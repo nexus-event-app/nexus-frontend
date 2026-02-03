@@ -1,11 +1,13 @@
-import React from 'react'
+import React from 'react';
+import { AuthProvider } from './context/AuthContext';
+import AppRouter from './router/AppRouter';
 
 function App() {
   return (
-    <section className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-indigo-600">Nexus</h1>
-    </section>
-  )
+    <AuthProvider>
+      <AppRouter />
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;
