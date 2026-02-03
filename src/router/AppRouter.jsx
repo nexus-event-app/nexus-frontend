@@ -2,6 +2,7 @@
     import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
     import Login from '../pages/Login';
     import Dashboard from '../pages/Dashboard';
+    import CreateEvent from '../pages/CreateEvent';
     import ProtectedRoute from './ProtectedRoute';
 
     function AppRouter() {
@@ -17,6 +18,15 @@
             element={
                 <ProtectedRoute>
                 <Dashboard />
+                </ProtectedRoute>
+            }
+            />
+            
+            <Route
+            path="/events/create"
+            element={
+                <ProtectedRoute>
+                <CreateEvent />
                 </ProtectedRoute>
             }
             />
