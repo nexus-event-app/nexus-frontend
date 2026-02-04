@@ -4,13 +4,14 @@
     import Dashboard from '../pages/Dashboard';
     import CreateEvent from '../pages/CreateEvent';
     import EditEvent from '../pages/EditEvent';
+    import PublicEvents from '../pages/PublicEvents';
     import ProtectedRoute from './ProtectedRoute';
 
     function AppRouter() {
     return (
         <BrowserRouter>
         <Routes>
-            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="/" element={<PublicEvents />} />
             
             <Route path="/login" element={<Login />} />
             
@@ -41,7 +42,7 @@
             }
             />
             
-            <Route path="*" element={<Navigate to="/login" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         </BrowserRouter>
     );
