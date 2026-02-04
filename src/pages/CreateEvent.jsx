@@ -1,6 +1,7 @@
     import React, { useState } from 'react';
     import { useNavigate } from 'react-router-dom';
     import eventService from '../services/eventService';
+    import EventForm from '../components/events/EventForm';
 
     function CreateEvent() {
     const navigate = useNavigate();
@@ -46,6 +47,10 @@
         }
     };
 
+    const handleCancel = () => {
+        navigate('/dashboard');
+    };
+
     return (
         <>
         <header className="bg-white shadow-sm">
@@ -54,7 +59,7 @@
                 Nexus Admin
             </h1>
             <button
-                onClick={() => navigate('/dashboard')}
+                onClick={handleCancel}
                 className="px-4 py-2 text-sm text-gray-700 transition hover:text-indigo-600"
             >
                 ← Volver al Dashboard
@@ -73,188 +78,16 @@
                 </p>
             </header>
 
-            <form onSubmit={handleSubmit} className="p-8 bg-white border border-gray-100 shadow-sm rounded-xl">
-                <fieldset disabled={loading}>
-                <legend className="sr-only">Formulario de creación de evento</legend>
-
-                {error && (
-                    <p className="p-3 mb-6 text-sm text-red-600 rounded-lg bg-red-50" role="alert">
-                    {error}
-                    </p>
-                )}
-
-                {success && (
-                    <p className="p-3 mb-6 text-sm text-green-600 rounded-lg bg-green-50" role="alert">
-                    ¡Evento creado correctamente! Redirigiendo...
-                    </p>
-                )}
-
-                <section className="space-y-6">
-                    <label className="block">
-                    <span className="block mb-1 font-medium text-gray-700">
-                        Título del evento *
-                    </span>
-                    <input
-                        type="text"
-                        name="title"
-                        value={formData.title}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                        placeholder="Ej: Networking para Juniors - Barcelona"
-                    />
-                    </label>
-
-                    <label className="block">
-                    <span className="block mb-1 font-medium text-gray-700">
-                        Descripción
-                    </span>
-                    <textarea
-                        name="description"
-                        value={formData.description}
-                        onChange={handleChange}
-                        rows={4}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                        placeholder="Describe el evento, qué se hará, qué aprenderán los asistentes..."
-                    />
-                    </label>
-
-                    <label className="block">
-                    <span className="block mb-1 font-medium text-gray-700">
-                        Fecha y hora *
-                    </span>
-                    <input
-                        type="datetime-local"
-                        name="eventDate"
-                        value={formData.eventDate}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                    />
-                    </label>
-
-                    <label className="block">
-                    <span className="block mb-1 font-medium text-gray-700">
-                        Ubicación *
-                    </span>
-                    <select
-                        name="location"
-                        value={formData.location}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                    >
-                        <option value="Barcelona">Barcelona</option>
-                        <option value="Madrid">Madrid</option>
-                        <option value="Valencia">Valencia</option>
-                        <option value="Sevilla">Sevilla</option>
-                        <option value="Online">Online</option>
-                        <option value="España">España (General)</option>
-                    </select>
-                    </label>
-
-                    <label className="block">
-                    <span className="block mb-1 font-medium text-gray-700">
-                        Tipo de evento *
-                    </span>
-                    <select
-                        name="eventType"
-                        value={formData.eventType}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                    >
-                        <option value="NETWORKING">Networking</option>
-                        <option value="WORKSHOP">Workshop</option>
-                        <option value="TALK">Charla</option>
-                        <option value="COFFEE_CHAT">Coffee Chat</option>
-                    </select>
-                    </label>
-
-                    <label className="block">
-                    <span className="block mb-1 font-medium text-gray-700">
-                        Nivel *
-                    </span>
-                    <select
-                        name="level"
-                        value={formData.level}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                    >
-                        <option value="JUNIOR_FRIENDLY">Junior Friendly</option>
-                        <option value="ALL_LEVELS">Todos los niveles</option>
-                    </select>
-                    </label>
-
-                    <label className="block">
-                    <span className="block mb-1 font-medium text-gray-700">
-                        Etiquetas
-                    </span>
-                    <input
-                        type="text"
-                        name="tags"
-                        value={formData.tags}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                        placeholder="Ej: #networking,#junior,#barcelona,#IA"
-                    />
-                    <span className="block mt-1 text-sm text-gray-500">
-                        Separa las etiquetas con comas
-                    </span>
-                    </label>
-
-                    <label className="block">
-                    <span className="block mb-1 font-medium text-gray-700">
-                        URL del evento original
-                    </span>
-                    <input
-                        type="url"
-                        name="sourceUrl"
-                        value={formData.sourceUrl}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                        placeholder="https://meetup.com/evento..."
-                    />
-                    <span className="block mt-1 text-sm text-gray-500">
-                        Si el evento proviene de Meetup, Eventbrite, etc.
-                    </span>
-                    </label>
-
-                    <label className="block">
-                    <span className="block mb-1 font-medium text-gray-700">
-                        Nombre del organizador
-                    </span>
-                    <input
-                        type="text"
-                        name="organizerName"
-                        value={formData.organizerName}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                        placeholder="Nexus Team"
-                    />
-                    </label>
-                </section>
-
-                <footer className="flex gap-4 mt-8">
-                    <button
-                    type="submit"
-                    disabled={loading}
-                    className="flex-1 px-6 py-3 font-medium text-white transition bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                    {loading ? 'Creando evento...' : 'Crear evento'}
-                    </button>
-                    <button
-                    type="button"
-                    onClick={() => navigate('/dashboard')}
-                    disabled={loading}
-                    className="px-6 py-3 font-medium text-gray-700 transition bg-gray-100 rounded-lg hover:bg-gray-200 disabled:opacity-50"
-                    >
-                    Cancelar
-                    </button>
-                </footer>
-                </fieldset>
-            </form>
+            <EventForm
+                formData={formData}
+                onChange={handleChange}
+                onSubmit={handleSubmit}
+                onCancel={handleCancel}
+                loading={loading}
+                error={error}
+                success={success}
+                isEdit={false}
+            />
             </section>
         </main>
         </>

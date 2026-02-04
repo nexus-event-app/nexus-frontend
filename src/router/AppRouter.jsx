@@ -3,6 +3,7 @@
     import Login from '../pages/Login';
     import Dashboard from '../pages/Dashboard';
     import CreateEvent from '../pages/CreateEvent';
+    import EditEvent from '../pages/EditEvent';
     import ProtectedRoute from './ProtectedRoute';
 
     function AppRouter() {
@@ -27,6 +28,15 @@
             element={
                 <ProtectedRoute>
                 <CreateEvent />
+                </ProtectedRoute>
+            }
+            />
+            
+            <Route
+            path="/events/edit/:id"
+            element={
+                <ProtectedRoute>
+                <EditEvent />
                 </ProtectedRoute>
             }
             />
