@@ -1,26 +1,39 @@
     import React, { useState, useEffect } from 'react';
     import { useNavigate } from 'react-router-dom';
     import eventService from '../services/eventService';
+    import EventFilters from '../components/events/EventFilters';
 
     function PublicEvents() {
     const navigate = useNavigate();
     const [events, setEvents] = useState([]);
+    const [filteredEvents, setFilteredEvents] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [filter, setFilter] = useState('upcoming');
+    const [timeFilter, setTimeFilter] = useState('upcoming');
+
+    const [filters, setFilters] = useState({
+        location: '',
+        eventType: '',
+        level: '',
+        search: ''
+    });
 
     useEffect(() => {
         loadEvents();
-    }, [filter]);
+    }, [timeFilter]);
+
+    useEffect(() => {
+        applyFilters();
+    }, [events, filters]);
 
     const loadEvents = async () => {
         setLoading(true);
         try {
         let data;
-        if (filter === 'upcoming') {
+        if (timeFilter === 'upcoming') {
             data = await eventService.getUpcomingEvents();
-        } else if (filter === 'all') {
+        } else if (timeFilter === 'all') {
             data = await eventService.getAllEvents();
-        } else if (filter === 'past') {
+        } else if (timeFilter === 'past') {
             data = await eventService.getPastEvents();
         }
         setEvents(data);
@@ -30,6 +43,54 @@
         setLoading(false);
         }
     };
+
+    const applyFilters = () => {
+        let filtered = [...events];
+
+        if (filters.search) {
+        const searchLower = filters.search.toLowerCase();
+        filtered = filtered.filter(event =>
+            event.title.toLowerCase().includes(searchLower) ||
+            event.description?.toLowerCase().includes(searchLower) ||
+            event.tags?.toLowerCase().includes(searchLower)
+        );
+        }
+
+        if (filters.location) {
+        filtered = filtered.filter(event => event.location === filters.location);
+        }
+
+        if (filters.eventType) {
+        filtered = filtered.filter(event => event.eventType === filters.eventType);
+        }
+
+        if (filters.level) {
+        filtered = filtered.filter(event => event.level === filters.level);
+        }
+
+        setFilteredEvents(filtered);
+    };
+
+    const handleFilterChange = (filterName, value) => {
+        setFilters(prev => ({
+        ...prev,
+        [filterName]: value
+        }));
+    };
+
+    const clearFilters = () => {
+        setFilters({
+        location: '',
+        eventType: '',
+        level: '',
+        search: ''
+        });
+    };
+
+    const hasActiveFilters =
+        filters.location || filters.eventType || filters.level || filters.search;
+
+    const displayEvents = hasActiveFilters ? filteredEvents : events;
 
     const formatDate = (dateString) => {
         return new Date(dateString).toLocaleDateString('es-ES', {
@@ -48,6 +109,9 @@
             <h1 className="text-2xl font-bold text-indigo-600">
                 Nexus
             </h1>
+            <p className="hidden text-gray-600 md:block">
+                Eventos tech para juniors
+            </p>
             <button
                 onClick={() => navigate('/login')}
                 className="px-4 py-2 text-sm text-gray-700 transition bg-gray-100 rounded-lg hover:bg-gray-200"
@@ -68,11 +132,11 @@
                 </p>
             </header>
 
-            <section className="flex justify-center gap-4 mb-8">
+            <section className="flex flex-wrap justify-center gap-3 mb-8">
                 <button
-                onClick={() => setFilter('upcoming')}
+                onClick={() => setTimeFilter('upcoming')}
                 className={`px-6 py-2 rounded-lg font-medium transition ${
-                    filter === 'upcoming'
+                    timeFilter === 'upcoming'
                     ? 'bg-indigo-600 text-white'
                     : 'bg-white text-gray-700 hover:bg-gray-100'
                 }`}
@@ -80,9 +144,9 @@
                 Próximos eventos
                 </button>
                 <button
-                onClick={() => setFilter('all')}
+                onClick={() => setTimeFilter('all')}
                 className={`px-6 py-2 rounded-lg font-medium transition ${
-                    filter === 'all'
+                    timeFilter === 'all'
                     ? 'bg-indigo-600 text-white'
                     : 'bg-white text-gray-700 hover:bg-gray-100'
                 }`}
@@ -90,9 +154,9 @@
                 Todos
                 </button>
                 <button
-                onClick={() => setFilter('past')}
+                onClick={() => setTimeFilter('past')}
                 className={`px-6 py-2 rounded-lg font-medium transition ${
-                    filter === 'past'
+                    timeFilter === 'past'
                     ? 'bg-indigo-600 text-white'
                     : 'bg-white text-gray-700 hover:bg-gray-100'
                 }`}
@@ -101,24 +165,47 @@
                 </button>
             </section>
 
+            <section className="mb-8">
+                <EventFilters
+                filters={filters}
+                onFilterChange={handleFilterChange}
+                onClearFilters={clearFilters}
+                showSearch={true}
+                resultCount={displayEvents.length}
+                totalCount={events.length}
+                />
+            </section>
+
             {loading ? (
                 <p className="text-center text-gray-600">Cargando eventos...</p>
-            ) : events.length === 0 ? (
+            ) : displayEvents.length === 0 ? (
                 <section className="p-12 text-center bg-white border border-gray-200 rounded-xl">
                 <p className="text-xl text-gray-600">
-                    No hay eventos disponibles en este momento
+                    {hasActiveFilters
+                    ? 'No hay eventos que coincidan con tu búsqueda'
+                    : 'No hay eventos disponibles en este momento'}
                 </p>
+                {hasActiveFilters && (
+                    <button
+                    onClick={clearFilters}
+                    className="px-6 py-2 mt-4 font-medium text-white transition bg-indigo-600 rounded-lg hover:bg-indigo-700"
+                    >
+                    Ver todos los eventos
+                    </button>
+                )}
                 </section>
             ) : (
                 <section className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {events.map(event => (
+                {displayEvents.map(event => (
                     <article
                     key={event.id}
                     className="p-6 transition bg-white border border-gray-200 shadow-sm rounded-xl hover:shadow-md"
                     >
                     <header className="mb-4">
                         <span className="inline-block px-3 py-1 mb-3 text-xs font-medium text-indigo-600 rounded-full bg-indigo-50">
-                        {event.level === 'JUNIOR_FRIENDLY' ? 'Junior Friendly' : 'Todos los niveles'}
+                        {event.level === 'JUNIOR_FRIENDLY'
+                            ? 'Junior Friendly'
+                            : 'Todos los niveles'}
                         </span>
                         <h3 className="mb-2 text-xl font-bold text-gray-900">
                         {event.title}

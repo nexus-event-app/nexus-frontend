@@ -2,18 +2,31 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import eventService from '../services/eventService';
+import EventFilters from '../components/events/EventFilters';
 
 function Dashboard() {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
     const [events, setEvents] = useState([]);
+    const [filteredEvents, setFilteredEvents] = useState([]);
     const [upcomingEvents, setUpcomingEvents] = useState([]);
     const [pastEvents, setPastEvents] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const [filters, setFilters] = useState({
+        location: '',
+        eventType: '',
+        level: '',
+        search: ''
+    });
+
     useEffect(() => {
         loadEvents();
     }, []);
+
+    useEffect(() => {
+        applyFilters();
+    }, [events, filters]);
 
     const loadEvents = async () => {
         try {
@@ -32,6 +45,53 @@ function Dashboard() {
             setLoading(false);
         }
     };
+
+    const applyFilters = () => {
+        let filtered = [...events];
+
+        if (filters.search) {
+            const searchLower = filters.search.toLowerCase();
+            filtered = filtered.filter(event =>
+                event.title.toLowerCase().includes(searchLower) ||
+                event.description?.toLowerCase().includes(searchLower) ||
+                event.tags?.toLowerCase().includes(searchLower)
+            );
+        }
+
+        if (filters.location) {
+            filtered = filtered.filter(event => event.location === filters.location);
+        }
+
+        if (filters.eventType) {
+            filtered = filtered.filter(event => event.eventType === filters.eventType);
+        }
+
+        if (filters.level) {
+            filtered = filtered.filter(event => event.level === filters.level);
+        }
+
+        setFilteredEvents(filtered);
+    };
+
+    const handleFilterChange = (filterName, value) => {
+        setFilters(prev => ({
+            ...prev,
+            [filterName]: value
+        }));
+    };
+
+    const clearFilters = () => {
+        setFilters({
+            location: '',
+            eventType: '',
+            level: '',
+            search: ''
+        });
+    };
+
+    const hasActiveFilters = filters.location || filters.eventType || filters.level || filters.search;
+
+    const displayEvents = hasActiveFilters ? filteredEvents : events;
 
     const handleLogout = () => {
         logout();
@@ -135,7 +195,26 @@ function Dashboard() {
                                 Crear Evento
                             </button>
                         </li>
+                        <li>
+                            <button
+                                onClick={() => navigate('/')}
+                                className="px-6 py-3 font-medium text-gray-700 transition bg-gray-100 rounded-lg hover:bg-gray-200"
+                            >
+                                Ver Página Pública
+                            </button>
+                        </li>
                     </menu>
+                </section>
+
+                <section className="mb-8">
+                    <EventFilters
+                        filters={filters}
+                        onFilterChange={handleFilterChange}
+                        onClearFilters={clearFilters}
+                        showSearch={true}
+                        resultCount={displayEvents.length}
+                        totalCount={events.length}
+                    />
                 </section>
 
                 <section className="p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
@@ -145,11 +224,13 @@ function Dashboard() {
 
                     {loading ? (
                         <p className="text-gray-600">Cargando eventos...</p>
-                    ) : events.length === 0 ? (
-                        <p className="text-gray-600">No hay eventos creados. ¡Crea el primero!</p>
+                    ) : displayEvents.length === 0 ? (
+                        <p className="text-gray-600">
+                            {hasActiveFilters ? 'No hay eventos que coincidan con los filtros.' : 'No hay eventos creados. ¡Crea el primero!'}
+                        </p>
                     ) : (
                         <ul className="space-y-4">
-                            {events.map(event => (
+                            {displayEvents.map(event => (
                                 <li key={event.id} className="p-4 transition border border-gray-200 rounded-lg hover:bg-gray-50">
                                     <article>
                                         <header className="flex items-start justify-between mb-2">
