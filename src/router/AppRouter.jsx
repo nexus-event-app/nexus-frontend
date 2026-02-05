@@ -1,17 +1,20 @@
     import React from 'react';
     import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+    import Home from '../pages/Home';
+    import PublicEvents from '../pages/PublicEvents';
     import Login from '../pages/Login';
     import Dashboard from '../pages/Dashboard';
     import CreateEvent from '../pages/CreateEvent';
     import EditEvent from '../pages/EditEvent';
-    import PublicEvents from '../pages/PublicEvents';
     import ProtectedRoute from './ProtectedRoute';
 
     function AppRouter() {
     return (
         <BrowserRouter>
         <Routes>
-            <Route path="/" element={<PublicEvents />} />
+            <Route path="/" element={<Home />} />
+            
+            <Route path="/eventos" element={<PublicEvents />} />
             
             <Route path="/login" element={<Login />} />
             
