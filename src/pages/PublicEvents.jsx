@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import eventService from '../services/eventService';
 import EventFilters from '../components/events/EventFilters';
+import Layout from '../components/layout/Layout';
 
 function PublicEvents() {
-  const navigate = useNavigate();
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,122 +16,74 @@ function PublicEvents() {
     search: ''
   });
 
-  useEffect(() => {
-    loadEvents();
-  }, [timeFilter]);
-
-  useEffect(() => {
-    applyFilters();
-  }, [events, filters]);
-
-  const loadEvents = async () => {
-    setLoading(true);
-    try {
-      let data;
-      if (timeFilter === 'upcoming') {
-        data = await eventService.getUpcomingEvents();
-      } else if (timeFilter === 'all') {
-        data = await eventService.getAllEvents();
-      } else if (timeFilter === 'past') {
-        data = await eventService.getPastEvents();
-      }
-      setEvents(data);
-    } catch (error) {
-      console.error('Error al cargar eventos:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const applyFilters = () => {
-    let filtered = [...events];
-
-    if (filters.search) {
-      const searchLower = filters.search.toLowerCase();
-      filtered = filtered.filter(event =>
-        event.title.toLowerCase().includes(searchLower) ||
-        event.description?.toLowerCase().includes(searchLower) ||
-        event.tags?.toLowerCase().includes(searchLower)
-      );
-    }
-
-    if (filters.location) {
-      filtered = filtered.filter(event => event.location === filters.location);
-    }
-
-    if (filters.eventType) {
-      filtered = filtered.filter(event => event.eventType === filters.eventType);
-    }
-
-    if (filters.level) {
-      filtered = filtered.filter(event => event.level === filters.level);
-    }
-
-    setFilteredEvents(filtered);
-  };
-
-  const handleFilterChange = (filterName, value) => {
-    setFilters(prev => ({
-      ...prev,
-      [filterName]: value
-    }));
-  };
-
-  const clearFilters = () => {
-    setFilters({
-      location: '',
-      eventType: '',
-      level: '',
-      search: ''
-    });
-  };
-
   const hasActiveFilters =
     filters.location || filters.eventType || filters.level || filters.search;
 
   const displayEvents = hasActiveFilters ? filteredEvents : events;
 
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('es-ES', {
+  const formatDate = (dateString) =>
+    new Date(dateString).toLocaleDateString('es-ES', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
       hour: '2-digit',
       minute: '2-digit'
     });
-  };
+
+  useEffect(() => {
+    const loadEvents = async () => {
+      setLoading(true);
+      try {
+        let data;
+        if (timeFilter === 'upcoming') data = await eventService.getUpcomingEvents();
+        else if (timeFilter === 'all') data = await eventService.getAllEvents();
+        else if (timeFilter === 'past') data = await eventService.getPastEvents();
+        setEvents(data);
+      } catch (error) {
+        console.error('Error al cargar eventos:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadEvents();
+  }, [timeFilter]);
+
+  useEffect(() => {
+    const applyFilters = () => {
+      let filtered = [...events];
+
+      if (filters.search) {
+        const searchLower = filters.search.toLowerCase();
+        filtered = filtered.filter(event =>
+          event.title.toLowerCase().includes(searchLower) ||
+          event.description?.toLowerCase().includes(searchLower) ||
+          event.tags?.toLowerCase().includes(searchLower)
+        );
+      }
+
+      if (filters.location)
+        filtered = filtered.filter(event => event.location === filters.location);
+
+      if (filters.eventType)
+        filtered = filtered.filter(event => event.eventType === filters.eventType);
+
+      if (filters.level)
+        filtered = filtered.filter(event => event.level === filters.level);
+
+      setFilteredEvents(filtered);
+    };
+
+    applyFilters();
+  }, [events, filters]);
+
+  const handleFilterChange = (filterName, value) =>
+    setFilters(prev => ({ ...prev, [filterName]: value }));
+
+  const clearFilters = () =>
+    setFilters({ location: '', eventType: '', level: '', search: '' });
 
   return (
-    <>
-      <header className="bg-white border-b border-gray-200 shadow-sm">
-        <nav className="flex items-center justify-between h-16 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <button
-            onClick={() => navigate('/')}
-            className="text-2xl font-bold text-indigo-600 transition hover:text-indigo-700"
-          >
-            Nexus
-          </button>
-          <menu className="flex items-center gap-6 p-0 m-0 list-none">
-            <li>
-              <button
-                onClick={() => navigate('/')}
-                className="font-medium text-gray-700 transition hover:text-indigo-600"
-              >
-                Inicio
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => navigate('/login')}
-                className="px-4 py-2 text-sm text-gray-700 transition bg-gray-100 rounded-lg hover:bg-gray-200"
-              >
-                Admin
-              </button>
-            </li>
-          </menu>
-        </nav>
-      </header>
-
+    <Layout>
       <main className="min-h-screen py-8 bg-gray-50">
         <section className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <header className="mb-8 text-center">
@@ -145,33 +96,23 @@ function PublicEvents() {
           </header>
 
           <section className="flex flex-wrap justify-center gap-3 mb-8">
-            <button
-              onClick={() => setTimeFilter('upcoming')}
-              className={`px-6 py-2 rounded-lg font-medium transition ${timeFilter === 'upcoming'
-                ? 'bg-indigo-600 text-white'
-                : 'bg-white text-gray-700 hover:bg-gray-100'
+            {['upcoming', 'all', 'past'].map(filter => (
+              <button
+                key={filter}
+                onClick={() => setTimeFilter(filter)}
+                className={`px-6 py-2 rounded-lg font-medium transition ${
+                  timeFilter === filter
+                    ? 'bg-indigo-600 text-white'
+                    : 'bg-white text-gray-700 hover:bg-gray-100'
                 }`}
-            >
-              Próximos eventos
-            </button>
-            <button
-              onClick={() => setTimeFilter('all')}
-              className={`px-6 py-2 rounded-lg font-medium transition ${timeFilter === 'all'
-                ? 'bg-indigo-600 text-white'
-                : 'bg-white text-gray-700 hover:bg-gray-100'
-                }`}
-            >
-              Todos
-            </button>
-            <button
-              onClick={() => setTimeFilter('past')}
-              className={`px-6 py-2 rounded-lg font-medium transition ${timeFilter === 'past'
-                ? 'bg-indigo-600 text-white'
-                : 'bg-white text-gray-700 hover:bg-gray-100'
-                }`}
-            >
-              Eventos pasados
-            </button>
+              >
+                {filter === 'upcoming'
+                  ? 'Próximos eventos'
+                  : filter === 'all'
+                  ? 'Todos'
+                  : 'Eventos pasados'}
+              </button>
+            ))}
           </section>
 
           <section className="mb-8">
@@ -179,7 +120,7 @@ function PublicEvents() {
               filters={filters}
               onFilterChange={handleFilterChange}
               onClearFilters={clearFilters}
-              showSearch={true}
+              showSearch
               resultCount={displayEvents.length}
               totalCount={events.length}
             />
@@ -216,26 +157,20 @@ function PublicEvents() {
                         ? 'Junior Friendly'
                         : 'Todos los niveles'}
                     </span>
-                    <h3 className="mb-2 text-xl font-bold text-gray-900">
-                      {event.title}
-                    </h3>
+                    <h3 className="mb-2 text-xl font-bold text-gray-900">{event.title}</h3>
                   </header>
 
-                  <p className="mb-4 text-gray-600 line-clamp-3">
-                    {event.description}
-                  </p>
+                  <p className="mb-4 text-gray-600 line-clamp-3">{event.description}</p>
 
                   <dl className="space-y-2 text-sm">
                     <dd className="flex items-center text-gray-600">
                       <span className="mr-2">📅</span>
                       {formatDate(event.eventDate)}
                     </dd>
-
                     <dd className="flex items-center text-gray-600">
                       <span className="mr-2">📍</span>
                       {event.location}
                     </dd>
-
                     <dd className="flex items-center text-gray-600">
                       <span className="mr-2">🎯</span>
                       {event.eventType}
@@ -244,9 +179,7 @@ function PublicEvents() {
 
                   {event.tags && (
                     <footer className="pt-4 mt-4 border-t border-gray-100">
-                      <p className="text-sm text-indigo-600">
-                        {event.tags}
-                      </p>
+                      <p className="text-sm text-indigo-600">{event.tags}</p>
                     </footer>
                   )}
 
@@ -268,16 +201,7 @@ function PublicEvents() {
           )}
         </section>
       </main>
-
-      <footer className="py-8 mt-16 text-center bg-white border-t border-gray-200">
-        <p className="text-gray-600">
-          Nexus - Plataforma de eventos tech para juniors
-        </p>
-        <p className="mt-2 text-sm text-gray-500">
-          Conectando la comunidad tech junior en España
-        </p>
-      </footer>
-    </>
+    </Layout>
   );
 }
 

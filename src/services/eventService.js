@@ -1,8 +1,8 @@
-    import axios from 'axios';
+import axios from 'axios';
 
-    const API_URL = 'http://localhost:8080/api/events';
+const API_URL = 'http://localhost:8080/api/events';
 
-    const eventService = {
+const eventService = {
 
     createEvent: async (eventData) => {
         const response = await axios.post(API_URL, eventData);
@@ -47,7 +47,12 @@
     getEventsByType: async (type) => {
         const response = await axios.get(`${API_URL}/type/${type}`);
         return response.data;
-    }
-    };
+    },
 
-    export default eventService;
+    getLatestEvents: async () => {
+        const response = await axios.get(`${API_URL}/latest`);
+        return response.data;
+    }
+};
+
+export default eventService;
