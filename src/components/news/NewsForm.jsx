@@ -1,4 +1,5 @@
 import React from 'react';
+import FormField from '../common/FormField';
 
 function NewsForm({
     formData,
@@ -10,7 +11,6 @@ function NewsForm({
     success,
     isEdit = false
 }) {
-
     return (
         <form onSubmit={onSubmit} className="space-y-6">
             {error && (
@@ -25,90 +25,59 @@ function NewsForm({
                 </p>
             )}
 
-            <label className="block">
-                <span className="block mb-1 font-medium text-gray-700">
-                    Título *
-                </span>
-                <input
-                    type="text"
-                    name="title"
-                    value={formData.title}
-                    onChange={onChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                    placeholder="Ej: GitHub Copilot gratis para estudiantes"
-                />
-            </label>
+            <FormField
+                label="Título"
+                name="title"
+                value={formData.title}
+                onChange={onChange}
+                required
+                placeholder="Ej: GitHub Copilot gratis para estudiantes"
+            />
 
-            <label className="block">
-                <span className="block mb-1 font-medium text-gray-700">
-                    Contenido
-                </span>
-                <textarea
-                    name="content"
-                    value={formData.content}
-                    onChange={onChange}
-                    rows="5"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                    placeholder="Descripción de la noticia..."
-                />
-            </label>
+            <FormField
+                label="Contenido"
+                name="content"
+                type="textarea"
+                value={formData.content}
+                onChange={onChange}
+                rows={5}
+                placeholder="Descripción de la noticia..."
+            />
 
-            <label className="block">
-                <span className="block mb-1 font-medium text-gray-700">
-                    URL de la fuente
-                </span>
-                <input
-                    type="url"
-                    name="sourceUrl"
-                    value={formData.sourceUrl}
-                    onChange={onChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                    placeholder="https://ejemplo.com/noticia"
-                />
-            </label>
+            <FormField
+                label="URL de la fuente"
+                name="sourceUrl"
+                type="url"
+                value={formData.sourceUrl}
+                onChange={onChange}
+                placeholder="https://ejemplo.com/noticia"
+            />
 
-            <label className="block">
-                <span className="block mb-1 font-medium text-gray-700">
-                    URL de la imagen
-                </span>
-                <input
-                    type="url"
-                    name="imageUrl"
-                    value={formData.imageUrl}
-                    onChange={onChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                    placeholder="https://ejemplo.com/imagen.jpg"
-                />
-            </label>
+            <FormField
+                label="URL de la imagen"
+                name="imageUrl"
+                type="url"
+                value={formData.imageUrl}
+                onChange={onChange}
+                placeholder="https://ejemplo.com/imagen.jpg"
+            />
 
-            <label className="block">
-                <span className="block mb-1 font-medium text-gray-700">
-                    Autor
-                </span>
-                <input
-                    type="text"
-                    name="author"
-                    value={formData.author}
-                    onChange={onChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                    placeholder="Ej: GitHub Blog"
-                />
-            </label>
+            <FormField
+                label="Autor"
+                name="author"
+                value={formData.author}
+                onChange={onChange}
+                placeholder="Ej: GitHub Blog"
+            />
 
             {isEdit && (
-                <label className="flex items-center gap-2">
-                    <input
-                        type="checkbox"
-                        name="isActive"
-                        checked={formData.isActive}
-                        onChange={onChange}
-                        className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
-                    />
-                    <span className="text-sm font-medium text-gray-700">
-                        Noticia activa (visible en la web)
-                    </span>
-                </label>
+                <FormField
+                    label="Noticia activa (visible en la web)"
+                    name="isActive"
+                    type="checkbox"
+                    checked={formData.isActive}
+                    onChange={onChange}
+                />
             )}
 
             <menu className="flex gap-4 p-0 m-0 list-none">
