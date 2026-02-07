@@ -186,13 +186,21 @@ function Dashboard() {
                     <h2 className="mb-4 text-xl font-bold text-gray-900">
                         Acciones Rápidas
                     </h2>
-                    <menu className="flex gap-4 p-0 m-0 list-none">
+                    <menu className="flex flex-wrap gap-4 p-0 m-0 list-none">
                         <li>
                             <button
                                 onClick={() => navigate('/events/create')}
                                 className="px-6 py-3 font-medium text-white transition bg-indigo-600 rounded-lg hover:bg-indigo-700"
                             >
                                 Crear Evento
+                            </button>
+                        </li>
+                        <li>
+                            <button
+                                onClick={() => navigate('/dashboard/news')}
+                                className="px-6 py-3 font-medium text-white transition bg-purple-600 rounded-lg hover:bg-purple-700"
+                            >
+                                Gestionar Noticias
                             </button>
                         </li>
                         <li>

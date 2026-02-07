@@ -7,17 +7,16 @@
     import CreateEvent from '../pages/CreateEvent';
     import EditEvent from '../pages/EditEvent';
     import ProtectedRoute from './ProtectedRoute';
+    import ManageNews from '../pages/ManageNews';
 
     function AppRouter() {
     return (
         <BrowserRouter>
         <Routes>
             <Route path="/" element={<Home />} />
-            
             <Route path="/eventos" element={<PublicEvents />} />
-            
             <Route path="/login" element={<Login />} />
-            
+
             <Route
             path="/dashboard"
             element={
@@ -26,7 +25,15 @@
                 </ProtectedRoute>
             }
             />
-            
+
+            <Route
+            path="/dashboard/news"
+            element={
+                <ProtectedRoute>
+                <ManageNews />
+                </ProtectedRoute>
+            }
+            />
             <Route
             path="/events/create"
             element={
@@ -35,7 +42,6 @@
                 </ProtectedRoute>
             }
             />
-            
             <Route
             path="/events/edit/:id"
             element={
@@ -44,7 +50,7 @@
                 </ProtectedRoute>
             }
             />
-            
+
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         </BrowserRouter>

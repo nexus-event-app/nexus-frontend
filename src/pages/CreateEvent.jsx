@@ -1,71 +1,22 @@
-    import React, { useState } from 'react';
-    import { useNavigate } from 'react-router-dom';
-    import eventService from '../services/eventService';
+    import React from 'react';
     import EventForm from '../components/events/EventForm';
+    import AdminHeader from '../components/layout/AdminHeader';
+    import { useEventForm } from '../hooks/useEventForm';
 
     function CreateEvent() {
-    const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState(false);
-
-    const [formData, setFormData] = useState({
-        title: '',
-        description: '',
-        eventDate: '',
-        location: 'Barcelona',
-        eventType: 'NETWORKING',
-        level: 'JUNIOR_FRIENDLY',
-        tags: '',
-        sourceUrl: '',
-        organizerName: 'Nexus Team'
-    });
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({
-        ...prev,
-        [name]: value
-        }));
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError('');
-        setLoading(true);
-
-        try {
-        await eventService.createEvent(formData);
-        setSuccess(true);
-        setTimeout(() => {
-            navigate('/dashboard');
-        }, 1500);
-        } catch (err) {
-        setError(err.response?.data?.message || 'Error al crear el evento');
-        } finally {
-        setLoading(false);
-        }
-    };
-
-    const handleCancel = () => {
-        navigate('/dashboard');
-    };
+    const {
+        formData,
+        saving,
+        error,
+        success,
+        handleChange,
+        handleSubmit,
+        handleCancel
+    } = useEventForm();
 
     return (
         <>
-        <header className="bg-white shadow-sm">
-            <nav className="flex items-center justify-between h-16 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <h1 className="text-2xl font-bold text-indigo-600">
-                Nexus Admin
-            </h1>
-            <button
-                onClick={handleCancel}
-                className="px-4 py-2 text-sm text-gray-700 transition hover:text-indigo-600"
-            >
-                ← Volver al Dashboard
-            </button>
-            </nav>
-        </header>
+        <AdminHeader showBackButton={true} />
 
         <main className="min-h-screen py-8 bg-gray-50">
             <section className="max-w-3xl px-4 mx-auto sm:px-6 lg:px-8">
@@ -83,7 +34,7 @@
                 onChange={handleChange}
                 onSubmit={handleSubmit}
                 onCancel={handleCancel}
-                loading={loading}
+                loading={saving}
                 error={error}
                 success={success}
                 isEdit={false}
