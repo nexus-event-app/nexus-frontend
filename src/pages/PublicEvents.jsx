@@ -21,17 +21,19 @@ function PublicEvents() {
 
   return (
     <Layout>
-      <main className="min-h-screen py-8 bg-gray-50">
-        <section className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <header className="mb-8 text-center">
-            <h2 className="mb-3 text-4xl font-bold text-gray-900">
-              Eventos Tech para Juniors
-            </h2>
-            <p className="max-w-2xl mx-auto text-lg text-gray-600">
-              Descubre eventos de networking, workshops y charlas diseñados para developers junior en España
-            </p>
-          </header>
+      <header className="py-16 mb-8 bg-gradient-to-br from-indigo-600 to-purple-700 sm:py-20">
+        <article className="max-w-4xl px-4 mx-auto text-center sm:px-6 lg:px-8">
+          <h1 className="mb-6 text-4xl font-bold text-white sm:text-5xl">
+            Eventos Tech para Juniors
+          </h1>
+          <p className="text-lg text-indigo-100 sm:text-xl">
+            Descubre meetups, talleres y oportunidades de networking en tu ciudad
+          </p>
+        </article>
+      </header>
 
+      <main className="min-h-screen pb-8 bg-gray-50">
+        <section className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <TimeFilterButtons
             timeFilter={timeFilter}
             onFilterChange={setTimeFilter}

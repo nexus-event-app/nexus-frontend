@@ -12,10 +12,11 @@
         <Layout>
         <main className="min-h-screen bg-gray-50">
             <HeroSection />
-            <FeaturedEventsSection />
-            <NewsSection />
-            <TestimonialsSection />
             <WhyNexusSection />
+            <NewsSection />
+            <FeaturedEventsSection />
+            <TestimonialsSection />
+            
             <CTASection />
         </main>
         </Layout>

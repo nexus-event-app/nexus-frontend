@@ -1,9 +1,12 @@
 import React from 'react';
 import FormField from '../common/FormField';
+import ImageUpload from '../common/ImageUpload';
 
 function NewsForm({
     formData,
     onChange,
+    onImageChange,
+    onImageRemove,
     onSubmit,
     onCancel,
     loading,
@@ -74,6 +77,12 @@ function NewsForm({
                 placeholder="Descripción de la noticia..."
             />
 
+            <ImageUpload
+                imageUrl={formData.imageUrl}
+                onImageChange={onImageChange}
+                onImageRemove={onImageRemove}
+            />
+
             <FormField
                 label="URL de la fuente"
                 name="sourceUrl"
@@ -81,15 +90,6 @@ function NewsForm({
                 value={formData.sourceUrl}
                 onChange={onChange}
                 placeholder="https://ejemplo.com/noticia"
-            />
-
-            <FormField
-                label="URL de la imagen"
-                name="imageUrl"
-                type="url"
-                value={formData.imageUrl}
-                onChange={onChange}
-                placeholder="https://ejemplo.com/imagen.jpg"
             />
 
             <FormField

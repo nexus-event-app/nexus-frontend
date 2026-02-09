@@ -10,6 +10,8 @@ import ManageNews from '../pages/ManageNews';
 import ManageTestimonials from '../pages/ManageTestimonials';
 import ProtectedRoute from './ProtectedRoute';
 import News from '../pages/News';
+import NewsDetail from '../pages/NewsDetail';
+
 
 function AppRouter() {
     return (
@@ -19,6 +21,9 @@ function AppRouter() {
                 <Route path="/eventos" element={<PublicEvents />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/noticias" element={<News />} />
+                <Route path="/noticias/:id" element={<NewsDetail />} />
+
+
 
                 <Route
                     path="/dashboard"

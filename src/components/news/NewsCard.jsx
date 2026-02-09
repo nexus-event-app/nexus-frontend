@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getImageUrl } from '../../utils/imageUtils';
+
 
 function NewsCard({ news }) {
     const getCategoryColor = (category) => {
@@ -44,7 +46,7 @@ function NewsCard({ news }) {
             {news.imageUrl && (
                 <figure className="m-0">
                     <img
-                        src={news.imageUrl}
+                        src={getImageUrl(news.imageUrl)}
                         alt={news.title}
                         className="object-cover w-full h-48 sm:h-56 md:h-64"
                     />

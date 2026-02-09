@@ -1,17 +1,18 @@
-    import { useState, useEffect } from 'react';
-    import newsService from '../services/newsService';
+import { useState, useEffect } from 'react';
+import newsService from '../services/newsService';
 
-    const initialFormData = {
+const initialFormData = {
     title: '',
     content: '',
     sourceUrl: '',
     imageUrl: '',
+    imageName: '',
     author: '',
     category: 'GENERAL',
     isActive: true
-    };
+};
 
-    export function useNewsForm() {
+export function useNewsForm() {
     const [news, setNews] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showForm, setShowForm] = useState(false);
@@ -27,20 +28,36 @@
 
     const loadNews = async () => {
         try {
-        const data = await newsService.getAllNews();
-        setNews(data);
+            const data = await newsService.getAllNews();
+            setNews(data);
         } catch (error) {
-        console.error('Error al cargar noticias:', error);
+            console.error('Error al cargar noticias:', error);
         } finally {
-        setLoading(false);
+            setLoading(false);
         }
     };
 
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
         setFormData(prev => ({
-        ...prev,
-        [name]: type === 'checkbox' ? checked : value
+            ...prev,
+            [name]: type === 'checkbox' ? checked : value
+        }));
+    };
+
+    const handleImageChange = (imageUrl, imageName) => {
+        setFormData(prev => ({
+            ...prev,
+            imageUrl,
+            imageName
+        }));
+    };
+
+    const handleImageRemove = () => {
+        setFormData(prev => ({
+            ...prev,
+            imageUrl: '',
+            imageName: ''
         }));
     };
 
@@ -55,13 +72,13 @@
     const handleEditClick = (item) => {
         setEditingNews(item);
         setFormData({
-        title: item.title,
-        content: item.content || '',
-        sourceUrl: item.sourceUrl || '',
-        imageUrl: item.imageUrl || '',
-        author: item.author || '',
-        category: item.category || 'GENERAL',
-        isActive: item.isActive
+            title: item.title,
+            content: item.content || '',
+            sourceUrl: item.sourceUrl || '',
+            imageUrl: item.imageUrl || '',
+            author: item.author || '',
+            category: item.category || 'GENERAL',
+            isActive: item.isActive
         });
         setFormError('');
         setFormSuccess('');
@@ -75,23 +92,23 @@
         setFormSuccess('');
 
         try {
-        if (editingNews) {
-            await newsService.updateNews(editingNews.id, formData);
-            setFormSuccess('Noticia actualizada correctamente');
-        } else {
-            await newsService.createNews(formData);
-            setFormSuccess('Noticia creada correctamente');
-        }
-        
-        await loadNews();
-        setTimeout(() => {
-            setShowForm(false);
-            setFormSuccess('');
-        }, 1500);
+            if (editingNews) {
+                await newsService.updateNews(editingNews.id, formData);
+                setFormSuccess('Noticia actualizada correctamente');
+            } else {
+                await newsService.createNews(formData);
+                setFormSuccess('Noticia creada correctamente');
+            }
+
+            await loadNews();
+            setTimeout(() => {
+                setShowForm(false);
+                setFormSuccess('');
+            }, 1500);
         } catch (error) {
-        setFormError(error.response?.data?.message || 'Error al guardar la noticia');
+            setFormError(error.response?.data?.message || 'Error al guardar la noticia');
         } finally {
-        setFormLoading(false);
+            setFormLoading(false);
         }
     };
 
@@ -104,12 +121,12 @@
 
     const handleDelete = async (id) => {
         if (window.confirm('¿Estás seguro de eliminar esta noticia?')) {
-        try {
-            await newsService.deleteNews(id);
-            loadNews();
-        } catch (error) {
-            console.error('Error al eliminar noticia:', error);
-        }
+            try {
+                await newsService.deleteNews(id);
+                loadNews();
+            } catch (error) {
+                console.error('Error al eliminar noticia:', error);
+            }
         }
     };
 
@@ -123,10 +140,12 @@
         formError,
         formSuccess,
         handleInputChange,
+        handleImageChange,
+        handleImageRemove,
         handleCreateClick,
         handleEditClick,
         handleSubmit,
         handleCancel,
         handleDelete
     };
-    }
+}
