@@ -2,20 +2,23 @@ import React from 'react';
 import { useAuth } from '../context/AuthContext';
 import AdminHeader from '../components/layout/AdminHeader';
 import StatsCards from '../components/dashboard/StatsCards';
+import TestimonialStatsCards from '../components/dashboard/TestimonialStatsCards';
 import QuickActionsCard from '../components/dashboard/QuickActionsCard';
 import EventFilters from '../components/events/EventFilters';
 import EventListItem from '../components/dashboard/EventListItem';
 import UserInfoCard from '../components/dashboard/UserInfoCard';
 import { useDashboardEvents } from '../hooks/useDashboardEvents';
+import { useDashboardTestimonials } from '../hooks/useDashboardTestimonials';
 
 function Dashboard() {
     const { user } = useAuth();
+
     const {
         events,
         displayEvents,
         upcomingEvents,
         pastEvents,
-        loading,
+        loading: eventsLoading,
         filters,
         hasActiveFilters,
         handleFilterChange,
@@ -23,6 +26,13 @@ function Dashboard() {
         handleDeleteEvent,
         handleEditEvent
     } = useDashboardEvents();
+
+    const {
+        totalTestimonials,
+        activeTestimonials,
+        highlightedTestimonials,
+        loading: testimonialsLoading
+    } = useDashboardTestimonials();
 
     return (
         <>
@@ -38,12 +48,29 @@ function Dashboard() {
                     </p>
                 </section>
 
-                <StatsCards
-                    totalEvents={events.length}
-                    upcomingEvents={upcomingEvents.length}
-                    pastEvents={pastEvents.length}
-                    loading={loading}
-                />
+                <section className="mb-2">
+                    <h3 className="mb-3 text-sm font-semibold tracking-wider text-gray-500 uppercase">
+                        Eventos
+                    </h3>
+                    <StatsCards
+                        totalEvents={events.length}
+                        upcomingEvents={upcomingEvents.length}
+                        pastEvents={pastEvents.length}
+                        loading={eventsLoading}
+                    />
+                </section>
+
+                <section className="mb-8">
+                    <h3 className="mb-3 text-sm font-semibold tracking-wider text-gray-500 uppercase">
+                        Testimonios
+                    </h3>
+                    <TestimonialStatsCards
+                        totalTestimonials={totalTestimonials}
+                        activeTestimonials={activeTestimonials}
+                        highlightedTestimonials={highlightedTestimonials}
+                        loading={testimonialsLoading}
+                    />
+                </section>
 
                 <QuickActionsCard />
 
@@ -63,7 +90,7 @@ function Dashboard() {
                         Todos los Eventos
                     </h2>
 
-                    {loading ? (
+                    {eventsLoading ? (
                         <p className="text-gray-600">Cargando eventos...</p>
                     ) : displayEvents.length === 0 ? (
                         <p className="text-gray-600">

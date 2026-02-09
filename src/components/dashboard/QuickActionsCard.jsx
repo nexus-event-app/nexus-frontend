@@ -28,6 +28,14 @@ function QuickActionsCard() {
                 </li>
                 <li>
                     <button
+                        onClick={() => navigate('/dashboard/testimonials')}
+                        className="px-6 py-3 font-medium text-white transition bg-green-600 rounded-lg hover:bg-green-700"
+                    >
+                        Gestionar Testimonios
+                    </button>
+                </li>
+                <li>
+                    <button
                         onClick={() => navigate('/')}
                         className="px-6 py-3 font-medium text-gray-700 transition bg-gray-100 rounded-lg hover:bg-gray-200"
                     >

@@ -4,7 +4,7 @@
     import WhyNexusSection from '../components/home/WhyNexusSection';
     import FeaturedEventsSection from '../components/home/FeaturedEventsSection';
     import NewsSection from '../components/home/NewsSection';
-    import TestimonialsSection from '../components/home/TestimonialsSection';
+    import TestimonialsSection from '../components/testimonials/TestimonialsSection';
     import CTASection from '../components/home/CTASection';
 
     function Home() {

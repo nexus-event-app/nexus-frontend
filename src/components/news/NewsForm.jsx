@@ -11,6 +11,17 @@ function NewsForm({
     success,
     isEdit = false
 }) {
+    const categories = [
+        { value: 'FRONTEND', label: 'Frontend' },
+        { value: 'BACKEND', label: 'Backend' },
+        { value: 'DEVOPS', label: 'DevOps' },
+        { value: 'CARRERA', label: 'Carrera' },
+        { value: 'RECURSOS', label: 'Recursos' },
+        { value: 'HERRAMIENTAS', label: 'Herramientas' },
+        { value: 'ENTREVISTAS', label: 'Entrevistas' },
+        { value: 'GENERAL', label: 'General' }
+    ];
+
     return (
         <form onSubmit={onSubmit} className="space-y-6">
             {error && (
@@ -31,8 +42,27 @@ function NewsForm({
                 value={formData.title}
                 onChange={onChange}
                 required
-                placeholder="Ej: GitHub Copilot gratis para estudiantes"
+                placeholder="Ej: Los mejores recursos para aprender React"
             />
+
+            <label className="block">
+                <span className="block mb-1 font-medium text-gray-700">
+                    Categoría *
+                </span>
+                <select
+                    name="category"
+                    value={formData.category}
+                    onChange={onChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                >
+                    {categories.map(cat => (
+                        <option key={cat.value} value={cat.value}>
+                            {cat.label}
+                        </option>
+                    ))}
+                </select>
+            </label>
 
             <FormField
                 label="Contenido"
@@ -67,7 +97,7 @@ function NewsForm({
                 name="author"
                 value={formData.author}
                 onChange={onChange}
-                placeholder="Ej: GitHub Blog"
+                placeholder="Ej: Tech Blog"
             />
 
             {isEdit && (

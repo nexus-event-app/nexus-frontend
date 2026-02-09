@@ -7,33 +7,33 @@
     return (
         <section className="py-20 bg-gradient-to-br from-indigo-600 to-purple-700">
         <article className="max-w-4xl px-4 mx-auto text-center sm:px-6 lg:px-8">
-            <h2 className="mb-6 text-5xl font-bold text-white">
+            
+            <h2 className="mb-6 text-4xl font-bold text-white sm:text-5xl">
             Conectando juniors con oportunidades tech
             </h2>
 
-            <p className="mb-8 text-xl text-indigo-100">
+            <p className="mb-10 text-lg text-indigo-100 sm:text-xl">
             No estás solo en tu búsqueda. Nexus reúne eventos, recursos y una comunidad de developers junior que entienden tu camino.
             </p>
 
-            <ul className="flex justify-center gap-4 p-0 m-0 list-none">
-            <li>
-                <button
+            <section className="flex flex-col gap-4 sm:flex-row sm:justify-center">
+            
+            <button
                 onClick={() => navigate('/eventos')}
-                className="px-8 py-3 text-lg font-medium text-indigo-600 transition bg-white rounded-lg hover:bg-gray-50"
-                >
+                className="w-full px-8 py-3 text-lg font-medium text-indigo-600 transition bg-white rounded-lg sm:w-auto hover:bg-gray-50"
+            >
                 Explorar eventos
-                </button>
-            </li>
+            </button>
 
-            <li>
-                <a
+            <a
                 href="#testimonios"
-                className="px-8 py-3 text-lg font-medium text-white transition border-2 border-white rounded-lg hover:bg-white hover:text-indigo-600"
-                >
+                className="w-full px-8 py-3 text-lg font-medium text-center text-white transition border-2 border-white rounded-lg sm:w-auto hover:bg-white hover:text-indigo-600"
+            >
                 Conoce historias
-                </a>
-            </li>
-            </ul>
+            </a>
+
+            </section>
+
         </article>
         </section>
     );

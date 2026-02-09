@@ -5,7 +5,8 @@
     const navigate = useNavigate();
 
     return (
-        <header className="bg-white border-b border-gray-200 shadow-sm">
+        <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+
         <nav className="flex items-center justify-between h-16 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <button
             onClick={() => navigate('/')}

@@ -7,6 +7,7 @@
     sourceUrl: '',
     imageUrl: '',
     author: '',
+    category: 'GENERAL',
     isActive: true
     };
 
@@ -59,6 +60,7 @@
         sourceUrl: item.sourceUrl || '',
         imageUrl: item.imageUrl || '',
         author: item.author || '',
+        category: item.category || 'GENERAL',
         isActive: item.isActive
         });
         setFormError('');
