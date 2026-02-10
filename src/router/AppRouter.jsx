@@ -16,11 +16,16 @@ import CreateDiscussion from '../pages/CreateDiscussion';
 import DiscussionDetail from '../pages/DiscussionDetail';
 import ManageDiscussions from '../pages/ManageDiscussions';
 import ManageDiscussionComments from '../pages/ManageDiscussionComments';
+import ScrollToTop from './ScrollToTop';
+
 
 
 function AppRouter() {
     return (
         <BrowserRouter>
+
+        <ScrollToTop /> 
+        
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/eventos" element={<PublicEvents />} />
