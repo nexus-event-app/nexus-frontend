@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 function Header() {
+    const location = useLocation();
+
     return (
         <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
             <nav
@@ -10,7 +12,7 @@ function Header() {
             >
                 <Link
                     to="/"
-                    className="text-xl font-bold text-indigo-600 transition hover:text-indigo-700 sm:text-2xl"
+                    className="text-xl font-bold text-[#484BCD] hover:text-[#484BCD] sm:text-2xl"
                 >
                     Nexus
                 </Link>
@@ -19,7 +21,9 @@ function Header() {
                     <li>
                         <Link
                             to="/"
-                            className="text-sm font-medium text-gray-700 hover:text-indigo-600 sm:text-base"
+                            className={`text-sm font-medium sm:text-base transition ${
+                                location.pathname === '/' ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700 hover:text-indigo-600'
+                            }`}
                         >
                             Inicio
                         </Link>
@@ -28,7 +32,9 @@ function Header() {
                     <li>
                         <Link
                             to="/noticias"
-                            className="text-sm font-medium text-gray-700 hover:text-indigo-600 sm:text-base"
+                            className={`text-sm font-medium sm:text-base transition ${
+                                location.pathname === '/noticias' ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700 hover:text-indigo-600'
+                            }`}
                         >
                             Noticias
                         </Link>
@@ -37,7 +43,9 @@ function Header() {
                     <li>
                         <Link
                             to="/eventos"
-                            className="text-sm font-medium text-gray-700 hover:text-indigo-600 sm:text-base"
+                            className={`text-sm font-medium sm:text-base transition ${
+                                location.pathname === '/eventos' ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700 hover:text-indigo-600'
+                            }`}
                         >
                             Eventos
                         </Link>
@@ -46,7 +54,9 @@ function Header() {
                     <li>
                         <Link
                             to="/foro"
-                            className="text-sm font-medium text-gray-700 hover:text-indigo-600 sm:text-base"
+                            className={`text-sm font-medium sm:text-base transition ${
+                                location.pathname === '/foro' ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700 hover:text-indigo-600'
+                            }`}
                         >
                             Foro
                         </Link>

@@ -72,7 +72,7 @@ function DiscussionForm({ formData, onChange, onSubmit, onCancel, loading, error
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full px-6 py-3 font-medium text-white transition bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full px-6 py-3 font-medium text-white transition bg-[#4150B2] hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {loading ? 'Publicando...' : 'Publicar discusión'}
                     </button>

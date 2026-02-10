@@ -13,7 +13,7 @@ import { useDashboardTestimonials } from '../hooks/useDashboardTestimonials';
 
 function Dashboard() {
     const { user } = useAuth();
-     const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const {
         events,

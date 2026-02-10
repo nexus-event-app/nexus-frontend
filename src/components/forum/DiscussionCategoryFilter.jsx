@@ -12,10 +12,7 @@ function DiscussionCategoryFilter({ selectedCategory, onCategoryChange }) {
 
     return (
         <nav aria-label="Filtrar discusiones por categoría" className="text-center">
-            <p className="mb-3 text-sm font-medium text-gray-700 sm:text-base">
-                Filtrar por categoría:
-            </p>
-            <ul className="flex flex-wrap justify-center gap-2 p-0 m-0 list-none">
+            <ul className="flex flex-wrap justify-center gap-2 p-0 m-0 mt-6 list-none">
                 {categories.map(category => (
                     <li key={category.value}>
                         <button

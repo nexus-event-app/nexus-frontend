@@ -5,7 +5,7 @@
     const navigate = useNavigate();
 
     return (
-        <section className="py-20 bg-gradient-to-br from-indigo-600 to-purple-700">
+        <section className="py-20 bg-gradient-to-br from-[#4F46E5] via-[#3E54A3] to-[#3E54A3]/70">
         <article className="max-w-4xl px-4 mx-auto text-center sm:px-6 lg:px-8">
             <h2 className="mb-6 text-4xl font-bold text-white">
             ¿Listo para dar el siguiente paso?

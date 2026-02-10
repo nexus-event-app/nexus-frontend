@@ -4,7 +4,7 @@ import Layout from '../components/layout/Layout';
 import NewsCard from '../components/news/NewsCard';
 import CategoryFilter from '../components/news/CategoryFilter';
 import SearchBar from '../components/news/SearchBar';
-import Pagination from '../components/news/Pagination';
+import Pagination from '../components/common/Pagination';
 
 function News() {
     const {
@@ -36,11 +36,11 @@ function News() {
 
     return (
         <Layout>
-            <header className="py-16 mb-8 bg-gradient-to-br from-indigo-600 to-purple-700 sm:py-20">
+            <header className="py-20 bg-gradient-to-br from-[#4F46E5] via-[#3E54A3] to-[#3E54A3]/70 mb-6">
                 <article className="max-w-4xl px-4 mx-auto text-center sm:px-6 lg:px-8">
-                    <h1 className="mb-6 text-4xl font-bold text-white sm:text-5xl">
+                    <h2 className="mb-6 text-4xl font-bold text-white sm:text-5xl">
                         Noticias y Recursos Tech
-                    </h1>
+                    </h2>
                     <p className="text-lg text-indigo-100 sm:text-xl">
                         Mantente actualizado con las últimas noticias y recursos para juniors
                     </p>

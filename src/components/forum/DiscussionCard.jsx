@@ -48,7 +48,8 @@ function DiscussionCard({ discussion, onDeleted }) {
     };
 
     return (
-        <article className="p-6 transition bg-white border border-gray-200 rounded-lg hover:shadow-md">
+         <article className="p-6 transition bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg hover:border-indigo-200">
+
             <header className="mb-4">
                 <nav className="flex flex-wrap items-center justify-between gap-2 mb-3" aria-label="Metadatos de la discusión">
                     <section className="flex flex-wrap items-center gap-2">
