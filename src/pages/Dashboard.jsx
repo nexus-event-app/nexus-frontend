@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import AdminHeader from '../components/layout/AdminHeader';
 import StatsCards from '../components/dashboard/StatsCards';
@@ -12,6 +13,7 @@ import { useDashboardTestimonials } from '../hooks/useDashboardTestimonials';
 
 function Dashboard() {
     const { user } = useAuth();
+     const navigate = useNavigate();
 
     const {
         events,
@@ -60,6 +62,7 @@ function Dashboard() {
                     />
                 </section>
 
+
                 <section className="mb-8">
                     <h3 className="mb-3 text-sm font-semibold tracking-wider text-gray-500 uppercase">
                         Testimonios
@@ -71,6 +74,21 @@ function Dashboard() {
                         loading={testimonialsLoading}
                     />
                 </section>
+                                <article className="p-6 transition bg-white border border-gray-100 shadow-sm rounded-xl hover:shadow-md">
+                    <span className="block mb-4 text-4xl" aria-hidden="true">💬</span>
+                    <h3 className="mb-2 text-xl font-bold text-gray-900">
+                        Gestionar Foro
+                    </h3>
+                    <p className="mb-4 text-gray-600">
+                        Modera discusiones y comentarios
+                    </p>
+                    <button
+                        onClick={() => navigate('/dashboard/discussions')}
+                        className="text-indigo-600 transition hover:text-indigo-700"
+                    >
+                        Ir al foro →
+                    </button>
+                </article>
 
                 <QuickActionsCard />
 

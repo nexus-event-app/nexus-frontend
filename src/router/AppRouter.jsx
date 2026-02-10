@@ -11,6 +11,11 @@ import ManageTestimonials from '../pages/ManageTestimonials';
 import ProtectedRoute from './ProtectedRoute';
 import News from '../pages/News';
 import NewsDetail from '../pages/NewsDetail';
+import Forum from '../pages/Forum';
+import CreateDiscussion from '../pages/CreateDiscussion';
+import DiscussionDetail from '../pages/DiscussionDetail';
+import ManageDiscussions from '../pages/ManageDiscussions';
+import ManageDiscussionComments from '../pages/ManageDiscussionComments';
 
 
 function AppRouter() {
@@ -22,6 +27,13 @@ function AppRouter() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/noticias" element={<News />} />
                 <Route path="/noticias/:id" element={<NewsDetail />} />
+                <Route path="/foro" element={<Forum />} />
+                <Route path="/foro/crear" element={<CreateDiscussion />} />
+                <Route path="/foro/:id" element={<DiscussionDetail />} />
+                <Route path="/dashboard/discussions" element={<ManageDiscussions />} />
+                <Route path="/dashboard/discussions/:id/comments" element={<ManageDiscussionComments />} />
+
+
 
 
 

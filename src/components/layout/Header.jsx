@@ -1,9 +1,7 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Header() {
-    const navigate = useNavigate();
-
     return (
         <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
             <nav
@@ -17,40 +15,52 @@ function Header() {
                     Nexus
                 </Link>
 
-                <menu className="flex items-center gap-4 p-0 m-0 list-none sm:gap-6">
+                <ul className="flex items-center gap-4 list-none sm:gap-6">
                     <li>
                         <Link
                             to="/"
-                            className="text-sm font-medium text-gray-700 transition hover:text-indigo-600 sm:text-base"
+                            className="text-sm font-medium text-gray-700 hover:text-indigo-600 sm:text-base"
                         >
                             Inicio
                         </Link>
                     </li>
-                    <li>
-                        <Link
-                            to="/eventos"
-                            className="text-sm font-medium text-gray-700 transition hover:text-indigo-600 sm:text-base"
-                        >
-                            Eventos
-                        </Link>
-                    </li>
+
                     <li>
                         <Link
                             to="/noticias"
-                            className="text-sm font-medium text-gray-700 transition hover:text-indigo-600 sm:text-base"
+                            className="text-sm font-medium text-gray-700 hover:text-indigo-600 sm:text-base"
                         >
                             Noticias
                         </Link>
                     </li>
+
+                    <li>
+                        <Link
+                            to="/eventos"
+                            className="text-sm font-medium text-gray-700 hover:text-indigo-600 sm:text-base"
+                        >
+                            Eventos
+                        </Link>
+                    </li>
+
+                    <li>
+                        <Link
+                            to="/foro"
+                            className="text-sm font-medium text-gray-700 hover:text-indigo-600 sm:text-base"
+                        >
+                            Foro
+                        </Link>
+                    </li>
+
                     <li>
                         <Link
                             to="/login"
-                            className="px-3 py-2 text-xs text-gray-700 transition bg-gray-100 rounded-lg hover:bg-gray-200 sm:px-4 sm:text-sm"
+                            className="px-3 py-2 text-xs text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 sm:px-4 sm:text-sm"
                         >
                             Admin
                         </Link>
                     </li>
-                </menu>
+                </ul>
             </nav>
         </header>
     );
