@@ -17,15 +17,6 @@ function WhyNexusSection() {
                     </p>
                 </header>
 
-                <section className="mb-12">
-                    <ImageCarousel
-                        images={whyNexusImages}
-                        autoPlay={true}
-                        interval={5000}
-                        height="h-96"
-                    />
-                </section>
-
                 <section className="grid grid-cols-1 gap-8 md:grid-cols-3">
                     <article className="p-6 text-center">
                         <span className="block mb-4 text-5xl" aria-hidden="true">🎯</span>
@@ -56,6 +47,15 @@ function WhyNexusSection() {
                             Noticias tech relevantes, guías y consejos pensados específicamente para developers que empiezan.
                         </p>
                     </article>
+                </section>
+
+                <section className="mb-12">
+                    <ImageCarousel
+                        images={whyNexusImages}
+                        autoPlay={true}
+                        interval={5000}
+                        height="h-96"
+                    />
                 </section>
             </article>
         </section>

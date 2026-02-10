@@ -67,20 +67,20 @@ function NewsCard({ news }) {
                         </time>
                     </nav>
 
-                    <h2 className="mb-2 text-lg font-bold text-gray-900 line-clamp-2 sm:text-xl">
+                    <h2 className="mb-1 text-base font-bold text-center text-gray-900 line-clamp-2 sm:text-lg">
                         {news.title}
                     </h2>
                 </header>
 
                 {news.content && (
-                    <p className="mb-4 text-sm text-gray-600 line-clamp-3 sm:text-base">
+                    <p className="mb-4 text-sm text-center text-gray-600 line-clamp-3 sm:text-base">
                         {news.content}
                     </p>
                 )}
 
                 <footer>
                     {news.author && (
-                        <p className="mb-4 text-sm text-gray-500">
+                        <p className="mb-4 text-sm text-center text-gray-500">
                             Por <span className="font-medium">{news.author}</span>
                         </p>
                     )}

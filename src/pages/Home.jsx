@@ -16,7 +16,6 @@
             <NewsSection />
             <FeaturedEventsSection />
             <TestimonialsSection />
-            
             <CTASection />
         </main>
         </Layout>

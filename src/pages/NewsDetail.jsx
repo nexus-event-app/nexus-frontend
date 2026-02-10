@@ -144,9 +144,9 @@ function NewsDetail() {
                             </time>
                         </nav>
 
-                        <h1 className="mb-4 text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl">
+                        <h2 className="mb-4 text-xl font-bold text-center text-gray-900 sm:text-2xl lg:text-3xl">
                             {news.title}
-                        </h1>
+                        </h2>
 
                         {news.author && (
                             <p className="text-base text-gray-600 sm:text-lg">
@@ -166,14 +166,14 @@ function NewsDetail() {
                     )}
 
                     <section className="prose prose-lg max-w-none">
-                        <p className="text-base leading-relaxed text-gray-700 whitespace-pre-wrap sm:text-lg">
+                        <p className="text-base leading-relaxed text-center text-gray-700 whitespace-pre-wrap sm:text-lg">
                             {news.content}
                         </p>
                     </section>
 
                     {news.sourceUrl && (
                         <footer className="pt-6 mt-8 border-t border-gray-200">
-                            <p className="text-sm text-gray-600 sm:text-base">
+                            <p className="text-sm text-center text-gray-600 sm:text-base">
                                 Fuente:{' '}
                                 <a
                                     href={news.sourceUrl}

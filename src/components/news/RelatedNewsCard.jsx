@@ -60,7 +60,7 @@ function RelatedNewsCard({ news }) {
                         {getCategoryLabel(news.category)}
                     </span>
 
-                    <h3 className="mb-1 text-base font-bold text-gray-900 line-clamp-2 sm:text-lg">
+                    <h3 className="mb-1 text-base font-bold text-center text-gray-900 line-clamp-2 sm:text-lg">
                         {news.title}
                     </h3>
 

@@ -16,7 +16,7 @@ function EventCard({ event }) {
                 <span className="inline-block px-3 py-1 mb-3 text-xs font-medium text-indigo-600 rounded-full bg-indigo-50">
                     {event.level === 'JUNIOR_FRIENDLY' ? 'Junior Friendly' : 'Todos los niveles'}
                 </span>
-                <h3 className="mb-2 text-xl font-bold text-gray-900">
+                <h3 className="mb-2 text-xl font-bold text-center text-gray-900">
                     {event.title}
                 </h3>
             </header>
@@ -41,7 +41,7 @@ function EventCard({ event }) {
             </dl>
 
             {event.tags && (
-                <footer className="pt-4 mt-4 border-t border-gray-100">
+                <footer className="pt-4 mt-4 text-center border-t border-gray-100">
                     <p className="text-sm text-indigo-600">{event.tags}</p>
                 </footer>
             )}
