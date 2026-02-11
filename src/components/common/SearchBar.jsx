@@ -38,7 +38,7 @@ function SearchBar({
                 />
 
                 {totalResults !== null && searchTerm && (
-                    <span className="absolute px-3 py-1 text-xs font-semibold text-white transform -translate-y-1/2 rounded-full bg-gradient-to-r from-[#4C4AD6] to-purple-600 right-4 top-1/2">
+                    <span className="absolute px-3 py-1 text-xs font-semibold text-white transform -translate-y-1/2 rounded-full bg-gradient-to-r from-[#4C4AD6] to-purple-600 right-9 top-1/2">
                         {totalResults} {totalResults === 1 ? 'resultado' : 'resultados'}
                     </span>
                 )}

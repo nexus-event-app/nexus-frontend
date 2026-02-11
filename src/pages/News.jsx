@@ -3,7 +3,7 @@ import { useNews } from '../hooks/useNews';
 import Layout from '../components/layout/Layout';
 import NewsCard from '../components/news/NewsCard';
 import CategoryFilter from '../components/news/CategoryFilter';
-import SearchBar from '../components/news/SearchBar';
+import SearchBar from '../components/common/SearchBar';
 import Pagination from '../components/common/Pagination';
 
 function News() {
@@ -55,13 +55,13 @@ function News() {
                     />
                 </section>
 
+                {/* SearchBar común reutilizable */}
                 <section className="mb-8">
                     <SearchBar
                         searchTerm={searchTerm}
                         onSearchChange={handleSearchChange}
+                        placeholder="Buscar noticias por título, contenido o autor..."
                         totalResults={totalResults}
-                        hasActiveFilters={hasActiveFilters}
-                        onClearFilters={clearFilters}
                     />
                 </section>
 
@@ -73,7 +73,7 @@ function News() {
                         {hasActiveFilters && (
                             <button
                                 onClick={clearFilters}
-                                className="px-6 py-3 font-medium text-white transition bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                className="px-6 py-3 font-medium text-white transition rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             >
                                 Limpiar filtros
                             </button>

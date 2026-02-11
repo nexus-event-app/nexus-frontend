@@ -1,5 +1,6 @@
 import React from 'react';
 import Layout from '../components/layout/Layout';
+import SearchBar from '../components/common/SearchBar';
 import EventFilters from '../components/events/EventFilters';
 import EventCard from '../components/events/EventCard';
 import TimeFilterButtons from '../components/events/TimeFilterButtons';
@@ -40,11 +41,19 @@ function PublicEvents() {
           />
 
           <section className="mb-8">
+            <SearchBar
+              searchTerm={filters.search || ''}
+              onSearchChange={(value) => handleFilterChange('search', value)}
+              placeholder="Buscar eventos por título, descripción, tags u organizador..."
+              totalResults={displayEvents.length}
+            />
+          </section>
+
+          <section className="mb-8">
             <EventFilters
               filters={filters}
               onFilterChange={handleFilterChange}
               onClearFilters={clearFilters}
-              showSearch
               resultCount={displayEvents.length}
               totalCount={events.length}
             />

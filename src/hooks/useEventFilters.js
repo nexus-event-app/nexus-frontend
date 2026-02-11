@@ -44,7 +44,9 @@
             filtered = filtered.filter(event =>
             event.title.toLowerCase().includes(searchLower) ||
             event.description?.toLowerCase().includes(searchLower) ||
-            event.tags?.toLowerCase().includes(searchLower)
+            event.tags?.toLowerCase().includes(searchLower) ||
+            event.location.toLowerCase().includes(searchLower) ||
+            event.organizerName?.toLowerCase().includes(searchLower)
             );
         }
 
