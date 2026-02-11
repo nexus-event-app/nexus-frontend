@@ -4,6 +4,7 @@ import { useDiscussions } from '../hooks/useDiscussions';
 import DiscussionCard from '../components/forum/DiscussionCard';
 import DiscussionCategoryFilter from '../components/forum/DiscussionCategoryFilter';
 import CreateDiscussionButton from '../components/forum/CreateDiscussionButton';
+import ForumRules from '../components/forum/ForumRules';
 import Pagination from '../components/common/Pagination';
 
 function Forum() {
@@ -71,6 +72,7 @@ function Forum() {
                         />
                     </>
                 )}
+                <ForumRules />
             </main>
         </Layout>
     );

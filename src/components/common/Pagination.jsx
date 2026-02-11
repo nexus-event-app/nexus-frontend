@@ -25,7 +25,7 @@
     };
 
     return (
-        <nav className="flex items-center justify-center gap-2 mt-8" aria-label="Paginación">
+        <nav className="flex items-center justify-center gap-2 mt-8 mb-6" aria-label="Paginación">
         <button
             onClick={() => onPageChange(currentPage - 1)}
             disabled={currentPage === 1}
