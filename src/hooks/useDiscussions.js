@@ -5,6 +5,7 @@
     const [discussions, setDiscussions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedCategory, setSelectedCategory] = useState('TODAS');
+    const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const ITEMS_PER_PAGE = 9;
 
@@ -24,7 +25,7 @@
         }
 
         setDiscussions(data);
-        setCurrentPage(1); // Reset a página 1 cuando cambia categoría
+        setCurrentPage(1);
         } catch (error) {
         console.error('Error al cargar discusiones:', error);
         } finally {
@@ -34,17 +35,33 @@
 
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
+        setSearchTerm('');
+    };
+
+    const handleSearchChange = (term) => {
+        setSearchTerm(term);
+        setCurrentPage(1);
     };
 
     const reloadDiscussions = () => {
         loadDiscussions();
     };
 
-    // Paginación
-    const totalPages = Math.ceil(discussions.length / ITEMS_PER_PAGE);
+    const filteredDiscussions = discussions.filter(discussion => {
+        if (!searchTerm) return true;
+        
+        const searchLower = searchTerm.toLowerCase();
+        const titleMatch = discussion.title.toLowerCase().includes(searchLower);
+        const contentMatch = discussion.content.toLowerCase().includes(searchLower);
+        const authorMatch = discussion.authorName.toLowerCase().includes(searchLower);
+        
+        return titleMatch || contentMatch || authorMatch;
+    });
+
+    const totalPages = Math.ceil(filteredDiscussions.length / ITEMS_PER_PAGE);
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
     const endIndex = startIndex + ITEMS_PER_PAGE;
-    const paginatedDiscussions = discussions.slice(startIndex, endIndex);
+    const paginatedDiscussions = filteredDiscussions.slice(startIndex, endIndex);
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -53,12 +70,14 @@
 
     return {
         discussions: paginatedDiscussions,
-        allDiscussions: discussions,
+        allDiscussions: filteredDiscussions,
         loading,
         selectedCategory,
+        searchTerm,
         currentPage,
         totalPages,
         handleCategoryChange,
+        handleSearchChange,
         handlePageChange,
         reloadDiscussions
     };

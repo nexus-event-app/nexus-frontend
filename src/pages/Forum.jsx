@@ -6,19 +6,22 @@ import DiscussionCategoryFilter from '../components/forum/DiscussionCategoryFilt
 import CreateDiscussionButton from '../components/forum/CreateDiscussionButton';
 import ForumRules from '../components/forum/ForumRules';
 import Pagination from '../components/common/Pagination';
+import SearchBar from '../components/common/SearchBar';
 
 function Forum() {
-    const {
-        discussions,
-        allDiscussions,
-        loading,
-        selectedCategory,
-        currentPage,
-        totalPages,
-        handleCategoryChange,
-        handlePageChange,
-        reloadDiscussions
-    } = useDiscussions();
+const {
+    discussions,
+    allDiscussions,
+    loading,
+    selectedCategory,
+    searchTerm,
+    currentPage,
+    totalPages,
+    handleCategoryChange,
+    handleSearchChange,
+    handlePageChange,
+    reloadDiscussions
+} = useDiscussions();
 
     return (
         <Layout>
@@ -35,12 +38,21 @@ function Forum() {
             </header>
 
             <main className="container px-4 pb-8 mx-auto sm:px-6 lg:px-8">
-                <section className="mb-8" aria-label="Filtros de búsqueda">
-                    <DiscussionCategoryFilter
-                        selectedCategory={selectedCategory}
-                        onCategoryChange={handleCategoryChange}
-                    />
-                </section>
+<section className="mb-8" aria-label="Filtros de búsqueda">
+    <DiscussionCategoryFilter
+        selectedCategory={selectedCategory}
+        onCategoryChange={handleCategoryChange}
+    />
+</section>
+
+<section className="mb-8">
+    <SearchBar
+        searchTerm={searchTerm}
+        onSearchChange={handleSearchChange}
+        placeholder="Buscar en el foro por título, contenido o autor..."
+        totalResults={allDiscussions.length}
+    />
+</section>
 
                 {loading ? (
                     <section className="py-16 text-center">
