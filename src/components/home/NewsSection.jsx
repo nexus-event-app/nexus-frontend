@@ -49,7 +49,7 @@ function NewsSection() {
                             className="flex flex-col h-full overflow-hidden transition-all duration-300 bg-white border-2 border-gray-200 rounded-xl hover:shadow-2xl hover:border-indigo-400 hover:-translate-y-1"
                         >
                             {item.imageUrl && (
-                                <figure className="relative h-48 overflow-hidden">
+                                <figure className="relative h-40 overflow-hidden">
                                     <img
                                         src={getImageUrl(item.imageUrl)}
                                         alt={item.title}
@@ -60,7 +60,7 @@ function NewsSection() {
 
                             <section className="flex flex-col flex-1 p-6">
                                 <header className="mb-4">
-                                    <h3 className="mb-3 text-xl font-bold text-center text-gray-900 line-clamp-2">
+                                    <h3 className="mb-3 text-2xl font-bold text-center text-gray-900 line-clamp-2">
                                         {item.title}
                                     </h3>
                                     {item.author && (
@@ -71,7 +71,7 @@ function NewsSection() {
                                 </header>
 
                                 {item.content && (
-                                    <p className="flex-1 mb-4 text-sm text-center text-gray-600 sm:text-base line-clamp-3">
+                                    <p className="flex-1 mb-4 text-xl text-center text-gray-800 sm:text-base line-clamp-3">
                                         {item.content}
                                     </p>
                                 )}
@@ -79,7 +79,7 @@ function NewsSection() {
                                 <footer className="pt-4 mt-auto text-center border-t border-gray-100">
                                     <Link
                                         to={`/noticias/${item.id}`}
-                                        className="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white transition-all rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                        className="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white transition-all rounded-lg bg-[#3F53A8] hover:from-indigo-700 hover:to-purple-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                     >
                                         Leer más →
                                     </Link>
@@ -92,7 +92,7 @@ function NewsSection() {
                 <footer className="mt-12 text-center">
                     <Link
                         to="/noticias"
-                        className="inline-flex items-center px-8 py-3 text-lg font-semibold text-white transition-all rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-300"
+                        className="inline-flex items-center px-8 py-3 text-lg font-semibold text-white transition-all rounded-xl bg-[#3F53A8] hover:to-purple-700 hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-300"
                     >
                         Ver todas las noticias
                     </Link>

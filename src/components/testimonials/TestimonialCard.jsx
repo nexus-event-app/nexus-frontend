@@ -41,64 +41,65 @@ function TestimonialCard({ testimonial }) {
     const avatarGradient = getAvatarGradient(testimonial.name);
 
     return (
-        <article className="relative flex flex-col h-full overflow-hidden transition-all duration-500 bg-white border-2 border-gray-200 p- group sm:p-8 rounded-2xl hover:shadow-2xl hover:border-indigo-300 hover:-translate-y-2">
-            <span className="absolute inset-0 transition-opacity duration-500 opacity-0 bg-gradient-to-br from-indigo-50/50 to-purple-50/50 group-hover:opacity-100" aria-hidden="true"></span>
-            
-            <section className="relative z-10">
-                <header className="flex items-start gap-4 mb-6">
-                    <section className="relative flex-shrink-0">
-                        <span 
-                            className={`flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 text-white rounded-2xl bg-gradient-to-br ${avatarGradient} transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-lg`}
-                        >
-                            <span className="text-lg font-bold sm:text-xl">{initials}</span>
-                        </span>
-                        <span className="absolute inset-0 transition-all duration-500 opacity-0 rounded-2xl ring-4 ring-indigo-300/30 group-hover:opacity-100 group-hover:scale-125" aria-hidden="true"></span>
-                    </section>
-
-                    <section className="flex-1">
-                        <h3 className="text-lg font-bold text-gray-900 transition-colors duration-300 sm:text-xl group-hover:text-indigo-600">
-                            {testimonial.name}
-                        </h3>
-                        {testimonial.role && (
-                            <p className="mt-1 text-sm font-medium text-gray-600 sm:text-base">
-                                {testimonial.role}
-                            </p>
-                        )}
-                        {testimonial.location && (
-                            <address className="flex items-center gap-1 mt-2 text-xs not-italic text-gray-500 sm:text-sm">
-                                <span aria-hidden="true">📍</span>
-                                <span>{testimonial.location}</span>
-                            </address>
-                        )}
-                    </section>
-                </header>
-
-                {/* Contenido con quote decorativo */}
-                <blockquote className="relative flex-1 mb-6">
-                    <span className="absolute font-serif text-6xl text-indigo-100 opacity-50 -top-4 -left-2" aria-hidden="true">"</span>
-                    <p className="relative text-base leading-relaxed text-gray-700 sm:text-lg">
-                        {testimonial.content}
-                    </p>
-                </blockquote>
-
-                {/* Footer con badges */}
-                <footer className="flex flex-wrap items-center gap-2 pt-4 border-t border-gray-100">
-                    {testimonial.isHighlighted && (
-                        <span className="inline-flex items-center gap-1 px-3 py-1 text-xs font-semibold text-yellow-800 rounded-full bg-gradient-to-r from-yellow-100 to-yellow-200 sm:text-sm">
-                            <span aria-hidden="true">⭐</span>
-                            <span>Destacado</span>
-                        </span>
-                    )}
-                    <time 
-                        className="inline-flex items-center gap-1 text-xs text-gray-500 sm:text-sm"
-                        dateTime={testimonial.createdAt}
-                    >
-                        <span aria-hidden="true">📅</span>
-                        <span>{getRelativeTime(testimonial.createdAt)}</span>
-                    </time>
-                </footer>
+<article className="relative flex flex-col h-full overflow-hidden bg-white border-2 border-gray-200 p- group sm:p-8 rounded-2xl">
+    <span className="absolute inset-0 opacity-0 bg-gradient-to-br from-indigo-50/50 to-purple-50/50" aria-hidden="true"></span>
+    
+    <section className="relative z-10">
+        <header className="flex items-start gap-4 mb-6">
+            <section className="relative flex-shrink-0">
+                <span 
+                    className={`flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 text-white rounded-2xl bg-gradient-to-br ${avatarGradient} shadow-lg`}
+                >
+                    <span className="text-lg font-bold sm:text-xl">{initials}</span>
+                </span>
+                <span className="absolute inset-0 opacity-0 rounded-2xl ring-4 ring-indigo-300/30" aria-hidden="true"></span>
             </section>
-        </article>
+
+            <section className="flex-1">
+                <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
+                    {testimonial.name}
+                </h3>
+                {testimonial.role && (
+                    <p className="mt-1 text-sm font-medium text-gray-600 sm:text-base">
+                        {testimonial.role}
+                    </p>
+                )}
+                {testimonial.location && (
+                    <address className="flex items-center gap-1 mt-2 text-xs not-italic text-gray-500 sm:text-sm">
+                        <span aria-hidden="true">📍</span>
+                        <span>{testimonial.location}</span>
+                    </address>
+                )}
+            </section>
+        </header>
+
+        <blockquote className="relative flex-1 mb-6">
+            <span className="absolute text-6xl text-indigo-100 opacity-50 -top-8 -left-2" aria-hidden="true">"</span>
+            <p className="relative text-base leading-relaxed text-gray-700 sm:text-lg">
+                {testimonial.content}
+            </p>
+            <span className="absolute text-6xl text-indigo-100 opacity-50 -bottom-8 -right-2" aria-hidden="true">"</span>
+
+        </blockquote>
+
+        <footer className="flex flex-wrap items-center gap-2 pt-4 border-t border-gray-100">
+            {testimonial.isHighlighted && (
+                <span className="inline-flex items-center gap-1 px-3 py-1 text-xs font-semibold text-yellow-800 rounded-full bg-gradient-to-r from-yellow-100 to-yellow-200 sm:text-sm">
+                    <span aria-hidden="true">⭐</span>
+                    <span>Destacado</span>
+                </span>
+            )}
+            <time 
+                className="inline-flex items-center gap-1 text-xs text-gray-500 sm:text-sm"
+                dateTime={testimonial.createdAt}
+            >
+                <span aria-hidden="true">📅</span>
+                <span>{getRelativeTime(testimonial.createdAt)}</span>
+            </time>
+        </footer>
+    </section>
+</article>
+
     );
 }
 

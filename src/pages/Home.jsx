@@ -7,6 +7,7 @@
     import TestimonialsSection from '../components/testimonials/TestimonialsSection';
     import CTASection from '../components/home/CTASection';
 
+
     function Home() {
     return (
         <Layout>

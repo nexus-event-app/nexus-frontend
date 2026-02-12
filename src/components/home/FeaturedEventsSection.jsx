@@ -37,8 +37,8 @@
         {loading ? (
             <p className="text-center text-gray-600">Cargando eventos...</p>
         ) : featuredEvents.length === 0 ? (
-            <section className="relative p-12 overflow-hidden text-center transition-all duration-300 bg-white border-2 border-purple-200 border-dashed rounded-xl hover:border-purple-400 hover:shadow-lg">
-                <section className="absolute inset-0 opacity-5 bg-gradient-to-br from-purple-100 to-pink-100"></section>
+            <section className="relative p-12 overflow-hidden text-center transition-all duration-300 bg-white border-2 border-purple-200 border-dashed rounded-xl hover:bg-[#A3A1F7] hover:shadow-lg">
+                <section className="absolute inset-0 opacity-5 bg-[#A3A1F7]"></section>
                 
                 <section className="relative z-10">
                     <p className="mb-2 text-6xl">🎯</p>
@@ -50,7 +50,7 @@
                     </p>
                     <button
                         onClick={() => navigate('/eventos')}
-                        className="inline-flex items-center px-8 py-3 text-base font-semibold text-white transition-all shadow-lg rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-4 focus:ring-purple-300"
+                        className="inline-flex items-center px-8 py-3 text-base font-semibold text-white transition-all shadow-lg rounded-2xl bg-[#A3A1F7] hover:bg[#3F53A8] hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-4 focus:ring-purple-300"
                     >
                         Explorar eventos
                     </button>
@@ -62,7 +62,7 @@
                     {featuredEvents.map(event => (
                         <article
                             key={event.id}
-                            className="relative flex flex-col h-full p-6 transition-all duration-300 bg-white border-2 border-gray-200 rounded-xl hover:shadow-2xl hover:border-purple-400 hover:-translate-y-1"
+                            className="relative flex flex-col h-full p-8 transition-all duration-300 bg-white border-2 ray-300 rounded-xl hover:shadow-2xl hover:border-[#A3A1F7] hover:-translate-y-1"
                         >
                             <header className="mb-4">
                                 <span className={`inline-block px-4 py-2 mb-4 text-xs font-bold uppercase tracking-wider rounded-full ${
@@ -73,16 +73,16 @@
                                     {event.level === 'JUNIOR_FRIENDLY' ? '✨ Junior Friendly' : '🌟 Todos los niveles'}
                                 </span>
                                 
-                                <h3 className="mb-3 text-xl font-bold text-center text-gray-900 line-clamp-2">
+                                <h3 className="mb-3 text-2xl font-bold text-center text-gray-900 line-clamp-2">
                                     {event.title}
                                 </h3>
                             </header>
 
-                            <p className="flex-1 mb-4 text-sm text-center text-gray-600 sm:text-base line-clamp-3">
+                            <p className="flex-1 mb-4 text-sm text-center text-gray-800 sm:text-base line-clamp-3">
                                 {event.description}
                             </p>
 
-                            <section className="p-4 mb-4 space-y-2 text-sm rounded-lg bg-gradient-to-r from-purple-50 to-pink-50">
+                            <section className="p-4 mb-4 space-y-2 text-sm rounded-lg bg-[#F9F7FD]">
                                 <time className="flex items-center justify-center gap-2 font-medium text-gray-700" dateTime={event.eventDate}>
                                     <span className="text-lg">📅</span>
                                     <span>
@@ -101,7 +101,7 @@
 
                             {event.tags && (
                                 <footer className="pt-4 mt-auto text-center border-t border-gray-100">
-                                    <p className="text-xs font-semibold text-purple-600">
+                                    <p className="text-xs font-semibold text-[#3F53A8]">
                                         {event.tags}
                                     </p>
                                 </footer>
@@ -113,7 +113,7 @@
                 <footer className="text-center">
                     <button
                         onClick={() => navigate('/eventos')}
-                        className="inline-flex items-center px-8 py-3 text-lg font-semibold text-white transition-all rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-4 focus:ring-purple-300"
+                        className="inline-flex items-center px-8 py-3 text-lg font-semibold text-white transition-all rounded-xl bg-[#3F53A8] hover:bg-{#A3A1F7} hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-4 focus:ring-purple-100"
                     >
                         Ver todos los eventos →
                     </button>
