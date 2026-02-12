@@ -1,8 +1,8 @@
-    import axios from 'axios';
+import axios from 'axios';
 
-    const API_URL = 'http://localhost:8080/api/discussions';
+const API_URL = 'http://localhost:8080/api/discussions';
 
-    const discussionService = {
+const discussionService = {
     getAllDiscussions: async () => {
         const response = await axios.get(API_URL);
         return response.data;
@@ -20,30 +20,37 @@
 
     getMyDiscussions: async (userId) => {
         const response = await axios.get(`${API_URL}/my-discussions`, {
-        headers: { 'User-Id': userId }
+            headers: { 'User-Id': userId }
         });
         return response.data;
     },
 
     createDiscussion: async (data, userId) => {
         const response = await axios.post(API_URL, data, {
-        headers: { 'User-Id': userId }
+            headers: { 'User-Id': userId }
         });
         return response.data;
     },
 
     updateDiscussion: async (id, data, userId) => {
         const response = await axios.put(`${API_URL}/${id}`, data, {
-        headers: { 'User-Id': userId }
+            headers: { 'User-Id': userId }
         });
         return response.data;
     },
 
     deleteDiscussion: async (id, userId) => {
         await axios.delete(`${API_URL}/${id}`, {
-        headers: { 'User-Id': userId }
+            headers: { 'User-Id': userId }
         });
-    }
-    };
+    },
 
-    export default discussionService;
+    toggleLike: async (discussionId, userId) => {
+        const response = await axios.post(`${API_URL}/${discussionId}/like`, {}, {
+            headers: { 'User-Id': userId }
+        });
+        return response.data;
+    }
+};
+
+export default discussionService;
