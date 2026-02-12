@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import discussionService from '../services/discussionService';
 import commentService from '../services/commentService';
@@ -10,11 +10,7 @@ export function useDiscussionDetail(discussionId) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
-    useEffect(() => {
-        loadDiscussionAndComments();
-    }, [discussionId]);
-
-    const loadDiscussionAndComments = async () => {
+    const loadDiscussionAndComments = useCallback(async () => {
         try {
             setLoading(true);
             const user = JSON.parse(localStorage.getItem('user') || 'null');
@@ -31,7 +27,11 @@ export function useDiscussionDetail(discussionId) {
         } finally {
             setLoading(false);
         }
-    };
+    }, [discussionId]);
+
+    useEffect(() => {
+        loadDiscussionAndComments();
+    }, [loadDiscussionAndComments]);
 
     const handleBack = () => {
         navigate('/foro');
