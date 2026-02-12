@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
 import Breadcrumbs from '../components/common/Breadcrumbs';
@@ -31,6 +31,22 @@ function DiscussionDetail() {
         createComment,
         deleteComment
     } = useComments(id, reloadComments);
+
+    useEffect(() => {
+        if (window.location.hash === '#add-response') {
+            setTimeout(() => {
+                const element = document.getElementById('add-response');
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                    const textarea = element.querySelector('textarea');
+                    if (textarea) {
+                        textarea.focus();
+                    }
+                }
+            }, 300);
+        }
+    }, []);
 
     const handleCommentSubmit = (e) => {
         e.preventDefault();
@@ -75,11 +91,8 @@ function DiscussionDetail() {
 
     return (
         <Layout>
-
             <main className="container max-w-4xl px-4 py-8 mx-auto sm:px-6 lg:px-8">
-            
                 <Breadcrumbs items={breadcrumbItems} />
-
 
                 <button
                     onClick={handleBack}
@@ -90,7 +103,6 @@ function DiscussionDetail() {
                     </svg>
                     Volver al foro
                 </button>
-
 
                 <DiscussionHeader
                     discussion={discussion}
@@ -104,7 +116,7 @@ function DiscussionDetail() {
                     deleting={deleting}
                 />
 
-                <section aria-labelledby="add-response-heading">
+                <section id="add-response" aria-labelledby="add-response-heading">
                     <h2 id="add-response-heading" className="sr-only">Añadir respuesta</h2>
                     <CommentForm
                         value={commentText}
@@ -115,6 +127,7 @@ function DiscussionDetail() {
                         isLoggedIn={!!user}
                     />
                 </section>
+                
                 <ForumRules />
             </main>
         </Layout>
