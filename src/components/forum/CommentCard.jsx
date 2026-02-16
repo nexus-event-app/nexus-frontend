@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
+import { useToastContext } from '../../context/ToastContext';
+import DeleteConfirmModal from '../common/DeleteConfirmModal';
 import commentService from '../../services/commentService';
+
 
 function CommentCard({ comment: initialComment, canDelete, onDelete, deleting }) {
     const [comment, setComment] = useState(initialComment);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [liking, setLiking] = useState(false);
+    const { showError } = useToastContext();
     const user = JSON.parse(localStorage.getItem('user') || 'null');
 
     const formatDate = (dateString) => {
@@ -21,7 +26,7 @@ function CommentCard({ comment: initialComment, canDelete, onDelete, deleting })
 
     const handleToggleLike = async () => {
         if (!user) {
-            alert('Debes iniciar sesión para dar like');
+            showError('Debes iniciar sesión para dar like');
             return;
         }
 
@@ -31,67 +36,90 @@ function CommentCard({ comment: initialComment, canDelete, onDelete, deleting })
             setComment(updated);
         } catch (error) {
             console.error('Error al dar like:', error);
+            showError('✕ Error al dar like');
         } finally {
             setLiking(false);
         }
     };
 
+    const handleDeleteConfirm = async () => {
+        try {
+            await onDelete();
+            setShowDeleteModal(false);
+        } catch (error) {
+            setShowDeleteModal(false);
+        }
+    };
+
     return (
-        <article className="p-4 transition-all border-l-4 border-indigo-200 bg-gray-50 hover:bg-gray-100">
-            <header className="flex items-center justify-between mb-3">
-                <section className="flex items-center gap-2">
-                    <span className="flex items-center justify-center w-8 h-8 text-sm font-bold text-white bg-indigo-500 rounded-full">
-                        {comment.authorName.charAt(0).toUpperCase()}
-                    </span>
-                    <section>
-                        <p className="font-semibold text-gray-900">{comment.authorName}</p>
-                        <time className="text-sm text-gray-500">{formatDate(comment.createdAt)}</time>
+        <>
+            <article className="p-4 transition-all border-l-4 border-indigo-200 bg-gray-50 hover:bg-gray-100">
+                <header className="flex items-center justify-between mb-3">
+                    <section className="flex items-center gap-2">
+                        <span className="flex items-center justify-center w-8 h-8 text-sm font-bold text-white bg-indigo-500 rounded-full">
+                            {comment.authorName.charAt(0).toUpperCase()}
+                        </span>
+                        <section>
+                            <p className="font-semibold text-gray-900">{comment.authorName}</p>
+                            <time className="text-sm text-gray-500">{formatDate(comment.createdAt)}</time>
+                        </section>
                     </section>
-                </section>
 
-                <section className="flex items-center gap-2">
-                    <button
-                        onClick={handleToggleLike}
-                        disabled={liking || !user}
-                        className={`flex items-center gap-1 px-2 py-1 rounded-lg transition-all ${
-                            comment.isLikedByCurrentUser
-                                ? 'bg-red-100 text-red-600 hover:bg-red-200'
-                                : 'bg-white text-gray-600 hover:bg-gray-100'
-                        } disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-red-300`}
-                        aria-label={comment.isLikedByCurrentUser ? 'Quitar like' : 'Dar like'}
-                    >
-                        <svg
-                            className={`w-4 h-4 transition-transform ${liking ? 'animate-pulse' : ''}`}
-                            fill={comment.isLikedByCurrentUser ? 'currentColor' : 'none'}
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" 
-                            />
-                        </svg>
-                        <span className="text-xs font-semibold">{comment.likesCount || 0}</span>
-                    </button>
-
-                    {canDelete && (
+                    <section className="flex items-center gap-2">
                         <button
-                            onClick={onDelete}
-                            disabled={deleting}
-                            className="px-4 py-3 text-xs font-medium text-red-600 transition rounded-lg bg-red-50 hover:bg-red-100 disabled:opacity-50"
-                            aria-label="Eliminar comentario"
+                            onClick={handleToggleLike}
+                            disabled={liking || !user}
+                            className={`flex items-center gap-1 px-2 py-1 rounded-lg transition-all ${
+                                comment.isLikedByCurrentUser
+                                    ? 'bg-red-100 text-red-600 hover:bg-red-200'
+                                    : 'bg-white text-gray-600 hover:bg-gray-100'
+                            } disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-red-300`}
+                            aria-label={comment.isLikedByCurrentUser ? 'Quitar like' : 'Dar like'}
                         >
-                            {deleting ? 'Eliminando...' : 'x'}
+                            <svg
+                                className={`w-4 h-4 transition-transform ${liking ? 'animate-pulse' : ''}`}
+                                fill={comment.isLikedByCurrentUser ? 'currentColor' : 'none'}
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" 
+                                />
+                            </svg>
+                            <span className="text-xs font-semibold">{comment.likesCount || 0}</span>
                         </button>
-                    )}
-                </section>
-            </header>
 
-            <p className="text-gray-700 whitespace-pre-wrap">{comment.content}</p>
-        </article>
+                        {/* Botón Eliminar */}
+                        {canDelete && (
+                            <button
+                                onClick={() => setShowDeleteModal(true)}
+                                disabled={deleting}
+                                className="px-3 py-1 text-xs font-medium text-red-600 transition rounded-lg bg-red-50 hover:bg-red-100 disabled:opacity-50"
+                                aria-label="Eliminar comentario"
+                            >
+                                {deleting ? 'Eliminando...' : 'Eliminar'}
+                            </button>
+                        )}
+                    </section>
+                </header>
+
+                <p className="text-gray-700 whitespace-pre-wrap">{comment.content}</p>
+            </article>
+
+            {showDeleteModal && (
+<DeleteConfirmModal
+    isOpen={showDeleteModal}
+    onClose={() => setShowDeleteModal(false)}
+    onConfirm={handleDeleteConfirm}
+    loading={deleting}
+    type="comentario"
+/>
+            )}
+        </>
     );
 }
 

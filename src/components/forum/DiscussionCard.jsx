@@ -5,17 +5,18 @@ import { useDiscussionLike } from '../../hooks/useDiscussionLike';
 import { useToastContext } from '../../context/ToastContext';
 import { getCategoryLabel, getCategoryColor } from '../../utils/forumHelpers';
 import EditDiscussionModal from './EditDiscussionModal';
-import ConfirmModal from '../common/ConfirmModal';
+import DeleteConfirmModal from '../common/DeleteConfirmModal';
 import DiscussionActions from './DiscussionActions';
 import DiscussionFooter from './DiscussionFooter';
 import discussionService from '../../services/discussionService';
+
 
 function DiscussionCard({ discussion: initialDiscussion, onDeleted, onUpdated }) {
     const [discussion, setDiscussion] = useState(initialDiscussion);
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [saving, setSaving] = useState(false);
-    
+
     const user = JSON.parse(localStorage.getItem('user') || 'null');
     const { showSuccess, showError } = useToastContext();
     const { deleteDiscussion, deleting } = useDiscussionActions(onDeleted);
@@ -76,7 +77,7 @@ function DiscussionCard({ discussion: initialDiscussion, onDeleted, onUpdated })
                     {discussion.content}
                 </p>
 
-                <DiscussionFooter 
+                <DiscussionFooter
                     discussion={discussion}
                     user={user}
                     liking={liking}
@@ -92,7 +93,6 @@ function DiscussionCard({ discussion: initialDiscussion, onDeleted, onUpdated })
                 />
             </article>
 
-            {/* Modal de edición */}
             {showEditModal && (
                 <EditDiscussionModal
                     discussion={discussion}
@@ -103,16 +103,12 @@ function DiscussionCard({ discussion: initialDiscussion, onDeleted, onUpdated })
             )}
 
             {showDeleteModal && (
-                <ConfirmModal
+                <DeleteConfirmModal
                     isOpen={showDeleteModal}
                     onClose={() => setShowDeleteModal(false)}
                     onConfirm={handleDeleteConfirm}
-                    title="⚠️ Eliminar discusión"
-                    message="¿Estás seguro de que quieres eliminar esta discusión? Esta acción no se puede deshacer."
-                    confirmText="Sí, eliminar"
-                    cancelText="Cancelar"
-                    danger={true}
                     loading={deleting}
+                    type="discusión"
                 />
             )}
         </>
