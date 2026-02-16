@@ -130,8 +130,10 @@ function NewsDetail() {
                     Volver a noticias
                 </button>
 
-                <article className="mb-12">
-                    <header className="mb-6">
+                <article className="p-6 mb-12 bg-white border border-gray-100 shadow-xl rounded-2xl shadow-gray-200/60 sm:p-8 lg:p-10">
+
+                    <header className="pb-6 mb-8 border-b border-gray-100">
+
                         <nav className="flex flex-wrap items-center gap-3 mb-4" aria-label="Metadatos de la noticia">
                             <span className={`px-3 py-1 text-sm font-semibold rounded-full ${getCategoryColor(news.category)}`}>
                                 {getCategoryLabel(news.category)}
@@ -144,7 +146,7 @@ function NewsDetail() {
                             </time>
                         </nav>
 
-                        <h2 className="mb-4 text-xl font-bold text-center text-gray-900 sm:text-2xl lg:text-3xl">
+                        <h2 className="mb-6 text-2xl font-extrabold leading-tight text-center text-gray-900 sm:text-3xl lg:text-4xl">
                             {news.title}
                         </h2>
 
@@ -160,20 +162,26 @@ function NewsDetail() {
                             <img
                                 src={getImageUrl(news.imageUrl)}
                                 alt={news.title}
-                                className="object-cover w-full h-64 rounded-lg sm:h-96"
+                                className="object-cover w-4/5 h-56 mx-auto shadow-xl rounded-2xl sm:h-80"
+
                             />
                         </figure>
                     )}
 
-                    <section className="prose prose-lg max-w-none">
-                        <p className="text-base leading-relaxed text-center text-gray-700 whitespace-pre-wrap sm:text-lg">
+                    <section className="leading-relaxed prose prose-lg max-w-none prose-gray">
+
+                        <p className="text-base leading-8 text-gray-700 whitespace-pre-wrap sm:text-lg"
+
+                        >
                             {news.content}
                         </p>
                     </section>
 
                     {news.sourceUrl && (
-                        <footer className="pt-6 mt-8 border-t border-gray-200">
-                            <p className="text-sm text-center text-gray-600 sm:text-base">
+                        <footer className="pt-6 mt-10 border-t border-gray-100">
+
+                            <p className="text-sm text-center text-gray-600 sm:text-base"
+                            >
                                 Fuente:{' '}
                                 <a
                                     href={news.sourceUrl}

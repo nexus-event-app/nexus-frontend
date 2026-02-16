@@ -6,11 +6,11 @@ function ToastContainer({ toasts, removeToast }) {
 
     return (
         <section
-            className="fixed z-50 w-full max-w-sm space-y-3 pointer-events-none top-4 right-4"
+            className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none"
             aria-live="polite"
             aria-atomic="true"
         >
-            <section className="pointer-events-auto">
+            <section className="flex flex-col items-center pointer-events-auto">
                 {toasts.map(toast => (
                     <Toast
                         key={toast.id}
