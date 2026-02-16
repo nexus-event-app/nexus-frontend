@@ -5,15 +5,13 @@ function TestimonialForm({
     formData,
     onChange,
     onSubmit,
-    loading,
-    error,
-    success
+    loading
 }) {
     const charCount = formData.content.length;
     const isValid = charCount >= 50 && charCount <= 300;
 
     return (
-        <form onSubmit={onSubmit} className="p-6 bg-white border border-gray-200 shadow-sm rounded-xl">
+        <form onSubmit={onSubmit} className="p-6 bg-white border border-gray-200 shadow-sm rounded-xl" noValidate>
             <h3 className="mb-4 text-xl font-bold text-gray-900">
                 Comparte tu experiencia
             </h3>
@@ -21,25 +19,12 @@ function TestimonialForm({
                 Cuéntanos cómo Nexus te ha ayudado en tu carrera tech
             </p>
 
-            {error && (
-                <p className="p-3 mb-4 text-sm text-red-600 rounded-lg bg-red-50" role="alert">
-                    {error}
-                </p>
-            )}
-
-            {success && (
-                <p className="p-3 mb-4 text-sm text-green-600 rounded-lg bg-green-50" role="alert">
-                    {success}
-                </p>
-            )}
-
             <section className="space-y-4">
                 <FormField
                     label="Tu nombre"
                     name="name"
                     value={formData.name}
                     onChange={onChange}
-                    required
                     placeholder="Ej: María González"
                 />
 
@@ -66,14 +51,14 @@ function TestimonialForm({
                         type="textarea"
                         value={formData.content}
                         onChange={onChange}
-                        required
                         rows={4}
                         placeholder="Comparte tu experiencia con la comunidad Nexus..."
                     />
-                    <p className={`mt-1 text-xs text-right ${charCount < 50 ? 'text-red-500' :
-                            charCount > 300 ? 'text-red-500' :
-                                'text-gray-500'
-                        }`}>
+                    <p className={`mt-1 text-xs text-right ${
+                        charCount < 50 ? 'text-red-500' :
+                        charCount > 300 ? 'text-red-500' :
+                        'text-gray-500'
+                    }`}>
                         {charCount}/300 caracteres {charCount < 50 && `(mínimo 50)`}
                     </p>
                 </section>

@@ -18,8 +18,6 @@ function TestimonialsSection() {
     const {
         formData,
         loading: formLoading,
-        error,
-        success,
         handleChange,
         handleSubmit,
         resetForm
@@ -84,8 +82,6 @@ function TestimonialsSection() {
                             onChange={handleChange}
                             onSubmit={onSubmit}
                             loading={formLoading}
-                            error={error}
-                            success={success}
                         />
                         <button
                             onClick={handleCancelForm}

@@ -93,7 +93,6 @@ function CommentCard({ comment: initialComment, canDelete, onDelete, deleting })
                             <span className="text-xs font-semibold">{comment.likesCount || 0}</span>
                         </button>
 
-                        {/* Botón Eliminar */}
                         {canDelete && (
                             <button
                                 onClick={() => setShowDeleteModal(true)}
@@ -101,7 +100,7 @@ function CommentCard({ comment: initialComment, canDelete, onDelete, deleting })
                                 className="px-3 py-1 text-xs font-medium text-red-600 transition rounded-lg bg-red-50 hover:bg-red-100 disabled:opacity-50"
                                 aria-label="Eliminar comentario"
                             >
-                                {deleting ? 'Eliminando...' : 'Eliminar'}
+                                {deleting ? 'Eliminando...' : 'X'}
                             </button>
                         )}
                     </section>

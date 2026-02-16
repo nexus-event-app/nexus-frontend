@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useToastContext } from '../context/ToastContext';
 import testimonialService from '../services/testimonialService';
 
 export function useTestimonialAdmin() {
+    const { showSuccess, showError } = useToastContext();
     const [testimonials, setTestimonials] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -15,6 +17,7 @@ export function useTestimonialAdmin() {
             setTestimonials(data);
         } catch (error) {
             console.error('Error al cargar testimonios:', error);
+            showError('✕ Error al cargar los testimonios');
         } finally {
             setLoading(false);
         }
@@ -26,8 +29,10 @@ export function useTestimonialAdmin() {
                 isHighlighted: !currentValue
             });
             loadTestimonials();
+            showSuccess(currentValue ? '✓ Testimonio desmarcado como destacado' : '✓ Testimonio marcado como destacado');
         } catch (error) {
             console.error('Error al destacar testimonio:', error);
+            showError('✕ Error al cambiar estado destacado');
         }
     };
 
@@ -37,19 +42,22 @@ export function useTestimonialAdmin() {
                 isActive: !currentValue
             });
             loadTestimonials();
+            showSuccess(currentValue ? '✓ Testimonio ocultado' : '✓ Testimonio publicado');
         } catch (error) {
             console.error('Error al cambiar estado:', error);
+            showError('✕ Error al cambiar visibilidad');
         }
     };
 
     const handleDelete = async (id) => {
-        if (window.confirm('¿Estás seguro de eliminar este testimonio?')) {
-            try {
-                await testimonialService.deleteTestimonial(id);
-                loadTestimonials();
-            } catch (error) {
-                console.error('Error al eliminar testimonio:', error);
-            }
+        try {
+            await testimonialService.deleteTestimonial(id);
+            loadTestimonials();
+            showSuccess('✓ Testimonio eliminado correctamente');
+        } catch (error) {
+            console.error('Error al eliminar testimonio:', error);
+            showError('✕ Error al eliminar el testimonio');
+            throw error;
         }
     };
 
