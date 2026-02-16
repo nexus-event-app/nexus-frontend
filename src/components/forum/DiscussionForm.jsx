@@ -1,7 +1,7 @@
 import React from 'react';
 import FormField from '../common/FormField';
 
-function DiscussionForm({ formData, onChange, onSubmit, onCancel, loading, error }) {
+function DiscussionForm({ formData, onChange, onSubmit, onCancel, loading }) {
     const categories = [
         { value: 'AYUDA_TECNICA', label: 'Ayuda Técnica' },
         { value: 'RECURSOS', label: 'Recursos' },
@@ -11,19 +11,12 @@ function DiscussionForm({ formData, onChange, onSubmit, onCancel, loading, error
     ];
 
     return (
-        <form onSubmit={onSubmit} className="space-y-6">
-            {error && (
-                <p className="p-3 text-sm text-red-600 rounded-lg bg-red-50" role="alert">
-                    {error}
-                </p>
-            )}
-
+        <form onSubmit={onSubmit} className="space-y-6" noValidate>
             <FormField
                 label="Título"
                 name="title"
                 value={formData.title}
                 onChange={onChange}
-                required
                 placeholder="Ej: ¿Cómo prepararse para una entrevista técnica?"
                 maxLength={200}
             />
@@ -36,7 +29,6 @@ function DiscussionForm({ formData, onChange, onSubmit, onCancel, loading, error
                     name="category"
                     value={formData.category}
                     onChange={onChange}
-                    required
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 >
                     {categories.map(cat => (
@@ -53,7 +45,6 @@ function DiscussionForm({ formData, onChange, onSubmit, onCancel, loading, error
                 type="textarea"
                 value={formData.content}
                 onChange={onChange}
-                required
                 rows={8}
                 placeholder="Explica tu duda o comparte tu experiencia..."
             />
@@ -72,7 +63,7 @@ function DiscussionForm({ formData, onChange, onSubmit, onCancel, loading, error
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full px-6 py-3 font-medium text-white transition bg-[#4150B2] hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full px-6 py-3 font-medium text-white transition bg-[#4150B2] rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {loading ? 'Publicando...' : 'Publicar discusión'}
                     </button>

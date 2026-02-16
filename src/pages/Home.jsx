@@ -6,7 +6,6 @@
     import NewsSection from '../components/home/NewsSection';
     import TestimonialsSection from '../components/testimonials/TestimonialsSection';
     import CTASection from '../components/home/CTASection';
-    import ToastTest from '../components/test/ToastTest';
 
 
 
@@ -15,7 +14,6 @@
         <Layout>
         <main className="min-h-screen bg-gray-50">
             <HeroSection />
-            <ToastTest />
             <WhyNexusSection />
             <NewsSection />
             <FeaturedEventsSection />

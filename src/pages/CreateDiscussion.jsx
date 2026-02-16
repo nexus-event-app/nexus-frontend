@@ -7,7 +7,6 @@ function CreateDiscussion() {
     const {
         formData,
         loading,
-        error,
         handleChange,
         handleSubmit,
         handleCancel
@@ -34,7 +33,6 @@ function CreateDiscussion() {
                         onSubmit={handleSubmit}
                         onCancel={handleCancel}
                         loading={loading}
-                        error={error}
                     />
                 </section>
             </main>
