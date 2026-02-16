@@ -11,22 +11,26 @@ function EventCard({ event }) {
         });
 
     return (
-        <article className="p-6 transition bg-white border border-gray-200 shadow-sm rounded-xl hover:shadow-md">
+        <article className="p-8 bg-white border border-gray-100 shadow-lg rounded-2xl shadow-gray-200/60"
+        >
             <header className="mb-4">
-                <span className="inline-block px-3 py-1 mb-3 text-xs font-medium text-indigo-600 rounded-full bg-indigo-50">
+                <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-wide text-indigo-700 uppercase bg-indigo-50 border border-indigo-200 rounded-full"
+                >
                     {event.level === 'JUNIOR_FRIENDLY' ? 'Junior Friendly' : 'Todos los niveles'}
                 </span>
-                <h3 className="mb-2 text-xl font-bold text-center text-gray-900">
+                <h3 className="mb-3 text-xl font-bold leading-snug text-gray-900"
+                >
                     {event.title}
                 </h3>
             </header>
 
-            <p className="mb-4 text-gray-600 line-clamp-3">
+            <p className="mb-6 text-base leading-7 text-gray-600 line-clamp-3"
+            >
                 {event.description}
             </p>
 
-            <dl className="space-y-2 text-sm">
-                <dd className="flex items-center text-gray-600">
+            <dl className="space-y-3 text-sm">
+                <dd className="flex items-start gap-2 text-gray-600">
                     <span className="mr-2">📅</span>
                     {formatDate(event.eventDate)}
                 </dd>
@@ -42,7 +46,8 @@ function EventCard({ event }) {
 
             {event.tags && (
                 <footer className="pt-4 mt-4 text-center border-t border-gray-100">
-                    <p className="text-sm text-indigo-600">{event.tags}</p>
+                    <p className="text-xs font-medium tracking-wide text-indigo-600 uppercase"
+                    >{event.tags}</p>
                 </footer>
             )}
 
@@ -52,7 +57,8 @@ function EventCard({ event }) {
                         href={event.sourceUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-block w-full px-4 py-2 text-sm font-medium text-center text-white transition bg-indigo-600 rounded-lg hover:bg-indigo-700"
+                        className="inline-block w-full px-5 py-2.5 text-sm font-semibold text-center text-white bg-indigo-600 rounded-xl shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+
                     >
                         Ver más información →
                     </a>
