@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import Modal from '../common/Modal';
+import { useToastContext } from '../../context/ToastContext';
 import { getCategoryLabel } from '../../utils/forumHelpers';
 
 function EditDiscussionModal({ discussion, onClose, onSave, saving }) {
+    const { showError } = useToastContext();
     const [formData, setFormData] = useState({
         title: discussion.title,
         content: discussion.content,
         category: discussion.category
     });
-
-    const [errors, setErrors] = useState({});
 
     const categories = [
         'AYUDA_TECNICA',
@@ -22,34 +22,40 @@ function EditDiscussionModal({ discussion, onClose, onSave, saving }) {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
-        if (errors[name]) {
-            setErrors(prev => ({ ...prev, [name]: '' }));
-        }
     };
 
     const validate = () => {
-        const newErrors = {};
-        
         if (!formData.title.trim()) {
-            newErrors.title = 'El título es obligatorio';
-        } else if (formData.title.length < 5) {
-            newErrors.title = 'El título debe tener al menos 5 caracteres';
-        } else if (formData.title.length > 200) {
-            newErrors.title = 'El título no puede superar los 200 caracteres';
+            showError('El título es obligatorio');
+            return false;
+        }
+
+        if (formData.title.trim().length < 5) {
+            showError('El título debe tener al menos 5 caracteres');
+            return false;
+        }
+
+        if (formData.title.length > 200) {
+            showError('El título no puede superar los 200 caracteres');
+            return false;
         }
 
         if (!formData.content.trim()) {
-            newErrors.content = 'El contenido es obligatorio';
-        } else if (formData.content.length < 10) {
-            newErrors.content = 'El contenido debe tener al menos 10 caracteres';
+            showError('El contenido es obligatorio');
+            return false;
+        }
+
+        if (formData.content.trim().length < 10) {
+            showError('El contenido debe tener al menos 10 caracteres');
+            return false;
         }
 
         if (!formData.category) {
-            newErrors.category = 'La categoría es obligatoria';
+            showError('La categoría es obligatoria');
+            return false;
         }
 
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
+        return true;
     };
 
     const handleSubmit = async (e) => {
@@ -59,9 +65,9 @@ function EditDiscussionModal({ discussion, onClose, onSave, saving }) {
     };
 
     return (
-        <Modal 
-            isOpen={true} 
-            onClose={onClose} 
+        <Modal
+            isOpen={true}
+            onClose={onClose}
             title="✏️ Editar discusión"
             size="md"
         >
@@ -76,16 +82,9 @@ function EditDiscussionModal({ discussion, onClose, onSave, saving }) {
                         name="title"
                         value={formData.title}
                         onChange={handleChange}
-                        className={`w-full px-4 py-3 border-2 rounded-lg transition focus:outline-none focus:ring-4 ${
-                            errors.title 
-                                ? 'border-red-500 focus:ring-red-200' 
-                                : 'border-gray-300 focus:ring-indigo-200 focus:border-indigo-600'
-                        }`}
+                        className="w-full px-4 py-3 transition border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-indigo-200 focus:border-indigo-600"
                         placeholder="Título de tu discusión"
                     />
-                    {errors.title && (
-                        <p className="mt-2 text-sm text-red-600">{errors.title}</p>
-                    )}
                 </section>
 
                 <section className="mb-6">
@@ -97,11 +96,7 @@ function EditDiscussionModal({ discussion, onClose, onSave, saving }) {
                         name="category"
                         value={formData.category}
                         onChange={handleChange}
-                        className={`w-full px-4 py-3 border-2 rounded-lg transition focus:outline-none focus:ring-4 ${
-                            errors.category 
-                                ? 'border-red-500 focus:ring-red-200' 
-                                : 'border-gray-300 focus:ring-indigo-200 focus:border-indigo-600'
-                        }`}
+                        className="w-full px-4 py-3 transition border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-indigo-200 focus:border-indigo-600"
                     >
                         <option value="">Selecciona una categoría</option>
                         {categories.map(cat => (
@@ -110,9 +105,6 @@ function EditDiscussionModal({ discussion, onClose, onSave, saving }) {
                             </option>
                         ))}
                     </select>
-                    {errors.category && (
-                        <p className="mt-2 text-sm text-red-600">{errors.category}</p>
-                    )}
                 </section>
 
                 <section className="mb-6">
@@ -125,16 +117,9 @@ function EditDiscussionModal({ discussion, onClose, onSave, saving }) {
                         value={formData.content}
                         onChange={handleChange}
                         rows="8"
-                        className={`w-full px-4 py-3 border-2 rounded-lg transition focus:outline-none focus:ring-4 resize-none ${
-                            errors.content 
-                                ? 'border-red-500 focus:ring-red-200' 
-                                : 'border-gray-300 focus:ring-indigo-200 focus:border-indigo-600'
-                        }`}
+                        className="w-full px-4 py-3 transition border-2 border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-4 focus:ring-indigo-200 focus:border-indigo-600"
                         placeholder="Describe tu pregunta o tema..."
                     />
-                    {errors.content && (
-                        <p className="mt-2 text-sm text-red-600">{errors.content}</p>
-                    )}
                 </section>
 
                 <footer className="flex flex-col gap-3 sm:flex-row sm:justify-end">

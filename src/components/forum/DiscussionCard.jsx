@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDiscussionActions } from '../../hooks/useDiscussionActions';
 import { useDiscussionLike } from '../../hooks/useDiscussionLike';
+import { useToastContext } from '../../context/ToastContext';
 import { getCategoryLabel, getCategoryColor } from '../../utils/forumHelpers';
 import EditDiscussionModal from './EditDiscussionModal';
+import ConfirmModal from '../common/ConfirmModal';
 import DiscussionActions from './DiscussionActions';
 import DiscussionFooter from './DiscussionFooter';
 import discussionService from '../../services/discussionService';
@@ -11,9 +13,11 @@ import discussionService from '../../services/discussionService';
 function DiscussionCard({ discussion: initialDiscussion, onDeleted, onUpdated }) {
     const [discussion, setDiscussion] = useState(initialDiscussion);
     const [showEditModal, setShowEditModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [saving, setSaving] = useState(false);
     
     const user = JSON.parse(localStorage.getItem('user') || 'null');
+    const { showSuccess, showError } = useToastContext();
     const { deleteDiscussion, deleting } = useDiscussionActions(onDeleted);
     const { liking, toggleLike } = useDiscussionLike(discussion, setDiscussion);
 
@@ -30,12 +34,23 @@ function DiscussionCard({ discussion: initialDiscussion, onDeleted, onUpdated })
             );
             setDiscussion(updated);
             setShowEditModal(false);
+            showSuccess('✓ Discusión editada correctamente');
             if (onUpdated) onUpdated(updated);
         } catch (error) {
             console.error('Error al actualizar discusión:', error);
-            alert('Error al guardar los cambios');
+            showError('✕ Error al guardar los cambios');
         } finally {
             setSaving(false);
+        }
+    };
+
+    const handleDeleteConfirm = async () => {
+        try {
+            await deleteDiscussion(discussion.id, user.id);
+            setShowDeleteModal(false);
+            showSuccess('✓ Discusión eliminada correctamente');
+        } catch (error) {
+            showError('✕ Error al eliminar la discusión');
         }
     };
 
@@ -72,17 +87,32 @@ function DiscussionCard({ discussion: initialDiscussion, onDeleted, onUpdated })
                     canEdit={canEdit}
                     canDelete={canDelete}
                     onEdit={() => setShowEditModal(true)}
-                    onDelete={() => deleteDiscussion(discussion.id, user.id)}
+                    onDelete={() => setShowDeleteModal(true)}
                     deleting={deleting}
                 />
             </article>
 
+            {/* Modal de edición */}
             {showEditModal && (
                 <EditDiscussionModal
                     discussion={discussion}
                     onClose={() => setShowEditModal(false)}
                     onSave={handleSaveEdit}
                     saving={saving}
+                />
+            )}
+
+            {showDeleteModal && (
+                <ConfirmModal
+                    isOpen={showDeleteModal}
+                    onClose={() => setShowDeleteModal(false)}
+                    onConfirm={handleDeleteConfirm}
+                    title="⚠️ Eliminar discusión"
+                    message="¿Estás seguro de que quieres eliminar esta discusión? Esta acción no se puede deshacer."
+                    confirmText="Sí, eliminar"
+                    cancelText="Cancelar"
+                    danger={true}
+                    loading={deleting}
                 />
             )}
         </>
