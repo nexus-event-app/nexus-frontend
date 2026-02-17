@@ -1,24 +1,12 @@
 import React from 'react';
 
-function EventForm({ formData, onChange, onSubmit, onCancel, loading, error, success, isEdit = false }) {
+function EventForm({ formData, onChange, onSubmit, onCancel, loading, isEdit = false }) {
     return (
-        <form onSubmit={onSubmit} className="p-8 bg-white border border-gray-100 shadow-sm rounded-xl">
+        <form onSubmit={onSubmit} className="p-8 bg-white border border-gray-100 shadow-sm rounded-xl" noValidate>
             <fieldset disabled={loading}>
                 <legend className="sr-only">
                     {isEdit ? 'Formulario de edición de evento' : 'Formulario de creación de evento'}
                 </legend>
-
-                {error && (
-                    <p className="p-3 mb-6 text-sm text-red-600 rounded-lg bg-red-50" role="alert">
-                        {error}
-                    </p>
-                )}
-
-                {success && (
-                    <p className="p-3 mb-6 text-sm text-green-600 rounded-lg bg-green-50" role="alert">
-                        {isEdit ? '¡Evento actualizado correctamente!' : '¡Evento creado correctamente!'} Redirigiendo...
-                    </p>
-                )}
 
                 <section className="space-y-6">
                     <label className="block">
@@ -30,7 +18,6 @@ function EventForm({ formData, onChange, onSubmit, onCancel, loading, error, suc
                             name="title"
                             value={formData.title}
                             onChange={onChange}
-                            required
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                             placeholder="Ej: Networking para Juniors - Barcelona"
                         />
@@ -38,7 +25,7 @@ function EventForm({ formData, onChange, onSubmit, onCancel, loading, error, suc
 
                     <label className="block">
                         <span className="block mb-1 font-medium text-gray-700">
-                            Descripción
+                            Descripción *
                         </span>
                         <textarea
                             name="description"
@@ -59,7 +46,6 @@ function EventForm({ formData, onChange, onSubmit, onCancel, loading, error, suc
                             name="eventDate"
                             value={formData.eventDate}
                             onChange={onChange}
-                            required
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                         />
                     </label>
@@ -72,7 +58,6 @@ function EventForm({ formData, onChange, onSubmit, onCancel, loading, error, suc
                             name="location"
                             value={formData.location}
                             onChange={onChange}
-                            required
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                         >
                             <option value="Barcelona">Barcelona</option>
@@ -92,7 +77,6 @@ function EventForm({ formData, onChange, onSubmit, onCancel, loading, error, suc
                             name="eventType"
                             value={formData.eventType}
                             onChange={onChange}
-                            required
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                         >
                             <option value="NETWORKING">Networking</option>
@@ -110,7 +94,6 @@ function EventForm({ formData, onChange, onSubmit, onCancel, loading, error, suc
                             name="level"
                             value={formData.level}
                             onChange={onChange}
-                            required
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                         >
                             <option value="JUNIOR_FRIENDLY">Junior Friendly</option>
@@ -188,7 +171,10 @@ function EventForm({ formData, onChange, onSubmit, onCancel, loading, error, suc
                         disabled={loading}
                         className="flex-1 px-6 py-3 font-medium text-white transition bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        {loading ? (isEdit ? 'Guardando cambios...' : 'Creando evento...') : (isEdit ? 'Guardar cambios' : 'Crear evento')}
+                        {loading
+                            ? (isEdit ? 'Guardando cambios...' : 'Creando evento...')
+                            : (isEdit ? 'Guardar cambios' : 'Crear evento')
+                        }
                     </button>
                     <button
                         type="button"

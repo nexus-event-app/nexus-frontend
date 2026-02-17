@@ -55,7 +55,6 @@ function News() {
                     />
                 </section>
 
-                {/* SearchBar común reutilizable */}
                 <section className="mb-8">
                     <SearchBar
                         searchTerm={searchTerm}

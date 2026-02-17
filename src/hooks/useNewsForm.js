@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useToastContext } from '../context/ToastContext';
 import newsService from '../services/newsService';
 
 const initialFormData = {
@@ -13,14 +14,13 @@ const initialFormData = {
 };
 
 export function useNewsForm() {
+    const { showSuccess, showError } = useToastContext();
     const [news, setNews] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showForm, setShowForm] = useState(false);
     const [editingNews, setEditingNews] = useState(null);
     const [formData, setFormData] = useState(initialFormData);
     const [formLoading, setFormLoading] = useState(false);
-    const [formError, setFormError] = useState('');
-    const [formSuccess, setFormSuccess] = useState('');
 
     useEffect(() => {
         loadNews();
@@ -32,6 +32,7 @@ export function useNewsForm() {
             setNews(data);
         } catch (error) {
             console.error('Error al cargar noticias:', error);
+            showError('✕ Error al cargar las noticias');
         } finally {
             setLoading(false);
         }
@@ -46,26 +47,16 @@ export function useNewsForm() {
     };
 
     const handleImageChange = (imageUrl, imageName) => {
-        setFormData(prev => ({
-            ...prev,
-            imageUrl,
-            imageName
-        }));
+        setFormData(prev => ({ ...prev, imageUrl, imageName }));
     };
 
     const handleImageRemove = () => {
-        setFormData(prev => ({
-            ...prev,
-            imageUrl: '',
-            imageName: ''
-        }));
+        setFormData(prev => ({ ...prev, imageUrl: '', imageName: '' }));
     };
 
     const handleCreateClick = () => {
         setEditingNews(null);
         setFormData(initialFormData);
-        setFormError('');
-        setFormSuccess('');
         setShowForm(true);
     };
 
@@ -80,33 +71,43 @@ export function useNewsForm() {
             category: item.category || 'GENERAL',
             isActive: item.isActive
         });
-        setFormError('');
-        setFormSuccess('');
         setShowForm(true);
+    };
+
+    const validateForm = () => {
+        if (!formData.title.trim()) {
+            showError('El título es obligatorio');
+            return false;
+        }
+        if (formData.title.trim().length < 5) {
+            showError('El título debe tener al menos 5 caracteres');
+            return false;
+        }
+        if (!formData.content.trim()) {
+            showError('El contenido es obligatorio');
+            return false;
+        }
+        return true;
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setFormLoading(true);
-        setFormError('');
-        setFormSuccess('');
 
+        if (!validateForm()) return;
+
+        setFormLoading(true);
         try {
             if (editingNews) {
                 await newsService.updateNews(editingNews.id, formData);
-                setFormSuccess('Noticia actualizada correctamente');
+                showSuccess('✓ Noticia actualizada correctamente');
             } else {
                 await newsService.createNews(formData);
-                setFormSuccess('Noticia creada correctamente');
+                showSuccess('✓ Noticia creada correctamente');
             }
-
             await loadNews();
-            setTimeout(() => {
-                setShowForm(false);
-                setFormSuccess('');
-            }, 1500);
+            setTimeout(() => setShowForm(false), 1500);
         } catch (error) {
-            setFormError(error.response?.data?.message || 'Error al guardar la noticia');
+            showError(error.response?.data?.message || '✕ Error al guardar la noticia');
         } finally {
             setFormLoading(false);
         }
@@ -115,18 +116,17 @@ export function useNewsForm() {
     const handleCancel = () => {
         setShowForm(false);
         setEditingNews(null);
-        setFormError('');
-        setFormSuccess('');
     };
 
     const handleDelete = async (id) => {
-        if (window.confirm('¿Estás seguro de eliminar esta noticia?')) {
-            try {
-                await newsService.deleteNews(id);
-                loadNews();
-            } catch (error) {
-                console.error('Error al eliminar noticia:', error);
-            }
+        try {
+            await newsService.deleteNews(id);
+            showSuccess('✓ Noticia eliminada correctamente');
+            loadNews();
+        } catch (error) {
+            console.error('Error al eliminar noticia:', error);
+            showError('✕ Error al eliminar la noticia');
+            throw error;
         }
     };
 
@@ -137,8 +137,6 @@ export function useNewsForm() {
         editingNews,
         formData,
         formLoading,
-        formError,
-        formSuccess,
         handleInputChange,
         handleImageChange,
         handleImageRemove,

@@ -23,7 +23,6 @@ function WhyNexusSection() {
                 height="h-96"
             />
         </section>
-         
 
         <section className="grid grid-cols-1 gap-8 mt-10 mb-12 md:grid-cols-3">
 

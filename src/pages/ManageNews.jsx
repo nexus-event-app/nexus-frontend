@@ -66,8 +66,6 @@ function ManageNews() {
                             onSubmit={handleSubmit}
                             onCancel={handleCancel}
                             loading={formLoading}
-                            error={formError}
-                            success={formSuccess}
                             isEdit={!!editingNews}
                         />
                     </section>

@@ -9,7 +9,6 @@ function Login() {
         setEmail,
         password,
         setPassword,
-        error,
         loading,
         handleSubmit
     } = useLogin();
@@ -22,7 +21,6 @@ function Login() {
                     setEmail={setEmail}
                     password={password}
                     setPassword={setPassword}
-                    error={error}
                     loading={loading}
                     onSubmit={handleSubmit}
                 />

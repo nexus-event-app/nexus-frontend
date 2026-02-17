@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useToastContext } from '../context/ToastContext';
 import eventService from '../services/eventService';
 
 export function useDashboardEvents() {
     const navigate = useNavigate();
+    const { showSuccess, showError } = useToastContext();
     const [events, setEvents] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([]);
     const [upcomingEvents, setUpcomingEvents] = useState([]);
@@ -35,12 +37,12 @@ export function useDashboardEvents() {
                 eventService.getUpcomingEvents(),
                 eventService.getPastEvents()
             ]);
-
             setEvents(allEvents);
             setUpcomingEvents(upcoming);
             setPastEvents(past);
         } catch (error) {
             console.error('Error al cargar eventos:', error);
+            showError('✕ Error al cargar los eventos');
         } finally {
             setLoading(false);
         }
@@ -74,29 +76,22 @@ export function useDashboardEvents() {
     };
 
     const handleFilterChange = (filterName, value) => {
-        setFilters(prev => ({
-            ...prev,
-            [filterName]: value
-        }));
+        setFilters(prev => ({ ...prev, [filterName]: value }));
     };
 
     const clearFilters = () => {
-        setFilters({
-            location: '',
-            eventType: '',
-            level: '',
-            search: ''
-        });
+        setFilters({ location: '', eventType: '', level: '', search: '' });
     };
 
     const handleDeleteEvent = async (id) => {
-        if (window.confirm('¿Estás seguro de eliminar este evento?')) {
-            try {
-                await eventService.deleteEvent(id);
-                loadEvents();
-            } catch (error) {
-                console.error('Error al eliminar evento:', error);
-            }
+        try {
+            await eventService.deleteEvent(id);
+            showSuccess('✓ Evento eliminado correctamente');
+            loadEvents();
+        } catch (error) {
+            console.error('Error al eliminar evento:', error);
+            showError('✕ Error al eliminar el evento');
+            throw error;
         }
     };
 
