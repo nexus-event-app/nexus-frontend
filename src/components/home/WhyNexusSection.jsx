@@ -4,7 +4,7 @@ import { whyNexusImages } from '../../data/carouselData';
 
 function WhyNexusSection() {
     return (
-<section className="py-16 mb-8 bg-gradient-to-br from-white via-indigo-50/60 to-purple-5mb-8">
+<section className="py-16 mb-5 bg-gradient-to-br from-white via-indigo-50/60 to-purple-5mb-8">
     <article className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <header className="mb-12 text-center">
             <h2 className="mb-4 text-3xl font-bold text-gray-900 sm:text-4xl">
@@ -16,8 +16,16 @@ function WhyNexusSection() {
                 que entiende tus dudas. No estás solo en este camino. Nexus es tu red de apoyo tech.
             </p>
         </header>
+                <section className="overflow-hidden border-2 border-gray-200 rounded-2xl">
+            <ImageCarousel
+                images={whyNexusImages}
+                autoPlay={false}
+                height="h-96"
+            />
+        </section>
+         
 
-        <section className="grid grid-cols-1 gap-8 mb-12 md:grid-cols-3">
+        <section className="grid grid-cols-1 gap-8 mt-10 mb-12 md:grid-cols-3">
 
             <article className="flex flex-col h-full">
                 <section className="text-center">
@@ -64,14 +72,6 @@ function WhyNexusSection() {
                 </section>
             </article>
 
-        </section>
-
-        <section className="overflow-hidden border-2 border-gray-200 rounded-2xl">
-            <ImageCarousel
-                images={whyNexusImages}
-                autoPlay={false}
-                height="h-96"
-            />
         </section>
 
     </article>

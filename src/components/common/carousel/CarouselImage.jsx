@@ -9,7 +9,7 @@ function CarouselImage({ src, alt, caption }) {
                 className="object-cover w-full h-full transition-opacity duration-500"
             />
             {caption && (
-                <figcaption className="absolute bottom-0 left-0 right-0 px-4 py-3 text-center text-white bg-black bg-opacity-50">
+                <figcaption className="absolute bottom-0 left-0 right-0 px-4 py-3 text-center text-white bg-black bg-opacity-90">
                     {caption}
                 </figcaption>
             )}
