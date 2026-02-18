@@ -50,7 +50,7 @@ function TestimonialsSection() {
                 <header className="mb-8 text-center sm:mb-10 lg:mb-12">
                     <h2
                         id="testimonials-heading"
-                        className="mb-3 text-2xl font-bold text-gray-900 sm:mb-4 sm:text-2xl lg:text-2xl"
+                        className="mb-4 text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl"
                     >
                         Historias de la comunidad
                     </h2>
@@ -63,7 +63,7 @@ function TestimonialsSection() {
                     <section className="mb-6 text-center sm:mb-8" aria-label="Acciones de testimonios">
                         <button
                             onClick={handleOpenForm}
-                            className="inline-flex items-center px-6 py-3 text-sm font-semibold text-white transition-all shadow-lg sm:px-8 sm:text-base rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:ring-offset-2"
+                            className="inline-flex items-center px-6 py-3 text-sm font-semibold text-white transition-all shadow-lg sm:px-8 sm:text-base rounded-xl bg-[#3F53A8] hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:ring-offset-2"
                             aria-label="Abrir formulario para compartir experiencia"
                         >
                             <span className="mr-2" aria-hidden="true">✨</span>
@@ -146,12 +146,11 @@ function TestimonialsSection() {
                             aria-label="Lista de testimonios de la comunidad"
                         >
                             {displayedTestimonials.map(testimonial => (
-                                <li key={testimonial.id}>
-                                    <TestimonialCard
-                                        testimonial={testimonial}
-                                    />
+                                <li key={testimonial.id} className="min-w-0">
+                                    <TestimonialCard testimonial={testimonial} />
                                 </li>
                             ))}
+
                         </ul>
 
                         {hasMore && (

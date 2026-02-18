@@ -27,7 +27,7 @@ function NewsSection() {
 
             <article className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <header className="mb-12 text-center">
-                    <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900"
+                    <h2 className="mb-4 text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl"
                     >Noticias tech para juniors</h2>
                     <p className="max-w-2xl mx-auto text-lg text-gray-600"
                     >

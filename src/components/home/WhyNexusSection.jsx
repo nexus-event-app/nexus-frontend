@@ -10,7 +10,7 @@ function WhyNexusSection() {
             <h2 className="mb-4 text-3xl font-bold text-gray-900 sm:text-4xl">
                 ¿Por qué <span className="text-transparent bg-[#4C4AD6] bg-clip-text">Nexus</span>?
             </h2>
-            <p className="max-w-3xl mx-auto mb-6 text-lg text-gray-800">
+            <p className="max-w-3xl mx-auto mb-4 text-lg text-gray-800">
                 Sabemos lo difícil que es empezar. Por eso creamos un espacio donde los juniors son protagonistas.
                 Aquí encontrarás eventos presenciales para conectar, recursos actualizados sin ruido, y una comunidad
                 que entiende tus dudas. No estás solo en este camino. Nexus es tu red de apoyo tech.
@@ -24,7 +24,7 @@ function WhyNexusSection() {
             />
         </section>
 
-        <section className="grid grid-cols-1 gap-8 mt-10 mb-12 md:grid-cols-3">
+        <section className="grid grid-cols-1 gap-8 mt-10 md:grid-cols-3">
 
             <article className="flex flex-col h-full">
                 <section className="text-center">

@@ -7,7 +7,7 @@ function CarouselIndicators({ total, currentIndex, onIndicatorClick }) {
                 <button
                     key={index}
                     onClick={() => onIndicatorClick(index)}
-                    className={`w-3 h-3 rounded-full transition focus:outline-none focus:ring-2 focus:ring-white ${index === currentIndex
+                    className={`w-2 h-1 mb-10 rounded-full transition focus:outline-none focus:ring-2 focus:ring- ${index === currentIndex
                             ? 'bg-white'
                             : 'bg-white bg-opacity-50 hover:bg-opacity-75'
                         }`}
