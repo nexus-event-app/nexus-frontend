@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from '../common/LanguageSelector';
+import logo from '../../assets/images/Logo.png';
 
 function Header() {
     const location = useLocation();
@@ -10,23 +11,23 @@ function Header() {
     return (
         <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
             <nav
-                className="flex items-center justify-between h-16 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8"
+                className="flex items-center justify-between h-20 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8"
                 aria-label="Navegación principal"
             >
-                <Link
-                    to="/"
-                    className="text-xl font-bold text-[#484BCD] hover:text-[#484BCD] sm:text-2xl"
-                >
-                    Nexus
+                <Link to="/" className="flex items-center">
+                    <img
+                        src={logo}
+                        alt="StartDev Logo"
+                        className="w-auto h-12 sm:h-14"
+                    />
                 </Link>
 
                 <ul className="flex items-center gap-4 list-none sm:gap-6">
                     <li>
                         <Link
                             to="/"
-                            className={`text-sm font-medium sm:text-base transition ${
-                                location.pathname === '/' ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700 hover:text-indigo-600'
-                            }`}
+                            className={`text-sm font-medium sm:text-base transition ${location.pathname === '/' ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700 hover:text-indigo-600'
+                                }`}
                         >
                             {t('nav.home')}
                         </Link>
@@ -34,21 +35,9 @@ function Header() {
 
                     <li>
                         <Link
-                            to="/noticias"
-                            className={`text-sm font-medium sm:text-base transition ${
-                                location.pathname === '/noticias' ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700 hover:text-indigo-600'
-                            }`}
-                        >
-                            {t('nav.news')}
-                        </Link>
-                    </li>
-
-                    <li>
-                        <Link
                             to="/eventos"
-                            className={`text-sm font-medium sm:text-base transition ${
-                                location.pathname === '/eventos' ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700 hover:text-indigo-600'
-                            }`}
+                            className={`text-sm font-medium sm:text-base transition ${location.pathname === '/eventos' ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700 hover:text-indigo-600'
+                                }`}
                         >
                             {t('nav.events')}
                         </Link>
@@ -56,10 +45,19 @@ function Header() {
 
                     <li>
                         <Link
+                            to="/noticias"
+                            className={`text-sm font-medium sm:text-base transition ${location.pathname === '/noticias' ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700 hover:text-indigo-600'
+                                }`}
+                        >
+                            {t('nav.news')}
+                        </Link>
+                    </li>
+
+                    <li>
+                        <Link
                             to="/foro"
-                            className={`text-sm font-medium sm:text-base transition ${
-                                location.pathname === '/foro' ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700 hover:text-indigo-600'
-                            }`}
+                            className={`text-sm font-medium sm:text-base transition ${location.pathname === '/foro' ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700 hover:text-indigo-600'
+                                }`}
                         >
                             {t('nav.forum')}
                         </Link>

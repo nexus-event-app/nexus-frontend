@@ -20,7 +20,7 @@
             
             <button
                 onClick={() => navigate('/eventos')}
-                className="w-full px-8 py-3 text-lg font-medium text-indigo-600 transition bg-white rounded-lg sm:w-auto hover:bg-gray-50"
+                className="w-full px-8 py-3 text-lg font-medium text-[#4D48DC] transition bg-white rounded-lg sm:w-auto hover:bg-gray-50"
             >
                 Explorar eventos
             </button>

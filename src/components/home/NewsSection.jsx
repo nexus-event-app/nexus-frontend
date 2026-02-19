@@ -105,7 +105,7 @@ function NewsSection() {
                                 className="inline-flex items-center px-10 py-3 text-lg font-semibold text-white bg-[#3F53A8] rounded-2xl shadow-md transition-all duration-300 hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-300"
 
                             >
-                                Ver todas las noticias
+                                Ver todas las noticias  ▶
                             </Link>
                         </footer>
                     </>

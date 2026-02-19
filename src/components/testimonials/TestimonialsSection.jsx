@@ -54,19 +54,19 @@ function TestimonialsSection() {
                     >
                         Historias de la comunidad
                     </h2>
-                    <p className="px-4 text-base text-gray-600 sm:text-lg">
+                    <p className="px-4 mb-0 text-base text-gray-600 sm:text-lg">
                         Juniors como tú comparten sus experiencias
                     </p>
                 </header>
 
                 {!showForm && (
-                    <section className="mb-6 text-center sm:mb-8" aria-label="Acciones de testimonios">
+                    <section className="mt-0 text-center sm:mb-10" aria-label="Acciones de testimonios">
                         <button
                             onClick={handleOpenForm}
                             className="inline-flex items-center px-6 py-3 text-sm font-semibold text-white transition-all shadow-lg sm:px-8 sm:text-base rounded-xl bg-[#3F53A8] hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:ring-offset-2"
                             aria-label="Abrir formulario para compartir experiencia"
                         >
-                            <span className="mr-2" aria-hidden="true">✨</span>
+                            <span className="mr-2" aria-hidden="true">▶</span>
                             <span>Compartir mi experiencia</span>
                         </button>
                     </section>
@@ -160,7 +160,7 @@ function TestimonialsSection() {
                                     className="inline-flex items-center px-6 py-3 text-sm font-semibold text-indigo-600 transition-all bg-white border-2 border-indigo-600 sm:px-8 sm:text-base rounded-xl hover:bg-indigo-50 hover:shadow-lg hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:ring-offset-2"
                                     aria-label="Cargar más testimonios de la comunidad"
                                 >
-                                    Ver más testimonios →
+                                    Ver más testimonios 
                                 </button>
                             </footer>
                         )}

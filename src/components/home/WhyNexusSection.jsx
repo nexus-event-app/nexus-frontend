@@ -8,12 +8,12 @@ function WhyNexusSection() {
     <article className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <header className="mb-12 text-center">
             <h2 className="mb-4 text-3xl font-bold text-gray-900 sm:text-4xl">
-                ¿Por qué <span className="text-transparent bg-[#4C4AD6] bg-clip-text">Nexus</span>?
+                ¿Por qué <span className="text-transparent bg-[#4C4AD6] bg-clip-text">StartDev</span>?
             </h2>
             <p className="max-w-3xl mx-auto mb-4 text-lg text-gray-800">
                 Sabemos lo difícil que es empezar. Por eso creamos un espacio donde los juniors son protagonistas.
                 Aquí encontrarás eventos presenciales para conectar, recursos actualizados sin ruido, y una comunidad
-                que entiende tus dudas. No estás solo en este camino. Nexus es tu red de apoyo tech.
+                que entiende tus dudas. No estás solo en este camino. StartDev es tu red de apoyo tech.
             </p>
         </header>
                 <section className="overflow-hidden border-2 border-gray-200 rounded-2xl">

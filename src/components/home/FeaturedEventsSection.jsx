@@ -124,7 +124,7 @@ function FeaturedEventsSection() {
                                 onClick={() => navigate('/eventos')}
                                 className="inline-flex items-center px-8 py-3 text-lg font-semibold text-white transition-all rounded-xl bg-[#3F53A8] hover:bg-{#A3A1F7} hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-4 focus:ring-purple-100"
                             >
-                                Ver todos los eventos →
+                                Ver todos los eventos ▶
                             </button>
                         </footer>
                     </>
