@@ -3,6 +3,7 @@ import { AuthProvider } from './context/AuthContext';
 import { ToastProvider } from './context/ToastContext';
 import AppRouter from './router/AppRouter';
 import authService from './services/authService';
+import './i18n/config';
 
 authService.initializeToken();
 

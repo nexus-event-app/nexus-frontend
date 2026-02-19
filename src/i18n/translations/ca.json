@@ -1,0 +1,22 @@
+    {
+    "nav": {
+        "home": "Inici",
+        "events": "Esdeveniments",
+        "forum": "Fòrum",
+        "news": "Notícies",
+        "dashboard": "Tauler",
+        "login": "Iniciar sessió",
+        "logout": "Tancar sessió"
+    },
+    "hero": {
+        "title": "Connecta amb la comunitat tech junior de Barcelona",
+        "subtitle": "Esdeveniments, networking i recursos per fer el salt al món tech",
+        "cta": "Veure propers esdeveniments"
+    },
+    "footer": {
+        "rights": "Tots els drets reservats",
+        "about": "Sobre Nexus",
+        "contact": "Contacte",
+        "privacy": "Privacitat"
+    }
+    }

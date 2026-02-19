@@ -1,0 +1,22 @@
+    {
+    "nav": {
+        "home": "Home",
+        "events": "Events",
+        "forum": "Forum",
+        "news": "News",
+        "dashboard": "Dashboard",
+        "login": "Log in",
+        "logout": "Log out"
+    },
+    "hero": {
+        "title": "Connect with Barcelona's junior tech community",
+        "subtitle": "Events, networking and resources to break into tech",
+        "cta": "View upcoming events"
+    },
+    "footer": {
+        "rights": "All rights reserved",
+        "about": "About Nexus",
+        "contact": "Contact",
+        "privacy": "Privacy"
+    }
+    }

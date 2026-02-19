@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import LanguageSelector from '../common/LanguageSelector';
 
 function Header() {
     const location = useLocation();
+    const { t } = useTranslation();
 
     return (
         <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
@@ -25,7 +28,7 @@ function Header() {
                                 location.pathname === '/' ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700 hover:text-indigo-600'
                             }`}
                         >
-                            Inicio
+                            {t('nav.home')}
                         </Link>
                     </li>
 
@@ -36,7 +39,7 @@ function Header() {
                                 location.pathname === '/noticias' ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700 hover:text-indigo-600'
                             }`}
                         >
-                            Noticias
+                            {t('nav.news')}
                         </Link>
                     </li>
 
@@ -47,7 +50,7 @@ function Header() {
                                 location.pathname === '/eventos' ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700 hover:text-indigo-600'
                             }`}
                         >
-                            Eventos
+                            {t('nav.events')}
                         </Link>
                     </li>
 
@@ -58,8 +61,12 @@ function Header() {
                                 location.pathname === '/foro' ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700 hover:text-indigo-600'
                             }`}
                         >
-                            Foro
+                            {t('nav.forum')}
                         </Link>
+                    </li>
+
+                    <li>
+                        <LanguageSelector />
                     </li>
 
                     <li>
