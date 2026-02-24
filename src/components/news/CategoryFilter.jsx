@@ -1,17 +1,8 @@
 import React from 'react';
+import { getCategoriesForFilter } from '../constants/newsCategories';
 
 function CategoryFilter({ selectedCategory, onCategoryChange }) {
-    const categories = [
-        { value: 'TODAS', label: 'Todas', color: 'bg-gray-600 hover:bg-gray-700' },
-        { value: 'FRONTEND', label: 'Frontend', color: 'bg-blue-600 hover:bg-blue-700' },
-        { value: 'BACKEND', label: 'Backend', color: 'bg-green-600 hover:bg-green-700' },
-        { value: 'DEVOPS', label: 'DevOps', color: 'bg-purple-600 hover:bg-purple-700' },
-        { value: 'CARRERA', label: 'Carrera', color: 'bg-yellow-600 hover:bg-yellow-700' },
-        { value: 'RECURSOS', label: 'Recursos', color: 'bg-pink-600 hover:bg-pink-700' },
-        { value: 'HERRAMIENTAS', label: 'Herramientas', color: 'bg-indigo-600 hover:bg-indigo-700' },
-        { value: 'ENTREVISTAS', label: 'Entrevistas', color: 'bg-red-600 hover:bg-red-700' },
-        { value: 'GENERAL', label: 'General', color: 'bg-gray-600 hover:bg-gray-700' }
-    ];
+    const categories = getCategoriesForFilter();
 
     return (
         <nav aria-label="Filtrar noticias por categoría" className="text-center">

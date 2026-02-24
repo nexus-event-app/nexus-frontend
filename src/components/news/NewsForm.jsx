@@ -1,6 +1,7 @@
 import React from 'react';
 import FormField from '../common/FormField';
 import ImageUpload from '../common/ImageUpload';
+import { getCategoriesArray } from '../constants/newsCategories';
 
 function NewsForm({
     formData,
@@ -10,41 +11,17 @@ function NewsForm({
     onSubmit,
     onCancel,
     loading,
-    error,
-    success,
     isEdit = false
 }) {
-    const categories = [
-        { value: 'FRONTEND', label: 'Frontend' },
-        { value: 'BACKEND', label: 'Backend' },
-        { value: 'DEVOPS', label: 'DevOps' },
-        { value: 'CARRERA', label: 'Carrera' },
-        { value: 'RECURSOS', label: 'Recursos' },
-        { value: 'HERRAMIENTAS', label: 'Herramientas' },
-        { value: 'ENTREVISTAS', label: 'Entrevistas' },
-        { value: 'GENERAL', label: 'General' }
-    ];
+    const categories = getCategoriesArray();
 
     return (
-        <form onSubmit={onSubmit} className="space-y-6">
-            {error && (
-                <p className="p-3 text-sm text-red-600 rounded-lg bg-red-50" role="alert">
-                    {error}
-                </p>
-            )}
-
-            {success && (
-                <p className="p-3 text-sm text-green-600 rounded-lg bg-green-50" role="alert">
-                    {success}
-                </p>
-            )}
-
+        <form onSubmit={onSubmit} className="space-y-6" noValidate>
             <FormField
                 label="Título"
                 name="title"
                 value={formData.title}
                 onChange={onChange}
-                required
                 placeholder="Ej: Los mejores recursos para aprender React"
             />
 
@@ -56,7 +33,6 @@ function NewsForm({
                     name="category"
                     value={formData.category}
                     onChange={onChange}
-                    required
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 >
                     {categories.map(cat => (

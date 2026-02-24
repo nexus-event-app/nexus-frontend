@@ -18,14 +18,11 @@ import ManageDiscussions from '../pages/ManageDiscussions';
 import ManageDiscussionComments from '../pages/ManageDiscussionComments';
 import ScrollToTop from './ScrollToTop';
 
-
-
 function AppRouter() {
     return (
         <BrowserRouter>
-
-        <ScrollToTop /> 
-        
+            <ScrollToTop />
+            
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/eventos" element={<PublicEvents />} />
@@ -35,12 +32,6 @@ function AppRouter() {
                 <Route path="/foro" element={<Forum />} />
                 <Route path="/foro/crear" element={<CreateDiscussion />} />
                 <Route path="/foro/:id" element={<DiscussionDetail />} />
-                <Route path="/dashboard/discussions" element={<ManageDiscussions />} />
-                <Route path="/dashboard/discussions/:id/comments" element={<ManageDiscussionComments />} />
-
-
-
-
 
                 <Route
                     path="/dashboard"
@@ -65,6 +56,24 @@ function AppRouter() {
                     element={
                         <ProtectedRoute>
                             <ManageTestimonials />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/dashboard/discussions"
+                    element={
+                        <ProtectedRoute>
+                            <ManageDiscussions />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/dashboard/discussions/:id/comments"
+                    element={
+                        <ProtectedRoute>
+                            <ManageDiscussionComments />
                         </ProtectedRoute>
                     }
                 />

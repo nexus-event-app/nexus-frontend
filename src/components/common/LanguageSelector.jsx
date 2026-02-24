@@ -6,13 +6,13 @@ function LanguageSelector() {
 
     const languages = [
         { code: 'es', name: 'ES', flag: '' },
-        { code: 'en', name: 'EN', flag: '' },
-        { code: 'ca', name: 'CA', flag: '' }
-        
+        { code: 'ca', name: 'CA', flag: '' },
+        { code: 'en', name: 'EN', flag: '' }
+    
     ];
 
     return (
-        <section className="flex gap-2">
+        <section className="flex gap-1">
             {languages.map(({ code, name, flag }) => (
                 <button
                     key={code}

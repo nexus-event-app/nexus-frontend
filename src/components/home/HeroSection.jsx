@@ -9,11 +9,11 @@
         <article className="max-w-4xl px-4 mx-auto text-center sm:px-6 lg:px-8">
             
             <h1 className="mb-6 text-4xl font-bold text-white sm:text-5xl">
-            Conectando juniors con oportunidades tech
+            Comunidad Junior Tech
             </h1>
 
             <p className="mb-10 text-lg text-indigo-100 sm:text-xl">
-            No estás solo en tu búsqueda. Nexus reúne eventos, recursos y una comunidad de developers junior que entienden tu camino.
+            No estás solo en tu búsqueda. StartDev reúne eventos, recursos y una comunidad de developers junior que entienden tu camino.
             </p>
 
             <section className="flex flex-col gap-4 sm:flex-row sm:justify-center">
