@@ -55,32 +55,29 @@ export function useCreateDiscussion() {
         return true;
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    if (!validateForm()) {
+        return;
+    }
+
+    try {
+        setLoading(true);
+        
         const user = JSON.parse(localStorage.getItem('user'));
-        if (!user) {
-            showError('Debes iniciar sesión para crear una discusión');
-            navigate('/login');
-            return;
-        }
-
-        if (!validateForm()) {
-            return;
-        }
-
-        try {
-            setLoading(true);
-            await discussionService.createDiscussion(formData, user.id);
-            showSuccess('✓ Discusión creada correctamente');
-            navigate('/foro');
-        } catch (err) {
-            console.error('Error al crear discusión:', err);
-            showError('✕ Error al crear la discusión. Inténtalo de nuevo.');
-        } finally {
-            setLoading(false);
-        }
-    };
+        const userId = user ? user.id : null;
+        
+        await discussionService.createDiscussion(formData, userId);
+        showSuccess('✓ Discusión creada correctamente');
+        navigate('/foro');
+    } catch (err) {
+        console.error('Error al crear discusión:', err);
+        showError('✕ Error al crear la discusión. Inténtalo de nuevo.');
+    } finally {
+        setLoading(false);
+    }
+};
 
     const handleCancel = () => {
         navigate('/foro');

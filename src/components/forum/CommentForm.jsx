@@ -1,23 +1,6 @@
 import React from 'react';
 
-function CommentForm({ value, onChange, onSubmit, loading, error, isLoggedIn }) {
-    if (!isLoggedIn) {
-        return (
-            <section className="p-6 text-center border border-gray-200 rounded-lg bg-gray-50">
-                <p className="mb-4 text-gray-600">
-                    Inicia sesión para participar en la discusión
-                </p>
-
-                <a
-                    href="/login"
-                    className="inline-block px-6 py-2 font-medium text-white transition bg-indigo-600 rounded-lg hover:bg-indigo-700"
-                >
-                    Iniciar sesión
-                </a>
-            </section>
-        );
-    }
-
+function CommentForm({ value, onChange, onSubmit, loading, error }) {
     return (
         <form onSubmit={onSubmit} className="p-6 border border-gray-200 rounded-lg bg-gray-50">
             <h3 className="mb-4 text-lg font-bold text-gray-900">

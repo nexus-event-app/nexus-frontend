@@ -38,7 +38,7 @@ function DiscussionDetail() {
                 const element = document.getElementById('add-response');
                 if (element) {
                     element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    
+
                     const textarea = element.querySelector('textarea');
                     if (textarea) {
                         textarea.focus();
@@ -50,9 +50,8 @@ function DiscussionDetail() {
 
     const handleCommentSubmit = (e) => {
         e.preventDefault();
-        if (user) {
-            createComment(user.id);
-        }
+        const userId = user ? user.id : null;
+        createComment(userId);
     };
 
     if (loading) {
@@ -124,10 +123,9 @@ function DiscussionDetail() {
                         onSubmit={handleCommentSubmit}
                         loading={commentLoading}
                         error={commentError}
-                        isLoggedIn={!!user}
                     />
                 </section>
-                
+
                 <ForumRules />
             </main>
         </Layout>

@@ -26,9 +26,12 @@ const discussionService = {
     },
 
     createDiscussion: async (data, userId) => {
-        const response = await axios.post(API_URL, data, {
-            headers: { 'User-Id': userId }
-        });
+        const config = {};
+        if (userId) {
+            config.headers = { 'User-Id': userId };
+        }
+
+        const response = await axios.post(API_URL, data, config);
         return response.data;
     },
 
