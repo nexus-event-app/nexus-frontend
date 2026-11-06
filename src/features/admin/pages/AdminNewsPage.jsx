@@ -63,6 +63,7 @@ export default function AdminNewsPage() {
     { key: 'date', header: 'Fecha', render: (item) => <Time value={item.createdAt} format="short" /> },
     {
       key: 'actions',
+      actions: true,
       header: 'Acciones',
       render: (item) => (
         <div className="flex flex-wrap justify-end gap-2 md:justify-start">

@@ -46,6 +46,7 @@ export default function AdminUsersPage() {
     { key: 'date', header: 'Alta', render: (user) => <Time value={user.createdAt} format="short" /> },
     {
       key: 'actions',
+      actions: true,
       header: 'Acciones',
       render: (user) =>
         user.role === 'ADMIN' || user.id === currentUser.id ? (

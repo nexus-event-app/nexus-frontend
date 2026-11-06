@@ -80,6 +80,7 @@ export default function AdminTestimonialsPage() {
     { key: 'date', header: 'Enviado', render: (testimonial) => <Time value={testimonial.createdAt} format="short" /> },
     {
       key: 'actions',
+      actions: true,
       header: 'Acciones',
       render: (testimonial) => (
         <div className="flex flex-wrap justify-end gap-2 md:justify-start">

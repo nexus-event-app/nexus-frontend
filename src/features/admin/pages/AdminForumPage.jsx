@@ -54,6 +54,7 @@ export default function AdminForumPage() {
     { key: 'date', header: 'Fecha', render: (discussion) => <Time value={discussion.createdAt} format="short" /> },
     {
       key: 'actions',
+      actions: true,
       header: 'Acciones',
       render: (discussion) => (
         <div className="flex flex-wrap justify-end gap-2 md:justify-start">

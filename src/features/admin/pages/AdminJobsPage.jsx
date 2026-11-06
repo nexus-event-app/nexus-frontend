@@ -77,6 +77,7 @@ export default function AdminJobsPage() {
     { key: 'date', header: 'Publicada', render: (job) => <Time value={postedAt(job)} format="short" /> },
     {
       key: 'actions',
+      actions: true,
       header: 'Acciones',
       render: (job) => (
         <div className="flex flex-wrap justify-end gap-2 md:justify-start">

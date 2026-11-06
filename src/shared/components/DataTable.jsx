@@ -27,16 +27,23 @@ export default function DataTable({ caption, columns, rows, getRowKey }) {
               {columns.map((column) => (
                 <td
                   key={column.key}
-                  data-label={column.primary ? undefined : column.header}
+                  data-label={column.primary || column.actions ? undefined : column.header}
                   className={cx(
                     'flex items-start justify-between gap-4 border-b border-slate-100 px-4 py-2.5 last:border-b-0 md:table-cell md:border-b-0 md:align-middle',
                     !column.primary &&
+                      !column.actions &&
                       'before:text-xs before:font-semibold before:uppercase before:tracking-wide before:text-ink-muted before:content-[attr(data-label)] md:before:content-none',
                     column.primary && 'bg-slate-50 font-semibold md:bg-transparent',
                     column.className,
                   )}
                 >
-                  <div className={cx('min-w-0', column.primary ? 'text-left' : 'text-right md:text-left')}>{column.render(row)}</div>
+                  <div
+                    className={cx(
+                      'min-w-0',
+                      column.primary ? 'text-left' : 'text-right md:text-left',
+                      column.actions && 'w-full bg-slate-50/60 md:w-auto md:bg-transparent',
+                    )}
+                  >{column.render(row)}</div>
                 </td>
               ))}
             </tr>
