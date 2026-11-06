@@ -66,8 +66,8 @@ function TestimonialsSection() {
                             className="inline-flex items-center px-6 py-3 text-sm font-semibold text-white transition-all shadow-lg sm:px-8 sm:text-base rounded-xl bg-[#3F53A8] hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:ring-offset-2"
                             aria-label="Abrir formulario para compartir experiencia"
                         >
-                            <span className="mr-2" aria-hidden="true">▶</span>
-                            <span>Compartir mi experiencia</span>
+                            <span className="mr-2" aria-hidden="true"></span>
+                            <span>Compartir mi experiencia ▶</span>
                         </button>
                     </section>
                 )}
