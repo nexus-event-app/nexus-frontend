@@ -13,11 +13,15 @@ export default function Logo({ showName = true, className = '' }) {
         focusable="false"
       >
         <rect width="64" height="64" rx="14" fill="#4f46e5" />
-        <g fill="none" stroke="#fff" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M22 14C17 14 16 16 16 21V26C16 29 14 31 11 32C14 33 16 35 16 38V43C16 48 17 50 22 50" />
-          <path d="M42 14C47 14 48 16 48 21V26C48 29 50 31 53 32C50 33 48 35 48 38V43C48 48 47 50 42 50" />
-        </g>
-        <path d="M27 24L40 32L27 40Z" fill="#fff" stroke="#fff" strokeWidth="3" strokeLinejoin="round" />
+        <circle cx="21" cy="32" r="8" fill="none" stroke="#fff" strokeWidth="4.5" />
+        <path
+          d="M29 32H49M42 24.5 49.5 32 42 39.5"
+          fill="none"
+          stroke="#fff"
+          strokeWidth="4.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
       {showName && <span className="text-xl font-extrabold tracking-tight text-ink">{siteConfig.name}</span>}
     </span>

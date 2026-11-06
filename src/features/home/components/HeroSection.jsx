@@ -2,6 +2,7 @@ import { useAuth } from '@/features/auth/hooks/useAuth'
 import ButtonLink from '@/shared/components/ButtonLink'
 import Icon from '@/shared/components/Icon'
 import { paths } from '@/shared/config/paths'
+import { siteConfig } from '@/shared/config/site'
 
 const HIGHLIGHTS = [
   { icon: 'newspaper', title: 'Noticias sin ruido', text: 'Lo que pasa en tech, explicado para quien empieza.' },
@@ -21,7 +22,7 @@ export default function HeroSection() {
             Tu primer paso en tecnología no tiene que darse en solitario
           </h1>
           <p className="mt-5 max-w-xl text-lg text-brand-100">
-            StartDev reúne noticias, ofertas de empleo junior, un foro activo y testimonios reales para quienes
+            {siteConfig.name} reúne noticias, ofertas de empleo junior, un foro activo y testimonios reales para quienes
             empiezan su carrera como developers.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">

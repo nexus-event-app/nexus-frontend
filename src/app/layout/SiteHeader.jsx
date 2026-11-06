@@ -10,6 +10,7 @@ import { useDismiss } from '@/shared/hooks/useDismiss'
 import { useToast } from '@/shared/hooks/useToast'
 import NavItems from './NavItems'
 import UserMenu from './UserMenu'
+import { siteConfig } from '@/shared/config/site'
 
 function AuthLinks() {
   return (
@@ -47,7 +48,7 @@ export default function SiteHeader() {
   return (
     <header ref={headerRef} className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div className="page-container flex h-16 items-center justify-between gap-4">
-        <Link to={paths.home} aria-label="StartDev, ir al inicio" className="rounded-control">
+        <Link to={paths.home} aria-label={`${siteConfig.name}, ir al inicio`} className="rounded-control">
           <Logo />
         </Link>
 

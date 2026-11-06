@@ -20,7 +20,7 @@ export default function TestimonialsPage() {
     <div className="page-container page-section">
       <Seo
         title="Testimonios de la comunidad"
-        description="Historias reales de personas que están empezando en tecnología: aprendizajes, dudas y logros compartidos por la comunidad StartDev."
+        description="Historias reales de personas que están empezando en tecnología: aprendizajes, dudas y logros compartidos por la comunidad de Primer Commit."
         path={paths.testimonials}
       />
       <Breadcrumbs items={[{ label: 'Testimonios', to: paths.testimonials }]} />

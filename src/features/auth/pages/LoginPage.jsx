@@ -6,6 +6,7 @@ import { safeRedirect } from '@/shared/utils/url'
 import AuthCard from '../components/AuthCard'
 import LoginForm from '../components/LoginForm'
 import { useAuth } from '../hooks/useAuth'
+import { siteConfig } from '@/shared/config/site'
 
 export default function LoginPage() {
   const { isAuthenticated, loading } = useAuth()
@@ -17,7 +18,7 @@ export default function LoginPage() {
 
   return (
     <>
-      <Seo title="Iniciar sesión" description="Accede a tu cuenta de StartDev." path={paths.login} robots="noindex,nofollow" />
+      <Seo title="Iniciar sesión" description={`Accede a tu cuenta de ${siteConfig.name}.`} path={paths.login} robots="noindex,nofollow" />
       <AuthCard
         title="Iniciar sesión"
         subtitle="Accede para participar en el foro y compartir tu testimonio."

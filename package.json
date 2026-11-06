@@ -27,7 +27,7 @@
     "tailwindcss": "^3.4.19",
     "vite": "^7.2.4"
   },
-  "description": "Frontend de StartDev, la comunidad tech en español para perfiles junior (React 19 + Vite)",
+  "description": "Frontend de Primer Commit, la comunidad tech en español para perfiles junior (React 19 + Vite)",
   "engines": {
     "node": ">=20"
   }

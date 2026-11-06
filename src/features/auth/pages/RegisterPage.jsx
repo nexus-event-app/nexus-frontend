@@ -6,6 +6,7 @@ import { safeRedirect } from '@/shared/utils/url'
 import AuthCard from '../components/AuthCard'
 import RegisterForm from '../components/RegisterForm'
 import { useAuth } from '../hooks/useAuth'
+import { siteConfig } from '@/shared/config/site'
 
 export default function RegisterPage() {
   const { isAuthenticated, loading } = useAuth()
@@ -17,7 +18,7 @@ export default function RegisterPage() {
 
   return (
     <>
-      <Seo title="Crear cuenta" description="Crea tu cuenta gratuita en StartDev." path={paths.register} robots="noindex,nofollow" />
+      <Seo title="Crear cuenta" description={`Crea tu cuenta gratuita en ${siteConfig.name}.`} path={paths.register} robots="noindex,nofollow" />
       <AuthCard
         title="Crear cuenta"
         subtitle="Únete a la comunidad: participa en el foro y cuéntanos tu experiencia."

@@ -7,6 +7,7 @@ import { useToast } from '@/shared/hooks/useToast'
 import DiscussionForm from '../components/DiscussionForm'
 import ForumRules from '../components/ForumRules'
 import { discussionService } from '../services/discussionService'
+import { siteConfig } from '@/shared/config/site'
 
 const INITIAL_VALUES = { title: '', content: '', category: 'AYUDA_TECNICA' }
 
@@ -24,7 +25,7 @@ export default function NewDiscussionPage() {
     <div className="page-container page-section">
       <Seo
         title="Nueva discusión"
-        description="Abre una discusión en el foro de StartDev."
+        description={`Abre una discusión en el foro de ${siteConfig.name}.`}
         path={paths.forumNew}
         robots="noindex,nofollow"
       />

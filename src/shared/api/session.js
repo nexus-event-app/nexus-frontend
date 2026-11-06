@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'startdev.session'
+const STORAGE_KEY = 'primercommit.session'
 
 const listeners = new Set()
 

@@ -10,6 +10,7 @@ import { paths } from '@/shared/config/paths'
 import { useDismiss } from '@/shared/hooks/useDismiss'
 import { useToast } from '@/shared/hooks/useToast'
 import AdminNav from './AdminNav'
+import { siteConfig } from '@/shared/config/site'
 
 function AccountBlock() {
   const { user, logout } = useAuth()
@@ -60,7 +61,7 @@ export default function AdminLayout() {
 
       <aside className="hidden border-r border-slate-200 bg-white lg:block">
         <div className="sticky top-0 flex h-dvh flex-col gap-6 overflow-y-auto p-4">
-          <Link to={paths.admin} aria-label="Panel de administración de StartDev">
+          <Link to={paths.admin} aria-label={`Panel de administración de ${siteConfig.name}`}>
             <Logo />
           </Link>
           <div className="flex-1">
@@ -73,7 +74,7 @@ export default function AdminLayout() {
       <div className="min-w-0">
         <div ref={barRef} className="sticky top-0 z-40 border-b border-slate-200 bg-white lg:hidden">
           <div className="page-container flex h-16 items-center justify-between">
-            <Link to={paths.admin} aria-label="Panel de administración de StartDev">
+            <Link to={paths.admin} aria-label={`Panel de administración de ${siteConfig.name}`}>
               <Logo />
             </Link>
             <button
