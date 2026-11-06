@@ -1,0 +1,25 @@
+import JsonLd from '@/shared/components/JsonLd'
+import Seo from '@/shared/components/Seo'
+import { paths } from '@/shared/config/paths'
+import FinalCta from '../components/FinalCta'
+import ForumSection from '../components/ForumSection'
+import HeroSection from '../components/HeroSection'
+import LatestJobsSection from '../components/LatestJobsSection'
+import LatestNewsSection from '../components/LatestNewsSection'
+import TestimonialsSection from '../components/TestimonialsSection'
+import { buildHomeData } from '../utils/structuredData'
+
+export default function HomePage() {
+  return (
+    <>
+      <Seo path={paths.home} />
+      <JsonLd data={buildHomeData()} />
+      <HeroSection />
+      <LatestNewsSection />
+      <LatestJobsSection />
+      <ForumSection />
+      <TestimonialsSection />
+      <FinalCta />
+    </>
+  )
+}

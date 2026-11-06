@@ -1,15 +1,32 @@
-# Etapa 1: Compilar la aplicación React con Vite
+# Etapa 1: compilar la aplicación con Vite
 FROM node:20-alpine AS build
 WORKDIR /app
-COPY package*.json ./
+
+COPY package.json package-lock.json ./
 RUN npm ci
+
 COPY . .
+
+# Se incorporan al bundle en tiempo de build
+ARG VITE_API_URL=
+ARG VITE_SITE_URL=http://localhost:5173
+ENV VITE_API_URL=$VITE_API_URL \
+    VITE_SITE_URL=$VITE_SITE_URL
+
 RUN npm run build
 
-# Etapa 2: Servidor web ultra ligero con Nginx
-FROM nginx:alpine
+# Etapa 2: nginx sin privilegios sirviendo la SPA y haciendo de proxy al backend
+FROM nginxinc/nginx-unprivileged:1.27-alpine
+
+# BACKEND_URL: origen del backend, sin barra final ni ruta (p. ej. http://backend:8080)
+ENV BACKEND_URL=http://backend:8080 \
+    NGINX_ENVSUBST_FILTER=^BACKEND_URL\$
+
+COPY docker/nginx/default.conf.template /etc/nginx/templates/default.conf.template
+COPY docker/nginx/snippets/ /etc/nginx/snippets/
 COPY --from=build /app/dist /usr/share/nginx/html
-# Configuración para que React Router funcione al recargar cualquier página
-RUN printf 'server {\n listen 8080;\n location / {\n root /usr/share/nginx/html;\n index index.html;\n try_files $uri $uri/ /index.html;\n }\n}\n' > /etc/nginx/conf.d/default.conf
+
 EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"]
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD wget -q --spider http://127.0.0.1:8080/healthz || exit 1
