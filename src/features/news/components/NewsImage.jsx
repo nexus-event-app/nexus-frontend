@@ -11,6 +11,7 @@ export default function NewsImage({ url, alt = '', priority = false }) {
           height="450"
           loading={priority ? 'eager' : 'lazy'}
           decoding="async"
+          referrerPolicy={url.startsWith('http') ? 'no-referrer' : undefined}
           className="h-full w-full object-cover"
         />
       ) : (

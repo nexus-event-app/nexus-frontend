@@ -54,6 +54,8 @@ export default function JobDetailPage() {
   const path = paths.jobDetail(job)
   const expired = isExpired(job)
   const canApply = isHttpUrl(job.applyUrl)
+  // Las ofertas importadas pertenecen a otra bolsa de empleo: no se indexan ni se marcan como JobPosting.
+  const imported = Boolean(job.imported)
 
   return (
     <div className="page-container page-section">
@@ -64,9 +66,9 @@ export default function JobDetailPage() {
         type="article"
         publishedTime={postedAt(job)}
         modifiedTime={job.updatedAt}
-        robots={expired ? 'noindex,follow' : 'index,follow'}
+        robots={expired || imported ? 'noindex,follow' : 'index,follow'}
       />
-      {!expired && <JsonLd data={buildJobPostingData(job)} />}
+      {!expired && !imported && <JsonLd data={buildJobPostingData(job)} />}
       <Breadcrumbs
         items={[
           { label: 'Empleo', to: paths.jobs },
@@ -95,6 +97,13 @@ export default function JobDetailPage() {
               </span>
             </p>
           </header>
+
+          {imported && job.source && (
+            <p className="mt-4 text-sm text-ink-muted">
+              Oferta publicada originalmente en <strong className="font-semibold text-ink-soft">{job.source}</strong>.
+              Para aplicar, sigue el enlace a la oferta original.
+            </p>
+          )}
 
           {expired && (
             <Alert variant="warning" className="mt-6" title="Oferta caducada">
@@ -153,7 +162,7 @@ export default function JobDetailPage() {
                 rel="noopener noreferrer nofollow"
                 className="btn btn-primary mt-4 w-full"
               >
-                Aplicar a la oferta
+                {imported ? 'Ver la oferta original' : 'Aplicar a la oferta'}
                 <Icon name="external" className="h-4 w-4" />
                 <span className="sr-only">(se abre en una pestaña nueva)</span>
               </a>

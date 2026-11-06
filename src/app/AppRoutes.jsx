@@ -23,6 +23,7 @@ const AdminJobsPage = lazy(() => import('@/features/admin/pages/AdminJobsPage'))
 const AdminForumPage = lazy(() => import('@/features/admin/pages/AdminForumPage'))
 const AdminTestimonialsPage = lazy(() => import('@/features/admin/pages/AdminTestimonialsPage'))
 const AdminUsersPage = lazy(() => import('@/features/admin/pages/AdminUsersPage'))
+const AdminImportPage = lazy(() => import('@/features/admin/pages/AdminImportPage'))
 
 export default function AppRoutes() {
   return (
@@ -63,6 +64,7 @@ export default function AppRoutes() {
         <Route path="foro" element={<AdminForumPage />} />
         <Route path="testimonios" element={<AdminTestimonialsPage />} />
         <Route path="usuarios" element={<AdminUsersPage />} />
+        <Route path="importacion" element={<AdminImportPage />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

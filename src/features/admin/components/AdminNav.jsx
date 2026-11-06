@@ -10,6 +10,7 @@ const ITEMS = [
   { label: 'Foro', to: paths.adminForum, icon: 'chat' },
   { label: 'Testimonios', to: paths.adminTestimonials, icon: 'star' },
   { label: 'Usuarios', to: paths.adminUsers, icon: 'users' },
+  { label: 'Importación', to: paths.adminImport, icon: 'refresh' },
 ]
 
 export default function AdminNav() {

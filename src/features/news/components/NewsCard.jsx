@@ -26,6 +26,7 @@ export default function NewsCard({ item, headingLevel = 'h3' }) {
           </Link>
         </Heading>
         <p className="mt-2 line-clamp-3 text-ink-muted">{excerpt(item.content, 180)}</p>
+        {item.imported && item.source && <p className="mt-auto pt-3 text-sm text-ink-muted">Vía {item.source}</p>}
       </div>
     </article>
   )

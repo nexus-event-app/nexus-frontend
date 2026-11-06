@@ -51,3 +51,14 @@ export function validateJob({ title, company, description, location, tags, apply
   if (source.trim().length > 100) errors.source = 'La fuente no puede superar los 100 caracteres.'
   return errors
 }
+
+export function validateImportSource({ name, url, keywords }) {
+  const errors = {}
+  const trimmedName = name.trim()
+  if (trimmedName.length < 2) errors.name = 'El nombre debe tener al menos 2 caracteres.'
+  else if (trimmedName.length > 100) errors.name = 'El nombre no puede superar los 100 caracteres.'
+  if (!isHttpUrl(url.trim())) errors.url = 'Introduce una URL válida que empiece por http:// o https://.'
+  else if (url.trim().length > 500) errors.url = 'La URL no puede superar los 500 caracteres.'
+  if (keywords.trim().length > 500) errors.keywords = 'Las palabras clave no pueden superar los 500 caracteres.'
+  return errors
+}

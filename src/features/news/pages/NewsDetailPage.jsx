@@ -48,6 +48,9 @@ export default function NewsDetailPage() {
 
   const related = (latestRequest.data ?? []).filter((item) => item.id !== article.id).slice(0, RELATED_COUNT)
   const path = paths.newsDetail(article)
+  const hasSource = isHttpUrl(article.sourceUrl)
+  // Las noticias importadas son un resumen de un artículo ajeno: no se indexan ni se marcan como NewsArticle.
+  const imported = Boolean(article.imported)
 
   return (
     <div className="page-container page-section">
@@ -60,8 +63,9 @@ export default function NewsDetailPage() {
         type="article"
         publishedTime={article.createdAt}
         modifiedTime={article.updatedAt}
+        robots={imported ? 'noindex,follow' : 'index,follow'}
       />
-      <JsonLd data={buildNewsArticleData(article)} />
+      {!imported && <JsonLd data={buildNewsArticleData(article)} />}
       <Breadcrumbs
         items={[
           { label: 'Noticias', to: paths.news },
@@ -78,6 +82,7 @@ export default function NewsDetailPage() {
             </h1>
             <p className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-ink-muted">
               {article.author && <span>Por {article.author}</span>}
+              {imported && article.source && <span>Vía {article.source}</span>}
               <Time value={article.createdAt} />
             </p>
           </header>
@@ -90,7 +95,26 @@ export default function NewsDetailPage() {
 
           <UserText className="mt-8 text-lg leading-relaxed text-ink-soft">{article.content}</UserText>
 
-          {isHttpUrl(article.sourceUrl) && (
+          {imported && hasSource && (
+            <aside aria-label="Artículo original" className="card mt-8 bg-brand-50/60 p-5">
+              <p className="text-ink-soft">
+                Esto es un resumen. El artículo completo está publicado en{' '}
+                <strong className="font-semibold text-ink">{article.source ?? hostnameOf(article.sourceUrl)}</strong>.
+              </p>
+              <a
+                href={article.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary mt-4 w-full sm:w-auto"
+              >
+                Leer el artículo completo
+                <Icon name="external" className="h-4 w-4" />
+                <span className="sr-only">(se abre en una pestaña nueva)</span>
+              </a>
+            </aside>
+          )}
+
+          {!imported && hasSource && (
             <footer className="mt-8 border-t border-slate-200 pt-6">
               <p className="text-ink-muted">
                 Fuente:{' '}

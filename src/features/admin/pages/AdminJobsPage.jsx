@@ -54,7 +54,10 @@ export default function AdminJobsPage() {
       render: (job) => (
         <div>
           <p>{job.title}</p>
-          <p className="mt-1 text-sm font-normal text-ink-muted">{job.company}</p>
+          <p className="mt-1 text-sm font-normal text-ink-muted">
+            {job.company}
+            {job.imported && <> · importada de {job.source}</>}
+          </p>
         </div>
       ),
     },

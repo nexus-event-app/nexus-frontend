@@ -43,6 +43,7 @@ export default function JobCard({ job, headingLevel = 'h3' }) {
       )}
       <p className="mt-auto pt-4 text-sm text-ink-muted">
         Publicada el <Time value={postedAt(job)} format="short" />
+        {job.imported && job.source && <> · vía {job.source}</>}
       </p>
     </article>
   )

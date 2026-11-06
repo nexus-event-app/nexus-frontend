@@ -44,6 +44,15 @@ export const workModes = catalog([
   ['ONSITE', 'Presencial', 'slate'],
 ])
 
+export const importSourceTypes = catalog([
+  ['RSS_NEWS', 'Noticias · RSS o Atom', 'blue'],
+  ['GETONBRD_JOBS', 'Empleo · Get on Board', 'green'],
+  ['REMOTIVE_JOBS', 'Empleo · Remotive', 'green'],
+  ['ARBEITNOW_JOBS', 'Empleo · Arbeitnow', 'green'],
+])
+
+export const isNewsSourceType = (type) => type === 'RSS_NEWS'
+
 export const contractTypes = catalog([
   ['FULL_TIME', 'Jornada completa'],
   ['PART_TIME', 'Media jornada'],

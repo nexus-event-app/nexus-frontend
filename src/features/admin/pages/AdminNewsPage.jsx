@@ -33,6 +33,15 @@ export default function AdminNewsPage() {
     { successMessage: 'Noticia borrada.' },
   )
 
+  const [publishNews, publishing] = useAction(
+    async (item) => {
+      const { title, content, sourceUrl, imageUrl, author, category } = item
+      await adminNewsService.update(item.id, { title, content, sourceUrl, imageUrl, author, category, isActive: true })
+      list.reload()
+    },
+    { successMessage: 'Noticia publicada.' },
+  )
+
   const handleSubmit = async (payload) => {
     if (editing === 'new') {
       await adminNewsService.create(payload)
@@ -53,8 +62,9 @@ export default function AdminNewsPage() {
       render: (item) => (
         <div>
           <p>{item.title}</p>
-          <p className="mt-1">
+          <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-normal text-ink-muted">
             <Badge tone={newsCategories.toneOf(item.category)}>{newsCategories.labelOf(item.category)}</Badge>
+            {item.imported && <span>Importada de {item.source}</span>}
           </p>
         </div>
       ),
@@ -67,10 +77,15 @@ export default function AdminNewsPage() {
       header: 'Acciones',
       render: (item) => (
         <div className="flex flex-wrap justify-end gap-2 md:justify-start">
-          {item.isActive && (
+          {item.isActive ? (
             <Link to={paths.newsDetail(item)} className="btn btn-ghost btn-sm">
               Ver<span className="sr-only"> {item.title}</span>
             </Link>
+          ) : (
+            <Button variant="primary" size="sm" disabled={publishing} onClick={() => publishNews(item)}>
+              <Icon name="check" className="h-4 w-4" />
+              Publicar<span className="sr-only"> {item.title}</span>
+            </Button>
           )}
           <Button variant="secondary" size="sm" onClick={() => setEditing(item)}>
             <Icon name="pencil" className="h-4 w-4" />

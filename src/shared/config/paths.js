@@ -18,6 +18,7 @@ export const paths = {
   adminForum: '/admin/foro',
   adminTestimonials: '/admin/testimonios',
   adminUsers: '/admin/usuarios',
+  adminImport: '/admin/importacion',
 }
 
 export function loginPath(redirectTo) {
