@@ -15,6 +15,9 @@ const ForumPage = lazy(() => import('@/features/forum/pages/ForumPage'))
 const NewDiscussionPage = lazy(() => import('@/features/forum/pages/NewDiscussionPage'))
 const DiscussionDetailPage = lazy(() => import('@/features/forum/pages/DiscussionDetailPage'))
 const TestimonialsPage = lazy(() => import('@/features/testimonials/pages/TestimonialsPage'))
+const LegalNoticePage = lazy(() => import('@/features/legal/pages/LegalNoticePage'))
+const PrivacyPage = lazy(() => import('@/features/legal/pages/PrivacyPage'))
+const CookiesPage = lazy(() => import('@/features/legal/pages/CookiesPage'))
 const LoginPage = lazy(() => import('@/features/auth/pages/LoginPage'))
 const RegisterPage = lazy(() => import('@/features/auth/pages/RegisterPage'))
 const AdminDashboardPage = lazy(() => import('@/features/admin/pages/AdminDashboardPage'))
@@ -45,6 +48,9 @@ export default function AppRoutes() {
         />
         <Route path="foro/:idSlug" element={<DiscussionDetailPage />} />
         <Route path="testimonios" element={<TestimonialsPage />} />
+        <Route path="aviso-legal" element={<LegalNoticePage />} />
+        <Route path="privacidad" element={<PrivacyPage />} />
+        <Route path="cookies" element={<CookiesPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="registro" element={<RegisterPage />} />
         <Route path="*" element={<NotFound />} />

@@ -57,6 +57,14 @@
     @apply py-10 sm:py-14;
   }
 
+  .legal-text ul {
+    @apply list-disc space-y-1.5 pl-6;
+  }
+
+  .legal-text strong {
+    @apply font-semibold text-ink;
+  }
+
   .skip-link {
     @apply fixed left-4 top-4 z-[100] -translate-y-24 rounded-control bg-brand-700 px-4 py-3 font-semibold text-white shadow-pop focus:translate-y-0;
   }

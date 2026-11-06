@@ -6,8 +6,10 @@ import FormField from '@/shared/components/FormField'
 import { useAuth } from '../hooks/useAuth'
 import { normalizeEmail, validateRegister } from '../utils/validators'
 import PasswordField from './PasswordField'
+import TermsCheckbox from './TermsCheckbox'
+import { siteConfig } from '@/shared/config/site'
 
-const INITIAL_VALUES = { name: '', email: '', password: '' }
+const INITIAL_VALUES = { name: '', email: '', password: '', acceptTerms: false }
 
 export default function RegisterForm() {
   const { register } = useAuth()
@@ -16,9 +18,9 @@ export default function RegisterForm() {
   const form = useForm({
     initialValues: INITIAL_VALUES,
     validate: validateRegister,
-    onSubmit: async ({ name, email, password }) => {
-      const user = await register({ name: name.trim(), email: normalizeEmail(email), password })
-      toast.success(`Bienvenido/a a StartDev, ${user.name}.`)
+    onSubmit: async ({ name, email, password, acceptTerms }) => {
+      const user = await register({ name: name.trim(), email: normalizeEmail(email), password, acceptTerms })
+      toast.success(`Te damos la bienvenida a ${siteConfig.name}, ${user.name}.`)
     },
   })
 
@@ -48,6 +50,11 @@ export default function RegisterForm() {
         maxLength={72}
         hint="Entre 8 y 72 caracteres, con al menos una letra y un número."
         required
+      />
+      <TermsCheckbox
+        checked={form.values.acceptTerms}
+        onChange={form.handleChange}
+        error={form.errors.acceptTerms}
       />
       <Button type="submit" className="w-full" loading={form.submitting}>
         {form.submitting ? 'Creando cuenta…' : 'Crear cuenta'}

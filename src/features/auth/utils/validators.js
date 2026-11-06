@@ -19,7 +19,7 @@ export function validateLogin({ email, password }) {
   return errors
 }
 
-export function validateRegister({ name, email, password }) {
+export function validateRegister({ name, email, password, acceptTerms }) {
   const errors = {}
   const trimmedName = name.trim()
   if (trimmedName.length < 2 || trimmedName.length > 50) {
@@ -32,5 +32,6 @@ export function validateRegister({ name, email, password }) {
   } else if (!/\p{L}/u.test(password) || !/\d/.test(password)) {
     errors.password = 'La contraseña debe incluir al menos una letra y un número.'
   }
+  if (!acceptTerms) errors.acceptTerms = 'Debes aceptar las condiciones de uso y la política de privacidad.'
   return errors
 }

@@ -1,6 +1,6 @@
-# StartDev · Frontend
+# Primer Commit · Frontend
 
-Frontend de **StartDev**, una comunidad tech en español para perfiles junior: noticias, ofertas de empleo, foro y testimonios, con registro de usuarios y un panel de administración.
+Frontend de **Primer Commit**, una comunidad tech en español para perfiles junior: noticias, ofertas de empleo, foro y testimonios, con registro de usuarios y un panel de administración.
 
 ## Stack
 
@@ -33,7 +33,16 @@ Se definen en `.env` (ver `.env.example`). Son variables de **build**: se incrus
 | `VITE_API_URL` | `/api` | URL base de la API. Déjala vacía salvo que el backend esté en otro origen (en ese caso hay que configurar CORS en el backend y ajustar el CSP de nginx). |
 | `VITE_SITE_URL` | `http://localhost:5173` | URL pública del sitio. Se usa en canonical, Open Graph, JSON-LD y en el HTML base. **Debe apuntar al dominio real en producción.** |
 
+| `VITE_LEGAL_OWNER_NAME`, `VITE_LEGAL_OWNER_ID`, `VITE_LEGAL_ADDRESS`, `VITE_LEGAL_EMAIL` | vacías | Titular, NIF, domicilio y email que exigen la LSSI y el RGPD en el aviso legal y la política de privacidad. **Obligatorias antes de publicar.** Mientras falten, las páginas muestran «pendiente de configurar». Configúralas solo en el servidor o en el `.env` local (ignorado por Git), nunca en el repositorio. |
+| `VITE_LEGAL_HOSTING_PROVIDER` | vacía | Proveedor de alojamiento, que aparece como encargado del tratamiento en la política de privacidad. |
+
 En runtime, el contenedor Docker usa además `BACKEND_URL` (ver más abajo).
+
+### Páginas legales
+
+`/aviso-legal`, `/privacidad` y `/cookies` describen lo que hace realmente el sitio: qué datos se guardan, qué se publica, el contenido importado y el almacenamiento local de la sesión (`primercommit.session`). Como solo se usa almacenamiento técnico, no hace falta banner de cookies. Si se añaden analíticas u otras cookies no técnicas, habrá que pedir consentimiento previo y actualizar `/cookies`. El registro exige aceptar las condiciones; el backend guarda la fecha en `users.terms_accepted_at`.
+
+Los textos son una base razonable, pero conviene que los revise un profesional antes del lanzamiento.
 
 ## Scripts
 
@@ -83,9 +92,13 @@ El contrato (rutas, DTOs, errores, paginación) está en el documento de API com
 ```bash
 docker build \
   --build-arg VITE_SITE_URL=https://tu-dominio.example \
-  -t startdev-frontend .
+  --build-arg VITE_LEGAL_OWNER_NAME="…" \
+  --build-arg VITE_LEGAL_OWNER_ID="…" \
+  --build-arg VITE_LEGAL_ADDRESS="…" \
+  --build-arg VITE_LEGAL_EMAIL="…" \
+  -t primercommit-frontend .
 
-docker run -p 8080:8080 -e BACKEND_URL=http://backend:8080 startdev-frontend
+docker run -p 8080:8080 -e BACKEND_URL=http://backend:8080 primercommit-frontend
 ```
 
 La imagen final es `nginx-unprivileged` (usuario no root, puerto 8080). La plantilla `docker/nginx/default.conf.template` se procesa con `envsubst` en el arranque y solo sustituye `BACKEND_URL`:

@@ -58,7 +58,10 @@ export default function TestimonialForm() {
 
   return (
     <form onSubmit={form.handleSubmit} noValidate className="card space-y-5 p-6">
-      <p className="text-ink-muted">Tu testimonio se publicará tras la revisión del equipo.</p>
+      <p className="text-ink-muted">
+        Tu testimonio se publicará tras la revisión del equipo, junto con el nombre, el cargo y la ubicación que
+        indiques. Puedes pedir que lo retiremos cuando quieras.
+      </p>
       {sent && (
         <Alert variant="success" title="¡Gracias por compartir tu experiencia!">
           Hemos recibido tu testimonio. Lo publicaremos en cuanto el equipo lo revise.
