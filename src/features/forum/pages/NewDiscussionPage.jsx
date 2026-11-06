@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router-dom'
+import VerifyEmailNotice from '@/features/auth/components/VerifyEmailNotice'
+import { useAuth } from '@/features/auth/hooks/useAuth'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import PageHeader from '@/shared/components/PageHeader'
 import Seo from '@/shared/components/Seo'
@@ -13,6 +15,7 @@ const INITIAL_VALUES = { title: '', content: '', category: 'AYUDA_TECNICA' }
 
 export default function NewDiscussionPage() {
   const navigate = useNavigate()
+  const { user } = useAuth()
   const toast = useToast()
 
   const handleSubmit = async (payload) => {
@@ -37,9 +40,15 @@ export default function NewDiscussionPage() {
       />
       <PageHeader title="Nueva discusión" description="Cuéntanos tu duda o tema. Cuanto más claro, mejor te podremos ayudar." />
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem]">
-        <div className="card min-w-0 p-5 sm:p-6">
-          <DiscussionForm initialValues={INITIAL_VALUES} submitLabel="Publicar discusión" onSubmit={handleSubmit} />
-        </div>
+        {user?.emailVerified === false ? (
+          <div className="min-w-0">
+            <VerifyEmailNotice>Confirma tu email para publicar en el foro. Te enviamos un enlace al registrarte.</VerifyEmailNotice>
+          </div>
+        ) : (
+          <div className="card min-w-0 p-5 sm:p-6">
+            <DiscussionForm initialValues={INITIAL_VALUES} submitLabel="Publicar discusión" onSubmit={handleSubmit} />
+          </div>
+        )}
         <ForumRules />
       </div>
     </div>

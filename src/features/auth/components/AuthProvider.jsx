@@ -69,6 +69,17 @@ export default function AuthProvider({ children }) {
   const login = useCallback((credentials) => startSession(() => authService.login(credentials)), [startSession])
   const register = useCallback((payload) => startSession(() => authService.register(payload)), [startSession])
 
+  /** Vuelve a pedir el usuario al backend (p. ej. tras verificar el email) y actualiza la sesión. */
+  const refreshUser = useCallback(async () => {
+    const current = readSession()
+    if (!current) return null
+    const user = await authService.me()
+    const next = { token: current.token, user }
+    saveSession(next)
+    setSession(next)
+    return user
+  }, [])
+
   const logout = useCallback(() => {
     clearSession()
     setSession(null)
@@ -83,9 +94,10 @@ export default function AuthProvider({ children }) {
       login,
       register,
       logout,
+      refreshUser,
       loading,
     }),
-    [session, login, register, logout, loading],
+    [session, login, register, logout, refreshUser, loading],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

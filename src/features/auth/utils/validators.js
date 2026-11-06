@@ -11,6 +11,27 @@ function validateEmail(email) {
   return undefined
 }
 
+function validatePassword(password) {
+  if (password.length < 8 || password.length > 72) return 'La contraseña debe tener entre 8 y 72 caracteres.'
+  if (!/\p{L}/u.test(password) || !/\d/.test(password)) return 'La contraseña debe incluir al menos una letra y un número.'
+  return undefined
+}
+
+export function validateForgotPassword({ email }) {
+  const errors = {}
+  const emailError = validateEmail(email)
+  if (emailError) errors.email = emailError
+  return errors
+}
+
+export function validateResetPassword({ password, confirmPassword }) {
+  const errors = {}
+  const passwordError = validatePassword(password)
+  if (passwordError) errors.password = passwordError
+  else if (password !== confirmPassword) errors.confirmPassword = 'Las contraseñas no coinciden.'
+  return errors
+}
+
 export function validateLogin({ email, password }) {
   const errors = {}
   const emailError = validateEmail(email)
@@ -27,11 +48,8 @@ export function validateRegister({ name, email, password, acceptTerms }) {
   }
   const emailError = validateEmail(email)
   if (emailError) errors.email = emailError
-  if (password.length < 8 || password.length > 72) {
-    errors.password = 'La contraseña debe tener entre 8 y 72 caracteres.'
-  } else if (!/\p{L}/u.test(password) || !/\d/.test(password)) {
-    errors.password = 'La contraseña debe incluir al menos una letra y un número.'
-  }
+  const passwordError = validatePassword(password)
+  if (passwordError) errors.password = passwordError
   if (!acceptTerms) errors.acceptTerms = 'Debes aceptar las condiciones de uso y la política de privacidad.'
   return errors
 }

@@ -18,6 +18,9 @@ const TestimonialsPage = lazy(() => import('@/features/testimonials/pages/Testim
 const LegalNoticePage = lazy(() => import('@/features/legal/pages/LegalNoticePage'))
 const PrivacyPage = lazy(() => import('@/features/legal/pages/PrivacyPage'))
 const CookiesPage = lazy(() => import('@/features/legal/pages/CookiesPage'))
+const ForgotPasswordPage = lazy(() => import('@/features/auth/pages/ForgotPasswordPage'))
+const ResetPasswordPage = lazy(() => import('@/features/auth/pages/ResetPasswordPage'))
+const VerifyEmailPage = lazy(() => import('@/features/auth/pages/VerifyEmailPage'))
 const LoginPage = lazy(() => import('@/features/auth/pages/LoginPage'))
 const RegisterPage = lazy(() => import('@/features/auth/pages/RegisterPage'))
 const AdminDashboardPage = lazy(() => import('@/features/admin/pages/AdminDashboardPage'))
@@ -53,6 +56,9 @@ export default function AppRoutes() {
         <Route path="cookies" element={<CookiesPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="registro" element={<RegisterPage />} />
+        <Route path="recuperar-contrasena" element={<ForgotPasswordPage />} />
+        <Route path="restablecer-contrasena" element={<ResetPasswordPage />} />
+        <Route path="verificar-email" element={<VerifyEmailPage />} />
         <Route path="*" element={<NotFound />} />
       </Route>
 

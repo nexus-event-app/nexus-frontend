@@ -1,5 +1,6 @@
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import SignInPrompt from '@/features/auth/components/SignInPrompt'
+import VerifyEmailNotice from '@/features/auth/components/VerifyEmailNotice'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import CardGridSkeleton from '@/shared/components/CardGridSkeleton'
 import EmptyState from '@/shared/components/EmptyState'
@@ -13,7 +14,7 @@ import TestimonialGrid from '../components/TestimonialGrid'
 import { useTestimonials } from '../hooks/useTestimonials'
 
 export default function TestimonialsPage() {
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, user } = useAuth()
   const request = useTestimonials()
 
   return (
@@ -55,7 +56,9 @@ export default function TestimonialsPage() {
           title="Comparte tu experiencia"
           description="Cuéntanos cómo te va en tu camino tech. Tu historia puede ayudar a otras personas."
         />
-        {isAuthenticated ? (
+        {isAuthenticated && user?.emailVerified === false ? (
+          <VerifyEmailNotice>Confirma tu email para compartir tu testimonio.</VerifyEmailNotice>
+        ) : isAuthenticated ? (
           <TestimonialForm />
         ) : (
           <SignInPrompt>Inicia sesión o crea una cuenta para compartir tu testimonio.</SignInPrompt>

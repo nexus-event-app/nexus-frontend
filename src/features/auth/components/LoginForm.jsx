@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+import { paths } from '@/shared/config/paths'
 import { useForm } from '@/shared/hooks/useForm'
 import { useToast } from '@/shared/hooks/useToast'
 import Alert from '@/shared/components/Alert'
@@ -34,7 +36,14 @@ export default function LoginForm() {
         autoCapitalize="none"
         required
       />
-      <PasswordField {...form.getFieldProps('password')} autoComplete="current-password" required />
+      <div>
+        <PasswordField {...form.getFieldProps('password')} autoComplete="current-password" required />
+        <p className="mt-2 text-right text-sm">
+          <Link to={paths.forgotPassword} className="link">
+            ¿Has olvidado tu contraseña?
+          </Link>
+        </p>
+      </div>
       <Button type="submit" className="w-full" loading={form.submitting}>
         {form.submitting ? 'Entrando…' : 'Iniciar sesión'}
       </Button>

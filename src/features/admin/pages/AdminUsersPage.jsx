@@ -41,7 +41,12 @@ export default function AdminUsersPage() {
     {
       key: 'status',
       header: 'Estado',
-      render: (user) => <Badge tone={user.enabled ? 'green' : 'red'}>{user.enabled ? 'Activo' : 'Desactivado'}</Badge>,
+      render: (user) => (
+        <div className="flex flex-wrap justify-end gap-1.5 md:justify-start">
+          <Badge tone={user.enabled ? 'green' : 'red'}>{user.enabled ? 'Activo' : 'Desactivado'}</Badge>
+          {!user.emailVerified && <Badge tone="amber">Email sin verificar</Badge>}
+        </div>
+      ),
     },
     { key: 'date', header: 'Alta', render: (user) => <Time value={user.createdAt} format="short" /> },
     {

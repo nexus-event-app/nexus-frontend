@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import SignInPrompt from '@/features/auth/components/SignInPrompt'
+import VerifyEmailNotice from '@/features/auth/components/VerifyEmailNotice'
 import ConfirmDialog from '@/shared/components/ConfirmDialog'
 import ErrorState from '@/shared/components/ErrorState'
 import ListSkeleton from '@/shared/components/ListSkeleton'
@@ -12,7 +13,7 @@ import CommentForm from './CommentForm'
 import CommentItem from './CommentItem'
 
 export default function CommentsSection({ discussionId, comments }) {
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, user } = useAuth()
   const toast = useToast()
   const canManage = useCanManage()
   const [pendingDelete, setPendingDelete] = useState(null)
@@ -78,7 +79,9 @@ export default function CommentsSection({ discussionId, comments }) {
       </div>
 
       <div className="mt-8">
-        {isAuthenticated ? (
+        {isAuthenticated && user?.emailVerified === false ? (
+          <VerifyEmailNotice>Confirma tu email para comentar en esta discusión.</VerifyEmailNotice>
+        ) : isAuthenticated ? (
           <CommentForm onSubmit={handleCreate} />
         ) : (
           <SignInPrompt>Inicia sesión o crea una cuenta para comentar en esta discusión.</SignInPrompt>

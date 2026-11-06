@@ -38,6 +38,13 @@ Se definen en `.env` (ver `.env.example`). Son variables de **build**: se incrus
 
 En runtime, el contenedor Docker usa además `BACKEND_URL` (ver más abajo).
 
+### Cuenta: verificación de email y recuperación de contraseña
+
+- `/recuperar-contrasena` pide el email y `/restablecer-contrasena?token=…` permite elegir una contraseña nueva; tras cambiarla se cierra la sesión.
+- `/verificar-email?token=…` confirma el email (el token se envía una sola vez aunque React ejecute el efecto dos veces en desarrollo).
+- Mientras el email no esté verificado se muestra un aviso bajo la cabecera con «Reenviar enlace», y los formularios del foro, los comentarios y los testimonios se sustituyen por `VerifyEmailNotice`.
+- En desarrollo, los enlaces de los emails aparecen en la consola del backend.
+
 ### Páginas legales
 
 `/aviso-legal`, `/privacidad` y `/cookies` describen lo que hace realmente el sitio: qué datos se guardan, qué se publica, el contenido importado y el almacenamiento local de la sesión (`primercommit.session`). Como solo se usa almacenamiento técnico, no hace falta banner de cookies. Si se añaden analíticas u otras cookies no técnicas, habrá que pedir consentimiento previo y actualizar `/cookies`. El registro exige aceptar las condiciones; el backend guarda la fecha en `users.terms_accepted_at`.

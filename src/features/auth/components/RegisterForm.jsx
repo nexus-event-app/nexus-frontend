@@ -20,7 +20,7 @@ export default function RegisterForm() {
     validate: validateRegister,
     onSubmit: async ({ name, email, password, acceptTerms }) => {
       const user = await register({ name: name.trim(), email: normalizeEmail(email), password, acceptTerms })
-      toast.success(`Te damos la bienvenida a ${siteConfig.name}, ${user.name}.`)
+      toast.success(`Te damos la bienvenida a ${siteConfig.name}, ${user.name}. Revisa tu email para confirmar tu cuenta.`)
     },
   })
 
