@@ -150,5 +150,14 @@ Hasta entonces, lo que más ayuda es que el backend publique un `sitemap.xml` co
 
 - **Sin estado global de servidor**: cada pantalla pide sus datos con `useRequest`, que cancela peticiones obsoletas y evita condiciones de carrera.
 - **Sesión en `localStorage`** (token + usuario), validada al arrancar con `GET /api/auth/me` y sincronizada entre pestañas. Es una decisión de simplicidad; la alternativa más segura frente a XSS sería una cookie `HttpOnly`, que requeriría cambios en el backend.
-- **Solo español**: se eliminó i18n; los textos están directamente en los componentes.
+- **Tres idiomas sin librería externa**: castellano en la raíz, catalán en `/ca` y inglés en `/en`. Los textos están en `src/shared/i18n/messages` y `npm run check:i18n` (también en CI) comprueba que los tres idiomas tienen las mismas claves y variables. El panel de administración y las páginas legales siguen solo en castellano.
+
+## Idiomas y SEO
+
+Una página se declara traducida solo si su contenido principal existe en cada idioma:
+
+- **Traducidas** (portada, listados de noticias, empleo y foro, testimonios): cada idioma tiene su propia canonical y enlaces `hreflang` a los demás, y aparecen en el sitemap en los tres idiomas.
+- **Solo en castellano** (detalle de noticia, oferta y debate, páginas legales): su texto lo escriben los usuarios o viene de fuentes externas y no se traduce. Se pueden ver con la interfaz en catalán o inglés, pero todas las versiones apuntan con canonical a la castellana, no declaran `hreflang` y solo la castellana está en el sitemap. Así Google no las trata como contenido duplicado. En el código: `<Seo translated={false} />`, y los datos estructurados usan también la URL castellana.
+
+Si en el futuro se traduce el contenido de algún tipo de página, basta con quitar `translated={false}` en ella y añadirla a las rutas traducidas del sitemap del backend.
 - **Sin dependencias extra**: nada de librerías de formularios, fetching o iconos; los iconos son SVG propios en `shared/components/Icon.jsx`.

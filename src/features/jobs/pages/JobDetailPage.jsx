@@ -70,6 +70,7 @@ export default function JobDetailPage() {
         publishedTime={postedAt(job)}
         modifiedTime={job.updatedAt}
         robots={expired || imported ? 'noindex,follow' : 'index,follow'}
+        translated={false}
       />
       {!expired && !imported && <JsonLd data={buildJobPostingData(job)} />}
       <Breadcrumbs

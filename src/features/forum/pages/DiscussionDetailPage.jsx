@@ -52,6 +52,7 @@ export default function DiscussionDetailPage() {
         type="article"
         publishedTime={discussion.createdAt}
         modifiedTime={discussion.updatedAt}
+        translated={false}
       />
       <JsonLd data={buildDiscussionData(discussion, comments.data)} />
       <Breadcrumbs

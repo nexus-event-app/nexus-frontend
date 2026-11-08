@@ -16,6 +16,11 @@ function buildTitle(title, tagline) {
   return `${fitted}${suffix}`
 }
 
+/**
+ * Metadatos SEO de la página. `translated={false}` marca las páginas cuyo contenido principal solo existe en
+ * castellano (noticias, ofertas, debates, textos legales): todas sus versiones de idioma apuntan con canonical a
+ * la castellana y no se declaran alternativas hreflang, para que Google no las trate como contenido duplicado.
+ */
 export default function Seo({
   title,
   description,
@@ -26,6 +31,7 @@ export default function Seo({
   robots = 'index,follow',
   publishedTime,
   modifiedTime,
+  translated = true,
 }) {
   const { pathname } = useLocation()
   const { t, lang } = useI18n()
@@ -38,7 +44,8 @@ export default function Seo({
   const summary = excerpt(description ?? t('seo.description'), MAX_DESCRIPTION)
   // La ruta base no lleva prefijo de idioma; cada versión añade el suyo.
   const basePath = stripLang(path ?? pathname)
-  const url = absoluteUrl(localizePath(basePath, lang))
+  const url = absoluteUrl(localizePath(basePath, translated ? lang : DEFAULT_LANGUAGE))
+  const contentLang = translated ? lang : DEFAULT_LANGUAGE
   const imageUrl = absoluteUrl(image || siteConfig.defaultImage)
   const alt = imageAlt || t('seo.imageAlt')
   const indexable = !robots.startsWith('noindex')
@@ -50,6 +57,7 @@ export default function Seo({
       <meta name="robots" content={robots} />
       {indexable && <link rel="canonical" href={url} />}
       {indexable &&
+        translated &&
         LANGUAGES.map((language) => (
           <link
             key={language}
@@ -58,15 +66,16 @@ export default function Seo({
             href={absoluteUrl(localizePath(basePath, language))}
           />
         ))}
-      {indexable && (
+      {indexable && translated && (
         <link rel="alternate" hrefLang="x-default" href={absoluteUrl(localizePath(basePath, DEFAULT_LANGUAGE))} />
       )}
       <meta property="og:type" content={type} />
       <meta property="og:site_name" content={siteConfig.name} />
-      <meta property="og:locale" content={LANGUAGE_META[lang].og} />
-      {LANGUAGES.filter((language) => language !== lang).map((language) => (
-        <meta key={language} property="og:locale:alternate" content={LANGUAGE_META[language].og} />
-      ))}
+      <meta property="og:locale" content={LANGUAGE_META[contentLang].og} />
+      {translated &&
+        LANGUAGES.filter((language) => language !== lang).map((language) => (
+          <meta key={language} property="og:locale:alternate" content={LANGUAGE_META[language].og} />
+        ))}
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={summary} />
       <meta property="og:url" content={url} />

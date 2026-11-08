@@ -1,8 +1,7 @@
 import { absoluteUrl } from '@/shared/config/site'
 import { paths } from '@/shared/config/paths'
 import { excerpt } from '@/shared/utils/text'
-import { getCurrentLanguage, translate } from '@/shared/i18n/translate'
-import { localizePath } from '@/shared/i18n/languages'
+import { translate } from '@/shared/i18n/translate'
 
 const MAX_COMMENTS_IN_DATA = 10
 
@@ -11,7 +10,8 @@ function person(name) {
 }
 
 export function buildDiscussionData(discussion, comments) {
-  const url = absoluteUrl(localizePath(paths.discussionDetail(discussion), getCurrentLanguage()))
+  // URL canónica (castellano): el contenido del debate no se traduce.
+  const url = absoluteUrl(paths.discussionDetail(discussion))
   const commentCount = comments ? comments.length : discussion.commentCount
 
   return {

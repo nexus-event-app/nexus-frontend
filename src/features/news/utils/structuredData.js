@@ -2,11 +2,10 @@ import { absoluteUrl, siteConfig } from '@/shared/config/site'
 import { newsCategories } from '@/shared/config/catalogs'
 import { paths } from '@/shared/config/paths'
 import { excerpt } from '@/shared/utils/text'
-import { getCurrentLanguage } from '@/shared/i18n/translate'
-import { localizePath } from '@/shared/i18n/languages'
 
 export function buildNewsArticleData(article) {
-  const url = absoluteUrl(localizePath(paths.newsDetail(article), getCurrentLanguage()))
+  // URL canónica (castellano): el contenido de la noticia no se traduce.
+  const url = absoluteUrl(paths.newsDetail(article))
 
   return {
     '@context': 'https://schema.org',

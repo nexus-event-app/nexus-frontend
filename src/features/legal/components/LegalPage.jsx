@@ -14,7 +14,7 @@ const LEGAL_LINKS = [
 export default function LegalPage({ title, description, path, sections }) {
   return (
     <div className="page-container page-section">
-      <Seo title={title} description={description} path={path} />
+      <Seo title={title} description={description} path={path} translated={false} />
       <Breadcrumbs items={[{ label: title, to: path }]} />
 
       <div className="grid gap-10 lg:grid-cols-[16rem_minmax(0,1fr)]">

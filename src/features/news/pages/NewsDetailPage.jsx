@@ -67,6 +67,7 @@ export default function NewsDetailPage() {
         publishedTime={article.createdAt}
         modifiedTime={article.updatedAt}
         robots={imported ? 'noindex,follow' : 'index,follow'}
+        translated={false}
       />
       {!imported && <JsonLd data={buildNewsArticleData(article)} />}
       <Breadcrumbs
