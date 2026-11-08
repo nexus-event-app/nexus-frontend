@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@/shared/i18n/router'
+import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import Icon from './Icon'
 
@@ -11,24 +12,25 @@ function pageItems(page, totalPages) {
   return sorted.flatMap((value, index) => (index > 0 && value - sorted[index - 1] > 1 ? ['gap', value] : [value]))
 }
 
-export default function Pagination({ page, totalPages, buildHref, label = 'Paginación' }) {
+export default function Pagination({ page, totalPages, buildHref, label }) {
+  const { t } = useI18n()
   if (!totalPages || totalPages <= 1) return null
 
   const items = pageItems(page, totalPages)
 
   return (
-    <nav aria-label={label} className="mt-10">
+    <nav aria-label={label ?? t('common.pagination.label')} className="mt-10">
       <ul className="flex flex-wrap items-center justify-center gap-1">
         <li>
           {page > 1 ? (
             <Link to={buildHref(page - 1)} rel="prev" className={cx(ITEM_CLASSES, 'text-ink-soft hover:bg-slate-100')}>
               <Icon name="chevron-left" className="h-4 w-4" />
-              Anterior
+              {t('common.pagination.previous')}
             </Link>
           ) : (
             <span className={cx(ITEM_CLASSES, 'text-slate-400')} aria-disabled="true">
               <Icon name="chevron-left" className="h-4 w-4" />
-              Anterior
+              {t('common.pagination.previous')}
             </span>
           )}
         </li>
@@ -42,7 +44,7 @@ export default function Pagination({ page, totalPages, buildHref, label = 'Pagin
               <Link
                 to={buildHref(item)}
                 aria-current={item === page ? 'page' : undefined}
-                aria-label={`Página ${item}`}
+                aria-label={t('common.pagination.page', { page: item })}
                 className={cx(
                   ITEM_CLASSES,
                   item === page ? 'bg-brand-600 text-white' : 'text-ink-soft hover:bg-slate-100',
@@ -56,12 +58,12 @@ export default function Pagination({ page, totalPages, buildHref, label = 'Pagin
         <li>
           {page < totalPages ? (
             <Link to={buildHref(page + 1)} rel="next" className={cx(ITEM_CLASSES, 'text-ink-soft hover:bg-slate-100')}>
-              Siguiente
+              {t('common.pagination.next')}
               <Icon name="chevron-right" className="h-4 w-4" />
             </Link>
           ) : (
             <span className={cx(ITEM_CLASSES, 'text-slate-400')} aria-disabled="true">
-              Siguiente
+              {t('common.pagination.next')}
               <Icon name="chevron-right" className="h-4 w-4" />
             </span>
           )}

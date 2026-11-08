@@ -1,5 +1,7 @@
 import { absoluteUrl } from '@/shared/config/site'
 import { paths } from '@/shared/config/paths'
+import { getCurrentLanguage } from '@/shared/i18n/translate'
+import { localizePath } from '@/shared/i18n/languages'
 import { postedAt } from './jobHelpers'
 
 const EMPLOYMENT_TYPES = {
@@ -35,7 +37,7 @@ export function buildJobPostingData(job) {
     ...(job.expiresAt && { validThrough: job.expiresAt }),
     employmentType: EMPLOYMENT_TYPES[job.contractType],
     directApply: false,
-    url: absoluteUrl(paths.jobDetail(job)),
+    url: absoluteUrl(localizePath(paths.jobDetail(job), getCurrentLanguage())),
     hiringOrganization: { '@type': 'Organization', name: job.company },
     ...(remote
       ? {

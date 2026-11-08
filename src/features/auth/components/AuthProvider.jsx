@@ -3,6 +3,7 @@ import { clearSession, onUnauthorized, readSession, saveSession, SESSION_STORAGE
 import { useToast } from '@/shared/hooks/useToast'
 import { AuthContext } from '../hooks/authContext'
 import { authService } from '../services/authService'
+import { translate } from '@/shared/i18n/translate'
 
 function isSessionRejected(error) {
   return error.status >= 400 && error.status < 500
@@ -43,7 +44,7 @@ export default function AuthProvider({ children }) {
     () =>
       onUnauthorized(() => {
         setSession(null)
-        toast.info('Tu sesión ha caducado. Inicia sesión de nuevo.')
+        toast.info(translate('auth.sessionExpired'))
       }),
     [toast],
   )

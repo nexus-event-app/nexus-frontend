@@ -1,3 +1,5 @@
+import { translate } from '@/shared/i18n/translate'
+
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export function normalizeEmail(email) {
@@ -6,14 +8,14 @@ export function normalizeEmail(email) {
 
 function validateEmail(email) {
   const value = email.trim()
-  if (!value) return 'Introduce tu email.'
-  if (value.length > 100 || !EMAIL_PATTERN.test(value)) return 'El email debe ser válido.'
+  if (!value) return translate('auth.validation.emailRequired')
+  if (value.length > 100 || !EMAIL_PATTERN.test(value)) return translate('auth.validation.emailInvalid')
   return undefined
 }
 
 function validatePassword(password) {
-  if (password.length < 8 || password.length > 72) return 'La contraseña debe tener entre 8 y 72 caracteres.'
-  if (!/\p{L}/u.test(password) || !/\d/.test(password)) return 'La contraseña debe incluir al menos una letra y un número.'
+  if (password.length < 8 || password.length > 72) return translate('auth.validation.passwordLength')
+  if (!/\p{L}/u.test(password) || !/\d/.test(password)) return translate('auth.validation.passwordComposition')
   return undefined
 }
 
@@ -28,7 +30,7 @@ export function validateResetPassword({ password, confirmPassword }) {
   const errors = {}
   const passwordError = validatePassword(password)
   if (passwordError) errors.password = passwordError
-  else if (password !== confirmPassword) errors.confirmPassword = 'Las contraseñas no coinciden.'
+  else if (password !== confirmPassword) errors.confirmPassword = translate('auth.validation.passwordMismatch')
   return errors
 }
 
@@ -36,7 +38,7 @@ export function validateLogin({ email, password }) {
   const errors = {}
   const emailError = validateEmail(email)
   if (emailError) errors.email = emailError
-  if (!password) errors.password = 'Introduce tu contraseña.'
+  if (!password) errors.password = translate('auth.validation.passwordRequired')
   return errors
 }
 
@@ -44,12 +46,12 @@ export function validateRegister({ name, email, password, acceptTerms }) {
   const errors = {}
   const trimmedName = name.trim()
   if (trimmedName.length < 2 || trimmedName.length > 50) {
-    errors.name = 'El nombre debe tener entre 2 y 50 caracteres.'
+    errors.name = translate('auth.validation.nameLength')
   }
   const emailError = validateEmail(email)
   if (emailError) errors.email = emailError
   const passwordError = validatePassword(password)
   if (passwordError) errors.password = passwordError
-  if (!acceptTerms) errors.acceptTerms = 'Debes aceptar las condiciones de uso y la política de privacidad.'
+  if (!acceptTerms) errors.acceptTerms = translate('auth.validation.termsRequired')
   return errors
 }

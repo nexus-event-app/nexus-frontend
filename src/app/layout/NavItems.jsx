@@ -1,8 +1,10 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink } from '@/shared/i18n/router'
+import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import { mainNavigation } from './navigation'
 
 export default function NavItems({ orientation = 'horizontal' }) {
+  const { t } = useI18n()
   const vertical = orientation === 'vertical'
 
   return (
@@ -18,7 +20,7 @@ export default function NavItems({ orientation = 'horizontal' }) {
               )
             }
           >
-            {item.label}
+            {t(item.labelKey)}
           </NavLink>
         </li>
       ))}

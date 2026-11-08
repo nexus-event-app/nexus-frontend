@@ -1,12 +1,14 @@
 import { useAction } from '@/shared/hooks/useAction'
 import { useAuth } from '../hooks/useAuth'
 import { authService } from '../services/authService'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 /** Aviso bajo la cabecera mientras el email de la cuenta no esté confirmado. */
 export default function EmailVerificationBanner() {
+  const { t } = useI18n()
   const { user } = useAuth()
   const [resend, pending] = useAction(() => authService.resendVerification(), {
-    successMessage: 'Te hemos enviado un nuevo enlace. Revisa tu bandeja de entrada.',
+    successMessage: t('auth.resend.sent'),
   })
 
   if (!user || user.emailVerified !== false) return null
@@ -15,8 +17,9 @@ export default function EmailVerificationBanner() {
     <div role="status" className="border-b border-amber-200 bg-amber-50">
       <p className="page-container flex flex-wrap items-center gap-x-3 gap-y-1 py-2.5 text-sm text-amber-900">
         <span>
-          Confirma tu email (<strong className="font-semibold">{user.email}</strong>) para participar en el foro y
-          compartir tu testimonio.
+          {t('auth.banner.start')}
+          <strong className="font-semibold">{user.email}</strong>
+          {t('auth.banner.end')}
         </span>
         <button
           type="button"
@@ -24,7 +27,7 @@ export default function EmailVerificationBanner() {
           disabled={pending}
           className="font-semibold underline underline-offset-2 hover:no-underline disabled:opacity-60"
         >
-          {pending ? 'Enviando…' : 'Reenviar enlace'}
+          {pending ? t('auth.resend.sending') : t('auth.resend.button')}
         </button>
       </p>
     </div>

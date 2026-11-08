@@ -31,5 +31,8 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Comprobar traducciones
+        run: npm run check:i18n
+
       - name: Build
         run: npm run build

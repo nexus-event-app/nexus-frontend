@@ -1,14 +1,21 @@
-const LOCALE = 'es-ES'
+import { LANGUAGE_META } from '@/shared/i18n/languages'
+import { getCurrentLanguage } from '@/shared/i18n/translate'
 
-const dateFormat = new Intl.DateTimeFormat(LOCALE, { day: 'numeric', month: 'long', year: 'numeric' })
-const shortDateFormat = new Intl.DateTimeFormat(LOCALE, { day: 'numeric', month: 'short', year: 'numeric' })
-const dateTimeFormat = new Intl.DateTimeFormat(LOCALE, {
-  day: 'numeric',
-  month: 'short',
-  year: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit',
-})
+const OPTIONS = {
+  long: { day: 'numeric', month: 'long', year: 'numeric' },
+  short: { day: 'numeric', month: 'short', year: 'numeric' },
+  datetime: { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' },
+}
+
+const formatters = new Map()
+
+/** Un formateador por idioma y estilo, creado la primera vez que se necesita. */
+function formatter(style) {
+  const locale = LANGUAGE_META[getCurrentLanguage()].locale
+  const key = `${locale}:${style}`
+  if (!formatters.has(key)) formatters.set(key, new Intl.DateTimeFormat(locale, OPTIONS[style]))
+  return formatters.get(key)
+}
 
 function toDate(value) {
   if (!value) return null
@@ -18,17 +25,17 @@ function toDate(value) {
 
 export function formatDate(value) {
   const date = toDate(value)
-  return date ? dateFormat.format(date) : ''
+  return date ? formatter('long').format(date) : ''
 }
 
 export function formatShortDate(value) {
   const date = toDate(value)
-  return date ? shortDateFormat.format(date) : ''
+  return date ? formatter('short').format(date) : ''
 }
 
 export function formatDateTime(value) {
   const date = toDate(value)
-  return date ? dateTimeFormat.format(date) : ''
+  return date ? formatter('datetime').format(date) : ''
 }
 
 export function toLocalDateTimeInput(value) {

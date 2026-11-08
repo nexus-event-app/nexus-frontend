@@ -1,20 +1,22 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@/shared/i18n/router'
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import Logo from '@/shared/components/Logo'
 import { paths } from '@/shared/config/paths'
 import { siteConfig } from '@/shared/config/site'
+import { useI18n } from '@/shared/i18n/useI18n'
 import { mainNavigation } from './navigation'
 
 const LEGAL_LINKS = [
-  { label: 'Aviso legal y condiciones', to: paths.legalNotice },
-  { label: 'Privacidad', to: paths.privacy },
-  { label: 'Cookies', to: paths.cookies },
+  { labelKey: 'common.footer.legalNotice', to: paths.legalNotice },
+  { labelKey: 'common.footer.privacy', to: paths.privacy },
+  { labelKey: 'common.footer.cookies', to: paths.cookies },
 ]
 
 const LINK_CLASSES = 'inline-flex min-h-[2.75rem] items-center text-ink-soft hover:text-brand-700 hover:underline sm:min-h-0 sm:py-1'
 
 export default function SiteFooter() {
   const { isAuthenticated } = useAuth()
+  const { t } = useI18n()
 
   return (
     <footer className="border-t border-slate-200 bg-white">
@@ -22,43 +24,42 @@ export default function SiteFooter() {
         <div>
           <Logo />
           <p className="mt-4 max-w-sm text-ink-muted">
-            {siteConfig.tagline}. Noticias, ofertas de empleo, foro y testimonios en español para quienes dan sus
-            primeros pasos en tecnología.
+            {t('seo.tagline')}. {t('common.footer.description')}
           </p>
         </div>
 
-        <nav aria-label="Pie de página: explorar">
-          <h2 className="text-sm font-bold uppercase tracking-wide text-ink">Explorar</h2>
+        <nav aria-label={t('common.footer.exploreLabel')}>
+          <h2 className="text-sm font-bold uppercase tracking-wide text-ink">{t('common.footer.explore')}</h2>
           <ul className="mt-3">
             {mainNavigation.map((item) => (
               <li key={item.to}>
                 <Link to={item.to} className={LINK_CLASSES}>
-                  {item.label}
+                  {t(item.labelKey)}
                 </Link>
               </li>
             ))}
           </ul>
         </nav>
 
-        <nav aria-label="Pie de página: cuenta">
-          <h2 className="text-sm font-bold uppercase tracking-wide text-ink">Tu cuenta</h2>
+        <nav aria-label={t('common.footer.accountLabel')}>
+          <h2 className="text-sm font-bold uppercase tracking-wide text-ink">{t('common.footer.account')}</h2>
           <ul className="mt-3">
             {isAuthenticated ? (
               <li>
                 <Link to={paths.forumNew} className={LINK_CLASSES}>
-                  Crear una discusión
+                  {t('common.footer.newDiscussion')}
                 </Link>
               </li>
             ) : (
               <>
                 <li>
                   <Link to={paths.login} className={LINK_CLASSES}>
-                    Iniciar sesión
+                    {t('common.account.login')}
                   </Link>
                 </li>
                 <li>
                   <Link to={paths.register} className={LINK_CLASSES}>
-                    Crear cuenta
+                    {t('common.account.register')}
                   </Link>
                 </li>
               </>
@@ -66,13 +67,13 @@ export default function SiteFooter() {
           </ul>
         </nav>
 
-        <nav aria-label="Pie de página: legal">
-          <h2 className="text-sm font-bold uppercase tracking-wide text-ink">Legal</h2>
+        <nav aria-label={t('common.footer.legalLabel')}>
+          <h2 className="text-sm font-bold uppercase tracking-wide text-ink">{t('common.footer.legal')}</h2>
           <ul className="mt-3">
             {LEGAL_LINKS.map((item) => (
               <li key={item.to}>
                 <Link to={item.to} className={LINK_CLASSES}>
-                  {item.label}
+                  {t(item.labelKey)}
                 </Link>
               </li>
             ))}
@@ -81,7 +82,7 @@ export default function SiteFooter() {
       </div>
       <div className="border-t border-slate-200">
         <p className="page-container py-5 text-center text-sm text-ink-muted">
-          © {new Date().getFullYear()} {siteConfig.name}. Hecho para la comunidad tech junior en español.
+          {t('common.footer.copyright', { year: new Date().getFullYear(), name: siteConfig.name })}
         </p>
       </div>
     </footer>

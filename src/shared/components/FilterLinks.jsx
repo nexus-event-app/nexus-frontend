@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@/shared/i18n/router'
 import { cx } from '@/shared/utils/classNames'
 
 export default function FilterLinks({ label, options }) {

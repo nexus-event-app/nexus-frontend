@@ -1,12 +1,14 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@/shared/i18n/router'
 import Badge from '@/shared/components/Badge'
 import Icon from '@/shared/components/Icon'
 import Time from '@/shared/components/Time'
 import { contractTypes, jobLevels, workModes } from '@/shared/config/catalogs'
 import { paths } from '@/shared/config/paths'
 import { postedAt } from '../utils/jobHelpers'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 export default function JobCard({ job, headingLevel = 'h3' }) {
+  const { t } = useI18n()
   const Heading = headingLevel
 
   return (
@@ -33,7 +35,7 @@ export default function JobCard({ job, headingLevel = 'h3' }) {
       </p>
       <p className="mt-1 text-sm text-ink-muted">{contractTypes.labelOf(job.contractType)}</p>
       {job.tags?.length > 0 && (
-        <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Tecnologías">
+        <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={t('jobs.card.technologies')}>
           {job.tags.slice(0, 5).map((tag) => (
             <li key={tag} className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-ink-soft">
               {tag}
@@ -42,8 +44,8 @@ export default function JobCard({ job, headingLevel = 'h3' }) {
         </ul>
       )}
       <p className="mt-auto pt-4 text-sm text-ink-muted">
-        Publicada el <Time value={postedAt(job)} format="short" />
-        {job.imported && job.source && <> · vía {job.source}</>}
+        {t('jobs.card.postedOn')} <Time value={postedAt(job)} format="short" />
+        {job.imported && job.source && <> · {t('jobs.card.via', { source: job.source })}</>}
       </p>
     </article>
   )

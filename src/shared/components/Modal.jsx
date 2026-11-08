@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef } from 'react'
 import { createPortal } from 'react-dom'
+import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import Icon from './Icon'
 
@@ -22,6 +23,7 @@ function unlockScroll() {
 }
 
 export default function Modal({ title, description, onClose, size = 'md', dismissible = true, children }) {
+  const { t } = useI18n()
   const dialogRef = useRef(null)
   const titleId = useId()
   const descriptionId = useId()
@@ -78,7 +80,7 @@ export default function Modal({ title, description, onClose, size = 'md', dismis
           type="button"
           onClick={requestClose}
           disabled={!dismissible}
-          aria-label="Cerrar ventana"
+          aria-label={t('common.dialog.close')}
           className="-mr-2 flex h-11 w-11 shrink-0 items-center justify-center rounded-control text-ink-muted hover:bg-slate-100 disabled:opacity-50"
         >
           <Icon name="close" className="h-6 w-6" />

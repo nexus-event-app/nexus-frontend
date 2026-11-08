@@ -1,12 +1,14 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@/shared/i18n/router'
 import Badge from '@/shared/components/Badge'
 import Icon from '@/shared/components/Icon'
 import Time from '@/shared/components/Time'
 import { discussionCategories } from '@/shared/config/catalogs'
 import { paths } from '@/shared/config/paths'
 import { excerpt } from '@/shared/utils/text'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 export default function DiscussionCard({ discussion, headingLevel = 'h3' }) {
+  const { t } = useI18n()
   const Heading = headingLevel
 
   return (
@@ -16,7 +18,7 @@ export default function DiscussionCard({ discussion, headingLevel = 'h3' }) {
           {discussionCategories.labelOf(discussion.category)}
         </Badge>
         <span className="text-sm text-ink-muted">
-          {discussion.authorName || 'Usuario'} · <Time value={discussion.createdAt} format="short" />
+          {discussion.authorName || t('forum.user')} · <Time value={discussion.createdAt} format="short" />
         </span>
       </div>
       <Heading className="mt-3 text-lg font-bold leading-snug text-ink">
@@ -32,12 +34,12 @@ export default function DiscussionCard({ discussion, headingLevel = 'h3' }) {
         <span className="inline-flex items-center gap-1.5">
           <Icon name="chat" className="h-4 w-4" />
           {discussion.commentCount}
-          <span className="sr-only">comentarios</span>
+          <span className="sr-only">{t('forum.card.comments')}</span>
         </span>
         <span className="inline-flex items-center gap-1.5">
           <Icon name="heart" className="h-4 w-4" />
           {discussion.likesCount}
-          <span className="sr-only">me gusta</span>
+          <span className="sr-only">{t('forum.card.likes')}</span>
         </span>
       </p>
     </article>

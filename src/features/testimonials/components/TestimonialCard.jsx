@@ -1,8 +1,10 @@
 import Avatar from '@/shared/components/Avatar'
 import Badge from '@/shared/components/Badge'
 import Icon from '@/shared/components/Icon'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 export default function TestimonialCard({ testimonial }) {
+  const { t } = useI18n()
   const subtitle = [testimonial.role, testimonial.location].filter(Boolean).join(' · ')
 
   return (
@@ -10,7 +12,7 @@ export default function TestimonialCard({ testimonial }) {
       {testimonial.isHighlighted && (
         <Badge tone="amber" className="mb-4 self-start">
           <Icon name="star" className="h-3.5 w-3.5" filled />
-          Destacado
+          {t('testimonials.card.highlighted')}
         </Badge>
       )}
       <blockquote className="flex-1">

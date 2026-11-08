@@ -31,36 +31,45 @@ const AdminTestimonialsPage = lazy(() => import('@/features/admin/pages/AdminTes
 const AdminUsersPage = lazy(() => import('@/features/admin/pages/AdminUsersPage'))
 const AdminImportPage = lazy(() => import('@/features/admin/pages/AdminImportPage'))
 
+/** Las páginas públicas existen una vez por idioma: «/», «/ca» y «/en». El panel de admin solo en castellano. */
+const PUBLIC_PREFIXES = ['/', '/ca', '/en']
+
+function publicRoutes(prefix) {
+  return (
+    <Route key={prefix} path={prefix} element={<RootLayout />}>
+      <Route index element={<HomePage />} />
+      <Route path="noticias" element={<NewsListPage />} />
+      <Route path="noticias/:idSlug" element={<NewsDetailPage />} />
+      <Route path="empleo" element={<JobsListPage />} />
+      <Route path="empleo/:idSlug" element={<JobDetailPage />} />
+      <Route path="foro" element={<ForumPage />} />
+      <Route
+        path="foro/nueva"
+        element={
+          <RequireAuth>
+            <NewDiscussionPage />
+          </RequireAuth>
+        }
+      />
+      <Route path="foro/:idSlug" element={<DiscussionDetailPage />} />
+      <Route path="testimonios" element={<TestimonialsPage />} />
+      <Route path="aviso-legal" element={<LegalNoticePage />} />
+      <Route path="privacidad" element={<PrivacyPage />} />
+      <Route path="cookies" element={<CookiesPage />} />
+      <Route path="login" element={<LoginPage />} />
+      <Route path="registro" element={<RegisterPage />} />
+      <Route path="recuperar-contrasena" element={<ForgotPasswordPage />} />
+      <Route path="restablecer-contrasena" element={<ResetPasswordPage />} />
+      <Route path="verificar-email" element={<VerifyEmailPage />} />
+      <Route path="*" element={<NotFound />} />
+    </Route>
+  )
+}
+
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route element={<RootLayout />}>
-        <Route index element={<HomePage />} />
-        <Route path="noticias" element={<NewsListPage />} />
-        <Route path="noticias/:idSlug" element={<NewsDetailPage />} />
-        <Route path="empleo" element={<JobsListPage />} />
-        <Route path="empleo/:idSlug" element={<JobDetailPage />} />
-        <Route path="foro" element={<ForumPage />} />
-        <Route
-          path="foro/nueva"
-          element={
-            <RequireAuth>
-              <NewDiscussionPage />
-            </RequireAuth>
-          }
-        />
-        <Route path="foro/:idSlug" element={<DiscussionDetailPage />} />
-        <Route path="testimonios" element={<TestimonialsPage />} />
-        <Route path="aviso-legal" element={<LegalNoticePage />} />
-        <Route path="privacidad" element={<PrivacyPage />} />
-        <Route path="cookies" element={<CookiesPage />} />
-        <Route path="login" element={<LoginPage />} />
-        <Route path="registro" element={<RegisterPage />} />
-        <Route path="recuperar-contrasena" element={<ForgotPasswordPage />} />
-        <Route path="restablecer-contrasena" element={<ResetPasswordPage />} />
-        <Route path="verificar-email" element={<VerifyEmailPage />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
+      {PUBLIC_PREFIXES.map(publicRoutes)}
 
       <Route
         path="admin"

@@ -1,19 +1,16 @@
-const DEFAULT_MESSAGES = {
-  0: 'No se pudo conectar con el servidor. Revisa tu conexión e inténtalo de nuevo.',
-  400: 'La solicitud no es válida.',
-  401: 'Necesitas iniciar sesión para continuar.',
-  403: 'No tienes permisos para realizar esta acción.',
-  404: 'No hemos encontrado lo que buscas.',
-  409: 'La operación entra en conflicto con el estado actual.',
-  429: 'Demasiadas peticiones. Espera un momento y vuelve a intentarlo.',
-  500: 'Ha ocurrido un error inesperado. Inténtalo de nuevo más tarde.',
-}
+import { translate } from '@/shared/i18n/translate'
 
-const GENERIC_MESSAGE = 'Ha ocurrido un error inesperado. Inténtalo de nuevo más tarde.'
+const KNOWN_STATUSES = [400, 401, 403, 404, 409, 429, 500]
+
+/** Mensaje por defecto en el idioma actual cuando el servidor no manda uno propio. */
+function defaultMessage(status) {
+  if (status === 0) return translate('errors.network')
+  return translate(KNOWN_STATUSES.includes(status) ? `errors.${status}` : 'errors.generic')
+}
 
 export class ApiError extends Error {
   constructor({ status = 0, code = 'UNKNOWN', message, fieldErrors = {} } = {}) {
-    super(message || DEFAULT_MESSAGES[status] || GENERIC_MESSAGE)
+    super(message || defaultMessage(status))
     this.name = 'ApiError'
     this.status = status
     this.code = code
@@ -38,7 +35,7 @@ export class ApiError extends Error {
 
 export function toApiError(error) {
   if (error instanceof ApiError) return error
-  return new ApiError({ status: 0, code: 'UNKNOWN', message: GENERIC_MESSAGE })
+  return new ApiError({ status: 0, code: 'UNKNOWN', message: translate('errors.generic') })
 }
 
 export function getErrorMessage(error) {

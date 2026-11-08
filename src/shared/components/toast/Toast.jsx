@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { cx } from '@/shared/utils/classNames'
 import Icon from '@/shared/components/Icon'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 const TYPES = {
   success: { classes: 'border-green-300 bg-green-50 text-green-900', icon: 'check-circle', duration: 5000 },
@@ -9,6 +10,7 @@ const TYPES = {
 }
 
 export default function Toast({ id, type, message, onDismiss }) {
+  const { t } = useI18n()
   const config = TYPES[type]
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export default function Toast({ id, type, message, onDismiss }) {
       <button
         type="button"
         onClick={() => onDismiss(id)}
-        aria-label="Cerrar notificación"
+        aria-label={t('common.toast.dismiss')}
         className="-m-2 flex h-11 w-11 shrink-0 items-center justify-center rounded-control hover:bg-black/5"
       >
         <Icon name="close" className="h-5 w-5" />

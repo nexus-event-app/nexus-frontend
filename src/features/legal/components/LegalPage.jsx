@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@/shared/i18n/router'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import Seo from '@/shared/components/Seo'
 import { legalConfig } from '@/shared/config/legal'

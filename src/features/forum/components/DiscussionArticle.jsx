@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from '@/shared/i18n/useNavigate'
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import Avatar from '@/shared/components/Avatar'
 import Badge from '@/shared/components/Badge'
@@ -17,8 +17,10 @@ import { useCanManage } from '../hooks/useCanManage'
 import { discussionService } from '../services/discussionService'
 import DiscussionForm from './DiscussionForm'
 import LikeButton from './LikeButton'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 export default function DiscussionArticle({ discussion, commentCount, onChange }) {
+  const { t } = useI18n()
   const { isAuthenticated } = useAuth()
   const toast = useToast()
   const navigate = useNavigate()
@@ -32,13 +34,13 @@ export default function DiscussionArticle({ discussion, commentCount, onChange }
 
   const [deleteDiscussion, deletePending] = useAction(async () => {
     await discussionService.remove(discussion.id)
-    toast.success('Discusión borrada.')
+    toast.success(t('forum.detail.deleted'))
     navigate(paths.forum, { replace: true })
   })
 
   const handleLike = () => {
     if (!isAuthenticated) {
-      toast.info('Inicia sesión para dar me gusta.')
+      toast.info(t('forum.detail.loginToLike'))
       return
     }
     toggleLike()
@@ -47,7 +49,7 @@ export default function DiscussionArticle({ discussion, commentCount, onChange }
   const handleUpdate = async (payload) => {
     onChange(await discussionService.update(discussion.id, payload))
     setEditing(false)
-    toast.success('Discusión actualizada.')
+    toast.success(t('forum.detail.updated'))
   }
 
   const manageable = canManage(discussion.authorId)
@@ -64,9 +66,9 @@ export default function DiscussionArticle({ discussion, commentCount, onChange }
         <div className="mt-4 flex items-center gap-3">
           <Avatar name={discussion.authorName} />
           <p className="text-sm text-ink-muted">
-            <span className="block font-semibold text-ink">{discussion.authorName || 'Usuario'}</span>
+            <span className="block font-semibold text-ink">{discussion.authorName || t('forum.user')}</span>
             <Time value={discussion.createdAt} format="datetime" />
-            {commentCount > 0 && ` · ${commentCount} ${commentCount === 1 ? 'comentario' : 'comentarios'}`}
+            {commentCount > 0 && ` · ${t('forum.detail.comment', { count: commentCount })}`}
           </p>
         </div>
       </header>
@@ -79,27 +81,27 @@ export default function DiscussionArticle({ discussion, commentCount, onChange }
           liked={discussion.isLikedByCurrentUser}
           pending={likePending}
           onToggle={handleLike}
-          label="Me gusta en esta discusión"
+          label={t('forum.detail.likeDiscussion')}
         />
         {manageable && (
           <>
             <Button variant="secondary" onClick={() => setEditing(true)}>
               <Icon name="pencil" className="h-4 w-4" />
-              Editar
+              {t('forum.detail.edit')}
             </Button>
             <Button variant="ghost" onClick={() => setConfirmingDelete(true)}>
               <Icon name="trash" className="h-4 w-4" />
-              Borrar
+              {t('forum.detail.delete')}
             </Button>
           </>
         )}
       </footer>
 
       {editing && (
-        <Modal title="Editar discusión" size="md" onClose={() => setEditing(false)}>
+        <Modal title={t('forum.detail.editTitle')} size="md" onClose={() => setEditing(false)}>
           <DiscussionForm
             initialValues={{ title: discussion.title, content: discussion.content, category: discussion.category }}
-            submitLabel="Guardar cambios"
+            submitLabel={t('forum.detail.save')}
             onSubmit={handleUpdate}
             onCancel={() => setEditing(false)}
           />
@@ -108,9 +110,9 @@ export default function DiscussionArticle({ discussion, commentCount, onChange }
 
       {confirmingDelete && (
         <ConfirmDialog
-          title="Borrar discusión"
-          message="Se borrará la discusión junto con todos sus comentarios y me gusta. Esta acción no se puede deshacer."
-          confirmLabel="Borrar discusión"
+          title={t('forum.detail.deleteTitle')}
+          message={t('forum.detail.deleteMessage')}
+          confirmLabel={t('forum.detail.deleteTitle')}
           pending={deletePending}
           onConfirm={deleteDiscussion}
           onCancel={() => setConfirmingDelete(false)}

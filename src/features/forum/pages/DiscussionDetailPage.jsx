@@ -1,4 +1,5 @@
-import { Navigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import { Navigate } from '@/shared/i18n/router'
 import ArticleSkeleton from '@/shared/components/ArticleSkeleton'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import ErrorState from '@/shared/components/ErrorState'
@@ -13,8 +14,10 @@ import DiscussionArticle from '../components/DiscussionArticle'
 import { useComments } from '../hooks/useComments'
 import { useDiscussion } from '../hooks/useDiscussion'
 import { buildDiscussionData } from '../utils/structuredData'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 export default function DiscussionDetailPage() {
+  const { t } = useI18n()
   const { idSlug } = useParams()
   const { id, slug } = parseIdSlug(idSlug)
   const request = useDiscussion(id)
@@ -25,7 +28,7 @@ export default function DiscussionDetailPage() {
   if (request.error) {
     return (
       <div className="page-container page-section">
-        <ErrorState error={request.error} title="No hemos podido cargar la discusión" onRetry={request.reload} />
+        <ErrorState error={request.error} title={t('forum.detail.error')} onRetry={request.reload} />
       </div>
     )
   }
@@ -53,7 +56,7 @@ export default function DiscussionDetailPage() {
       <JsonLd data={buildDiscussionData(discussion, comments.data)} />
       <Breadcrumbs
         items={[
-          { label: 'Foro', to: paths.forum },
+          { label: t('forum.breadcrumb'), to: paths.forum },
           { label: excerpt(discussion.title, 60), to: path },
         ]}
       />

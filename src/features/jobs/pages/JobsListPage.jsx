@@ -9,25 +9,27 @@ import { paths } from '@/shared/config/paths'
 import JobFilters from '../components/JobFilters'
 import JobGrid from '../components/JobGrid'
 import { useJobsList } from '../hooks/useJobsList'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 const CLEARED_FILTERS = { nivel: '', modalidad: '', contrato: '', q: '' }
 
 export default function JobsListPage() {
+  const { t } = useI18n()
   const list = useJobsList()
   const { page, filters, hasFilters, setFilters, buildHref } = list
 
   return (
     <div className="page-container page-section">
       <Seo
-        title={page > 1 ? `Ofertas de empleo junior (página ${page})` : 'Ofertas de empleo junior y prácticas'}
-        description="Ofertas de trabajo y prácticas en tecnología para perfiles junior: filtra por nivel, modalidad y tipo de contrato."
+        title={page > 1 ? `${t('jobs.list.seoTitlePage')}${t('common.pageSuffix', { page })}` : t('jobs.list.seoTitle')}
+        description={t('jobs.list.seoDescription')}
         path={page > 1 ? `${paths.jobs}?page=${page}` : paths.jobs}
         robots={hasFilters ? 'noindex,follow' : 'index,follow'}
       />
-      <Breadcrumbs items={[{ label: 'Empleo', to: paths.jobs }]} />
+      <Breadcrumbs items={[{ label: t('jobs.breadcrumb'), to: paths.jobs }]} />
       <PageHeader
-        title="Ofertas de empleo para juniors"
-        description="Prácticas y primeros empleos en tecnología, seleccionados para quienes están empezando."
+        title={t('jobs.list.title')}
+        description={t('jobs.list.description')}
       />
 
       <JobFilters
@@ -37,29 +39,27 @@ export default function JobsListPage() {
         onClear={() => setFilters(CLEARED_FILTERS)}
       />
 
-      <section aria-label="Resultados" aria-busy={list.loading}>
+      <section aria-label={t('common.results')} aria-busy={list.loading}>
         <QueryBoundary
           data={list.data}
           error={list.error}
           onRetry={list.reload}
           skeleton={<CardGridSkeleton withImage={false} />}
-          errorTitle="No hemos podido cargar las ofertas"
+          errorTitle={t('jobs.list.error')}
         >
           {(result) =>
             result.content.length === 0 ? (
               <EmptyState
                 icon="briefcase"
-                title="No hay ofertas con estos criterios"
+                title={t('jobs.list.emptyTitle')}
                 description={
-                  hasFilters
-                    ? 'Prueba a cambiar la búsqueda o a quitar algún filtro.'
-                    : 'Ahora mismo no hay ofertas publicadas. Vuelve pronto.'
+                  hasFilters ? t('jobs.list.emptyFiltered') : t('jobs.list.empty')
                 }
               />
             ) : (
               <>
                 <p role="status" className="mb-4 text-sm text-ink-muted">
-                  {result.totalElements} {result.totalElements === 1 ? 'oferta' : 'ofertas'}
+                  {t('jobs.list.count', { count: result.totalElements })}
                 </p>
                 <JobGrid items={result.content} headingLevel="h2" />
                 <Pagination page={page} totalPages={result.totalPages} buildHref={buildHref} />

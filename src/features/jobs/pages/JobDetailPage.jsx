@@ -1,4 +1,5 @@
-import { Navigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import { Navigate } from '@/shared/i18n/router'
 import Alert from '@/shared/components/Alert'
 import ArticleSkeleton from '@/shared/components/ArticleSkeleton'
 import Badge from '@/shared/components/Badge'
@@ -18,6 +19,7 @@ import { isHttpUrl } from '@/shared/utils/url'
 import { useJob } from '../hooks/useJob'
 import { isExpired, postedAt } from '../utils/jobHelpers'
 import { buildJobPostingData } from '../utils/structuredData'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 function SummaryRow({ label, children }) {
   return (
@@ -29,6 +31,7 @@ function SummaryRow({ label, children }) {
 }
 
 export default function JobDetailPage() {
+  const { t } = useI18n()
   const { idSlug } = useParams()
   const { id, slug } = parseIdSlug(idSlug)
   const request = useJob(id)
@@ -38,7 +41,7 @@ export default function JobDetailPage() {
   if (request.error) {
     return (
       <div className="page-container page-section">
-        <ErrorState error={request.error} title="No hemos podido cargar la oferta" onRetry={request.reload} />
+        <ErrorState error={request.error} title={t('jobs.detail.error')} onRetry={request.reload} />
       </div>
     )
   }
@@ -60,8 +63,8 @@ export default function JobDetailPage() {
   return (
     <div className="page-container page-section">
       <Seo
-        title={`${job.title} en ${job.company}`}
-        description={`${job.title} en ${job.company} (${job.location}). ${excerpt(job.description, 110)}`}
+        title={t('jobs.detail.seoTitle', { title: job.title, company: job.company })}
+        description={t('jobs.detail.seoDescription', { title: job.title, company: job.company, location: job.location, summary: excerpt(job.description, 110) })}
         path={path}
         type="article"
         publishedTime={postedAt(job)}
@@ -71,7 +74,7 @@ export default function JobDetailPage() {
       {!expired && !imported && <JsonLd data={buildJobPostingData(job)} />}
       <Breadcrumbs
         items={[
-          { label: 'Empleo', to: paths.jobs },
+          { label: t('jobs.breadcrumb'), to: paths.jobs },
           { label: excerpt(job.title, 60), to: path },
         ]}
       />
@@ -100,20 +103,20 @@ export default function JobDetailPage() {
 
           {imported && job.source && (
             <p className="mt-4 text-sm text-ink-muted">
-              Oferta publicada originalmente en <strong className="font-semibold text-ink-soft">{job.source}</strong>.
-              Para aplicar, sigue el enlace a la oferta original.
+              {t('jobs.detail.importedStart')}{' '}
+              <strong className="font-semibold text-ink-soft">{job.source}</strong>. {t('jobs.detail.importedEnd')}
             </p>
           )}
 
           {expired && (
-            <Alert variant="warning" className="mt-6" title="Oferta caducada">
-              El plazo para aplicar a esta oferta ha terminado.
+            <Alert variant="warning" className="mt-6" title={t('jobs.detail.expiredTitle')}>
+              {t('jobs.detail.expired')}
             </Alert>
           )}
 
           <section aria-labelledby="job-description" className="mt-8">
             <h2 id="job-description" className="mb-4 text-xl font-bold text-ink">
-              Descripción de la oferta
+              {t('jobs.detail.description')}
             </h2>
             <UserText className="text-lg leading-relaxed text-ink-soft">{job.description}</UserText>
           </section>
@@ -121,7 +124,7 @@ export default function JobDetailPage() {
           {job.tags?.length > 0 && (
             <section aria-labelledby="job-tags" className="mt-8">
               <h2 id="job-tags" className="mb-3 text-xl font-bold text-ink">
-                Tecnologías y etiquetas
+                {t('jobs.detail.tags')}
               </h2>
               <ul className="flex flex-wrap gap-2">
                 {job.tags.map((tag) => (
@@ -137,23 +140,23 @@ export default function JobDetailPage() {
         <aside aria-labelledby="job-summary" className="lg:sticky lg:top-24 lg:self-start">
           <div className="card p-5">
             <h2 id="job-summary" className="text-lg font-bold text-ink">
-              Resumen de la oferta
+              {t('jobs.detail.summary')}
             </h2>
             <dl className="mt-2">
-              <SummaryRow label="Empresa">{job.company}</SummaryRow>
-              <SummaryRow label="Ubicación">{job.location}</SummaryRow>
-              <SummaryRow label="Modalidad">{workModes.labelOf(job.workMode)}</SummaryRow>
-              <SummaryRow label="Nivel">{jobLevels.labelOf(job.level)}</SummaryRow>
-              <SummaryRow label="Contrato">{contractTypes.labelOf(job.contractType)}</SummaryRow>
-              <SummaryRow label="Publicada">
+              <SummaryRow label={t('jobs.detail.company')}>{job.company}</SummaryRow>
+              <SummaryRow label={t('jobs.detail.location')}>{job.location}</SummaryRow>
+              <SummaryRow label={t('jobs.detail.workMode')}>{workModes.labelOf(job.workMode)}</SummaryRow>
+              <SummaryRow label={t('jobs.detail.level')}>{jobLevels.labelOf(job.level)}</SummaryRow>
+              <SummaryRow label={t('jobs.detail.contract')}>{contractTypes.labelOf(job.contractType)}</SummaryRow>
+              <SummaryRow label={t('jobs.detail.posted')}>
                 <Time value={postedAt(job)} />
               </SummaryRow>
               {job.expiresAt && (
-                <SummaryRow label="Válida hasta">
+                <SummaryRow label={t('jobs.detail.validUntil')}>
                   <Time value={job.expiresAt} />
                 </SummaryRow>
               )}
-              {job.source && <SummaryRow label="Fuente">{job.source}</SummaryRow>}
+              {job.source && <SummaryRow label={t('jobs.detail.source')}>{job.source}</SummaryRow>}
             </dl>
             {canApply && !expired && (
               <a
@@ -162,9 +165,9 @@ export default function JobDetailPage() {
                 rel="noopener noreferrer nofollow"
                 className="btn btn-primary mt-4 w-full"
               >
-                {imported ? 'Ver la oferta original' : 'Aplicar a la oferta'}
+                {imported ? t('jobs.detail.viewOriginal') : t('jobs.detail.apply')}
                 <Icon name="external" className="h-4 w-4" />
-                <span className="sr-only">(se abre en una pestaña nueva)</span>
+                <span className="sr-only">{t('common.newTab')}</span>
               </a>
             )}
           </div>

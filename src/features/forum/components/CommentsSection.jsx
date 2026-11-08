@@ -11,8 +11,10 @@ import { commentService } from '../services/commentService'
 import { useCanManage } from '../hooks/useCanManage'
 import CommentForm from './CommentForm'
 import CommentItem from './CommentItem'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 export default function CommentsSection({ discussionId, comments }) {
+  const { t } = useI18n()
   const { isAuthenticated, user } = useAuth()
   const toast = useToast()
   const canManage = useCanManage()
@@ -30,12 +32,12 @@ export default function CommentsSection({ discussionId, comments }) {
       mutate((items) => items.filter((item) => item.id !== comment.id))
       setPendingDelete(null)
     },
-    { successMessage: 'Comentario borrado.' },
+    { successMessage: t('forum.comments.deleted') },
   )
 
   const handleToggleLike = (comment) => {
     if (!isAuthenticated) {
-      toast.info('Inicia sesión para dar me gusta.')
+      toast.info(t('forum.detail.loginToLike'))
       return
     }
     toggleLike(comment)
@@ -44,21 +46,22 @@ export default function CommentsSection({ discussionId, comments }) {
   const handleCreate = async (content) => {
     const created = await commentService.create({ discussionId, content })
     mutate((items) => [...items, created])
-    toast.success('Comentario publicado.')
+    toast.success(t('forum.comments.posted'))
   }
 
   return (
     <section aria-labelledby="comments-heading" className="mt-12">
       <h2 id="comments-heading" className="text-2xl font-bold text-ink">
-        Comentarios{data ? ` (${data.length})` : ''}
+        {t('forum.comments.title')}
+        {data ? ` (${data.length})` : ''}
       </h2>
 
       <div className="mt-6">
-        {error && <ErrorState error={error} title="No hemos podido cargar los comentarios" onRetry={reload} />}
+        {error && <ErrorState error={error} title={t('forum.comments.error')} onRetry={reload} />}
         {!error && !data && <ListSkeleton rows={2} />}
         {data && data.length === 0 && (
           <p className="rounded-card border border-dashed border-slate-300 p-6 text-center text-ink-muted">
-            Todavía no hay comentarios. ¡Sé la primera persona en responder!
+            {t('forum.comments.empty')}
           </p>
         )}
         {data && data.length > 0 && (
@@ -80,19 +83,19 @@ export default function CommentsSection({ discussionId, comments }) {
 
       <div className="mt-8">
         {isAuthenticated && user?.emailVerified === false ? (
-          <VerifyEmailNotice>Confirma tu email para comentar en esta discusión.</VerifyEmailNotice>
+          <VerifyEmailNotice>{t('forum.comments.confirmEmail')}</VerifyEmailNotice>
         ) : isAuthenticated ? (
           <CommentForm onSubmit={handleCreate} />
         ) : (
-          <SignInPrompt>Inicia sesión o crea una cuenta para comentar en esta discusión.</SignInPrompt>
+          <SignInPrompt>{t('forum.comments.signIn')}</SignInPrompt>
         )}
       </div>
 
       {pendingDelete && (
         <ConfirmDialog
-          title="Borrar comentario"
-          message="Este comentario se eliminará de forma permanente. ¿Quieres continuar?"
-          confirmLabel="Borrar comentario"
+          title={t('forum.comments.deleteTitle')}
+          message={t('forum.comments.deleteMessage')}
+          confirmLabel={t('forum.comments.deleteConfirm')}
           pending={deletePending}
           onConfirm={() => deleteComment(pendingDelete)}
           onCancel={() => setPendingDelete(null)}

@@ -1,12 +1,14 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@/shared/i18n/router'
 import Badge from '@/shared/components/Badge'
 import Time from '@/shared/components/Time'
 import { newsCategories } from '@/shared/config/catalogs'
 import { paths } from '@/shared/config/paths'
 import { excerpt } from '@/shared/utils/text'
 import NewsImage from './NewsImage'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 export default function NewsCard({ item, headingLevel = 'h3' }) {
+  const { t } = useI18n()
   const Heading = headingLevel
 
   return (
@@ -26,7 +28,7 @@ export default function NewsCard({ item, headingLevel = 'h3' }) {
           </Link>
         </Heading>
         <p className="mt-2 line-clamp-3 text-ink-muted">{excerpt(item.content, 180)}</p>
-        {item.imported && item.source && <p className="mt-auto pt-3 text-sm text-ink-muted">Vía {item.source}</p>}
+        {item.imported && item.source && <p className="mt-auto pt-3 text-sm text-ink-muted">{t('news.card.via', { source: item.source })}</p>}
       </div>
     </article>
   )

@@ -5,17 +5,19 @@ import EmptyState from '@/shared/components/EmptyState'
 import QueryBoundary from '@/shared/components/QueryBoundary'
 import { paths } from '@/shared/config/paths'
 import HomeSection from './HomeSection'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 export default function LatestJobsSection() {
+  const { t } = useI18n()
   const request = useLatestJobs(3)
 
   return (
     <HomeSection
       id="home-jobs"
-      title="Últimas ofertas de empleo"
-      description="Prácticas y puestos junior para dar tu primer paso profesional."
+      title={t('home.jobs.title')}
+      description={t('home.jobs.description')}
       linkTo={paths.jobs}
-      linkLabel="Ver todas las ofertas"
+      linkLabel={t('home.jobs.link')}
       tinted
     >
       <QueryBoundary
@@ -23,11 +25,11 @@ export default function LatestJobsSection() {
         error={request.error}
         onRetry={request.reload}
         skeleton={<CardGridSkeleton count={3} withImage={false} />}
-        errorTitle="No hemos podido cargar las ofertas"
+        errorTitle={t('home.jobs.error')}
       >
         {(items) =>
           items.length === 0 ? (
-            <EmptyState icon="briefcase" title="Ahora mismo no hay ofertas" description="Vuelve pronto: añadimos oportunidades junior con frecuencia." />
+            <EmptyState icon="briefcase" title={t('home.jobs.emptyTitle')} description={t('home.jobs.emptyText')} />
           ) : (
             <JobGrid items={items} />
           )

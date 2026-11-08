@@ -1,11 +1,14 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@/shared/i18n/router'
 import { absoluteUrl } from '@/shared/config/site'
 import { paths } from '@/shared/config/paths'
+import { localizePath } from '@/shared/i18n/languages'
+import { useI18n } from '@/shared/i18n/useI18n'
 import JsonLd from './JsonLd'
 import Icon from './Icon'
 
 export default function Breadcrumbs({ items }) {
-  const trail = [{ label: 'Inicio', to: paths.home }, ...items]
+  const { t, lang } = useI18n()
+  const trail = [{ label: t('common.breadcrumbs.home'), to: paths.home }, ...items]
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -14,12 +17,12 @@ export default function Breadcrumbs({ items }) {
       '@type': 'ListItem',
       position: index + 1,
       name: item.label,
-      item: absoluteUrl(item.to),
+      item: absoluteUrl(localizePath(item.to, lang)),
     })),
   }
 
   return (
-    <nav aria-label="Migas de pan" className="mb-6">
+    <nav aria-label={t('common.breadcrumbs.label')} className="mb-6">
       <ol className="flex flex-wrap items-center gap-1 text-sm text-ink-muted">
         {trail.map((item, index) => {
           const isLast = index === trail.length - 1

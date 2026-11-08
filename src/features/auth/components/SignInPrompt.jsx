@@ -2,8 +2,10 @@ import { useLocation } from 'react-router-dom'
 import ButtonLink from '@/shared/components/ButtonLink'
 import Icon from '@/shared/components/Icon'
 import { loginPath, registerPath } from '@/shared/config/paths'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 export default function SignInPrompt({ children }) {
+  const { t } = useI18n()
   const { pathname, search } = useLocation()
   const redirectTo = `${pathname}${search}`
 
@@ -15,9 +17,9 @@ export default function SignInPrompt({ children }) {
       <p className="flex-1 text-ink-soft">{children}</p>
       <div className="flex flex-wrap gap-3">
         <ButtonLink to={loginPath(redirectTo)} variant="secondary">
-          Iniciar sesión
+          {t('auth.login.submit')}
         </ButtonLink>
-        <ButtonLink to={registerPath(redirectTo)}>Crear cuenta</ButtonLink>
+        <ButtonLink to={registerPath(redirectTo)}>{t('auth.register.submit')}</ButtonLink>
       </div>
     </div>
   )

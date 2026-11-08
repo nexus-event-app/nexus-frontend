@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { ApiError } from './ApiError'
+import { getCurrentLanguage } from '@/shared/i18n/translate'
 import { clearSession, getToken, notifyUnauthorized } from './session'
 
 const AUTH_ENDPOINTS = ['/auth/login', '/auth/register']
@@ -11,6 +12,7 @@ export const http = axios.create({
 })
 
 http.interceptors.request.use((config) => {
+  config.headers.set('Accept-Language', getCurrentLanguage())
   const token = getToken()
   if (token) {
     config.headers.set('Authorization', `Bearer ${token}`)

@@ -1,15 +1,17 @@
 import { absoluteUrl } from '@/shared/config/site'
 import { paths } from '@/shared/config/paths'
 import { excerpt } from '@/shared/utils/text'
+import { getCurrentLanguage, translate } from '@/shared/i18n/translate'
+import { localizePath } from '@/shared/i18n/languages'
 
 const MAX_COMMENTS_IN_DATA = 10
 
 function person(name) {
-  return { '@type': 'Person', name: name || 'Usuario' }
+  return { '@type': 'Person', name: name || translate('forum.user') }
 }
 
 export function buildDiscussionData(discussion, comments) {
-  const url = absoluteUrl(paths.discussionDetail(discussion))
+  const url = absoluteUrl(localizePath(paths.discussionDetail(discussion), getCurrentLanguage()))
   const commentCount = comments ? comments.length : discussion.commentCount
 
   return {

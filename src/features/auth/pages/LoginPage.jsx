@@ -1,4 +1,5 @@
-import { Link, Navigate, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
+import { Link, Navigate } from '@/shared/i18n/router'
 import PageLoader from '@/shared/components/PageLoader'
 import Seo from '@/shared/components/Seo'
 import { paths, registerPath } from '@/shared/config/paths'
@@ -7,8 +8,10 @@ import AuthCard from '../components/AuthCard'
 import LoginForm from '../components/LoginForm'
 import { useAuth } from '../hooks/useAuth'
 import { siteConfig } from '@/shared/config/site'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 export default function LoginPage() {
+  const { t } = useI18n()
   const { isAuthenticated, loading } = useAuth()
   const [searchParams] = useSearchParams()
   const redirectTo = safeRedirect(searchParams.get('redirect'), paths.home)
@@ -18,15 +21,15 @@ export default function LoginPage() {
 
   return (
     <>
-      <Seo title="Iniciar sesión" description={`Accede a tu cuenta de ${siteConfig.name}.`} path={paths.login} robots="noindex,nofollow" />
+      <Seo title={t('auth.login.seoTitle')} description={t('auth.login.seoDescription', { name: siteConfig.name })} path={paths.login} robots="noindex,nofollow" />
       <AuthCard
-        title="Iniciar sesión"
-        subtitle="Accede para participar en el foro y compartir tu testimonio."
+        title={t('auth.login.title')}
+        subtitle={t('auth.login.subtitle')}
         footer={
           <>
-            ¿Aún no tienes cuenta?{' '}
+            {t('auth.login.noAccount')}{' '}
             <Link to={registerPath(redirectTo)} className="link">
-              Crea una cuenta
+              {t('auth.login.createAccount')}
             </Link>
           </>
         }

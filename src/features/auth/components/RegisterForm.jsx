@@ -8,10 +8,12 @@ import { normalizeEmail, validateRegister } from '../utils/validators'
 import PasswordField from './PasswordField'
 import TermsCheckbox from './TermsCheckbox'
 import { siteConfig } from '@/shared/config/site'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 const INITIAL_VALUES = { name: '', email: '', password: '', acceptTerms: false }
 
 export default function RegisterForm() {
+  const { t } = useI18n()
   const { register } = useAuth()
   const toast = useToast()
 
@@ -20,7 +22,7 @@ export default function RegisterForm() {
     validate: validateRegister,
     onSubmit: async ({ name, email, password, acceptTerms }) => {
       const user = await register({ name: name.trim(), email: normalizeEmail(email), password, acceptTerms })
-      toast.success(`Te damos la bienvenida a ${siteConfig.name}, ${user.name}. Revisa tu email para confirmar tu cuenta.`)
+      toast.success(t('auth.register.welcome', { site: siteConfig.name, name: user.name }))
     },
   })
 
@@ -29,15 +31,15 @@ export default function RegisterForm() {
       {form.formError && <Alert variant="error">{form.formError}</Alert>}
       <FormField
         {...form.getFieldProps('name')}
-        label="Nombre"
+        label={t('auth.register.name')}
         autoComplete="name"
         maxLength={50}
-        hint="Es el nombre que verán los demás en el foro."
+        hint={t('auth.register.nameHint')}
         required
       />
       <FormField
         {...form.getFieldProps('email')}
-        label="Email"
+        label={t('auth.login.email')}
         type="email"
         autoComplete="email"
         inputMode="email"
@@ -48,7 +50,7 @@ export default function RegisterForm() {
         {...form.getFieldProps('password')}
         autoComplete="new-password"
         maxLength={72}
-        hint="Entre 8 y 72 caracteres, con al menos una letra y un número."
+        hint={t('auth.register.passwordHint')}
         required
       />
       <TermsCheckbox
@@ -57,7 +59,7 @@ export default function RegisterForm() {
         error={form.errors.acceptTerms}
       />
       <Button type="submit" className="w-full" loading={form.submitting}>
-        {form.submitting ? 'Creando cuenta…' : 'Crear cuenta'}
+        {form.submitting ? t('auth.register.submitting') : t('auth.register.submit')}
       </Button>
     </form>
   )

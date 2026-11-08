@@ -1,15 +1,18 @@
 import { useId, useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import { Link } from '@/shared/i18n/router'
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import Avatar from '@/shared/components/Avatar'
 import Icon from '@/shared/components/Icon'
 import { paths } from '@/shared/config/paths'
 import { useDismiss } from '@/shared/hooks/useDismiss'
+import { useI18n } from '@/shared/i18n/useI18n'
 import { useToast } from '@/shared/hooks/useToast'
 
 export default function UserMenu() {
   const { user, isAdmin, logout } = useAuth()
   const toast = useToast()
+  const { t } = useI18n()
   const location = useLocation()
   const menuId = useId()
   const containerRef = useRef(null)
@@ -20,7 +23,7 @@ export default function UserMenu() {
 
   const handleLogout = () => {
     logout()
-    toast.info('Has cerrado sesión.')
+    toast.info(t('common.account.loggedOut'))
   }
 
   return (
@@ -50,7 +53,7 @@ export default function UserMenu() {
                   className="flex min-h-[2.75rem] items-center gap-2 rounded-control px-3 font-medium text-ink-soft hover:bg-slate-100"
                 >
                   <Icon name="shield" />
-                  Panel de administración
+                  {t('common.account.admin')}
                 </Link>
               </li>
             )}
@@ -61,7 +64,7 @@ export default function UserMenu() {
                 className="flex min-h-[2.75rem] w-full items-center gap-2 rounded-control px-3 text-left font-medium text-ink-soft hover:bg-slate-100"
               >
                 <Icon name="logout" />
-                Cerrar sesión
+                {t('common.account.logout')}
               </button>
             </li>
           </ul>

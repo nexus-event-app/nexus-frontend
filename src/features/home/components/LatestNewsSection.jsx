@@ -5,28 +5,30 @@ import EmptyState from '@/shared/components/EmptyState'
 import QueryBoundary from '@/shared/components/QueryBoundary'
 import { paths } from '@/shared/config/paths'
 import HomeSection from './HomeSection'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 export default function LatestNewsSection() {
+  const { t } = useI18n()
   const request = useLatestNews(3)
 
   return (
     <HomeSection
       id="home-news"
-      title="Últimas noticias"
-      description="Lo más relevante del mundo tech, contado de forma clara."
+      title={t('home.news.title')}
+      description={t('home.news.description')}
       linkTo={paths.news}
-      linkLabel="Ver todas las noticias"
+      linkLabel={t('home.news.link')}
     >
       <QueryBoundary
         data={request.data}
         error={request.error}
         onRetry={request.reload}
         skeleton={<CardGridSkeleton count={3} />}
-        errorTitle="No hemos podido cargar las noticias"
+        errorTitle={t('home.news.error')}
       >
         {(items) =>
           items.length === 0 ? (
-            <EmptyState icon="newspaper" title="Pronto publicaremos noticias" description="Estamos preparando las primeras publicaciones." />
+            <EmptyState icon="newspaper" title={t('home.news.emptyTitle')} description={t('home.news.emptyText')} />
           ) : (
             <NewsGrid items={items} />
           )

@@ -1,4 +1,6 @@
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
+import { useNavigate } from '@/shared/i18n/useNavigate'
+import { Link } from '@/shared/i18n/router'
 import Alert from '@/shared/components/Alert'
 import Button from '@/shared/components/Button'
 import Seo from '@/shared/components/Seo'
@@ -10,8 +12,10 @@ import PasswordField from '../components/PasswordField'
 import { useAuth } from '../hooks/useAuth'
 import { authService } from '../services/authService'
 import { validateResetPassword } from '../utils/validators'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 export default function ResetPasswordPage() {
+  const { t } = useI18n()
   const [searchParams] = useSearchParams()
   const token = searchParams.get('token')?.trim() ?? ''
   const navigate = useNavigate()
@@ -25,47 +29,47 @@ export default function ResetPasswordPage() {
       await authService.resetPassword(token, password)
       // Las sesiones abiertas dejan de valer al cambiar la contraseña.
       logout()
-      toast.success('Contraseña cambiada. Ya puedes iniciar sesión con la nueva.')
+      toast.success(t('auth.reset.done'))
       navigate(paths.login, { replace: true })
     },
   })
 
   return (
     <>
-      <Seo title="Elegir contraseña nueva" path={paths.resetPassword} robots="noindex,nofollow" />
+      <Seo title={t('auth.reset.seoTitle')} path={paths.resetPassword} robots="noindex,nofollow" />
       <AuthCard
-        title="Elige una contraseña nueva"
-        subtitle="Al cambiarla se cerrará la sesión en todos tus dispositivos."
+        title={t('auth.reset.title')}
+        subtitle={t('auth.reset.subtitle')}
         footer={
           <Link to={paths.forgotPassword} className="link">
-            Pedir un enlace nuevo
+            {t('auth.reset.newLink')}
           </Link>
         }
       >
         {!token ? (
-          <Alert variant="error" title="Enlace no válido">
-            Falta el código del enlace. Ábrelo de nuevo desde el email o pide uno nuevo.
+          <Alert variant="error" title={t('auth.reset.invalidTitle')}>
+            {t('auth.reset.missingToken')}
           </Alert>
         ) : (
           <form onSubmit={form.handleSubmit} noValidate className="space-y-5">
             {form.formError && <Alert variant="error">{form.formError}</Alert>}
             <PasswordField
               {...form.getFieldProps('password')}
-              label="Contraseña nueva"
+              label={t('auth.reset.newPassword')}
               autoComplete="new-password"
               maxLength={72}
-              hint="Entre 8 y 72 caracteres, con al menos una letra y un número."
+              hint={t('auth.register.passwordHint')}
               required
             />
             <PasswordField
               {...form.getFieldProps('confirmPassword')}
-              label="Repite la contraseña"
+              label={t('auth.reset.repeat')}
               autoComplete="new-password"
               maxLength={72}
               required
             />
             <Button type="submit" className="w-full" loading={form.submitting}>
-              {form.submitting ? 'Guardando…' : 'Cambiar contraseña'}
+              {form.submitting ? t('auth.reset.submitting') : t('auth.reset.submit')}
             </Button>
           </form>
         )}

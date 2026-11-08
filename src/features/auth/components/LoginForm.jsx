@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@/shared/i18n/router'
 import { paths } from '@/shared/config/paths'
 import { useForm } from '@/shared/hooks/useForm'
 import { useToast } from '@/shared/hooks/useToast'
@@ -8,10 +8,12 @@ import FormField from '@/shared/components/FormField'
 import { useAuth } from '../hooks/useAuth'
 import { normalizeEmail, validateLogin } from '../utils/validators'
 import PasswordField from './PasswordField'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 const INITIAL_VALUES = { email: '', password: '' }
 
 export default function LoginForm() {
+  const { t } = useI18n()
   const { login } = useAuth()
   const toast = useToast()
 
@@ -20,7 +22,7 @@ export default function LoginForm() {
     validate: validateLogin,
     onSubmit: async ({ email, password }) => {
       const user = await login({ email: normalizeEmail(email), password })
-      toast.success(`Hola de nuevo, ${user.name}.`)
+      toast.success(t('auth.login.welcomeBack', { name: user.name }))
     },
   })
 
@@ -29,7 +31,7 @@ export default function LoginForm() {
       {form.formError && <Alert variant="error">{form.formError}</Alert>}
       <FormField
         {...form.getFieldProps('email')}
-        label="Email"
+        label={t('auth.login.email')}
         type="email"
         autoComplete="email"
         inputMode="email"
@@ -40,12 +42,12 @@ export default function LoginForm() {
         <PasswordField {...form.getFieldProps('password')} autoComplete="current-password" required />
         <p className="mt-2 text-right text-sm">
           <Link to={paths.forgotPassword} className="link">
-            ¿Has olvidado tu contraseña?
+            {t('auth.login.forgot')}
           </Link>
         </p>
       </div>
       <Button type="submit" className="w-full" loading={form.submitting}>
-        {form.submitting ? 'Entrando…' : 'Iniciar sesión'}
+        {form.submitting ? t('auth.login.submitting') : t('auth.login.submit')}
       </Button>
     </form>
   )

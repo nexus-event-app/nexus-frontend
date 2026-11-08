@@ -1,4 +1,5 @@
-import { Navigate, Outlet, useLocation } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
+import { Navigate } from '@/shared/i18n/router'
 import PageLoader from '@/shared/components/PageLoader'
 import { loginPath, paths } from '@/shared/config/paths'
 import { useAuth } from '../hooks/useAuth'

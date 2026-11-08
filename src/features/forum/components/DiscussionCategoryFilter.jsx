@@ -1,9 +1,11 @@
 import FilterLinks from '@/shared/components/FilterLinks'
 import { discussionCategories } from '@/shared/config/catalogs'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 export default function DiscussionCategoryFilter({ category, buildHref }) {
+  const { t } = useI18n()
   const options = [
-    { key: 'all', label: 'Todas', href: buildHref(1, { categoria: '' }), active: category === '' },
+    { key: 'all', label: t('forum.filter.all'), href: buildHref(1, { categoria: '' }), active: category === '' },
     ...discussionCategories.items.map((item) => ({
       key: item.value,
       label: item.label,
@@ -12,5 +14,5 @@ export default function DiscussionCategoryFilter({ category, buildHref }) {
     })),
   ]
 
-  return <FilterLinks label="Filtrar discusiones por categoría" options={options} />
+  return <FilterLinks label={t('forum.filter.label')} options={options} />
 }

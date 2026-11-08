@@ -5,17 +5,19 @@ import EmptyState from '@/shared/components/EmptyState'
 import QueryBoundary from '@/shared/components/QueryBoundary'
 import { paths } from '@/shared/config/paths'
 import HomeSection from './HomeSection'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 export default function TestimonialsSection() {
+  const { t } = useI18n()
   const request = useLatestTestimonials()
 
   return (
     <HomeSection
       id="home-testimonials"
-      title="Historias de la comunidad"
-      description="Personas como tú cuentan cómo les va en su camino tech."
+      title={t('home.testimonials.title')}
+      description={t('home.testimonials.description')}
       linkTo={paths.testimonials}
-      linkLabel="Ver todos los testimonios"
+      linkLabel={t('home.testimonials.link')}
       tinted
     >
       <QueryBoundary
@@ -23,11 +25,11 @@ export default function TestimonialsSection() {
         error={request.error}
         onRetry={request.reload}
         skeleton={<CardGridSkeleton count={3} withImage={false} />}
-        errorTitle="No hemos podido cargar los testimonios"
+        errorTitle={t('home.testimonials.error')}
       >
         {(items) =>
           items.length === 0 ? (
-            <EmptyState icon="star" title="Aún no hay testimonios" description="Sé la primera persona en compartir tu experiencia." />
+            <EmptyState icon="star" title={t('home.testimonials.emptyTitle')} description={t('home.testimonials.emptyText')} />
           ) : (
             <TestimonialGrid items={items.slice(0, 3)} />
           )

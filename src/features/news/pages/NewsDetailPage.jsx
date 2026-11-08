@@ -1,4 +1,5 @@
-import { Navigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import { Navigate } from '@/shared/i18n/router'
 import ArticleSkeleton from '@/shared/components/ArticleSkeleton'
 import Badge from '@/shared/components/Badge'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
@@ -19,10 +20,12 @@ import RelatedNews from '../components/RelatedNews'
 import { useLatestNews } from '../hooks/useLatestNews'
 import { useNewsArticle } from '../hooks/useNewsArticle'
 import { buildNewsArticleData } from '../utils/structuredData'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 const RELATED_COUNT = 3
 
 export default function NewsDetailPage() {
+  const { t } = useI18n()
   const { idSlug } = useParams()
   const { id, slug } = parseIdSlug(idSlug)
   const articleRequest = useNewsArticle(id)
@@ -33,7 +36,7 @@ export default function NewsDetailPage() {
   if (articleRequest.error) {
     return (
       <div className="page-container page-section">
-        <ErrorState error={articleRequest.error} title="No hemos podido cargar la noticia" onRetry={articleRequest.reload} />
+        <ErrorState error={articleRequest.error} title={t('news.detail.error')} onRetry={articleRequest.reload} />
       </div>
     )
   }
@@ -68,7 +71,7 @@ export default function NewsDetailPage() {
       {!imported && <JsonLd data={buildNewsArticleData(article)} />}
       <Breadcrumbs
         items={[
-          { label: 'Noticias', to: paths.news },
+          { label: t('news.breadcrumb'), to: paths.news },
           { label: excerpt(article.title, 60), to: path },
         ]}
       />
@@ -81,24 +84,24 @@ export default function NewsDetailPage() {
               {article.title}
             </h1>
             <p className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-ink-muted">
-              {article.author && <span>Por {article.author}</span>}
-              {imported && article.source && <span>Vía {article.source}</span>}
+              {article.author && <span>{t('news.detail.by', { author: article.author })}</span>}
+              {imported && article.source && <span>{t('news.detail.via', { source: article.source })}</span>}
               <Time value={article.createdAt} />
             </p>
           </header>
 
           {article.imageUrl && (
             <figure className="mt-8 overflow-hidden rounded-card">
-              <NewsImage url={article.imageUrl} alt={`Imagen de la noticia: ${article.title}`} priority />
+              <NewsImage url={article.imageUrl} alt={t('news.detail.imageAlt', { title: article.title })} priority />
             </figure>
           )}
 
           <UserText className="mt-8 text-lg leading-relaxed text-ink-soft">{article.content}</UserText>
 
           {imported && hasSource && (
-            <aside aria-label="Artículo original" className="card mt-8 bg-brand-50/60 p-5">
+            <aside aria-label={t('news.detail.originalLabel')} className="card mt-8 bg-brand-50/60 p-5">
               <p className="text-ink-soft">
-                Esto es un resumen. El artículo completo está publicado en{' '}
+                {t('news.detail.summary')}{' '}
                 <strong className="font-semibold text-ink">{article.source ?? hostnameOf(article.sourceUrl)}</strong>.
               </p>
               <a
@@ -107,9 +110,9 @@ export default function NewsDetailPage() {
                 rel="noopener noreferrer"
                 className="btn btn-primary mt-4 w-full sm:w-auto"
               >
-                Leer el artículo completo
+                {t('news.detail.readFull')}
                 <Icon name="external" className="h-4 w-4" />
-                <span className="sr-only">(se abre en una pestaña nueva)</span>
+                <span className="sr-only">{t('common.newTab')}</span>
               </a>
             </aside>
           )}
@@ -117,7 +120,7 @@ export default function NewsDetailPage() {
           {!imported && hasSource && (
             <footer className="mt-8 border-t border-slate-200 pt-6">
               <p className="text-ink-muted">
-                Fuente:{' '}
+                {t('news.detail.source')}{' '}
                 <a
                   href={article.sourceUrl}
                   target="_blank"
@@ -126,7 +129,7 @@ export default function NewsDetailPage() {
                 >
                   {hostnameOf(article.sourceUrl)}
                   <Icon name="external" className="h-4 w-4" />
-                  <span className="sr-only">(se abre en una pestaña nueva)</span>
+                  <span className="sr-only">{t('common.newTab')}</span>
                 </a>
               </p>
             </footer>

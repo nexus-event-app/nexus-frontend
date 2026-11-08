@@ -4,8 +4,10 @@ import FormField from '@/shared/components/FormField'
 import { discussionCategories } from '@/shared/config/catalogs'
 import { useForm } from '@/shared/hooks/useForm'
 import { validateDiscussion } from '../utils/validators'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 export default function DiscussionForm({ initialValues, submitLabel, onSubmit, onCancel }) {
+  const { t } = useI18n()
   const form = useForm({
     initialValues,
     validate: validateDiscussion,
@@ -17,12 +19,12 @@ export default function DiscussionForm({ initialValues, submitLabel, onSubmit, o
       {form.formError && <Alert variant="error">{form.formError}</Alert>}
       <FormField
         {...form.getFieldProps('title')}
-        label="Título"
-        placeholder="Resume tu duda o tema en una frase"
+        label={t('forum.form.title')}
+        placeholder={t('forum.form.titlePlaceholder')}
         maxLength={200}
         required
       />
-      <FormField {...form.getFieldProps('category')} as="select" label="Categoría" required>
+      <FormField {...form.getFieldProps('category')} as="select" label={t('forum.form.category')} required>
         {discussionCategories.items.map((item) => (
           <option key={item.value} value={item.value}>
             {item.label}
@@ -33,15 +35,15 @@ export default function DiscussionForm({ initialValues, submitLabel, onSubmit, o
         {...form.getFieldProps('content')}
         as="textarea"
         rows={9}
-        label="Contenido"
-        hint="Texto plano. Para compartir código, enciérralo entre líneas con ```."
+        label={t('forum.form.content')}
+        hint={t('forum.form.contentHint')}
         maxLength={10000}
         required
       />
       <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
         {onCancel && (
           <Button variant="secondary" onClick={onCancel} disabled={form.submitting}>
-            Cancelar
+            {t('forum.form.cancel')}
           </Button>
         )}
         <Button type="submit" loading={form.submitting}>

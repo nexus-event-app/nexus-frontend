@@ -1,9 +1,11 @@
 import FilterLinks from '@/shared/components/FilterLinks'
 import { newsCategories } from '@/shared/config/catalogs'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 export default function NewsCategoryFilter({ category, buildHref }) {
+  const { t } = useI18n()
   const options = [
-    { key: 'all', label: 'Todas', href: buildHref(1, { categoria: '' }), active: category === '' },
+    { key: 'all', label: t('news.filter.all'), href: buildHref(1, { categoria: '' }), active: category === '' },
     ...newsCategories.items.map((item) => ({
       key: item.value,
       label: item.label,
@@ -12,5 +14,5 @@ export default function NewsCategoryFilter({ category, buildHref }) {
     })),
   ]
 
-  return <FilterLinks label="Filtrar noticias por categoría" options={options} />
+  return <FilterLinks label={t('news.filter.label')} options={options} />
 }

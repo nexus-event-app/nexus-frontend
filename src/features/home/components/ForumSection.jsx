@@ -6,32 +6,34 @@ import ListSkeleton from '@/shared/components/ListSkeleton'
 import QueryBoundary from '@/shared/components/QueryBoundary'
 import { paths } from '@/shared/config/paths'
 import HomeSection from './HomeSection'
+import { useI18n } from '@/shared/i18n/useI18n'
 
 export default function ForumSection() {
+  const { t } = useI18n()
   const request = useLatestDiscussions(3)
 
   return (
     <HomeSection
       id="home-forum"
-      title="El foro de la comunidad"
-      description="Dudas técnicas, recursos y experiencias. Aquí todas las preguntas son bienvenidas."
+      title={t('home.forum.title')}
+      description={t('home.forum.description')}
       linkTo={paths.forum}
-      linkLabel="Ir al foro"
+      linkLabel={t('home.forum.link')}
     >
       <QueryBoundary
         data={request.data}
         error={request.error}
         onRetry={request.reload}
         skeleton={<ListSkeleton rows={3} />}
-        errorTitle="No hemos podido cargar el foro"
+        errorTitle={t('home.forum.error')}
       >
         {(items) =>
           items.length === 0 ? (
             <EmptyState
               icon="chat"
-              title="El foro está esperando su primera discusión"
-              description="Abre un tema y empieza la conversación."
-              action={<ButtonLink to={paths.forumNew}>Crear una discusión</ButtonLink>}
+              title={t('home.forum.emptyTitle')}
+              description={t('home.forum.emptyText')}
+              action={<ButtonLink to={paths.forumNew}>{t('home.forum.create')}</ButtonLink>}
             />
           ) : (
             <ul className="grid gap-4 lg:grid-cols-3">

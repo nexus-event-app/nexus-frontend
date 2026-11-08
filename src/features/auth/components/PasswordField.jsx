@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import FormField from '@/shared/components/FormField'
 import Icon from '@/shared/components/Icon'
+import { useI18n } from '@/shared/i18n/useI18n'
 
-export default function PasswordField({ label = 'Contraseña', ...props }) {
+export default function PasswordField({ label, ...props }) {
+  const { t } = useI18n()
   const [visible, setVisible] = useState(false)
 
   return (
     <FormField
       {...props}
-      label={label}
+      label={label ?? t('auth.password.label')}
       type={visible ? 'text' : 'password'}
       autoCapitalize="none"
       autoCorrect="off"
@@ -17,7 +19,7 @@ export default function PasswordField({ label = 'Contraseña', ...props }) {
         <button
           type="button"
           onClick={() => setVisible((current) => !current)}
-          aria-label={visible ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+          aria-label={visible ? t('auth.password.hide') : t('auth.password.show')}
           aria-pressed={visible}
           className="flex h-11 w-11 items-center justify-center rounded-control text-ink-muted hover:text-ink"
         >

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@/shared/i18n/router'
 import SectionHeader from '@/shared/components/SectionHeader'
 import { cx } from '@/shared/utils/classNames'
 
