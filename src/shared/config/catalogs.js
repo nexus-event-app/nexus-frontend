@@ -48,6 +48,7 @@ export const importSourceTypes = catalog([
   ['RSS_NEWS', 'Noticias · RSS o Atom', 'blue'],
   ['GETONBRD_JOBS', 'Empleo · Get on Board', 'green'],
   ['REMOTIVE_JOBS', 'Empleo · Remotive', 'green'],
+  ['JOBICY_JOBS', 'Empleo · Jobicy', 'green'],
   ['ARBEITNOW_JOBS', 'Empleo · Arbeitnow', 'green'],
 ])
 

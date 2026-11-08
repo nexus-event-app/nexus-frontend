@@ -10,6 +10,7 @@ const URL_HINTS = {
   RSS_NEWS: 'Dirección del feed RSS o Atom (suele terminar en /feed, /rss o .xml).',
   GETONBRD_JOBS: 'Categoría de Get on Board, p. ej. https://www.getonbrd.com/api/v0/categories/programming/jobs?per_page=100',
   REMOTIVE_JOBS: 'https://remotive.com/api/remote-jobs?category=software-dev',
+  JOBICY_JOBS: 'https://jobicy.com/api/v2/remote-jobs?count=100&geo=europe&industry=dev',
   ARBEITNOW_JOBS: 'https://www.arbeitnow.com/api/job-board-api',
 }
 
