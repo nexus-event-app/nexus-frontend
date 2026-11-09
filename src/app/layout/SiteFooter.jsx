@@ -45,11 +45,18 @@ export default function SiteFooter() {
           <h2 className="text-sm font-bold uppercase tracking-wide text-ink">{t('common.footer.account')}</h2>
           <ul className="mt-3">
             {isAuthenticated ? (
-              <li>
-                <Link to={paths.forumNew} className={LINK_CLASSES}>
-                  {t('common.footer.newDiscussion')}
-                </Link>
-              </li>
+              <>
+                <li>
+                  <Link to={paths.savedJobs} className={LINK_CLASSES}>
+                    {t('common.account.savedJobs')}
+                  </Link>
+                </li>
+                <li>
+                  <Link to={paths.forumNew} className={LINK_CLASSES}>
+                    {t('common.footer.newDiscussion')}
+                  </Link>
+                </li>
+              </>
             ) : (
               <>
                 <li>

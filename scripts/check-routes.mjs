@@ -23,6 +23,7 @@ const cases = [
   ['/noticias/12-hola-mundo', '/noticias/12-hola-mundo', '/ca/noticies/12-hola-mundo', '/en/news/12-hola-mundo'],
   ['/empleo?nivel=junior&page=2', '/empleo?nivel=junior&page=2', '/ca/feina?nivel=junior&page=2', '/en/jobs?nivel=junior&page=2'],
   ['/foro/nueva', '/foro/nueva', '/ca/forum/nova', '/en/forum/new'],
+  ['/empleo/guardadas', '/empleo/guardadas', '/ca/feina/desades', '/en/jobs/saved'],
   ['/foro/5-mi-duda#comentarios', '/foro/5-mi-duda#comentarios', '/ca/forum/5-mi-duda#comentarios', '/en/forum/5-mi-duda#comentarios'],
   ['/testimonios', '/testimonios', '/ca/testimonis', '/en/testimonials'],
   ['/aviso-legal', '/aviso-legal', '/ca/avis-legal', '/en/legal-notice'],

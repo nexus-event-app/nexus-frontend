@@ -58,6 +58,15 @@ export default function UserMenu() {
               </li>
             )}
             <li>
+              <Link
+                to={paths.savedJobs}
+                className="flex min-h-[2.75rem] items-center gap-2 rounded-control px-3 font-medium text-ink-soft hover:bg-slate-100"
+              >
+                <Icon name="bookmark" />
+                {t('common.account.savedJobs')}
+              </Link>
+            </li>
+            <li>
               <button
                 type="button"
                 onClick={handleLogout}

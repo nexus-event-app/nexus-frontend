@@ -5,6 +5,7 @@ import Time from '@/shared/components/Time'
 import { contractTypes, jobLevels, workModes } from '@/shared/config/catalogs'
 import { paths } from '@/shared/config/paths'
 import { postedAt } from '../utils/jobHelpers'
+import SaveJobButton from './SaveJobButton'
 import { useI18n } from '@/shared/i18n/useI18n'
 
 export default function JobCard({ job, headingLevel = 'h3' }) {
@@ -12,12 +13,15 @@ export default function JobCard({ job, headingLevel = 'h3' }) {
   const Heading = headingLevel
 
   return (
-    <article className="card relative flex h-full flex-col p-5 transition-shadow hover:shadow-pop has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-brand-600">
-      <div className="flex flex-wrap gap-2">
-        <Badge tone={jobLevels.toneOf(job.level)}>{jobLevels.labelOf(job.level)}</Badge>
-        <Badge tone={workModes.toneOf(job.workMode)}>{workModes.labelOf(job.workMode)}</Badge>
+    <article className="card relative flex h-full flex-col p-5 transition-shadow hover:shadow-pop has-[a:focus-visible]:ring-2 has-[:focus-visible]:ring-brand-600">
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex flex-wrap gap-2">
+          <Badge tone={jobLevels.toneOf(job.level)}>{jobLevels.labelOf(job.level)}</Badge>
+          <Badge tone={workModes.toneOf(job.workMode)}>{workModes.labelOf(job.workMode)}</Badge>
+        </div>
+        <SaveJobButton job={job} compact className="-mr-2 -mt-2 shrink-0" />
       </div>
-      <Heading className="mt-3 text-lg font-bold leading-snug text-ink">
+      <Heading className="mt-1 text-lg font-bold leading-snug text-ink">
         <Link
           to={paths.jobDetail(job)}
           className="after:absolute after:inset-0 hover:text-accent focus-visible:ring-0 focus-visible:ring-offset-0"

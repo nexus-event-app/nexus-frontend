@@ -14,6 +14,7 @@ const NewsListPage = lazy(() => import('@/features/news/pages/NewsListPage'))
 const NewsDetailPage = lazy(() => import('@/features/news/pages/NewsDetailPage'))
 const JobsListPage = lazy(() => import('@/features/jobs/pages/JobsListPage'))
 const JobDetailPage = lazy(() => import('@/features/jobs/pages/JobDetailPage'))
+const SavedJobsPage = lazy(() => import('@/features/jobs/pages/SavedJobsPage'))
 const ForumPage = lazy(() => import('@/features/forum/pages/ForumPage'))
 const NewDiscussionPage = lazy(() => import('@/features/forum/pages/NewDiscussionPage'))
 const DiscussionDetailPage = lazy(() => import('@/features/forum/pages/DiscussionDetailPage'))
@@ -55,6 +56,14 @@ function publicRoutes({ prefix, lang }) {
       <Route path={seg('noticias')} element={<NewsListPage />} />
       <Route path={`${seg('noticias')}/:idSlug`} element={<NewsDetailPage />} />
       <Route path={seg('empleo')} element={<JobsListPage />} />
+      <Route
+        path={`${seg('empleo')}/${routeSubsegment('empleo', 'guardadas', lang)}`}
+        element={
+          <RequireAuth>
+            <SavedJobsPage />
+          </RequireAuth>
+        }
+      />
       <Route path={`${seg('empleo')}/:idSlug`} element={<JobDetailPage />} />
       <Route path={forum} element={<ForumPage />} />
       <Route
@@ -79,7 +88,10 @@ function publicRoutes({ prefix, lang }) {
         <Route key={esSegment} path={`${esSegment}/*`} element={<LegacyPathRedirect />} />
       ))}
       {lang !== DEFAULT_LANGUAGE && (
-        <Route path={`${forum}/nueva`} element={<LegacyPathRedirect />} />
+        <>
+          <Route path={`${forum}/nueva`} element={<LegacyPathRedirect />} />
+          <Route path={`${seg('empleo')}/guardadas`} element={<LegacyPathRedirect />} />
+        </>
       )}
       <Route path="*" element={<NotFound />} />
     </Route>

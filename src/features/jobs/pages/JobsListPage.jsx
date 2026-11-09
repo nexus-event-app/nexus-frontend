@@ -10,6 +10,10 @@ import JobFilters from '../components/JobFilters'
 import JobGrid from '../components/JobGrid'
 import JobPortals from '../components/JobPortals'
 import { useJobsList } from '../hooks/useJobsList'
+import { useSavedJobs } from '../hooks/useSavedJobs'
+import { useAuth } from '@/features/auth/hooks/useAuth'
+import ButtonLink from '@/shared/components/ButtonLink'
+import Icon from '@/shared/components/Icon'
 import { useI18n } from '@/shared/i18n/useI18n'
 
 const CLEARED_FILTERS = { nivel: '', modalidad: '', contrato: '', q: '' }
@@ -18,6 +22,8 @@ export default function JobsListPage() {
   const { t } = useI18n()
   const list = useJobsList()
   const { page, filters, hasFilters, setFilters, buildHref } = list
+  const { isAuthenticated } = useAuth()
+  const savedJobs = useSavedJobs()
 
   return (
     <div className="page-container page-section">
@@ -31,6 +37,14 @@ export default function JobsListPage() {
       <PageHeader
         title={t('jobs.list.title')}
         description={t('jobs.list.description')}
+        actions={
+          isAuthenticated && (
+            <ButtonLink to={paths.savedJobs} variant="secondary">
+              <Icon name="bookmark" />
+              {t('jobs.saved.link', { count: savedJobs.count })}
+            </ButtonLink>
+          )
+        }
       />
 
       <JobFilters

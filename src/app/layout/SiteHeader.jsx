@@ -97,6 +97,10 @@ export default function SiteHeader() {
                   <p className="px-3 text-sm text-ink-muted">
                     {t('common.account.loggedInAs')} <span className="font-semibold text-ink">{user.name}</span>
                   </p>
+                  <ButtonLink to={paths.savedJobs} variant="secondary" className="w-full">
+                    <Icon name="bookmark" />
+                    {t('common.account.savedJobs')}
+                  </ButtonLink>
                   {isAdmin && (
                     <ButtonLink to={paths.admin} variant="secondary" className="w-full">
                       <Icon name="shield" />

@@ -6,6 +6,7 @@ export const paths = {
   newsDetail: (item) => buildSlugPath('/noticias', item),
   jobs: '/empleo',
   jobDetail: (item) => buildSlugPath('/empleo', item),
+  savedJobs: '/empleo/guardadas',
   forum: '/foro',
   forumNew: '/foro/nueva',
   discussionDetail: (item) => buildSlugPath('/foro', item),

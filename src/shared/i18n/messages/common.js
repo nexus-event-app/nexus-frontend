@@ -30,6 +30,7 @@ export default {
       loggedOut: 'Has cerrado sesión.',
       loggedInAs: 'Sesión iniciada como',
       admin: 'Panel de administración',
+      savedJobs: 'Ofertas guardadas',
     },
     footer: {
       description:
@@ -100,6 +101,7 @@ export default {
       loggedOut: 'Has tancat la sessió.',
       loggedInAs: 'Sessió iniciada com a',
       admin: 'Tauler d’administració',
+      savedJobs: 'Ofertes desades',
     },
     footer: {
       description:
@@ -170,6 +172,7 @@ export default {
       loggedOut: 'You have logged out.',
       loggedInAs: 'Logged in as',
       admin: 'Admin panel',
+      savedJobs: 'Saved jobs',
     },
     footer: {
       description:

@@ -16,6 +16,7 @@ import { paths } from '@/shared/config/paths'
 import { parseIdSlug } from '@/shared/utils/slug'
 import { excerpt } from '@/shared/utils/text'
 import { isHttpUrl } from '@/shared/utils/url'
+import SaveJobButton from '../components/SaveJobButton'
 import { useJob } from '../hooks/useJob'
 import { isExpired, postedAt } from '../utils/jobHelpers'
 import { buildJobPostingData } from '../utils/structuredData'
@@ -171,6 +172,7 @@ export default function JobDetailPage() {
                 <span className="sr-only">{t('common.newTab')}</span>
               </a>
             )}
+            <SaveJobButton job={job} className="mt-3" />
           </div>
         </aside>
       </div>
