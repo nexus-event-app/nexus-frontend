@@ -46,13 +46,13 @@ export function validateJob({ title, company, description, location, tags, apply
   else if (parsedTags.some((tag) => tag.length > MAX_TAG_LENGTH)) {
     errors.tags = `Cada etiqueta puede tener como máximo ${MAX_TAG_LENGTH} caracteres.`
   }
-  if (!applyUrl.trim()) errors.applyUrl = 'La URL para aplicar es obligatoria.'
+  if (!applyUrl.trim()) errors.applyUrl = 'El enlace para inscribirse es obligatorio.'
   else if (!isHttpUrl(applyUrl.trim())) errors.applyUrl = 'Introduce una URL válida que empiece por http:// o https://.'
   if (source.trim().length > 100) errors.source = 'La fuente no puede superar los 100 caracteres.'
   return errors
 }
 
-export function validateImportSource({ name, url, keywords }) {
+export function validateImportSource({ name, url, keywords, excludeKeywords }) {
   const errors = {}
   const trimmedName = name.trim()
   if (trimmedName.length < 2) errors.name = 'El nombre debe tener al menos 2 caracteres.'
@@ -60,5 +60,8 @@ export function validateImportSource({ name, url, keywords }) {
   if (!isHttpUrl(url.trim())) errors.url = 'Introduce una URL válida que empiece por http:// o https://.'
   else if (url.trim().length > 500) errors.url = 'La URL no puede superar los 500 caracteres.'
   if (keywords.trim().length > 500) errors.keywords = 'Las palabras clave no pueden superar los 500 caracteres.'
+  if (excludeKeywords.trim().length > 500) {
+    errors.excludeKeywords = 'Las palabras excluidas no pueden superar los 500 caracteres.'
+  }
   return errors
 }

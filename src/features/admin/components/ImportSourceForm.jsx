@@ -21,6 +21,7 @@ function toValues(source) {
     url: source?.url ?? '',
     newsCategory: source?.newsCategory ?? 'GENERAL',
     keywords: source?.keywords ?? '',
+    excludeKeywords: source?.excludeKeywords ?? '',
     intervalMinutes: String(source?.intervalMinutes ?? ''),
     autoPublish: source?.autoPublish ?? true,
     remoteOnly: source?.remoteOnly ?? false,
@@ -41,6 +42,7 @@ export default function ImportSourceForm({ source, onSubmit, onCancel }) {
         url: values.url.trim(),
         newsCategory: isNewsSourceType(values.type) ? values.newsCategory : null,
         keywords: values.keywords.trim() || null,
+        excludeKeywords: values.excludeKeywords.trim() || null,
         intervalMinutes: values.intervalMinutes ? Number(values.intervalMinutes) : null,
         autoPublish: values.autoPublish,
         remoteOnly: !isNewsSourceType(values.type) && values.remoteOnly,
@@ -111,6 +113,14 @@ export default function ImportSourceForm({ source, onSubmit, onCancel }) {
         rows={3}
         label="Palabras clave (opcional)"
         hint="Separadas por comas. Si las indicas, solo se importa lo que contenga alguna. Útil para feeds generalistas."
+        maxLength={500}
+      />
+      <FormField
+        {...form.getFieldProps('excludeKeywords')}
+        as="textarea"
+        rows={2}
+        label="Palabras excluidas (opcional)"
+        hint="Separadas por comas. Lo que contenga alguna no se importa, aunque cumpla las palabras clave."
         maxLength={500}
       />
       <div className="space-y-1 rounded-control bg-slate-50 p-3">

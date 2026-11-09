@@ -154,6 +154,8 @@ Hasta entonces, lo que más ayuda es que el backend publique un `sitemap.xml` co
 
 ## Idiomas y SEO
 
+**URLs por idioma.** El castellano va en la raíz y el catalán y el inglés con prefijo y la sección traducida: `/noticias` → `/ca/noticies` → `/en/news`, `/empleo` → `/ca/feina` → `/en/jobs`, `/foro/nueva` → `/ca/forum/nova` → `/en/forum/new`, etc. En el código las rutas se escriben siempre en castellano (`paths.news`) y `localizePath` las traduce con la tabla de `src/shared/i18n/routeSegments.js`; los `Link`, `NavLink`, `Navigate` y `useNavigate` de `@/shared/i18n` lo hacen solos. Las direcciones antiguas con la sección en castellano bajo `/ca` o `/en` (por ejemplo `/en/foro/12-x`) redirigen a la traducida. `npm run check:routes` (también en CI) comprueba la tabla y la traducción en los dos sentidos. Si cambias una sección, cambia también `Languages.SEGMENTS` en el backend (sitemap, robots y emails).
+
 Una página se declara traducida solo si su contenido principal existe en cada idioma:
 
 - **Traducidas** (portada, listados de noticias, empleo y foro, testimonios): cada idioma tiene su propia canonical y enlaces `hreflang` a los demás, y aparecen en el sitemap en los tres idiomas.

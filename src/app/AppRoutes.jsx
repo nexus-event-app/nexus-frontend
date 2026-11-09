@@ -5,6 +5,9 @@ import RequireAuth from '@/features/auth/components/RequireAuth'
 import AdminLayout from '@/features/admin/components/AdminLayout'
 import NotFound from '@/shared/components/NotFound'
 import RootLayout from './layout/RootLayout'
+import LegacyPathRedirect from './layout/LegacyPathRedirect'
+import { DEFAULT_LANGUAGE, routeSegment, routeSubsegment } from '@/shared/i18n/languages'
+import { ROUTE_SEGMENTS } from '@/shared/i18n/routeSegments'
 
 const HomePage = lazy(() => import('@/features/home/pages/HomePage'))
 const NewsListPage = lazy(() => import('@/features/news/pages/NewsListPage'))
@@ -32,35 +35,52 @@ const AdminUsersPage = lazy(() => import('@/features/admin/pages/AdminUsersPage'
 const AdminImportPage = lazy(() => import('@/features/admin/pages/AdminImportPage'))
 
 /** Las páginas públicas existen una vez por idioma: «/», «/ca» y «/en». El panel de admin solo en castellano. */
-const PUBLIC_PREFIXES = ['/', '/ca', '/en']
+const PUBLIC_LANGUAGES = [
+  { prefix: '/', lang: DEFAULT_LANGUAGE },
+  { prefix: '/ca', lang: 'ca' },
+  { prefix: '/en', lang: 'en' },
+]
 
-function publicRoutes(prefix) {
+function publicRoutes({ prefix, lang }) {
+  const seg = (esSegment) => routeSegment(esSegment, lang)
+  const forum = seg('foro')
+  // Direcciones antiguas con el nombre de la sección en castellano (p. ej. «/en/foro/12-x»): redirigen a la traducida.
+  const legacy = lang === DEFAULT_LANGUAGE
+    ? []
+    : Object.keys(ROUTE_SEGMENTS).filter((esSegment) => seg(esSegment) !== esSegment)
+
   return (
     <Route key={prefix} path={prefix} element={<RootLayout />}>
       <Route index element={<HomePage />} />
-      <Route path="noticias" element={<NewsListPage />} />
-      <Route path="noticias/:idSlug" element={<NewsDetailPage />} />
-      <Route path="empleo" element={<JobsListPage />} />
-      <Route path="empleo/:idSlug" element={<JobDetailPage />} />
-      <Route path="foro" element={<ForumPage />} />
+      <Route path={seg('noticias')} element={<NewsListPage />} />
+      <Route path={`${seg('noticias')}/:idSlug`} element={<NewsDetailPage />} />
+      <Route path={seg('empleo')} element={<JobsListPage />} />
+      <Route path={`${seg('empleo')}/:idSlug`} element={<JobDetailPage />} />
+      <Route path={forum} element={<ForumPage />} />
       <Route
-        path="foro/nueva"
+        path={`${forum}/${routeSubsegment('foro', 'nueva', lang)}`}
         element={
           <RequireAuth>
             <NewDiscussionPage />
           </RequireAuth>
         }
       />
-      <Route path="foro/:idSlug" element={<DiscussionDetailPage />} />
-      <Route path="testimonios" element={<TestimonialsPage />} />
-      <Route path="aviso-legal" element={<LegalNoticePage />} />
-      <Route path="privacidad" element={<PrivacyPage />} />
-      <Route path="cookies" element={<CookiesPage />} />
-      <Route path="login" element={<LoginPage />} />
-      <Route path="registro" element={<RegisterPage />} />
-      <Route path="recuperar-contrasena" element={<ForgotPasswordPage />} />
-      <Route path="restablecer-contrasena" element={<ResetPasswordPage />} />
-      <Route path="verificar-email" element={<VerifyEmailPage />} />
+      <Route path={`${forum}/:idSlug`} element={<DiscussionDetailPage />} />
+      <Route path={seg('testimonios')} element={<TestimonialsPage />} />
+      <Route path={seg('aviso-legal')} element={<LegalNoticePage />} />
+      <Route path={seg('privacidad')} element={<PrivacyPage />} />
+      <Route path={seg('cookies')} element={<CookiesPage />} />
+      <Route path={seg('login')} element={<LoginPage />} />
+      <Route path={seg('registro')} element={<RegisterPage />} />
+      <Route path={seg('recuperar-contrasena')} element={<ForgotPasswordPage />} />
+      <Route path={seg('restablecer-contrasena')} element={<ResetPasswordPage />} />
+      <Route path={seg('verificar-email')} element={<VerifyEmailPage />} />
+      {legacy.map((esSegment) => (
+        <Route key={esSegment} path={`${esSegment}/*`} element={<LegacyPathRedirect />} />
+      ))}
+      {lang !== DEFAULT_LANGUAGE && (
+        <Route path={`${forum}/nueva`} element={<LegacyPathRedirect />} />
+      )}
       <Route path="*" element={<NotFound />} />
     </Route>
   )
@@ -69,7 +89,7 @@ function publicRoutes(prefix) {
 export default function AppRoutes() {
   return (
     <Routes>
-      {PUBLIC_PREFIXES.map(publicRoutes)}
+      {PUBLIC_LANGUAGES.map(publicRoutes)}
 
       <Route
         path="admin"

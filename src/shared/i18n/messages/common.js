@@ -72,7 +72,7 @@ export default {
     language: { label: 'Idioma' },
     nav: {
       news: 'Notícies',
-      jobs: 'Ocupació',
+      jobs: 'Feina',
       forum: 'Fòrum',
       testimonials: 'Testimonis',
       main: 'Principal',

@@ -34,5 +34,8 @@ jobs:
       - name: Comprobar traducciones
         run: npm run check:i18n
 
+      - name: Comprobar rutas por idioma
+        run: npm run check:routes
+
       - name: Build
         run: npm run build

@@ -65,9 +65,33 @@ export default function AdminImportPage() {
   })
 
   const [toggleSource] = useAction(async (source) => {
-    const { name, type, url, newsCategory, keywords, intervalMinutes, autoPublish, remoteOnly, active } = source
-    const payload = { name, type, url, newsCategory, keywords, intervalMinutes, autoPublish, remoteOnly, active: !active }
+    const { name, type, url, newsCategory, keywords, excludeKeywords, intervalMinutes, autoPublish, remoteOnly, active } =
+      source
+    const payload = {
+      name,
+      type,
+      url,
+      newsCategory,
+      keywords,
+      excludeKeywords,
+      intervalMinutes,
+      autoPublish,
+      remoteOnly,
+      active: !active,
+    }
     replaceSource(await adminImportService.update(source.id, payload))
+  })
+
+  const [addDefaults, addingDefaults] = useAction(async () => {
+    const created = await adminImportService.addDefaults()
+    if (created.length === 0) {
+      toast.info('Ya tienes todas las fuentes recomendadas.')
+      return
+    }
+    request.mutate((items) => [...items, ...created].sort((a, b) => a.name.localeCompare(b.name, 'es')))
+    toast.success(
+      created.length === 1 ? `Añadida: ${created[0].name}.` : `Añadidas ${created.length} fuentes: ${created.map((s) => s.name).join(', ')}.`,
+    )
   })
 
   const [removeSource, removing] = useAction(
@@ -114,6 +138,7 @@ export default function AdminImportPage() {
           {!source.autoPublish && <Badge tone="amber">Revisión manual</Badge>}
           {source.remoteOnly && <Badge tone="blue">Solo remoto</Badge>}
           {source.keywords && <Badge tone="indigo">Con palabras clave</Badge>}
+          {source.excludeKeywords && <Badge tone="indigo">Con exclusiones</Badge>}
           <Badge>{formatInterval(source.intervalMinutes)}</Badge>
         </div>
       ),
@@ -159,16 +184,21 @@ export default function AdminImportPage() {
         title="Importación automática"
         description="Fuentes externas de noticias y ofertas de empleo que se consultan periódicamente."
         actions={
-          <Button onClick={() => setEditing('new')}>
-            <Icon name="plus" />
-            Nueva fuente
-          </Button>
+          <>
+            <Button variant="secondary" loading={addingDefaults} onClick={() => addDefaults()}>
+              Añadir fuentes recomendadas
+            </Button>
+            <Button onClick={() => setEditing('new')}>
+              <Icon name="plus" />
+              Nueva fuente
+            </Button>
+          </>
         }
       />
 
       <Alert variant="info" className="mb-6" title="Cómo funciona">
         De cada noticia se guarda un resumen con enlace al artículo original, y las ofertas enlazan a la fuente
-        para aplicar. Solo se importan ofertas de prácticas o junior del sector tech. Lo importado no se indexa
+        para inscribirse. Solo se importan ofertas de prácticas o junior del sector tech. Lo importado no se indexa
         en buscadores, para no competir con el contenido original. Si borras algo importado, no vuelve a importarse.
       </Alert>
 

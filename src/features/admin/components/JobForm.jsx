@@ -81,7 +81,7 @@ export default function JobForm({ job, onSubmit, onCancel }) {
         {...form.getFieldProps('applyUrl')}
         type="url"
         inputMode="url"
-        label="Enlace para aplicar"
+        label="Enlace para inscribirse"
         placeholder="https://…"
         required
       />
