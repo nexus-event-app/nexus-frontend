@@ -14,8 +14,8 @@ export default function EmailVerificationBanner() {
   if (!user || user.emailVerified !== false) return null
 
   return (
-    <div role="status" className="border-b border-amber-200 bg-amber-50">
-      <p className="page-container flex flex-wrap items-center gap-x-3 gap-y-1 py-2.5 text-sm text-amber-900">
+    <div role="status" className="border-b border-amber-200 bg-amber-50 dark:border-amber-400/30 dark:bg-amber-500/10">
+      <p className="page-container flex flex-wrap items-center gap-x-3 gap-y-1 py-2.5 text-sm text-amber-900 dark:text-amber-200">
         <span>
           {t('auth.banner.start')}
           <strong className="font-semibold">{user.email}</strong>

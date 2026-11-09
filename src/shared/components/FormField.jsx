@@ -24,7 +24,7 @@ export default function FormField({
       <label htmlFor={id} className="mb-1.5 block text-sm font-semibold text-ink">
         {label}
         {required && (
-          <span className="text-red-700" aria-hidden="true">
+          <span className="text-red-700 dark:text-red-400" aria-hidden="true">
             {' '}
             *
           </span>
@@ -51,7 +51,7 @@ export default function FormField({
         </p>
       )}
       {error && (
-        <p id={errorId} role="alert" className="mt-1.5 text-sm font-medium text-red-700">
+        <p id={errorId} role="alert" className="mt-1.5 text-sm font-medium text-red-700 dark:text-red-400">
           {error}
         </p>
       )}

@@ -34,7 +34,7 @@ export default function Breadcrumbs({ items }) {
                   {item.label}
                 </span>
               ) : (
-                <Link to={item.to} className="rounded px-1 py-2 hover:text-brand-700 hover:underline">
+                <Link to={item.to} className="rounded px-1 py-2 hover:text-accent hover:underline">
                   {item.label}
                 </Link>
               )}

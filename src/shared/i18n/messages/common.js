@@ -5,6 +5,12 @@ export default {
     newTab: '(se abre en una pestaña nueva)',
     pageSuffix: ' (página {page})',
     results: 'Resultados',
+    theme: {
+      toggle: 'Tema: {current}. Cambiar a {next}',
+      system: 'automático (según el dispositivo)',
+      light: 'claro',
+      dark: 'oscuro',
+    },
     language: { label: 'Idioma' },
     nav: {
       news: 'Noticias',
@@ -69,6 +75,12 @@ export default {
     newTab: '(s’obre en una pestanya nova)',
     pageSuffix: ' (pàgina {page})',
     results: 'Resultats',
+    theme: {
+      toggle: 'Tema: {current}. Canvia a {next}',
+      system: 'automàtic (segons el dispositiu)',
+      light: 'clar',
+      dark: 'fosc',
+    },
     language: { label: 'Idioma' },
     nav: {
       news: 'Notícies',
@@ -133,6 +145,12 @@ export default {
     newTab: '(opens in a new tab)',
     pageSuffix: ' (page {page})',
     results: 'Results',
+    theme: {
+      toggle: 'Theme: {current}. Switch to {next}',
+      system: 'automatic (device setting)',
+      light: 'light',
+      dark: 'dark',
+    },
     language: { label: 'Language' },
     nav: {
       news: 'News',

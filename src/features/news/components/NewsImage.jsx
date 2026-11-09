@@ -15,7 +15,7 @@ export default function NewsImage({ url, alt = '', priority = false }) {
           className="h-full w-full object-cover"
         />
       ) : (
-        <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-brand-100 to-brand-50 text-brand-700" aria-hidden="true">
+        <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-accent-tint to-accent-soft text-accent" aria-hidden="true">
           <Icon name="newspaper" className="h-12 w-12" />
         </div>
       )}

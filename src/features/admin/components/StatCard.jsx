@@ -5,9 +5,9 @@ export default function StatCard({ label, value, icon, to, highlight = false }) 
   return (
     <Link
       to={to}
-      className={`card flex items-center gap-4 p-5 transition-shadow hover:shadow-pop ${highlight ? 'border-amber-300 bg-amber-50' : ''}`}
+      className={`card flex items-center gap-4 p-5 transition-shadow hover:shadow-pop ${highlight ? 'border-amber-300 bg-amber-50 dark:border-amber-400/40 dark:bg-amber-500/10' : ''}`}
     >
-      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-control bg-brand-50 text-brand-700">
+      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-control bg-accent-soft text-accent">
         <Icon name={icon} className="h-6 w-6" />
       </span>
       <span>

@@ -6,6 +6,7 @@ import ErrorBoundary from '@/shared/components/ErrorBoundary'
 import Icon from '@/shared/components/Icon'
 import Logo from '@/shared/components/Logo'
 import PageLoader from '@/shared/components/PageLoader'
+import ThemeToggle from '@/shared/components/ThemeToggle'
 import { paths } from '@/shared/config/paths'
 import { useDismiss } from '@/shared/hooks/useDismiss'
 import { useToast } from '@/shared/hooks/useToast'
@@ -23,9 +24,12 @@ function AccountBlock() {
 
   return (
     <div className="space-y-3 border-t border-slate-200 pt-4">
-      <p className="truncate px-1 text-sm text-ink-muted">
-        Sesión de <span className="font-semibold text-ink">{user.name}</span>
-      </p>
+      <div className="flex items-center justify-between gap-2">
+        <p className="min-w-0 truncate px-1 text-sm text-ink-muted">
+          Sesión de <span className="font-semibold text-ink">{user.name}</span>
+        </p>
+        <ThemeToggle className="shrink-0" />
+      </div>
       <Link to={paths.home} className="btn btn-secondary w-full">
         <Icon name="arrow-left" className="h-4 w-4" />
         Ver el sitio
@@ -59,7 +63,7 @@ export default function AdminLayout() {
         Saltar al contenido
       </a>
 
-      <aside className="hidden border-r border-slate-200 bg-white lg:block">
+      <aside className="hidden border-r border-slate-200 bg-surface lg:block">
         <div className="sticky top-0 flex h-dvh flex-col gap-6 overflow-y-auto p-4">
           <Link to={paths.admin} aria-label={`Panel de administración de ${siteConfig.name}`}>
             <Logo />
@@ -72,7 +76,7 @@ export default function AdminLayout() {
       </aside>
 
       <div className="min-w-0">
-        <div ref={barRef} className="sticky top-0 z-40 border-b border-slate-200 bg-white lg:hidden">
+        <div ref={barRef} className="sticky top-0 z-40 border-b border-slate-200 bg-surface lg:hidden">
           <div className="page-container flex h-16 items-center justify-between">
             <Link to={paths.admin} aria-label={`Panel de administración de ${siteConfig.name}`}>
               <Logo />

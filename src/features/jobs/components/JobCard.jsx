@@ -20,7 +20,7 @@ export default function JobCard({ job, headingLevel = 'h3' }) {
       <Heading className="mt-3 text-lg font-bold leading-snug text-ink">
         <Link
           to={paths.jobDetail(job)}
-          className="after:absolute after:inset-0 hover:text-brand-700 focus-visible:ring-0 focus-visible:ring-offset-0"
+          className="after:absolute after:inset-0 hover:text-accent focus-visible:ring-0 focus-visible:ring-offset-0"
         >
           {job.title}
         </Link>

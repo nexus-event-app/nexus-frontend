@@ -3,6 +3,62 @@
 @tailwind utilities;
 
 @layer base {
+  /*
+   * Colores que cambian con el tema, como canales RGB (Tailwind les añade la opacidad). El tema oscuro se activa
+   * con la clase .dark en <html>, que pone public/theme-init.js antes de pintar según la preferencia guardada o
+   * la del dispositivo.
+   */
+  :root {
+    color-scheme: light;
+    --color-ink: 15 23 42;
+    --color-ink-soft: 51 65 85;
+    --color-ink-muted: 71 85 105;
+    --color-canvas: 248 250 252;
+    --color-surface: 255 255 255;
+    --color-accent: 67 56 202;
+    --color-accent-strong: 55 48 163;
+    --color-accent-soft: 238 242 255;
+    --color-accent-tint: 224 231 255;
+    --color-accent-line: 199 210 254;
+    --color-slate-50: 248 250 252;
+    --color-slate-100: 241 245 249;
+    --color-slate-200: 226 232 240;
+    --color-slate-300: 203 213 225;
+    --color-slate-400: 148 163 184;
+    --color-slate-500: 100 116 139;
+    --color-slate-600: 71 85 105;
+    --color-slate-700: 51 65 85;
+    --color-slate-800: 30 41 59;
+    --color-slate-900: 15 23 42;
+    --color-slate-950: 2 6 23;
+  }
+
+  .dark {
+    color-scheme: dark;
+    --color-ink: 241 245 249;
+    --color-ink-soft: 203 213 225;
+    --color-ink-muted: 160 174 192;
+    --color-canvas: 11 18 32;
+    --color-surface: 19 28 46;
+    --color-accent: 165 180 252;
+    --color-accent-strong: 199 210 254;
+    --color-accent-soft: 30 35 75;
+    --color-accent-tint: 40 46 99;
+    --color-accent-line: 67 76 140;
+    /* Grises invertidos: los tonos claros (fondos suaves, bordes) pasan a ser oscuros y al revés. */
+    --color-slate-50: 28 38 56;
+    --color-slate-100: 33 44 64;
+    --color-slate-200: 45 58 80;
+    --color-slate-300: 63 77 102;
+    --color-slate-400: 100 116 139;
+    --color-slate-500: 148 163 184;
+    --color-slate-600: 170 183 200;
+    --color-slate-700: 203 213 225;
+    --color-slate-800: 226 232 240;
+    --color-slate-900: 241 245 249;
+    --color-slate-950: 248 250 252;
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
@@ -30,7 +86,7 @@
   }
 
   :focus-visible {
-    @apply outline-none ring-2 ring-brand-600 ring-offset-2;
+    @apply outline-none ring-2 ring-brand-600 ring-offset-2 ring-offset-canvas dark:ring-brand-400;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -78,11 +134,11 @@
   }
 
   .btn-primary {
-    @apply bg-brand-600 text-white shadow-card hover:bg-brand-700;
+    @apply bg-brand-600 text-white shadow-card hover:bg-brand-700 dark:hover:bg-brand-500;
   }
 
   .btn-secondary {
-    @apply border border-slate-300 bg-white text-ink hover:bg-slate-50;
+    @apply border border-slate-300 bg-surface text-ink hover:bg-slate-50;
   }
 
   .btn-ghost {
@@ -102,22 +158,22 @@
   }
 
   .field-input {
-    @apply block min-h-[2.75rem] w-full rounded-control border border-slate-300 bg-white px-3 py-2 text-base text-ink shadow-sm placeholder:text-slate-500 disabled:bg-slate-100;
+    @apply block min-h-[2.75rem] w-full rounded-control border border-slate-300 bg-surface px-3 py-2 text-base text-ink shadow-sm placeholder:text-slate-500 disabled:bg-slate-100;
   }
 
   .field-input[aria-invalid='true'] {
-    @apply border-red-600;
+    @apply border-red-600 dark:border-red-400;
   }
 
   .card {
-    @apply rounded-card border border-slate-200 bg-white shadow-card;
+    @apply rounded-card border border-slate-200 bg-surface shadow-card;
   }
 
   .link {
-    @apply font-medium text-brand-700 underline decoration-brand-300 underline-offset-2 hover:decoration-brand-700;
+    @apply font-medium text-accent underline decoration-accent/40 underline-offset-2 hover:decoration-accent;
   }
 
   .eyebrow {
-    @apply text-sm font-semibold uppercase tracking-wide text-brand-700;
+    @apply text-sm font-semibold uppercase tracking-wide text-accent;
   }
 }

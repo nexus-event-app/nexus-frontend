@@ -23,7 +23,7 @@ export default function LanguageSwitcher({ className }) {
                 title={LANGUAGE_META[language].name}
                 className={cx(
                   'inline-flex min-h-[2.75rem] min-w-[2.75rem] items-center justify-center rounded-control px-2 text-sm font-bold transition-colors sm:min-h-[2.25rem] sm:min-w-[2.25rem]',
-                  active ? 'bg-brand-50 text-brand-800' : 'text-ink-muted hover:bg-slate-100 hover:text-ink',
+                  active ? 'bg-accent-soft text-accent-strong' : 'text-ink-muted hover:bg-slate-100 hover:text-ink',
                 )}
               >
                 {LANGUAGE_META[language].short}

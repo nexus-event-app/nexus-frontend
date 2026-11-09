@@ -12,14 +12,14 @@ const LEGAL_LINKS = [
   { labelKey: 'common.footer.cookies', to: paths.cookies },
 ]
 
-const LINK_CLASSES = 'inline-flex min-h-[2.75rem] items-center text-ink-soft hover:text-brand-700 hover:underline sm:min-h-0 sm:py-1'
+const LINK_CLASSES = 'inline-flex min-h-[2.75rem] items-center text-ink-soft hover:text-accent hover:underline sm:min-h-0 sm:py-1'
 
 export default function SiteFooter() {
   const { isAuthenticated } = useAuth()
   const { t } = useI18n()
 
   return (
-    <footer className="border-t border-slate-200 bg-white">
+    <footer className="border-t border-slate-200 bg-surface">
       <div className="page-container grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <Logo />

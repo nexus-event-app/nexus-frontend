@@ -14,7 +14,7 @@ export default function FilterLinks({ label, options }) {
                 'inline-flex min-h-[2.75rem] items-center rounded-full border px-4 text-sm font-semibold transition-colors sm:min-h-[2.25rem]',
                 option.active
                   ? 'border-brand-600 bg-brand-600 text-white'
-                  : 'border-slate-300 bg-white text-ink-soft hover:bg-slate-50',
+                  : 'border-slate-300 bg-surface text-ink-soft hover:bg-slate-50',
               )}
             >
               {option.label}

@@ -8,6 +8,7 @@ import Icon from '@/shared/components/Icon'
 import Logo from '@/shared/components/Logo'
 import { paths } from '@/shared/config/paths'
 import LanguageSwitcher from '@/shared/components/LanguageSwitcher'
+import ThemeToggle from '@/shared/components/ThemeToggle'
 import { useDismiss } from '@/shared/hooks/useDismiss'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { useToast } from '@/shared/hooks/useToast'
@@ -51,7 +52,7 @@ export default function SiteHeader() {
   }
 
   return (
-    <header ref={headerRef} className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
+    <header ref={headerRef} className="sticky top-0 z-40 border-b border-slate-200 bg-surface/95 backdrop-blur">
       <div className="page-container flex h-16 items-center justify-between gap-4">
         <Link to={paths.home} aria-label={t('common.nav.goHome', { name: siteConfig.name })} className="rounded-control">
           <Logo />
@@ -62,6 +63,7 @@ export default function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
+          <ThemeToggle />
           <LanguageSwitcher />
           {isAuthenticated ? <UserMenu /> : <AuthLinks />}
         </div>
@@ -80,12 +82,15 @@ export default function SiteHeader() {
       </div>
 
       {open && (
-        <div id={menuId} className="border-t border-slate-200 bg-white lg:hidden">
+        <div id={menuId} className="border-t border-slate-200 bg-surface lg:hidden">
           <div className="page-container space-y-4 py-4">
             <nav aria-label={t('common.nav.mainMobile')}>
               <NavItems orientation="vertical" />
             </nav>
-            <LanguageSwitcher />
+            <div className="flex items-center justify-between gap-2">
+              <LanguageSwitcher />
+              <ThemeToggle />
+            </div>
             <div className="border-t border-slate-200 pt-4">
               {isAuthenticated ? (
                 <div className="space-y-3">

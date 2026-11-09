@@ -97,7 +97,7 @@ export default function ImageUploadField({ label, value, onChange, error }) {
       </div>
       <p className="mt-1.5 text-sm text-ink-muted">JPG, PNG, WebP o GIF de hasta 5 MB.</p>
       {error && (
-        <p id={errorId} role="alert" className="mt-1.5 text-sm font-medium text-red-700">
+        <p id={errorId} role="alert" className="mt-1.5 text-sm font-medium text-red-700 dark:text-red-400">
           {error}
         </p>
       )}

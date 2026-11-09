@@ -1,7 +1,11 @@
 import defaultTheme from 'tailwindcss/defaultTheme'
 
+/** Color definido como variable CSS (canal RGB) para que admita opacidad: `bg-surface/95`. */
+const token = (name) => `rgb(var(--color-${name}) / <alpha-value>)`
+
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
@@ -19,12 +23,26 @@ export default {
           900: '#312e81',
           950: '#1e1b4b',
         },
+        // Colores que cambian con el tema: sus valores claro y oscuro están en src/index.css (:root y .dark).
         ink: {
-          DEFAULT: '#0f172a',
-          soft: '#334155',
-          muted: '#475569',
+          DEFAULT: token('ink'),
+          soft: token('ink-soft'),
+          muted: token('ink-muted'),
         },
-        canvas: '#f8fafc',
+        canvas: token('canvas'),
+        surface: token('surface'),
+        accent: {
+          DEFAULT: token('accent'),
+          strong: token('accent-strong'),
+          soft: token('accent-soft'),
+          tint: token('accent-tint'),
+          line: token('accent-line'),
+        },
+        // Los grises neutros se adaptan al tema; para algo que deba verse igual en los dos (p. ej. bloques de
+        // código), usa la paleta `gray`.
+        slate: Object.fromEntries(
+          [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map((shade) => [shade, token(`slate-${shade}`)]),
+        ),
       },
       fontFamily: {
         sans: ['ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', ...defaultTheme.fontFamily.sans],

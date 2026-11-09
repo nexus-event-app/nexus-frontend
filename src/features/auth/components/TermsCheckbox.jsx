@@ -41,7 +41,7 @@ export default function TermsCheckbox({ checked, onChange, error }) {
         </label>
       </div>
       {error && (
-        <p id={errorId} role="alert" className="mt-1.5 text-sm font-medium text-red-700">
+        <p id={errorId} role="alert" className="mt-1.5 text-sm font-medium text-red-700 dark:text-red-400">
           {error}
         </p>
       )}

@@ -1,6 +1,7 @@
 import { SESSION_STORAGE_KEY } from '@/shared/api/session'
 import { paths } from '@/shared/config/paths'
 import { siteConfig } from '@/shared/config/site'
+import { THEME_STORAGE_KEY } from '@/shared/theme/theme'
 import LegalPage from '../components/LegalPage'
 
 const SECTIONS = [
@@ -10,7 +11,7 @@ const SECTIONS = [
     content: (
       <p>
         {siteConfig.name} <strong>no usa cookies de análisis, publicidad ni redes sociales</strong>. Solo guardamos en
-        tu navegador lo imprescindible para mantener tu sesión iniciada. Por eso no te mostramos un aviso de cookies:
+        tu navegador lo imprescindible para mantener tu sesión iniciada y, si lo eliges, el tema claro u oscuro. Por eso no te mostramos un aviso de cookies:
         este tipo de almacenamiento técnico no necesita consentimiento (art. 22.2 LSSI).
       </p>
     ),
@@ -37,6 +38,12 @@ const SECTIONS = [
               <td className="py-3 pr-4">Mantener tu sesión iniciada: identificador de sesión y datos básicos de tu perfil (nombre, email y rol).</td>
               <td className="py-3">Hasta que cierres sesión. La sesión caduca a las 24 horas.</td>
             </tr>
+            <tr className="align-top border-t border-slate-200">
+              <td className="py-3 pr-4 font-mono text-xs">{THEME_STORAGE_KEY}</td>
+              <td className="py-3 pr-4">Almacenamiento local, propio y técnico</td>
+              <td className="py-3 pr-4">Recordar si has elegido el tema claro u oscuro. Solo se guarda si lo cambias; por defecto se sigue la preferencia de tu dispositivo.</td>
+              <td className="py-3">Hasta que vuelvas al tema automático o borres los datos del sitio.</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -58,7 +65,7 @@ const SECTIONS = [
     title: '4. Cómo borrarlo',
     content: (
       <p>
-        Al cerrar sesión se borra la sesión guardada. También puedes borrar los datos de este sitio desde la
+        Al cerrar sesión se borra la sesión guardada, y al volver al tema automático se borra la preferencia de tema. También puedes borrar los datos de este sitio desde la
         configuración de tu navegador, normalmente en el apartado de privacidad o de datos de sitios.
       </p>
     ),

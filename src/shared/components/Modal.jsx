@@ -61,7 +61,7 @@ export default function Modal({ title, description, onClose, size = 'md', dismis
         if (event.target === event.currentTarget) requestClose()
       }}
       className={cx(
-        'm-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] overflow-y-auto rounded-card bg-white p-0 text-ink shadow-pop backdrop:bg-slate-900/60 backdrop:backdrop-blur-sm',
+        'm-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] overflow-y-auto rounded-card bg-surface p-0 text-ink shadow-pop backdrop:bg-gray-950/70 backdrop:backdrop-blur-sm',
         SIZES[size],
       )}
     >

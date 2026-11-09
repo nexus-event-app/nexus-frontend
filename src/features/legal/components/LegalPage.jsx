@@ -24,7 +24,7 @@ export default function LegalPage({ title, description, path, sections }) {
             <ol className="mt-3 space-y-1 text-sm">
               {sections.map((section) => (
                 <li key={section.id}>
-                  <a href={`#${section.id}`} className="inline-flex min-h-[2.25rem] items-center text-ink-soft hover:text-brand-700 hover:underline">
+                  <a href={`#${section.id}`} className="inline-flex min-h-[2.25rem] items-center text-ink-soft hover:text-accent hover:underline">
                     {section.title}
                   </a>
                 </li>

@@ -48,10 +48,10 @@ export default function JobPortals({ compact = false }) {
               className="card group flex h-full items-start justify-between gap-3 p-4 transition-shadow hover:shadow-pop"
             >
               <span>
-                <span className="block font-bold text-ink group-hover:text-brand-700">{portal.name}</span>
+                <span className="block font-bold text-ink group-hover:text-accent">{portal.name}</span>
                 <span className="mt-1 block text-sm text-ink-muted">{t(`jobs.portals.${portal.id}`)}</span>
               </span>
-              <Icon name="external" className="mt-1 h-4 w-4 shrink-0 text-ink-muted group-hover:text-brand-700" />
+              <Icon name="external" className="mt-1 h-4 w-4 shrink-0 text-ink-muted group-hover:text-accent" />
             </PortalLink>
           </li>
         ))}

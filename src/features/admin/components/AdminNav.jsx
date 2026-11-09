@@ -25,7 +25,7 @@ export default function AdminNav() {
               className={({ isActive }) =>
                 cx(
                   'flex min-h-[2.75rem] items-center gap-3 rounded-control px-3 font-semibold transition-colors',
-                  isActive ? 'bg-brand-50 text-brand-800' : 'text-ink-soft hover:bg-slate-100 hover:text-ink',
+                  isActive ? 'bg-accent-soft text-accent-strong' : 'text-ink-soft hover:bg-slate-100 hover:text-ink',
                 )
               }
             >

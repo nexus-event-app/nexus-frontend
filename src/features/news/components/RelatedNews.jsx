@@ -17,7 +17,7 @@ export default function RelatedNews({ items }) {
           <li key={item.id} className="card p-4">
             <Time value={item.createdAt} format="short" className="text-sm text-ink-muted" />
             <h3 className="mt-1 font-semibold leading-snug text-ink">
-              <Link to={paths.newsDetail(item)} className="hover:text-brand-700 hover:underline">
+              <Link to={paths.newsDetail(item)} className="hover:text-accent hover:underline">
                 {item.title}
               </Link>
             </h3>

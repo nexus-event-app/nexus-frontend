@@ -37,7 +37,7 @@ function LastRun({ source }) {
         <Badge tone={failed ? 'red' : 'green'}>{failed ? 'Error' : 'Correcta'}</Badge>
         <Time value={source.lastRunAt} format="short" className="text-ink-muted" />
       </div>
-      {source.lastMessage && <p className={failed ? 'text-red-700' : 'text-ink-muted'}>{source.lastMessage}</p>}
+      {source.lastMessage && <p className={failed ? 'text-red-700 dark:text-red-400' : 'text-ink-muted'}>{source.lastMessage}</p>}
     </div>
   )
 }

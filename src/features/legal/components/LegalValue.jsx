@@ -2,7 +2,7 @@
 export default function LegalValue({ value, href }) {
   if (!value) {
     return (
-      <mark className="rounded bg-amber-100 px-1.5 py-0.5 text-sm font-medium text-amber-900">
+      <mark className="rounded bg-amber-100 px-1.5 py-0.5 text-sm font-medium text-amber-900 dark:bg-amber-500/20 dark:text-amber-200">
         pendiente de configurar
       </mark>
     )

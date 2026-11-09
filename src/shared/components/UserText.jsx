@@ -23,7 +23,7 @@ export default function UserText({ children, className }) {
       {blocks.map((block, index) => (
         <Fragment key={index}>
           {block.type === 'code' ? (
-            <pre className="overflow-x-auto rounded-control bg-slate-900 p-4 text-sm leading-relaxed text-slate-100">
+            <pre className="overflow-x-auto rounded-control bg-gray-900 p-4 text-sm leading-relaxed text-gray-100 dark:ring-1 dark:ring-white/10">
               <code className="font-mono">{block.value}</code>
             </pre>
           ) : (

@@ -100,7 +100,7 @@ export default function NewsDetailPage() {
           <UserText className="mt-8 text-lg leading-relaxed text-ink-soft">{article.content}</UserText>
 
           {imported && hasSource && (
-            <aside aria-label={t('news.detail.originalLabel')} className="card mt-8 bg-brand-50/60 p-5">
+            <aside aria-label={t('news.detail.originalLabel')} className="card mt-8 bg-accent-soft/60 p-5">
               <p className="text-ink-soft">
                 {t('news.detail.summary')}{' '}
                 <strong className="font-semibold text-ink">{article.source ?? hostnameOf(article.sourceUrl)}</strong>.

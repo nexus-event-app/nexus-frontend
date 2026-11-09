@@ -4,7 +4,7 @@ import { cx } from '@/shared/utils/classNames'
 
 export default function HomeSection({ id, title, description, linkTo, linkLabel, tinted = false, children }) {
   return (
-    <section aria-labelledby={id} className={cx('page-section', tinted && 'bg-white')}>
+    <section aria-labelledby={id} className={cx('page-section', tinted && 'bg-surface')}>
       <div className="page-container">
         <SectionHeader
           id={id}

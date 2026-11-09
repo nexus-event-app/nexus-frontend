@@ -81,7 +81,7 @@ export default function AdminDashboardPage() {
           {QUICK_ACTIONS.map((action) => (
             <li key={action.to}>
               <Link to={action.to} className="card flex min-h-[3.5rem] items-center gap-3 p-4 font-semibold text-ink hover:bg-slate-50">
-                <Icon name={action.icon} className="h-5 w-5 text-brand-700" />
+                <Icon name={action.icon} className="h-5 w-5 text-accent" />
                 {action.label}
                 <Icon name="arrow-right" className="ml-auto h-4 w-4 text-ink-muted" />
               </Link>

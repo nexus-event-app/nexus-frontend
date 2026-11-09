@@ -2,7 +2,7 @@ import { cx } from '@/shared/utils/classNames'
 
 export default function DataTable({ caption, columns, rows, getRowKey }) {
   return (
-    <div className="md:overflow-x-auto md:rounded-card md:border md:border-slate-200 md:bg-white md:shadow-card">
+    <div className="md:overflow-x-auto md:rounded-card md:border md:border-slate-200 md:bg-surface md:shadow-card">
       <table className="block w-full text-left text-sm md:table">
         <caption className="sr-only">{caption}</caption>
         <thead className="sr-only md:not-sr-only md:table-header-group md:bg-slate-50">
