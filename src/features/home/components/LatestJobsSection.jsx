@@ -1,4 +1,5 @@
 import JobGrid from '@/features/jobs/components/JobGrid'
+import JobPortals from '@/features/jobs/components/JobPortals'
 import { useLatestJobs } from '@/features/jobs/hooks/useLatestJobs'
 import CardGridSkeleton from '@/shared/components/CardGridSkeleton'
 import EmptyState from '@/shared/components/EmptyState'
@@ -35,6 +36,7 @@ export default function LatestJobsSection() {
           )
         }
       </QueryBoundary>
+      <JobPortals compact />
     </HomeSection>
   )
 }

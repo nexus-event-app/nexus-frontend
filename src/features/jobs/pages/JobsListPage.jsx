@@ -8,6 +8,7 @@ import Seo from '@/shared/components/Seo'
 import { paths } from '@/shared/config/paths'
 import JobFilters from '../components/JobFilters'
 import JobGrid from '../components/JobGrid'
+import JobPortals from '../components/JobPortals'
 import { useJobsList } from '../hooks/useJobsList'
 import { useI18n } from '@/shared/i18n/useI18n'
 
@@ -68,6 +69,8 @@ export default function JobsListPage() {
           }
         </QueryBoundary>
       </section>
+
+      <JobPortals />
     </div>
   )
 }
