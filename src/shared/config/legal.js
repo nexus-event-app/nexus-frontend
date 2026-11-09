@@ -16,7 +16,3 @@ export const legalConfig = {
   hostingProvider: env('VITE_LEGAL_HOSTING_PROVIDER'),
   lastUpdated: '6 de noviembre de 2026',
 }
-
-export const isLegalConfigComplete = Boolean(
-  legalConfig.ownerName && legalConfig.ownerId && legalConfig.address && legalConfig.email,
-)

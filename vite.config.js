@@ -16,7 +16,7 @@ function vendorChunk(id) {
 
 function siteUrlPlugin(siteUrl) {
   return {
-    name: 'startdev-site-url',
+    name: 'primercommit-site-url',
     transformIndexHtml: (html) => html.replaceAll('%SITE_URL%', siteUrl),
   }
 }
@@ -31,6 +31,10 @@ export default defineConfig(({ mode }) => {
       alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
     },
     server: {
+      // Prepara al arrancar los módulos de la primera pantalla para que la primera carga no espere a compilarlos.
+      warmup: {
+        clientFiles: ['./src/main.jsx', './src/app/App.jsx', './src/app/AppRoutes.jsx', './src/features/home/pages/HomePage.jsx'],
+      },
       proxy: Object.fromEntries(
         proxiedPaths.map((path) => [path, { target: BACKEND_URL, changeOrigin: true }]),
       ),

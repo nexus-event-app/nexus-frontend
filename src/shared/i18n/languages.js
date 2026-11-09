@@ -14,7 +14,7 @@ const PREFIX_PATTERN = new RegExp(`^/(${PREFIXED.join('|')})(?=[/?#]|$)`)
 /** Rutas que no se traducen: el panel de administración solo existe en castellano. */
 const UNLOCALIZED = /^\/admin(?=[/?#]|$)/
 
-export function isLanguage(value) {
+function isLanguage(value) {
   return LANGUAGES.includes(value)
 }
 
