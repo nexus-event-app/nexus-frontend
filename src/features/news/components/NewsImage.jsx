@@ -5,7 +5,7 @@ import NewsCover from './NewsCover'
  * Imagen de una noticia. Si no tiene, o si la imagen externa no carga (enlace roto, la web de origen la bloquea...),
  * muestra la portada por defecto de su categoría: nunca queda un hueco vacío ni el icono de imagen rota.
  */
-export default function NewsImage({ url, alt = '', category, priority = false, size }) {
+export default function NewsImage({ url, alt = '', category, title, seed, priority = false, size }) {
   const [failedUrl, setFailedUrl] = useState(null)
   const showImage = Boolean(url) && failedUrl !== url
 
@@ -24,7 +24,7 @@ export default function NewsImage({ url, alt = '', category, priority = false, s
           className="h-full w-full object-cover"
         />
       ) : (
-        <NewsCover category={category} size={size} />
+        <NewsCover category={category} title={title} seed={seed} size={size} />
       )}
     </div>
   )

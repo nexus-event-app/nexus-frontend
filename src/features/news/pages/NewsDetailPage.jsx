@@ -96,6 +96,8 @@ export default function NewsDetailPage() {
               url={article.imageUrl}
               alt={t('news.detail.imageAlt', { title: article.title })}
               category={article.category}
+              title={article.title}
+              seed={article.id}
               size="lg"
               priority
             />

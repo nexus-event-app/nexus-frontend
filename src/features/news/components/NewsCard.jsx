@@ -13,7 +13,7 @@ export default function NewsCard({ item, headingLevel = 'h3' }) {
 
   return (
     <article className="card relative flex h-full flex-col overflow-hidden transition-shadow hover:shadow-pop has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-brand-600">
-      <NewsImage url={item.imageUrl} category={item.category} />
+      <NewsImage url={item.imageUrl} category={item.category} title={item.title} seed={item.id} />
       <div className="flex flex-1 flex-col p-5">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
           <Badge tone={newsCategories.toneOf(item.category)}>{newsCategories.labelOf(item.category)}</Badge>
