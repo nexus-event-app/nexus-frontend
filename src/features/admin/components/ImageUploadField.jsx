@@ -8,7 +8,7 @@ import { uploadService } from '../services/uploadService'
 const MAX_SIZE_BYTES = 5 * 1024 * 1024
 const ACCEPTED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif']
 
-export default function ImageUploadField({ label, value, onChange, error }) {
+export default function ImageUploadField({ label, value, onChange, error, hint }) {
   const inputId = useId()
   const errorId = useId()
   const toast = useToast()
@@ -95,7 +95,7 @@ export default function ImageUploadField({ label, value, onChange, error }) {
           </Button>
         )}
       </div>
-      <p className="mt-1.5 text-sm text-ink-muted">JPG, PNG, WebP o GIF de hasta 5 MB.</p>
+      <p className="mt-1.5 text-sm text-ink-muted">JPG, PNG, WebP o GIF de hasta 5 MB.{hint && ` ${hint}`}</p>
       {error && (
         <p id={errorId} role="alert" className="mt-1.5 text-sm font-medium text-red-700 dark:text-red-400">
           {error}

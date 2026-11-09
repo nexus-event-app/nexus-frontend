@@ -91,11 +91,15 @@ export default function NewsDetailPage() {
             </p>
           </header>
 
-          {article.imageUrl && (
-            <figure className="mt-8 overflow-hidden rounded-card">
-              <NewsImage url={article.imageUrl} alt={t('news.detail.imageAlt', { title: article.title })} priority />
-            </figure>
-          )}
+          <figure className="mt-8 overflow-hidden rounded-card">
+            <NewsImage
+              url={article.imageUrl}
+              alt={t('news.detail.imageAlt', { title: article.title })}
+              category={article.category}
+              size="lg"
+              priority
+            />
+          </figure>
 
           <UserText className="mt-8 text-lg leading-relaxed text-ink-soft">{article.content}</UserText>
 

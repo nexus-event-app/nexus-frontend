@@ -1,9 +1,17 @@
-import Icon from '@/shared/components/Icon'
+import { useState } from 'react'
+import NewsCover from './NewsCover'
 
-export default function NewsImage({ url, alt = '', priority = false }) {
+/**
+ * Imagen de una noticia. Si no tiene, o si la imagen externa no carga (enlace roto, la web de origen la bloquea...),
+ * muestra la portada por defecto de su categoría: nunca queda un hueco vacío ni el icono de imagen rota.
+ */
+export default function NewsImage({ url, alt = '', category, priority = false, size }) {
+  const [failedUrl, setFailedUrl] = useState(null)
+  const showImage = Boolean(url) && failedUrl !== url
+
   return (
     <div className="aspect-[16/9] w-full overflow-hidden bg-slate-100">
-      {url ? (
+      {showImage ? (
         <img
           src={url}
           alt={alt}
@@ -12,12 +20,11 @@ export default function NewsImage({ url, alt = '', priority = false }) {
           loading={priority ? 'eager' : 'lazy'}
           decoding="async"
           referrerPolicy={url.startsWith('http') ? 'no-referrer' : undefined}
+          onError={() => setFailedUrl(url)}
           className="h-full w-full object-cover"
         />
       ) : (
-        <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-accent-tint to-accent-soft text-accent" aria-hidden="true">
-          <Icon name="newspaper" className="h-12 w-12" />
-        </div>
+        <NewsCover category={category} size={size} />
       )}
     </div>
   )

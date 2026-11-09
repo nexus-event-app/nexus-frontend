@@ -60,6 +60,7 @@ export default function NewsForm({ news, onSubmit, onCancel }) {
       />
       <ImageUploadField
         label="Imagen destacada"
+        hint="Si no subes ninguna, se usará la imagen de la página de la fuente y, si tampoco tiene, una portada según la categoría."
         value={form.values.imageUrl}
         onChange={(url) => form.setValue('imageUrl', url)}
         error={form.errors.imageUrl}
