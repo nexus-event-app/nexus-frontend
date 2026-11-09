@@ -65,7 +65,7 @@ export default function AdminImportPage() {
   })
 
   const [toggleSource] = useAction(async (source) => {
-    const { name, type, url, newsCategory, keywords, excludeKeywords, intervalMinutes, autoPublish, remoteOnly, active } =
+    const { name, type, url, newsCategory, keywords, excludeKeywords, intervalMinutes, autoPublish, remoteOnly, useSourceImages, active } =
       source
     const payload = {
       name,
@@ -77,6 +77,7 @@ export default function AdminImportPage() {
       intervalMinutes,
       autoPublish,
       remoteOnly,
+      useSourceImages,
       active: !active,
     }
     replaceSource(await adminImportService.update(source.id, payload))
@@ -139,6 +140,7 @@ export default function AdminImportPage() {
           {source.remoteOnly && <Badge tone="blue">Solo remoto</Badge>}
           {source.keywords && <Badge tone="indigo">Con palabras clave</Badge>}
           {source.excludeKeywords && <Badge tone="indigo">Con exclusiones</Badge>}
+          {source.useSourceImages === false && <Badge tone="violet">Fotos propias</Badge>}
           <Badge>{formatInterval(source.intervalMinutes)}</Badge>
         </div>
       ),

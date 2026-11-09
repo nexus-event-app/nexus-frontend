@@ -25,6 +25,7 @@ function toValues(source) {
     intervalMinutes: String(source?.intervalMinutes ?? ''),
     autoPublish: source?.autoPublish ?? true,
     remoteOnly: source?.remoteOnly ?? false,
+    useSourceImages: source?.useSourceImages ?? true,
     active: source?.active ?? true,
   }
 }
@@ -46,6 +47,7 @@ export default function ImportSourceForm({ source, onSubmit, onCancel }) {
         intervalMinutes: values.intervalMinutes ? Number(values.intervalMinutes) : null,
         autoPublish: values.autoPublish,
         remoteOnly: !isNewsSourceType(values.type) && values.remoteOnly,
+        useSourceImages: !isNewsSourceType(values.type) || values.useSourceImages,
         active: values.active,
       }),
   })
@@ -131,6 +133,15 @@ export default function ImportSourceForm({ source, onSubmit, onCancel }) {
           checked={form.values.autoPublish}
           onChange={form.handleChange}
         />
+        {news && (
+          <CheckboxField
+            name="useSourceImages"
+            label="Usar las imágenes de la fuente"
+            hint="Desmárcalo si sus portadas no quedan bien (p. ej. tarjetas de texto generadas automáticamente): se mostrarán las fotos propias de la web. Al desmarcarlo se quitan también de lo ya importado."
+            checked={form.values.useSourceImages}
+            onChange={form.handleChange}
+          />
+        )}
         {!news && (
           <CheckboxField
             name="remoteOnly"

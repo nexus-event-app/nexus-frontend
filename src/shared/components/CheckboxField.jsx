@@ -6,7 +6,7 @@ export default function CheckboxField({ label, name, checked, onChange, hint }) 
         name={name}
         checked={checked}
         onChange={onChange}
-        className="mt-1 h-5 w-5 rounded border-slate-400 text-brand-600"
+        className="mt-1 h-5 w-5 shrink-0 rounded border-slate-400 text-brand-600"
       />
       <span>
         <span className="block text-sm font-semibold text-ink">{label}</span>
