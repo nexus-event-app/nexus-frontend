@@ -16,6 +16,7 @@ import { excerpt } from '@/shared/utils/text'
 import { hostnameOf, isHttpUrl } from '@/shared/utils/url'
 import { parseIdSlug } from '@/shared/utils/slug'
 import NewsImage from '../components/NewsImage'
+import { coverPhotoFor } from '../utils/coverPhoto'
 import RelatedNews from '../components/RelatedNews'
 import { useLatestNews } from '../hooks/useLatestNews'
 import { useNewsArticle } from '../hooks/useNewsArticle'
@@ -61,7 +62,7 @@ export default function NewsDetailPage() {
         title={article.title}
         description={excerpt(article.content, 160)}
         path={path}
-        image={article.imageUrl}
+        image={article.imageUrl || coverPhotoFor(article)}
         imageAlt={article.title}
         type="article"
         publishedTime={article.createdAt}
@@ -98,7 +99,6 @@ export default function NewsDetailPage() {
               category={article.category}
               title={article.title}
               seed={article.id}
-              size="lg"
               priority
             />
           </figure>

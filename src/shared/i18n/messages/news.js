@@ -1,20 +1,6 @@
 /** Noticias. */
 export default {
   es: {
-    topics: {
-      ai: 'IA',
-      security: 'Seguridad',
-      bugs: 'Errores',
-      cloud: 'Cloud',
-      terminal: 'Terminal y Git',
-      data: 'Datos',
-      mobile: 'Móvil',
-      web: 'Web',
-      code: 'Programación',
-      career: 'Empleo',
-      learning: 'Aprender',
-      business: 'Negocio',
-    },
     breadcrumb: 'Noticias',
     list: {
       heading: 'Noticias tech para juniors',
@@ -46,20 +32,6 @@ export default {
     },
   },
   ca: {
-    topics: {
-      ai: 'IA',
-      security: 'Seguretat',
-      bugs: 'Errors',
-      cloud: 'Núvol',
-      terminal: 'Terminal i Git',
-      data: 'Dades',
-      mobile: 'Mòbil',
-      web: 'Web',
-      code: 'Programació',
-      career: 'Feina',
-      learning: 'Aprendre',
-      business: 'Negoci',
-    },
     breadcrumb: 'Notícies',
     list: {
       heading: 'Notícies tech per a júniors',
@@ -91,20 +63,6 @@ export default {
     },
   },
   en: {
-    topics: {
-      ai: 'AI',
-      security: 'Security',
-      bugs: 'Bugs',
-      cloud: 'Cloud',
-      terminal: 'Terminal & Git',
-      data: 'Data',
-      mobile: 'Mobile',
-      web: 'Web',
-      code: 'Coding',
-      career: 'Careers',
-      learning: 'Learning',
-      business: 'Business',
-    },
     breadcrumb: 'News',
     list: {
       heading: 'Tech news for juniors',
