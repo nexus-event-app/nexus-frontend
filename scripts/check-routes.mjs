@@ -24,6 +24,8 @@ const cases = [
   ['/empleo?nivel=junior&page=2', '/empleo?nivel=junior&page=2', '/ca/feina?nivel=junior&page=2', '/en/jobs?nivel=junior&page=2'],
   ['/foro/nueva', '/foro/nueva', '/ca/forum/nova', '/en/forum/new'],
   ['/empleo/guardadas', '/empleo/guardadas', '/ca/feina/desades', '/en/jobs/saved'],
+  ['/perfil/editar', '/perfil/editar', '/ca/perfil/edita', '/en/profile/edit'],
+  ['/perfil/7-ana-garcia', '/perfil/7-ana-garcia', '/ca/perfil/7-ana-garcia', '/en/profile/7-ana-garcia'],
   ['/foro/5-mi-duda#comentarios', '/foro/5-mi-duda#comentarios', '/ca/forum/5-mi-duda#comentarios', '/en/forum/5-mi-duda#comentarios'],
   ['/testimonios', '/testimonios', '/ca/testimonis', '/en/testimonials'],
   ['/aviso-legal', '/aviso-legal', '/ca/avis-legal', '/en/legal-notice'],

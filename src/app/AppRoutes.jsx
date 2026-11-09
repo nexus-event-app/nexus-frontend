@@ -18,6 +18,8 @@ const SavedJobsPage = lazy(() => import('@/features/jobs/pages/SavedJobsPage'))
 const ForumPage = lazy(() => import('@/features/forum/pages/ForumPage'))
 const NewDiscussionPage = lazy(() => import('@/features/forum/pages/NewDiscussionPage'))
 const DiscussionDetailPage = lazy(() => import('@/features/forum/pages/DiscussionDetailPage'))
+const ProfilePage = lazy(() => import('@/features/profile/pages/ProfilePage'))
+const EditProfilePage = lazy(() => import('@/features/profile/pages/EditProfilePage'))
 const TestimonialsPage = lazy(() => import('@/features/testimonials/pages/TestimonialsPage'))
 const LegalNoticePage = lazy(() => import('@/features/legal/pages/LegalNoticePage'))
 const PrivacyPage = lazy(() => import('@/features/legal/pages/PrivacyPage'))
@@ -76,6 +78,15 @@ function publicRoutes({ prefix, lang }) {
       />
       <Route path={`${forum}/:idSlug`} element={<DiscussionDetailPage />} />
       <Route path={seg('testimonios')} element={<TestimonialsPage />} />
+      <Route
+        path={`${seg('perfil')}/${routeSubsegment('perfil', 'editar', lang)}`}
+        element={
+          <RequireAuth>
+            <EditProfilePage />
+          </RequireAuth>
+        }
+      />
+      <Route path={`${seg('perfil')}/:idSlug`} element={<ProfilePage />} />
       <Route path={seg('aviso-legal')} element={<LegalNoticePage />} />
       <Route path={seg('privacidad')} element={<PrivacyPage />} />
       <Route path={seg('cookies')} element={<CookiesPage />} />
@@ -91,6 +102,7 @@ function publicRoutes({ prefix, lang }) {
         <>
           <Route path={`${forum}/nueva`} element={<LegacyPathRedirect />} />
           <Route path={`${seg('empleo')}/guardadas`} element={<LegacyPathRedirect />} />
+          <Route path={`${seg('perfil')}/editar`} element={<LegacyPathRedirect />} />
         </>
       )}
       <Route path="*" element={<NotFound />} />

@@ -35,7 +35,7 @@ export default function UserMenu() {
         aria-controls={menuId}
         className="flex min-h-[2.75rem] items-center gap-2 rounded-control px-2 text-sm font-semibold text-ink hover:bg-slate-100"
       >
-        <Avatar name={user.name} />
+        <Avatar name={user.name} src={user.avatarUrl} size="sm" />
         <span className="max-w-[10rem] truncate">{user.name}</span>
         <Icon name="chevron-down" className="h-4 w-4" />
       </button>
@@ -46,6 +46,15 @@ export default function UserMenu() {
             <p className="truncate text-sm text-ink-muted">{user.email}</p>
           </div>
           <ul className="pt-2">
+            <li>
+              <Link
+                to={paths.profile(user)}
+                className="flex min-h-[2.75rem] items-center gap-2 rounded-control px-3 font-medium text-ink-soft hover:bg-slate-100"
+              >
+                <Icon name="user" />
+                {t('common.account.profile')}
+              </Link>
+            </li>
             {isAdmin && (
               <li>
                 <Link

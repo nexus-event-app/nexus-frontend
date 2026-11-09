@@ -6,25 +6,30 @@ import { discussionCategories } from '@/shared/config/catalogs'
 import { paths } from '@/shared/config/paths'
 import { excerpt } from '@/shared/utils/text'
 import { useI18n } from '@/shared/i18n/useI18n'
+import AuthorLink from '@/features/profile/components/AuthorLink'
+import Avatar from '@/shared/components/Avatar'
 
 export default function DiscussionCard({ discussion, headingLevel = 'h3' }) {
   const { t } = useI18n()
   const Heading = headingLevel
 
   return (
-    <article className="card relative p-5 transition-shadow hover:shadow-pop has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-brand-600">
+    <article className="card relative p-5 transition-shadow hover:shadow-pop has-[.card-link:focus-visible]:ring-2 has-[.card-link:focus-visible]:ring-brand-600">
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
         <Badge tone={discussionCategories.toneOf(discussion.category)}>
           {discussionCategories.labelOf(discussion.category)}
         </Badge>
-        <span className="text-sm text-ink-muted">
-          {discussion.authorName || t('forum.user')} · <Time value={discussion.createdAt} format="short" />
+        <span className="flex items-center gap-2 text-sm text-ink-muted">
+          <Avatar name={discussion.authorName} src={discussion.authorAvatarUrl} size="sm" className="h-6 w-6 text-[0.625rem]" />
+          <AuthorLink id={discussion.authorId} name={discussion.authorName || t('forum.user')} className="font-medium text-ink-soft" />
+          <span aria-hidden="true">·</span>
+          <Time value={discussion.createdAt} format="short" />
         </span>
       </div>
       <Heading className="mt-3 text-lg font-bold leading-snug text-ink">
         <Link
           to={paths.discussionDetail(discussion)}
-          className="after:absolute after:inset-0 hover:text-accent focus-visible:ring-0 focus-visible:ring-offset-0"
+          className="card-link after:absolute after:inset-0 hover:text-accent focus-visible:ring-0 focus-visible:ring-offset-0"
         >
           {discussion.title}
         </Link>

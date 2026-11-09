@@ -1,9 +1,10 @@
 import Avatar from '@/shared/components/Avatar'
+import AuthorLink from '@/features/profile/components/AuthorLink'
 import Badge from '@/shared/components/Badge'
 import Icon from '@/shared/components/Icon'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-export default function TestimonialCard({ testimonial }) {
+export default function TestimonialCard({ testimonial, linkAuthor = true }) {
   const { t } = useI18n()
   const subtitle = [testimonial.role, testimonial.location].filter(Boolean).join(' · ')
 
@@ -19,9 +20,13 @@ export default function TestimonialCard({ testimonial }) {
         <p className="whitespace-pre-wrap text-lg leading-relaxed text-ink-soft">«{testimonial.content}»</p>
       </blockquote>
       <figcaption className="mt-6 flex items-center gap-3">
-        <Avatar name={testimonial.name} />
+        <Avatar name={testimonial.name} src={testimonial.authorAvatarUrl} />
         <span className="min-w-0">
-          <span className="block truncate font-semibold text-ink">{testimonial.name}</span>
+          <AuthorLink
+            id={linkAuthor ? testimonial.authorId : null}
+            name={testimonial.name}
+            className="block truncate font-semibold text-ink"
+          />
           {subtitle && <span className="block truncate text-sm text-ink-muted">{subtitle}</span>}
         </span>
       </figcaption>

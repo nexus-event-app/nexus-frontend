@@ -1,4 +1,5 @@
 import Avatar from '@/shared/components/Avatar'
+import AuthorLink from '@/features/profile/components/AuthorLink'
 import Button from '@/shared/components/Button'
 import Icon from '@/shared/components/Icon'
 import Time from '@/shared/components/Time'
@@ -11,9 +12,13 @@ export default function CommentItem({ comment, canDelete, likePending, onToggleL
   return (
     <article className="card p-4 sm:p-5">
       <header className="flex items-center gap-3">
-        <Avatar name={comment.authorName} />
+        <Avatar name={comment.authorName} src={comment.authorAvatarUrl} />
         <p className="min-w-0 flex-1">
-          <span className="block truncate font-semibold text-ink">{comment.authorName || t('forum.user')}</span>
+          <AuthorLink
+            id={comment.authorId}
+            name={comment.authorName || t('forum.user')}
+            className="block truncate font-semibold text-ink"
+          />
           <Time value={comment.createdAt} format="datetime" className="text-sm text-ink-muted" />
         </p>
       </header>

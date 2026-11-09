@@ -5,6 +5,7 @@ const OPTIONS = {
   long: { day: 'numeric', month: 'long', year: 'numeric' },
   short: { day: 'numeric', month: 'short', year: 'numeric' },
   datetime: { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' },
+  monthYear: { month: 'long', year: 'numeric' },
 }
 
 const formatters = new Map()
@@ -48,4 +49,9 @@ export function toLocalDateTimeInput(value) {
 export function fromLocalDateTimeInput(value) {
   if (!value) return null
   return value.length === 16 ? `${value}:00` : value
+}
+
+export function formatMonthYear(value) {
+  const date = toDate(value)
+  return date ? formatter('monthYear').format(date) : ''
 }

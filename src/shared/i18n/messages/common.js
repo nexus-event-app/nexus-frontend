@@ -31,6 +31,7 @@ export default {
       loggedInAs: 'Sesión iniciada como',
       admin: 'Panel de administración',
       savedJobs: 'Ofertas guardadas',
+      profile: 'Mi perfil',
     },
     footer: {
       description:
@@ -102,6 +103,7 @@ export default {
       loggedInAs: 'Sessió iniciada com a',
       admin: 'Tauler d’administració',
       savedJobs: 'Ofertes desades',
+      profile: 'El meu perfil',
     },
     footer: {
       description:
@@ -173,6 +175,7 @@ export default {
       loggedInAs: 'Logged in as',
       admin: 'Admin panel',
       savedJobs: 'Saved jobs',
+      profile: 'My profile',
     },
     footer: {
       description:

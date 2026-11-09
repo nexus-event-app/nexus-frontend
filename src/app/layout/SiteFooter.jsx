@@ -15,7 +15,7 @@ const LEGAL_LINKS = [
 const LINK_CLASSES = 'inline-flex min-h-[2.75rem] items-center text-ink-soft hover:text-accent hover:underline sm:min-h-0 sm:py-1'
 
 export default function SiteFooter() {
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, user } = useAuth()
   const { t } = useI18n()
 
   return (
@@ -46,6 +46,11 @@ export default function SiteFooter() {
           <ul className="mt-3">
             {isAuthenticated ? (
               <>
+                <li>
+                  <Link to={paths.profile(user)} className={LINK_CLASSES}>
+                    {t('common.account.profile')}
+                  </Link>
+                </li>
                 <li>
                   <Link to={paths.savedJobs} className={LINK_CLASSES}>
                     {t('common.account.savedJobs')}

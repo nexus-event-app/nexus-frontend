@@ -6,10 +6,11 @@ import forum from './forum'
 import home from './home'
 import jobs from './jobs'
 import news from './news'
+import profile from './profile'
 import seo from './seo'
 import testimonials from './testimonials'
 
-const modules = { catalogs, common, errors, seo, home, news, jobs, forum, testimonials, auth }
+const modules = { catalogs, common, errors, seo, home, news, jobs, forum, testimonials, auth, profile }
 
 /** Une los módulos: cada uno aporta sus textos en los tres idiomas bajo su propio nombre. */
 function merge(language) {

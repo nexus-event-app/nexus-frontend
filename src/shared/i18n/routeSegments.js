@@ -18,10 +18,12 @@ export const ROUTE_SEGMENTS = {
   'recuperar-contrasena': { ca: 'recupera-contrasenya', en: 'forgot-password' },
   'restablecer-contrasena': { ca: 'restableix-contrasenya', en: 'reset-password' },
   'verificar-email': { ca: 'verifica-correu', en: 'verify-email' },
+  perfil: { ca: 'perfil', en: 'profile' },
 }
 
 /** Subsecciones fijas (el resto de segundos segmentos son identificadores como «12-mi-duda» y no se traducen). */
 export const ROUTE_SUBSEGMENTS = {
   foro: { nueva: { ca: 'nova', en: 'new' } },
   empleo: { guardadas: { ca: 'desades', en: 'saved' } },
+  perfil: { editar: { ca: 'edita', en: 'edit' } },
 }

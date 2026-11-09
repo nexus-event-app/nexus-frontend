@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from '@/shared/i18n/useNavigate'
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import Avatar from '@/shared/components/Avatar'
+import AuthorLink from '@/features/profile/components/AuthorLink'
 import Badge from '@/shared/components/Badge'
 import Button from '@/shared/components/Button'
 import ConfirmDialog from '@/shared/components/ConfirmDialog'
@@ -64,9 +65,13 @@ export default function DiscussionArticle({ discussion, commentCount, onChange }
           {discussion.title}
         </h1>
         <div className="mt-4 flex items-center gap-3">
-          <Avatar name={discussion.authorName} />
+          <Avatar name={discussion.authorName} src={discussion.authorAvatarUrl} />
           <p className="text-sm text-ink-muted">
-            <span className="block font-semibold text-ink">{discussion.authorName || t('forum.user')}</span>
+            <AuthorLink
+              id={discussion.authorId}
+              name={discussion.authorName || t('forum.user')}
+              className="block font-semibold text-ink"
+            />
             <Time value={discussion.createdAt} format="datetime" />
             {commentCount > 0 && ` · ${t('forum.detail.comment', { count: commentCount })}`}
           </p>

@@ -32,6 +32,11 @@ const SECTIONS = [
           ubicación que indiques).
         </li>
         <li>
+          <strong>Tu perfil, si decides completarlo:</strong> foto, titular, presentación, tecnologías y enlaces a
+          GitHub o LinkedIn. Todo es opcional y puedes cambiarlo o borrarlo cuando quieras desde «Editar perfil». Al
+          subir una foto eliminamos sus metadatos (como la ubicación donde se hizo).
+        </li>
+        <li>
           <strong>Datos técnicos:</strong> la dirección IP se usa de forma temporal, solo en memoria, para limitar
           abusos como intentos masivos de inicio de sesión. No la guardamos.
         </li>
@@ -67,7 +72,9 @@ const SECTIONS = [
     content: (
       <p>
         Tu nombre aparece junto a los debates y comentarios que publicas, y los testimonios aprobados muestran el
-        nombre, el cargo y la ubicación que indicaste. Tu email nunca se muestra a otras personas.
+        nombre, el cargo y la ubicación que indicaste. Tu perfil es público dentro de la web: muestra tu nombre, la
+        fecha en que te uniste, los datos de perfil que hayas añadido, y tus debates y testimonios publicados. Los
+        perfiles no se indexan en buscadores. Tu email nunca se muestra a otras personas.
       </p>
     ),
   },
