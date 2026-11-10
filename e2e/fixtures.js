@@ -60,7 +60,7 @@ export const test = base.extend({
           query: url.searchParams,
           body: request.postData(),
         })
-        await route.fulfill(api.handle(request.method(), url.pathname))
+        await route.fulfill(await api.handle(request.method(), url.pathname))
       })
       // Las imágenes externas no deben hacer lentas ni frágiles las pruebas.
       await browserPage.route(/^https?:\/\/(?!localhost)/, (route) => route.abort())

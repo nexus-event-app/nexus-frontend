@@ -37,7 +37,9 @@ export default function SaveJobButton({ job, compact = false, className }) {
     }
   }
 
-  const label = saved ? t('jobs.saved.removeLabel', { title: job.title }) : t('jobs.saved.saveLabel', { title: job.title })
+  const label = saved
+    ? t('jobs.saved.removeLabel', { title: job.title })
+    : t('jobs.saved.saveLabel', { title: job.title })
 
   return (
     <button

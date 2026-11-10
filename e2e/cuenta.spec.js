@@ -54,6 +54,27 @@ test.describe('Cuenta', () => {
     expect(api.calls.some((call) => call.method === 'PUT' && call.path === '/api/saved-jobs/11')).toBe(true)
   })
 
+  test('lo guardado nada más entrar no se pierde aunque la lista tarde en llegar', async ({ page, api, signedIn }) => {
+    expect(signedIn.id).toBe(7)
+    let releaseList
+    const listArrived = new Promise((resolve) => (releaseList = resolve))
+    let listServed = false
+    api.on('GET', '/api/saved-jobs/ids', async () => {
+      await listArrived
+      listServed = true
+      return { status: 200, contentType: 'application/json', body: '[]' }
+    })
+    await page.goto('/empleo')
+    await page.getByRole('button', { name: /Guardar la oferta «Desarrollador\/a frontend junior»/ }).click()
+    releaseList()
+
+    const saved = page.getByRole('button', { name: /Quitar «Desarrollador\/a frontend junior»/ })
+    await expect(saved).toHaveAttribute('aria-pressed', 'true')
+    // Ya ha llegado la lista (sin esa oferta) y la oferta sigue guardada.
+    await expect.poll(() => listServed).toBe(true)
+    await expect(saved).toHaveAttribute('aria-pressed', 'true')
+  })
+
   test('sin sesión, guardar una oferta invita a iniciar sesión', async ({ page, api }) => {
     await page.goto('/empleo')
     await page

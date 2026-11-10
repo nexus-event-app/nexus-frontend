@@ -13,6 +13,9 @@ export default function SavedJobsProvider({ children }) {
   const [state, setState] = useState({ userId: null, ids: new Set() })
   const [pending, setPending] = useState(() => new Set())
   const pendingRef = useRef(pending)
+  // Cambios hechos mientras se carga la lista: la respuesta se pidió antes y no los incluye, así que se aplican
+  // encima al llegar. Sin esto, guardar una oferta nada más entrar se perdía al terminar la carga.
+  const changesWhileLoadingRef = useRef(null)
 
   useEffect(() => {
     pendingRef.current = pending
@@ -21,25 +24,38 @@ export default function SavedJobsProvider({ children }) {
   useEffect(() => {
     if (userId === null) return undefined
     const controller = new AbortController()
-    savedJobsService.ids({ signal: controller.signal }).then(
-      (ids) => setState({ userId, ids: new Set(ids) }),
-      () => {
-        // Sin la lista, los botones aparecen sin marcar; guardar sigue funcionando.
-      },
-    )
+    const changes = new Map()
+    changesWhileLoadingRef.current = changes
+    savedJobsService
+      .ids({ signal: controller.signal })
+      .then(
+        (serverIds) => {
+          const ids = new Set(serverIds)
+          changes.forEach((saved, jobId) => (saved ? ids.add(jobId) : ids.delete(jobId)))
+          setState({ userId, ids })
+        },
+        () => {
+          // Sin la lista, los botones aparecen sin marcar; guardar sigue funcionando.
+        },
+      )
+      .finally(() => {
+        if (changesWhileLoadingRef.current === changes) changesWhileLoadingRef.current = null
+      })
     return () => controller.abort()
   }, [userId])
 
   const ids = useMemo(() => (state.userId === userId ? state.ids : new Set()), [state, userId])
 
   const setSaved = useCallback(
-    (jobId, saved) =>
+    (jobId, saved) => {
+      changesWhileLoadingRef.current?.set(jobId, saved)
       setState((current) => {
         const next = new Set(current.ids)
         if (saved) next.add(jobId)
         else next.delete(jobId)
         return { userId, ids: next }
-      }),
+      })
+    },
     [userId],
   )
 
