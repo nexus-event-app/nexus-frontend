@@ -25,6 +25,7 @@ const cases = [
   ['/foro/nueva', '/foro/nueva', '/ca/forum/nova', '/en/forum/new'],
   ['/empleo/guardadas', '/empleo/guardadas', '/ca/feina/desades', '/en/jobs/saved'],
   ['/perfil/editar', '/perfil/editar', '/ca/perfil/edita', '/en/profile/edit'],
+  ['/buscar?q=react', '/buscar?q=react', '/ca/cerca?q=react', '/en/search?q=react'],
   ['/perfil/7-ana-garcia', '/perfil/7-ana-garcia', '/ca/perfil/7-ana-garcia', '/en/profile/7-ana-garcia'],
   ['/foro/5-mi-duda#comentarios', '/foro/5-mi-duda#comentarios', '/ca/forum/5-mi-duda#comentarios', '/en/forum/5-mi-duda#comentarios'],
   ['/testimonios', '/testimonios', '/ca/testimonis', '/en/testimonials'],

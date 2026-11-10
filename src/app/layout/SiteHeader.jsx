@@ -1,4 +1,4 @@
-import { useId, useRef, useState } from 'react'
+import { useCallback, useId, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Link } from '@/shared/i18n/router'
 import { useAuth } from '@/features/auth/hooks/useAuth'
@@ -12,6 +12,9 @@ import ThemeToggle from '@/shared/components/ThemeToggle'
 import { useDismiss } from '@/shared/hooks/useDismiss'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { useToast } from '@/shared/hooks/useToast'
+import SearchButton from '@/features/search/components/SearchButton'
+import SearchDialog from '@/features/search/components/SearchDialog'
+import { useSearchShortcut } from '@/features/search/hooks/useSearchShortcut'
 import NavItems from './NavItems'
 import UserMenu from './UserMenu'
 import { siteConfig } from '@/shared/config/site'
@@ -53,6 +56,14 @@ export default function SiteHeader() {
 
   useDismiss(headerRef, open, closeMenu)
 
+  // Búsqueda global: una sola ventana para toda la cabecera (botón de escritorio, de móvil y atajo de teclado).
+  const [searchOpen, setSearchOpen] = useState(false)
+  const openSearch = useCallback(() => {
+    setOpenKey(null)
+    setSearchOpen(true)
+  }, [])
+  useSearchShortcut(openSearch)
+
   const handleLogout = () => {
     logout()
     toast.info(t('common.account.loggedOut'))
@@ -77,6 +88,9 @@ export default function SiteHeader() {
 
       <menu className="hidden items-center gap-2 lg:flex">
         <li>
+          <SearchButton onOpen={openSearch} />
+        </li>
+        <li>
           <ThemeToggle />
         </li>
         <li>
@@ -85,6 +99,7 @@ export default function SiteHeader() {
         {isAuthenticated ? <UserMenu /> : <AuthLinks />}
       </menu>
 
+      <SearchButton onOpen={openSearch} compact className="ml-auto lg:hidden" />
       <button
         ref={toggleRef}
         type="button"
@@ -157,6 +172,7 @@ export default function SiteHeader() {
           </footer>
         </section>
       )}
+      {searchOpen && <SearchDialog onClose={() => setSearchOpen(false)} />}
     </header>
   )
 }

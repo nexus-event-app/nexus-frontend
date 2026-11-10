@@ -20,6 +20,7 @@ const NewDiscussionPage = lazy(() => import('@/features/forum/pages/NewDiscussio
 const DiscussionDetailPage = lazy(() => import('@/features/forum/pages/DiscussionDetailPage'))
 const ProfilePage = lazy(() => import('@/features/profile/pages/ProfilePage'))
 const EditProfilePage = lazy(() => import('@/features/profile/pages/EditProfilePage'))
+const SearchPage = lazy(() => import('@/features/search/pages/SearchPage'))
 const TestimonialsPage = lazy(() => import('@/features/testimonials/pages/TestimonialsPage'))
 const LegalNoticePage = lazy(() => import('@/features/legal/pages/LegalNoticePage'))
 const PrivacyPage = lazy(() => import('@/features/legal/pages/PrivacyPage'))
@@ -78,6 +79,7 @@ function publicRoutes({ prefix, lang }) {
       />
       <Route path={`${forum}/:idSlug`} element={<DiscussionDetailPage />} />
       <Route path={seg('testimonios')} element={<TestimonialsPage />} />
+      <Route path={seg('buscar')} element={<SearchPage />} />
       <Route
         path={`${seg('perfil')}/${routeSubsegment('perfil', 'editar', lang)}`}
         element={

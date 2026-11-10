@@ -19,6 +19,7 @@ export const ROUTE_SEGMENTS = {
   'restablecer-contrasena': { ca: 'restableix-contrasenya', en: 'reset-password' },
   'verificar-email': { ca: 'verifica-correu', en: 'verify-email' },
   perfil: { ca: 'perfil', en: 'profile' },
+  buscar: { ca: 'cerca', en: 'search' },
 }
 
 /** Subsecciones fijas (el resto de segundos segmentos son identificadores como «12-mi-duda» y no se traducen). */
