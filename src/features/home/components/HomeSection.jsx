@@ -4,22 +4,20 @@ import { cx } from '@/shared/utils/classNames'
 
 export default function HomeSection({ id, title, description, linkTo, linkLabel, tinted = false, children }) {
   return (
-    <section aria-labelledby={id} className={cx('page-section', tinted && 'bg-surface')}>
-      <div className="page-container">
-        <SectionHeader
-          id={id}
-          title={title}
-          description={description}
-          action={
-            linkTo && (
-              <Link to={linkTo} className="link inline-flex min-h-[2.75rem] shrink-0 items-center">
-                {linkLabel}
-              </Link>
-            )
-          }
-        />
-        {children}
-      </div>
+    <section aria-labelledby={id} className={cx('page-gutter page-section', tinted && 'bg-surface')}>
+      <SectionHeader
+        id={id}
+        title={title}
+        description={description}
+        action={
+          linkTo && (
+            <Link to={linkTo} className="link inline-flex min-h-[2.75rem] shrink-0 items-center">
+              {linkLabel}
+            </Link>
+          )
+        }
+      />
+      {children}
     </section>
   )
 }

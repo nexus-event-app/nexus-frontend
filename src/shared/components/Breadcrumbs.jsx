@@ -1,3 +1,4 @@
+import { cx } from '@/shared/utils/classNames'
 import { Link } from '@/shared/i18n/router'
 import { absoluteUrl } from '@/shared/config/site'
 import { paths } from '@/shared/config/paths'
@@ -6,7 +7,7 @@ import { useI18n } from '@/shared/i18n/useI18n'
 import JsonLd from './JsonLd'
 import Icon from './Icon'
 
-export default function Breadcrumbs({ items }) {
+export default function Breadcrumbs({ items, className }) {
   const { t, lang } = useI18n()
   const trail = [{ label: t('common.breadcrumbs.home'), to: paths.home }, ...items]
 
@@ -22,7 +23,7 @@ export default function Breadcrumbs({ items }) {
   }
 
   return (
-    <nav aria-label={t('common.breadcrumbs.label')} className="mb-6">
+    <nav aria-label={t('common.breadcrumbs.label')} className={cx('mb-6', className)}>
       <ol className="flex flex-wrap items-center gap-1 text-sm text-ink-muted">
         {trail.map((item, index) => {
           const isLast = index === trail.length - 1

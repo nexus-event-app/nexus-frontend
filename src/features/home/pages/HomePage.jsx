@@ -1,4 +1,5 @@
 import JsonLd from '@/shared/components/JsonLd'
+import PageMain from '@/shared/components/PageMain'
 import Seo from '@/shared/components/Seo'
 import { paths } from '@/shared/config/paths'
 import FinalCta from '../components/FinalCta'
@@ -11,7 +12,7 @@ import { buildHomeData } from '../utils/structuredData'
 
 export default function HomePage() {
   return (
-    <>
+    <PageMain>
       <Seo path={paths.home} />
       <JsonLd data={buildHomeData()} />
       <HeroSection />
@@ -20,6 +21,6 @@ export default function HomePage() {
       <ForumSection />
       <TestimonialsSection />
       <FinalCta />
-    </>
+    </PageMain>
   )
 }

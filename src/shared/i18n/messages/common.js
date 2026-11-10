@@ -19,6 +19,7 @@ export default {
       testimonials: 'Testimonios',
       main: 'Principal',
       mainMobile: 'Principal (móvil)',
+      menu: 'Menú',
       openMenu: 'Abrir menú',
       closeMenu: 'Cerrar menú',
       goHome: '{name}, ir al inicio',
@@ -32,6 +33,7 @@ export default {
       admin: 'Panel de administración',
       savedJobs: 'Ofertas guardadas',
       profile: 'Mi perfil',
+      menu: 'Menú de tu cuenta',
     },
     footer: {
       description:
@@ -91,6 +93,7 @@ export default {
       testimonials: 'Testimonis',
       main: 'Principal',
       mainMobile: 'Principal (mòbil)',
+      menu: 'Menú',
       openMenu: 'Obre el menú',
       closeMenu: 'Tanca el menú',
       goHome: '{name}, anar a l’inici',
@@ -104,6 +107,7 @@ export default {
       admin: 'Tauler d’administració',
       savedJobs: 'Ofertes desades',
       profile: 'El meu perfil',
+      menu: 'Menú del teu compte',
     },
     footer: {
       description:
@@ -163,6 +167,7 @@ export default {
       testimonials: 'Testimonials',
       main: 'Main',
       mainMobile: 'Main (mobile)',
+      menu: 'Menu',
       openMenu: 'Open menu',
       closeMenu: 'Close menu',
       goHome: '{name}, go to the home page',
@@ -176,6 +181,7 @@ export default {
       admin: 'Admin panel',
       savedJobs: 'Saved jobs',
       profile: 'My profile',
+      menu: 'Your account menu',
     },
     footer: {
       description:

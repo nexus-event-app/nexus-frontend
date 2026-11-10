@@ -16,14 +16,21 @@ import NavItems from './NavItems'
 import UserMenu from './UserMenu'
 import { siteConfig } from '@/shared/config/site'
 
-function AuthLinks() {
+/** Entrar y crear cuenta, como elementos de un menú (<menu>). */
+function AuthLinks({ className }) {
   const { t } = useI18n()
   return (
     <>
-      <ButtonLink to={paths.login} variant="ghost">
-        {t('common.account.login')}
-      </ButtonLink>
-      <ButtonLink to={paths.register}>{t('common.account.register')}</ButtonLink>
+      <li>
+        <ButtonLink to={paths.login} variant="ghost" className={className}>
+          {t('common.account.login')}
+        </ButtonLink>
+      </li>
+      <li>
+        <ButtonLink to={paths.register} className={className}>
+          {t('common.account.register')}
+        </ButtonLink>
+      </li>
     </>
   )
 }
@@ -52,78 +59,103 @@ export default function SiteHeader() {
   }
 
   return (
-    <header ref={headerRef} className="sticky top-0 z-40 border-b border-slate-200 bg-surface/95 backdrop-blur">
-      <div className="page-container flex h-16 items-center justify-between gap-4">
-        <Link to={paths.home} aria-label={t('common.nav.goHome', { name: siteConfig.name })} className="rounded-control">
-          <Logo />
-        </Link>
+    <header
+      ref={headerRef}
+      className="page-gutter sticky top-0 z-40 flex flex-wrap items-center justify-between gap-x-4 border-b border-slate-200 bg-surface/95 backdrop-blur"
+    >
+      <Link
+        to={paths.home}
+        aria-label={t('common.nav.goHome', { name: siteConfig.name })}
+        className="flex h-16 items-center rounded-control"
+      >
+        <Logo />
+      </Link>
 
-        <nav aria-label={t('common.nav.main')} className="hidden lg:block">
-          <NavItems />
-        </nav>
+      <nav aria-label={t('common.nav.main')} className="hidden lg:block">
+        <NavItems />
+      </nav>
 
-        <div className="hidden items-center gap-2 lg:flex">
+      <menu className="hidden items-center gap-2 lg:flex">
+        <li>
           <ThemeToggle />
+        </li>
+        <li>
           <LanguageSwitcher />
-          {isAuthenticated ? <UserMenu /> : <AuthLinks />}
-        </div>
+        </li>
+        {isAuthenticated ? <UserMenu /> : <AuthLinks />}
+      </menu>
 
-        <button
-          ref={toggleRef}
-          type="button"
-          onClick={() => setOpenKey(open ? null : location.key)}
-          aria-expanded={open}
-          aria-controls={menuId}
-          aria-label={open ? t('common.nav.closeMenu') : t('common.nav.openMenu')}
-          className="-mr-2 flex h-11 w-11 items-center justify-center rounded-control text-ink hover:bg-slate-100 lg:hidden"
-        >
-          <Icon name={open ? 'close' : 'menu'} className="h-6 w-6" />
-        </button>
-      </div>
+      <button
+        ref={toggleRef}
+        type="button"
+        onClick={() => setOpenKey(open ? null : location.key)}
+        aria-expanded={open}
+        aria-controls={menuId}
+        aria-label={open ? t('common.nav.closeMenu') : t('common.nav.openMenu')}
+        className="-mr-2 flex h-11 w-11 items-center justify-center rounded-control text-ink hover:bg-slate-100 lg:hidden"
+      >
+        <Icon name={open ? 'close' : 'menu'} className="h-6 w-6" />
+      </button>
 
       {open && (
-        <div id={menuId} className="border-t border-slate-200 bg-surface lg:hidden">
-          <div className="page-container space-y-4 py-4">
-            <nav aria-label={t('common.nav.mainMobile')}>
-              <NavItems orientation="vertical" />
-            </nav>
-            <div className="flex items-center justify-between gap-2">
+        <section
+          id={menuId}
+          aria-label={t('common.nav.menu')}
+          className="basis-full space-y-4 border-t border-slate-200 py-4 lg:hidden"
+        >
+          <nav aria-label={t('common.nav.mainMobile')}>
+            <NavItems orientation="vertical" />
+          </nav>
+          <menu className="flex items-center justify-between gap-2">
+            <li>
               <LanguageSwitcher />
+            </li>
+            <li>
               <ThemeToggle />
-            </div>
-            <div className="border-t border-slate-200 pt-4">
+            </li>
+          </menu>
+          <footer className="space-y-3 border-t border-slate-200 pt-4">
+            {isAuthenticated && (
+              <p className="px-3 text-sm text-ink-muted">
+                {t('common.account.loggedInAs')} <strong className="font-semibold text-ink">{user.name}</strong>
+              </p>
+            )}
+            <menu className="flex flex-col gap-3">
               {isAuthenticated ? (
-                <div className="space-y-3">
-                  <p className="px-3 text-sm text-ink-muted">
-                    {t('common.account.loggedInAs')} <span className="font-semibold text-ink">{user.name}</span>
-                  </p>
-                  <ButtonLink to={paths.profile(user)} variant="secondary" className="w-full">
-                    <Icon name="user" />
-                    {t('common.account.profile')}
-                  </ButtonLink>
-                  <ButtonLink to={paths.savedJobs} variant="secondary" className="w-full">
-                    <Icon name="bookmark" />
-                    {t('common.account.savedJobs')}
-                  </ButtonLink>
-                  {isAdmin && (
-                    <ButtonLink to={paths.admin} variant="secondary" className="w-full">
-                      <Icon name="shield" />
-                      {t('common.account.admin')}
+                <>
+                  <li>
+                    <ButtonLink to={paths.profile(user)} variant="secondary" className="w-full">
+                      <Icon name="user" />
+                      {t('common.account.profile')}
                     </ButtonLink>
+                  </li>
+                  <li>
+                    <ButtonLink to={paths.savedJobs} variant="secondary" className="w-full">
+                      <Icon name="bookmark" />
+                      {t('common.account.savedJobs')}
+                    </ButtonLink>
+                  </li>
+                  {isAdmin && (
+                    <li>
+                      <ButtonLink to={paths.admin} variant="secondary" className="w-full">
+                        <Icon name="shield" />
+                        {t('common.account.admin')}
+                      </ButtonLink>
+                    </li>
                   )}
-                  <Button variant="secondary" className="w-full" onClick={handleLogout}>
-                    <Icon name="logout" />
-                    {t('common.account.logout')}
-                  </Button>
-                </div>
+                  <li>
+                    <Button variant="secondary" className="w-full" onClick={handleLogout}>
+                      <Icon name="logout" />
+                      {t('common.account.logout')}
+                    </Button>
+                  </li>
+                </>
               ) : (
-                <div className="flex flex-col gap-3">
-                  <AuthLinks />
-                </div>
+                <AuthLinks className="w-full" />
               )}
-            </div>
-          </div>
-        </div>
+            </menu>
+          </footer>
+        </section>
       )}
     </header>
   )

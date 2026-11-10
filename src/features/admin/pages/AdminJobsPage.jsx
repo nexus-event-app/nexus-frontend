@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ActionMenu from '@/shared/components/ActionMenu'
 import { Link } from 'react-router-dom'
 import Badge from '@/shared/components/Badge'
 import Button from '@/shared/components/Button'
@@ -52,30 +53,29 @@ export default function AdminJobsPage() {
       header: 'Oferta',
       primary: true,
       render: (job) => (
-        <div>
-          <p>{job.title}</p>
-          <p className="mt-1 text-sm font-normal text-ink-muted">
+        <p>
+          {job.title}
+          <span className="block mt-1 text-sm font-normal text-ink-muted">
             {job.company}
             {job.imported && <> · importada de {job.source}</>}
-          </p>
-        </div>
+          </span>
+        </p>
       ),
     },
     {
       key: 'kind',
       header: 'Nivel y modalidad',
       render: (job) => (
-        <div className="flex flex-wrap justify-end gap-1.5 md:justify-start">
+        <p className="flex flex-wrap justify-end gap-1.5 md:justify-start">
           <Badge tone={jobLevels.toneOf(job.level)}>{jobLevels.labelOf(job.level)}</Badge>
           <Badge tone={workModes.toneOf(job.workMode)}>{workModes.labelOf(job.workMode)}</Badge>
-        </div>
+        </p>
       ),
     },
     {
       key: 'status',
       header: 'Estado',
-      render: (job) =>
-        isExpired(job) ? <Badge tone="amber">Caducada</Badge> : <StatusBadge active={job.isActive} />,
+      render: (job) => (isExpired(job) ? <Badge tone="amber">Caducada</Badge> : <StatusBadge active={job.isActive} />),
     },
     { key: 'date', header: 'Publicada', render: (job) => <Time value={postedAt(job)} format="short" /> },
     {
@@ -83,7 +83,7 @@ export default function AdminJobsPage() {
       actions: true,
       header: 'Acciones',
       render: (job) => (
-        <div className="flex flex-wrap justify-end gap-2 md:justify-start">
+        <ActionMenu className="justify-end md:justify-start">
           {job.isActive && !isExpired(job) && (
             <Link to={paths.jobDetail(job)} className="btn btn-ghost btn-sm">
               Ver<span className="sr-only"> {job.title}</span>
@@ -97,7 +97,7 @@ export default function AdminJobsPage() {
             <Icon name="trash" className="h-4 w-4" />
             Borrar<span className="sr-only"> {job.title}</span>
           </Button>
-        </div>
+        </ActionMenu>
       ),
     },
   ]
@@ -125,11 +125,7 @@ export default function AdminJobsPage() {
       />
 
       {editing && (
-        <Modal
-          title={editing === 'new' ? 'Nueva oferta' : 'Editar oferta'}
-          size="lg"
-          onClose={() => setEditing(null)}
-        >
+        <Modal title={editing === 'new' ? 'Nueva oferta' : 'Editar oferta'} size="lg" onClose={() => setEditing(null)}>
           <JobForm job={editing === 'new' ? null : editing} onSubmit={handleSubmit} onCancel={() => setEditing(null)} />
         </Modal>
       )}

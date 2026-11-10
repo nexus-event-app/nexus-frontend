@@ -61,12 +61,12 @@ export default function Modal({ title, description, onClose, size = 'md', dismis
         if (event.target === event.currentTarget) requestClose()
       }}
       className={cx(
-        'm-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] overflow-y-auto rounded-card bg-surface p-0 text-ink shadow-pop backdrop:bg-gray-950/70 backdrop:backdrop-blur-sm',
+        'm-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] overflow-y-auto rounded-card bg-surface px-5 pb-5 pt-0 text-ink shadow-pop backdrop:bg-gray-950/70 backdrop:backdrop-blur-sm sm:px-6',
         SIZES[size],
       )}
     >
-      <div className="flex items-start justify-between gap-4 border-b border-slate-200 px-5 py-4 sm:px-6">
-        <div>
+      <header className="-mx-5 mb-5 flex items-start justify-between gap-4 border-b border-slate-200 px-5 py-4 sm:-mx-6 sm:px-6">
+        <hgroup>
           <h2 id={titleId} className="text-xl font-bold">
             {title}
           </h2>
@@ -75,7 +75,7 @@ export default function Modal({ title, description, onClose, size = 'md', dismis
               {description}
             </p>
           )}
-        </div>
+        </hgroup>
         <button
           type="button"
           onClick={requestClose}
@@ -85,8 +85,8 @@ export default function Modal({ title, description, onClose, size = 'md', dismis
         >
           <Icon name="close" className="h-6 w-6" />
         </button>
-      </div>
-      <div className="px-5 py-5 sm:px-6">{children}</div>
+      </header>
+      {children}
     </dialog>,
     document.body,
   )

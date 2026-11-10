@@ -3,6 +3,7 @@ import VerifyEmailNotice from '@/features/auth/components/VerifyEmailNotice'
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import PageHeader from '@/shared/components/PageHeader'
+import PageMain from '@/shared/components/PageMain'
 import Seo from '@/shared/components/Seo'
 import { paths } from '@/shared/config/paths'
 import { useToast } from '@/shared/hooks/useToast'
@@ -27,7 +28,7 @@ export default function NewDiscussionPage() {
   }
 
   return (
-    <div className="page-container page-section">
+    <PageMain className="page-container page-section grid grid-cols-1 content-start gap-x-10 lg:grid-cols-[minmax(0,1fr)_22rem]">
       <Seo
         title={t('forum.new.seoTitle')}
         description={t('forum.new.seoDescription', { name: siteConfig.name })}
@@ -35,24 +36,24 @@ export default function NewDiscussionPage() {
         robots="noindex,nofollow"
       />
       <Breadcrumbs
+        className="col-span-full"
         items={[
           { label: t('forum.breadcrumb'), to: paths.forum },
           { label: t('forum.new.seoTitle'), to: paths.forumNew },
         ]}
       />
-      <PageHeader title={t('forum.new.seoTitle')} description={t('forum.new.description')} />
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem]">
-        {user?.emailVerified === false ? (
-          <div className="min-w-0">
-            <VerifyEmailNotice>{t('forum.new.confirmEmail')}</VerifyEmailNotice>
-          </div>
-        ) : (
-          <div className="card min-w-0 p-5 sm:p-6">
-            <DiscussionForm initialValues={INITIAL_VALUES} submitLabel={t('forum.new.submit')} onSubmit={handleSubmit} />
-          </div>
-        )}
-        <ForumRules />
-      </div>
-    </div>
+      <PageHeader className="col-span-full" title={t('forum.new.seoTitle')} description={t('forum.new.description')} />
+      {user?.emailVerified === false ? (
+        <VerifyEmailNotice className="min-w-0 self-start">{t('forum.new.confirmEmail')}</VerifyEmailNotice>
+      ) : (
+        <DiscussionForm
+          className="card min-w-0 self-start p-5 sm:p-6"
+          initialValues={INITIAL_VALUES}
+          submitLabel={t('forum.new.submit')}
+          onSubmit={handleSubmit}
+        />
+      )}
+      <ForumRules className="mt-10 lg:mt-0" />
+    </PageMain>
   )
 }

@@ -130,7 +130,7 @@ export default function AppRoutes() {
         <Route path="testimonios" element={<AdminTestimonialsPage />} />
         <Route path="usuarios" element={<AdminUsersPage />} />
         <Route path="importacion" element={<AdminImportPage />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<NotFound embedded />} />
       </Route>
     </Routes>
   )

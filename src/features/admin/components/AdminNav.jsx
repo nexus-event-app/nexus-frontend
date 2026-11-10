@@ -13,9 +13,9 @@ const ITEMS = [
   { label: 'Importación', to: paths.adminImport, icon: 'refresh' },
 ]
 
-export default function AdminNav() {
+export default function AdminNav({ className }) {
   return (
-    <nav aria-label="Administración">
+    <nav aria-label="Administración" className={className}>
       <ul className="space-y-1">
         {ITEMS.map((item) => (
           <li key={item.to}>

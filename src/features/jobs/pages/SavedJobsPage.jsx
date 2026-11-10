@@ -5,6 +5,7 @@ import CardGridSkeleton from '@/shared/components/CardGridSkeleton'
 import EmptyState from '@/shared/components/EmptyState'
 import Icon from '@/shared/components/Icon'
 import PageHeader from '@/shared/components/PageHeader'
+import PageMain from '@/shared/components/PageMain'
 import Pagination from '@/shared/components/Pagination'
 import QueryBoundary from '@/shared/components/QueryBoundary'
 import Seo from '@/shared/components/Seo'
@@ -33,9 +34,9 @@ function UnavailableJob({ job }) {
         <Icon name="building" className="h-4 w-4" />
         {job.company}
       </p>
-      <div className="mt-auto flex justify-end pt-4">
+      <footer className="mt-auto flex justify-end pt-4">
         <SaveJobButton job={job} compact />
-      </div>
+      </footer>
     </article>
   )
 }
@@ -49,7 +50,7 @@ export default function SavedJobsPage() {
   )
 
   return (
-    <div className="page-container page-section">
+    <PageMain className="page-container page-section">
       <Seo title={t('jobs.saved.title')} path={paths.savedJobs} robots="noindex,nofollow" />
       <Breadcrumbs
         items={[
@@ -104,6 +105,6 @@ export default function SavedJobsPage() {
           }}
         </QueryBoundary>
       </section>
-    </div>
+    </PageMain>
   )
 }

@@ -24,9 +24,9 @@ function toValues(job) {
   }
 }
 
-function SelectField({ form, name, label, catalog }) {
+function SelectField({ form, name, label, catalog, className }) {
   return (
-    <FormField {...form.getFieldProps(name)} as="select" label={label}>
+    <FormField {...form.getFieldProps(name)} as="select" label={label} className={className}>
       {catalog.items.map((item) => (
         <option key={item.value} value={item.value}>
           {item.label}
@@ -60,18 +60,29 @@ export default function JobForm({ job, onSubmit, onCancel }) {
   })
 
   return (
-    <form onSubmit={form.handleSubmit} noValidate className="space-y-5">
+    <form onSubmit={form.handleSubmit} noValidate className="form-grid">
       {form.formError && <Alert variant="error">{form.formError}</Alert>}
       <FormField {...form.getFieldProps('title')} label="Puesto" maxLength={200} required />
-      <div className="grid gap-5 sm:grid-cols-2">
-        <FormField {...form.getFieldProps('company')} label="Empresa" maxLength={120} required />
-        <FormField {...form.getFieldProps('location')} label="Ubicación" maxLength={120} required />
-      </div>
-      <div className="grid gap-5 sm:grid-cols-3">
-        <SelectField form={form} name="level" label="Nivel" catalog={jobLevels} />
-        <SelectField form={form} name="workMode" label="Modalidad" catalog={workModes} />
-        <SelectField form={form} name="contractType" label="Tipo de contrato" catalog={contractTypes} />
-      </div>
+
+      <FormField className="field-half" {...form.getFieldProps('company')} label="Empresa" maxLength={120} required />
+      <FormField
+        className="field-half"
+        {...form.getFieldProps('location')}
+        label="Ubicación"
+        maxLength={120}
+        required
+      />
+
+      <SelectField className="field-third" form={form} name="level" label="Nivel" catalog={jobLevels} />
+      <SelectField className="field-third" form={form} name="workMode" label="Modalidad" catalog={workModes} />
+      <SelectField
+        className="field-third"
+        form={form}
+        name="contractType"
+        label="Tipo de contrato"
+        catalog={contractTypes}
+      />
+
       <FormField
         {...form.getFieldProps('tags')}
         label="Etiquetas"
@@ -85,10 +96,10 @@ export default function JobForm({ job, onSubmit, onCancel }) {
         placeholder="https://…"
         required
       />
-      <div className="grid gap-5 sm:grid-cols-2">
-        <FormField {...form.getFieldProps('source')} label="Fuente" maxLength={100} />
-        <FormField {...form.getFieldProps('expiresAt')} type="datetime-local" label="Caduca el" />
-      </div>
+
+      <FormField className="field-half" {...form.getFieldProps('source')} label="Fuente" maxLength={100} />
+      <FormField className="field-half" {...form.getFieldProps('expiresAt')} type="datetime-local" label="Caduca el" />
+
       <FormField
         {...form.getFieldProps('description')}
         as="textarea"
@@ -107,14 +118,14 @@ export default function JobForm({ job, onSubmit, onCancel }) {
           onChange={form.handleChange}
         />
       )}
-      <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+      <footer className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
         <Button variant="secondary" onClick={onCancel} disabled={form.submitting}>
           Cancelar
         </Button>
         <Button type="submit" loading={form.submitting}>
           {editing ? 'Guardar cambios' : 'Crear oferta'}
         </Button>
-      </div>
+      </footer>
     </form>
   )
 }

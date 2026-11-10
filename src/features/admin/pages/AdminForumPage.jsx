@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ActionMenu from '@/shared/components/ActionMenu'
 import { discussionService } from '@/features/forum/services/discussionService'
 import Badge from '@/shared/components/Badge'
 import Button from '@/shared/components/Button'
@@ -38,14 +39,14 @@ export default function AdminForumPage() {
       header: 'Discusión',
       primary: true,
       render: (discussion) => (
-        <div>
-          <p>{discussion.title}</p>
-          <p className="mt-1">
+        <p>
+          {discussion.title}
+          <span className="block mt-1">
             <Badge tone={discussionCategories.toneOf(discussion.category)}>
               {discussionCategories.labelOf(discussion.category)}
             </Badge>
-          </p>
-        </div>
+          </span>
+        </p>
       ),
     },
     { key: 'author', header: 'Autor', render: (discussion) => discussion.authorName || 'Usuario' },
@@ -57,7 +58,7 @@ export default function AdminForumPage() {
       actions: true,
       header: 'Acciones',
       render: (discussion) => (
-        <div className="flex flex-wrap justify-end gap-2 md:justify-start">
+        <ActionMenu className="justify-end md:justify-start">
           <Button variant="secondary" size="sm" onClick={() => setModerating(discussion)}>
             <Icon name="eye" className="h-4 w-4" />
             Ver<span className="sr-only"> {discussion.title}</span>
@@ -66,7 +67,7 @@ export default function AdminForumPage() {
             <Icon name="trash" className="h-4 w-4" />
             Borrar<span className="sr-only"> {discussion.title}</span>
           </Button>
-        </div>
+        </ActionMenu>
       ),
     },
   ]
@@ -78,14 +79,14 @@ export default function AdminForumPage() {
         title="Moderación del foro"
         description="Revisa discusiones y comentarios, incluidas las discusiones inactivas."
       />
-      <div className="mb-6">
+      <search className="mb-6 block">
         <SearchBar
           value={list.search}
           onSearch={(value) => list.setFilters({ q: value }, { replace: true })}
           label="Buscar discusiones"
           placeholder="Buscar por título o contenido…"
         />
-      </div>
+      </search>
       <PagedTable
         list={list}
         columns={columns}

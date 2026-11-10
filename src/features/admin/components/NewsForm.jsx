@@ -38,19 +38,19 @@ export default function NewsForm({ news, onSubmit, onCancel }) {
   })
 
   return (
-    <form onSubmit={form.handleSubmit} noValidate className="space-y-5">
+    <form onSubmit={form.handleSubmit} noValidate className="form-grid">
       {form.formError && <Alert variant="error">{form.formError}</Alert>}
       <FormField {...form.getFieldProps('title')} label="Título" maxLength={200} required />
-      <div className="grid gap-5 sm:grid-cols-2">
-        <FormField {...form.getFieldProps('category')} as="select" label="Categoría">
-          {newsCategories.items.map((item) => (
-            <option key={item.value} value={item.value}>
-              {item.label}
-            </option>
-          ))}
-        </FormField>
-        <FormField {...form.getFieldProps('author')} label="Autor" maxLength={100} />
-      </div>
+
+      <FormField className="field-half" {...form.getFieldProps('category')} as="select" label="Categoría">
+        {newsCategories.items.map((item) => (
+          <option key={item.value} value={item.value}>
+            {item.label}
+          </option>
+        ))}
+      </FormField>
+      <FormField className="field-half" {...form.getFieldProps('author')} label="Autor" maxLength={100} />
+
       <FormField
         {...form.getFieldProps('sourceUrl')}
         type="url"
@@ -83,14 +83,14 @@ export default function NewsForm({ news, onSubmit, onCancel }) {
           onChange={form.handleChange}
         />
       )}
-      <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+      <footer className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
         <Button variant="secondary" onClick={onCancel} disabled={form.submitting}>
           Cancelar
         </Button>
         <Button type="submit" loading={form.submitting}>
           {editing ? 'Guardar cambios' : 'Crear noticia'}
         </Button>
-      </div>
+      </footer>
     </form>
   )
 }

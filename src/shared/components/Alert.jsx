@@ -8,16 +8,18 @@ const VARIANTS = {
   success: { classes: 'border-green-200 bg-green-50 text-green-900 dark:border-green-400/30 dark:bg-green-500/10 dark:text-green-200', icon: 'check-circle', role: 'status' },
 }
 
+/** Aviso breve: un párrafo con su rol (alert o status) para que los lectores de pantalla lo anuncien. */
 export default function Alert({ variant = 'info', title, className, children }) {
   const config = VARIANTS[variant]
 
   return (
-    <div role={config.role} className={cx('flex gap-3 rounded-control border p-4 text-sm', config.classes, className)}>
-      <Icon name={config.icon} className="mt-0.5 h-5 w-5" />
-      <div className="min-w-0 flex-1">
-        {title && <p className="font-semibold">{title}</p>}
-        <div>{children}</div>
-      </div>
-    </div>
+    <p
+      role={config.role}
+      className={cx('grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 rounded-control border p-4 text-sm', config.classes, className)}
+    >
+      <Icon name={config.icon} className="row-span-2 mt-0.5 h-5 w-5" />
+      {title && <strong className="block font-semibold">{title}</strong>}
+      <span className="block">{children}</span>
+    </p>
   )
 }

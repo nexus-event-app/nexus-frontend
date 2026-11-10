@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ActionMenu from '@/shared/components/ActionMenu'
 import Badge from '@/shared/components/Badge'
 import Button from '@/shared/components/Button'
 import ConfirmDialog from '@/shared/components/ConfirmDialog'
@@ -25,7 +26,7 @@ function sortPendingFirst(items) {
 
 function StatusBadges({ testimonial }) {
   return (
-    <div className="flex flex-wrap justify-end gap-1.5 md:justify-start">
+    <p className="flex flex-wrap justify-end gap-1.5 md:justify-start">
       {testimonial.isPending ? (
         <Badge tone="amber">Pendiente</Badge>
       ) : testimonial.isActive ? (
@@ -34,7 +35,7 @@ function StatusBadges({ testimonial }) {
         <Badge tone="slate">Oculto</Badge>
       )}
       {testimonial.isHighlighted && <Badge tone="indigo">Destacado</Badge>}
-    </div>
+    </p>
   )
 }
 
@@ -62,12 +63,12 @@ export default function AdminTestimonialsPage() {
       header: 'Autor',
       primary: true,
       render: (testimonial) => (
-        <div>
-          <p>{testimonial.name}</p>
-          <p className="text-sm font-normal text-ink-muted">
+        <p>
+          {testimonial.name}
+          <span className="block text-sm font-normal text-ink-muted">
             {[testimonial.role, testimonial.location].filter(Boolean).join(' · ')}
-          </p>
-        </div>
+          </span>
+        </p>
       ),
     },
     {
@@ -83,7 +84,7 @@ export default function AdminTestimonialsPage() {
       actions: true,
       header: 'Acciones',
       render: (testimonial) => (
-        <div className="flex flex-wrap justify-end gap-2 md:justify-start">
+        <ActionMenu className="justify-end md:justify-start">
           {testimonial.isPending ? (
             <Button
               size="sm"
@@ -123,7 +124,7 @@ export default function AdminTestimonialsPage() {
             <Icon name="trash" className="h-4 w-4" />
             Eliminar<span className="sr-only"> testimonio de {testimonial.name}</span>
           </Button>
-        </div>
+        </ActionMenu>
       ),
     },
   ]
@@ -139,7 +140,11 @@ export default function AdminTestimonialsPage() {
         <QueryBoundary data={request.data} error={request.error} onRetry={request.reload} skeleton={<ListSkeleton />}>
           {(items) =>
             items.length === 0 ? (
-              <EmptyState icon="star" title="No hay testimonios" description="Cuando alguien envíe uno aparecerá aquí." />
+              <EmptyState
+                icon="star"
+                title="No hay testimonios"
+                description="Cuando alguien envíe uno aparecerá aquí."
+              />
             ) : (
               <DataTable
                 caption="Listado de testimonios"

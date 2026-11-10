@@ -1,14 +1,15 @@
+import { cx } from '@/shared/utils/classNames'
 import { Link } from '@/shared/i18n/router'
 import Time from '@/shared/components/Time'
 import { paths } from '@/shared/config/paths'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-export default function RelatedNews({ items }) {
+export default function RelatedNews({ items, className }) {
   const { t } = useI18n()
   if (items.length === 0) return null
 
   return (
-    <aside aria-labelledby="related-news-heading" className="lg:sticky lg:top-24 lg:self-start">
+    <aside aria-labelledby="related-news-heading" className={cx('lg:sticky lg:top-24 lg:self-start', className)}>
       <h2 id="related-news-heading" className="text-lg font-bold text-ink">
         {t('news.related.title')}
       </h2>

@@ -13,14 +13,15 @@ const SELECTS = [
 export default function JobFilters({ filters, hasFilters, onChange, onClear }) {
   const { t } = useI18n()
   return (
-    <div className="mb-8 space-y-4">
+    <search className="mb-8 block space-y-4">
       <SearchBar
         value={filters.q}
         onSearch={(value) => onChange({ q: value }, { replace: true })}
         label={t('jobs.filters.search')}
         placeholder={t('jobs.filters.searchPlaceholder')}
       />
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:items-end">
+      <fieldset className="grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:items-end">
+        <legend className="sr-only">{t('jobs.filters.legend')}</legend>
         {SELECTS.map(({ key, label, catalog }) => (
           <FormField
             key={key}
@@ -43,7 +44,7 @@ export default function JobFilters({ filters, hasFilters, onChange, onClear }) {
             {t('jobs.filters.clear')}
           </Button>
         )}
-      </div>
-    </div>
+      </fieldset>
+    </search>
   )
 }

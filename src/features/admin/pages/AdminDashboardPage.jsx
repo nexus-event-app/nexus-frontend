@@ -4,6 +4,7 @@ import ErrorState from '@/shared/components/ErrorState'
 import Icon from '@/shared/components/Icon'
 import PageHeader from '@/shared/components/PageHeader'
 import Seo from '@/shared/components/Seo'
+import LoadingStatus from '@/shared/components/LoadingStatus'
 import Skeleton from '@/shared/components/Skeleton'
 import { paths } from '@/shared/config/paths'
 import StatCard from '../components/StatCard'
@@ -56,12 +57,16 @@ export default function AdminDashboardPage() {
         {request.error ? (
           <ErrorState error={request.error} title="No hemos podido cargar las estadísticas" onRetry={request.reload} />
         ) : !cards ? (
-          <div role="status" aria-busy="true" className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            <span className="sr-only">Cargando estadísticas…</span>
-            {Array.from({ length: 6 }, (_, index) => (
-              <Skeleton key={index} className="h-24" />
-            ))}
-          </div>
+          <>
+            <LoadingStatus />
+            <ul aria-hidden="true" className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              {Array.from({ length: 6 }, (_, index) => (
+                <li key={index}>
+                  <Skeleton className="h-24" />
+                </li>
+              ))}
+            </ul>
+          </>
         ) : (
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {cards.map((card) => (
@@ -80,7 +85,10 @@ export default function AdminDashboardPage() {
         <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {QUICK_ACTIONS.map((action) => (
             <li key={action.to}>
-              <Link to={action.to} className="card flex min-h-[3.5rem] items-center gap-3 p-4 font-semibold text-ink hover:bg-slate-50">
+              <Link
+                to={action.to}
+                className="card flex min-h-[3.5rem] items-center gap-3 p-4 font-semibold text-ink hover:bg-slate-50"
+              >
                 <Icon name={action.icon} className="h-5 w-5 text-accent" />
                 {action.label}
                 <Icon name="arrow-right" className="ml-auto h-4 w-4 text-ink-muted" />

@@ -34,8 +34,9 @@ export default function SearchBar({ value, onSearch, label, placeholder }) {
   }
 
   return (
-    <form role="search" onSubmit={handleSubmit} className="flex gap-2">
-      <div className="relative flex-1">
+    // Va dentro de la zona de búsqueda de cada página (<search>), que agrupa también sus filtros.
+    <form onSubmit={handleSubmit} className="flex gap-2">
+      <p className="relative flex-1">
         <label htmlFor={inputId} className="sr-only">
           {fieldLabel}
         </label>
@@ -52,7 +53,7 @@ export default function SearchBar({ value, onSearch, label, placeholder }) {
           className="field-input pl-10"
         />
         <Icon name="search" className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
-      </div>
+      </p>
       <button type="submit" className="btn btn-primary" aria-label={t('common.search.submit', { label: fieldLabel })}>
         <span className="hidden sm:inline">{t('common.search.button')}</span>
         <Icon name="search" className="h-5 w-5 sm:hidden" />

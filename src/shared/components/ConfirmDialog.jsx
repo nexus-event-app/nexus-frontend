@@ -17,14 +17,14 @@ export default function ConfirmDialog({
   return (
     <Modal title={title} size="sm" onClose={onCancel} dismissible={!pending}>
       <p className="text-ink-soft">{message}</p>
-      <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+      <footer className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
         <Button variant="secondary" onClick={onCancel} disabled={pending}>
           {cancelLabel ?? t('common.dialog.cancel')}
         </Button>
         <Button variant={tone} onClick={onConfirm} loading={pending}>
           {confirmLabel ?? t('common.dialog.confirm')}
         </Button>
-      </div>
+      </footer>
     </Modal>
   )
 }

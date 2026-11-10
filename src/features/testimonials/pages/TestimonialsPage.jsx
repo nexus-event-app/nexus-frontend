@@ -7,6 +7,7 @@ import EmptyState from '@/shared/components/EmptyState'
 import PageHeader from '@/shared/components/PageHeader'
 import QueryBoundary from '@/shared/components/QueryBoundary'
 import SectionHeader from '@/shared/components/SectionHeader'
+import PageMain from '@/shared/components/PageMain'
 import Seo from '@/shared/components/Seo'
 import { paths } from '@/shared/config/paths'
 import { siteConfig } from '@/shared/config/site'
@@ -21,17 +22,14 @@ export default function TestimonialsPage() {
   const request = useTestimonials()
 
   return (
-    <div className="page-container page-section">
+    <PageMain className="page-container page-section">
       <Seo
         title={t('testimonials.seoTitle')}
         description={t('testimonials.seoDescription', { name: siteConfig.name })}
         path={paths.testimonials}
       />
       <Breadcrumbs items={[{ label: t('testimonials.breadcrumb'), to: paths.testimonials }]} />
-      <PageHeader
-        title={t('testimonials.seoTitle')}
-        description={t('testimonials.description')}
-      />
+      <PageHeader title={t('testimonials.seoTitle')} description={t('testimonials.description')} />
 
       <QueryBoundary
         data={request.data}
@@ -42,11 +40,7 @@ export default function TestimonialsPage() {
       >
         {(items) =>
           items.length === 0 ? (
-            <EmptyState
-              icon="star"
-              title={t('testimonials.emptyTitle')}
-              description={t('testimonials.emptyText')}
-            />
+            <EmptyState icon="star" title={t('testimonials.emptyTitle')} description={t('testimonials.emptyText')} />
           ) : (
             <TestimonialGrid items={items} />
           )
@@ -67,6 +61,6 @@ export default function TestimonialsPage() {
           <SignInPrompt>{t('testimonials.signIn')}</SignInPrompt>
         )}
       </section>
-    </div>
+    </PageMain>
   )
 }

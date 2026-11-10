@@ -2,6 +2,7 @@ import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import CardGridSkeleton from '@/shared/components/CardGridSkeleton'
 import EmptyState from '@/shared/components/EmptyState'
 import PageHeader from '@/shared/components/PageHeader'
+import PageMain from '@/shared/components/PageMain'
 import Pagination from '@/shared/components/Pagination'
 import QueryBoundary from '@/shared/components/QueryBoundary'
 import Seo from '@/shared/components/Seo'
@@ -26,7 +27,7 @@ export default function JobsListPage() {
   const savedJobs = useSavedJobs()
 
   return (
-    <div className="page-container page-section">
+    <PageMain className="page-container page-section">
       <Seo
         title={page > 1 ? `${t('jobs.list.seoTitlePage')}${t('common.pageSuffix', { page })}` : t('jobs.list.seoTitle')}
         description={t('jobs.list.seoDescription')}
@@ -67,9 +68,7 @@ export default function JobsListPage() {
               <EmptyState
                 icon="briefcase"
                 title={t('jobs.list.emptyTitle')}
-                description={
-                  hasFilters ? t('jobs.list.emptyFiltered') : t('jobs.list.empty')
-                }
+                description={hasFilters ? t('jobs.list.emptyFiltered') : t('jobs.list.empty')}
               />
             ) : (
               <>
@@ -85,6 +84,6 @@ export default function JobsListPage() {
       </section>
 
       <JobPortals />
-    </div>
+    </PageMain>
   )
 }

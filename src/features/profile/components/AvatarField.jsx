@@ -1,3 +1,4 @@
+import { cx } from '@/shared/utils/classNames'
 import { useId, useRef, useState } from 'react'
 import { getErrorMessage } from '@/shared/api/ApiError'
 import Avatar from '@/shared/components/Avatar'
@@ -12,7 +13,7 @@ import { resizeToSquareJpeg } from '../utils/resizeImage'
 const MAX_FILE_BYTES = 20 * 1024 * 1024
 
 /** Foto de perfil: se sube o se quita al momento, sin esperar a guardar el resto del formulario. */
-export default function AvatarField({ name, avatarUrl, onChange }) {
+export default function AvatarField({ name, avatarUrl, onChange, className }) {
   const { t } = useI18n()
   const toast = useToast()
   const inputId = useId()
@@ -65,34 +66,36 @@ export default function AvatarField({ name, avatarUrl, onChange }) {
   }
 
   return (
-    <fieldset className="flex flex-col items-start gap-4 sm:flex-row sm:items-center" aria-busy={busy}>
-      <legend className="mb-3 text-sm font-semibold text-ink">{t('profile.edit.photo')}</legend>
-      <Avatar name={name} src={preview ?? avatarUrl} size="xl" className={busy ? 'opacity-60' : undefined} />
-      <div className="space-y-2">
-        <div className="flex flex-wrap gap-2">
-          <input
-            ref={inputRef}
-            id={inputId}
-            type="file"
-            accept="image/*"
-            onChange={handleFile}
-            className="sr-only"
-            tabIndex={-1}
-            aria-hidden="true"
-          />
-          <Button variant="secondary" size="sm" loading={busy} onClick={() => inputRef.current?.click()}>
-            <Icon name="camera" className="h-4 w-4" />
-            {avatarUrl ? t('profile.edit.photoChange') : t('profile.edit.photoUpload')}
+    // Rejilla: la foto a la izquierda; los botones y la explicación a su derecha.
+    <fieldset
+      className={cx('grid items-center gap-4 sm:grid-cols-[auto_minmax(0,1fr)] sm:gap-y-2', className)}
+      aria-busy={busy}
+    >
+      <legend className="float-left col-span-full w-full text-sm font-semibold text-ink sm:mb-1">{t('profile.edit.photo')}</legend>
+      <Avatar name={name} src={preview ?? avatarUrl} size="xl" className={cx('sm:row-span-2', busy && 'opacity-60')} />
+      <p className="flex flex-wrap gap-2 sm:self-end">
+        <input
+          ref={inputRef}
+          id={inputId}
+          type="file"
+          accept="image/*"
+          onChange={handleFile}
+          className="sr-only"
+          tabIndex={-1}
+          aria-hidden="true"
+        />
+        <Button variant="secondary" size="sm" loading={busy} onClick={() => inputRef.current?.click()}>
+          <Icon name="camera" className="h-4 w-4" />
+          {avatarUrl ? t('profile.edit.photoChange') : t('profile.edit.photoUpload')}
+        </Button>
+        {avatarUrl && (
+          <Button variant="ghost" size="sm" disabled={busy} onClick={handleRemove}>
+            <Icon name="trash" className="h-4 w-4" />
+            {t('profile.edit.photoRemove')}
           </Button>
-          {avatarUrl && (
-            <Button variant="ghost" size="sm" disabled={busy} onClick={handleRemove}>
-              <Icon name="trash" className="h-4 w-4" />
-              {t('profile.edit.photoRemove')}
-            </Button>
-          )}
-        </div>
-        <p className="max-w-sm text-sm text-ink-muted">{t('profile.edit.photoHint')}</p>
-      </div>
+        )}
+      </p>
+      <p className="max-w-sm text-sm text-ink-muted sm:self-start">{t('profile.edit.photoHint')}</p>
     </fieldset>
   )
 }

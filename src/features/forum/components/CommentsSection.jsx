@@ -1,3 +1,4 @@
+import { cx } from '@/shared/utils/classNames'
 import { useState } from 'react'
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import SignInPrompt from '@/features/auth/components/SignInPrompt'
@@ -13,7 +14,7 @@ import CommentForm from './CommentForm'
 import CommentItem from './CommentItem'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-export default function CommentsSection({ discussionId, comments }) {
+export default function CommentsSection({ discussionId, comments, className }) {
   const { t } = useI18n()
   const { isAuthenticated, user } = useAuth()
   const toast = useToast()
@@ -50,38 +51,36 @@ export default function CommentsSection({ discussionId, comments }) {
   }
 
   return (
-    <section aria-labelledby="comments-heading" className="mt-12">
+    <section aria-labelledby="comments-heading" className={cx('mt-12', className)}>
       <h2 id="comments-heading" className="text-2xl font-bold text-ink">
         {t('forum.comments.title')}
         {data ? ` (${data.length})` : ''}
       </h2>
 
-      <div className="mt-6">
-        {error && <ErrorState error={error} title={t('forum.comments.error')} onRetry={reload} />}
-        {!error && !data && <ListSkeleton rows={2} />}
-        {data && data.length === 0 && (
-          <p className="rounded-card border border-dashed border-slate-300 p-6 text-center text-ink-muted">
-            {t('forum.comments.empty')}
-          </p>
-        )}
-        {data && data.length > 0 && (
-          <ul className="space-y-4">
-            {data.map((comment) => (
-              <li key={comment.id}>
-                <CommentItem
-                  comment={comment}
-                  canDelete={canManage(comment.authorId)}
-                  likePending={likePending}
-                  onToggleLike={handleToggleLike}
-                  onDelete={setPendingDelete}
-                />
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      {error && <ErrorState className="mt-6" error={error} title={t('forum.comments.error')} onRetry={reload} />}
+      {!error && !data && <ListSkeleton className="mt-6" rows={2} />}
+      {data && data.length === 0 && (
+        <p className="mt-6 rounded-card border border-dashed border-slate-300 p-6 text-center text-ink-muted">
+          {t('forum.comments.empty')}
+        </p>
+      )}
+      {data && data.length > 0 && (
+        <ul className="mt-6 space-y-4">
+          {data.map((comment) => (
+            <li key={comment.id}>
+              <CommentItem
+                comment={comment}
+                canDelete={canManage(comment.authorId)}
+                likePending={likePending}
+                onToggleLike={handleToggleLike}
+                onDelete={setPendingDelete}
+              />
+            </li>
+          ))}
+        </ul>
+      )}
 
-      <div className="mt-8">
+      <footer className="mt-8">
         {isAuthenticated && user?.emailVerified === false ? (
           <VerifyEmailNotice>{t('forum.comments.confirmEmail')}</VerifyEmailNotice>
         ) : isAuthenticated ? (
@@ -89,7 +88,7 @@ export default function CommentsSection({ discussionId, comments }) {
         ) : (
           <SignInPrompt>{t('forum.comments.signIn')}</SignInPrompt>
         )}
-      </div>
+      </footer>
 
       {pendingDelete && (
         <ConfirmDialog

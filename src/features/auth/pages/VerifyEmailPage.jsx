@@ -51,14 +51,14 @@ export default function VerifyEmailPage() {
           </p>
         )}
         {state.status === 'success' && (
-          <div className="space-y-5">
+          <>
             <Alert variant="success" title={t('auth.verify.successTitle')}>
               {t('auth.verify.success')}
             </Alert>
-            <ButtonLink to={isAuthenticated ? paths.forum : paths.login} className="w-full">
+            <ButtonLink to={isAuthenticated ? paths.forum : paths.login} className="mt-5 w-full">
               {isAuthenticated ? t('auth.verify.goForum') : t('auth.login.submit')}
             </ButtonLink>
-          </div>
+          </>
         )}
         {state.status === 'error' && (
           <Alert variant="error" title={t('auth.verify.errorTitle')}>

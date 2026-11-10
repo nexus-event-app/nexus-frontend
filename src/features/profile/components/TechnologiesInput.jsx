@@ -6,9 +6,38 @@ export const MAX_TECHNOLOGIES = 12
 export const MAX_TECHNOLOGY_LENGTH = 30
 
 const SUGGESTIONS = [
-  'HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Vue', 'Angular', 'Tailwind CSS', 'Node.js',
-  'Java', 'Spring Boot', 'Python', 'Django', 'PHP', 'Laravel', 'C#', '.NET', 'Kotlin', 'Swift', 'Flutter', 'SQL',
-  'PostgreSQL', 'MySQL', 'MongoDB', 'Git', 'Docker', 'Linux', 'AWS', 'Figma', 'Testing', 'Ciberseguridad',
+  'HTML',
+  'CSS',
+  'JavaScript',
+  'TypeScript',
+  'React',
+  'Next.js',
+  'Vue',
+  'Angular',
+  'Tailwind CSS',
+  'Node.js',
+  'Java',
+  'Spring Boot',
+  'Python',
+  'Django',
+  'PHP',
+  'Laravel',
+  'C#',
+  '.NET',
+  'Kotlin',
+  'Swift',
+  'Flutter',
+  'SQL',
+  'PostgreSQL',
+  'MySQL',
+  'MongoDB',
+  'Git',
+  'Docker',
+  'Linux',
+  'AWS',
+  'Figma',
+  'Testing',
+  'Ciberseguridad',
 ]
 
 /**
@@ -45,10 +74,9 @@ export default function TechnologiesInput({ value, onChange, error }) {
   const errorId = `${id}-error`
 
   return (
-    <div>
-      <label htmlFor={id} className="mb-1.5 block text-sm font-semibold text-ink">
-        {t('profile.edit.technologies')}
-      </label>
+    // Grupo de campos: la lista de tecnologías añadidas y el campo para añadir otra.
+    <fieldset>
+      <legend className="mb-1.5 block text-sm font-semibold text-ink">{t('profile.edit.technologies')}</legend>
       {value.length > 0 && (
         <ul className="mb-2 flex flex-wrap gap-2" aria-label={t('profile.edit.technologiesAdded')}>
           {value.map((technology) => (
@@ -72,6 +100,9 @@ export default function TechnologiesInput({ value, onChange, error }) {
           ))}
         </ul>
       )}
+      <label htmlFor={id} className="sr-only">
+        {t('profile.edit.addTechnology')}
+      </label>
       <input
         ref={inputRef}
         id={id}
@@ -105,6 +136,6 @@ export default function TechnologiesInput({ value, onChange, error }) {
           {error}
         </p>
       )}
-    </div>
+    </fieldset>
   )
 }

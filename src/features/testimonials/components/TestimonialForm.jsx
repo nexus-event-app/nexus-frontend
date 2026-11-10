@@ -57,25 +57,30 @@ export default function TestimonialForm() {
   const length = form.values.content.trim().length
 
   return (
-    <form onSubmit={form.handleSubmit} noValidate className="card space-y-5 p-6">
-      <p className="text-ink-muted">
-        {t('testimonials.form.intro')}
-      </p>
+    // Rejilla (form-grid): nombre y rol comparten fila; el resto ocupa todo el ancho.
+    <form onSubmit={form.handleSubmit} noValidate className="form-grid card p-6">
+      <p className="text-ink-muted">{t('testimonials.form.intro')}</p>
       {sent && (
         <Alert variant="success" title={t('testimonials.form.thanksTitle')}>
           {t('testimonials.form.thanks')}
         </Alert>
       )}
       {form.formError && <Alert variant="error">{form.formError}</Alert>}
-      <div className="grid gap-5 sm:grid-cols-2">
-        <FormField {...form.getFieldProps('name')} label={t('testimonials.form.name')} autoComplete="name" maxLength={100} required />
-        <FormField
-          {...form.getFieldProps('role')}
-          label={t('testimonials.form.role')}
-          placeholder={t('testimonials.form.rolePlaceholder')}
-          maxLength={100}
-        />
-      </div>
+      <FormField
+        className="field-half"
+        {...form.getFieldProps('name')}
+        label={t('testimonials.form.name')}
+        autoComplete="name"
+        maxLength={100}
+        required
+      />
+      <FormField
+        className="field-half"
+        {...form.getFieldProps('role')}
+        label={t('testimonials.form.role')}
+        placeholder={t('testimonials.form.rolePlaceholder')}
+        maxLength={100}
+      />
       <FormField
         {...form.getFieldProps('location')}
         label={t('testimonials.form.location')}
@@ -92,7 +97,7 @@ export default function TestimonialForm() {
         maxLength={CONTENT_MAX}
         required
       />
-      <Button type="submit" loading={form.submitting}>
+      <Button type="submit" loading={form.submitting} className="justify-self-start">
         {form.submitting ? t('testimonials.form.submitting') : t('testimonials.form.submit')}
       </Button>
     </form>

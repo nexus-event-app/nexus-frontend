@@ -10,6 +10,7 @@ import EmptyState from '@/shared/components/EmptyState'
 import ErrorState from '@/shared/components/ErrorState'
 import ListSkeleton from '@/shared/components/ListSkeleton'
 import NotFound from '@/shared/components/NotFound'
+import PageMain from '@/shared/components/PageMain'
 import Pagination from '@/shared/components/Pagination'
 import QueryBoundary from '@/shared/components/QueryBoundary'
 import Seo from '@/shared/components/Seo'
@@ -34,7 +35,7 @@ function Discussions({ profile, isOwn }) {
     profileService.discussions(profile.id, { page: page - 1, size: DEFAULT_PAGE_SIZE }, { signal }),
   )
   return (
-    <section aria-labelledby="profile-discussions" aria-busy={request.loading}>
+    <section aria-labelledby="profile-discussions" aria-busy={request.loading} className="mt-12">
       <h2 id="profile-discussions" className="mb-4 text-2xl font-bold text-ink">
         {t('profile.view.discussionsTitle')}
       </h2>
@@ -43,7 +44,9 @@ function Discussions({ profile, isOwn }) {
           result.content.length === 0 ? (
             <EmptyState
               icon="chat"
-              title={isOwn ? t('profile.view.noDiscussionsOwn') : t('profile.view.noDiscussions', { name: profile.name })}
+              title={
+                isOwn ? t('profile.view.noDiscussionsOwn') : t('profile.view.noDiscussions', { name: profile.name })
+              }
               action={isOwn && <ButtonLink to={paths.forumNew}>{t('profile.view.startDiscussion')}</ButtonLink>}
             />
           ) : (
@@ -71,7 +74,7 @@ function Testimonials({ profile, isOwn }) {
   )
   if (!isOwn && request.data?.length === 0) return null
   return (
-    <section aria-labelledby="profile-testimonials" aria-busy={request.loading}>
+    <section aria-labelledby="profile-testimonials" aria-busy={request.loading} className="mt-12">
       <h2 id="profile-testimonials" className="mb-4 text-2xl font-bold text-ink">
         {t('profile.view.testimonialsTitle')}
       </h2>
@@ -81,7 +84,11 @@ function Testimonials({ profile, isOwn }) {
             <EmptyState
               icon="star"
               title={t('profile.view.noTestimonialsOwn')}
-              action={<ButtonLink to={paths.testimonials} variant="secondary">{t('profile.view.shareTestimonial')}</ButtonLink>}
+              action={
+                <ButtonLink to={paths.testimonials} variant="secondary">
+                  {t('profile.view.shareTestimonial')}
+                </ButtonLink>
+              }
             />
           ) : (
             <TestimonialGrid items={items} linkAuthors={false} />
@@ -105,16 +112,16 @@ export default function ProfilePage() {
   if (id === null || request.error?.status === 404) return <NotFound />
   if (request.error) {
     return (
-      <div className="page-container page-section">
+      <PageMain className="page-container page-section">
         <ErrorState error={request.error} title={t('profile.view.error')} onRetry={request.reload} />
-      </div>
+      </PageMain>
     )
   }
   if (!profile) {
     return (
-      <div className="page-container page-section">
+      <PageMain className="page-container page-section" loading>
         <ArticleSkeleton />
-      </div>
+      </PageMain>
     )
   }
   if (slug !== profile.slug) return <Navigate to={paths.profile(profile)} replace />
@@ -123,11 +130,15 @@ export default function ProfilePage() {
   const path = paths.profile(profile)
 
   return (
-    <div className="page-container page-section">
+    <PageMain className="page-container page-section max-w-[60rem]">
       {/* Los perfiles son de personas: no se indexan en buscadores. */}
       <Seo
         title={t('profile.view.seoTitle', { name: profile.name })}
-        description={profile.headline || excerpt(profile.bio ?? '', 150) || t('profile.view.seoDescription', { name: profile.name })}
+        description={
+          profile.headline ||
+          excerpt(profile.bio ?? '', 150) ||
+          t('profile.view.seoDescription', { name: profile.name })
+        }
         path={path}
         type="profile"
         robots="noindex,follow"
@@ -139,22 +150,25 @@ export default function ProfilePage() {
           { label: profile.name, to: path },
         ]}
       />
-      <div className="mx-auto max-w-4xl space-y-12">
-        <ProfileHeader profile={profile} isOwn={isOwn} />
-        {isOwn && isIncomplete(profile) && (
-          <div className="flex flex-col gap-4 rounded-card border border-dashed border-accent-line bg-accent-soft/60 p-5 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <p className="font-semibold text-ink">{t('profile.view.completeTitle')}</p>
-              <p className="mt-1 text-sm text-ink-soft">{t('profile.view.completeText')}</p>
-            </div>
-            <ButtonLink to={paths.profileEdit} className="shrink-0">
-              {t('profile.view.completeAction')}
-            </ButtonLink>
-          </div>
-        )}
-        <Discussions profile={profile} isOwn={isOwn} />
-        <Testimonials profile={profile} isOwn={isOwn} />
-      </div>
-    </div>
+      <ProfileHeader profile={profile} isOwn={isOwn} />
+      {isOwn && isIncomplete(profile) && (
+        <section
+          aria-labelledby="profile-complete"
+          className="mt-12 flex flex-col gap-4 rounded-card border border-dashed border-accent-line bg-accent-soft/60 p-5 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <hgroup>
+            <h2 id="profile-complete" className="font-semibold text-ink">
+              {t('profile.view.completeTitle')}
+            </h2>
+            <p className="mt-1 text-sm text-ink-soft">{t('profile.view.completeText')}</p>
+          </hgroup>
+          <ButtonLink to={paths.profileEdit} className="shrink-0">
+            {t('profile.view.completeAction')}
+          </ButtonLink>
+        </section>
+      )}
+      <Discussions profile={profile} isOwn={isOwn} />
+      <Testimonials profile={profile} isOwn={isOwn} />
+    </PageMain>
   )
 }

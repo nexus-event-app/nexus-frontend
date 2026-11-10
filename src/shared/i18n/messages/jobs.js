@@ -23,6 +23,7 @@ export default {
       contract: 'Tipo de contrato',
       all: 'Todos',
       clear: 'Quitar filtros',
+      legend: 'Filtrar ofertas',
     },
     saved: {
       title: 'Ofertas guardadas',
@@ -105,6 +106,7 @@ export default {
       contract: 'Tipus de contracte',
       all: 'Tots',
       clear: 'Treu els filtres',
+      legend: 'Filtra les ofertes',
     },
     saved: {
       title: 'Ofertes desades',
@@ -187,6 +189,7 @@ export default {
       contract: 'Contract type',
       all: 'All',
       clear: 'Clear filters',
+      legend: 'Filter job offers',
     },
     saved: {
       title: 'Saved jobs',

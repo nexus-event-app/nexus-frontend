@@ -19,8 +19,9 @@ export default function FormField({
   const errorId = `${id}-error`
   const describedBy = [hint && hintId, error && errorId].filter(Boolean).join(' ') || undefined
 
+  // Cada etiqueta con su campo va en un párrafo, como recomienda la especificación HTML para formularios.
   return (
-    <div className={className}>
+    <p className={className}>
       <label htmlFor={id} className="mb-1.5 block text-sm font-semibold text-ink">
         {label}
         {required && (
@@ -30,7 +31,7 @@ export default function FormField({
           </span>
         )}
       </label>
-      <div className="relative">
+      <span className="relative block">
         <Control
           id={id}
           name={name}
@@ -43,18 +44,18 @@ export default function FormField({
         >
           {children}
         </Control>
-        {adornment && <div className="absolute inset-y-0 right-0 flex items-center pr-1">{adornment}</div>}
-      </div>
+        {adornment && <span className="absolute inset-y-0 right-0 flex items-center pr-1">{adornment}</span>}
+      </span>
       {hint && (
-        <p id={hintId} className="mt-1.5 text-sm text-ink-muted">
+        <small id={hintId} className="mt-1.5 block text-sm text-ink-muted">
           {hint}
-        </p>
+        </small>
       )}
       {error && (
-        <p id={errorId} role="alert" className="mt-1.5 text-sm font-medium text-red-700 dark:text-red-400">
+        <strong id={errorId} role="alert" className="mt-1.5 block text-sm font-medium text-red-700 dark:text-red-400">
           {error}
-        </p>
+        </strong>
       )}
-    </div>
+    </p>
   )
 }

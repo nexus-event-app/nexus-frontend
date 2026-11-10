@@ -10,17 +10,17 @@ export default function SignInPrompt({ children }) {
   const redirectTo = `${pathname}${search}`
 
   return (
-    <div className="card flex flex-col gap-4 border-accent-line bg-accent-soft p-5 sm:flex-row sm:items-center">
+    <p className="card flex flex-col gap-4 border-accent-line bg-accent-soft p-5 sm:flex-row sm:items-center">
       <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-surface text-accent">
         <Icon name="lock" className="h-6 w-6" />
       </span>
-      <p className="flex-1 text-ink-soft">{children}</p>
-      <div className="flex flex-wrap gap-3">
+      <span className="flex-1 text-ink-soft">{children}</span>
+      <span className="flex flex-wrap gap-3">
         <ButtonLink to={loginPath(redirectTo)} variant="secondary">
           {t('auth.login.submit')}
         </ButtonLink>
         <ButtonLink to={registerPath(redirectTo)}>{t('auth.register.submit')}</ButtonLink>
-      </div>
-    </div>
+      </span>
+    </p>
   )
 }

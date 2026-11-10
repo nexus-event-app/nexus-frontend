@@ -3,6 +3,7 @@ import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import CardGridSkeleton from '@/shared/components/CardGridSkeleton'
 import EmptyState from '@/shared/components/EmptyState'
 import PageHeader from '@/shared/components/PageHeader'
+import PageMain from '@/shared/components/PageMain'
 import Pagination from '@/shared/components/Pagination'
 import QueryBoundary from '@/shared/components/QueryBoundary'
 import SearchBar from '@/shared/components/SearchBar'
@@ -25,7 +26,7 @@ export default function NewsListPage() {
   const pageSuffix = page > 1 ? t('common.pageSuffix', { page }) : ''
 
   return (
-    <div className="page-container page-section">
+    <PageMain className="page-container page-section">
       <Seo
         title={`${heading}${pageSuffix}`}
         description={t('news.list.seoDescription')}
@@ -33,12 +34,9 @@ export default function NewsListPage() {
         robots={hasFilters ? 'noindex,follow' : 'index,follow'}
       />
       <Breadcrumbs items={[{ label: t('news.breadcrumb'), to: paths.news }]} />
-      <PageHeader
-        title={heading}
-        description={t('news.list.description')}
-      />
+      <PageHeader title={heading} description={t('news.list.description')} />
 
-      <div className="mb-8 space-y-4">
+      <search className="mb-8 block space-y-4">
         <SearchBar
           value={search}
           onSearch={(value) => setFilters({ q: value }, { replace: true })}
@@ -46,7 +44,7 @@ export default function NewsListPage() {
           placeholder={t('news.list.searchPlaceholder')}
         />
         <NewsCategoryFilter category={category} buildHref={buildHref} />
-      </div>
+      </search>
 
       <section aria-label={t('common.results')} aria-busy={list.loading}>
         <QueryBoundary
@@ -61,9 +59,7 @@ export default function NewsListPage() {
               <EmptyState
                 icon="newspaper"
                 title={t('news.list.emptyTitle')}
-                description={
-                  hasFilters ? t('news.list.emptyFiltered') : t('news.list.empty')
-                }
+                description={hasFilters ? t('news.list.emptyFiltered') : t('news.list.empty')}
                 action={
                   hasFilters || page > 1 ? (
                     <Link to={paths.news} className="btn btn-secondary">
@@ -84,6 +80,6 @@ export default function NewsListPage() {
           }
         </QueryBoundary>
       </section>
-    </div>
+    </PageMain>
   )
 }

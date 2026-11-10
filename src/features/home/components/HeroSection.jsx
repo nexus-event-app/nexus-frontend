@@ -16,46 +16,50 @@ export default function HeroSection() {
   const { isAuthenticated } = useAuth()
 
   return (
-    <section aria-labelledby="hero-heading" className="bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 text-white">
-      <div className="page-container grid items-center gap-10 py-14 sm:py-20 lg:grid-cols-[1.1fr_0.9fr]">
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-brand-200">{t('home.hero.eyebrow')}</p>
-          <h1 id="hero-heading" className="mt-3 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-            {t('home.hero.title')}
-          </h1>
-          <p className="mt-5 max-w-xl text-lg text-brand-100">
-            {t('home.hero.text', { name: siteConfig.name })}
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+    <section
+      aria-labelledby="hero-heading"
+      className="page-gutter grid items-center gap-10 bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 py-14 text-white sm:py-20 lg:grid-cols-[1.1fr_0.9fr]"
+    >
+      <header>
+        <p className="text-sm font-semibold uppercase tracking-wide text-brand-200">{t('home.hero.eyebrow')}</p>
+        <h1 id="hero-heading" className="mt-3 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
+          {t('home.hero.title')}
+        </h1>
+        <p className="mt-5 max-w-xl text-lg text-brand-100">{t('home.hero.text', { name: siteConfig.name })}</p>
+        <menu className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <li>
             {isAuthenticated ? (
-              <ButtonLink to={paths.forum} variant="inverse">
+              <ButtonLink to={paths.forum} variant="inverse" className="w-full sm:w-auto">
                 {t('home.hero.goForum')}
               </ButtonLink>
             ) : (
-              <ButtonLink to={paths.register} variant="inverse">
+              <ButtonLink to={paths.register} variant="inverse" className="w-full sm:w-auto">
                 {t('home.hero.register')}
               </ButtonLink>
             )}
-            <ButtonLink to={paths.jobs} variant="outlineInverse">
+          </li>
+          <li>
+            <ButtonLink to={paths.jobs} variant="outlineInverse" className="w-full sm:w-auto">
               {t('home.hero.seeJobs')}
             </ButtonLink>
-          </div>
-        </div>
+          </li>
+        </menu>
+      </header>
 
-        <ul className="grid gap-4">
-          {HIGHLIGHTS.map((item) => (
-            <li key={item.key} className="flex items-start gap-4 rounded-card bg-white/10 p-5 ring-1 ring-white/20">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-control bg-white/15">
-                <Icon name={item.icon} className="h-6 w-6" />
-              </span>
-              <div>
-                <h2 className="font-bold">{t(`home.hero.${item.key}Title`)}</h2>
-                <p className="mt-1 text-brand-100">{t(`home.hero.${item.key}Text`)}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul className="grid gap-4">
+        {HIGHLIGHTS.map((item) => (
+          <li
+            key={item.key}
+            className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-4 rounded-card bg-white/10 p-5 ring-1 ring-white/20"
+          >
+            <span className="row-span-2 flex h-11 w-11 items-center justify-center rounded-control bg-white/15">
+              <Icon name={item.icon} className="h-6 w-6" />
+            </span>
+            <h2 className="font-bold">{t(`home.hero.${item.key}Title`)}</h2>
+            <p className="mt-1 text-brand-100">{t(`home.hero.${item.key}Text`)}</p>
+          </li>
+        ))}
+      </ul>
     </section>
   )
 }

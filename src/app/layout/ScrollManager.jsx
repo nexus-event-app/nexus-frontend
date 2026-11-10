@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
+import { focusMainContent } from '@/shared/navigation/pageFocus'
 
 export default function ScrollManager() {
   const { pathname, search, hash } = useLocation()
@@ -12,7 +13,7 @@ export default function ScrollManager() {
 
     if (previousPath.current !== pathname) {
       previousPath.current = pathname
-      document.getElementById('contenido')?.focus({ preventScroll: true })
+      focusMainContent()
     }
   }, [pathname, page, hash])
 

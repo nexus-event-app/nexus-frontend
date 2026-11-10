@@ -53,11 +53,7 @@ export default function RegisterForm() {
         hint={t('auth.register.passwordHint')}
         required
       />
-      <TermsCheckbox
-        checked={form.values.acceptTerms}
-        onChange={form.handleChange}
-        error={form.errors.acceptTerms}
-      />
+      <TermsCheckbox checked={form.values.acceptTerms} onChange={form.handleChange} error={form.errors.acceptTerms} />
       <Button type="submit" className="w-full" loading={form.submitting}>
         {form.submitting ? t('auth.register.submitting') : t('auth.register.submit')}
       </Button>

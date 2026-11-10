@@ -27,7 +27,7 @@ export default function LoginForm() {
   })
 
   return (
-    <form onSubmit={form.handleSubmit} noValidate className="space-y-5">
+    <form onSubmit={form.handleSubmit} noValidate className="flex flex-col gap-5">
       {form.formError && <Alert variant="error">{form.formError}</Alert>}
       <FormField
         {...form.getFieldProps('email')}
@@ -38,14 +38,12 @@ export default function LoginForm() {
         autoCapitalize="none"
         required
       />
-      <div>
-        <PasswordField {...form.getFieldProps('password')} autoComplete="current-password" required />
-        <p className="mt-2 text-right text-sm">
-          <Link to={paths.forgotPassword} className="link">
-            {t('auth.login.forgot')}
-          </Link>
-        </p>
-      </div>
+      <PasswordField {...form.getFieldProps('password')} autoComplete="current-password" required />
+      <p className="-mt-3 text-right text-sm">
+        <Link to={paths.forgotPassword} className="link">
+          {t('auth.login.forgot')}
+        </Link>
+      </p>
       <Button type="submit" className="w-full" loading={form.submitting}>
         {form.submitting ? t('auth.login.submitting') : t('auth.login.submit')}
       </Button>

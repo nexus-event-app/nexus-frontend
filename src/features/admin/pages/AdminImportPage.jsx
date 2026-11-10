@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ActionMenu from '@/shared/components/ActionMenu'
 import Alert from '@/shared/components/Alert'
 import Badge from '@/shared/components/Badge'
 import Button from '@/shared/components/Button'
@@ -17,6 +18,7 @@ import { paths } from '@/shared/config/paths'
 import { useAction } from '@/shared/hooks/useAction'
 import { useRequest } from '@/shared/hooks/useRequest'
 import { useToast } from '@/shared/hooks/useToast'
+import { cx } from '@/shared/utils/classNames'
 import { hostnameOf } from '@/shared/utils/url'
 import ImportSourceForm from '../components/ImportSourceForm'
 import StatusBadge from '../components/StatusBadge'
@@ -32,13 +34,17 @@ function LastRun({ source }) {
   if (!source.lastRunAt) return <span className="text-sm text-ink-muted">Pendiente de la primera ejecución</span>
   const failed = source.lastStatus === 'FAILED'
   return (
-    <div className="space-y-1 text-sm">
-      <div className="flex flex-wrap items-center justify-end gap-2 md:justify-start">
+    <p className="text-sm">
+      <span className="flex flex-wrap items-center justify-end gap-2 md:justify-start">
         <Badge tone={failed ? 'red' : 'green'}>{failed ? 'Error' : 'Correcta'}</Badge>
         <Time value={source.lastRunAt} format="short" className="text-ink-muted" />
-      </div>
-      {source.lastMessage && <p className={failed ? 'text-red-700 dark:text-red-400' : 'text-ink-muted'}>{source.lastMessage}</p>}
-    </div>
+      </span>
+      {source.lastMessage && (
+        <span className={cx('mt-1 block', failed ? 'text-red-700 dark:text-red-400' : 'text-ink-muted')}>
+          {source.lastMessage}
+        </span>
+      )}
+    </p>
   )
 }
 
@@ -65,8 +71,19 @@ export default function AdminImportPage() {
   })
 
   const [toggleSource] = useAction(async (source) => {
-    const { name, type, url, newsCategory, keywords, excludeKeywords, intervalMinutes, autoPublish, remoteOnly, useSourceImages, active } =
-      source
+    const {
+      name,
+      type,
+      url,
+      newsCategory,
+      keywords,
+      excludeKeywords,
+      intervalMinutes,
+      autoPublish,
+      remoteOnly,
+      useSourceImages,
+      active,
+    } = source
     const payload = {
       name,
       type,
@@ -91,7 +108,9 @@ export default function AdminImportPage() {
     }
     request.mutate((items) => [...items, ...created].sort((a, b) => a.name.localeCompare(b.name, 'es')))
     toast.success(
-      created.length === 1 ? `Añadida: ${created[0].name}.` : `Añadidas ${created.length} fuentes: ${created.map((s) => s.name).join(', ')}.`,
+      created.length === 1
+        ? `Añadida: ${created[0].name}.`
+        : `Añadidas ${created.length} fuentes: ${created.map((s) => s.name).join(', ')}.`,
     )
   })
 
@@ -122,19 +141,19 @@ export default function AdminImportPage() {
       header: 'Fuente',
       primary: true,
       render: (source) => (
-        <div>
-          <p>{source.name}</p>
-          <p className="mt-1 text-sm font-normal text-ink-muted">
+        <p>
+          {source.name}
+          <span className="block mt-1 text-sm font-normal text-ink-muted">
             {importSourceTypes.labelOf(source.type)} · {hostnameOf(source.url)}
-          </p>
-        </div>
+          </span>
+        </p>
       ),
     },
     {
       key: 'config',
       header: 'Configuración',
       render: (source) => (
-        <div className="flex flex-wrap justify-end gap-1.5 md:justify-start">
+        <p className="flex flex-wrap justify-end gap-1.5 md:justify-start">
           <StatusBadge active={source.active} inactiveLabel="Pausada" />
           {!source.autoPublish && <Badge tone="amber">Revisión manual</Badge>}
           {source.remoteOnly && <Badge tone="blue">Solo remoto</Badge>}
@@ -142,7 +161,7 @@ export default function AdminImportPage() {
           {source.excludeKeywords && <Badge tone="indigo">Con exclusiones</Badge>}
           {source.useSourceImages === false && <Badge tone="violet">Fotos propias</Badge>}
           <Badge>{formatInterval(source.intervalMinutes)}</Badge>
-        </div>
+        </p>
       ),
     },
     { key: 'lastRun', header: 'Última ejecución', render: (source) => <LastRun source={source} /> },
@@ -151,7 +170,7 @@ export default function AdminImportPage() {
       actions: true,
       header: 'Acciones',
       render: (source) => (
-        <div className="flex flex-wrap justify-end gap-2 md:justify-start">
+        <ActionMenu className="justify-end md:justify-start">
           <Button
             variant="secondary"
             size="sm"
@@ -174,7 +193,7 @@ export default function AdminImportPage() {
             <Icon name="trash" className="h-4 w-4" />
             Borrar<span className="sr-only"> {source.name}</span>
           </Button>
-        </div>
+        </ActionMenu>
       ),
     },
   ]
@@ -199,9 +218,9 @@ export default function AdminImportPage() {
       />
 
       <Alert variant="info" className="mb-6" title="Cómo funciona">
-        De cada noticia se guarda un resumen con enlace al artículo original, y las ofertas enlazan a la fuente
-        para inscribirse. Solo se importan ofertas de prácticas o junior del sector tech. Lo importado no se indexa
-        en buscadores, para no competir con el contenido original. Si borras algo importado, no vuelve a importarse.
+        De cada noticia se guarda un resumen con enlace al artículo original, y las ofertas enlazan a la fuente para
+        inscribirse. Solo se importan ofertas de prácticas o junior del sector tech. Lo importado no se indexa en
+        buscadores, para no competir con el contenido original. Si borras algo importado, no vuelve a importarse.
       </Alert>
 
       <section aria-label="Fuentes de importación" aria-busy={request.loading}>
@@ -226,11 +245,7 @@ export default function AdminImportPage() {
       </section>
 
       {editing && (
-        <Modal
-          title={editing === 'new' ? 'Nueva fuente' : 'Editar fuente'}
-          size="lg"
-          onClose={() => setEditing(null)}
-        >
+        <Modal title={editing === 'new' ? 'Nueva fuente' : 'Editar fuente'} size="lg" onClose={() => setEditing(null)}>
           <ImportSourceForm
             source={editing === 'new' ? null : editing}
             onSubmit={handleSubmit}

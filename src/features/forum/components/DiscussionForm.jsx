@@ -1,3 +1,4 @@
+import { cx } from '@/shared/utils/classNames'
 import Alert from '@/shared/components/Alert'
 import Button from '@/shared/components/Button'
 import FormField from '@/shared/components/FormField'
@@ -6,7 +7,7 @@ import { useForm } from '@/shared/hooks/useForm'
 import { validateDiscussion } from '../utils/validators'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-export default function DiscussionForm({ initialValues, submitLabel, onSubmit, onCancel }) {
+export default function DiscussionForm({ initialValues, submitLabel, onSubmit, onCancel, className }) {
   const { t } = useI18n()
   const form = useForm({
     initialValues,
@@ -15,7 +16,7 @@ export default function DiscussionForm({ initialValues, submitLabel, onSubmit, o
   })
 
   return (
-    <form onSubmit={form.handleSubmit} noValidate className="space-y-5">
+    <form onSubmit={form.handleSubmit} noValidate className={cx('space-y-5', className)}>
       {form.formError && <Alert variant="error">{form.formError}</Alert>}
       <FormField
         {...form.getFieldProps('title')}
@@ -40,7 +41,7 @@ export default function DiscussionForm({ initialValues, submitLabel, onSubmit, o
         maxLength={10000}
         required
       />
-      <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+      <footer className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
         {onCancel && (
           <Button variant="secondary" onClick={onCancel} disabled={form.submitting}>
             {t('forum.form.cancel')}
@@ -49,7 +50,7 @@ export default function DiscussionForm({ initialValues, submitLabel, onSubmit, o
         <Button type="submit" loading={form.submitting}>
           {submitLabel}
         </Button>
-      </div>
+      </footer>
     </form>
   )
 }

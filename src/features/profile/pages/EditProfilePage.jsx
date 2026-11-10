@@ -9,6 +9,7 @@ import ButtonLink from '@/shared/components/ButtonLink'
 import ErrorState from '@/shared/components/ErrorState'
 import FormField from '@/shared/components/FormField'
 import PageHeader from '@/shared/components/PageHeader'
+import PageMain from '@/shared/components/PageMain'
 import Seo from '@/shared/components/Seo'
 import { paths } from '@/shared/config/paths'
 import { useForm } from '@/shared/hooks/useForm'
@@ -77,12 +78,15 @@ function ProfileForm({ profile, onAvatarChange }) {
   const bioLength = form.values.bio.trim().length
 
   return (
-    <div className="space-y-8">
-      <div className="card p-5 sm:p-6">
-        <AvatarField name={form.values.name || profile.name} avatarUrl={profile.avatarUrl} onChange={onAvatarChange} />
-      </div>
+    <>
+      <AvatarField
+        className="card p-5 sm:p-6"
+        name={form.values.name || profile.name}
+        avatarUrl={profile.avatarUrl}
+        onChange={onAvatarChange}
+      />
 
-      <form onSubmit={form.handleSubmit} noValidate className="card space-y-6 p-5 sm:p-6">
+      <form onSubmit={form.handleSubmit} noValidate className="card mt-8 space-y-6 p-5 sm:p-6">
         {form.formError && <Alert variant="error">{form.formError}</Alert>}
         <FormField
           {...form.getFieldProps('name')}
@@ -135,16 +139,16 @@ function ProfileForm({ profile, onAvatarChange }) {
             maxLength={200}
           />
         </fieldset>
-        <div className="flex flex-col-reverse gap-3 border-t border-slate-200 pt-5 sm:flex-row sm:justify-end">
+        <footer className="flex flex-col-reverse gap-3 border-t border-slate-200 pt-5 sm:flex-row sm:justify-end">
           <ButtonLink to={paths.profile(profile)} variant="secondary">
             {t('profile.edit.cancel')}
           </ButtonLink>
           <Button type="submit" loading={form.submitting}>
             {t('profile.edit.submit')}
           </Button>
-        </div>
+        </footer>
       </form>
-    </div>
+    </>
   )
 }
 
@@ -160,7 +164,7 @@ export default function EditProfilePage() {
   }
 
   return (
-    <div className="page-container page-section">
+    <PageMain className="page-container page-section max-w-[52rem]">
       <Seo title={t('profile.edit.title')} path={paths.profileEdit} robots="noindex,nofollow" />
       <Breadcrumbs
         items={[
@@ -168,18 +172,16 @@ export default function EditProfilePage() {
           { label: t('profile.edit.title'), to: paths.profileEdit },
         ]}
       />
-      <div className="mx-auto max-w-3xl">
-        <PageHeader title={t('profile.edit.title')} description={t('profile.edit.description')} />
-        {user?.emailVerified === false ? (
-          <VerifyEmailNotice>{t('profile.edit.confirmEmail')}</VerifyEmailNotice>
-        ) : request.error ? (
-          <ErrorState error={request.error} title={t('profile.edit.error')} onRetry={request.reload} />
-        ) : !profile ? (
-          <ArticleSkeleton />
-        ) : (
-          <ProfileForm profile={profile} onAvatarChange={handleAvatarChange} />
-        )}
-      </div>
-    </div>
+      <PageHeader title={t('profile.edit.title')} description={t('profile.edit.description')} />
+      {user?.emailVerified === false ? (
+        <VerifyEmailNotice>{t('profile.edit.confirmEmail')}</VerifyEmailNotice>
+      ) : request.error ? (
+        <ErrorState error={request.error} title={t('profile.edit.error')} onRetry={request.reload} />
+      ) : !profile ? (
+        <ArticleSkeleton />
+      ) : (
+        <ProfileForm profile={profile} onAvatarChange={handleAvatarChange} />
+      )}
+    </PageMain>
   )
 }

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ActionMenu from '@/shared/components/ActionMenu'
 import { Link } from 'react-router-dom'
 import Badge from '@/shared/components/Badge'
 import Button from '@/shared/components/Button'
@@ -60,23 +61,27 @@ export default function AdminNewsPage() {
       header: 'Noticia',
       primary: true,
       render: (item) => (
-        <div>
-          <p>{item.title}</p>
-          <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-normal text-ink-muted">
+        <p>
+          {item.title}
+          <span className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-normal text-ink-muted">
             <Badge tone={newsCategories.toneOf(item.category)}>{newsCategories.labelOf(item.category)}</Badge>
             {item.imported && <span>Importada de {item.source}</span>}
-          </p>
-        </div>
+          </span>
+        </p>
       ),
     },
-    { key: 'status', header: 'Estado', render: (item) => <StatusBadge active={item.isActive} activeLabel="Publicada" inactiveLabel="Oculta" /> },
+    {
+      key: 'status',
+      header: 'Estado',
+      render: (item) => <StatusBadge active={item.isActive} activeLabel="Publicada" inactiveLabel="Oculta" />,
+    },
     { key: 'date', header: 'Fecha', render: (item) => <Time value={item.createdAt} format="short" /> },
     {
       key: 'actions',
       actions: true,
       header: 'Acciones',
       render: (item) => (
-        <div className="flex flex-wrap justify-end gap-2 md:justify-start">
+        <ActionMenu className="justify-end md:justify-start">
           {item.isActive ? (
             <Link to={paths.newsDetail(item)} className="btn btn-ghost btn-sm">
               Ver<span className="sr-only"> {item.title}</span>
@@ -95,7 +100,7 @@ export default function AdminNewsPage() {
             <Icon name="trash" className="h-4 w-4" />
             Borrar<span className="sr-only"> {item.title}</span>
           </Button>
-        </div>
+        </ActionMenu>
       ),
     },
   ]
@@ -128,7 +133,11 @@ export default function AdminNewsPage() {
           size="lg"
           onClose={() => setEditing(null)}
         >
-          <NewsForm news={editing === 'new' ? null : editing} onSubmit={handleSubmit} onCancel={() => setEditing(null)} />
+          <NewsForm
+            news={editing === 'new' ? null : editing}
+            onSubmit={handleSubmit}
+            onCancel={() => setEditing(null)}
+          />
         </Modal>
       )}
 

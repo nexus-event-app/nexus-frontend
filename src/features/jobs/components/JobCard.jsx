@@ -14,21 +14,21 @@ export default function JobCard({ job, headingLevel = 'h3' }) {
 
   return (
     <article className="card relative flex h-full flex-col p-5 transition-shadow hover:shadow-pop has-[a:focus-visible]:ring-2 has-[:focus-visible]:ring-brand-600">
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex flex-wrap gap-2">
+      <header className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3">
+        <p className="flex flex-wrap gap-2">
           <Badge tone={jobLevels.toneOf(job.level)}>{jobLevels.labelOf(job.level)}</Badge>
           <Badge tone={workModes.toneOf(job.workMode)}>{workModes.labelOf(job.workMode)}</Badge>
-        </div>
-        <SaveJobButton job={job} compact className="-mr-2 -mt-2 shrink-0" />
-      </div>
-      <Heading className="mt-1 text-lg font-bold leading-snug text-ink">
-        <Link
-          to={paths.jobDetail(job)}
-          className="after:absolute after:inset-0 hover:text-accent focus-visible:ring-0 focus-visible:ring-offset-0"
-        >
-          {job.title}
-        </Link>
-      </Heading>
+        </p>
+        <SaveJobButton job={job} compact className="-mr-2 -mt-2" />
+        <Heading className="col-span-2 mt-1 text-lg font-bold leading-snug text-ink">
+          <Link
+            to={paths.jobDetail(job)}
+            className="after:absolute after:inset-0 hover:text-accent focus-visible:ring-0 focus-visible:ring-offset-0"
+          >
+            {job.title}
+          </Link>
+        </Heading>
+      </header>
       <p className="mt-2 flex items-center gap-2 font-medium text-ink-soft">
         <Icon name="building" className="h-4 w-4 text-ink-muted" />
         {job.company}

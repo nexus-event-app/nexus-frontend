@@ -1,4 +1,3 @@
-import { Fragment } from 'react'
 import { cx } from '@/shared/utils/classNames'
 
 const FENCE = /```[^\n]*\n([\s\S]*?)```/g
@@ -12,25 +11,29 @@ function splitBlocks(text) {
     cursor = match.index + match[0].length
   }
   if (cursor < text.length) blocks.push({ type: 'text', value: text.slice(cursor) })
-  return blocks
+  return blocks.filter((block) => block.type === 'code' || block.value.trim())
 }
 
+/**
+ * Texto escrito por la comunidad: párrafos y bloques de código (entre ```), sin contenedor alrededor.
+ * `className` se aplica a cada bloque; la separación entre bloques la pone .user-text (index.css).
+ */
 export default function UserText({ children, className }) {
-  const blocks = splitBlocks(children ?? '')
-
-  return (
-    <div className={cx('space-y-4 break-words', className)}>
-      {blocks.map((block, index) => (
-        <Fragment key={index}>
-          {block.type === 'code' ? (
-            <pre className="overflow-x-auto rounded-control bg-gray-900 p-4 text-sm leading-relaxed text-gray-100 dark:ring-1 dark:ring-white/10">
-              <code className="font-mono">{block.value}</code>
-            </pre>
-          ) : (
-            block.value.trim() && <p className="whitespace-pre-wrap">{block.value.trim()}</p>
-          )}
-        </Fragment>
-      ))}
-    </div>
+  return splitBlocks(children ?? '').map((block, index) =>
+    block.type === 'code' ? (
+      <pre
+        key={index}
+        className={cx(
+          'user-text user-code overflow-x-auto rounded-control bg-gray-900 p-4 leading-relaxed text-gray-100 dark:ring-1 dark:ring-white/10',
+          className,
+        )}
+      >
+        <code className="font-mono">{block.value}</code>
+      </pre>
+    ) : (
+      <p key={index} className={cx('user-text whitespace-pre-wrap break-words', className)}>
+        {block.value.trim()}
+      </p>
+    ),
   )
 }

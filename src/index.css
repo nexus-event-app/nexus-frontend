@@ -69,6 +69,11 @@
     overflow-wrap: break-word;
   }
 
+  /* La aplicación ocupa al menos toda la pantalla y el pie queda abajo, sin contenedores envolventes. */
+  #root {
+    @apply flex min-h-dvh flex-col;
+  }
+
   img,
   svg,
   video {
@@ -109,8 +114,67 @@
     @apply mx-auto w-full max-w-page px-4 sm:px-6 lg:px-8 3xl:max-w-[100rem];
   }
 
+  /*
+   * Igual que .page-container pero sin envoltorio: el elemento ocupa todo el ancho (con su fondo y sus bordes)
+   * y el margen interior centra el contenido en la misma columna que .page-container.
+   */
+  .page-gutter {
+    --gutter: theme(spacing.4);
+    --page-max: theme(maxWidth.page);
+    padding-inline: max(var(--gutter), calc((100% - var(--page-max)) / 2 + var(--gutter)));
+  }
+
+  @media (min-width: theme(screens.sm)) {
+    .page-gutter {
+      --gutter: theme(spacing.6);
+    }
+  }
+
+  @media (min-width: theme(screens.lg)) {
+    .page-gutter {
+      --gutter: theme(spacing.8);
+    }
+  }
+
+  @media (min-width: theme(screens.3xl)) {
+    .page-gutter {
+      --page-max: 100rem;
+    }
+  }
+
   .page-section {
     @apply py-10 sm:py-14;
+  }
+
+  /*
+   * Formulario en rejilla: cada campo ocupa todo el ancho y, desde pantallas pequeñas, los marcados con
+   * .field-half o .field-third comparten fila. Evita envolver los campos en contenedores solo para maquetar.
+   */
+  .form-grid {
+    @apply grid grid-cols-6 gap-5;
+  }
+
+  .form-grid > * {
+    grid-column: 1 / -1;
+  }
+
+  @media (min-width: theme(screens.sm)) {
+    .form-grid > .field-half {
+      grid-column: span 3 / span 3;
+    }
+
+    .form-grid > .field-third {
+      grid-column: span 2 / span 2;
+    }
+  }
+
+  /* Bloques de texto de la comunidad (UserText): separación entre párrafos y tamaño fijo del código. */
+  .user-text + .user-text {
+    @apply mt-4;
+  }
+
+  .user-text.user-code {
+    @apply text-sm;
   }
 
   .legal-text ul {

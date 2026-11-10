@@ -20,7 +20,7 @@ import DiscussionForm from './DiscussionForm'
 import LikeButton from './LikeButton'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-export default function DiscussionArticle({ discussion, commentCount, onChange }) {
+export default function DiscussionArticle({ discussion, commentCount, onChange, className }) {
   const { t } = useI18n()
   const { isAuthenticated } = useAuth()
   const toast = useToast()
@@ -56,7 +56,7 @@ export default function DiscussionArticle({ discussion, commentCount, onChange }
   const manageable = canManage(discussion.authorId)
 
   return (
-    <article>
+    <article className={className}>
       <header>
         <Badge tone={discussionCategories.toneOf(discussion.category)}>
           {discussionCategories.labelOf(discussion.category)}
@@ -64,9 +64,9 @@ export default function DiscussionArticle({ discussion, commentCount, onChange }
         <h1 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl">
           {discussion.title}
         </h1>
-        <div className="mt-4 flex items-center gap-3">
+        <p className="mt-4 flex items-center gap-3 text-sm text-ink-muted">
           <Avatar name={discussion.authorName} src={discussion.authorAvatarUrl} />
-          <p className="text-sm text-ink-muted">
+          <span>
             <AuthorLink
               id={discussion.authorId}
               name={discussion.authorName || t('forum.user')}
@@ -74,8 +74,8 @@ export default function DiscussionArticle({ discussion, commentCount, onChange }
             />
             <Time value={discussion.createdAt} format="datetime" />
             {commentCount > 0 && ` · ${t('forum.detail.comment', { count: commentCount })}`}
-          </p>
-        </div>
+          </span>
+        </p>
       </header>
 
       <UserText className="mt-6 text-lg leading-relaxed text-ink-soft">{discussion.content}</UserText>

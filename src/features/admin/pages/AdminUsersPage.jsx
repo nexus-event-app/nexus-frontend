@@ -36,16 +36,18 @@ export default function AdminUsersPage() {
     {
       key: 'role',
       header: 'Rol',
-      render: (user) => <Badge tone={user.role === 'ADMIN' ? 'indigo' : 'slate'}>{user.role === 'ADMIN' ? 'Admin' : 'Usuario'}</Badge>,
+      render: (user) => (
+        <Badge tone={user.role === 'ADMIN' ? 'indigo' : 'slate'}>{user.role === 'ADMIN' ? 'Admin' : 'Usuario'}</Badge>
+      ),
     },
     {
       key: 'status',
       header: 'Estado',
       render: (user) => (
-        <div className="flex flex-wrap justify-end gap-1.5 md:justify-start">
+        <p className="flex flex-wrap justify-end gap-1.5 md:justify-start">
           <Badge tone={user.enabled ? 'green' : 'red'}>{user.enabled ? 'Activo' : 'Desactivado'}</Badge>
           {!user.emailVerified && <Badge tone="amber">Email sin verificar</Badge>}
-        </div>
+        </p>
       ),
     },
     { key: 'date', header: 'Alta', render: (user) => <Time value={user.createdAt} format="short" /> },
@@ -70,14 +72,14 @@ export default function AdminUsersPage() {
     <>
       <Seo title="Administrar usuarios" path={paths.adminUsers} robots="noindex,nofollow" />
       <PageHeader title="Usuarios" description="Busca usuarios y activa o desactiva sus cuentas." />
-      <div className="mb-6">
+      <search className="mb-6 block">
         <SearchBar
           value={list.search}
           onSearch={(value) => list.setFilters({ q: value }, { replace: true })}
           label="Buscar usuarios"
           placeholder="Buscar por nombre o email…"
         />
-      </div>
+      </search>
       <PagedTable
         list={list}
         columns={columns}

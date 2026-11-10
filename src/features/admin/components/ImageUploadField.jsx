@@ -60,8 +60,8 @@ export default function ImageUploadField({ label, value, onChange, error, hint }
   }
 
   return (
-    <div>
-      <p className="mb-1.5 text-sm font-semibold text-ink">{label}</p>
+    <fieldset>
+      <legend className="mb-1.5 text-sm font-semibold text-ink">{label}</legend>
       {value && (
         <img
           src={value}
@@ -72,7 +72,7 @@ export default function ImageUploadField({ label, value, onChange, error, hint }
           className="mb-3 aspect-[16/9] w-full max-w-md rounded-control border border-slate-200 object-cover"
         />
       )}
-      <div className="flex flex-wrap items-center gap-3">
+      <p className="flex flex-wrap items-center gap-3">
         <label
           htmlFor={inputId}
           className="btn btn-secondary cursor-pointer has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-brand-600 has-[:focus-visible]:ring-offset-2"
@@ -94,13 +94,13 @@ export default function ImageUploadField({ label, value, onChange, error, hint }
             Quitar imagen
           </Button>
         )}
-      </div>
+      </p>
       <p className="mt-1.5 text-sm text-ink-muted">JPG, PNG, WebP o GIF de hasta 5 MB.{hint && ` ${hint}`}</p>
       {error && (
         <p id={errorId} role="alert" className="mt-1.5 text-sm font-medium text-red-700 dark:text-red-400">
           {error}
         </p>
       )}
-    </div>
+    </fieldset>
   )
 }

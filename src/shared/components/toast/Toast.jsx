@@ -19,7 +19,7 @@ export default function Toast({ id, type, message, onDismiss }) {
   }, [id, config.duration, onDismiss])
 
   return (
-    <div
+    <li
       className={cx(
         'pointer-events-auto flex animate-toast-in items-start gap-3 rounded-control border p-4 shadow-pop',
         config.classes,
@@ -35,6 +35,6 @@ export default function Toast({ id, type, message, onDismiss }) {
       >
         <Icon name="close" className="h-5 w-5" />
       </button>
-    </div>
+    </li>
   )
 }

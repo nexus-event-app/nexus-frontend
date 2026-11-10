@@ -23,13 +23,13 @@ function AccountBlock() {
   }
 
   return (
-    <div className="space-y-3 border-t border-slate-200 pt-4">
-      <div className="flex items-center justify-between gap-2">
-        <p className="min-w-0 truncate px-1 text-sm text-ink-muted">
-          Sesión de <span className="font-semibold text-ink">{user.name}</span>
-        </p>
+    <footer className="space-y-3 border-t border-slate-200 pt-4">
+      <p className="flex items-center justify-between gap-2 px-1 text-sm text-ink-muted">
+        <span className="min-w-0 truncate">
+          Sesión de <strong className="font-semibold text-ink">{user.name}</strong>
+        </span>
         <ThemeToggle className="shrink-0" />
-      </div>
+      </p>
       <Link to={paths.home} className="btn btn-secondary w-full">
         <Icon name="arrow-left" className="h-4 w-4" />
         Ver el sitio
@@ -38,7 +38,7 @@ function AccountBlock() {
         <Icon name="logout" className="h-4 w-4" />
         Cerrar sesión
       </Button>
-    </div>
+    </footer>
   )
 }
 
@@ -57,58 +57,62 @@ export default function AdminLayout() {
 
   useDismiss(barRef, open, closeMenu)
 
+  // #root (index.css) apila la página en columna; en pantallas grandes la barra lateral queda fija a la izquierda.
   return (
-    <div className="min-h-dvh bg-canvas lg:grid lg:grid-cols-[16rem_minmax(0,1fr)]">
+    <>
       <a href="#contenido" className="skip-link">
         Saltar al contenido
       </a>
 
-      <aside className="hidden border-r border-slate-200 bg-surface lg:block">
-        <div className="sticky top-0 flex h-dvh flex-col gap-6 overflow-y-auto p-4">
-          <Link to={paths.admin} aria-label={`Panel de administración de ${siteConfig.name}`}>
-            <Logo />
-          </Link>
-          <div className="flex-1">
-            <AdminNav />
-          </div>
-          <AccountBlock />
-        </div>
+      <aside className="hidden flex-col gap-6 overflow-y-auto border-r border-slate-200 bg-surface p-4 lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-64">
+        <Link to={paths.admin} aria-label={`Panel de administración de ${siteConfig.name}`}>
+          <Logo />
+        </Link>
+        <AdminNav className="flex-1" />
+        <AccountBlock />
       </aside>
 
-      <div className="min-w-0">
-        <div ref={barRef} className="sticky top-0 z-40 border-b border-slate-200 bg-surface lg:hidden">
-          <div className="page-container flex h-16 items-center justify-between">
-            <Link to={paths.admin} aria-label={`Panel de administración de ${siteConfig.name}`}>
-              <Logo />
-            </Link>
-            <button
-              ref={toggleRef}
-              type="button"
-              onClick={() => setOpenKey(open ? null : location.key)}
-              aria-expanded={open}
-              aria-controls={menuId}
-              aria-label={open ? 'Cerrar menú de administración' : 'Abrir menú de administración'}
-              className="-mr-2 flex h-11 w-11 items-center justify-center rounded-control hover:bg-slate-100"
-            >
-              <Icon name={open ? 'close' : 'menu'} className="h-6 w-6" />
-            </button>
-          </div>
-          {open && (
-            <div id={menuId} className="page-container space-y-4 border-t border-slate-200 py-4">
-              <AdminNav />
-              <AccountBlock />
-            </div>
-          )}
-        </div>
+      <header
+        ref={barRef}
+        className="page-gutter sticky top-0 z-40 flex flex-wrap items-center justify-between border-b border-slate-200 bg-surface lg:hidden"
+      >
+        <Link
+          to={paths.admin}
+          aria-label={`Panel de administración de ${siteConfig.name}`}
+          className="flex h-16 items-center"
+        >
+          <Logo />
+        </Link>
+        <button
+          ref={toggleRef}
+          type="button"
+          onClick={() => setOpenKey(open ? null : location.key)}
+          aria-expanded={open}
+          aria-controls={menuId}
+          aria-label={open ? 'Cerrar menú de administración' : 'Abrir menú de administración'}
+          className="-mr-2 flex h-11 w-11 items-center justify-center rounded-control hover:bg-slate-100"
+        >
+          <Icon name={open ? 'close' : 'menu'} className="h-6 w-6" />
+        </button>
+        {open && (
+          <section
+            id={menuId}
+            aria-label="Menú de administración"
+            className="basis-full space-y-4 border-t border-slate-200 py-4"
+          >
+            <AdminNav />
+            <AccountBlock />
+          </section>
+        )}
+      </header>
 
-        <main id="contenido" tabIndex={-1} className="page-container py-8 focus:outline-none">
-          <ErrorBoundary resetKey={location.pathname}>
-            <Suspense fallback={<PageLoader />}>
-              <Outlet />
-            </Suspense>
-          </ErrorBoundary>
-        </main>
-      </div>
-    </div>
+      <main id="contenido" tabIndex={-1} className="page-gutter flex-1 py-8 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 lg:ml-64">
+        <ErrorBoundary resetKey={location.pathname} embedded>
+          <Suspense fallback={<PageLoader />}>
+            <Outlet />
+          </Suspense>
+        </ErrorBoundary>
+      </main>
+    </>
   )
 }

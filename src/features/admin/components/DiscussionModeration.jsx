@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { commentService } from '@/features/forum/services/commentService'
+import ActionMenu from '@/shared/components/ActionMenu'
 import Badge from '@/shared/components/Badge'
 import Button from '@/shared/components/Button'
 import ConfirmDialog from '@/shared/components/ConfirmDialog'
@@ -32,20 +33,20 @@ export default function DiscussionModeration({ discussion, onClose, onDeleteDisc
 
   return (
     <Modal title="Moderar discusión" size="lg" onClose={onClose}>
-      <div className="space-y-6">
+      <>
         <article>
-          <div className="flex flex-wrap items-center gap-2">
+          <p className="flex flex-wrap items-center gap-2">
             <Badge tone={discussionCategories.toneOf(discussion.category)}>
               {discussionCategories.labelOf(discussion.category)}
             </Badge>
             {!discussion.isActive && <Badge tone="amber">Inactiva</Badge>}
-          </div>
+          </p>
           <h3 className="mt-3 text-xl font-bold text-ink">{discussion.title}</h3>
           <p className="mt-1 text-sm text-ink-muted">
             {discussion.authorName || 'Usuario'} · <Time value={discussion.createdAt} format="datetime" />
           </p>
           <UserText className="mt-4 text-ink-soft">{discussion.content}</UserText>
-          <div className="mt-4 flex flex-wrap gap-2">
+          <ActionMenu className="mt-4">
             {discussion.isActive && (
               <Link to={paths.discussionDetail(discussion)} className="btn btn-secondary btn-sm">
                 Ver en el sitio
@@ -55,10 +56,10 @@ export default function DiscussionModeration({ discussion, onClose, onDeleteDisc
               <Icon name="trash" className="h-4 w-4" />
               Borrar discusión
             </Button>
-          </div>
+          </ActionMenu>
         </article>
 
-        <section aria-labelledby="moderation-comments">
+        <section aria-labelledby="moderation-comments" className="mt-6">
           <h3 id="moderation-comments" className="mb-3 text-lg font-bold text-ink">
             Comentarios{comments.data ? ` (${comments.data.length})` : ''}
           </h3>
@@ -83,7 +84,7 @@ export default function DiscussionModeration({ discussion, onClose, onDeleteDisc
             </ul>
           )}
         </section>
-      </div>
+      </>
 
       {pendingDelete && (
         <ConfirmDialog
