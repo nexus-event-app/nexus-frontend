@@ -24,6 +24,15 @@ export default defineConfig([
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^_' }],
       'no-console': 'error',
+      // HTML semántico: nada de <div>. Usa la etiqueta con significado (main, section, article, aside, nav,
+      // header, footer, ul/li, dl, figure, hgroup, fieldset, search, p...) o quita el contenedor y maqueta con CSS.
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: "JSXOpeningElement[name.name='div']",
+          message: 'No uses <div>: elige una etiqueta semántica o maqueta sin contenedor (ver CLAUDE.md).',
+        },
+      ],
     },
   },
   {
