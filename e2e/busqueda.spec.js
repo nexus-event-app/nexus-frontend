@@ -11,7 +11,9 @@ test.describe('Búsqueda global', () => {
 
     await input.fill('react')
     await expect(dialog.getByRole('option', { name: /Novedades de React 19/ })).toBeVisible()
-    expect(api.calls.some((call) => call.path === '/api/search' && call.query.get('q') === 'react')).toBe(true)
+    await expect
+      .poll(() => api.calls.some((call) => call.path === '/api/search' && call.query.get('q') === 'react'))
+      .toBe(true)
 
     await page.keyboard.press('ArrowDown')
     await page.keyboard.press('Enter')

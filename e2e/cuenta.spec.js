@@ -51,7 +51,10 @@ test.describe('Cuenta', () => {
       'aria-pressed',
       'true',
     )
-    expect(api.calls.some((call) => call.method === 'PUT' && call.path === '/api/saved-jobs/11')).toBe(true)
+    // El botón cambia al instante y la petición sale después: se espera a que llegue al servidor simulado.
+    await expect
+      .poll(() => api.calls.some((call) => call.method === 'PUT' && call.path === '/api/saved-jobs/11'))
+      .toBe(true)
   })
 
   test('lo guardado nada más entrar no se pierde aunque la lista tarde en llegar', async ({ page, api, signedIn }) => {
