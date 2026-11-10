@@ -1,10 +1,15 @@
 import { Children, Fragment, isValidElement } from 'react'
 import { cx } from '@/shared/utils/classNames'
 
-/** Separa las acciones (aunque vengan en fragmentos o con condiciones) para darle a cada una su <li>. */
-function actionItems(children) {
-  return Children.toArray(children).flatMap((child) =>
-    isValidElement(child) && child.type === Fragment ? actionItems(child.props.children) : [child],
+/**
+ * Separa las acciones (aunque vengan en fragmentos o con condiciones) para darle a cada una su <li>. La clave de cada
+ * acción incluye la de su fragmento, para que no se repitan claves entre fragmentos distintos.
+ */
+function actionItems(children, prefix = '') {
+  return Children.toArray(children).flatMap((child, index) =>
+    isValidElement(child) && child.type === Fragment
+      ? actionItems(child.props.children, `${prefix}${child.key}/`)
+      : [{ key: `${prefix}${child.key ?? index}`, node: child }],
   )
 }
 
@@ -14,8 +19,8 @@ export default function ActionMenu({ className, children }) {
   if (items.length === 0) return null
   return (
     <menu className={cx('flex flex-wrap gap-2', className)}>
-      {items.map((item, index) => (
-        <li key={item.key ?? index}>{item}</li>
+      {items.map((item) => (
+        <li key={item.key}>{item.node}</li>
       ))}
     </menu>
   )

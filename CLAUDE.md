@@ -28,11 +28,22 @@ Normas de código del proyecto. Se aplican a todo lo que se escriba a partir de 
 - Contraste suficiente en tema claro y oscuro: usa los colores del tema (`ink`, `canvas`, `surface`, `accent`...).
 - Comprueba con axe las páginas nuevas o cambiadas, en claro y oscuro, escritorio y móvil.
 
+## Pruebas
+
+- **Unitarias y de componentes** (Vitest + Testing Library, `npm test`): junto al archivo que prueban, como
+  `Componente.test.jsx`. Pinta con `renderWithProviders` (`@/test/render`), que pone router, idioma, sesión y avisos.
+  Busca los elementos como los encuentra una persona: `getByRole`, `getByLabelText`... nunca por clases.
+- **De extremo a extremo** (Playwright, `npm run test:e2e`): en `e2e/`, con la API simulada en `e2e/fixtures.js`
+  y los datos en `e2e/data.js`. Se ejecutan en escritorio y móvil, y `accesibilidad.spec.js` pasa axe a las páginas
+  principales en tema claro y oscuro: añade ahí cada página nueva.
+- Todo cambio de lógica o de componente lleva su prueba. Corregir un fallo empieza por una prueba que lo reproduce.
+
 ## Estilo y calidad
 
 - Formato: `.prettierrc.json` (sin punto y coma, comillas simples, 120 caracteres).
 - Textos visibles traducidos en `src/shared/i18n/messages` (castellano, catalán e inglés); `npm run check:i18n`.
 - Rutas por idioma en `src/shared/i18n/routeSegments.js`; `npm run check:routes`.
-- Antes de subir: `npm run lint`, `npm run check:i18n`, `npm run check:routes` y `npm run build`.
+- Antes de subir: `npm run lint`, `npm run check:i18n`, `npm run check:routes`, `npm test`, `npm run test:e2e`
+  y `npm run build`.
 - Comentarios y nombres en castellano, explicando el porqué cuando no es evidente.
 - Nunca datos personales en el código: los datos legales vienen de variables `VITE_LEGAL_*`.

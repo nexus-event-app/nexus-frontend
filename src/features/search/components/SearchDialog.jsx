@@ -84,10 +84,10 @@ export default function SearchDialog({ onClose }) {
     else if (search.enabled || query.trim().length >= 2) open(searchPath(query))
   }
 
-  let index = -1
+  // Posición de cada opción en la lista completa, para la opción activa y los id de aria-activedescendant.
+  const optionIndex = new Map(options.map((option, position) => [option.key, position]))
   const renderOption = (entry) => {
-    index += 1
-    const current = index
+    const current = optionIndex.get(entry.key)
     return (
       <li
         key={entry.key}

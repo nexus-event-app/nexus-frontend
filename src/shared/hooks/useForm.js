@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 import { toApiError } from '@/shared/api/ApiError'
+import { translate } from '@/shared/i18n/translate'
 
 function focusFirstInvalid(form) {
   requestAnimationFrame(() => {
@@ -62,7 +63,7 @@ export function useForm({ initialValues, validate, onSubmit }) {
       const fieldErrors = apiError.fieldErrors ?? {}
       const hasFieldErrors = Object.keys(fieldErrors).length > 0
       setErrors(fieldErrors)
-      setFormError(hasFieldErrors ? 'Revisa los campos marcados.' : apiError.message)
+      setFormError(hasFieldErrors ? translate('errors.checkFields') : apiError.message)
       if (hasFieldErrors) focusFirstInvalid(form)
     } finally {
       submittingRef.current = false

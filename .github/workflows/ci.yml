@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   build:
-    name: Lint y build
+    name: Lint, pruebas y build
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -37,5 +37,37 @@ jobs:
       - name: Comprobar rutas por idioma
         run: npm run check:routes
 
+      - name: Pruebas unitarias y de componentes
+        run: npm run test:coverage
+
       - name: Build
         run: npm run build
+
+  e2e:
+    name: Pruebas de extremo a extremo
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Instalar Chromium para Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Playwright (escritorio y móvil, accesibilidad incluida)
+        run: npm run test:e2e
+
+      - name: Guardar el informe si algo falla
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: informe-playwright
+          path: playwright-report
+          retention-days: 7

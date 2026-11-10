@@ -33,14 +33,31 @@ export default defineConfig(({ mode }) => {
     server: {
       // Prepara al arrancar los módulos de la primera pantalla para que la primera carga no espere a compilarlos.
       warmup: {
-        clientFiles: ['./src/main.jsx', './src/app/App.jsx', './src/app/AppRoutes.jsx', './src/features/home/pages/HomePage.jsx'],
+        clientFiles: [
+          './src/main.jsx',
+          './src/app/App.jsx',
+          './src/app/AppRoutes.jsx',
+          './src/features/home/pages/HomePage.jsx',
+        ],
       },
-      proxy: Object.fromEntries(
-        proxiedPaths.map((path) => [path, { target: BACKEND_URL, changeOrigin: true }]),
-      ),
+      proxy: Object.fromEntries(proxiedPaths.map((path) => [path, { target: BACKEND_URL, changeOrigin: true }])),
     },
     build: {
       rollupOptions: { output: { manualChunks: vendorChunk } },
+    },
+    // Pruebas unitarias y de componentes (Vitest + Testing Library). Las de extremo a extremo están en e2e/.
+    test: {
+      environment: 'jsdom',
+      setupFiles: ['./src/test/setup.js'],
+      include: ['src/**/*.test.{js,jsx}'],
+      css: false,
+      restoreMocks: true,
+      coverage: {
+        provider: 'v8',
+        reporter: ['text-summary', 'html'],
+        include: ['src/**/*.{js,jsx}'],
+        exclude: ['src/test/**', 'src/**/*.test.{js,jsx}', 'src/main.jsx', 'src/shared/i18n/messages/**'],
+      },
     },
   }
 })

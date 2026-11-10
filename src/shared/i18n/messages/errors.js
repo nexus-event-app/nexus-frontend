@@ -15,6 +15,7 @@ export default {
     429: 'Demasiadas peticiones. Espera un momento y vuelve a intentarlo.',
     500: generic.es,
     generic: generic.es,
+    checkFields: 'Revisa los campos marcados.',
   },
   ca: {
     network: 'No s’ha pogut connectar amb el servidor. Revisa la connexió i torna-ho a provar.',
@@ -26,6 +27,7 @@ export default {
     429: 'Massa peticions. Espera un moment i torna-ho a provar.',
     500: generic.ca,
     generic: generic.ca,
+    checkFields: 'Revisa els camps marcats.',
   },
   en: {
     network: 'Could not connect to the server. Check your connection and try again.',
@@ -37,5 +39,6 @@ export default {
     429: 'Too many requests. Wait a moment and try again.',
     500: generic.en,
     generic: generic.en,
+    checkFields: 'Please check the highlighted fields.',
   },
 }
