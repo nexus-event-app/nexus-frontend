@@ -3,6 +3,8 @@ export default {
   es: {
     skipLink: 'Saltar al contenido',
     newTab: '(se abre en una pestaña nueva)',
+    readMore: 'Leer más',
+    readLess: 'Leer menos',
     pageSuffix: ' (página {page})',
     results: 'Resultados',
     theme: {
@@ -77,6 +79,8 @@ export default {
   ca: {
     skipLink: 'Salta al contingut',
     newTab: '(s’obre en una pestanya nova)',
+    readMore: 'Llegeix-ne més',
+    readLess: 'Llegeix-ne menys',
     pageSuffix: ' (pàgina {page})',
     results: 'Resultats',
     theme: {
@@ -151,6 +155,8 @@ export default {
   en: {
     skipLink: 'Skip to content',
     newTab: '(opens in a new tab)',
+    readMore: 'Read more',
+    readLess: 'Show less',
     pageSuffix: ' (page {page})',
     results: 'Results',
     theme: {
