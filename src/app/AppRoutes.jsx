@@ -20,6 +20,7 @@ const NewDiscussionPage = lazy(() => import('@/features/forum/pages/NewDiscussio
 const DiscussionDetailPage = lazy(() => import('@/features/forum/pages/DiscussionDetailPage'))
 const ProfilePage = lazy(() => import('@/features/profile/pages/ProfilePage'))
 const EditProfilePage = lazy(() => import('@/features/profile/pages/EditProfilePage'))
+const AboutPage = lazy(() => import('@/features/about/pages/AboutPage'))
 const SearchPage = lazy(() => import('@/features/search/pages/SearchPage'))
 const TestimonialsPage = lazy(() => import('@/features/testimonials/pages/TestimonialsPage'))
 const LegalNoticePage = lazy(() => import('@/features/legal/pages/LegalNoticePage'))
@@ -49,9 +50,8 @@ function publicRoutes({ prefix, lang }) {
   const seg = (esSegment) => routeSegment(esSegment, lang)
   const forum = seg('foro')
   // Direcciones antiguas con el nombre de la sección en castellano (p. ej. «/en/foro/12-x»): redirigen a la traducida.
-  const legacy = lang === DEFAULT_LANGUAGE
-    ? []
-    : Object.keys(ROUTE_SEGMENTS).filter((esSegment) => seg(esSegment) !== esSegment)
+  const legacy =
+    lang === DEFAULT_LANGUAGE ? [] : Object.keys(ROUTE_SEGMENTS).filter((esSegment) => seg(esSegment) !== esSegment)
 
   return (
     <Route key={prefix} path={prefix} element={<RootLayout />}>
@@ -80,6 +80,7 @@ function publicRoutes({ prefix, lang }) {
       <Route path={`${forum}/:idSlug`} element={<DiscussionDetailPage />} />
       <Route path={seg('testimonios')} element={<TestimonialsPage />} />
       <Route path={seg('buscar')} element={<SearchPage />} />
+      <Route path={seg('sobre-el-proyecto')} element={<AboutPage />} />
       <Route
         path={`${seg('perfil')}/${routeSubsegment('perfil', 'editar', lang)}`}
         element={

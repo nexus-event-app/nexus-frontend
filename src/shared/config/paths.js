@@ -16,6 +16,7 @@ export const paths = {
     buildSlugPath('/perfil', { id: person.id ?? person.authorId, slug: slugify(person.name ?? person.authorName) }),
   profileEdit: '/perfil/editar',
   search: '/buscar',
+  about: '/sobre-el-proyecto',
   legalNotice: '/aviso-legal',
   privacy: '/privacidad',
   cookies: '/cookies',

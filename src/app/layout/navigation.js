@@ -6,3 +6,6 @@ export const mainNavigation = [
   { labelKey: 'common.nav.forum', to: paths.forum },
   { labelKey: 'common.nav.testimonials', to: paths.testimonials },
 ]
+
+/** Enlaces del pie que no están en la navegación principal. */
+export const footerExtraNavigation = [{ labelKey: 'common.nav.about', to: paths.about }]

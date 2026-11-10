@@ -19,6 +19,7 @@ export default {
       jobs: 'Empleo',
       forum: 'Foro',
       testimonials: 'Testimonios',
+      about: 'Sobre el proyecto',
       main: 'Principal',
       mainMobile: 'Principal (móvil)',
       menu: 'Menú',
@@ -95,6 +96,7 @@ export default {
       jobs: 'Feina',
       forum: 'Fòrum',
       testimonials: 'Testimonis',
+      about: 'Sobre el projecte',
       main: 'Principal',
       mainMobile: 'Principal (mòbil)',
       menu: 'Menú',
@@ -171,6 +173,7 @@ export default {
       jobs: 'Jobs',
       forum: 'Forum',
       testimonials: 'Testimonials',
+      about: 'About the project',
       main: 'Main',
       mainMobile: 'Main (mobile)',
       menu: 'Menu',
@@ -190,8 +193,7 @@ export default {
       menu: 'Your account menu',
     },
     footer: {
-      description:
-        'News, job offers, forum and testimonials in Spanish for those taking their first steps in tech.',
+      description: 'News, job offers, forum and testimonials in Spanish for those taking their first steps in tech.',
       explore: 'Explore',
       exploreLabel: 'Footer: explore',
       account: 'Your account',

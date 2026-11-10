@@ -1,3 +1,4 @@
+import about from './about'
 import auth from './auth'
 import catalogs from './catalogs'
 import common from './common'
@@ -11,7 +12,7 @@ import search from './search'
 import seo from './seo'
 import testimonials from './testimonials'
 
-const modules = { catalogs, common, errors, seo, home, news, jobs, forum, testimonials, auth, profile, search }
+const modules = { catalogs, common, errors, seo, home, news, jobs, forum, testimonials, auth, profile, search, about }
 
 /** Une los módulos: cada uno aporta sus textos en los tres idiomas bajo su propio nombre. */
 function merge(language) {

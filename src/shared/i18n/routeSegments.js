@@ -20,6 +20,7 @@ export const ROUTE_SEGMENTS = {
   'verificar-email': { ca: 'verifica-correu', en: 'verify-email' },
   perfil: { ca: 'perfil', en: 'profile' },
   buscar: { ca: 'cerca', en: 'search' },
+  'sobre-el-proyecto': { ca: 'sobre-el-projecte', en: 'about' },
 }
 
 /** Subsecciones fijas (el resto de segundos segmentos son identificadores como «12-mi-duda» y no se traducen). */
