@@ -20,6 +20,12 @@ export default {
       count_other: '{count} noticias',
     },
     filter: { label: 'Filtrar noticias por categoría', all: 'Todas' },
+    languageFilter: {
+      label: 'Filtrar noticias por idioma',
+      all: 'Todos los idiomas',
+      es: 'En español',
+      en: 'En inglés',
+    },
     card: { via: 'Vía {source}' },
     related: { title: 'Más noticias', seeAll: 'Ver todas las noticias' },
     detail: {
@@ -53,6 +59,12 @@ export default {
       count_other: '{count} notícies',
     },
     filter: { label: 'Filtra les notícies per categoria', all: 'Totes' },
+    languageFilter: {
+      label: 'Filtra les notícies per idioma',
+      all: 'Tots els idiomes',
+      es: 'En castellà',
+      en: 'En anglès',
+    },
     card: { via: 'Via {source}' },
     related: { title: 'Més notícies', seeAll: 'Mira totes les notícies' },
     detail: {
@@ -86,6 +98,7 @@ export default {
       count_other: '{count} articles',
     },
     filter: { label: 'Filter news by category', all: 'All' },
+    languageFilter: { label: 'Filter news by language', all: 'All languages', es: 'In Spanish', en: 'In English' },
     card: { via: 'Via {source}' },
     related: { title: 'More news', seeAll: 'See all news' },
     detail: {

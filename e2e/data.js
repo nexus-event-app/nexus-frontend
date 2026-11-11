@@ -46,6 +46,24 @@ export const news = [
   },
 ]
 
+// Noticia importada de una fuente en inglés.
+export const englishNews = {
+  id: 3,
+  slug: 'what-is-new-in-react-19',
+  title: 'What is new in React 19',
+  content: 'A quick tour of the features that matter most when you are starting out.',
+  sourceUrl: 'https://example.com/react-19',
+  imageUrl: null,
+  author: null,
+  category: 'DESARROLLO',
+  source: 'DEV Community',
+  language: 'en',
+  imported: true,
+  isActive: true,
+  createdAt: DATE,
+  updatedAt: DATE,
+}
+
 export const jobs = [
   {
     id: 11,

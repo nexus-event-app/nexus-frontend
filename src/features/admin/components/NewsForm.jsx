@@ -2,7 +2,7 @@ import Alert from '@/shared/components/Alert'
 import Button from '@/shared/components/Button'
 import CheckboxField from '@/shared/components/CheckboxField'
 import FormField from '@/shared/components/FormField'
-import { newsCategories } from '@/shared/config/catalogs'
+import { contentLanguages, newsCategories } from '@/shared/config/catalogs'
 import { useForm } from '@/shared/hooks/useForm'
 import { validateNews } from '../utils/validators'
 import ImageUploadField from './ImageUploadField'
@@ -11,6 +11,7 @@ function toValues(news) {
   return {
     title: news?.title ?? '',
     category: news?.category ?? 'GENERAL',
+    language: news?.language ?? 'es',
     author: news?.author ?? '',
     sourceUrl: news?.sourceUrl ?? '',
     imageUrl: news?.imageUrl ?? '',
@@ -30,6 +31,7 @@ export default function NewsForm({ news, onSubmit, onCancel }) {
         title: values.title.trim(),
         content: values.content.trim(),
         category: values.category,
+        language: values.language,
         author: values.author.trim() || null,
         sourceUrl: values.sourceUrl.trim() || null,
         imageUrl: values.imageUrl || null,
@@ -42,14 +44,21 @@ export default function NewsForm({ news, onSubmit, onCancel }) {
       {form.formError && <Alert variant="error">{form.formError}</Alert>}
       <FormField {...form.getFieldProps('title')} label="Título" maxLength={200} required />
 
-      <FormField className="field-half" {...form.getFieldProps('category')} as="select" label="Categoría">
+      <FormField className="field-third" {...form.getFieldProps('category')} as="select" label="Categoría">
         {newsCategories.items.map((item) => (
           <option key={item.value} value={item.value}>
             {item.label}
           </option>
         ))}
       </FormField>
-      <FormField className="field-half" {...form.getFieldProps('author')} label="Autor" maxLength={100} />
+      <FormField className="field-third" {...form.getFieldProps('language')} as="select" label="Idioma">
+        {contentLanguages.map((item) => (
+          <option key={item.value} value={item.value}>
+            {item.label}
+          </option>
+        ))}
+      </FormField>
+      <FormField className="field-third" {...form.getFieldProps('author')} label="Autor" maxLength={100} />
 
       <FormField
         {...form.getFieldProps('sourceUrl')}

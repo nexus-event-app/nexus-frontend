@@ -16,9 +16,10 @@ function splitBlocks(text) {
 
 /**
  * Texto escrito por la comunidad: párrafos y bloques de código (entre ```), sin contenedor alrededor.
- * `className` se aplica a cada bloque; la separación entre bloques la pone .user-text (index.css).
+ * `className` se aplica a cada bloque; la separación entre bloques la pone .user-text (index.css). `lang`, si se
+ * indica, marca el idioma de cada párrafo (por ejemplo, una noticia en inglés).
  */
-export default function UserText({ children, className }) {
+export default function UserText({ children, className, lang }) {
   return splitBlocks(children ?? '').map((block, index) =>
     block.type === 'code' ? (
       <pre
@@ -31,7 +32,7 @@ export default function UserText({ children, className }) {
         <code className="font-mono">{block.value}</code>
       </pre>
     ) : (
-      <p key={index} className={cx('user-text whitespace-pre-wrap break-words', className)}>
+      <p key={index} lang={lang} className={cx('user-text whitespace-pre-wrap break-words', className)}>
         {block.value.trim()}
       </p>
     ),

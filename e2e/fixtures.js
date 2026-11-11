@@ -1,6 +1,17 @@
 import AxeBuilder from '@axe-core/playwright'
 import { test as base, expect } from '@playwright/test'
-import { comments, discussions, jobs, news, notifications, page, searchResult, testimonials, user } from './data.js'
+import {
+  comments,
+  discussions,
+  englishNews,
+  jobs,
+  news,
+  notifications,
+  page,
+  searchResult,
+  testimonials,
+  user,
+} from './data.js'
 
 const json = (body, status = 200) => ({ status, contentType: 'application/json', body: JSON.stringify(body) })
 
@@ -13,8 +24,14 @@ class MockApi {
     this.calls = []
     this.handlers = new Map()
     this.on('GET', '/api/news/latest', () => json(news))
-    this.on('GET', '/api/news', () => json(page(news)))
-    this.on('GET', /^\/api\/news\/(\d+)$/, ([, id]) => json(news.find((item) => item.id === Number(id))))
+    this.on('GET', '/api/news', (_, query) => {
+      const all = [...news, englishNews]
+      const language = query?.get('language')
+      return json(page(language ? all.filter((item) => (item.language ?? 'es') === language) : all))
+    })
+    this.on('GET', /^\/api\/news\/(\d+)$/, ([, id]) =>
+      json([...news, englishNews].find((item) => item.id === Number(id))),
+    )
     this.on('GET', '/api/jobs/latest', () => json(jobs))
     this.on('GET', '/api/jobs', () => json(page(jobs)))
     this.on('GET', /^\/api\/jobs\/(\d+)$/, ([, id]) => json(jobs.find((item) => item.id === Number(id))))
@@ -43,13 +60,13 @@ class MockApi {
     this.handlers.set(`${method} ${path}`, { method, path, respond })
   }
 
-  handle(method, pathname) {
+  handle(method, pathname, query) {
     for (const { method: m, path, respond } of [...this.handlers.values()].reverse()) {
       if (m !== method) continue
-      if (typeof path === 'string' && path === pathname) return respond([pathname])
+      if (typeof path === 'string' && path === pathname) return respond([pathname], query)
       if (path instanceof RegExp) {
         const match = path.exec(pathname)
-        if (match) return respond(match)
+        if (match) return respond(match, query)
       }
     }
     return json({ error: 'NOT_FOUND', message: 'No simulado en las pruebas' }, 404)
@@ -70,7 +87,7 @@ export const test = base.extend({
           query: url.searchParams,
           body: request.postData(),
         })
-        await route.fulfill(await api.handle(request.method(), url.pathname))
+        await route.fulfill(await api.handle(request.method(), url.pathname, url.searchParams))
       })
       // Las imágenes externas no deben hacer lentas ni frágiles las pruebas.
       await browserPage.route(/^https?:\/\/(?!localhost)/, (route) => route.abort())

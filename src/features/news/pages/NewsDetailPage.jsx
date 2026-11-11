@@ -2,6 +2,8 @@ import { useParams } from 'react-router-dom'
 import { Navigate } from '@/shared/i18n/router'
 import ArticleSkeleton from '@/shared/components/ArticleSkeleton'
 import Badge from '@/shared/components/Badge'
+import ContentLanguageBadge from '@/shared/components/ContentLanguageBadge'
+import { contentLanguageOf } from '@/shared/utils/contentLanguage'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import ErrorState from '@/shared/components/ErrorState'
 import JsonLd from '@/shared/components/JsonLd'
@@ -83,8 +85,14 @@ export default function NewsDetailPage() {
 
       <article className="min-w-0 max-w-prose">
         <header>
-          <Badge tone={newsCategories.toneOf(article.category)}>{newsCategories.labelOf(article.category)}</Badge>
-          <h1 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl">
+          <p className="flex flex-wrap items-center gap-2">
+            <Badge tone={newsCategories.toneOf(article.category)}>{newsCategories.labelOf(article.category)}</Badge>
+            <ContentLanguageBadge language={contentLanguageOf(article)} />
+          </p>
+          <h1
+            lang={contentLanguageOf(article)}
+            className="mt-4 text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl"
+          >
             {article.title}
           </h1>
           <p className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-ink-muted">
@@ -106,7 +114,9 @@ export default function NewsDetailPage() {
           />
         </figure>
 
-        <UserText className="mt-8 text-lg leading-relaxed text-ink-soft">{article.content}</UserText>
+        <UserText lang={contentLanguageOf(article)} className="mt-8 text-lg leading-relaxed text-ink-soft">
+          {article.content}
+        </UserText>
 
         {imported && hasSource && (
           <aside aria-label={t('news.detail.originalLabel')} className="card mt-8 bg-accent-soft/60 p-5">

@@ -4,6 +4,7 @@ const PAGES = [
   '/',
   '/noticias',
   '/noticias/1-novedades-de-react-19',
+  '/noticias/3-what-is-new-in-react-19',
   '/empleo',
   '/empleo/11-desarrollador-frontend-junior',
   '/foro',

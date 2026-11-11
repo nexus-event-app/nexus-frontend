@@ -67,6 +67,12 @@ export const importSourceTypes = catalog('importSourceTypes', [
   ['ARBEITNOW_JOBS', 'Empleo · Arbeitnow', 'green'],
 ])
 
+/** Idiomas del contenido (noticias y sus fuentes). El panel de administración solo está en castellano. */
+export const contentLanguages = [
+  { value: 'es', label: 'Español' },
+  { value: 'en', label: 'Inglés' },
+]
+
 export const isNewsSourceType = (type) => type === 'RSS_NEWS'
 
 export const contractTypes = catalog('contractTypes', [

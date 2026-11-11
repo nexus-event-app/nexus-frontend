@@ -110,7 +110,9 @@ export default function SearchDialog({ onClose }) {
           />
         )}
         <span className="min-w-0">
-          <span className={cx('block font-medium', entry.key !== 'see-all' && 'truncate')}>{entry.title}</span>
+          <span lang={entry.lang} className={cx('block font-medium', entry.key !== 'see-all' && 'truncate')}>
+            {entry.title}
+          </span>
           {entry.detail && <span className="block truncate text-sm text-ink-muted">{entry.detail}</span>}
         </span>
       </li>

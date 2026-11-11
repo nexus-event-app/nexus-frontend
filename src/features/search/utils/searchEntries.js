@@ -1,9 +1,16 @@
 import { paths } from '@/shared/config/paths'
 import { contractTypes, discussionCategories, newsCategories } from '@/shared/config/catalogs'
+import { contentLanguageOf } from '@/shared/utils/contentLanguage'
 
 /** Convierte cada resultado en una entrada uniforme (enlace, título y detalle) para pintarla en cualquier lista. */
 const TO_ENTRY = {
-  news: (item) => ({ href: paths.newsDetail(item), title: item.title, detail: newsCategories.labelOf(item.category) }),
+  news: (item) => ({
+    href: paths.newsDetail(item),
+    title: item.title,
+    // Idioma del titular, para que el lector de pantalla lo pronuncie bien.
+    lang: contentLanguageOf(item),
+    detail: newsCategories.labelOf(item.category),
+  }),
   jobs: (item) => ({
     href: paths.jobDetail(item),
     title: item.title,

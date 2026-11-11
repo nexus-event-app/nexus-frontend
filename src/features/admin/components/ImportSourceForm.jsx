@@ -2,7 +2,7 @@ import Alert from '@/shared/components/Alert'
 import Button from '@/shared/components/Button'
 import CheckboxField from '@/shared/components/CheckboxField'
 import FormField from '@/shared/components/FormField'
-import { importSourceTypes, isNewsSourceType, newsCategories } from '@/shared/config/catalogs'
+import { contentLanguages, importSourceTypes, isNewsSourceType, newsCategories } from '@/shared/config/catalogs'
 import { useForm } from '@/shared/hooks/useForm'
 import { validateImportSource } from '../utils/validators'
 
@@ -21,6 +21,7 @@ function toValues(source) {
     type: source?.type ?? 'RSS_NEWS',
     url: source?.url ?? '',
     newsCategory: source?.newsCategory ?? 'GENERAL',
+    language: source?.language ?? 'es',
     keywords: source?.keywords ?? '',
     excludeKeywords: source?.excludeKeywords ?? '',
     intervalMinutes: String(source?.intervalMinutes ?? ''),
@@ -43,6 +44,7 @@ export default function ImportSourceForm({ source, onSubmit, onCancel }) {
         type: values.type,
         url: values.url.trim(),
         newsCategory: isNewsSourceType(values.type) ? values.newsCategory : null,
+        language: isNewsSourceType(values.type) ? values.language : 'es',
         keywords: values.keywords.trim() || null,
         excludeKeywords: values.excludeKeywords.trim() || null,
         intervalMinutes: values.intervalMinutes ? Number(values.intervalMinutes) : null,
@@ -94,21 +96,36 @@ export default function ImportSourceForm({ source, onSubmit, onCancel }) {
       />
 
       {news && (
-        <FormField
-          className="field-half"
-          {...form.getFieldProps('newsCategory')}
-          as="select"
-          label="Categoría de las noticias"
-        >
-          {newsCategories.items.map((item) => (
-            <option key={item.value} value={item.value}>
-              {item.label}
-            </option>
-          ))}
-        </FormField>
+        <>
+          <FormField
+            className="field-third"
+            {...form.getFieldProps('newsCategory')}
+            as="select"
+            label="Categoría de las noticias"
+          >
+            {newsCategories.items.map((item) => (
+              <option key={item.value} value={item.value}>
+                {item.label}
+              </option>
+            ))}
+          </FormField>
+          <FormField
+            className="field-third"
+            {...form.getFieldProps('language')}
+            as="select"
+            label="Idioma de la fuente"
+            hint="Las noticias en inglés se marcan en la web."
+          >
+            {contentLanguages.map((item) => (
+              <option key={item.value} value={item.value}>
+                {item.label}
+              </option>
+            ))}
+          </FormField>
+        </>
       )}
       <FormField
-        className="field-half"
+        className={news ? 'field-third' : 'field-half'}
         {...form.getFieldProps('intervalMinutes')}
         type="number"
         inputMode="numeric"
