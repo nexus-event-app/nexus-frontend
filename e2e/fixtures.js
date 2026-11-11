@@ -52,6 +52,12 @@ class MockApi {
     this.on('GET', '/api/learning/progress', () => json([]))
     this.on('PUT', /^\/api\/learning\/progress\/[a-z0-9-]+\/[a-z0-9-]+$/, () => ({ status: 204 }))
     this.on('DELETE', /^\/api\/learning\/progress\/[a-z0-9-]+\/[a-z0-9-]+$/, () => ({ status: 204 }))
+    this.on('POST', '/api/reports', () => ({ status: 204 }))
+    this.on('GET', '/api/admin/reports', () => json([]))
+    this.on('POST', '/api/admin/reports/resolve', () => ({ status: 204 }))
+    this.on('GET', '/api/admin/stats', () =>
+      json({ users: 3, news: 2, jobs: 1, discussions: 1, comments: 2, pendingTestimonials: 0, pendingReports: 1 }),
+    )
     this.on('GET', '/api/auth/me', () => json(user))
     this.on('POST', '/api/auth/login', () => json({ token: 'token-de-prueba', user }))
   }
@@ -95,6 +101,19 @@ export const test = base.extend({
     },
     { auto: true },
   ],
+
+  /** Sesión de administración, para las pruebas del panel. */
+  signedInAdmin: async ({ page: browserPage, api }, use) => {
+    const admin = { ...user, id: 1, name: 'Admin Prueba', role: 'ADMIN' }
+    api.on('GET', '/api/auth/me', () => json(admin))
+    await browserPage.addInitScript(
+      (session) => {
+        window.localStorage.setItem('primercommit.session', JSON.stringify(session))
+      },
+      { token: 'token-de-admin', user: admin },
+    )
+    await use(admin)
+  },
 
   /** Inicia sesión guardando la sesión como lo hace la web, sin pasar por el formulario. */
   signedIn: async ({ page: browserPage }, use) => {

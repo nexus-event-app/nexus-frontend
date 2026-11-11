@@ -41,6 +41,7 @@ const AdminForumPage = lazy(() => import('@/features/admin/pages/AdminForumPage'
 const AdminTestimonialsPage = lazy(() => import('@/features/admin/pages/AdminTestimonialsPage'))
 const AdminUsersPage = lazy(() => import('@/features/admin/pages/AdminUsersPage'))
 const AdminImportPage = lazy(() => import('@/features/admin/pages/AdminImportPage'))
+const AdminReportsPage = lazy(() => import('@/features/admin/pages/AdminReportsPage'))
 
 /** Las páginas públicas existen una vez por idioma: «/», «/ca» y «/en». El panel de admin solo en castellano. */
 const PUBLIC_LANGUAGES = [
@@ -146,6 +147,7 @@ export default function AppRoutes() {
         <Route path="testimonios" element={<AdminTestimonialsPage />} />
         <Route path="usuarios" element={<AdminUsersPage />} />
         <Route path="importacion" element={<AdminImportPage />} />
+        <Route path="reportes" element={<AdminReportsPage />} />
         <Route path="*" element={<NotFound embedded />} />
       </Route>
     </Routes>

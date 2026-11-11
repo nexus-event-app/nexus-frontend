@@ -9,6 +9,7 @@ const ITEMS = [
   { label: 'Empleo', to: paths.adminJobs, icon: 'briefcase' },
   { label: 'Foro', to: paths.adminForum, icon: 'chat' },
   { label: 'Testimonios', to: paths.adminTestimonials, icon: 'star' },
+  { label: 'Reportes', to: paths.adminReports, icon: 'flag' },
   { label: 'Usuarios', to: paths.adminUsers, icon: 'users' },
   { label: 'Importación', to: paths.adminImport, icon: 'refresh' },
 ]

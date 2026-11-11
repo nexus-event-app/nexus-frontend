@@ -35,6 +35,7 @@ export const paths = {
   adminTestimonials: '/admin/testimonios',
   adminUsers: '/admin/usuarios',
   adminImport: '/admin/importacion',
+  adminReports: '/admin/reportes',
 }
 
 export function loginPath(redirectTo) {

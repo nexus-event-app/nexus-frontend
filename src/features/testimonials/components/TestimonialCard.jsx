@@ -3,6 +3,7 @@ import AuthorLink from '@/features/profile/components/AuthorLink'
 import Avatar from '@/shared/components/Avatar'
 import Badge from '@/shared/components/Badge'
 import Icon from '@/shared/components/Icon'
+import ReportButton from '@/features/reports/components/ReportButton'
 import { useIsClamped } from '@/shared/hooks/useIsClamped'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
@@ -62,6 +63,14 @@ export default function TestimonialCard({ testimonial, linkAuthor = true }) {
             {t('testimonials.card.highlighted')}
           </Badge>
         )}
+        <ReportButton
+          compact
+          targetType="TESTIMONIAL"
+          targetId={testimonial.id}
+          ownerId={testimonial.authorId}
+          srLabel={t('reports.testimonialSr', { author: testimonial.name })}
+          className="-mr-2"
+        />
       </figcaption>
     </figure>
   )

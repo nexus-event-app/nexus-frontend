@@ -5,6 +5,7 @@ import Icon from '@/shared/components/Icon'
 import Time from '@/shared/components/Time'
 import UserText from '@/shared/components/UserText'
 import { cx } from '@/shared/utils/classNames'
+import ReportButton from '@/features/reports/components/ReportButton'
 import LikeButton from './LikeButton'
 import { useI18n } from '@/shared/i18n/useI18n'
 
@@ -67,6 +68,12 @@ export default function CommentItem({
             <span className="sr-only">{t('forum.comments.acceptSr', { author })}</span>
           </Button>
         )}
+        <ReportButton
+          targetType="COMMENT"
+          targetId={comment.id}
+          ownerId={comment.authorId}
+          srLabel={t('reports.commentSr', { author })}
+        />
         {canDelete && (
           <Button variant="ghost" size="sm" onClick={() => onDelete(comment)}>
             <Icon name="trash" className="h-4 w-4" />

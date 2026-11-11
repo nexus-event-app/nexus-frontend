@@ -20,7 +20,9 @@ function renderProvider(user) {
   })
 }
 
-beforeEach(() => vi.spyOn(notificationService, 'unreadCount').mockResolvedValue(2))
+beforeEach(() => {
+  vi.spyOn(notificationService, 'unreadCount').mockResolvedValue(2)
+})
 afterEach(() => vi.useRealTimers())
 
 describe('NotificationsProvider', () => {

@@ -10,6 +10,7 @@ import learning from './learning'
 import news from './news'
 import notifications from './notifications'
 import profile from './profile'
+import reports from './reports'
 import search from './search'
 import seo from './seo'
 import testimonials from './testimonials'
@@ -30,6 +31,7 @@ const modules = {
   about,
   notifications,
   learning,
+  reports,
 }
 
 /** Une los módulos: cada uno aporta sus textos en los tres idiomas bajo su propio nombre. */

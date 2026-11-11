@@ -35,6 +35,13 @@ export default function AdminDashboardPage() {
       to: paths.adminTestimonials,
       highlight: stats.pendingTestimonials > 0,
     },
+    {
+      label: 'Reportes pendientes',
+      value: stats.pendingReports ?? 0,
+      icon: 'flag',
+      to: paths.adminReports,
+      highlight: stats.pendingReports > 0,
+    },
   ]
 
   return (

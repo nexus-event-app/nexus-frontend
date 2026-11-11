@@ -19,6 +19,7 @@ import { useToast } from '@/shared/hooks/useToast'
 import { useCanManage } from '../hooks/useCanManage'
 import { discussionService } from '../services/discussionService'
 import DiscussionForm from './DiscussionForm'
+import ReportButton from '@/features/reports/components/ReportButton'
 import LikeButton from './LikeButton'
 import { useI18n } from '@/shared/i18n/useI18n'
 
@@ -105,6 +106,12 @@ export default function DiscussionArticle({ discussion, commentCount, onChange, 
           pending={likePending}
           onToggle={handleLike}
           label={t('forum.detail.likeDiscussion')}
+        />
+        <ReportButton
+          targetType="DISCUSSION"
+          targetId={discussion.id}
+          ownerId={discussion.authorId}
+          srLabel={t('reports.discussionSr', { title: discussion.title })}
         />
         {manageable && (
           <>
