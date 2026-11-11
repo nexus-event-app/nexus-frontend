@@ -82,7 +82,7 @@ export default function ForumPage() {
                 <p role="status" className="mb-4 text-sm text-ink-muted">
                   {t('forum.list.count', { count: result.totalElements })}
                 </p>
-                <ul className="space-y-4">
+                <ul className="grid grid-cols-1 gap-5 md:grid-cols-2">
                   {result.content.map((discussion) => (
                     <li key={discussion.id}>
                       <DiscussionCard discussion={discussion} headingLevel="h2" />
