@@ -149,10 +149,9 @@ export default function HomePathsSection() {
           <ButtonLink
             to={paths.register}
             variant="inverse"
-            className="group justify-self-start rounded-full px-6 transition-all hover:-translate-y-0.5 lg:justify-self-end"
+            className="justify-self-start rounded-full px-6 transition-all hover:-translate-y-0.5 lg:justify-self-end"
           >
             {t('home.paths.join')}
-            <Icon name="arrow-right" className="h-5 w-5 transition-transform group-hover:translate-x-1" />
           </ButtonLink>
         </aside>
       )}

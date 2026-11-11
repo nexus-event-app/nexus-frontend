@@ -11,7 +11,6 @@ describe('HeroSection', () => {
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Tu primer paso en tecnología')
     expect(screen.getByRole('link', { name: /Únete gratis a la comunidad/ })).toHaveAttribute('href', '/registro')
     expect(screen.getByRole('link', { name: 'Ya tengo cuenta' })).toHaveAttribute('href', '/login')
-    expect(screen.getByRole('list', { name: 'Por qué unirte' })).toHaveTextContent('Sin publicidad')
 
     // Los bloques de «Qué encontrarás» informan: no son enlaces.
     const features = screen.getByRole('region', { name: /Qué encontrarás/ })

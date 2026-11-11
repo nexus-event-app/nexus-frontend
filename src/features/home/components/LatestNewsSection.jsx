@@ -37,7 +37,7 @@ export default function LatestNewsSection() {
           }
           const [featured, ...others] = items
           return (
-            <ul className={cx('grid gap-6', others.length > 0 && 'lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]')}>
+            <ul className={cx('grid gap-6', others.length > 0 && 'lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]')}>
               <li className={cx(others.length > 1 && 'lg:row-span-2')}>
                 <HomeNewsCard item={featured} featured />
               </li>

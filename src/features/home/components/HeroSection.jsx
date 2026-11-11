@@ -8,8 +8,6 @@ import { Link } from '@/shared/i18n/router'
 import { useI18n } from '@/shared/i18n/useI18n'
 import HeroIllustration from './HeroIllustration'
 
-const TRUST = ['trustFree', 'trustNoAds', 'trustJunior']
-
 /** Lo que ofrece la web, en cuatro bloques informativos (no son enlaces: las secciones están en el menú). */
 const FEATURES = [
   { key: 'learn', icon: 'academic' },
@@ -68,7 +66,6 @@ export default function HeroSection() {
               className="mt-4 rounded-full px-7 py-3 text-base shadow-lg shadow-brand-950/30 transition-all hover:-translate-y-0.5"
             >
               {t('home.hero.continue')}
-              <Icon name="arrow-right" className="h-5 w-5" />
             </ButtonLink>
           </section>
         ) : (
@@ -77,10 +74,9 @@ export default function HeroSection() {
               <ButtonLink
                 to={paths.register}
                 variant="inverse"
-                className="group rounded-full px-7 py-3 text-base shadow-lg shadow-brand-950/30 transition-all hover:-translate-y-0.5 hover:shadow-xl"
+                className="rounded-full px-7 py-3 text-base shadow-lg shadow-brand-950/30 transition-all hover:-translate-y-0.5 hover:shadow-xl"
               >
                 {t('home.hero.join')}
-                <Icon name="arrow-right" className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </ButtonLink>
             </li>
             <li>
@@ -93,18 +89,6 @@ export default function HeroSection() {
             </li>
           </menu>
         )}
-
-        <ul
-          aria-label={t('home.hero.trustLabel')}
-          className="mt-8 flex animate-rise-in flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium text-brand-100 [animation-delay:320ms] lg:justify-start"
-        >
-          {TRUST.map((key) => (
-            <li key={key} className="inline-flex items-center gap-2">
-              <Icon name="check-circle" className="h-5 w-5 text-emerald-300" />
-              {t(`home.hero.${key}`)}
-            </li>
-          ))}
-        </ul>
       </header>
 
       <HeroIllustration className="relative hidden h-[27rem] animate-rise-in [animation-delay:200ms] lg:block" />

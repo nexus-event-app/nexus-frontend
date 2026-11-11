@@ -32,7 +32,7 @@ export default function HomeNewsCard({ item, featured = false, horizontal = fals
       style={{ transitionDelay: `${delay}ms` }}
       className={cx(
         'group relative flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-surface shadow-card transition-all duration-700 ease-out hover:-translate-y-1 hover:shadow-pop has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-brand-600',
-        side && 'sm:grid sm:grid-cols-[40%_minmax(0,1fr)] sm:grid-rows-[auto_auto_1fr_auto]',
+        side && 'sm:grid sm:grid-cols-[42%_minmax(0,1fr)] sm:grid-rows-[auto_auto_1fr_auto]',
         inView ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0 print:translate-y-0 print:opacity-100',
       )}
     >
@@ -45,7 +45,7 @@ export default function HomeNewsCard({ item, featured = false, horizontal = fals
           priority={featured}
           className={cx(
             'transition-transform duration-700 ease-out group-hover:scale-105',
-            featured ? 'aspect-[16/10]' : side && 'sm:aspect-auto sm:h-full',
+            featured ? 'aspect-[2/1]' : side && 'sm:aspect-auto sm:h-full',
           )}
         />
         {featured && (
@@ -67,7 +67,7 @@ export default function HomeNewsCard({ item, featured = false, horizontal = fals
         className={cx(
           'mt-3 font-bold leading-tight tracking-tight text-ink',
           pad,
-          featured ? 'text-2xl sm:text-4xl' : 'line-clamp-3 text-xl',
+          featured ? 'text-2xl sm:text-3xl' : 'line-clamp-3 text-xl',
         )}
       >
         <Link
@@ -77,8 +77,8 @@ export default function HomeNewsCard({ item, featured = false, horizontal = fals
           {item.title}
         </Link>
       </h3>
-      <p lang={language} className={cx('mb-6 mt-3 text-ink-muted', pad, featured ? 'text-lg' : 'line-clamp-2')}>
-        {excerpt(item.content, featured ? 220 : 120)}
+      <p lang={language} className={cx('mb-6 mt-3 line-clamp-3 text-ink-muted', pad)}>
+        {excerpt(item.content, featured ? 180 : 140)}
       </p>
       <footer
         className={cx(
