@@ -1,5 +1,6 @@
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import ButtonLink from '@/shared/components/ButtonLink'
+import Eyebrow from '@/shared/components/Eyebrow'
 import Icon from '@/shared/components/Icon'
 import { paths } from '@/shared/config/paths'
 import { siteConfig } from '@/shared/config/site'
@@ -37,10 +38,9 @@ export default function HeroSection() {
       />
 
       <header className="mx-auto max-w-4xl text-center">
-        <p className="inline-flex animate-rise-in items-center gap-2 text-xs font-medium uppercase tracking-[0.2em] text-brand-200">
-          <span aria-hidden="true" className="h-1.5 w-1.5 animate-soft-pulse rounded-full bg-brand-200" />
+        <Eyebrow tone="dark" className="animate-rise-in">
           {t('home.hero.eyebrow')}
-        </p>
+        </Eyebrow>
         <h1
           id="hero-heading"
           className="mt-5 animate-rise-in text-4xl font-bold leading-[1.1] tracking-tight [animation-delay:80ms] sm:text-5xl lg:text-6xl"

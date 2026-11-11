@@ -15,6 +15,7 @@ export default function LatestJobsSection() {
   return (
     <HomeSection
       id="home-jobs"
+      eyebrow={t('home.jobs.eyebrow')}
       title={t('home.jobs.title')}
       description={t('home.jobs.description')}
       linkTo={paths.jobs}

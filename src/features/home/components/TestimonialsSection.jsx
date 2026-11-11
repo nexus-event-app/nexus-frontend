@@ -14,6 +14,7 @@ export default function TestimonialsSection() {
   return (
     <HomeSection
       id="home-testimonials"
+      eyebrow={t('home.testimonials.eyebrow')}
       title={t('home.testimonials.title')}
       description={t('home.testimonials.description')}
       linkTo={paths.testimonials}

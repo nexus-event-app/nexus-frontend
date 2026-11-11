@@ -90,6 +90,11 @@ export default {
           '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
           '50%': { transform: 'translate(4%, -6%) scale(1.08)' },
         },
+        // Cursor de la máquina de escribir de los antetítulos.
+        caret: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0' },
+        },
         'soft-pulse': {
           '0%, 100%': { opacity: '1', transform: 'scale(1)' },
           '50%': { opacity: '0.5', transform: 'scale(0.8)' },
@@ -102,6 +107,7 @@ export default {
         drift: 'drift 24s ease-in-out infinite',
         'drift-slow': 'drift 32s ease-in-out infinite reverse',
         'soft-pulse': 'soft-pulse 2.4s ease-in-out infinite',
+        caret: 'caret 1s steps(1) infinite',
       },
     },
   },

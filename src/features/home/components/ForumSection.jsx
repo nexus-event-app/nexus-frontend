@@ -15,6 +15,7 @@ export default function ForumSection() {
   return (
     <HomeSection
       id="home-forum"
+      eyebrow={t('home.forum.eyebrow')}
       title={t('home.forum.title')}
       description={t('home.forum.description')}
       linkTo={paths.forum}

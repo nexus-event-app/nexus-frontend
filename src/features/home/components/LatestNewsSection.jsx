@@ -1,12 +1,14 @@
 import { useLatestNews } from '@/features/news/hooks/useLatestNews'
-import NewsGrid from '@/features/news/components/NewsGrid'
 import CardGridSkeleton from '@/shared/components/CardGridSkeleton'
 import EmptyState from '@/shared/components/EmptyState'
 import QueryBoundary from '@/shared/components/QueryBoundary'
 import { paths } from '@/shared/config/paths'
-import HomeSection from './HomeSection'
 import { useI18n } from '@/shared/i18n/useI18n'
+import { cx } from '@/shared/utils/classNames'
+import HomeNewsCard from './HomeNewsCard'
+import HomeSection from './HomeSection'
 
+/** Noticias de la portada: la más reciente en grande y, a su lado, las dos siguientes. */
 export default function LatestNewsSection() {
   const { t } = useI18n()
   const request = useLatestNews(3)
@@ -14,6 +16,7 @@ export default function LatestNewsSection() {
   return (
     <HomeSection
       id="home-news"
+      eyebrow={t('home.news.eyebrow')}
       title={t('home.news.title')}
       description={t('home.news.description')}
       linkTo={paths.news}
@@ -26,13 +29,27 @@ export default function LatestNewsSection() {
         skeleton={<CardGridSkeleton count={3} />}
         errorTitle={t('home.news.error')}
       >
-        {(items) =>
-          items.length === 0 ? (
-            <EmptyState icon="newspaper" title={t('home.news.emptyTitle')} description={t('home.news.emptyText')} />
-          ) : (
-            <NewsGrid items={items} />
+        {(items) => {
+          if (items.length === 0) {
+            return (
+              <EmptyState icon="newspaper" title={t('home.news.emptyTitle')} description={t('home.news.emptyText')} />
+            )
+          }
+          const [featured, ...others] = items
+          return (
+            <ul className={cx('grid gap-6', others.length > 0 && 'lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]')}>
+              <li className={cx(others.length > 1 && 'lg:row-span-2')}>
+                <HomeNewsCard item={featured} featured />
+              </li>
+              {others.map((item, index) => (
+                <li key={item.id}>
+                  {/* Con dos al lado van horizontales, una encima de otra; si solo hay una, va como la destacada. */}
+                  <HomeNewsCard item={item} horizontal={others.length > 1} delay={(index + 1) * 120} />
+                </li>
+              ))}
+            </ul>
           )
-        }
+        }}
       </QueryBoundary>
     </HomeSection>
   )

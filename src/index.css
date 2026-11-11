@@ -229,6 +229,18 @@
     @apply border-red-600 dark:border-red-400;
   }
 
+  /*
+   * Fondo de cuadrícula suave, como papel milimetrado, que se desvanece hacia los bordes. Es solo decoración: usa el
+   * color de los bordes del tema para verse igual de discreto en claro y en oscuro.
+   */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgb(var(--color-slate-200) / 0.6) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--color-slate-200) / 0.6) 1px, transparent 1px);
+    background-size: 3rem 3rem;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 40%, transparent 100%);
+  }
+
   .card {
     @apply rounded-card border border-slate-200 bg-surface shadow-card;
   }
