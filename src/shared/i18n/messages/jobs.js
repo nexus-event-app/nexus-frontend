@@ -46,7 +46,13 @@ export default {
       loginToSave: 'Inicia sesión para guardar ofertas y verlas luego.',
       link: 'Mis ofertas guardadas ({count})',
     },
-    card: { technologies: 'Tecnologías', postedOn: 'Publicada el', via: 'vía {source}' },
+    card: {
+      technologies: 'Tecnologías',
+      postedOn: 'Publicada el',
+      via: 'vía {source}',
+      new: 'Nueva',
+      view: 'Ver oferta',
+    },
     portals: {
       title: 'Busca también en portales de España',
       description: 'Búsquedas ya filtradas por tecnología y perfiles junior en los principales portales de empleo.',
@@ -130,7 +136,13 @@ export default {
       loginToSave: 'Inicia sessió per desar ofertes i veure-les després.',
       link: 'Les meves ofertes desades ({count})',
     },
-    card: { technologies: 'Tecnologies', postedOn: 'Publicada el', via: 'via {source}' },
+    card: {
+      technologies: 'Tecnologies',
+      postedOn: 'Publicada el',
+      via: 'via {source}',
+      new: 'Nova',
+      view: 'Mira l’oferta',
+    },
     portals: {
       title: 'Cerca també a portals d’Espanya',
       description: 'Cerques ja filtrades per tecnologia i perfils júnior als principals portals de feina.',
@@ -214,7 +226,7 @@ export default {
       loginToSave: 'Log in to save jobs and see them later.',
       link: 'My saved jobs ({count})',
     },
-    card: { technologies: 'Technologies', postedOn: 'Posted on', via: 'via {source}' },
+    card: { technologies: 'Technologies', postedOn: 'Posted on', via: 'via {source}', new: 'New', view: 'View job' },
     portals: {
       title: 'Also search on Spanish job boards',
       description: 'Searches already filtered for tech and junior roles on the main job boards in Spain.',

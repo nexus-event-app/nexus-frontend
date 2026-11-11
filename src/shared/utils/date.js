@@ -51,6 +51,28 @@ export function fromLocalDateTimeInput(value) {
   return value.length === 16 ? `${value}:00` : value
 }
 
+const relativeFormatters = new Map()
+
+/** Días transcurridos desde una fecha (0 = hoy), contando días naturales y no horas. */
+export function daysSince(value, now = new Date()) {
+  const date = toDate(value)
+  if (!date) return null
+  const start = (day) => new Date(day.getFullYear(), day.getMonth(), day.getDate()).getTime()
+  return Math.round((start(now) - start(date)) / 86_400_000)
+}
+
+/** «hoy», «ayer», «hace 3 días»…; a partir de un mes, la fecha corta («2 nov 2026»). */
+export function formatRelative(value, now = new Date()) {
+  const days = daysSince(value, now)
+  if (days === null) return ''
+  if (days < 0 || days > 30) return formatShortDate(value)
+  const locale = LANGUAGE_META[getCurrentLanguage()].locale
+  if (!relativeFormatters.has(locale)) {
+    relativeFormatters.set(locale, new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }))
+  }
+  return relativeFormatters.get(locale).format(-days, 'day')
+}
+
 export function formatMonthYear(value) {
   const date = toDate(value)
   return date ? formatter('monthYear').format(date) : ''
