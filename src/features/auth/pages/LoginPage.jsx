@@ -21,7 +21,12 @@ export default function LoginPage() {
 
   return (
     <>
-      <Seo title={t('auth.login.seoTitle')} description={t('auth.login.seoDescription', { name: siteConfig.name })} path={paths.login} robots="noindex,nofollow" />
+      <Seo
+        title={t('auth.login.seoTitle')}
+        description={t('auth.login.seoDescription', { name: siteConfig.name })}
+        path={paths.login}
+        robots="noindex,nofollow"
+      />
       <AuthCard
         title={t('auth.login.title')}
         subtitle={t('auth.login.subtitle')}

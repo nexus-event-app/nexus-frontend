@@ -32,6 +32,7 @@ const cases = [
   ['/perfil/editar', '/perfil/editar', '/ca/perfil/edita', '/en/profile/edit'],
   ['/buscar?q=react', '/buscar?q=react', '/ca/cerca?q=react', '/en/search?q=react'],
   ['/sobre-el-proyecto', '/sobre-el-proyecto', '/ca/sobre-el-projecte', '/en/about'],
+  ['/notificaciones', '/notificaciones', '/ca/notificacions', '/en/notifications'],
   ['/perfil/7-ana-garcia', '/perfil/7-ana-garcia', '/ca/perfil/7-ana-garcia', '/en/profile/7-ana-garcia'],
   [
     '/foro/5-mi-duda#comentarios',

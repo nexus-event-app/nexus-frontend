@@ -5,8 +5,10 @@ export default {
     list: {
       heading: 'Noticias tech para juniors',
       categoryHeading: 'Noticias de {category}',
-      seoDescription: 'Las noticias tech más útiles para quienes empiezan: desarrollo, entrevistas, networking y recursos, en español.',
-      description: 'Desarrollo, entrevistas, networking y recursos explicados sin ruido y pensados para perfiles junior.',
+      seoDescription:
+        'Las noticias tech más útiles para quienes empiezan: desarrollo, entrevistas, networking y recursos, en español.',
+      description:
+        'Desarrollo, entrevistas, networking y recursos explicados sin ruido y pensados para perfiles junior.',
       searchLabel: 'Buscar noticias',
       searchPlaceholder: 'Buscar por título o contenido…',
       error: 'No hemos podido cargar las noticias',
@@ -36,8 +38,10 @@ export default {
     list: {
       heading: 'Notícies tech per a júniors',
       categoryHeading: 'Notícies de {category}',
-      seoDescription: 'Les notícies tech més útils per a qui comença: desenvolupament, entrevistes, networking i recursos, en castellà.',
-      description: 'Desenvolupament, entrevistes, networking i recursos explicats sense soroll i pensats per a perfils júnior.',
+      seoDescription:
+        'Les notícies tech més útils per a qui comença: desenvolupament, entrevistes, networking i recursos, en castellà.',
+      description:
+        'Desenvolupament, entrevistes, networking i recursos explicats sense soroll i pensats per a perfils júnior.',
       searchLabel: 'Cerca notícies',
       searchPlaceholder: 'Cerca per títol o contingut…',
       error: 'No hem pogut carregar les notícies',
@@ -67,8 +71,10 @@ export default {
     list: {
       heading: 'Tech news for juniors',
       categoryHeading: '{category} news',
-      seoDescription: 'The most useful tech news for people just starting out: development, interviews, networking and resources, in Spanish.',
-      description: 'Development, interviews, networking and resources explained without the noise and designed for junior profiles.',
+      seoDescription:
+        'The most useful tech news for people just starting out: development, interviews, networking and resources, in Spanish.',
+      description:
+        'Development, interviews, networking and resources explained without the noise and designed for junior profiles.',
       searchLabel: 'Search news',
       searchPlaceholder: 'Search by title or content…',
       error: 'We couldn’t load the news',

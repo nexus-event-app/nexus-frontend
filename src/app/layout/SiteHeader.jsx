@@ -12,6 +12,7 @@ import ThemeToggle from '@/shared/components/ThemeToggle'
 import { useDismiss } from '@/shared/hooks/useDismiss'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { useToast } from '@/shared/hooks/useToast'
+import NotificationBell from '@/features/notifications/components/NotificationBell'
 import SearchButton from '@/features/search/components/SearchButton'
 import SearchDialog from '@/features/search/components/SearchDialog'
 import { useSearchShortcut } from '@/features/search/hooks/useSearchShortcut'
@@ -96,10 +97,16 @@ export default function SiteHeader() {
         <li>
           <LanguageSwitcher />
         </li>
+        {isAuthenticated && (
+          <li>
+            <NotificationBell />
+          </li>
+        )}
         {isAuthenticated ? <UserMenu /> : <AuthLinks />}
       </menu>
 
       <SearchButton onOpen={openSearch} compact className="ml-auto lg:hidden" />
+      {isAuthenticated && <NotificationBell className="lg:hidden" />}
       <button
         ref={toggleRef}
         type="button"

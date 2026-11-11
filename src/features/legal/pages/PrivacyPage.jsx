@@ -94,9 +94,9 @@ const SECTIONS = [
     content: (
       <p>
         No vendemos ni cedemos tus datos a terceros. Para alojar el sitio usamos un proveedor que actúa como encargado
-        del tratamiento y solo trata los datos siguiendo nuestras instrucciones: <LegalValue value={legalConfig.hostingProvider} />
-        . Si alguno de nuestros proveedores tratara datos fuera del Espacio Económico Europeo, lo haría con las
-        garantías que exige el RGPD.
+        del tratamiento y solo trata los datos siguiendo nuestras instrucciones:{' '}
+        <LegalValue value={legalConfig.hostingProvider} />. Si alguno de nuestros proveedores tratara datos fuera del
+        Espacio Económico Europeo, lo haría con las garantías que exige el RGPD.
       </p>
     ),
   },

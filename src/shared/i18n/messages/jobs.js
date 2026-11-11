@@ -5,7 +5,8 @@ export default {
     list: {
       seoTitle: 'Ofertas de empleo junior y prácticas',
       seoTitlePage: 'Ofertas de empleo junior',
-      seoDescription: 'Ofertas de trabajo y prácticas en tecnología para perfiles junior: filtra por nivel, modalidad y tipo de contrato.',
+      seoDescription:
+        'Ofertas de trabajo y prácticas en tecnología para perfiles junior: filtra por nivel, modalidad y tipo de contrato.',
       title: 'Ofertas de empleo para juniors',
       description: 'Prácticas y primeros empleos en tecnología, seleccionados para quienes están empezando.',
       error: 'No hemos podido cargar las ofertas',
@@ -88,7 +89,8 @@ export default {
     list: {
       seoTitle: 'Ofertes de feina júnior i pràctiques',
       seoTitlePage: 'Ofertes de feina júnior',
-      seoDescription: 'Ofertes de feina i pràctiques en tecnologia per a perfils júnior: filtra per nivell, modalitat i tipus de contracte.',
+      seoDescription:
+        'Ofertes de feina i pràctiques en tecnologia per a perfils júnior: filtra per nivell, modalitat i tipus de contracte.',
       title: 'Ofertes de feina per a júniors',
       description: 'Pràctiques i primeres feines en tecnologia, seleccionades per a qui està començant.',
       error: 'No hem pogut carregar les ofertes',
@@ -171,7 +173,8 @@ export default {
     list: {
       seoTitle: 'Junior job offers and internships',
       seoTitlePage: 'Junior job offers',
-      seoDescription: 'Tech job offers and internships for junior profiles: filter by level, work mode and contract type.',
+      seoDescription:
+        'Tech job offers and internships for junior profiles: filter by level, work mode and contract type.',
       title: 'Job offers for juniors',
       description: 'Internships and first tech jobs, selected for people just starting out.',
       error: 'We couldn’t load the job offers',

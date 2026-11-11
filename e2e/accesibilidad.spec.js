@@ -7,6 +7,7 @@ const PAGES = [
   '/empleo',
   '/empleo/11-desarrollador-frontend-junior',
   '/foro',
+  '/foro/21-por-donde-empiezo-con-java',
   '/testimonios',
   '/buscar?q=react',
   '/sobre-el-proyecto',
@@ -14,6 +15,8 @@ const PAGES = [
   '/registro',
   '/en/about',
 ]
+
+const PRIVATE_PAGES = ['/notificaciones', '/foro/21-por-donde-empiezo-con-java']
 
 for (const theme of ['light', 'dark']) {
   test.describe(`Accesibilidad en tema ${theme === 'light' ? 'claro' : 'oscuro'}`, () => {
@@ -24,6 +27,19 @@ for (const theme of ['light', 'dark']) {
         await page.goto(path)
         await expect(page.getByRole('main')).toBeVisible()
         await expect(page.getByRole('main')).not.toHaveAttribute('aria-busy', 'true')
+        await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1)
+        await expect(page.locator('div:not(#root)')).toHaveCount(0)
+        await expectAccessible(page)
+      })
+    }
+
+    // Páginas que solo ve quien tiene sesión iniciada.
+    for (const path of PRIVATE_PAGES) {
+      test(`${path} (con sesión) cumple WCAG 2.2 AA`, async ({ page, signedIn }) => {
+        expect(signedIn.id).toBeDefined()
+        await page.goto(path)
+        await expect(page.getByRole('main')).not.toHaveAttribute('aria-busy', 'true')
+        await expect(page.getByRole('main').getByRole('list').first()).toBeVisible()
         await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1)
         await expect(page.locator('div:not(#root)')).toHaveCount(0)
         await expectAccessible(page)

@@ -1,5 +1,6 @@
 import { cx } from '@/shared/utils/classNames'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import SignInPrompt from '@/features/auth/components/SignInPrompt'
 import VerifyEmailNotice from '@/features/auth/components/VerifyEmailNotice'
@@ -8,19 +9,51 @@ import ErrorState from '@/shared/components/ErrorState'
 import ListSkeleton from '@/shared/components/ListSkeleton'
 import { useAction } from '@/shared/hooks/useAction'
 import { useToast } from '@/shared/hooks/useToast'
+import { commentAnchor } from '@/features/notifications/utils/notificationEntry'
 import { commentService } from '../services/commentService'
+import { discussionService } from '../services/discussionService'
 import { useCanManage } from '../hooks/useCanManage'
 import CommentForm from './CommentForm'
 import CommentItem from './CommentItem'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-export default function CommentsSection({ discussionId, comments, className }) {
+/** La mejor respuesta va la primera; el resto, en el orden en que se escribieron. */
+function sortComments(comments, acceptedId) {
+  const accepted = comments.find((comment) => comment.id === acceptedId)
+  return accepted ? [accepted, ...comments.filter((comment) => comment !== accepted)] : comments
+}
+
+export default function CommentsSection({ discussion, comments, onDiscussionChange, className }) {
+  const discussionId = discussion.id
   const { t } = useI18n()
   const { isAuthenticated, user } = useAuth()
   const toast = useToast()
   const canManage = useCanManage()
   const [pendingDelete, setPendingDelete] = useState(null)
   const { data, error, reload, mutate } = comments
+  const { hash } = useLocation()
+  // Solo quien preguntó elige la mejor respuesta (el servidor también lo comprueba).
+  const canAccept = isAuthenticated && user?.id === discussion.authorId
+  const acceptedId = discussion.acceptedCommentId ?? null
+
+  // Al llegar desde un aviso («#comentario-12»), se lleva la vista y el foco a ese comentario cuando ya está cargado.
+  const loaded = Boolean(data)
+  useEffect(() => {
+    if (!loaded || !hash.startsWith('#comentario-')) return
+    const target = document.getElementById(hash.slice(1))
+    if (!target) return
+    target.scrollIntoView({ block: 'start' })
+    target.focus({ preventScroll: true })
+  }, [loaded, hash])
+
+  const [toggleAccepted, acceptPending] = useAction(async (comment) => {
+    const accepting = comment.id !== acceptedId
+    const updated = accepting
+      ? await discussionService.acceptAnswer(discussionId, comment.id)
+      : await discussionService.clearAcceptedAnswer(discussionId)
+    onDiscussionChange(updated)
+    toast.success(accepting ? t('forum.comments.acceptedToast') : t('forum.comments.unacceptedToast'))
+  })
 
   const [toggleLike, likePending] = useAction(async (comment) => {
     const updated = await commentService.toggleLike(comment.id)
@@ -31,6 +64,8 @@ export default function CommentsSection({ discussionId, comments, className }) {
     async (comment) => {
       await commentService.remove(comment.id)
       mutate((items) => items.filter((item) => item.id !== comment.id))
+      // Si era la mejor respuesta, la discusión vuelve a quedar sin resolver.
+      if (comment.id === acceptedId) onDiscussionChange({ ...discussion, acceptedCommentId: null })
       setPendingDelete(null)
     },
     { successMessage: t('forum.comments.deleted') },
@@ -66,10 +101,15 @@ export default function CommentsSection({ discussionId, comments, className }) {
       )}
       {data && data.length > 0 && (
         <ul className="mt-6 space-y-4">
-          {data.map((comment) => (
+          {sortComments(data, acceptedId).map((comment) => (
             <li key={comment.id}>
               <CommentItem
+                id={commentAnchor(comment.id)}
                 comment={comment}
+                accepted={comment.id === acceptedId}
+                canAccept={canAccept}
+                acceptPending={acceptPending}
+                onToggleAccepted={toggleAccepted}
                 canDelete={canManage(comment.authorId)}
                 likePending={likePending}
                 onToggleLike={handleToggleLike}

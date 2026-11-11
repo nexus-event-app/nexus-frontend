@@ -29,7 +29,11 @@ export default function TestimonialsSection() {
       >
         {(items) =>
           items.length === 0 ? (
-            <EmptyState icon="star" title={t('home.testimonials.emptyTitle')} description={t('home.testimonials.emptyText')} />
+            <EmptyState
+              icon="star"
+              title={t('home.testimonials.emptyTitle')}
+              description={t('home.testimonials.emptyText')}
+            />
           ) : (
             <TestimonialGrid items={items.slice(0, 3)} />
           )

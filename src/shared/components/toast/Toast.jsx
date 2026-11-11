@@ -4,8 +4,17 @@ import Icon from '@/shared/components/Icon'
 import { useI18n } from '@/shared/i18n/useI18n'
 
 const TYPES = {
-  success: { classes: 'border-green-300 bg-green-50 text-green-900 dark:border-green-400/40 dark:bg-green-950 dark:text-green-100', icon: 'check-circle', duration: 5000 },
-  error: { classes: 'border-red-300 bg-red-50 text-red-900 dark:border-red-400/40 dark:bg-red-950 dark:text-red-100', icon: 'x-circle', duration: 8000 },
+  success: {
+    classes:
+      'border-green-300 bg-green-50 text-green-900 dark:border-green-400/40 dark:bg-green-950 dark:text-green-100',
+    icon: 'check-circle',
+    duration: 5000,
+  },
+  error: {
+    classes: 'border-red-300 bg-red-50 text-red-900 dark:border-red-400/40 dark:bg-red-950 dark:text-red-100',
+    icon: 'x-circle',
+    duration: 8000,
+  },
   info: { classes: 'border-accent-line bg-accent-soft text-accent-strong', icon: 'info', duration: 5000 },
 }
 

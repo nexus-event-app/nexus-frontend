@@ -106,7 +106,11 @@ export default function AdminLayout() {
         )}
       </header>
 
-      <main id="contenido" tabIndex={-1} className="page-gutter flex-1 py-8 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 lg:ml-64">
+      <main
+        id="contenido"
+        tabIndex={-1}
+        className="page-gutter flex-1 py-8 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 lg:ml-64"
+      >
         <ErrorBoundary resetKey={location.pathname} embedded>
           <Suspense fallback={<PageLoader />}>
             <Outlet />

@@ -35,8 +35,7 @@ function splitPath(path) {
 /** Traduce el nombre de una sección entre idiomas. Acepta también el nombre en castellano (direcciones antiguas). */
 function translateSegment(segment, fromLang, toLang, table) {
   if (!segment) return segment
-  const esKey =
-    Object.keys(table).find((key) => key === segment || table[key][fromLang] === segment) ?? null
+  const esKey = Object.keys(table).find((key) => key === segment || table[key][fromLang] === segment) ?? null
   if (esKey === null) return segment
   return toLang === DEFAULT_LANGUAGE ? esKey : table[esKey][toLang]
 }

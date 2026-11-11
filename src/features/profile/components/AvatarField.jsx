@@ -71,7 +71,9 @@ export default function AvatarField({ name, avatarUrl, onChange, className }) {
       className={cx('grid items-center gap-4 sm:grid-cols-[auto_minmax(0,1fr)] sm:gap-y-2', className)}
       aria-busy={busy}
     >
-      <legend className="float-left col-span-full w-full text-sm font-semibold text-ink sm:mb-1">{t('profile.edit.photo')}</legend>
+      <legend className="float-left col-span-full w-full text-sm font-semibold text-ink sm:mb-1">
+        {t('profile.edit.photo')}
+      </legend>
       <Avatar name={name} src={preview ?? avatarUrl} size="xl" className={cx('sm:row-span-2', busy && 'opacity-60')} />
       <p className="flex flex-wrap gap-2 sm:self-end">
         <input

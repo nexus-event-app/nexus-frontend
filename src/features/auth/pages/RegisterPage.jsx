@@ -21,7 +21,12 @@ export default function RegisterPage() {
 
   return (
     <>
-      <Seo title={t('auth.register.seoTitle')} description={t('auth.register.seoDescription', { name: siteConfig.name })} path={paths.register} robots="noindex,nofollow" />
+      <Seo
+        title={t('auth.register.seoTitle')}
+        description={t('auth.register.seoDescription', { name: siteConfig.name })}
+        path={paths.register}
+        robots="noindex,nofollow"
+      />
       <AuthCard
         title={t('auth.register.title')}
         subtitle={t('auth.register.subtitle')}

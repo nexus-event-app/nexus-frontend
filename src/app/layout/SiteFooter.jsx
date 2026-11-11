@@ -57,6 +57,11 @@ export default function SiteFooter() {
                 </Link>
               </li>
               <li>
+                <Link to={paths.notifications} className={LINK_CLASSES}>
+                  {t('notifications.title')}
+                </Link>
+              </li>
+              <li>
                 <Link to={paths.forumNew} className={LINK_CLASSES}>
                   {t('common.footer.newDiscussion')}
                 </Link>

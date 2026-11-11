@@ -68,7 +68,12 @@ export default function DiscussionDetailPage() {
         commentCount={comments.data?.length ?? discussion.commentCount}
         onChange={(updated) => request.mutate(() => updated)}
       />
-      <CommentsSection className="mx-auto max-w-3xl" discussionId={discussion.id} comments={comments} />
+      <CommentsSection
+        className="mx-auto max-w-3xl"
+        discussion={discussion}
+        comments={comments}
+        onDiscussionChange={(updated) => request.mutate(() => updated)}
+      />
     </PageMain>
   )
 }

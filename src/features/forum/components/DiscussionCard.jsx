@@ -70,6 +70,12 @@ export default function DiscussionCard({ discussion, headingLevel = 'h3' }) {
             <span className="sr-only">{t('forum.card.likes')}</span>
           </span>
         </p>
+        {discussion.acceptedCommentId && (
+          <span className="inline-flex items-center gap-1 font-semibold text-green-800 dark:text-green-300">
+            <Icon name="check-circle" className="h-4 w-4" />
+            {t('forum.card.resolved')}
+          </span>
+        )}
         {hasMore && <ReadMoreHint />}
       </footer>
     </article>

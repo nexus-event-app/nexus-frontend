@@ -17,6 +17,7 @@ export const paths = {
   profileEdit: '/perfil/editar',
   search: '/buscar',
   about: '/sobre-el-proyecto',
+  notifications: '/notificaciones',
   legalNotice: '/aviso-legal',
   privacy: '/privacidad',
   cookies: '/cookies',

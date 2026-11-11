@@ -12,8 +12,8 @@ const SECTIONS = [
     content: (
       <>
         <p>
-          En cumplimiento del artículo 10 de la Ley 34/2002, de servicios de la sociedad de la información y de
-          comercio electrónico (LSSI), estos son los datos del titular de {siteConfig.name}:
+          En cumplimiento del artículo 10 de la Ley 34/2002, de servicios de la sociedad de la información y de comercio
+          electrónico (LSSI), estos son los datos del titular de {siteConfig.name}:
         </p>
         <OwnerDetails />
       </>
@@ -35,10 +35,15 @@ const SECTIONS = [
     title: '3. Registro y cuenta de usuario',
     content: (
       <ul>
-        <li>Puedes leer el contenido sin registrarte. Para escribir en el foro o enviar un testimonio necesitas una cuenta.</li>
+        <li>
+          Puedes leer el contenido sin registrarte. Para escribir en el foro o enviar un testimonio necesitas una
+          cuenta.
+        </li>
         <li>Para registrarte debes tener al menos 14 años.</li>
         <li>Los datos que indiques deben ser veraces. Tu contraseña es personal: no la compartas.</li>
-        <li>Puedes pedir que eliminemos tu cuenta en cualquier momento escribiendo a <ContactEmail />.</li>
+        <li>
+          Puedes pedir que eliminemos tu cuenta en cualquier momento escribiendo a <ContactEmail />.
+        </li>
       </ul>
     ),
   },
@@ -108,8 +113,8 @@ const SECTIONS = [
     title: '8. Legislación aplicable',
     content: (
       <p>
-        Estas condiciones se rigen por la legislación española. Si eres consumidor, los tribunales competentes serán
-        los de tu domicilio. Para todo lo relativo a tus datos personales, consulta la{' '}
+        Estas condiciones se rigen por la legislación española. Si eres consumidor, los tribunales competentes serán los
+        de tu domicilio. Para todo lo relativo a tus datos personales, consulta la{' '}
         <Link to={paths.privacy} className="link">
           política de privacidad
         </Link>

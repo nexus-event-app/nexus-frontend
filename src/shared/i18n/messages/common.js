@@ -74,7 +74,7 @@ export default {
       reload: 'Recargar la página',
     },
     dialog: { confirm: 'Confirmar', cancel: 'Cancelar', close: 'Cerrar ventana' },
-    toast: { dismiss: 'Cerrar notificación' },
+    toast: { region: 'Mensajes', dismiss: 'Cerrar mensaje' },
     breadcrumbs: { label: 'Migas de pan', home: 'Inicio' },
   },
   ca: {
@@ -151,7 +151,7 @@ export default {
       reload: 'Torna a carregar la pàgina',
     },
     dialog: { confirm: 'Confirma', cancel: 'Cancel·la', close: 'Tanca la finestra' },
-    toast: { dismiss: 'Tanca la notificació' },
+    toast: { region: 'Missatges', dismiss: 'Tanca el missatge' },
     breadcrumbs: { label: 'Ruta de navegació', home: 'Inici' },
   },
   en: {
@@ -227,7 +227,7 @@ export default {
       reload: 'Reload the page',
     },
     dialog: { confirm: 'Confirm', cancel: 'Cancel', close: 'Close dialog' },
-    toast: { dismiss: 'Dismiss notification' },
+    toast: { region: 'Messages', dismiss: 'Dismiss message' },
     breadcrumbs: { label: 'Breadcrumb', home: 'Home' },
   },
 }

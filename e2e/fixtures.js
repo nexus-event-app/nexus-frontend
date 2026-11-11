@@ -1,6 +1,6 @@
 import AxeBuilder from '@axe-core/playwright'
 import { test as base, expect } from '@playwright/test'
-import { discussions, jobs, news, page, searchResult, testimonials, user } from './data.js'
+import { comments, discussions, jobs, news, notifications, page, searchResult, testimonials, user } from './data.js'
 
 const json = (body, status = 200) => ({ status, contentType: 'application/json', body: JSON.stringify(body) })
 
@@ -19,6 +19,13 @@ class MockApi {
     this.on('GET', '/api/jobs', () => json(page(jobs)))
     this.on('GET', /^\/api\/jobs\/(\d+)$/, ([, id]) => json(jobs.find((item) => item.id === Number(id))))
     this.on('GET', '/api/discussions', () => json(page(discussions)))
+    this.on('GET', /^\/api\/discussions\/(\d+)$/, ([, id]) => json(discussions.find((item) => item.id === Number(id))))
+    this.on('GET', /^\/api\/comments\/discussion\/\d+$/, () => json(comments))
+    this.on('GET', '/api/notifications', () => json(page(notifications)))
+    this.on('GET', '/api/notifications/unread-count', () =>
+      json({ count: notifications.filter((item) => !item.read).length }),
+    )
+    this.on('PUT', /^\/api\/notifications\/(\d+\/read|read-all)$/, () => ({ status: 204 }))
     this.on('GET', '/api/testimonials/latest', () => json(testimonials))
     this.on('GET', '/api/testimonials', () => json(testimonials))
     this.on('GET', '/api/search', () => json(searchResult()))

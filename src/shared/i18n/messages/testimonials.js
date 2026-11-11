@@ -3,7 +3,8 @@ export default {
   es: {
     breadcrumb: 'Testimonios',
     seoTitle: 'Testimonios de la comunidad',
-    seoDescription: 'Historias reales de personas que están empezando en tecnología: aprendizajes, dudas y logros compartidos por la comunidad de {name}.',
+    seoDescription:
+      'Historias reales de personas que están empezando en tecnología: aprendizajes, dudas y logros compartidos por la comunidad de {name}.',
     description: 'Experiencias reales de quienes están dando sus primeros pasos en tecnología.',
     error: 'No hemos podido cargar los testimonios',
     emptyTitle: 'Todavía no hay testimonios publicados',
@@ -14,7 +15,8 @@ export default {
     signIn: 'Inicia sesión o crea una cuenta para compartir tu testimonio.',
     card: { highlighted: 'Destacado' },
     form: {
-      intro: 'Tu testimonio se publicará tras la revisión del equipo, junto con el nombre, el cargo y la ubicación que indiques. Puedes pedir que lo retiremos cuando quieras.',
+      intro:
+        'Tu testimonio se publicará tras la revisión del equipo, junto con el nombre, el cargo y la ubicación que indiques. Puedes pedir que lo retiremos cuando quieras.',
       thanksTitle: '¡Gracias por compartir tu experiencia!',
       thanks: 'Hemos recibido tu testimonio. Lo publicaremos en cuanto el equipo lo revise.',
       name: 'Nombre',
@@ -36,7 +38,8 @@ export default {
   ca: {
     breadcrumb: 'Testimonis',
     seoTitle: 'Testimonis de la comunitat',
-    seoDescription: 'Històries reals de persones que comencen en tecnologia: aprenentatges, dubtes i assoliments compartits per la comunitat de {name}.',
+    seoDescription:
+      'Històries reals de persones que comencen en tecnologia: aprenentatges, dubtes i assoliments compartits per la comunitat de {name}.',
     description: 'Experiències reals de qui està fent els primers passos en tecnologia.',
     error: 'No hem pogut carregar els testimonis',
     emptyTitle: 'Encara no hi ha testimonis publicats',
@@ -47,7 +50,8 @@ export default {
     signIn: 'Inicia la sessió o crea un compte per compartir el teu testimoni.',
     card: { highlighted: 'Destacat' },
     form: {
-      intro: 'El teu testimoni es publicarà després de la revisió de l’equip, juntament amb el nom, el càrrec i la ubicació que indiquis. Pots demanar que el retirem quan vulguis.',
+      intro:
+        'El teu testimoni es publicarà després de la revisió de l’equip, juntament amb el nom, el càrrec i la ubicació que indiquis. Pots demanar que el retirem quan vulguis.',
       thanksTitle: 'Gràcies per compartir la teva experiència!',
       thanks: 'Hem rebut el teu testimoni. El publicarem tan bon punt l’equip el revisi.',
       name: 'Nom',
@@ -69,7 +73,8 @@ export default {
   en: {
     breadcrumb: 'Testimonials',
     seoTitle: 'Community testimonials',
-    seoDescription: 'Real stories from people starting out in tech: lessons, doubts and achievements shared by the {name} community.',
+    seoDescription:
+      'Real stories from people starting out in tech: lessons, doubts and achievements shared by the {name} community.',
     description: 'Real experiences from people taking their first steps in tech.',
     error: 'We couldn’t load the testimonials',
     emptyTitle: 'There are no published testimonials yet',
@@ -80,7 +85,8 @@ export default {
     signIn: 'Log in or create an account to share your testimonial.',
     card: { highlighted: 'Featured' },
     form: {
-      intro: 'Your testimonial will be published after the team reviews it, along with the name, role and location you provide. You can ask us to remove it at any time.',
+      intro:
+        'Your testimonial will be published after the team reviews it, along with the name, role and location you provide. You can ask us to remove it at any time.',
       thanksTitle: 'Thanks for sharing your experience!',
       thanks: 'We have received your testimonial. We will publish it as soon as the team reviews it.',
       name: 'Name',

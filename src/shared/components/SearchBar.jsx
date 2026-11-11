@@ -52,7 +52,10 @@ export default function SearchBar({ value, onSearch, label, placeholder }) {
           placeholder={placeholder ?? t('common.search.placeholder')}
           className="field-input pl-10"
         />
-        <Icon name="search" className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
+        <Icon
+          name="search"
+          className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500"
+        />
       </p>
       <button type="submit" className="btn btn-primary" aria-label={t('common.search.submit', { label: fieldLabel })}>
         <span className="hidden sm:inline">{t('common.search.button')}</span>

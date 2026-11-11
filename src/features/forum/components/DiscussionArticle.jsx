@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { Link } from '@/shared/i18n/router'
 import { useNavigate } from '@/shared/i18n/useNavigate'
+import { commentAnchor } from '@/features/notifications/utils/notificationEntry'
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import Avatar from '@/shared/components/Avatar'
 import AuthorLink from '@/features/profile/components/AuthorLink'
@@ -58,9 +60,25 @@ export default function DiscussionArticle({ discussion, commentCount, onChange, 
   return (
     <article className={className}>
       <header>
-        <Badge tone={discussionCategories.toneOf(discussion.category)}>
-          {discussionCategories.labelOf(discussion.category)}
-        </Badge>
+        <p className="flex flex-wrap items-center gap-2">
+          <Badge tone={discussionCategories.toneOf(discussion.category)}>
+            {discussionCategories.labelOf(discussion.category)}
+          </Badge>
+          {discussion.acceptedCommentId && (
+            <>
+              <Badge tone="green">
+                <Icon name="check-circle" className="h-3.5 w-3.5" />
+                {t('forum.detail.resolved')}
+              </Badge>
+              <Link
+                to={`#${commentAnchor(discussion.acceptedCommentId)}`}
+                className="link inline-flex min-h-[2.75rem] items-center text-sm sm:min-h-0"
+              >
+                {t('forum.detail.seeAnswer')}
+              </Link>
+            </>
+          )}
+        </p>
         <h1 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl">
           {discussion.title}
         </h1>

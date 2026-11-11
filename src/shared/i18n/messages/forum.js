@@ -6,7 +6,8 @@ export default {
     list: {
       heading: 'Foro de la comunidad',
       categoryHeading: 'Foro: {category}',
-      seoDescription: 'Preguntas, recursos y experiencias de la comunidad tech junior. Pregunta sin miedo y ayuda a otras personas a crecer.',
+      seoDescription:
+        'Preguntas, recursos y experiencias de la comunidad tech junior. Pregunta sin miedo y ayuda a otras personas a crecer.',
       description: 'Pregunta sin miedo, comparte lo que aprendes y ayuda a otras personas que empiezan como tú.',
       newDiscussion: 'Nueva discusión',
       searchLabel: 'Buscar discusiones',
@@ -22,7 +23,7 @@ export default {
       count_other: '{count} discusiones',
     },
     filter: { label: 'Filtrar discusiones por categoría', all: 'Todas' },
-    card: { comments: 'comentarios', likes: 'me gusta' },
+    card: { comments: 'comentarios', likes: 'me gusta', resolved: 'Resuelta' },
     new: {
       seoTitle: 'Nueva discusión',
       seoDescription: 'Abre una discusión en el foro de {name}.',
@@ -36,12 +37,15 @@ export default {
       comment_one: '{count} comentario',
       comment_other: '{count} comentarios',
       likeDiscussion: 'Me gusta esta discusión',
+      resolved: 'Resuelta',
+      seeAnswer: 'Ver la mejor respuesta',
       edit: 'Editar',
       delete: 'Borrar',
       editTitle: 'Editar discusión',
       save: 'Guardar cambios',
       deleteTitle: 'Borrar discusión',
-      deleteMessage: 'Se borrará la discusión junto con todos sus comentarios y me gusta. Esta acción no se puede deshacer.',
+      deleteMessage:
+        'Se borrará la discusión junto con todos sus comentarios y me gusta. Esta acción no se puede deshacer.',
       deleted: 'Discusión borrada.',
       updated: 'Discusión actualizada.',
       loginToLike: 'Inicia sesión para dar me gusta.',
@@ -72,8 +76,13 @@ export default {
       deleteMessage: 'Este comentario se eliminará de forma permanente. ¿Quieres continuar?',
       deleteConfirm: 'Borrar comentario',
       deleted: 'Comentario borrado.',
+      accepted: 'Mejor respuesta',
+      accept: 'Marcar como mejor respuesta',
+      unaccept: 'Quitar mejor respuesta',
+      acceptSr: ' (respuesta de {author})',
+      acceptedToast: 'Has marcado la mejor respuesta. Le avisaremos a quien la escribió.',
+      unacceptedToast: 'La discusión vuelve a estar sin resolver.',
     },
-    like: { label: '{label} ({count} me gusta)' },
     validation: {
       title: 'El título debe tener entre 5 y 200 caracteres.',
       content: 'El contenido debe tener entre 10 y 10.000 caracteres.',
@@ -82,17 +91,21 @@ export default {
     },
     rules: {
       title: 'Normas de la comunidad',
-      intro: 'Este es un espacio de aprendizaje y colaboración. Para mantener un ambiente constructivo, respeta estas normas:',
+      intro:
+        'Este es un espacio de aprendizaje y colaboración. Para mantener un ambiente constructivo, respeta estas normas:',
       respectTitle: 'Respeto absoluto',
       respectText: 'Tolerancia cero con faltas de respeto, insultos, discriminación o acoso de cualquier tipo.',
       techTitle: 'Contenido tecnológico',
-      techText: 'Las discusiones deben estar relacionadas con desarrollo, programación, herramientas tech o experiencias profesionales en el sector.',
+      techText:
+        'Las discusiones deben estar relacionadas con desarrollo, programación, herramientas tech o experiencias profesionales en el sector.',
       helpTitle: 'Ayuda constructiva',
       helpText: 'Sé amable al dar feedback. Todos estamos aprendiendo: ofrece soluciones, no solo críticas.',
       bannedTitle: 'Prohibido',
-      bannedText: 'Spam, autopromoción excesiva, contenido ilegal, plagio de código o compartir información confidencial de empresas.',
+      bannedText:
+        'Spam, autopromoción excesiva, contenido ilegal, plagio de código o compartir información confidencial de empresas.',
       practicesTitle: 'Buenas prácticas',
-      practicesText: 'Usa títulos descriptivos, elige bien la categoría, busca antes de preguntar y comparte el código entre bloques ```.',
+      practicesText:
+        'Usa títulos descriptivos, elige bien la categoría, busca antes de preguntar y comparte el código entre bloques ```.',
       footer: 'Somos una comunidad de aprendizaje: tu participación ayuda a otras personas a crecer.',
     },
   },
@@ -102,7 +115,8 @@ export default {
     list: {
       heading: 'Fòrum de la comunitat',
       categoryHeading: 'Fòrum: {category}',
-      seoDescription: 'Preguntes, recursos i experiències de la comunitat tech júnior. Pregunta sense por i ajuda altres persones a créixer.',
+      seoDescription:
+        'Preguntes, recursos i experiències de la comunitat tech júnior. Pregunta sense por i ajuda altres persones a créixer.',
       description: 'Pregunta sense por, comparteix el que aprens i ajuda altres persones que comencen com tu.',
       newDiscussion: 'Nova discussió',
       searchLabel: 'Cerca discussions',
@@ -118,7 +132,7 @@ export default {
       count_other: '{count} discussions',
     },
     filter: { label: 'Filtra les discussions per categoria', all: 'Totes' },
-    card: { comments: 'comentaris', likes: 'm’agrada' },
+    card: { comments: 'comentaris', likes: 'm’agrada', resolved: 'Resolta' },
     new: {
       seoTitle: 'Nova discussió',
       seoDescription: 'Obre una discussió al fòrum de {name}.',
@@ -132,12 +146,15 @@ export default {
       comment_one: '{count} comentari',
       comment_other: '{count} comentaris',
       likeDiscussion: 'M’agrada aquesta discussió',
+      resolved: 'Resolta',
+      seeAnswer: 'Mostra la millor resposta',
       edit: 'Edita',
       delete: 'Esborra',
       editTitle: 'Edita la discussió',
       save: 'Desa els canvis',
       deleteTitle: 'Esborra la discussió',
-      deleteMessage: 'S’esborrarà la discussió juntament amb tots els seus comentaris i m’agrada. Aquesta acció no es pot desfer.',
+      deleteMessage:
+        'S’esborrarà la discussió juntament amb tots els seus comentaris i m’agrada. Aquesta acció no es pot desfer.',
       deleted: 'Discussió esborrada.',
       updated: 'Discussió actualitzada.',
       loginToLike: 'Inicia la sessió per donar m’agrada.',
@@ -168,8 +185,13 @@ export default {
       deleteMessage: 'Aquest comentari s’eliminarà de manera permanent. Vols continuar?',
       deleteConfirm: 'Esborra el comentari',
       deleted: 'Comentari esborrat.',
+      accepted: 'Millor resposta',
+      accept: 'Marca com a millor resposta',
+      unaccept: 'Treu la millor resposta',
+      acceptSr: ' (resposta de {author})',
+      acceptedToast: 'Has marcat la millor resposta. Avisarem qui la va escriure.',
+      unacceptedToast: 'La discussió torna a estar sense resoldre.',
     },
-    like: { label: '{label} ({count} m’agrada)' },
     validation: {
       title: 'El títol ha de tenir entre 5 i 200 caràcters.',
       content: 'El contingut ha de tenir entre 10 i 10.000 caràcters.',
@@ -178,17 +200,22 @@ export default {
     },
     rules: {
       title: 'Normes de la comunitat',
-      intro: 'Aquest és un espai d’aprenentatge i col·laboració. Per mantenir un ambient constructiu, respecta aquestes normes:',
+      intro:
+        'Aquest és un espai d’aprenentatge i col·laboració. Per mantenir un ambient constructiu, respecta aquestes normes:',
       respectTitle: 'Respecte absolut',
-      respectText: 'Tolerància zero amb les faltes de respecte, els insults, la discriminació o l’assetjament de qualsevol tipus.',
+      respectText:
+        'Tolerància zero amb les faltes de respecte, els insults, la discriminació o l’assetjament de qualsevol tipus.',
       techTitle: 'Contingut tecnològic',
-      techText: 'Les discussions han d’estar relacionades amb desenvolupament, programació, eines tech o experiències professionals al sector.',
+      techText:
+        'Les discussions han d’estar relacionades amb desenvolupament, programació, eines tech o experiències professionals al sector.',
       helpTitle: 'Ajuda constructiva',
       helpText: 'Sigues amable en donar feedback. Tots estem aprenent: ofereix solucions, no només crítiques.',
       bannedTitle: 'Prohibit',
-      bannedText: 'Spam, autopromoció excessiva, contingut il·legal, plagi de codi o compartir informació confidencial d’empreses.',
+      bannedText:
+        'Spam, autopromoció excessiva, contingut il·legal, plagi de codi o compartir informació confidencial d’empreses.',
       practicesTitle: 'Bones pràctiques',
-      practicesText: 'Usa títols descriptius, tria bé la categoria, cerca abans de preguntar i comparteix el codi entre blocs ```.',
+      practicesText:
+        'Usa títols descriptius, tria bé la categoria, cerca abans de preguntar i comparteix el codi entre blocs ```.',
       footer: 'Som una comunitat d’aprenentatge: la teva participació ajuda altres persones a créixer.',
     },
   },
@@ -198,7 +225,8 @@ export default {
     list: {
       heading: 'Community forum',
       categoryHeading: 'Forum: {category}',
-      seoDescription: 'Questions, resources and experiences from the junior tech community. Ask without fear and help others grow.',
+      seoDescription:
+        'Questions, resources and experiences from the junior tech community. Ask without fear and help others grow.',
       description: 'Ask without fear, share what you learn and help other people who are starting out like you.',
       newDiscussion: 'New discussion',
       searchLabel: 'Search discussions',
@@ -214,7 +242,7 @@ export default {
       count_other: '{count} discussions',
     },
     filter: { label: 'Filter discussions by category', all: 'All' },
-    card: { comments: 'comments', likes: 'likes' },
+    card: { comments: 'comments', likes: 'likes', resolved: 'Solved' },
     new: {
       seoTitle: 'New discussion',
       seoDescription: 'Start a discussion in the {name} forum.',
@@ -228,6 +256,8 @@ export default {
       comment_one: '{count} comment',
       comment_other: '{count} comments',
       likeDiscussion: 'Like this discussion',
+      resolved: 'Solved',
+      seeAnswer: 'See the best answer',
       edit: 'Edit',
       delete: 'Delete',
       editTitle: 'Edit discussion',
@@ -264,8 +294,13 @@ export default {
       deleteMessage: 'This comment will be permanently deleted. Do you want to continue?',
       deleteConfirm: 'Delete comment',
       deleted: 'Comment deleted.',
+      accepted: 'Best answer',
+      accept: 'Mark as best answer',
+      unaccept: 'Remove best answer',
+      acceptSr: ' (answer by {author})',
+      acceptedToast: 'You have marked the best answer. We will let its author know.',
+      unacceptedToast: 'The discussion is unsolved again.',
     },
-    like: { label: '{label} ({count} likes)' },
     validation: {
       title: 'The title must be between 5 and 200 characters.',
       content: 'The content must be between 10 and 10,000 characters.',
@@ -278,13 +313,16 @@ export default {
       respectTitle: 'Absolute respect',
       respectText: 'Zero tolerance for disrespect, insults, discrimination or harassment of any kind.',
       techTitle: 'Tech content',
-      techText: 'Discussions must relate to development, programming, tech tools or professional experiences in the sector.',
+      techText:
+        'Discussions must relate to development, programming, tech tools or professional experiences in the sector.',
       helpTitle: 'Constructive help',
       helpText: 'Be kind when giving feedback. We are all learning: offer solutions, not just criticism.',
       bannedTitle: 'Not allowed',
-      bannedText: 'Spam, excessive self-promotion, illegal content, code plagiarism or sharing confidential company information.',
+      bannedText:
+        'Spam, excessive self-promotion, illegal content, code plagiarism or sharing confidential company information.',
       practicesTitle: 'Good practices',
-      practicesText: 'Use descriptive titles, choose the right category, search before asking and share code between ``` blocks.',
+      practicesText:
+        'Use descriptive titles, choose the right category, search before asking and share code between ``` blocks.',
       footer: 'We are a learning community: your participation helps others grow.',
     },
   },

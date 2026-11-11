@@ -105,6 +105,62 @@ export const testimonials = [
   },
 ]
 
+export const comments = [
+  {
+    id: 5,
+    content: 'Empieza por un curso gratuito de Java y haz un proyecto pequeño con Spring Boot.',
+    discussionId: 21,
+    authorId: 9,
+    authorName: 'Marta Ejemplo',
+    authorAvatarUrl: null,
+    likesCount: 1,
+    isLikedByCurrentUser: false,
+    createdAt: DATE,
+    updatedAt: DATE,
+  },
+  {
+    id: 6,
+    content: '¡Gracias! Me apunto el consejo.',
+    discussionId: 21,
+    authorId: 7,
+    authorName: 'Lucía Prueba',
+    authorAvatarUrl: null,
+    likesCount: 0,
+    isLikedByCurrentUser: false,
+    createdAt: DATE,
+    updatedAt: DATE,
+  },
+]
+
+export const notifications = [
+  {
+    id: 101,
+    type: 'COMMENT',
+    actorId: 9,
+    actorName: 'Marta Ejemplo',
+    actorAvatarUrl: null,
+    discussionId: 21,
+    discussionSlug: 'por-donde-empiezo-con-java',
+    discussionTitle: '¿Por dónde empiezo con Java?',
+    commentId: 5,
+    read: false,
+    createdAt: DATE,
+  },
+  {
+    id: 102,
+    type: 'ACCEPTED_ANSWER',
+    actorId: 3,
+    actorName: 'Pablo Ejemplo',
+    actorAvatarUrl: null,
+    discussionId: 22,
+    discussionSlug: 'consejos-para-mi-portfolio',
+    discussionTitle: 'Consejos para mi portfolio',
+    commentId: 40,
+    read: true,
+    createdAt: DATE,
+  },
+]
+
 export function page(content) {
   return { content, page: 0, size: 12, totalElements: content.length, totalPages: 1, last: true }
 }

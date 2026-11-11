@@ -26,7 +26,8 @@ export default {
     },
     edit: {
       title: 'Editar perfil',
-      description: 'Lo que pongas aquí es público: lo verá cualquiera que entre en tu perfil. Tu email nunca se muestra.',
+      description:
+        'Lo que pongas aquí es público: lo verá cualquiera que entre en tu perfil. Tu email nunca se muestra.',
       error: 'No hemos podido cargar tu perfil',
       confirmEmail: 'Confirma tu email para poder editar tu perfil público.',
       photo: 'Foto de perfil',
@@ -93,7 +94,8 @@ export default {
     },
     edit: {
       title: 'Edita el perfil',
-      description: 'El que posis aquí és públic: ho veurà qualsevol persona que entri al teu perfil. El teu correu no es mostra mai.',
+      description:
+        'El que posis aquí és públic: ho veurà qualsevol persona que entri al teu perfil. El teu correu no es mostra mai.',
       error: 'No hem pogut carregar el teu perfil',
       confirmEmail: 'Confirma el teu correu per poder editar el teu perfil públic.',
       photo: 'Foto de perfil',

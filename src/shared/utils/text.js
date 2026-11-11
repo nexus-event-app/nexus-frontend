@@ -1,5 +1,8 @@
 export function excerpt(text, maxLength = 160) {
-  const clean = (text ?? '').replace(/```[\s\S]*?```/g, ' ').replace(/\s+/g, ' ').trim()
+  const clean = (text ?? '')
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
   if (clean.length <= maxLength) return clean
   const cut = clean.slice(0, maxLength - 1)
   const lastSpace = cut.lastIndexOf(' ')

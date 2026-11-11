@@ -21,7 +21,8 @@ export function validateNews({ title, content, sourceUrl, author }) {
   const trimmedContent = content.trim()
   if (!trimmedContent) errors.content = 'El contenido es obligatorio.'
   else if (trimmedContent.length > 20000) errors.content = 'El contenido no puede superar los 20.000 caracteres.'
-  if (sourceUrl.trim() && !isHttpUrl(sourceUrl.trim())) errors.sourceUrl = 'Introduce una URL válida que empiece por http:// o https://.'
+  if (sourceUrl.trim() && !isHttpUrl(sourceUrl.trim()))
+    errors.sourceUrl = 'Introduce una URL válida que empiece por http:// o https://.'
   if (author.trim().length > 100) errors.author = 'El autor no puede superar los 100 caracteres.'
   return errors
 }
@@ -40,7 +41,8 @@ export function validateJob({ title, company, description, location, tags, apply
   })
   const trimmedDescription = description.trim()
   if (!trimmedDescription) errors.description = 'La descripción es obligatoria.'
-  else if (trimmedDescription.length > 20000) errors.description = 'La descripción no puede superar los 20.000 caracteres.'
+  else if (trimmedDescription.length > 20000)
+    errors.description = 'La descripción no puede superar los 20.000 caracteres.'
   const parsedTags = parseTags(tags)
   if (parsedTags.length > MAX_TAGS) errors.tags = `Máximo ${MAX_TAGS} etiquetas.`
   else if (parsedTags.some((tag) => tag.length > MAX_TAG_LENGTH)) {

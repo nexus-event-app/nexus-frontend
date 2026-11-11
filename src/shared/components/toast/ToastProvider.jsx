@@ -1,10 +1,12 @@
 import { useCallback, useMemo, useRef, useState } from 'react'
+import { useI18n } from '@/shared/i18n/useI18n'
 import { ToastContext } from './toastContext'
 import Toast from './Toast'
 
 const MAX_TOASTS = 4
 
 export default function ToastProvider({ children }) {
+  const { t } = useI18n()
   const [toasts, setToasts] = useState([])
   const nextId = useRef(0)
 
@@ -30,7 +32,11 @@ export default function ToastProvider({ children }) {
   return (
     <ToastContext.Provider value={api}>
       {children}
-      <section aria-label="Notificaciones" aria-live="polite" className="pointer-events-none fixed inset-x-4 bottom-4 z-[90] sm:left-auto sm:w-96">
+      <section
+        aria-label={t('common.toast.region')}
+        aria-live="polite"
+        className="pointer-events-none fixed inset-x-4 bottom-4 z-[90] sm:left-auto sm:w-96"
+      >
         <ol className="flex flex-col gap-3">
           {toasts.map((toast) => (
             <Toast key={toast.id} {...toast} onDismiss={dismiss} />
