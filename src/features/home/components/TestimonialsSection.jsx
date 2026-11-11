@@ -19,7 +19,6 @@ export default function TestimonialsSection() {
       description={t('home.testimonials.description')}
       linkTo={paths.testimonials}
       linkLabel={t('home.testimonials.link')}
-      tinted
     >
       <QueryBoundary
         data={request.data}

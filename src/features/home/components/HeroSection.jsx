@@ -10,10 +10,10 @@ import HeroIllustration from './HeroIllustration'
 
 /** Lo que ofrece la web, en cuatro bloques informativos (no son enlaces: las secciones están en el menú). */
 const FEATURES = [
-  { key: 'learn', icon: 'academic' },
+  { key: 'news', icon: 'newspaper' },
   { key: 'jobs', icon: 'briefcase' },
   { key: 'forum', icon: 'chat' },
-  { key: 'community', icon: 'users' },
+  { key: 'learn', icon: 'academic' },
 ]
 
 /**

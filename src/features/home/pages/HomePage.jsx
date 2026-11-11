@@ -16,10 +16,10 @@ export default function HomePage() {
       <Seo path={paths.home} />
       <JsonLd data={buildHomeData()} />
       <HeroSection />
-      <HomePathsSection />
       <LatestNewsSection />
       <LatestJobsSection />
       <ForumSection />
+      <HomePathsSection />
       <TestimonialsSection />
     </PageMain>
   )
