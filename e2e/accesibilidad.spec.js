@@ -11,12 +11,15 @@ const PAGES = [
   '/testimonios',
   '/buscar?q=react',
   '/sobre-el-proyecto',
+  '/rutas',
+  '/rutas/frontend',
+  '/en/learning-paths/data',
   '/login',
   '/registro',
   '/en/about',
 ]
 
-const PRIVATE_PAGES = ['/notificaciones', '/foro/21-por-donde-empiezo-con-java']
+const PRIVATE_PAGES = ['/notificaciones', '/foro/21-por-donde-empiezo-con-java', '/rutas/ia']
 
 for (const theme of ['light', 'dark']) {
   test.describe(`Accesibilidad en tema ${theme === 'light' ? 'claro' : 'oscuro'}`, () => {

@@ -37,7 +37,8 @@ export default function UserMenu() {
         className="flex min-h-[2.75rem] items-center gap-2 rounded-control px-2 text-sm font-semibold text-ink hover:bg-slate-100"
       >
         <Avatar name={user.name} src={user.avatarUrl} size="sm" />
-        <span className="max-w-[10rem] truncate">{user.name}</span>
+        {/* Por debajo de 1536 px solo se ve la foto, para que la cabecera quepa en una línea. */}
+        <span className="sr-only 2xl:not-sr-only 2xl:max-w-[10rem] 2xl:truncate">{user.name}</span>
         <Icon name="chevron-down" className="h-4 w-4" />
       </button>
       {open && (

@@ -18,6 +18,8 @@ export const paths = {
   search: '/buscar',
   about: '/sobre-el-proyecto',
   notifications: '/notificaciones',
+  learning: '/rutas',
+  learningPath: (id) => `/rutas/${id}`,
   legalNotice: '/aviso-legal',
   privacy: '/privacidad',
   cookies: '/cookies',

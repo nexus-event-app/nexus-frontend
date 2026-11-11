@@ -19,19 +19,13 @@ export default function SearchButton({ onOpen, compact = false, className }) {
       title={t('search.shortcut', { keys: SEARCH_SHORTCUT })}
       className={cx(
         'inline-flex min-h-[2.75rem] items-center justify-center gap-2 rounded-control text-ink-muted transition-colors hover:bg-slate-100 hover:text-ink sm:min-h-[2.25rem]',
-        compact ? 'min-w-[2.75rem]' : 'border border-slate-300 px-3 text-sm',
+        compact ? 'min-w-[2.75rem]' : 'h-11 w-11 border border-slate-300',
         className,
       )}
     >
       <Icon name="search" className="h-5 w-5" />
-      {!compact && (
-        <>
-          <span>{t('search.open')}</span>
-          <kbd aria-hidden="true" className="rounded border border-slate-300 px-1.5 font-sans text-xs text-ink-muted">
-            {SEARCH_SHORTCUT}
-          </kbd>
-        </>
-      )}
+      {/* La cabecera va justa: solo se ve la lupa. El texto sigue siendo su nombre y el atajo sale en el título. */}
+      {!compact && <span className="sr-only">{t('search.open')}</span>}
     </button>
   )
 }

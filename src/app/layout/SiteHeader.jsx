@@ -83,11 +83,11 @@ export default function SiteHeader() {
         <Logo />
       </Link>
 
-      <nav aria-label={t('common.nav.main')} className="hidden lg:block">
+      <nav aria-label={t('common.nav.main')} className="hidden xl:block">
         <NavItems />
       </nav>
 
-      <menu className="hidden items-center gap-2 lg:flex">
+      <menu className="hidden items-center gap-2 xl:flex">
         <li>
           <SearchButton onOpen={openSearch} />
         </li>
@@ -105,8 +105,8 @@ export default function SiteHeader() {
         {isAuthenticated ? <UserMenu /> : <AuthLinks />}
       </menu>
 
-      <SearchButton onOpen={openSearch} compact className="ml-auto lg:hidden" />
-      {isAuthenticated && <NotificationBell className="lg:hidden" />}
+      <SearchButton onOpen={openSearch} compact className="ml-auto xl:hidden" />
+      {isAuthenticated && <NotificationBell className="xl:hidden" />}
       <button
         ref={toggleRef}
         type="button"
@@ -114,7 +114,7 @@ export default function SiteHeader() {
         aria-expanded={open}
         aria-controls={menuId}
         aria-label={open ? t('common.nav.closeMenu') : t('common.nav.openMenu')}
-        className="-mr-2 flex h-11 w-11 items-center justify-center rounded-control text-ink hover:bg-slate-100 lg:hidden"
+        className="-mr-2 flex h-11 w-11 items-center justify-center rounded-control text-ink hover:bg-slate-100 xl:hidden"
       >
         <Icon name={open ? 'close' : 'menu'} className="h-6 w-6" />
       </button>
@@ -123,7 +123,7 @@ export default function SiteHeader() {
         <section
           id={menuId}
           aria-label={t('common.nav.menu')}
-          className="basis-full space-y-4 border-t border-slate-200 py-4 lg:hidden"
+          className="basis-full space-y-4 border-t border-slate-200 py-4 xl:hidden"
         >
           <nav aria-label={t('common.nav.mainMobile')}>
             <NavItems orientation="vertical" />

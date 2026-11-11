@@ -5,6 +5,7 @@ export const mainNavigation = [
   { labelKey: 'common.nav.jobs', to: paths.jobs },
   { labelKey: 'common.nav.forum', to: paths.forum },
   { labelKey: 'common.nav.testimonials', to: paths.testimonials },
+  { labelKey: 'common.nav.learning', to: paths.learning },
 ]
 
 /** Enlaces del pie que no están en la navegación principal. */

@@ -6,6 +6,7 @@ import errors from './errors'
 import forum from './forum'
 import home from './home'
 import jobs from './jobs'
+import learning from './learning'
 import news from './news'
 import notifications from './notifications'
 import profile from './profile'
@@ -28,6 +29,7 @@ const modules = {
   search,
   about,
   notifications,
+  learning,
 }
 
 /** Une los módulos: cada uno aporta sus textos en los tres idiomas bajo su propio nombre. */

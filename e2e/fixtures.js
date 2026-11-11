@@ -32,6 +32,9 @@ class MockApi {
     this.on('GET', '/api/saved-jobs/ids', () => json([]))
     this.on('GET', '/api/saved-jobs', () => json(page([])))
     this.on('PUT', /^\/api\/saved-jobs\/\d+$/, () => ({ status: 204 }))
+    this.on('GET', '/api/learning/progress', () => json([]))
+    this.on('PUT', /^\/api\/learning\/progress\/[a-z0-9-]+\/[a-z0-9-]+$/, () => ({ status: 204 }))
+    this.on('DELETE', /^\/api\/learning\/progress\/[a-z0-9-]+\/[a-z0-9-]+$/, () => ({ status: 204 }))
     this.on('GET', '/api/auth/me', () => json(user))
     this.on('POST', '/api/auth/login', () => json({ token: 'token-de-prueba', user }))
   }
