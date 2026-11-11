@@ -4,6 +4,7 @@ import Seo from '@/shared/components/Seo'
 import { paths } from '@/shared/config/paths'
 import ForumSection from '../components/ForumSection'
 import HeroSection from '../components/HeroSection'
+import HomePathsSection from '../components/HomePathsSection'
 import LatestJobsSection from '../components/LatestJobsSection'
 import LatestNewsSection from '../components/LatestNewsSection'
 import TestimonialsSection from '../components/TestimonialsSection'
@@ -15,6 +16,7 @@ export default function HomePage() {
       <Seo path={paths.home} />
       <JsonLd data={buildHomeData()} />
       <HeroSection />
+      <HomePathsSection />
       <LatestNewsSection />
       <LatestJobsSection />
       <ForumSection />

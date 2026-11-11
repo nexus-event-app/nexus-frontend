@@ -90,6 +90,11 @@ export default {
           '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
           '50%': { transform: 'translate(4%, -6%) scale(1.08)' },
         },
+        // Mini pantallas de la ilustración de la portada: suben y bajan muy suavemente.
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
         // Cursor de la máquina de escribir de los antetítulos.
         caret: {
           '0%, 100%': { opacity: '1' },
@@ -108,6 +113,7 @@ export default {
         'drift-slow': 'drift 32s ease-in-out infinite reverse',
         'soft-pulse': 'soft-pulse 2.4s ease-in-out infinite',
         caret: 'caret 1s steps(1) infinite',
+        float: 'float 7s ease-in-out infinite',
       },
     },
   },
