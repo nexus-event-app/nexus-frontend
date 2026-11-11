@@ -27,7 +27,7 @@ describe('AboutPage', () => {
 
   it('invita a registrarse solo a quien no tiene cuenta', () => {
     renderWithProviders(<AboutPage />, { route: '/sobre-el-proyecto', auth: { user: { id: 1, name: 'Ana' } } })
-    expect(screen.queryByRole('link', { name: 'Crear cuenta gratis' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: 'Crear cuenta' })).not.toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Ir al foro' })).toBeInTheDocument()
   })
 })

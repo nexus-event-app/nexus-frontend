@@ -1,15 +1,15 @@
 export default {
   es: {
     breadcrumb: 'Rutas de aprendizaje',
-    seoTitle: 'Rutas de aprendizaje gratuitas para empezar en tecnología',
+    seoTitle: 'Rutas de aprendizaje para empezar en tecnología',
     seoDescription:
-      'Frontend, backend, QA, análisis de datos e IA: un camino por etapas con recursos gratuitos, proyectos para practicar y tu progreso guardado en {name}.',
+      'Frontend, backend, QA, análisis de datos e IA: un camino por etapas con recursos escogidos, proyectos para practicar y tu progreso guardado en {name}.',
     eyebrow: 'Aprende paso a paso',
     title: 'Rutas de aprendizaje',
     intro:
-      'Elige hacia dónde quieres ir y sigue un camino por etapas, de cero a tu primer empleo. Cada etapa tiene recursos gratuitos escogidos y un proyecto para practicar.',
+      'Elige hacia dónde quieres ir y sigue un camino por etapas, de cero a tu primer empleo. Cada etapa tiene recursos escogidos y un proyecto para practicar.',
     listLabel: 'Rutas disponibles',
-    reviewed: 'Recursos gratuitos de terceros, revisados el {date}. Si alguno deja de funcionar, avísanos en el foro.',
+    reviewed: 'Recursos de terceros, revisados el {date}. Si alguno deja de funcionar, avísanos en el foro.',
     how: {
       title: 'Cómo funcionan',
       choose: { title: 'Elige una ruta', text: 'Cada una explica para quién es y cuánto se tarda más o menos.' },
@@ -38,7 +38,7 @@ export default {
       duration: 'Duración orientativa',
       steps: 'Etapas',
       step: 'Etapa {number}',
-      resources: 'Recursos gratuitos',
+      resources: 'Recursos',
       project: 'Practica',
       language: { es: 'ES', en: 'EN' },
       languageSr: { es: 'en castellano', en: 'en inglés' },
@@ -257,15 +257,15 @@ export default {
   },
   ca: {
     breadcrumb: 'Rutes d’aprenentatge',
-    seoTitle: 'Rutes d’aprenentatge gratuïtes per començar en tecnologia',
+    seoTitle: 'Rutes d’aprenentatge per començar en tecnologia',
     seoDescription:
-      'Frontend, backend, QA, anàlisi de dades i IA: un camí per etapes amb recursos gratuïts, projectes per practicar i el teu progrés desat a {name}.',
+      'Frontend, backend, QA, anàlisi de dades i IA: un camí per etapes amb recursos escollits, projectes per practicar i el teu progrés desat a {name}.',
     eyebrow: 'Aprèn pas a pas',
     title: 'Rutes d’aprenentatge',
     intro:
-      'Tria cap a on vols anar i segueix un camí per etapes, de zero a la teva primera feina. Cada etapa té recursos gratuïts escollits i un projecte per practicar.',
+      'Tria cap a on vols anar i segueix un camí per etapes, de zero a la teva primera feina. Cada etapa té recursos escollits i un projecte per practicar.',
     listLabel: 'Rutes disponibles',
-    reviewed: 'Recursos gratuïts de tercers, revisats el {date}. Si algun deixa de funcionar, avisa’ns al fòrum.',
+    reviewed: 'Recursos de tercers, revisats el {date}. Si algun deixa de funcionar, avisa’ns al fòrum.',
     how: {
       title: 'Com funcionen',
       choose: { title: 'Tria una ruta', text: 'Cadascuna explica per a qui és i quant es triga més o menys.' },
@@ -297,7 +297,7 @@ export default {
       duration: 'Durada orientativa',
       steps: 'Etapes',
       step: 'Etapa {number}',
-      resources: 'Recursos gratuïts',
+      resources: 'Recursos',
       project: 'Practica',
       language: { es: 'ES', en: 'EN' },
       languageSr: { es: 'en castellà', en: 'en anglès' },
@@ -516,15 +516,15 @@ export default {
   },
   en: {
     breadcrumb: 'Learning paths',
-    seoTitle: 'Free learning paths to start a career in tech',
+    seoTitle: 'Learning paths to start a career in tech',
     seoDescription:
-      'Frontend, backend, QA, data analysis and AI: a step-by-step path with free resources, practice projects and your progress saved on {name}.',
+      'Frontend, backend, QA, data analysis and AI: a step-by-step path with hand-picked resources, practice projects and your progress saved on {name}.',
     eyebrow: 'Learn step by step',
     title: 'Learning paths',
     intro:
-      'Choose where you want to go and follow a step-by-step path, from zero to your first job. Each step has hand-picked free resources and a project to practise.',
+      'Choose where you want to go and follow a step-by-step path, from zero to your first job. Each step has hand-picked resources and a project to practise.',
     listLabel: 'Available paths',
-    reviewed: 'Free third-party resources, reviewed on {date}. If one stops working, let us know in the forum.',
+    reviewed: 'Third-party resources, reviewed on {date}. If one stops working, let us know in the forum.',
     how: {
       title: 'How they work',
       choose: { title: 'Choose a path', text: 'Each one explains who it is for and roughly how long it takes.' },
@@ -556,7 +556,7 @@ export default {
       duration: 'Approximate duration',
       steps: 'Steps',
       step: 'Step {number}',
-      resources: 'Free resources',
+      resources: 'Resources',
       project: 'Practise',
       language: { es: 'ES', en: 'EN' },
       languageSr: { es: 'in Spanish', en: 'in English' },

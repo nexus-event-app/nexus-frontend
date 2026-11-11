@@ -16,7 +16,7 @@ export default {
     },
     register: {
       seoTitle: 'Crear cuenta',
-      seoDescription: 'Crea tu cuenta gratuita en {name}.',
+      seoDescription: 'Crea tu cuenta en {name}.',
       title: 'Crear cuenta',
       subtitle: 'Únete a la comunidad: participa en el foro y cuéntanos tu experiencia.',
       haveAccount: '¿Ya tienes cuenta?',
@@ -113,7 +113,7 @@ export default {
     },
     register: {
       seoTitle: 'Crea un compte',
-      seoDescription: 'Crea el teu compte gratuït a {name}.',
+      seoDescription: 'Crea el teu compte a {name}.',
       title: 'Crea un compte',
       subtitle: 'Uneix-te a la comunitat: participa al fòrum i explica’ns la teva experiència.',
       haveAccount: 'Ja tens compte?',
@@ -210,7 +210,7 @@ export default {
     },
     register: {
       seoTitle: 'Create account',
-      seoDescription: 'Create your free {name} account.',
+      seoDescription: 'Create your {name} account.',
       title: 'Create account',
       subtitle: 'Join the community: take part in the forum and tell us about your experience.',
       haveAccount: 'Already have an account?',

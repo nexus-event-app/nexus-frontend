@@ -9,7 +9,7 @@ describe('HeroSection', () => {
   it('sin sesión invita a unirse y explica qué hay en la web sin enlaces repetidos', () => {
     renderWithProviders(<HeroSection />)
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Tu primer paso en tecnología')
-    expect(screen.getByRole('link', { name: /Únete gratis a la comunidad/ })).toHaveAttribute('href', '/registro')
+    expect(screen.getByRole('link', { name: /Únete a la comunidad/ })).toHaveAttribute('href', '/registro')
     expect(screen.getByRole('link', { name: 'Ya tengo cuenta' })).toHaveAttribute('href', '/login')
 
     // Los bloques de «Qué encontrarás» informan: no son enlaces.
@@ -22,7 +22,7 @@ describe('HeroSection', () => {
     renderWithProviders(<HeroSection />, { auth: { user: { id: 7, name: 'Lucía' } } })
     expect(screen.getByText('Hola, Lucía. ¡Qué bien verte por aquí!')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /Sigue con tu ruta/ })).toHaveAttribute('href', '/rutas')
-    expect(screen.queryByRole('link', { name: /Únete gratis/ })).not.toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: /Únete a la comunidad/ })).not.toBeInTheDocument()
   })
 })
 
@@ -32,7 +32,7 @@ describe('HomePathsSection', () => {
     expect(screen.getByRole('heading', { level: 2, name: 'Elige tu camino' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Inteligencia artificial' })).toHaveAttribute('href', '/rutas/ia')
     const join = screen.getByRole('complementary', { name: 'Con tu cuenta, todo suma' })
-    expect(within(join).getByRole('link', { name: /Crear mi cuenta gratis/ })).toHaveAttribute('href', '/registro')
+    expect(within(join).getByRole('link', { name: /Crear mi cuenta/ })).toHaveAttribute('href', '/registro')
   })
 
   it('con sesión muestra el progreso de cada ruta y no invita a registrarse', async () => {

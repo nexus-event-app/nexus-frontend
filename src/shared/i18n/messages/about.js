@@ -8,7 +8,7 @@ export default {
     eyebrow: 'Sobre el proyecto',
     title: 'Nadie debería dar su primer paso en tecnología en solitario',
     intro:
-      '{name} es una comunidad en español para quienes empiezan su carrera en tecnología: noticias explicadas sin ruido, ofertas de empleo junior y prácticas, un foro donde preguntar sin miedo y testimonios reales de quienes ya han pasado por ahí.',
+      '{name} es una comunidad en español para quienes empiezan su carrera en tecnología: noticias para estar a la última en tecnología, ofertas de empleo junior y prácticas, un foro donde preguntar sin miedo y testimonios reales de quienes ya han pasado por ahí.',
     purpose: {
       title: 'Por qué existe',
       problem:
@@ -16,7 +16,7 @@ export default {
       answer:
         '{name} reúne en un solo sitio lo que necesitas para avanzar y te conecta con personas que están en tu mismo punto o que acaban de superarlo.',
       offerLabel: 'Qué encontrarás',
-      news: { title: 'Noticias sin ruido', text: 'Lo que pasa en el sector, explicado para quien empieza.' },
+      news: { title: 'Noticias al día', text: 'Lo que pasa en el sector, explicado para quien empieza.' },
       jobs: { title: 'Empleo junior', text: 'Prácticas y primeros empleos, con las ofertas de España primero.' },
       forum: {
         title: 'Un foro sin miedo',
@@ -77,8 +77,8 @@ export default {
     },
     cta: {
       title: '¿Te unes?',
-      text: 'Crea tu cuenta gratis y empieza a preguntar, compartir y aprender con la comunidad.',
-      register: 'Crear cuenta gratis',
+      text: 'Crea tu cuenta y empieza a preguntar, compartir y aprender con la comunidad.',
+      register: 'Crear cuenta',
       forum: 'Ir al foro',
     },
   },
@@ -90,7 +90,7 @@ export default {
     eyebrow: 'Sobre el projecte',
     title: 'Ningú no hauria de fer el primer pas en tecnologia tot sol',
     intro:
-      '{name} és una comunitat en espanyol per a qui comença la seva carrera en tecnologia: notícies explicades sense soroll, ofertes de feina júnior i pràctiques, un fòrum on preguntar sense por i testimonis reals de qui ja hi ha passat.',
+      '{name} és una comunitat en espanyol per a qui comença la seva carrera en tecnologia: notícies per estar al dia en tecnologia, ofertes de feina júnior i pràctiques, un fòrum on preguntar sense por i testimonis reals de qui ja hi ha passat.',
     purpose: {
       title: 'Per què existeix',
       problem:
@@ -98,7 +98,7 @@ export default {
       answer:
         '{name} reuneix en un sol lloc el que necessites per avançar i et connecta amb persones que són al mateix punt que tu o que just l’acaben de superar.',
       offerLabel: 'Què hi trobaràs',
-      news: { title: 'Notícies sense soroll', text: 'El que passa al sector, explicat per a qui comença.' },
+      news: { title: 'Notícies al dia', text: 'El que passa al sector, explicat per a qui comença.' },
       jobs: { title: 'Feina júnior', text: 'Pràctiques i primeres feines, amb les ofertes d’Espanya primer.' },
       forum: {
         title: 'Un fòrum sense por',
@@ -159,8 +159,8 @@ export default {
     },
     cta: {
       title: 'T’hi apuntes?',
-      text: 'Crea el teu compte gratis i comença a preguntar, compartir i aprendre amb la comunitat.',
-      register: 'Crea un compte gratis',
+      text: 'Crea el teu compte i comença a preguntar, compartir i aprendre amb la comunitat.',
+      register: 'Crea un compte',
       forum: 'Ves al fòrum',
     },
   },
@@ -172,7 +172,7 @@ export default {
     eyebrow: 'About the project',
     title: 'Nobody should take their first step in tech alone',
     intro:
-      '{name} is a Spanish-language community for people starting their career in tech: news explained without the noise, junior jobs and internships, a forum where you can ask without fear and real stories from people who have been there.',
+      '{name} is a Spanish-language community for people starting their career in tech: news to stay up to date with tech, junior jobs and internships, a forum where you can ask without fear and real stories from people who have been there.',
     purpose: {
       title: 'Why it exists',
       problem:
@@ -180,7 +180,7 @@ export default {
       answer:
         '{name} brings together everything you need to move forward and connects you with people who are where you are or who have just made it through.',
       offerLabel: 'What you will find',
-      news: { title: 'News without the noise', text: 'What is happening in the industry, explained for beginners.' },
+      news: { title: 'Up-to-date news', text: 'What is happening in the industry, explained for beginners.' },
       jobs: { title: 'Junior jobs', text: 'Internships and first jobs, with offers in Spain first.' },
       forum: {
         title: 'A friendly forum',
@@ -244,8 +244,8 @@ export default {
     },
     cta: {
       title: 'Join us?',
-      text: 'Create your free account and start asking, sharing and learning with the community.',
-      register: 'Create a free account',
+      text: 'Create your account and start asking, sharing and learning with the community.',
+      register: 'Create an account',
       forum: 'Go to the forum',
     },
   },

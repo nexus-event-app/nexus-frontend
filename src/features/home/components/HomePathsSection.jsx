@@ -125,7 +125,7 @@ export default function HomePathsSection() {
       {!isAuthenticated && (
         <aside
           aria-labelledby="home-join"
-          className="relative mt-10 grid items-center gap-6 overflow-hidden rounded-3xl bg-gradient-to-r from-brand-600 via-violet-600 to-fuchsia-600 p-6 text-white shadow-pop sm:p-8 lg:grid-cols-[auto_minmax(0,1fr)_auto]"
+          className="relative mt-10 grid items-center gap-6 overflow-hidden rounded-3xl bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 p-6 text-white shadow-pop sm:p-8 lg:grid-cols-[auto_minmax(0,1fr)_auto]"
         >
           <span
             aria-hidden="true"
@@ -135,7 +135,7 @@ export default function HomePathsSection() {
             <h3 id="home-join" className="text-2xl font-bold">
               {t('home.paths.joinTitle')}
             </h3>
-            <p className="mt-1 text-white/90">{t('home.paths.joinText')}</p>
+            <p className="mt-1 text-brand-100">{t('home.paths.joinText')}</p>
           </hgroup>
           <ul className="grid gap-x-6 gap-y-2 text-sm font-medium sm:grid-cols-2">
             {BENEFITS.map((benefit) => (
