@@ -34,7 +34,7 @@ export default function UserMenu() {
         onClick={() => setOpenKey(open ? null : location.key)}
         aria-expanded={open}
         aria-controls={menuId}
-        className="flex min-h-[2.75rem] items-center gap-2 rounded-control px-2 text-sm font-semibold text-ink hover:bg-slate-100"
+        className="flex min-h-[2.75rem] items-center gap-2 rounded-full bg-slate-100 py-1 pl-1 pr-3 text-sm font-semibold text-ink transition-colors hover:bg-slate-200"
       >
         <Avatar name={user.name} src={user.avatarUrl} size="sm" />
         {/* Por debajo de 1536 px solo se ve la foto, para que la cabecera quepa en una línea. */}

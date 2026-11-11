@@ -23,7 +23,7 @@ export default function ThemeToggle({ className }) {
       aria-label={label}
       title={label}
       className={cx(
-        'inline-flex min-h-[2.75rem] min-w-[2.75rem] items-center justify-center rounded-control text-ink-muted transition-colors hover:bg-slate-100 hover:text-ink sm:min-h-[2.25rem] sm:min-w-[2.25rem]',
+        'inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 text-ink-muted transition-colors hover:border-accent-line hover:text-accent',
         className,
       )}
     >

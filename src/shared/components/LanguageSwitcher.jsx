@@ -10,7 +10,7 @@ export default function LanguageSwitcher({ className }) {
 
   return (
     <nav aria-label={t('common.language.label')} className={className}>
-      <ul className="flex items-center gap-1">
+      <ul className="flex items-center gap-0.5 rounded-full bg-slate-100 p-1">
         {LANGUAGES.map((language) => {
           const active = language === lang
           return (
@@ -22,8 +22,8 @@ export default function LanguageSwitcher({ className }) {
                 aria-current={active ? 'true' : undefined}
                 title={LANGUAGE_META[language].name}
                 className={cx(
-                  'inline-flex min-h-[2.75rem] min-w-[2.75rem] items-center justify-center rounded-control px-2 text-sm font-bold transition-colors sm:min-h-[2.25rem] sm:min-w-[2.25rem]',
-                  active ? 'bg-accent-soft text-accent-strong' : 'text-ink-muted hover:bg-slate-100 hover:text-ink',
+                  'inline-flex min-h-[2.75rem] min-w-[2.75rem] items-center justify-center rounded-full px-2 text-xs font-bold tracking-wide transition-all duration-200 sm:min-h-[2.25rem] sm:min-w-[2.25rem]',
+                  active ? 'bg-surface text-accent-strong shadow-card' : 'text-ink-muted hover:text-ink',
                 )}
               >
                 {LANGUAGE_META[language].short}

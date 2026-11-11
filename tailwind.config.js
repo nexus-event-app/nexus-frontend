@@ -45,7 +45,15 @@ export default {
         ),
       },
       fontFamily: {
-        sans: ['ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', ...defaultTheme.fontFamily.sans],
+        sans: [
+          'Ubuntu',
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          'Segoe UI',
+          'Roboto',
+          ...defaultTheme.fontFamily.sans,
+        ],
         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', ...defaultTheme.fontFamily.mono],
       },
       borderRadius: {
@@ -72,10 +80,28 @@ export default {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
+        // Entrada de la portada: aparece subiendo un poco. Solo una vez, al cargar.
+        'rise-in': {
+          '0%': { transform: 'translateY(1rem)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        // Luces del fondo de la portada: se desplazan muy despacio para dar vida sin distraer.
+        drift: {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+          '50%': { transform: 'translate(4%, -6%) scale(1.08)' },
+        },
+        'soft-pulse': {
+          '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+          '50%': { opacity: '0.5', transform: 'scale(0.8)' },
+        },
       },
       animation: {
         'toast-in': 'toast-in 0.2s ease-out',
         'fade-in': 'fade-in 0.15s ease-out',
+        'rise-in': 'rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both',
+        drift: 'drift 24s ease-in-out infinite',
+        'drift-slow': 'drift 32s ease-in-out infinite reverse',
+        'soft-pulse': 'soft-pulse 2.4s ease-in-out infinite',
       },
     },
   },

@@ -19,19 +19,35 @@ import { useSearchShortcut } from '@/features/search/hooks/useSearchShortcut'
 import NavItems from './NavItems'
 import UserMenu from './UserMenu'
 import { siteConfig } from '@/shared/config/site'
+import { cx } from '@/shared/utils/classNames'
 
-/** Entrar y crear cuenta, como elementos de un menú (<menu>). */
-function AuthLinks({ className }) {
+/** Entrar y crear cuenta, como elementos de un menú (<menu>). En escritorio son pastillas, como el resto de la cabecera. */
+function AuthLinks({ className, pill = false }) {
   const { t } = useI18n()
   return (
     <>
       <li>
-        <ButtonLink to={paths.login} variant="ghost" className={className}>
+        <ButtonLink
+          to={paths.login}
+          variant="ghost"
+          className={cx(
+            pill &&
+              'whitespace-nowrap rounded-full bg-slate-100 px-4 font-medium text-ink hover:bg-slate-200 sm:text-sm',
+            className,
+          )}
+        >
           {t('common.account.login')}
         </ButtonLink>
       </li>
       <li>
-        <ButtonLink to={paths.register} className={className}>
+        <ButtonLink
+          to={paths.register}
+          className={cx(
+            pill &&
+              'whitespace-nowrap rounded-full bg-gradient-to-r from-brand-600 to-brand-700 px-4 font-medium sm:text-sm shadow-md shadow-brand-600/25 transition-all hover:-translate-y-px hover:shadow-lg hover:shadow-brand-600/30 dark:from-brand-500 dark:to-brand-700',
+            className,
+          )}
+        >
           {t('common.account.register')}
         </ButtonLink>
       </li>
@@ -73,12 +89,12 @@ export default function SiteHeader() {
   return (
     <header
       ref={headerRef}
-      className="page-gutter sticky top-0 z-40 flex flex-wrap items-center justify-between gap-x-4 border-b border-slate-200 bg-surface/95 backdrop-blur"
+      className="page-gutter sticky top-0 z-40 flex flex-wrap items-center justify-between gap-x-4 border-b border-slate-200 bg-surface/90 backdrop-blur-md"
     >
       <Link
         to={paths.home}
         aria-label={t('common.nav.goHome', { name: siteConfig.name })}
-        className="flex h-16 items-center rounded-control"
+        className="flex h-16 items-center rounded-control xl:h-20"
       >
         <Logo />
       </Link>
@@ -87,12 +103,9 @@ export default function SiteHeader() {
         <NavItems />
       </nav>
 
-      <menu className="hidden items-center gap-2 xl:flex">
+      <menu className="hidden items-center gap-1.5 xl:flex">
         <li>
           <SearchButton onOpen={openSearch} />
-        </li>
-        <li>
-          <ThemeToggle />
         </li>
         <li>
           <LanguageSwitcher />
@@ -102,7 +115,10 @@ export default function SiteHeader() {
             <NotificationBell />
           </li>
         )}
-        {isAuthenticated ? <UserMenu /> : <AuthLinks />}
+        {isAuthenticated ? <UserMenu /> : <AuthLinks pill />}
+        <li>
+          <ThemeToggle />
+        </li>
       </menu>
 
       <SearchButton onOpen={openSearch} compact className="ml-auto xl:hidden" />
@@ -114,7 +130,7 @@ export default function SiteHeader() {
         aria-expanded={open}
         aria-controls={menuId}
         aria-label={open ? t('common.nav.closeMenu') : t('common.nav.openMenu')}
-        className="-mr-2 flex h-11 w-11 items-center justify-center rounded-control text-ink hover:bg-slate-100 xl:hidden"
+        className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 text-ink transition-colors hover:border-accent-line hover:text-accent xl:hidden"
       >
         <Icon name={open ? 'close' : 'menu'} className="h-6 w-6" />
       </button>

@@ -129,6 +129,16 @@ export const test = base.extend({
 
 /** Comprueba la accesibilidad (WCAG 2.2 AA y buenas prácticas) de la página actual. */
 export async function expectAccessible(browserPage) {
+  // Las animaciones de entrada (opacidad) falsearían el contraste: se espera a que terminen. Las infinitas, como las
+  // luces del fondo de la portada, no cambian el color del texto y no se esperan.
+  await browserPage.evaluate(() =>
+    Promise.all(
+      document
+        .getAnimations()
+        .filter((animation) => animation.effect?.getComputedTiming().iterations !== Infinity)
+        .map((animation) => animation.finished.catch(() => {})),
+    ),
+  )
   const { violations } = await new AxeBuilder({ page: browserPage })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'])
     .analyze()

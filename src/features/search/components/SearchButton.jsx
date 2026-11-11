@@ -6,7 +6,10 @@ const IS_MAC =
   typeof navigator !== 'undefined' && /mac|iphone|ipad/i.test(navigator.userAgentData?.platform ?? navigator.platform)
 const SEARCH_SHORTCUT = IS_MAC ? '⌘ K' : 'Ctrl K'
 
-/** Botón que abre la búsqueda global (la ventana y el atajo los gestiona la cabecera). `compact`: solo el icono. */
+/**
+ * Botón redondo con la lupa que abre la búsqueda global (la ventana y el atajo los gestiona la cabecera). Con
+ * `compact` (móvil) su nombre va en aria-label; si no, en un texto solo para lectores de pantalla.
+ */
 export default function SearchButton({ onOpen, compact = false, className }) {
   const { t } = useI18n()
   return (
@@ -18,8 +21,8 @@ export default function SearchButton({ onOpen, compact = false, className }) {
       aria-keyshortcuts={IS_MAC ? 'Meta+K' : 'Control+K'}
       title={t('search.shortcut', { keys: SEARCH_SHORTCUT })}
       className={cx(
-        'inline-flex min-h-[2.75rem] items-center justify-center gap-2 rounded-control text-ink-muted transition-colors hover:bg-slate-100 hover:text-ink sm:min-h-[2.25rem]',
-        compact ? 'min-w-[2.75rem]' : 'h-11 w-11 border border-slate-300',
+        'inline-flex items-center justify-center gap-2 text-ink-muted transition-colors',
+        'h-11 w-11 rounded-full border border-slate-200 hover:border-accent-line hover:text-accent',
         className,
       )}
     >

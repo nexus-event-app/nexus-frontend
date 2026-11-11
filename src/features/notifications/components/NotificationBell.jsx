@@ -19,7 +19,7 @@ export default function NotificationBell({ className }) {
       to={paths.notifications}
       aria-label={label}
       className={cx(
-        'relative flex h-11 w-11 items-center justify-center rounded-control text-ink hover:bg-slate-100 aria-[current=page]:text-accent',
+        'relative flex h-11 w-11 items-center justify-center rounded-full text-ink transition-colors hover:bg-slate-100 hover:text-accent aria-[current=page]:text-accent',
         className,
       )}
     >

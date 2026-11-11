@@ -4,7 +4,7 @@ import Logo from '@/shared/components/Logo'
 import { paths } from '@/shared/config/paths'
 import { siteConfig } from '@/shared/config/site'
 import { useI18n } from '@/shared/i18n/useI18n'
-import { footerExtraNavigation, mainNavigation } from './navigation'
+import { mainNavigation } from './navigation'
 
 const LEGAL_LINKS = [
   { labelKey: 'common.footer.legalNotice', to: paths.legalNotice },
@@ -31,7 +31,7 @@ export default function SiteFooter() {
       <nav aria-label={t('common.footer.exploreLabel')} className="mb-10">
         <h2 className="text-sm font-bold uppercase tracking-wide text-ink">{t('common.footer.explore')}</h2>
         <ul className="mt-3">
-          {[...mainNavigation, ...footerExtraNavigation].map((item) => (
+          {mainNavigation.map((item) => (
             <li key={item.to}>
               <Link to={item.to} className={LINK_CLASSES}>
                 {t(item.labelKey)}
