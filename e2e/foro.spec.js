@@ -41,6 +41,9 @@ test.describe('Mejor respuesta', () => {
     await expect(page.getByRole('button', { name: /mejor respuesta/ })).toHaveCount(0)
     await page.getByRole('link', { name: 'Ver la mejor respuesta' }).click()
     await expect(page.locator('#comentario-6')).toBeFocused()
+    // Se audita con la página arriba: desplazada, la cabecera fija tapa a medias los botones de más arriba y axe los
+    // daría por pequeños (miden 44 px de alto).
+    await page.evaluate(() => window.scrollTo(0, 0))
     await expectAccessible(page)
   })
 
