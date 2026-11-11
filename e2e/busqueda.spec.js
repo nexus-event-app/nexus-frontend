@@ -4,6 +4,7 @@ test.describe('Búsqueda global', () => {
   test('Ctrl+K abre la búsqueda y las flechas eligen un resultado', async ({ page, api, isMobile }) => {
     test.skip(isMobile, 'Los atajos de teclado son para escritorio')
     await page.goto('/')
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
     await page.keyboard.press('Control+k')
     const dialog = page.getByRole('dialog')
     const input = dialog.getByRole('combobox')
@@ -24,6 +25,8 @@ test.describe('Búsqueda global', () => {
   test('Intro sin elegir abre la página de resultados', async ({ page, isMobile }) => {
     test.skip(isMobile, 'Los atajos de teclado son para escritorio')
     await page.goto('/foro')
+    // El atajo se activa cuando la página ya está pintada: sin esperar, la tecla podía llegar antes.
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
     await page.keyboard.press('/')
     await page.getByRole('combobox').fill('java')
     await expect(page.getByRole('option').first()).toBeVisible()

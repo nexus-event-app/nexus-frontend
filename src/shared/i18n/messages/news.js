@@ -3,6 +3,7 @@ export default {
   es: {
     breadcrumb: 'Noticias',
     list: {
+      eyebrow: 'Actualidad tech',
       heading: 'Noticias tech para juniors',
       categoryHeading: 'Noticias de {category}',
       seoDescription:
@@ -22,11 +23,11 @@ export default {
     filter: { label: 'Filtrar noticias por categoría', all: 'Todas' },
     languageFilter: {
       label: 'Filtrar noticias por idioma',
-      all: 'Todos los idiomas',
-      es: 'En español',
-      en: 'En inglés',
+      all: 'Todos',
+      es: 'Español',
+      en: 'Inglés',
     },
-    card: { via: 'Vía {source}' },
+    card: { via: 'Vía {source}', featured: 'Destacada', read: 'Leer noticia' },
     related: { title: 'Más noticias', seeAll: 'Ver todas las noticias' },
     detail: {
       error: 'No hemos podido cargar la noticia',
@@ -42,6 +43,7 @@ export default {
   ca: {
     breadcrumb: 'Notícies',
     list: {
+      eyebrow: 'Actualitat tech',
       heading: 'Notícies tech per a júniors',
       categoryHeading: 'Notícies de {category}',
       seoDescription:
@@ -61,11 +63,11 @@ export default {
     filter: { label: 'Filtra les notícies per categoria', all: 'Totes' },
     languageFilter: {
       label: 'Filtra les notícies per idioma',
-      all: 'Tots els idiomes',
-      es: 'En castellà',
-      en: 'En anglès',
+      all: 'Tots',
+      es: 'Castellà',
+      en: 'Anglès',
     },
-    card: { via: 'Via {source}' },
+    card: { via: 'Via {source}', featured: 'Destacada', read: 'Llegeix la notícia' },
     related: { title: 'Més notícies', seeAll: 'Mira totes les notícies' },
     detail: {
       error: 'No hem pogut carregar la notícia',
@@ -81,6 +83,7 @@ export default {
   en: {
     breadcrumb: 'News',
     list: {
+      eyebrow: 'Tech news',
       heading: 'Tech news for juniors',
       categoryHeading: '{category} news',
       seoDescription:
@@ -98,8 +101,8 @@ export default {
       count_other: '{count} articles',
     },
     filter: { label: 'Filter news by category', all: 'All' },
-    languageFilter: { label: 'Filter news by language', all: 'All languages', es: 'In Spanish', en: 'In English' },
-    card: { via: 'Via {source}' },
+    languageFilter: { label: 'Filter news by language', all: 'All', es: 'Spanish', en: 'English' },
+    card: { via: 'Via {source}', featured: 'Featured', read: 'Read the story' },
     related: { title: 'More news', seeAll: 'See all news' },
     detail: {
       error: 'We couldn’t load the article',

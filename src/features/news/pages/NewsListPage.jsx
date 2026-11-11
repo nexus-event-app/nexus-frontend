@@ -2,7 +2,7 @@ import { Link } from '@/shared/i18n/router'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import CardGridSkeleton from '@/shared/components/CardGridSkeleton'
 import EmptyState from '@/shared/components/EmptyState'
-import PageHeader from '@/shared/components/PageHeader'
+import Eyebrow from '@/shared/components/Eyebrow'
 import PageMain from '@/shared/components/PageMain'
 import Pagination from '@/shared/components/Pagination'
 import QueryBoundary from '@/shared/components/QueryBoundary'
@@ -27,25 +27,39 @@ export default function NewsListPage() {
   const pageSuffix = page > 1 ? t('common.pageSuffix', { page }) : ''
 
   return (
-    <PageMain className="page-container page-section">
+    <PageMain className="page-container page-section relative isolate">
       <Seo
         title={`${heading}${pageSuffix}`}
         description={t('news.list.seoDescription')}
         path={page > 1 ? `${paths.news}?page=${page}` : paths.news}
         robots={hasFilters ? 'noindex,follow' : 'index,follow'}
       />
+      {/* Cuadrícula decorativa detrás de la cabecera, como en las secciones de la portada. */}
+      <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Breadcrumbs items={[{ label: t('news.breadcrumb'), to: paths.news }]} />
-      <PageHeader title={heading} description={t('news.list.description')} />
 
-      <search className="mb-8 block space-y-4">
+      <header className="mb-8">
+        <hgroup>
+          <Eyebrow>{t('news.list.eyebrow')}</Eyebrow>
+          <h1 className="mt-3 text-4xl font-bold tracking-tight text-ink sm:text-5xl">{heading}</h1>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-muted">{t('news.list.description')}</p>
+        </hgroup>
+      </header>
+
+      {/*
+        Barra de filtros discreta: categorías a la izquierda; idioma y buscador a la derecha. En móvil, las categorías
+        ocupan su fila y debajo van el idioma y el buscador.
+      */}
+      <search className="mb-8 grid grid-cols-1 items-center gap-3 border-y border-slate-200 py-3 sm:grid-cols-[auto_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_auto_16rem]">
+        <NewsCategoryFilter category={category} buildHref={buildHref} className="sm:col-span-full lg:col-span-1" />
+        <NewsLanguageFilter language={language} buildHref={buildHref} />
         <SearchBar
+          compact
           value={search}
           onSearch={(value) => setFilters({ q: value }, { replace: true })}
           label={t('news.list.searchLabel')}
           placeholder={t('news.list.searchPlaceholder')}
         />
-        <NewsCategoryFilter category={category} buildHref={buildHref} />
-        <NewsLanguageFilter language={language} buildHref={buildHref} />
       </search>
 
       <section aria-label={t('common.results')} aria-busy={list.loading}>
@@ -72,10 +86,11 @@ export default function NewsListPage() {
               />
             ) : (
               <>
-                <p role="status" className="mb-4 text-sm text-ink-muted">
+                <p role="status" className="mb-5 text-sm font-medium text-ink-muted">
                   {t('news.list.count', { count: result.totalElements })}
                 </p>
-                <NewsGrid items={result.content} headingLevel="h2" />
+                {/* La más reciente se destaca solo en la primera página. */}
+                <NewsGrid items={result.content} headingLevel="h2" featured={page === 1} />
                 <Pagination page={page} totalPages={result.totalPages} buildHref={buildHref} />
               </>
             )
