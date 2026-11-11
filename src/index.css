@@ -241,15 +241,6 @@
     mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 40%, transparent 100%);
   }
 
-  /* La misma cuadrícula, en blanco muy suave, para secciones con fondo oscuro. */
-  .bg-grid-inverse {
-    background-image:
-      linear-gradient(to right, rgb(255 255 255 / 0.06) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(255 255 255 / 0.06) 1px, transparent 1px);
-    background-size: 3rem 3rem;
-    mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 40%, transparent 100%);
-  }
-
   .card {
     @apply rounded-card border border-slate-200 bg-surface shadow-card;
   }

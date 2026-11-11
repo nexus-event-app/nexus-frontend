@@ -26,7 +26,7 @@ describe('TestimonialCard', () => {
   })
 
   it('«Leer más» despliega el texto y lo anuncia', async () => {
-    renderWithProviders(<TestimonialCard testimonial={TESTIMONIAL} glass />)
+    renderWithProviders(<TestimonialCard testimonial={TESTIMONIAL} />)
     const toggle = screen.getByRole('button', { name: /Leer más/ })
     expect(toggle).toHaveAttribute('aria-expanded', 'false')
     await userEvent.click(toggle)

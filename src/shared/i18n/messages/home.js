@@ -58,13 +58,6 @@ export default {
       emptyTitle: 'Aún no hay testimonios',
       emptyText: 'Sé la primera persona en compartir tu experiencia.',
     },
-    cta: {
-      title: '¿Tienes una pregunta? Este es tu espacio',
-      text: 'Todas las personas empezamos desde cero. Pregunta, comparte lo que sabes y crece con la comunidad.',
-      create: 'Crear una discusión',
-      register: 'Crear cuenta gratis',
-      haveAccount: 'Ya tengo cuenta',
-    },
   },
   ca: {
     hero: {
@@ -124,13 +117,6 @@ export default {
       emptyTitle: 'Encara no hi ha testimonis',
       emptyText: 'Sigues la primera persona a compartir la teva experiència.',
     },
-    cta: {
-      title: 'Tens una pregunta? Aquest és el teu espai',
-      text: 'Totes les persones comencem de zero. Pregunta, comparteix el que saps i creix amb la comunitat.',
-      create: 'Crea una discussió',
-      register: 'Crea un compte gratis',
-      haveAccount: 'Ja tinc compte',
-    },
   },
   en: {
     hero: {
@@ -189,13 +175,6 @@ export default {
       error: 'We couldn’t load the testimonials',
       emptyTitle: 'There are no testimonials yet',
       emptyText: 'Be the first to share your experience.',
-    },
-    cta: {
-      title: 'Got a question? This is your space',
-      text: 'We all start from zero. Ask, share what you know and grow with the community.',
-      create: 'Start a discussion',
-      register: 'Create a free account',
-      haveAccount: 'I already have an account',
     },
   },
 }

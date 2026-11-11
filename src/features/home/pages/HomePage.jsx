@@ -2,7 +2,6 @@ import JsonLd from '@/shared/components/JsonLd'
 import PageMain from '@/shared/components/PageMain'
 import Seo from '@/shared/components/Seo'
 import { paths } from '@/shared/config/paths'
-import FinalCta from '../components/FinalCta'
 import ForumSection from '../components/ForumSection'
 import HeroSection from '../components/HeroSection'
 import LatestJobsSection from '../components/LatestJobsSection'
@@ -20,7 +19,6 @@ export default function HomePage() {
       <LatestJobsSection />
       <ForumSection />
       <TestimonialsSection />
-      <FinalCta />
     </PageMain>
   )
 }
