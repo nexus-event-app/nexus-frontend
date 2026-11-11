@@ -13,9 +13,17 @@ import ReportDialog from './ReportDialog'
 /**
  * Botón «Reportar». No aparece en el contenido propio. Sin sesión, lleva a iniciarla y vuelve aquí.
  * `srLabel` completa el nombre para lectores de pantalla («Reportar el comentario de Ana»); con `compact` solo se
- * ve la bandera y `srLabel` es el nombre completo.
+ * ve la bandera y `srLabel` es el nombre completo. `inverse`: colores claros, para fondos oscuros.
  */
-export default function ReportButton({ targetType, targetId, ownerId, srLabel, compact = false, className }) {
+export default function ReportButton({
+  targetType,
+  targetId,
+  ownerId,
+  srLabel,
+  compact = false,
+  inverse = false,
+  className,
+}) {
   const { t } = useI18n()
   const { isAuthenticated, user } = useAuth()
   const toast = useToast()
@@ -44,7 +52,10 @@ export default function ReportButton({ targetType, targetId, ownerId, srLabel, c
           aria-haspopup="dialog"
           title={t('reports.button')}
           className={cx(
-            'flex h-11 w-11 shrink-0 items-center justify-center rounded-control text-ink-muted hover:bg-slate-100 hover:text-ink',
+            'flex h-11 w-11 shrink-0 items-center justify-center rounded-control',
+            inverse
+              ? 'text-brand-100 hover:bg-white/10 hover:text-white'
+              : 'text-ink-muted hover:bg-slate-100 hover:text-ink',
             className,
           )}
         >

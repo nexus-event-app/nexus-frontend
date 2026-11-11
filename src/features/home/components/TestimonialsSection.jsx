@@ -19,7 +19,7 @@ export default function TestimonialsSection() {
       description={t('home.testimonials.description')}
       linkTo={paths.testimonials}
       linkLabel={t('home.testimonials.link')}
-      tinted
+      dark
     >
       <QueryBoundary
         data={request.data}
@@ -36,7 +36,7 @@ export default function TestimonialsSection() {
               description={t('home.testimonials.emptyText')}
             />
           ) : (
-            <TestimonialGrid items={items.slice(0, 3)} />
+            <TestimonialGrid items={items.slice(0, 3)} glass />
           )
         }
       </QueryBoundary>
