@@ -55,4 +55,22 @@ test.describe('Página de empleo', () => {
     await page.getByRole('button', { name: 'Quitar filtros' }).click()
     await expect(page).toHaveURL(/\/empleo$/)
   })
+
+  test('pide cinco ofertas por página y pone la paginación debajo', async ({ page, api }) => {
+    api.on('GET', '/api/jobs', () => ({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({ ...pageOf(manyJobs.slice(0, 5)), size: 5, totalElements: 12, totalPages: 3, last: false }),
+    }))
+    await page.goto('/empleo')
+    await expect(page.getByRole('heading', { level: 2, name: /^Oferta número/ })).toHaveCount(5)
+    await expect
+      .poll(() => api.calls.some((call) => call.path === '/api/jobs' && call.query.get('size') === '5'))
+      .toBe(true)
+    await page
+      .getByRole('navigation', { name: 'Paginación' })
+      .getByRole('link', { name: /Siguiente/ })
+      .click()
+    await expect(page).toHaveURL(/page=2/)
+  })
 })

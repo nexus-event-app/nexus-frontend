@@ -18,8 +18,8 @@ import { useI18n } from '@/shared/i18n/useI18n'
 const STYLES = {
   default: {
     article: 'border border-slate-200 bg-surface',
-    text: 'mx-6',
-    title: 'text-lg text-ink',
+    text: 'mx-5',
+    title: 'text-base text-ink',
     excerpt: 'text-ink-muted',
     muted: 'text-ink-muted',
     line: 'border-slate-200',
@@ -29,8 +29,8 @@ const STYLES = {
   wide: {
     article:
       'border border-slate-200 bg-surface lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:grid-rows-[auto_auto_1fr_auto]',
-    text: 'mx-6 lg:col-start-2 lg:mx-7',
-    title: 'text-lg text-ink lg:text-2xl lg:leading-tight',
+    text: 'mx-5 lg:col-start-2 lg:mx-6',
+    title: 'text-base text-ink lg:text-xl lg:leading-tight',
     excerpt: 'text-ink-muted',
     muted: 'text-ink-muted',
     line: 'border-slate-200',
@@ -40,7 +40,7 @@ const STYLES = {
 }
 
 /**
- * Tarjeta de una noticia. Toda la tarjeta lleva a la noticia; «Leer noticia» es solo una pista visual. Las de una
+ * Tarjeta de una noticia, compacta: imagen apaisada, titular y resumen a dos líneas. Toda la tarjeta lleva a la noticia; «Leer noticia» es solo una pista visual. Las de una
  * misma fila miden lo mismo: el pie se queda abajo. `variant`: default (imagen arriba) o wide (imagen al lado; ver
  * newsLayout).
  */
@@ -66,12 +66,13 @@ export default function NewsCard({ item, headingLevel = 'h3', variant = 'default
           title={item.title}
           seed={item.id}
           className={cx(
-            'transition-transform duration-700 ease-out group-hover:scale-105',
+            // Imagen más apaisada que la de 16:9 por defecto: la tarjeta queda más compacta.
+            'aspect-[2/1] transition-transform duration-700 ease-out group-hover:scale-105',
             wide && 'lg:aspect-auto lg:h-full',
           )}
         />
       </figure>
-      <p className={cx('mt-5 flex flex-wrap items-center gap-x-3 gap-y-2', styles.text)}>
+      <p className={cx('mt-4 flex flex-wrap items-center gap-x-3 gap-y-2', styles.text)}>
         <Badge tone={newsCategories.toneOf(item.category)}>{newsCategories.labelOf(item.category)}</Badge>
         <Time value={item.createdAt} format="relative" className={cx('text-sm', styles.muted)} />
         <ContentLanguageBadge language={language} />
@@ -79,10 +80,10 @@ export default function NewsCard({ item, headingLevel = 'h3', variant = 'default
       <Heading
         lang={language}
         className={cx(
-          'mt-3 line-clamp-3 font-bold leading-snug tracking-tight',
+          'mt-2 line-clamp-2 font-bold leading-snug tracking-tight',
           styles.text,
           styles.title,
-          'min-h-[3lh]',
+          'min-h-[2lh]',
           wide && 'lg:min-h-0',
         )}
       >
@@ -96,18 +97,18 @@ export default function NewsCard({ item, headingLevel = 'h3', variant = 'default
       <p
         lang={language}
         className={cx(
-          'mb-5 mt-2',
+          'mb-4 mt-1.5 text-sm leading-relaxed',
           styles.text,
           styles.excerpt,
-          'line-clamp-3 min-h-[3lh]',
-          wide && 'lg:mt-3 lg:min-h-0 lg:line-clamp-4',
+          'line-clamp-2 min-h-[2lh]',
+          wide && 'lg:mt-2 lg:min-h-0 lg:line-clamp-4',
         )}
       >
         {excerpt(item.content, wide ? 280 : 180)}
       </p>
       <footer
         className={cx(
-          'mt-auto flex items-center justify-between gap-3 border-t pb-5 pt-4 text-sm',
+          'mt-auto flex items-center justify-between gap-3 border-t pb-4 pt-3 text-sm',
           styles.text,
           styles.line,
         )}
