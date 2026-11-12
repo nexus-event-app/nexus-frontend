@@ -22,6 +22,7 @@ import DiscussionForm from './DiscussionForm'
 import ReportButton from '@/features/reports/components/ReportButton'
 import LikeButton from './LikeButton'
 import { useI18n } from '@/shared/i18n/useI18n'
+import { cx } from '@/shared/utils/classNames'
 
 export default function DiscussionArticle({ discussion, commentCount, onChange, className }) {
   const { t } = useI18n()
@@ -58,13 +59,16 @@ export default function DiscussionArticle({ discussion, commentCount, onChange, 
 
   const manageable = canManage(discussion.authorId)
 
+  // La pregunta, en su propia tarjeta: así se distingue a primera vista de las respuestas (debajo, más ligeras).
   return (
-    <article className={className}>
+    <article
+      className={cx('rounded-3xl border border-slate-200 bg-surface px-6 py-7 shadow-card sm:px-10 sm:py-9', className)}
+    >
       <header>
-        <p className="flex flex-wrap items-center gap-2">
-          <Badge tone={discussionCategories.toneOf(discussion.category)}>
+        <p className="flex flex-wrap items-center gap-x-3 gap-y-2">
+          <span className="text-sm font-bold uppercase tracking-[0.15em] text-accent">
             {discussionCategories.labelOf(discussion.category)}
-          </Badge>
+          </span>
           {discussion.acceptedCommentId && (
             <>
               <Badge tone="green">
@@ -80,10 +84,10 @@ export default function DiscussionArticle({ discussion, commentCount, onChange, 
             </>
           )}
         </p>
-        <h1 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl">
+        <h1 className="mt-4 text-balance text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl">
           {discussion.title}
         </h1>
-        <p className="mt-4 flex items-center gap-3 text-sm text-ink-muted">
+        <p className="mt-5 flex items-center gap-3 text-sm text-ink-muted">
           <Avatar name={discussion.authorName} src={discussion.authorAvatarUrl} />
           <span>
             <AuthorLink
@@ -97,9 +101,9 @@ export default function DiscussionArticle({ discussion, commentCount, onChange, 
         </p>
       </header>
 
-      <UserText className="mt-6 text-lg leading-relaxed text-ink-soft">{discussion.content}</UserText>
+      <UserText className="mt-7 text-lg leading-8 text-ink-soft">{discussion.content}</UserText>
 
-      <footer className="mt-6 flex flex-wrap items-center gap-2 border-t border-slate-200 pt-4">
+      <footer className="mt-8 flex flex-wrap items-center gap-2 border-t border-slate-200 pt-5">
         <LikeButton
           count={discussion.likesCount}
           liked={discussion.isLikedByCurrentUser}
@@ -115,11 +119,11 @@ export default function DiscussionArticle({ discussion, commentCount, onChange, 
         />
         {manageable && (
           <>
-            <Button variant="secondary" onClick={() => setEditing(true)}>
+            <Button variant="secondary" size="sm" className="sm:ml-auto" onClick={() => setEditing(true)}>
               <Icon name="pencil" className="h-4 w-4" />
               {t('forum.detail.edit')}
             </Button>
-            <Button variant="ghost" onClick={() => setConfirmingDelete(true)}>
+            <Button variant="ghost" size="sm" onClick={() => setConfirmingDelete(true)}>
               <Icon name="trash" className="h-4 w-4" />
               {t('forum.detail.delete')}
             </Button>

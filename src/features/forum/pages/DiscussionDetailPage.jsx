@@ -57,13 +57,14 @@ export default function DiscussionDetailPage() {
       />
       <JsonLd data={buildDiscussionData(discussion, comments.data)} />
       <Breadcrumbs
+        className="mx-auto max-w-3xl"
         items={[
           { label: t('forum.breadcrumb'), to: paths.forum },
           { label: excerpt(discussion.title, 60), to: path },
         ]}
       />
       <DiscussionArticle
-        className="mx-auto max-w-3xl"
+        className="mx-auto mt-6 max-w-3xl"
         discussion={discussion}
         commentCount={comments.data?.length ?? discussion.commentCount}
         onChange={(updated) => request.mutate(() => updated)}

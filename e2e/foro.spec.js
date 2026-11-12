@@ -22,7 +22,7 @@ test.describe('Mejor respuesta', () => {
     await expect(page.locator('#comentario-5')).toContainText('Mejor respuesta')
     await expect(
       page
-        .getByRole('region', { name: /Comentarios/ })
+        .getByRole('region', { name: /Respuestas/ })
         .getByRole('article')
         .first(),
     ).toHaveAttribute('id', 'comentario-5')
@@ -34,7 +34,7 @@ test.describe('Mejor respuesta', () => {
 
     await expect(
       page
-        .getByRole('region', { name: /Comentarios/ })
+        .getByRole('region', { name: /Respuestas/ })
         .getByRole('article')
         .first(),
     ).toHaveAttribute('id', `comentario-${comments[1].id}`)
