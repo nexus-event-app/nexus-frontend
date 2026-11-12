@@ -6,10 +6,12 @@ export default {
     seoDescription:
       'Qué es {name}, por qué existe, quién está detrás y cómo se financia: una comunidad independiente y sin ánimo de lucro para quienes empiezan en tecnología.',
     eyebrow: 'Sobre el proyecto',
+    terminal: { message: 'Mi primer paso en tecnología', output: 'Una persona más aprendiendo en comunidad' },
     title: 'Nadie debería dar su primer paso en tecnología en solitario',
     intro:
       '{name} es una comunidad en español para quienes empiezan su carrera en tecnología: noticias para estar a la última en tecnología, ofertas de empleo junior y prácticas, un foro donde preguntar sin miedo y testimonios reales de quienes ya han pasado por ahí.',
     purpose: {
+      eyebrow: 'El porqué',
       title: 'Por qué existe',
       problem:
         'Empezar en tecnología es difícil: casi todas las ofertas piden experiencia previa, la información útil está dispersa y gran parte está en inglés. Muchas personas lo dejan no por falta de capacidad, sino por no saber por dónde seguir ni a quién preguntar.',
@@ -25,6 +27,8 @@ export default {
       testimonials: { title: 'Historias reales', text: 'Cómo les va a quienes ya han dado su primer paso.' },
     },
     story: {
+      eyebrow: 'Cómo empezó',
+      upcoming: 'Próximamente',
       title: 'Nuestra historia',
       step: 'Paso {number}',
       idea: {
@@ -45,10 +49,12 @@ export default {
       },
     },
     team: {
+      eyebrow: 'El equipo',
       title: 'Quién está detrás',
       text: '{name} es un proyecto personal e independiente, sin ánimo de lucro y sin ninguna empresa detrás. Lo impulsa un equipo pequeño convencido de que aprender en comunidad es la mejor forma de empezar, y se construye junto a las personas que participan: cada duda, cada respuesta y cada testimonio lo hacen un poco mejor.',
     },
     operate: {
+      eyebrow: 'Transparencia',
       title: 'Cómo funcionamos',
       intro: 'Unirte a una comunidad es confiar en quienes están detrás. Esto es lo que deberías saber:',
       independent: {
@@ -71,6 +77,7 @@ export default {
       },
     },
     support: {
+      eyebrow: 'Colabora',
       title: 'Apoya el proyecto',
       text: 'Si representas a una entidad, un programa de ayudas o una empresa comprometida con el talento que empieza, nos encantará hablar. Tu apoyo nos permitirá cubrir el alojamiento y el dominio, mejorar la accesibilidad, organizar encuentros y llegar a más personas.',
       contact: 'Escríbenos a',
@@ -88,10 +95,12 @@ export default {
     seoDescription:
       'Què és {name}, per què existeix, qui hi ha al darrere i com es finança: una comunitat independent i sense ànim de lucre per a qui comença en tecnologia.',
     eyebrow: 'Sobre el projecte',
+    terminal: { message: 'El meu primer pas en tecnologia', output: 'Una persona més aprenent en comunitat' },
     title: 'Ningú no hauria de fer el primer pas en tecnologia tot sol',
     intro:
       '{name} és una comunitat en espanyol per a qui comença la seva carrera en tecnologia: notícies per estar al dia en tecnologia, ofertes de feina júnior i pràctiques, un fòrum on preguntar sense por i testimonis reals de qui ja hi ha passat.',
     purpose: {
+      eyebrow: 'El perquè',
       title: 'Per què existeix',
       problem:
         'Començar en tecnologia és difícil: gairebé totes les ofertes demanen experiència prèvia, la informació útil està dispersa i bona part és en anglès. Moltes persones ho deixen no per manca de capacitat, sinó per no saber per on continuar ni a qui preguntar.',
@@ -107,6 +116,8 @@ export default {
       testimonials: { title: 'Històries reals', text: 'Com els va a qui ja ha fet el primer pas.' },
     },
     story: {
+      eyebrow: 'Com va començar',
+      upcoming: 'Properament',
       title: 'La nostra història',
       step: 'Pas {number}',
       idea: {
@@ -127,10 +138,12 @@ export default {
       },
     },
     team: {
+      eyebrow: 'L’equip',
       title: 'Qui hi ha al darrere',
       text: '{name} és un projecte personal i independent, sense ànim de lucre i sense cap empresa al darrere. L’impulsa un equip petit convençut que aprendre en comunitat és la millor manera de començar, i es construeix amb les persones que hi participen: cada dubte, cada resposta i cada testimoni el fan una mica millor.',
     },
     operate: {
+      eyebrow: 'Transparència',
       title: 'Com funcionem',
       intro: 'Unir-te a una comunitat és confiar en qui hi ha al darrere. Això és el que hauries de saber:',
       independent: {
@@ -153,6 +166,7 @@ export default {
       },
     },
     support: {
+      eyebrow: 'Col·labora',
       title: 'Dona suport al projecte',
       text: 'Si representes una entitat, un programa d’ajudes o una empresa compromesa amb el talent que comença, ens encantarà parlar-ne. El teu suport ens permetrà cobrir l’allotjament i el domini, millorar l’accessibilitat, organitzar trobades i arribar a més persones.',
       contact: 'Escriu-nos a',
@@ -170,10 +184,12 @@ export default {
     seoDescription:
       'What {name} is, why it exists, who is behind it and how it is funded: an independent, non-profit community for people starting out in tech.',
     eyebrow: 'About the project',
+    terminal: { message: 'My first step in tech', output: 'One more person learning together' },
     title: 'Nobody should take their first step in tech alone',
     intro:
       '{name} is a Spanish-language community for people starting their career in tech: news to stay up to date with tech, junior jobs and internships, a forum where you can ask without fear and real stories from people who have been there.',
     purpose: {
+      eyebrow: 'The why',
       title: 'Why it exists',
       problem:
         'Getting started in tech is hard: almost every job asks for previous experience, useful information is scattered and much of it is in English. Many people give up not for lack of ability, but because they do not know where to go next or who to ask.',
@@ -192,6 +208,8 @@ export default {
       },
     },
     story: {
+      eyebrow: 'How it started',
+      upcoming: 'Coming soon',
       title: 'Our story',
       step: 'Step {number}',
       idea: {
@@ -212,10 +230,12 @@ export default {
       },
     },
     team: {
+      eyebrow: 'The team',
       title: 'Who is behind it',
       text: '{name} is an independent personal project, non-profit and with no company behind it. It is driven by a small team convinced that learning together is the best way to start, and it is built with the people who take part: every question, answer and testimonial makes it a little better.',
     },
     operate: {
+      eyebrow: 'Transparency',
       title: 'How we work',
       intro: 'Joining a community means trusting the people behind it. Here is what you should know:',
       independent: {
@@ -238,6 +258,7 @@ export default {
       },
     },
     support: {
+      eyebrow: 'Get involved',
       title: 'Support the project',
       text: 'If you represent an organisation, a grant programme or a company committed to people starting out in tech, we would love to talk. Your support will help us cover hosting and the domain, improve accessibility, organise meetups and reach more people.',
       contact: 'Write to us at',
