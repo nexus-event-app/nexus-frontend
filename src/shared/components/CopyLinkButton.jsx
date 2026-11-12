@@ -1,19 +1,21 @@
 import { useToast } from '@/shared/hooks/useToast'
+import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import Icon from './Icon'
 
 /**
- * Copia la dirección de la página actual y lo confirma con un aviso. Los textos vienen de fuera para que sirva en
- * cualquier sección (noticia, oferta, discusión...).
+ * Copia la dirección de la página actual y lo confirma con un aviso. Sirve en cualquier página (noticia, oferta,
+ * discusión...); los textos son los comunes, aunque se pueden cambiar.
  */
 export default function CopyLinkButton({ label, copiedMessage, failedMessage, className }) {
+  const { t } = useI18n()
   const toast = useToast()
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href)
-      toast.success(copiedMessage)
+      toast.success(copiedMessage ?? t('common.copyLink.copied'))
     } catch {
-      toast.error(failedMessage)
+      toast.error(failedMessage ?? t('common.copyLink.failed'))
     }
   }
   return (
@@ -26,7 +28,7 @@ export default function CopyLinkButton({ label, copiedMessage, failedMessage, cl
       )}
     >
       <Icon name="link" className="h-4 w-4" />
-      {label}
+      {label ?? t('common.copyLink.label')}
     </button>
   )
 }

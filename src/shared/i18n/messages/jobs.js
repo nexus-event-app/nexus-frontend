@@ -96,6 +96,7 @@ export default {
       source: 'Fuente',
       viewOriginal: 'Ver la oferta original',
       apply: 'Inscribirme en la oferta',
+      back: 'Volver a las ofertas',
     },
   },
   ca: {
@@ -194,6 +195,7 @@ export default {
       source: 'Font',
       viewOriginal: 'Mira l’oferta original',
       apply: 'Inscriu-me a l’oferta',
+      back: 'Torna a les ofertes',
     },
   },
   en: {
@@ -292,6 +294,7 @@ export default {
       source: 'Source',
       viewOriginal: 'View the original offer',
       apply: 'Apply for this job',
+      back: 'Back to job offers',
     },
   },
 }

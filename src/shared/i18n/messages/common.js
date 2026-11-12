@@ -3,6 +3,7 @@ export default {
   es: {
     skipLink: 'Saltar al contenido',
     newTab: '(se abre en una pestaña nueva)',
+    copyLink: { label: 'Copiar enlace', copied: 'Enlace copiado', failed: 'No hemos podido copiar el enlace' },
     readMore: 'Leer más',
     readLess: 'Leer menos',
     pageSuffix: ' (página {page})',
@@ -85,6 +86,7 @@ export default {
   ca: {
     skipLink: 'Salta al contingut',
     newTab: '(s’obre en una pestanya nova)',
+    copyLink: { label: 'Copia l’enllaç', copied: 'Enllaç copiat', failed: 'No hem pogut copiar l’enllaç' },
     readMore: 'Llegeix-ne més',
     readLess: 'Llegeix-ne menys',
     pageSuffix: ' (pàgina {page})',
@@ -167,6 +169,7 @@ export default {
   en: {
     skipLink: 'Skip to content',
     newTab: '(opens in a new tab)',
+    copyLink: { label: 'Copy link', copied: 'Link copied', failed: 'We couldn’t copy the link' },
     readMore: 'Read more',
     readLess: 'Show less',
     pageSuffix: ' (page {page})',

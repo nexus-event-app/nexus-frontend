@@ -73,4 +73,14 @@ test.describe('Página de empleo', () => {
       .click()
     await expect(page).toHaveURL(/page=2/)
   })
+
+  test('el detalle de una oferta enseña su resumen y vuelve a las ofertas', async ({ page }) => {
+    await page.goto('/empleo/11-desarrollador-frontend-junior')
+    await expect(page.getByRole('heading', { level: 1, name: 'Desarrollador/a frontend junior' })).toBeVisible()
+    const summary = page.getByRole('complementary', { name: 'Resumen de la oferta' })
+    await expect(summary).toContainText('Acme Software')
+    await expect(page.getByRole('button', { name: 'Copiar enlace' })).toBeVisible()
+    await page.getByRole('link', { name: 'Volver a las ofertas' }).click()
+    await expect(page).toHaveURL(/\/empleo$/)
+  })
 })

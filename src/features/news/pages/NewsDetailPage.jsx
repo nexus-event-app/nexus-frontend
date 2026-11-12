@@ -194,11 +194,7 @@ export default function NewsDetailPage() {
               <Icon name="arrow-left" className="h-4 w-4" />
               {t('news.detail.back')}
             </Link>
-            <CopyLinkButton
-              label={t('news.detail.copyLink')}
-              copiedMessage={t('news.detail.linkCopied')}
-              failedMessage={t('news.detail.copyFailed')}
-            />
+            <CopyLinkButton />
           </ActionMenu>
         </footer>
       </article>
