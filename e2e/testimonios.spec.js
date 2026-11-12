@@ -39,7 +39,7 @@ test.describe('Testimonios', () => {
     expect(signedIn.id).toBeDefined()
     await page.goto('/testimonios')
     const share = page.getByRole('region', { name: 'Comparte tu experiencia' })
-    await expect(share.getByRole('list', { name: 'Cómo funciona' }).getByRole('listitem')).toHaveCount(3)
+    await expect(share.getByRole('complementary', { name: 'Cómo funciona' }).getByRole('listitem')).toHaveCount(3)
     await expect(share.getByRole('button', { name: 'Enviar testimonio' })).toBeVisible()
     await expectAccessible(page)
   })

@@ -58,7 +58,8 @@ export default function TestimonialForm({ className }) {
   const length = form.values.content.trim().length
 
   return (
-    // Rejilla (form-grid): nombre y rol comparten fila; el resto ocupa todo el ancho. Sin caja propia: la pone la
+    // Rejilla (form-grid): nombre, puesto y ubicación comparten fila (así el formulario cabe en pantalla); el resto
+    // ocupa todo el ancho. Sin caja propia: la pone la
     // página (el panel de «Comparte tu experiencia»).
     <form onSubmit={form.handleSubmit} noValidate className={cx('form-grid', className)}>
       {sent && (
@@ -68,7 +69,7 @@ export default function TestimonialForm({ className }) {
       )}
       {form.formError && <Alert variant="error">{form.formError}</Alert>}
       <FormField
-        className="field-half"
+        className="field-third"
         {...form.getFieldProps('name')}
         label={t('testimonials.form.name')}
         autoComplete="name"
@@ -76,13 +77,14 @@ export default function TestimonialForm({ className }) {
         required
       />
       <FormField
-        className="field-half"
+        className="field-third"
         {...form.getFieldProps('role')}
         label={t('testimonials.form.role')}
         placeholder={t('testimonials.form.rolePlaceholder')}
         maxLength={100}
       />
       <FormField
+        className="field-third"
         {...form.getFieldProps('location')}
         label={t('testimonials.form.location')}
         placeholder={t('testimonials.form.locationPlaceholder')}
@@ -92,7 +94,7 @@ export default function TestimonialForm({ className }) {
       <FormField
         {...form.getFieldProps('content')}
         as="textarea"
-        rows={5}
+        rows={4}
         label={t('testimonials.form.content')}
         hint={t('testimonials.form.hint', { length, max: CONTENT_MAX, min: CONTENT_MIN })}
         maxLength={CONTENT_MAX}

@@ -15,6 +15,7 @@ import { siteConfig } from '@/shared/config/site'
 import { useListQuery } from '@/shared/hooks/useListQuery'
 import { Navigate } from '@/shared/i18n/router'
 import { useI18n } from '@/shared/i18n/useI18n'
+import { cx } from '@/shared/utils/classNames'
 import TestimonialForm from '../components/TestimonialForm'
 import TestimonialGrid from '../components/TestimonialGrid'
 import { useTestimonials } from '../hooks/useTestimonials'
@@ -28,6 +29,9 @@ const SHARE_STEPS = [
   { key: 'review', icon: 'shield' },
   { key: 'inspire', icon: 'sparkles' },
 ]
+
+/** La parte derecha del panel (formulario o aviso): redondea las esquinas que no toca el bloque de la izquierda. */
+const SHARE_SIDE = 'rounded-b-3xl rounded-t-none p-6 sm:p-8 lg:rounded-r-3xl lg:rounded-bl-none'
 
 export default function TestimonialsPage() {
   const { t } = useI18n()
@@ -89,43 +93,52 @@ export default function TestimonialsPage() {
       </section>
 
       {/*
-        «Comparte tu experiencia»: un panel en dos partes. A la izquierda, sobre el degradado de la marca, la invitación
-        y cómo funciona; a la derecha, el formulario (o lo que haga falta antes: entrar o confirmar el email).
+        «Comparte tu experiencia»: cabecera como la de los demás apartados y, debajo, un panel compacto (cabe en
+        pantalla sin bajar): a la izquierda, sobre el degradado de la marca, cómo funciona; a la derecha, el
+        formulario (o lo que haga falta antes: entrar o confirmar el email).
       */}
-      <section
-        aria-labelledby="share-heading"
-        className="mt-20 grid overflow-hidden rounded-[2rem] border border-slate-200 bg-surface shadow-card lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"
-      >
-        <header className="relative isolate overflow-hidden bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 p-8 text-white sm:p-10">
+      <section aria-labelledby="share-heading" className="mt-20 grid lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+        <header className="col-span-full mb-6">
+          <hgroup>
+            <Eyebrow>{t('testimonials.shareEyebrow')}</Eyebrow>
+            <h2 id="share-heading" className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+              {t('testimonials.shareTitle')}
+            </h2>
+            <p className="mt-3 max-w-2xl text-lg leading-relaxed text-ink-muted">{t('testimonials.shareText')}</p>
+          </hgroup>
+        </header>
+        {/* Las dos piezas forman un solo panel: cada una redondea sus esquinas exteriores. */}
+        <aside
+          aria-labelledby="share-steps-heading"
+          className="relative isolate overflow-hidden rounded-t-3xl bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 p-6 text-white sm:p-8 lg:rounded-l-3xl lg:rounded-tr-none"
+        >
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute -right-20 -top-20 -z-10 h-64 w-64 rounded-full bg-brand-400/30 blur-3xl"
+            className="pointer-events-none absolute -right-16 -top-16 -z-10 h-48 w-48 rounded-full bg-brand-400/30 blur-3xl"
           />
-          <Eyebrow tone="dark">{t('testimonials.shareEyebrow')}</Eyebrow>
-          <h2 id="share-heading" className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-            {t('testimonials.shareTitle')}
-          </h2>
-          <p className="mt-4 text-lg leading-relaxed text-brand-100">{t('testimonials.shareText')}</p>
-          <ol aria-label={t('testimonials.shareSteps.label')} className="mt-8 space-y-4">
+          <h3 id="share-steps-heading" className="text-sm font-bold uppercase tracking-[0.2em] text-brand-200">
+            {t('testimonials.shareSteps.label')}
+          </h3>
+          <ol className="mt-5 space-y-4">
             {SHARE_STEPS.map((step, index) => (
-              <li key={step.key} className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-4">
-                <span aria-hidden="true" className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15">
+              <li key={step.key} className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3">
+                <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/15">
                   <Icon name={step.icon} className="h-5 w-5" />
                 </span>
-                <p className="text-brand-50">
+                <p className="text-sm leading-relaxed text-brand-50">
                   <span className="sr-only">{index + 1}. </span>
                   {t(`testimonials.shareSteps.${step.key}`)}
                 </p>
               </li>
             ))}
           </ol>
-        </header>
+        </aside>
         {isAuthenticated && user?.emailVerified === false ? (
-          <VerifyEmailNotice className="m-6 self-center sm:m-10">{t('testimonials.confirmEmail')}</VerifyEmailNotice>
+          <VerifyEmailNotice className={SHARE_SIDE}>{t('testimonials.confirmEmail')}</VerifyEmailNotice>
         ) : isAuthenticated ? (
-          <TestimonialForm className="p-6 sm:p-10" />
+          <TestimonialForm className={cx(SHARE_SIDE, 'border border-slate-200 bg-surface shadow-card')} />
         ) : (
-          <SignInPrompt className="m-6 self-center sm:m-10">{t('testimonials.signIn')}</SignInPrompt>
+          <SignInPrompt className={SHARE_SIDE}>{t('testimonials.signIn')}</SignInPrompt>
         )}
       </section>
     </PageMain>
