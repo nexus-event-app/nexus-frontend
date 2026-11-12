@@ -38,9 +38,9 @@ test.describe('Testimonios', () => {
   test('con sesión, el formulario para compartir la experiencia es accesible', async ({ page, signedIn }) => {
     expect(signedIn.id).toBeDefined()
     await page.goto('/testimonios')
-    const share = page.getByRole('region', { name: 'Comparte tu experiencia' })
+    const share = page.getByRole('region', { name: 'Escribe en el muro' })
     await expect(share.getByRole('complementary', { name: 'Cómo funciona' }).getByRole('listitem')).toHaveCount(3)
-    await expect(share.getByRole('button', { name: 'Enviar testimonio' })).toBeVisible()
+    await expect(share.getByRole('button', { name: 'Enviar al muro' })).toBeVisible()
     await expectAccessible(page)
   })
 
@@ -48,6 +48,6 @@ test.describe('Testimonios', () => {
     await page.goto('/')
     await page.getByRole('link', { name: 'Cuenta tu historia' }).click()
     await expect(page).toHaveURL(/\/testimonios#share-heading$/)
-    await expect(page.getByRole('heading', { level: 2, name: 'Comparte tu experiencia' })).toBeInViewport()
+    await expect(page.getByRole('heading', { level: 2, name: 'Escribe en el muro' })).toBeInViewport()
   })
 })

@@ -23,7 +23,7 @@ import { useTestimonials } from '../hooks/useTestimonials'
 /** Seis testimonios por página: dos filas de tres en pantallas grandes. */
 export const TESTIMONIALS_PAGE_SIZE = 6
 
-/** Pasos de «Comparte tu experiencia», en orden; solo informan (no son enlaces). */
+/** Pasos de «Escribe en el muro», en orden; solo informan (no son enlaces). */
 const SHARE_STEPS = [
   { key: 'write', icon: 'pencil' },
   { key: 'review', icon: 'shield' },
@@ -61,7 +61,13 @@ export default function TestimonialsPage() {
         </hgroup>
       </header>
 
-      <section aria-label={t('common.results')} aria-busy={request.loading}>
+      {/* El muro: un tablero con la cuadrícula suave de fondo donde las notas quedan colgadas, un poco torcidas. */}
+      <section
+        aria-label={t('testimonials.wallLabel')}
+        aria-busy={request.loading}
+        className="relative isolate overflow-hidden rounded-[2rem] border border-slate-200 bg-canvas px-5 pb-8 pt-10 shadow-inner sm:px-10"
+      >
+        <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-0 -z-10" />
         <QueryBoundary
           data={request.data}
           error={request.error}
@@ -93,7 +99,7 @@ export default function TestimonialsPage() {
       </section>
 
       {/*
-        «Comparte tu experiencia»: cabecera como la de los demás apartados y, debajo, un panel compacto (cabe en
+        «Escribe en el muro»: cabecera como la de los demás apartados y, debajo, un panel compacto (cabe en
         pantalla sin bajar): a la izquierda, sobre el degradado de la marca, cómo funciona; a la derecha, el
         formulario (o lo que haga falta antes: entrar o confirmar el email).
       */}

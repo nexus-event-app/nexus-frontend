@@ -60,7 +60,7 @@ export default function TestimonialForm({ className }) {
   return (
     // Rejilla (form-grid): nombre, puesto y ubicación comparten fila (así el formulario cabe en pantalla); el resto
     // ocupa todo el ancho. Sin caja propia: la pone la
-    // página (el panel de «Comparte tu experiencia»).
+    // página (el panel de «Escribe en el muro»).
     <form onSubmit={form.handleSubmit} noValidate className={cx('form-grid', className)}>
       {sent && (
         <Alert variant="success" title={t('testimonials.form.thanksTitle')}>
@@ -95,6 +95,7 @@ export default function TestimonialForm({ className }) {
         {...form.getFieldProps('content')}
         as="textarea"
         rows={4}
+        placeholder={t('testimonials.form.contentPlaceholder')}
         label={t('testimonials.form.content')}
         hint={t('testimonials.form.hint', { length, max: CONTENT_MAX, min: CONTENT_MIN })}
         maxLength={CONTENT_MAX}
