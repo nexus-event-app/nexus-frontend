@@ -1,7 +1,7 @@
-import { DEFAULT_PAGE_SIZE } from '@/shared/api/params'
 import { newsCategories } from '@/shared/config/catalogs'
 import { useListQuery } from '@/shared/hooks/useListQuery'
 import { useRequest } from '@/shared/hooks/useRequest'
+import { NEWS_PAGE_SIZE } from '../components/newsLayout'
 import { newsService } from '../services/newsService'
 
 const FILTER_KEYS = ['categoria', 'q', 'idioma']
@@ -16,7 +16,7 @@ export function useNewsList() {
 
   const request = useRequest(`news:${query.page}:${category}:${search}:${language}`, ({ signal }) =>
     newsService.list(
-      { page: query.page - 1, size: DEFAULT_PAGE_SIZE, category, q: search, language: language || undefined },
+      { page: query.page - 1, size: NEWS_PAGE_SIZE, category, q: search, language: language || undefined },
       { signal },
     ),
   )

@@ -89,8 +89,8 @@ export default function NewsListPage() {
                 <p role="status" className="mb-5 text-sm font-medium text-ink-muted">
                   {t('news.list.count', { count: result.totalElements })}
                 </p>
-                {/* Rejilla variada; la más reciente lleva «Destacada» solo en la primera página. */}
-                <NewsGrid items={result.content} headingLevel="h2" varied featured={page === 1} />
+                {/* Rejilla variada: unas con la imagen arriba y otras, anchas, con la imagen al lado. */}
+                <NewsGrid items={result.content} headingLevel="h2" varied />
                 <Pagination page={page} totalPages={result.totalPages} buildHref={buildHref} />
               </>
             )

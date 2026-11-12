@@ -27,7 +27,7 @@ export default {
       es: 'Español',
       en: 'Inglés',
     },
-    card: { via: 'Vía {source}', featured: 'Destacada', read: 'Leer noticia' },
+    card: { via: 'Vía {source}', read: 'Leer noticia' },
     related: { title: 'Más noticias', seeAll: 'Ver todas las noticias' },
     detail: {
       error: 'No hemos podido cargar la noticia',
@@ -67,7 +67,7 @@ export default {
       es: 'Castellà',
       en: 'Anglès',
     },
-    card: { via: 'Via {source}', featured: 'Destacada', read: 'Llegeix la notícia' },
+    card: { via: 'Via {source}', read: 'Llegeix la notícia' },
     related: { title: 'Més notícies', seeAll: 'Mira totes les notícies' },
     detail: {
       error: 'No hem pogut carregar la notícia',
@@ -102,7 +102,7 @@ export default {
     },
     filter: { label: 'Filter news by category', all: 'All' },
     languageFilter: { label: 'Filter news by language', all: 'All', es: 'Spanish', en: 'English' },
-    card: { via: 'Via {source}', featured: 'Featured', read: 'Read the story' },
+    card: { via: 'Via {source}', read: 'Read the story' },
     related: { title: 'More news', seeAll: 'See all news' },
     detail: {
       error: 'We couldn’t load the article',

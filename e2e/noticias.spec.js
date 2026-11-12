@@ -3,8 +3,8 @@ import { news, page as pageOf } from './data.js'
 
 const CATEGORIES = ['DESARROLLO', 'ENTREVISTAS', 'NETWORKING', 'RECURSOS', 'GENERAL']
 
-/** Una página completa de noticias (12), para ver la destacada con la rejilla llena. */
-const fullPage = Array.from({ length: 12 }, (_, index) => ({
+/** Una página completa de noticias (9), para ver la rejilla llena. */
+const fullPage = Array.from({ length: 9 }, (_, index) => ({
   ...news[0],
   id: 100 + index,
   slug: `noticia-${index + 1}`,
@@ -13,16 +13,18 @@ const fullPage = Array.from({ length: 12 }, (_, index) => ({
 }))
 
 test.describe('Lista de noticias', () => {
-  test('la primera página destaca la noticia más reciente y sigue siendo accesible', async ({ page, api }) => {
+  test('enseña nueve noticias por página, sin destacada, y sigue siendo accesible', async ({ page, api }) => {
     api.on('GET', '/api/news', () => ({
       status: 200,
       contentType: 'application/json',
       body: JSON.stringify(pageOf(fullPage)),
     }))
     await page.goto('/noticias')
-    const featured = page.getByRole('article').filter({ hasText: 'La noticia más reciente de la semana' })
-    await expect(featured.getByText('Destacada')).toBeVisible()
-    await expect(page.getByText('Destacada')).toHaveCount(1)
+    await expect(page.getByRole('main').getByRole('article')).toHaveCount(9)
+    await expect(page.getByText('Destacada')).toHaveCount(0)
+    await expect
+      .poll(() => api.calls.some((call) => call.path === '/api/news' && call.query.get('size') === '9'))
+      .toBe(true)
     await expectAccessible(page)
   })
 
