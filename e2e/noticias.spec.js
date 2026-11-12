@@ -75,4 +75,17 @@ test.describe('Idioma de las noticias', () => {
     await expect(page.getByText('A quick tour of the features')).toHaveAttribute('lang', 'en')
     await expect(page.getByRole('main').getByText('EN', { exact: true })).toBeVisible()
   })
+
+  test('el detalle enseña el tiempo de lectura, «Sigue leyendo» sin repetir la noticia y vuelve a noticias', async ({
+    page,
+  }) => {
+    await page.goto('/noticias/1-novedades-de-react-19')
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+    await expect(page.getByText('1 min de lectura')).toBeVisible()
+    const related = page.getByRole('complementary', { name: 'Sigue leyendo' })
+    await expect(related.getByRole('article')).not.toHaveCount(0)
+    await expect(related.getByRole('link', { name: 'Novedades de React 19 para quien empieza' })).toHaveCount(0)
+    await page.getByRole('link', { name: 'Volver a noticias' }).click()
+    await expect(page).toHaveURL(/\/noticias$/)
+  })
 })

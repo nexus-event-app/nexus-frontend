@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom'
-import { Navigate } from '@/shared/i18n/router'
+import { Link, Navigate } from '@/shared/i18n/router'
 import ArticleSkeleton from '@/shared/components/ArticleSkeleton'
-import Badge from '@/shared/components/Badge'
+import ActionMenu from '@/shared/components/ActionMenu'
+import CopyLinkButton from '@/shared/components/CopyLinkButton'
 import ContentLanguageBadge from '@/shared/components/ContentLanguageBadge'
 import { contentLanguageOf } from '@/shared/utils/contentLanguage'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
@@ -23,6 +24,7 @@ import { coverPhotoFor } from '../utils/coverPhoto'
 import RelatedNews from '../components/RelatedNews'
 import { useLatestNews } from '../hooks/useLatestNews'
 import { useNewsArticle } from '../hooks/useNewsArticle'
+import { readingMinutes } from '../utils/readingTime'
 import { buildNewsArticleData } from '../utils/structuredData'
 import { useI18n } from '@/shared/i18n/useI18n'
 
@@ -59,9 +61,13 @@ export default function NewsDetailPage() {
   // Las noticias importadas son un resumen de un artículo ajeno: no se indexan ni se marcan como NewsArticle.
   const imported = Boolean(article.imported)
 
-  // Rejilla del <main>: migas de pan arriba; la noticia y, al lado, las relacionadas.
+  const language = contentLanguageOf(article)
+  const minutes = readingMinutes(article.content)
+
+  // Diseño editorial: la noticia en una columna centrada y cómoda de leer (la imagen, algo más ancha) y, debajo,
+  // «Sigue leyendo» a todo el ancho.
   return (
-    <PageMain className="page-container page-section grid grid-cols-1 content-start gap-x-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
+    <PageMain className="page-container page-section">
       <Seo
         title={article.title}
         description={excerpt(article.content, 160)}
@@ -76,35 +82,53 @@ export default function NewsDetailPage() {
       />
       {!imported && <JsonLd data={buildNewsArticleData(article)} />}
       <Breadcrumbs
-        className="col-span-full"
+        className="mx-auto max-w-3xl"
         items={[
           { label: t('news.breadcrumb'), to: paths.news },
           { label: excerpt(article.title, 60), to: path },
         ]}
       />
 
-      <article className="min-w-0 max-w-prose">
+      <article className="mx-auto mt-6 max-w-3xl">
         <header>
-          <p className="flex flex-wrap items-center gap-2">
-            <Badge tone={newsCategories.toneOf(article.category)}>{newsCategories.labelOf(article.category)}</Badge>
-            <ContentLanguageBadge language={contentLanguageOf(article)} />
+          <p className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
+            <span className="font-bold uppercase tracking-[0.15em] text-accent">
+              {newsCategories.labelOf(article.category)}
+            </span>
+            <ContentLanguageBadge language={language} />
           </p>
           <h1
-            lang={contentLanguageOf(article)}
-            className="mt-4 text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl"
+            lang={language}
+            className="mt-4 text-balance text-4xl font-bold leading-[1.1] tracking-tight text-ink sm:text-5xl"
           >
             {article.title}
           </h1>
-          <p className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-ink-muted">
-            {article.author && <span>{t('news.detail.by', { author: article.author })}</span>}
-            {imported && article.source && <span>{t('news.detail.via', { source: article.source })}</span>}
+          <p className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-ink-muted">
+            {article.author && (
+              <>
+                <span className="font-medium text-ink-soft">{t('news.detail.by', { author: article.author })}</span>
+                <span aria-hidden="true">·</span>
+              </>
+            )}
             <Time value={article.createdAt} />
+            <span aria-hidden="true">·</span>
+            <span className="inline-flex items-center gap-1.5">
+              <Icon name="clock" className="h-4 w-4" />
+              {t('news.detail.readingTime', { count: minutes })}
+            </span>
+            {imported && article.source && (
+              <>
+                <span aria-hidden="true">·</span>
+                <span>{t('news.detail.via', { source: article.source })}</span>
+              </>
+            )}
           </p>
         </header>
 
-        <figure className="mt-8">
+        {/* La imagen, algo más ancha que el texto en pantallas grandes, para dar aire a la noticia. */}
+        <figure className="mt-10 overflow-hidden rounded-3xl shadow-card lg:-mx-16">
           <NewsImage
-            className="rounded-card"
+            className="aspect-[2/1]"
             url={article.imageUrl}
             alt={t('news.detail.imageAlt', { title: article.title })}
             category={article.category}
@@ -114,12 +138,21 @@ export default function NewsDetailPage() {
           />
         </figure>
 
-        <UserText lang={contentLanguageOf(article)} className="mt-8 text-lg leading-relaxed text-ink-soft">
+        <UserText lang={language} className="mt-10 text-lg leading-8 text-ink-soft">
           {article.content}
         </UserText>
 
         {imported && hasSource && (
-          <aside aria-label={t('news.detail.originalLabel')} className="card mt-8 bg-accent-soft/60 p-5">
+          <aside
+            aria-label={t('news.detail.originalLabel')}
+            className="mt-10 grid gap-5 rounded-3xl border border-slate-200 bg-surface p-6 shadow-card sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center sm:p-8"
+          >
+            <span
+              aria-hidden="true"
+              className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand-700 to-brand-950 text-white shadow-md"
+            >
+              <Icon name="newspaper" className="h-6 w-6" />
+            </span>
             <p className="text-ink-soft">
               {t('news.detail.summary')}{' '}
               <strong className="font-semibold text-ink">{article.source ?? hostnameOf(article.sourceUrl)}</strong>.
@@ -128,7 +161,7 @@ export default function NewsDetailPage() {
               href={article.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-primary mt-4 w-full sm:w-auto"
+              className="btn btn-primary btn-lg justify-self-start shadow-pop sm:col-start-2"
             >
               {t('news.detail.readFull')}
               <Icon name="external" className="h-4 w-4" />
@@ -137,9 +170,9 @@ export default function NewsDetailPage() {
           </aside>
         )}
 
-        {!imported && hasSource && (
-          <footer className="mt-8 border-t border-slate-200 pt-6">
-            <p className="text-ink-muted">
+        <footer className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-slate-200 pt-6">
+          {!imported && hasSource ? (
+            <p className="text-sm text-ink-muted">
               {t('news.detail.source')}{' '}
               <a
                 href={article.sourceUrl}
@@ -152,11 +185,25 @@ export default function NewsDetailPage() {
                 <span className="sr-only">{t('common.newTab')}</span>
               </a>
             </p>
-          </footer>
-        )}
+          ) : null}
+          <ActionMenu className="flex-wrap gap-3 sm:ml-auto">
+            <Link
+              to={paths.news}
+              className="inline-flex min-h-[2.75rem] items-center gap-2 rounded-full px-4 text-sm font-medium text-ink-soft transition-colors hover:bg-slate-100 hover:text-ink"
+            >
+              <Icon name="arrow-left" className="h-4 w-4" />
+              {t('news.detail.back')}
+            </Link>
+            <CopyLinkButton
+              label={t('news.detail.copyLink')}
+              copiedMessage={t('news.detail.linkCopied')}
+              failedMessage={t('news.detail.copyFailed')}
+            />
+          </ActionMenu>
+        </footer>
       </article>
 
-      <RelatedNews items={related} className="mt-10 lg:mt-0" />
+      <RelatedNews items={related} className="mt-24" />
     </PageMain>
   )
 }
