@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react'
+import { screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { testimonialService } from '@/features/testimonials/services/testimonialService'
@@ -21,18 +21,21 @@ describe('SiteFooter', () => {
     vi.spyOn(testimonialService, 'latest').mockResolvedValue(TESTIMONIALS)
   })
 
-  it('enseña un testimonio pequeño (el destacado) y enlaza a los testimonios', async () => {
+  it('enseña un testimonio pequeño y anónimo (el destacado), sin enlace', async () => {
     renderWithProviders(<SiteFooter />)
     const testimonial = await screen.findByRole('region', { name: 'Una historia de quien ya empezó' })
     expect(testimonial).toHaveTextContent('El foro me ayudó con Docker.')
-    expect(testimonial).toHaveTextContent('Javier López')
-    expect(screen.getByRole('link', { name: 'Leer más testimonios' })).toHaveAttribute('href', '/testimonios')
+    expect(testimonial).toHaveTextContent('Anónimo')
+    expect(testimonial).not.toHaveTextContent('Javier López')
+    expect(within(testimonial).queryByRole('link')).not.toBeInTheDocument()
   })
 
   it('sin testimonios publicados no enseña la tarjeta', async () => {
     testimonialService.latest.mockResolvedValue([])
     renderWithProviders(<SiteFooter />)
-    await expect(screen.findByRole('link', { name: 'Leer más testimonios' }, { timeout: 300 })).rejects.toThrow()
+    await expect(
+      screen.findByRole('region', { name: 'Una historia de quien ya empezó' }, { timeout: 300 }),
+    ).rejects.toThrow()
   })
 
   it('enlaza a las secciones y a lo legal', () => {

@@ -6,7 +6,6 @@ import Logo from '@/shared/components/Logo'
 import { paths } from '@/shared/config/paths'
 import { siteConfig } from '@/shared/config/site'
 import { useI18n } from '@/shared/i18n/useI18n'
-import { initialsOf } from '@/shared/utils/text'
 import { mainNavigation } from './navigation'
 
 const LEGAL_LINKS = [
@@ -66,9 +65,10 @@ function BackToTop() {
 }
 
 /**
- * Un testimonio pequeño (el destacado o el más reciente), como las tarjetitas de la cabecera de la portada: blanca,
- * un poco inclinada, con las comillas de sello. Da vida al pie y lleva a los testimonios. Colores fijos (tarjeta blanca
- * sobre el morado) en los dos temas. Si aún no hay testimonios, no se muestra.
+ * Un testimonio pequeño y anónimo (el destacado o el más reciente): un guiño para dar algo de gracia al pie, como las
+ * tarjetitas de la cabecera de la portada. Blanca, un poco inclinada, con las comillas de sello. No enlaza a ningún sitio
+ * (los testimonios ya están en el menú). Colores fijos (tarjeta blanca sobre el morado) en los dos temas. Si aún no hay
+ * testimonios, no se muestra.
  */
 function FooterTestimonial() {
   const { t } = useI18n()
@@ -77,39 +77,33 @@ function FooterTestimonial() {
   if (!testimonial) return null
 
   return (
-    <section aria-labelledby="footer-testimonial" className="mt-8 max-w-sm">
+    <section aria-labelledby="footer-testimonial" className="mt-6 max-w-[17rem]">
       <h2 id="footer-testimonial" className="sr-only">
         {t('common.footer.testimonialTitle')}
       </h2>
-      <figure className="relative -rotate-1 rounded-2xl bg-white px-5 pb-4 pt-6 text-gray-900 shadow-2xl shadow-brand-950/40 transition-transform duration-300 hover:rotate-0">
+      <figure className="relative -rotate-2 rounded-xl bg-white px-4 pb-3 pt-4 text-gray-900 shadow-xl shadow-brand-950/40 transition-transform duration-300 hover:rotate-0">
         <span
           aria-hidden="true"
-          className="absolute -top-4 left-5 flex h-9 w-9 items-center justify-center rounded-xl bg-brand-600 text-3xl font-bold leading-none text-white shadow-lg"
+          className="absolute -top-3 left-4 flex h-7 w-7 items-center justify-center rounded-lg bg-brand-600 text-2xl font-bold leading-none text-white shadow-md"
         >
-          <span className="translate-y-2">“</span>
+          <span className="translate-y-1.5">“</span>
         </span>
         <blockquote>
-          <p className="line-clamp-3 text-sm leading-relaxed text-gray-800">{testimonial.content}</p>
+          <p className="line-clamp-2 text-xs leading-relaxed text-gray-800">{testimonial.content}</p>
         </blockquote>
-        <figcaption className="mt-3 flex items-center gap-2.5 border-t border-gray-100 pt-3 text-xs">
+        <figcaption className="mt-2 flex items-center gap-2 text-xs">
           <span
             aria-hidden="true"
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-100 font-bold text-brand-800"
+            className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-100 text-brand-800"
           >
-            {initialsOf(testimonial.name)}
+            <Icon name="user" className="h-3.5 w-3.5" />
           </span>
-          <span className="min-w-0">
-            <strong className="block truncate text-sm font-semibold text-gray-900">{testimonial.name}</strong>
-            {testimonial.role && <span className="block truncate text-gray-600">{testimonial.role}</span>}
+          <span className="min-w-0 truncate">
+            <strong className="font-semibold text-gray-900">{t('common.footer.anonymous')}</strong>
+            {testimonial.role && <span className="text-gray-600"> · {testimonial.role}</span>}
           </span>
         </figcaption>
       </figure>
-      <Link
-        to={paths.testimonials}
-        className="mt-4 inline-flex min-h-[2.75rem] items-center gap-1.5 text-sm font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white"
-      >
-        {t('common.footer.testimonialLink')}
-      </Link>
     </section>
   )
 }
@@ -123,7 +117,7 @@ export default function SiteFooter() {
   const { t } = useI18n()
 
   return (
-    <footer className="page-gutter relative isolate grid gap-x-10 gap-y-10 overflow-hidden bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 pt-14 text-white sm:grid-cols-2 lg:grid-cols-[minmax(0,1.5fr)_repeat(3,minmax(0,1fr))]">
+    <footer className="page-gutter relative isolate grid gap-x-10 gap-y-8 overflow-hidden bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 pt-10 text-white sm:grid-cols-2 lg:grid-cols-[minmax(0,1.5fr)_repeat(3,minmax(0,1fr))]">
       {/* Mismo degradado y luz que la portada, para cerrar la página con el color de la marca. Decorativo. */}
       <span
         aria-hidden="true"
@@ -195,7 +189,7 @@ export default function SiteFooter() {
         </ul>
       </nav>
 
-      <p className="relative col-span-full flex flex-col items-center justify-between gap-4 border-t border-white/15 py-6 text-sm text-brand-100 sm:flex-row">
+      <p className="relative col-span-full flex flex-col items-center justify-between gap-4 border-t border-white/15 py-4 text-sm text-brand-100 sm:flex-row">
         <span className="text-center sm:text-left">
           {t('common.footer.copyright', { year: new Date().getFullYear(), name: siteConfig.name })}
         </span>
