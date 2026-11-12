@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { learningService } from '@/features/learning/services/learningService'
 import { renderWithProviders } from '@/test/render'
 import HeroSection from './HeroSection'
+import HomeJoinSection from './HomeJoinSection'
 import HomePathsSection from './HomePathsSection'
 
 describe('HeroSection', () => {
@@ -27,12 +28,11 @@ describe('HeroSection', () => {
 })
 
 describe('HomePathsSection', () => {
-  it('muestra las cinco rutas y, sin sesión, lo que se gana al unirse', () => {
+  it('muestra las cinco rutas, sin la franja de crear cuenta (va al final de la portada)', () => {
     renderWithProviders(<HomePathsSection />)
     expect(screen.getByRole('heading', { level: 2, name: 'Elige tu camino' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Inteligencia artificial' })).toHaveAttribute('href', '/rutas/ia')
-    const join = screen.getByRole('complementary', { name: 'Con tu cuenta, todo suma' })
-    expect(within(join).getByRole('link', { name: /Crear mi cuenta/ })).toHaveAttribute('href', '/registro')
+    expect(screen.queryByRole('heading', { name: 'Con tu cuenta, todo suma' })).not.toBeInTheDocument()
   })
 
   it('con sesión muestra el progreso de cada ruta y no invita a registrarse', async () => {
@@ -40,6 +40,19 @@ describe('HomePathsSection', () => {
     renderWithProviders(<HomePathsSection />, { auth: { user: { id: 7, name: 'Lucía' } } })
     expect(screen.getByRole('heading', { level: 2, name: 'Sigue tu camino' })).toBeInTheDocument()
     expect(await screen.findByText('1 de 6 etapas')).toBeInTheDocument()
-    expect(screen.queryByRole('complementary')).not.toBeInTheDocument()
+  })
+})
+
+describe('HomeJoinSection', () => {
+  it('sin sesión, invita a crear cuenta con lo que se gana', () => {
+    renderWithProviders(<HomeJoinSection />)
+    const join = screen.getByRole('region', { name: 'Con tu cuenta, todo suma' })
+    expect(within(join).getAllByRole('listitem')).toHaveLength(4)
+    expect(within(join).getByRole('link', { name: /Crear mi cuenta/ })).toHaveAttribute('href', '/registro')
+  })
+
+  it('con sesión no se muestra', () => {
+    renderWithProviders(<HomeJoinSection />, { auth: { user: { id: 7, name: 'Lucía' } } })
+    expect(screen.queryByRole('region', { name: 'Con tu cuenta, todo suma' })).not.toBeInTheDocument()
   })
 })
