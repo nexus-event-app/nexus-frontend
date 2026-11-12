@@ -5,6 +5,7 @@ import QueryBoundary from '@/shared/components/QueryBoundary'
 import { paths } from '@/shared/config/paths'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
+import { contentLanguageOf } from '@/shared/utils/contentLanguage'
 import HomeNewsCard from './HomeNewsCard'
 import HomeSection from './HomeSection'
 
@@ -32,7 +33,10 @@ export default function LatestNewsSection() {
         skeleton={<CardGridSkeleton count={3} />}
         errorTitle={t('home.news.error')}
       >
-        {(items) => {
+        {(latest) => {
+          // Solo noticias en castellano en la portada. El servidor ya las filtra; esto es una segunda red por si alguna
+          // llegara en otro idioma (las demás están en la página de noticias, con su filtro).
+          const items = latest.filter((item) => contentLanguageOf(item) === 'es')
           if (items.length === 0) {
             return (
               <EmptyState icon="newspaper" title={t('home.news.emptyTitle')} description={t('home.news.emptyText')} />
