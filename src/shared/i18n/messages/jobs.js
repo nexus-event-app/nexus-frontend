@@ -8,7 +8,7 @@ export default {
       seoDescription:
         'Ofertas de trabajo y prácticas en tecnología para perfiles junior: filtra por nivel, modalidad y tipo de contrato.',
       eyebrow: 'Empleo junior',
-      title: 'Ofertas de empleo para juniors',
+      title: 'Ofertas de empleo',
       description: 'Prácticas y primeros empleos en tecnología, seleccionados para quienes están empezando.',
       error: 'No hemos podido cargar las ofertas',
       emptyTitle: 'No hay ofertas con estos criterios',
@@ -63,7 +63,7 @@ export default {
     portals: {
       eyebrow: 'Más ofertas',
       cta: 'Ver ofertas',
-      title: 'Busca también en portales de España',
+      title: 'Portales de España',
       description: 'Búsquedas ya filtradas por tecnología y perfiles junior en los principales portales de empleo.',
       compact: '¿Buscas más ofertas en España?',
       external: '(se abre en una pestaña nueva, en {name})',
@@ -107,7 +107,7 @@ export default {
       seoDescription:
         'Ofertes de feina i pràctiques en tecnologia per a perfils júnior: filtra per nivell, modalitat i tipus de contracte.',
       eyebrow: 'Feina júnior',
-      title: 'Ofertes de feina per a júniors',
+      title: 'Ofertes de feina',
       description: 'Pràctiques i primeres feines en tecnologia, seleccionades per a qui està començant.',
       error: 'No hem pogut carregar les ofertes',
       emptyTitle: 'No hi ha ofertes amb aquests criteris',
@@ -162,7 +162,7 @@ export default {
     portals: {
       eyebrow: 'Més ofertes',
       cta: 'Veure ofertes',
-      title: 'Cerca també a portals d’Espanya',
+      title: 'Portals d’Espanya',
       description: 'Cerques ja filtrades per tecnologia i perfils júnior als principals portals de feina.',
       compact: 'Busques més ofertes a Espanya?',
       external: '(s’obre en una pestanya nova, a {name})',
@@ -206,7 +206,7 @@ export default {
       seoDescription:
         'Tech job offers and internships for junior profiles: filter by level, work mode and contract type.',
       eyebrow: 'Junior jobs',
-      title: 'Job offers for juniors',
+      title: 'Job offers',
       description: 'Internships and first tech jobs, selected for people just starting out.',
       error: 'We couldn’t load the job offers',
       emptyTitle: 'No job offers match these criteria',
@@ -261,7 +261,7 @@ export default {
     portals: {
       eyebrow: 'More jobs',
       cta: 'See jobs',
-      title: 'Also search on Spanish job boards',
+      title: 'Job boards in Spain',
       description: 'Searches already filtered for tech and junior roles on the main job boards in Spain.',
       compact: 'Looking for more jobs in Spain?',
       external: '(opens in a new tab, on {name})',
