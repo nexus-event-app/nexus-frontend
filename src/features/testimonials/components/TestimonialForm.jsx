@@ -8,6 +8,7 @@ import { useForm } from '@/shared/hooks/useForm'
 import { testimonialService } from '../services/testimonialService'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { translate } from '@/shared/i18n/translate'
+import { cx } from '@/shared/utils/classNames'
 
 const CONTENT_MIN = 50
 const CONTENT_MAX = 300
@@ -25,7 +26,7 @@ function validate({ name, role, location, content }) {
   return errors
 }
 
-export default function TestimonialForm() {
+export default function TestimonialForm({ className }) {
   const { t } = useI18n()
   const { user } = useAuth()
   const [sent, setSent] = useState(false)
@@ -57,9 +58,9 @@ export default function TestimonialForm() {
   const length = form.values.content.trim().length
 
   return (
-    // Rejilla (form-grid): nombre y rol comparten fila; el resto ocupa todo el ancho.
-    <form onSubmit={form.handleSubmit} noValidate className="form-grid card p-6">
-      <p className="text-ink-muted">{t('testimonials.form.intro')}</p>
+    // Rejilla (form-grid): nombre y rol comparten fila; el resto ocupa todo el ancho. Sin caja propia: la pone la
+    // página (el panel de «Comparte tu experiencia»).
+    <form onSubmit={form.handleSubmit} noValidate className={cx('form-grid', className)}>
       {sent && (
         <Alert variant="success" title={t('testimonials.form.thanksTitle')}>
           {t('testimonials.form.thanks')}
@@ -97,9 +98,13 @@ export default function TestimonialForm() {
         maxLength={CONTENT_MAX}
         required
       />
-      <Button type="submit" loading={form.submitting} className="justify-self-start">
-        {form.submitting ? t('testimonials.form.submitting') : t('testimonials.form.submit')}
-      </Button>
+      {/* Qué se publica y cómo retirarlo, junto al botón: es lo que conviene saber justo antes de enviar. */}
+      <p className="flex flex-col gap-4 border-t border-slate-200 pt-5 sm:flex-row sm:items-center sm:justify-between">
+        <small className="max-w-md text-sm leading-relaxed text-ink-muted">{t('testimonials.form.intro')}</small>
+        <Button type="submit" size="lg" loading={form.submitting} className="shrink-0 shadow-pop">
+          {form.submitting ? t('testimonials.form.submitting') : t('testimonials.form.submit')}
+        </Button>
+      </p>
     </form>
   )
 }

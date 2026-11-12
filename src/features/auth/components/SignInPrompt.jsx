@@ -1,16 +1,22 @@
 import { useLocation } from 'react-router-dom'
 import ButtonLink from '@/shared/components/ButtonLink'
 import Icon from '@/shared/components/Icon'
+import { cx } from '@/shared/utils/classNames'
 import { loginPath, registerPath } from '@/shared/config/paths'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-export default function SignInPrompt({ children }) {
+export default function SignInPrompt({ children, className }) {
   const { t } = useI18n()
   const { pathname, search } = useLocation()
   const redirectTo = `${pathname}${search}`
 
   return (
-    <p className="card flex flex-col gap-4 border-accent-line bg-accent-soft p-5 sm:flex-row sm:items-center">
+    <p
+      className={cx(
+        'card flex flex-col gap-4 border-accent-line bg-accent-soft p-5 sm:flex-row sm:items-center',
+        className,
+      )}
+    >
       <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-surface text-accent">
         <Icon name="lock" className="h-6 w-6" />
       </span>

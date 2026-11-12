@@ -8,18 +8,15 @@ import { useIsClamped } from '@/shared/hooks/useIsClamped'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 
-/** Colores pastel que se alternan, como notas de distintos colores sobre un tablero. */
-const PASTELS = [
-  'border-violet-200 from-violet-100 to-indigo-50 dark:border-violet-400/25 dark:from-violet-500/20 dark:to-indigo-500/5',
-  'border-emerald-200 from-emerald-100 to-teal-50 dark:border-emerald-400/25 dark:from-emerald-500/20 dark:to-teal-500/5',
-  'border-amber-200 from-amber-100 to-rose-50 dark:border-amber-400/25 dark:from-amber-500/20 dark:to-rose-500/5',
-]
+/** Un solo color para todas las notas: el violeta suave de la marca, más sobrio que alternar varios. */
+const PASTEL =
+  'border-violet-200 from-violet-100 to-indigo-50 dark:border-violet-400/25 dark:from-violet-500/20 dark:to-indigo-500/5'
 /** Inclinación de cada nota; al pasar por encima (o enfocar algo dentro) se endereza. */
 const TILTS = ['-rotate-1', 'rotate-1', '-rotate-[0.5deg]']
 
 /**
  * Testimonio con aspecto de nota: ligeramente inclinada, con unas grandes comillas de sello y la cita como
- * protagonista, en un color pastel según su posición. Todas miden lo mismo: el texto reserva cinco líneas y, si no cabe, «Leer más» lo
+ * protagonista, sobre el violeta suave de la marca. Todas miden lo mismo: el texto reserva cinco líneas y, si no cabe, «Leer más» lo
  * despliega en la propia tarjeta.
  */
 export default function TestimonialCard({ testimonial, linkAuthor = true, index = 0 }) {
@@ -34,7 +31,7 @@ export default function TestimonialCard({ testimonial, linkAuthor = true, index 
       className={cx(
         'relative flex h-full flex-col rounded-3xl p-7 pt-10 transition-all duration-500 ease-out hover:-translate-y-1 hover:rotate-0 focus-within:rotate-0',
         TILTS[index % TILTS.length],
-        cx('border bg-gradient-to-br text-ink shadow-card hover:shadow-pop', PASTELS[index % PASTELS.length]),
+        cx('border bg-gradient-to-br text-ink shadow-card hover:shadow-pop', PASTEL),
         testimonial.isHighlighted && 'ring-2 ring-amber-400/70',
       )}
     >
