@@ -20,7 +20,7 @@ test.describe('Idiomas', () => {
   test('las direcciones traducidas funcionan al abrirlas directamente', async ({ page }) => {
     await page.goto('/ca/sobre-el-projecte')
     await expect(page.locator('html')).toHaveAttribute('lang', 'ca')
-    await expect(page.getByRole('heading', { level: 2, name: 'Per què existeix' })).toBeVisible()
+    await expect(page.getByRole('heading', { level: 2, name: 'Començar no hauria de ser tan difícil' })).toBeVisible()
   })
 
   test('los enlaces internos conservan el idioma', async ({ page }) => {

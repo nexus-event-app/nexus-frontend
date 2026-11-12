@@ -264,33 +264,32 @@ export default function AboutPage() {
         )}
       </section>
 
-      <section
-        aria-labelledby="about-cta"
-        className="relative isolate mt-24 overflow-hidden rounded-3xl bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 px-6 py-14 text-center text-white shadow-pop"
-      >
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-16 -top-20 -z-10 h-64 w-64 rounded-full bg-brand-400/25 blur-3xl"
-        />
-        <h2 id="about-cta" className="text-3xl font-bold tracking-tight sm:text-4xl">
-          {t('about.cta.title')}
-        </h2>
-        <p className="mx-auto mt-3 max-w-xl text-lg text-brand-100">{t('about.cta.text')}</p>
-        <ActionMenu className="mt-8 flex-col items-center justify-center gap-3 sm:flex-row">
-          {!isAuthenticated && (
-            <ButtonLink to={paths.register} variant="inverse" className="rounded-full px-6">
+      {/* «¿Te unes?» solo para quien aún no tiene cuenta: lleva a crearla. */}
+      {!isAuthenticated && (
+        <section
+          aria-labelledby="about-cta"
+          className="relative isolate mt-24 overflow-hidden rounded-3xl bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 px-6 py-14 text-center text-white shadow-pop"
+        >
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-16 -top-20 -z-10 h-64 w-64 rounded-full bg-brand-400/25 blur-3xl"
+          />
+          <h2 id="about-cta" className="text-3xl font-bold tracking-tight sm:text-4xl">
+            {t('about.cta.title')}
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-lg text-brand-100">{t('about.cta.text')}</p>
+          <ActionMenu className="mt-8 justify-center">
+            <ButtonLink
+              to={paths.register}
+              variant="inverse"
+              size="lg"
+              className="transition-all hover:-translate-y-0.5"
+            >
               {t('about.cta.register')}
             </ButtonLink>
-          )}
-          <ButtonLink
-            to={paths.forum}
-            variant={isAuthenticated ? 'inverse' : 'outlineInverse'}
-            className="rounded-full px-6"
-          >
-            {t('about.cta.forum')}
-          </ButtonLink>
-        </ActionMenu>
-      </section>
+          </ActionMenu>
+        </section>
+      )}
     </PageMain>
   )
 }

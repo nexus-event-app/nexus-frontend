@@ -5,14 +5,14 @@ export default {
     seoTitle: 'Sobre el proyecto',
     seoDescription:
       'Qué es {name}, por qué existe, quién está detrás y cómo se financia: una comunidad independiente y sin ánimo de lucro para quienes empiezan en tecnología.',
-    eyebrow: 'Sobre el proyecto',
+    eyebrow: 'Nuestra misión',
     terminal: { message: 'Mi primer paso en tecnología', output: 'Una persona más aprendiendo en comunidad' },
     title: 'Nadie debería dar su primer paso en tecnología en solitario',
     intro:
       '{name} es una comunidad en español para quienes empiezan su carrera en tecnología: noticias para estar a la última en tecnología, ofertas de empleo junior y prácticas, un foro donde preguntar sin miedo y testimonios reales de quienes ya han pasado por ahí.',
     purpose: {
-      eyebrow: 'El porqué',
-      title: 'Por qué existe',
+      eyebrow: 'Por qué existe',
+      title: 'Empezar no debería ser tan difícil',
       problem:
         'Empezar en tecnología es difícil: casi todas las ofertas piden experiencia previa, la información útil está dispersa y gran parte está en inglés. Muchas personas lo dejan no por falta de capacidad, sino por no saber por dónde seguir ni a quién preguntar.',
       answer:
@@ -29,7 +29,7 @@ export default {
     story: {
       eyebrow: 'Cómo empezó',
       upcoming: 'Próximamente',
-      title: 'Nuestra historia',
+      title: 'De una idea a una comunidad',
       step: 'Paso {number}',
       idea: {
         title: 'La idea',
@@ -49,8 +49,8 @@ export default {
       },
     },
     team: {
-      eyebrow: 'El equipo',
-      title: 'Quién está detrás',
+      eyebrow: 'Quién está detrás',
+      title: 'Un proyecto pequeño, independiente y hecho con cuidado',
       text: '{name} es un proyecto personal e independiente, sin ánimo de lucro y sin ninguna empresa detrás. Lo impulsa un equipo pequeño convencido de que aprender en comunidad es la mejor forma de empezar, y se construye junto a las personas que participan: cada duda, cada respuesta y cada testimonio lo hacen un poco mejor.',
     },
     operate: {
@@ -78,7 +78,7 @@ export default {
     },
     support: {
       eyebrow: 'Colabora',
-      title: 'Apoya el proyecto',
+      title: 'Ayúdanos a llegar a más personas',
       text: 'Si representas a una entidad, un programa de ayudas o una empresa comprometida con el talento que empieza, nos encantará hablar. Tu apoyo nos permitirá cubrir el alojamiento y el dominio, mejorar la accesibilidad, organizar encuentros y llegar a más personas.',
       contact: 'Escríbenos a',
     },
@@ -86,7 +86,6 @@ export default {
       title: '¿Te unes?',
       text: 'Crea tu cuenta y empieza a preguntar, compartir y aprender con la comunidad.',
       register: 'Crear cuenta',
-      forum: 'Ir al foro',
     },
   },
   ca: {
@@ -94,14 +93,14 @@ export default {
     seoTitle: 'Sobre el projecte',
     seoDescription:
       'Què és {name}, per què existeix, qui hi ha al darrere i com es finança: una comunitat independent i sense ànim de lucre per a qui comença en tecnologia.',
-    eyebrow: 'Sobre el projecte',
+    eyebrow: 'La nostra missió',
     terminal: { message: 'El meu primer pas en tecnologia', output: 'Una persona més aprenent en comunitat' },
     title: 'Ningú no hauria de fer el primer pas en tecnologia tot sol',
     intro:
       '{name} és una comunitat en espanyol per a qui comença la seva carrera en tecnologia: notícies per estar al dia en tecnologia, ofertes de feina júnior i pràctiques, un fòrum on preguntar sense por i testimonis reals de qui ja hi ha passat.',
     purpose: {
-      eyebrow: 'El perquè',
-      title: 'Per què existeix',
+      eyebrow: 'Per què existeix',
+      title: 'Començar no hauria de ser tan difícil',
       problem:
         'Començar en tecnologia és difícil: gairebé totes les ofertes demanen experiència prèvia, la informació útil està dispersa i bona part és en anglès. Moltes persones ho deixen no per manca de capacitat, sinó per no saber per on continuar ni a qui preguntar.',
       answer:
@@ -118,7 +117,7 @@ export default {
     story: {
       eyebrow: 'Com va començar',
       upcoming: 'Properament',
-      title: 'La nostra història',
+      title: 'D’una idea a una comunitat',
       step: 'Pas {number}',
       idea: {
         title: 'La idea',
@@ -138,8 +137,8 @@ export default {
       },
     },
     team: {
-      eyebrow: 'L’equip',
-      title: 'Qui hi ha al darrere',
+      eyebrow: 'Qui hi ha al darrere',
+      title: 'Un projecte petit, independent i fet amb cura',
       text: '{name} és un projecte personal i independent, sense ànim de lucre i sense cap empresa al darrere. L’impulsa un equip petit convençut que aprendre en comunitat és la millor manera de començar, i es construeix amb les persones que hi participen: cada dubte, cada resposta i cada testimoni el fan una mica millor.',
     },
     operate: {
@@ -167,7 +166,7 @@ export default {
     },
     support: {
       eyebrow: 'Col·labora',
-      title: 'Dona suport al projecte',
+      title: 'Ajuda’ns a arribar a més persones',
       text: 'Si representes una entitat, un programa d’ajudes o una empresa compromesa amb el talent que comença, ens encantarà parlar-ne. El teu suport ens permetrà cobrir l’allotjament i el domini, millorar l’accessibilitat, organitzar trobades i arribar a més persones.',
       contact: 'Escriu-nos a',
     },
@@ -175,7 +174,6 @@ export default {
       title: 'T’hi apuntes?',
       text: 'Crea el teu compte i comença a preguntar, compartir i aprendre amb la comunitat.',
       register: 'Crea un compte',
-      forum: 'Ves al fòrum',
     },
   },
   en: {
@@ -183,14 +181,14 @@ export default {
     seoTitle: 'About the project',
     seoDescription:
       'What {name} is, why it exists, who is behind it and how it is funded: an independent, non-profit community for people starting out in tech.',
-    eyebrow: 'About the project',
+    eyebrow: 'Our mission',
     terminal: { message: 'My first step in tech', output: 'One more person learning together' },
     title: 'Nobody should take their first step in tech alone',
     intro:
       '{name} is a Spanish-language community for people starting their career in tech: news to stay up to date with tech, junior jobs and internships, a forum where you can ask without fear and real stories from people who have been there.',
     purpose: {
-      eyebrow: 'The why',
-      title: 'Why it exists',
+      eyebrow: 'Why it exists',
+      title: 'Starting out shouldn’t be this hard',
       problem:
         'Getting started in tech is hard: almost every job asks for previous experience, useful information is scattered and much of it is in English. Many people give up not for lack of ability, but because they do not know where to go next or who to ask.',
       answer:
@@ -210,7 +208,7 @@ export default {
     story: {
       eyebrow: 'How it started',
       upcoming: 'Coming soon',
-      title: 'Our story',
+      title: 'From an idea to a community',
       step: 'Step {number}',
       idea: {
         title: 'The idea',
@@ -230,8 +228,8 @@ export default {
       },
     },
     team: {
-      eyebrow: 'The team',
-      title: 'Who is behind it',
+      eyebrow: 'Who is behind it',
+      title: 'A small, independent project built with care',
       text: '{name} is an independent personal project, non-profit and with no company behind it. It is driven by a small team convinced that learning together is the best way to start, and it is built with the people who take part: every question, answer and testimonial makes it a little better.',
     },
     operate: {
@@ -259,7 +257,7 @@ export default {
     },
     support: {
       eyebrow: 'Get involved',
-      title: 'Support the project',
+      title: 'Help us reach more people',
       text: 'If you represent an organisation, a grant programme or a company committed to people starting out in tech, we would love to talk. Your support will help us cover hosting and the domain, improve accessibility, organise meetups and reach more people.',
       contact: 'Write to us at',
     },
@@ -267,7 +265,6 @@ export default {
       title: 'Join us?',
       text: 'Create your account and start asking, sharing and learning with the community.',
       register: 'Create an account',
-      forum: 'Go to the forum',
     },
   },
 }

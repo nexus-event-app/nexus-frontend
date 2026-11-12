@@ -21,13 +21,29 @@ describe('AboutPage', () => {
 
   it('se traduce y enlaza a las secciones en el idioma de la página', () => {
     renderWithProviders(<AboutPage />, { route: '/en/about' })
-    expect(screen.getByRole('heading', { level: 2, name: 'Why it exists' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: 'Starting out shouldn’t be this hard' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /Junior jobs/ })).toHaveAttribute('href', '/en/jobs')
   })
 
-  it('invita a registrarse solo a quien no tiene cuenta', () => {
+  it('«¿Te unes?» lleva a crear cuenta y solo se muestra a quien aún no la tiene', () => {
+    const { unmount } = renderWithProviders(<AboutPage />, { route: '/sobre-el-proyecto' })
+    const join = screen.getByRole('region', { name: '¿Te unes?' })
+    expect(within(join).getAllByRole('link')).toHaveLength(1)
+    expect(within(join).getByRole('link', { name: 'Crear cuenta' })).toHaveAttribute('href', '/registro')
+    unmount()
     renderWithProviders(<AboutPage />, { route: '/sobre-el-proyecto', auth: { user: { id: 1, name: 'Ana' } } })
-    expect(screen.queryByRole('link', { name: 'Crear cuenta' })).not.toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Ir al foro' })).toBeInTheDocument()
+    expect(screen.queryByRole('region', { name: '¿Te unes?' })).not.toBeInTheDocument()
+  })
+
+  it('los antetítulos no repiten la miga de pan ni el título de su apartado', () => {
+    renderWithProviders(<AboutPage />, { route: '/sobre-el-proyecto' })
+    const main = screen.getByRole('main')
+    const eyebrows = [...main.querySelectorAll('hgroup > p:first-child .sr-only')].map((node) => node.textContent)
+    const titles = within(main)
+      .getAllByRole('heading')
+      .map((heading) => heading.textContent)
+    expect(eyebrows).toHaveLength(6)
+    expect(eyebrows).not.toContain('Sobre el proyecto')
+    eyebrows.forEach((eyebrow) => expect(titles).not.toContain(eyebrow))
   })
 })
