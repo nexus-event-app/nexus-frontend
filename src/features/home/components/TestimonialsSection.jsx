@@ -17,7 +17,8 @@ export default function TestimonialsSection() {
       eyebrow={t('home.testimonials.eyebrow')}
       title={t('home.testimonials.title')}
       description={t('home.testimonials.description')}
-      linkTo={paths.testimonials}
+      // Lleva directamente al formulario para contar la tuya; las demás historias están en la misma página.
+      linkTo={`${paths.testimonials}#share-heading`}
       linkLabel={t('home.testimonials.link')}
     >
       <QueryBoundary

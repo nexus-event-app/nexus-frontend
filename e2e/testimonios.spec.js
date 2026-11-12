@@ -43,4 +43,11 @@ test.describe('Testimonios', () => {
     await expect(share.getByRole('button', { name: 'Enviar testimonio' })).toBeVisible()
     await expectAccessible(page)
   })
+
+  test('desde la portada, «Cuenta tu historia» lleva al formulario para compartirla', async ({ page }) => {
+    await page.goto('/')
+    await page.getByRole('link', { name: 'Cuenta tu historia' }).click()
+    await expect(page).toHaveURL(/\/testimonios#share-heading$/)
+    await expect(page.getByRole('heading', { level: 2, name: 'Comparte tu experiencia' })).toBeInViewport()
+  })
 })

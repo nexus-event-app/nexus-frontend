@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 @layer base {
+  /* Al llegar a un apartado por un ancla (#...), que la cabecera fija no tape su título. */
+  h1[id],
+  h2[id],
+  h3[id] {
+    scroll-margin-top: 6rem;
+  }
+
   /*
    * Colores que cambian con el tema, como canales RGB (Tailwind les añade la opacidad). El tema oscuro se activa
    * con la clase .dark en <html>, que pone public/theme-init.js antes de pintar según la preferencia guardada o
