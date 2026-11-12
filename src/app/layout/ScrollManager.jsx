@@ -7,8 +7,8 @@ const ANCHOR_TRIES = 20
 const ANCHOR_INTERVAL = 50
 
 /**
- * Al cambiar de página sube al principio y lleva el foco al contenido. Si la dirección trae un ancla (#apartado), baja
- * hasta ese apartado en cuanto existe, como haría el navegador en una web de páginas sueltas.
+ * Al cambiar de página sube al principio y lleva el foco al contenido. Si se llega a otra página con un ancla
+ * (#apartado), baja hasta ese apartado en cuanto existe, como haría el navegador en una web de páginas sueltas.
  */
 export default function ScrollManager() {
   const { pathname, search, hash } = useLocation()
@@ -17,7 +17,11 @@ export default function ScrollManager() {
 
   useEffect(() => {
     if (hash) {
+      // Un ancla dentro de la misma página («Ver la mejor respuesta»...) ya la resuelven el navegador y la página: solo
+      // se baja aquí al llegar desde otra página, cuando el apartado aún se está pintando.
+      const samePage = previousPath.current === pathname
       previousPath.current = pathname
+      if (samePage) return undefined
       const id = decodeURIComponent(hash.slice(1))
       let tries = 0
       const timer = window.setInterval(() => {
