@@ -4,6 +4,7 @@ export default {
     breadcrumb: 'Foro',
     user: 'Usuario',
     list: {
+      eyebrow: 'Comunidad',
       heading: 'Foro de la comunidad',
       categoryHeading: 'Foro: {category}',
       seoDescription:
@@ -122,6 +123,7 @@ export default {
     breadcrumb: 'Fòrum',
     user: 'Usuari',
     list: {
+      eyebrow: 'Comunitat',
       heading: 'Fòrum de la comunitat',
       categoryHeading: 'Fòrum: {category}',
       seoDescription:
@@ -241,6 +243,7 @@ export default {
     breadcrumb: 'Forum',
     user: 'User',
     list: {
+      eyebrow: 'Community',
       heading: 'Community forum',
       categoryHeading: 'Forum: {category}',
       seoDescription:

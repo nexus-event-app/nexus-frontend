@@ -11,7 +11,8 @@ import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import { excerpt } from '@/shared/utils/text'
 
-const EXCERPT_LENGTH = 160
+/** Lo bastante para llenar las cuatro líneas del bocadillo y que se entienda de qué va la discusión. */
+const EXCERPT_LENGTH = 320
 /** A partir de cuántas respuestas o me gusta una discusión se marca como «Popular». */
 const POPULAR_REPLIES = 5
 const POPULAR_LIKES = 10
@@ -37,7 +38,7 @@ function statusOf(discussion) {
 
 /**
  * Tarjeta de una discusión con aire de foro: categoría con su icono, estado (resuelta, popular o sin respuesta),
- * título, el inicio del mensaje en un bocadillo, quién lo escribió y cuándo, y al pie las respuestas, los me gusta y
+ * título, el inicio del mensaje en un bocadillo (cuatro líneas, para que se entienda de qué va), quién lo escribió y cuándo, y al pie las respuestas, los me gusta y
  * «Participar». Toda la tarjeta lleva a la discusión (salvo el nombre, que lleva al perfil). Todas miden lo mismo.
  */
 export default function DiscussionCard({ discussion, headingLevel = 'h3' }) {
@@ -52,7 +53,7 @@ export default function DiscussionCard({ discussion, headingLevel = 'h3' }) {
     <article
       ref={ref}
       className={cx(
-        'group relative flex h-full flex-col rounded-3xl border border-slate-200 bg-surface p-6 shadow-card transition-all duration-500 ease-out hover:-translate-y-1 hover:border-accent-line hover:shadow-pop has-[.card-link:focus-visible]:ring-2 has-[.card-link:focus-visible]:ring-brand-600',
+        'group relative flex h-full flex-col rounded-3xl border border-slate-200 bg-surface px-6 pb-4 pt-5 shadow-card transition-all duration-500 ease-out hover:-translate-y-1 hover:border-accent-line hover:shadow-pop has-[.card-link:focus-visible]:ring-2 has-[.card-link:focus-visible]:ring-brand-600',
         inView ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0 print:translate-y-0 print:opacity-100',
       )}
     >
@@ -60,11 +61,11 @@ export default function DiscussionCard({ discussion, headingLevel = 'h3' }) {
         <span
           aria-hidden="true"
           className={cx(
-            'flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:rotate-6',
+            'flex h-9 w-9 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:rotate-6',
             category.tile,
           )}
         >
-          <Icon name={category.icon} className="h-6 w-6" />
+          <Icon name={category.icon} className="h-5 w-5" />
         </span>
         <p className="min-w-0 flex-1 truncate text-sm font-semibold text-ink-soft">
           {discussionCategories.labelOf(discussion.category)}
@@ -81,7 +82,7 @@ export default function DiscussionCard({ discussion, headingLevel = 'h3' }) {
         )}
       </header>
 
-      <Heading className="mt-4 line-clamp-2 min-h-[2lh] text-lg font-bold leading-snug text-ink">
+      <Heading className="mt-3 line-clamp-2 min-h-[2lh] text-lg font-bold leading-snug text-ink">
         <Link
           to={paths.discussionDetail(discussion)}
           className="card-link after:absolute after:inset-0 after:rounded-3xl group-hover:text-accent focus-visible:ring-0 focus-visible:ring-offset-0"
@@ -91,18 +92,18 @@ export default function DiscussionCard({ discussion, headingLevel = 'h3' }) {
       </Heading>
 
       {/* El inicio del mensaje, como un bocadillo de conversación que sale de quien lo escribió (debajo). */}
-      <p className="mt-4 min-h-[calc(2lh+1.5rem)] rounded-2xl rounded-bl-sm bg-canvas px-4 py-3 text-sm leading-relaxed text-ink-muted ring-1 ring-inset ring-slate-200 transition-colors group-hover:bg-accent-soft group-hover:ring-accent-line">
+      <p className="mt-3 min-h-[calc(4lh+1.5rem)] rounded-2xl rounded-bl-sm bg-canvas px-4 py-3 text-sm leading-relaxed text-ink-muted ring-1 ring-inset ring-slate-200 transition-colors group-hover:bg-accent-soft group-hover:ring-accent-line">
         {/* El recorte va en el texto, no en el bocadillo: con el relleno se vería asomar una tercera línea. */}
-        <span className="line-clamp-2">{excerpt(discussion.content, EXCERPT_LENGTH)}</span>
+        <span className="line-clamp-4">{excerpt(discussion.content, EXCERPT_LENGTH)}</span>
       </p>
-      <p className="mb-5 mt-3 flex min-w-0 items-center gap-2 text-sm text-ink-muted">
+      <p className="mb-4 mt-3 flex min-w-0 items-center gap-2 text-sm text-ink-muted">
         <Avatar name={discussion.authorName} src={discussion.authorAvatarUrl} size="sm" />
         <AuthorLink id={discussion.authorId} name={author} className="truncate font-medium text-ink-soft" />
         <span aria-hidden="true">·</span>
         <Time value={discussion.createdAt} format="relative" className="shrink-0" />
       </p>
 
-      <footer className="mt-auto flex items-center justify-between gap-3 border-t border-slate-200 pt-4 text-sm text-ink-muted">
+      <footer className="mt-auto flex items-center justify-between gap-3 border-t border-slate-200 pt-3 text-sm text-ink-muted">
         <p className="flex items-center gap-4">
           <span className="inline-flex items-center gap-1.5">
             <Icon name="chat" className="h-4 w-4" />

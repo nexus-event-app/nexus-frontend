@@ -43,4 +43,12 @@ describe('DiscussionCard', () => {
     expect(screen.getByText('1 respuesta')).toBeInTheDocument()
     expect(screen.queryByText(/Resuelta|Popular|Sin respuesta/)).not.toBeInTheDocument()
   })
+
+  it('enseña bastante del mensaje para entender de qué va (hasta unos 320 caracteres)', () => {
+    const content = 'Llevo dos meses con Java y Spring. '.repeat(8).trim()
+    renderWithProviders(<DiscussionCard discussion={{ ...DISCUSSION, content }} />)
+    const shown = screen.getByText(/^Llevo dos meses con Java/).textContent
+    expect(shown.length).toBeGreaterThan(250)
+    expect(shown.length).toBeLessThanOrEqual(321)
+  })
 })
