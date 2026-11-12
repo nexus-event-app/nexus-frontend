@@ -55,4 +55,26 @@ test.describe('Navegación', () => {
     const links = banner.getByRole('navigation', { name: /Principal/ }).getByRole('link')
     await expect(links).toHaveText(['Noticias', 'Empleo', 'Foro', 'Rutas', 'Testimonios', 'Sobre el proyecto'])
   })
+
+  test('en la portada, el logo sube hasta arriba; desde otra página lleva a la portada', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' })
+    await page.goto('/')
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+    await page.evaluate(() => window.scrollTo(0, 2000))
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(500)
+    await page
+      .getByRole('banner')
+      .getByRole('link', { name: /ir al inicio/ })
+      .click()
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0)
+    await expect(page).toHaveURL(/\/$/)
+
+    await page.goto('/noticias')
+    await page
+      .getByRole('banner')
+      .getByRole('link', { name: /ir al inicio/ })
+      .click()
+    await expect(page).toHaveURL(/localhost:\d+\/$/)
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+  })
 })

@@ -11,6 +11,7 @@ import LanguageSwitcher from '@/shared/components/LanguageSwitcher'
 import ThemeToggle from '@/shared/components/ThemeToggle'
 import { useDismiss } from '@/shared/hooks/useDismiss'
 import { useI18n } from '@/shared/i18n/useI18n'
+import { stripLang } from '@/shared/i18n/languages'
 import { useToast } from '@/shared/hooks/useToast'
 import NotificationBell from '@/features/notifications/components/NotificationBell'
 import SearchButton from '@/features/search/components/SearchButton'
@@ -80,6 +81,15 @@ export default function SiteHeader() {
   }, [])
   useSearchShortcut(openSearch)
 
+  // En la portada, el logo apunta a la misma página y no haría nada: en ese caso sube hasta arriba (sin animación con
+  // «reducir movimiento»). Desde cualquier otra página lleva a la portada como un enlace normal.
+  const handleLogoClick = (event) => {
+    if (stripLang(location.pathname) !== paths.home) return
+    event.preventDefault()
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' })
+  }
+
   const handleLogout = () => {
     logout()
     toast.info(t('common.account.loggedOut'))
@@ -92,6 +102,7 @@ export default function SiteHeader() {
     >
       <Link
         to={paths.home}
+        onClick={handleLogoClick}
         aria-label={t('common.nav.goHome', { name: siteConfig.name })}
         className="flex h-16 items-center rounded-control xl:h-20"
       >
