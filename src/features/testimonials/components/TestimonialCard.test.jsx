@@ -38,4 +38,12 @@ describe('TestimonialCard', () => {
     expect(screen.queryByRole('link', { name: 'Marta Ejemplo' })).not.toBeInTheDocument()
     expect(screen.getByText('Marta Ejemplo')).toBeInTheDocument()
   })
+
+  it('la versión compacta (portada) muestra lo mismo: cita, firma, destacado y reportar', () => {
+    renderWithProviders(<TestimonialCard testimonial={TESTIMONIAL} compact />)
+    expect(screen.getByRole('figure')).toHaveTextContent('Aquí encontré mi primer empleo.')
+    expect(screen.getByRole('link', { name: 'Marta Ejemplo' })).toBeInTheDocument()
+    expect(screen.getByText('Destacado')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Reportar el testimonio de Marta Ejemplo' })).toBeInTheDocument()
+  })
 })

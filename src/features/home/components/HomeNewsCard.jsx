@@ -43,7 +43,7 @@ export default function HomeNewsCard({ item, featured = false, delay = 0 }) {
           priority={featured}
           className={cx(
             'transition-transform duration-700 ease-out group-hover:scale-105',
-            featured ? 'aspect-[2/1] lg:aspect-[16/5]' : 'aspect-[2/1] sm:aspect-auto sm:h-full',
+            featured ? 'aspect-[2/1] lg:aspect-[4/1]' : 'aspect-[2/1] sm:aspect-auto sm:h-full',
           )}
         />
       </figure>

@@ -17,9 +17,9 @@ const TILTS = ['-rotate-1', 'rotate-1', '-rotate-[0.5deg]']
 /**
  * Testimonio con aspecto de nota: ligeramente inclinada, con unas grandes comillas de sello y la cita como
  * protagonista, sobre el violeta suave de la marca. Todas miden lo mismo: el texto reserva cinco líneas y, si no cabe, «Leer más» lo
- * despliega en la propia tarjeta.
+ * despliega en la propia tarjeta. `compact`: más pequeña (cuatro líneas y menos relleno), para la portada.
  */
-export default function TestimonialCard({ testimonial, linkAuthor = true, index = 0 }) {
+export default function TestimonialCard({ testimonial, linkAuthor = true, index = 0, compact = false }) {
   const { t } = useI18n()
   const quoteId = useId()
   const [expanded, setExpanded] = useState(false)
@@ -29,7 +29,8 @@ export default function TestimonialCard({ testimonial, linkAuthor = true, index 
   return (
     <figure
       className={cx(
-        'relative flex h-full flex-col rounded-3xl p-7 pt-10 transition-all duration-500 ease-out hover:-translate-y-1 hover:rotate-0 focus-within:rotate-0',
+        'relative flex h-full flex-col rounded-3xl transition-all duration-500 ease-out hover:-translate-y-1 hover:rotate-0 focus-within:rotate-0',
+        compact ? 'p-5 pt-8' : 'p-7 pt-10',
         TILTS[index % TILTS.length],
         cx('border bg-gradient-to-br text-ink shadow-card hover:shadow-pop', PASTEL),
         testimonial.isHighlighted && 'ring-2 ring-amber-400/70',
@@ -39,20 +40,21 @@ export default function TestimonialCard({ testimonial, linkAuthor = true, index 
       <span
         aria-hidden="true"
         className={cx(
-          'absolute -top-6 left-6 flex h-14 w-14 items-center justify-center rounded-2xl text-5xl font-bold leading-none shadow-lg',
+          'absolute flex items-center justify-center font-bold leading-none shadow-lg',
+          compact ? '-top-5 left-5 h-11 w-11 rounded-xl text-4xl' : '-top-6 left-6 h-14 w-14 rounded-2xl text-5xl',
           'bg-brand-600 text-white dark:bg-brand-500',
         )}
       >
-        <span className="translate-y-3">“</span>
+        <span className={compact ? 'translate-y-2.5' : 'translate-y-3'}>“</span>
       </span>
 
       <blockquote id={quoteId}>
         <p
           ref={quoteRef}
           className={cx(
-            'min-h-[5lh] whitespace-pre-wrap text-lg font-medium leading-relaxed',
-            'text-ink',
-            !expanded && 'line-clamp-5',
+            'whitespace-pre-wrap font-medium leading-relaxed text-ink',
+            compact ? 'min-h-[4lh] text-base' : 'min-h-[5lh] text-lg',
+            !expanded && (compact ? 'line-clamp-4' : 'line-clamp-5'),
           )}
         >
           {testimonial.content}
@@ -65,7 +67,8 @@ export default function TestimonialCard({ testimonial, linkAuthor = true, index 
         aria-expanded={expanded}
         aria-controls={quoteId}
         className={cx(
-          'mt-2 inline-flex min-h-[2.75rem] items-center gap-1 self-start text-sm font-semibold hover:underline',
+          'inline-flex min-h-[2.75rem] items-center gap-1 self-start text-sm font-semibold hover:underline',
+          compact ? 'mt-0' : 'mt-2',
           'text-accent',
           !clamped && !expanded && 'invisible',
         )}
@@ -74,7 +77,7 @@ export default function TestimonialCard({ testimonial, linkAuthor = true, index 
         <Icon name="chevron-down" className={cx('h-4 w-4 transition-transform', expanded && 'rotate-180')} />
       </button>
 
-      <figcaption className={cx('mt-auto flex items-center gap-3 border-t pt-5', 'border-ink/10')}>
+      <figcaption className={cx('mt-auto flex items-center gap-3 border-t border-ink/10', compact ? 'pt-3' : 'pt-5')}>
         <Avatar
           name={testimonial.name}
           src={testimonial.authorAvatarUrl}

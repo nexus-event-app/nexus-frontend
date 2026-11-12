@@ -32,7 +32,7 @@ export default function JobCard({ job, headingLevel = 'h3', note }) {
   const showContract = job.contractType && !(job.level === 'INTERN' && job.contractType === 'INTERNSHIP')
 
   return (
-    <article className="job-row group relative isolate gap-y-1.5 px-5 py-5 transition-colors hover:bg-canvas has-[a:focus-visible]:bg-canvas sm:px-6">
+    <article className="job-row group relative isolate gap-y-1.5 px-5 py-4 transition-colors hover:bg-canvas has-[a:focus-visible]:bg-canvas sm:px-6">
       {/* Barra morada a la izquierda al señalar la fila (decorativa). */}
       <span
         aria-hidden="true"

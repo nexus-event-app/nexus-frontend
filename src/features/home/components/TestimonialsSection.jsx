@@ -36,7 +36,7 @@ export default function TestimonialsSection() {
               description={t('home.testimonials.emptyText')}
             />
           ) : (
-            <TestimonialGrid items={items.slice(0, 3)} />
+            <TestimonialGrid items={items.slice(0, 3)} compact />
           )
         }
       </QueryBoundary>

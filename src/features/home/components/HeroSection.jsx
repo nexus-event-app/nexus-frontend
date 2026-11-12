@@ -29,7 +29,7 @@ export default function HeroSection() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="page-gutter relative isolate grid items-center gap-x-12 gap-y-10 overflow-hidden bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 pb-10 pt-10 text-white sm:pb-12 sm:pt-14 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)]"
+      className="page-gutter relative isolate grid items-center gap-x-12 gap-y-10 overflow-hidden bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 pb-10 pt-10 text-white sm:pb-12 sm:pt-14 lg:min-h-[43rem] lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)]"
     >
       <span
         aria-hidden="true"
