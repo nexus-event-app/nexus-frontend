@@ -2,7 +2,7 @@ import { screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Route, Routes } from 'react-router-dom'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { renderWithProviders } from '@/test/render'
+import { authValue, renderWithProviders } from '@/test/render'
 import { learningService } from '../services/learningService'
 import LearningPathPage from './LearningPathPage'
 import LearningPathsPage from './LearningPathsPage'
@@ -26,10 +26,24 @@ describe('LearningPathsPage', () => {
   it('muestra las cinco rutas con su enlace traducido y sin <div>', () => {
     const { container } = renderWithProviders(<LearningPathsPage />, { route: '/en/learning-paths' })
     const list = screen.getByRole('list', { name: 'Available paths' })
-    expect(within(list).getAllByRole('listitem')).toHaveLength(5)
+    // Las cinco rutas y la ayuda para elegir.
+    expect(within(list).getAllByRole('listitem')).toHaveLength(6)
+    expect(within(list).getByRole('link', { name: 'Ask in the forum' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Data analysis' })).toHaveAttribute('href', '/en/learning-paths/data')
     expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1)
     expect(container.querySelectorAll('div')).toHaveLength(0)
+  })
+
+  it('explica cómo funcionan en tres pasos y, sin sesión, invita a crear cuenta', () => {
+    renderWithProviders(<LearningPathsPage />, { route: '/rutas' })
+    const how = screen.getByRole('region', { name: 'Cómo funcionan' })
+    expect(within(how).getAllByRole('heading', { level: 3 })).toHaveLength(3)
+    expect(within(how).getByRole('link', { name: 'Crear mi cuenta' })).toBeInTheDocument()
+  })
+
+  it('con sesión no invita a crear cuenta', () => {
+    renderWithProviders(<LearningPathsPage />, { route: '/rutas', auth: authValue({ user: { id: 7, name: 'Lucía' } }) })
+    expect(screen.queryByRole('link', { name: 'Crear mi cuenta' })).not.toBeInTheDocument()
   })
 })
 

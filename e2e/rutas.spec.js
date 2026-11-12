@@ -12,7 +12,8 @@ test.describe('Rutas de aprendizaje', () => {
       .click()
 
     await expect(page).toHaveURL(/\/rutas$/)
-    await expect(page.getByRole('list', { name: 'Rutas disponibles' }).getByRole('listitem')).toHaveCount(5)
+    // Las cinco rutas y la ayuda para elegir.
+    await expect(page.getByRole('list', { name: 'Rutas disponibles' }).getByRole('listitem')).toHaveCount(6)
     await page.getByRole('link', { name: 'Inteligencia artificial' }).click()
 
     await expect(page).toHaveURL(/\/rutas\/ia$/)

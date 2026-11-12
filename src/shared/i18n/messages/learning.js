@@ -9,9 +9,17 @@ export default {
     intro:
       'Elige hacia dónde quieres ir y sigue un camino por etapas, de cero a tu primer empleo. Cada etapa tiene recursos escogidos y un proyecto para practicar.',
     listLabel: 'Rutas disponibles',
+    choose: {
+      title: '¿No sabes por cuál empezar?',
+      text: 'Cuéntalo en el foro: otras personas que ya pasaron por ahí te ayudan a elegir.',
+      cta: 'Preguntar en el foro',
+    },
     reviewed: 'Recursos de terceros, revisados el {date}. Si alguno deja de funcionar, avísanos en el foro.',
     how: {
+      eyebrow: 'En tres pasos',
       title: 'Cómo funcionan',
+      ctaText: 'Crea tu cuenta para guardar tu progreso y retomar cada ruta donde la dejaste.',
+      cta: 'Crear mi cuenta',
       choose: { title: 'Elige una ruta', text: 'Cada una explica para quién es y cuánto se tarda más o menos.' },
       practice: { title: 'Aprende y practica', text: 'Lee o mira los recursos y haz el mini proyecto de cada etapa.' },
       progress: {
@@ -265,9 +273,17 @@ export default {
     intro:
       'Tria cap a on vols anar i segueix un camí per etapes, de zero a la teva primera feina. Cada etapa té recursos escollits i un projecte per practicar.',
     listLabel: 'Rutes disponibles',
+    choose: {
+      title: 'No saps per quina començar?',
+      text: 'Explica-ho al fòrum: altres persones que ja hi han passat t’ajuden a triar.',
+      cta: 'Preguntar al fòrum',
+    },
     reviewed: 'Recursos de tercers, revisats el {date}. Si algun deixa de funcionar, avisa’ns al fòrum.',
     how: {
+      eyebrow: 'En tres passos',
       title: 'Com funcionen',
+      ctaText: 'Crea el teu compte per desar el teu progrés i reprendre cada ruta on la vas deixar.',
+      cta: 'Crear el meu compte',
       choose: { title: 'Tria una ruta', text: 'Cadascuna explica per a qui és i quant es triga més o menys.' },
       practice: {
         title: 'Aprèn i practica',
@@ -524,9 +540,17 @@ export default {
     intro:
       'Choose where you want to go and follow a step-by-step path, from zero to your first job. Each step has hand-picked resources and a project to practise.',
     listLabel: 'Available paths',
+    choose: {
+      title: 'Not sure where to start?',
+      text: 'Ask in the forum: people who have been there will help you choose.',
+      cta: 'Ask in the forum',
+    },
     reviewed: 'Third-party resources, reviewed on {date}. If one stops working, let us know in the forum.',
     how: {
+      eyebrow: 'In three steps',
       title: 'How they work',
+      ctaText: 'Create your account to save your progress and pick up each path where you left it.',
+      cta: 'Create my account',
       choose: { title: 'Choose a path', text: 'Each one explains who it is for and roughly how long it takes.' },
       practice: {
         title: 'Learn and practise',
