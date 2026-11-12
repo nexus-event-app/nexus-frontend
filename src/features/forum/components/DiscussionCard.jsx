@@ -115,7 +115,10 @@ export default function DiscussionCard({ discussion, headingLevel = 'h3' }) {
             <span className="sr-only">{t('forum.card.likes')}</span>
           </span>
         </p>
-        <span aria-hidden="true" className="inline-flex shrink-0 items-center gap-2 font-semibold text-accent">
+        <span
+          aria-hidden="true"
+          className="pointer-events-none inline-flex shrink-0 items-center gap-2 font-semibold text-accent"
+        >
           {t('forum.card.join')}
           <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent-soft transition-all duration-300 group-hover:translate-x-1 group-hover:bg-brand-600 group-hover:text-white">
             <Icon name="arrow-right" className="h-4 w-4" />

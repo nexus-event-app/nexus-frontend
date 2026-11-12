@@ -77,7 +77,7 @@ export default function LearningPathCard({
         </dl>
         <span
           aria-hidden="true"
-          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent transition-all duration-300 group-hover:translate-x-1 group-hover:bg-brand-600 group-hover:text-white"
+          className="pointer-events-none flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent transition-all duration-300 group-hover:translate-x-1 group-hover:bg-brand-600 group-hover:text-white"
         >
           <Icon name="arrow-right" className="h-4 w-4" />
         </span>

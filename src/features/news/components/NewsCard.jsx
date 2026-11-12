@@ -116,7 +116,10 @@ export default function NewsCard({ item, headingLevel = 'h3', variant = 'default
         <span className={cx('min-w-0 truncate', styles.muted)}>
           {item.imported && item.source && t('news.card.via', { source: item.source })}
         </span>
-        <span aria-hidden="true" className={cx('inline-flex shrink-0 items-center gap-2 font-semibold', styles.read)}>
+        <span
+          aria-hidden="true"
+          className={cx('pointer-events-none inline-flex shrink-0 items-center gap-2 font-semibold', styles.read)}
+        >
           {t('news.card.read')}
           <span
             className={cx(

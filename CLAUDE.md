@@ -44,6 +44,10 @@ Normas de código del proyecto. Se aplican a todo lo que se escriba a partir de 
 - Animaciones suaves y con propósito (`animate-rise-in`, `animate-drift`...): ninguna debe ser necesaria para entender
   el contenido y todas se desactivan con «reducir movimiento» (index.css). axe espera a que terminen las de entrada.
 
+- Tarjetas que son un enlace entero (el enlace del título con `after:absolute after:inset-0`): las pistas visuales
+  («Leer noticia», la flecha...) llevan `aria-hidden` y `pointer-events-none`, para que el clic siempre llegue al enlace
+  aunque se muevan al pasar el ratón. Lo comprueba `e2e/tarjetas.spec.js`.
+
 - Formato: `.prettierrc.json` (sin punto y coma, comillas simples, 120 caracteres).
 - Textos visibles traducidos en `src/shared/i18n/messages` (castellano, catalán e inglés); `npm run check:i18n`.
 - Rutas por idioma en `src/shared/i18n/routeSegments.js`; `npm run check:routes`.
