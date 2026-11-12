@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
 import DiscussionCard from '@/features/forum/components/DiscussionCard'
-import JobGrid from '@/features/jobs/components/JobGrid'
+import JobList from '@/features/jobs/components/JobList'
 import NewsGrid from '@/features/news/components/NewsGrid'
 import { Link } from '@/shared/i18n/router'
 import Avatar from '@/shared/components/Avatar'
@@ -128,7 +128,7 @@ export default function SearchPage() {
                     )}
                     {result.jobs.total > 0 && (
                       <ResultSection group="jobs" total={result.jobs.total} query={query}>
-                        <JobGrid items={result.jobs.items} />
+                        <JobList items={result.jobs.items} />
                       </ResultSection>
                     )}
                     {result.discussions.total > 0 && (

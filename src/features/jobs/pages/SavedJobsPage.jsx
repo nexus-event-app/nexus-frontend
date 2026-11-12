@@ -1,7 +1,7 @@
 import { Navigate } from '@/shared/i18n/router'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import ButtonLink from '@/shared/components/ButtonLink'
-import CardGridSkeleton from '@/shared/components/CardGridSkeleton'
+import JobListSkeleton from '../components/JobListSkeleton'
 import EmptyState from '@/shared/components/EmptyState'
 import Icon from '@/shared/components/Icon'
 import PageHeader from '@/shared/components/PageHeader'
@@ -15,28 +15,30 @@ import { paths } from '@/shared/config/paths'
 import { useListQuery } from '@/shared/hooks/useListQuery'
 import { useRequest } from '@/shared/hooks/useRequest'
 import { useI18n } from '@/shared/i18n/useI18n'
+import CompanyMonogram from '../components/CompanyMonogram'
 import JobCard from '../components/JobCard'
+import { JOB_LIST_CLASSES } from '../components/JobList'
 import SaveJobButton from '../components/SaveJobButton'
 import { useSavedJobs } from '../hooks/useSavedJobs'
 import { savedJobsService } from '../services/savedJobsService'
 
 /** Oferta guardada que ya no está publicada: se muestra para que el usuario pueda quitarla. */
-function UnavailableJob({ job }) {
+/** Oferta guardada que ya no está publicada: misma fila, apagada y sin enlace; solo se puede quitar de guardadas. */
+function UnavailableJob({ job, note }) {
   const { t } = useI18n()
   return (
-    <article className="card flex h-full flex-col p-5">
-      <p className="flex items-center gap-2 text-sm font-semibold text-ink-muted">
+    <article className="job-row gap-y-1.5 px-5 py-5 sm:px-6">
+      <CompanyMonogram name={job.company} className="opacity-50 [grid-area:logo]" />
+      <h2 className="self-center text-base font-bold leading-snug text-ink-soft [grid-area:title] sm:text-lg">
+        {job.title}
+      </h2>
+      <p className="truncate text-sm text-ink-muted [grid-area:company]">{job.company}</p>
+      <p className="mt-1 flex items-center gap-1.5 text-sm font-semibold text-ink-muted [grid-area:facts]">
         <Icon name="info" className="h-4 w-4" />
         {t('jobs.saved.unavailable')}
       </p>
-      <h2 className="mt-3 text-lg font-bold leading-snug text-ink-soft">{job.title}</h2>
-      <p className="mt-2 flex items-center gap-2 text-ink-muted">
-        <Icon name="building" className="h-4 w-4" />
-        {job.company}
-      </p>
-      <footer className="mt-auto flex justify-end pt-4">
-        <SaveJobButton job={job} compact />
-      </footer>
+      <SaveJobButton job={job} compact className="-mr-2 justify-self-end [grid-area:save]" />
+      <p className="mt-2 text-xs text-ink-muted [grid-area:time] lg:mt-0 lg:self-start lg:text-right">{note}</p>
     </article>
   )
 }
@@ -65,7 +67,7 @@ export default function SavedJobsPage() {
           data={request.data}
           error={request.error}
           onRetry={request.reload}
-          skeleton={<CardGridSkeleton withImage={false} />}
+          skeleton={<JobListSkeleton />}
           errorTitle={t('jobs.saved.error')}
         >
           {(result) => {
@@ -89,15 +91,23 @@ export default function SavedJobsPage() {
                 <p role="status" className="mb-4 text-sm text-ink-muted">
                   {t('jobs.saved.count', { count: result.totalElements - (result.content.length - items.length) })}
                 </p>
-                <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  {items.map(({ job, available, savedAt }) => (
-                    <li key={job.id} className="flex flex-col gap-2">
-                      {available ? <JobCard job={job} headingLevel="h2" /> : <UnavailableJob job={job} />}
-                      <p className="px-1 text-xs text-ink-muted">
+                <ul className={JOB_LIST_CLASSES}>
+                  {items.map(({ job, available, savedAt }) => {
+                    const note = (
+                      <span>
                         {t('jobs.saved.savedOn')} <Time value={savedAt} format="short" />
-                      </p>
-                    </li>
-                  ))}
+                      </span>
+                    )
+                    return (
+                      <li key={job.id}>
+                        {available ? (
+                          <JobCard job={job} headingLevel="h2" note={note} />
+                        ) : (
+                          <UnavailableJob job={job} note={note} />
+                        )}
+                      </li>
+                    )
+                  })}
                 </ul>
                 <Pagination page={page} totalPages={result.totalPages} buildHref={buildHref} />
               </>

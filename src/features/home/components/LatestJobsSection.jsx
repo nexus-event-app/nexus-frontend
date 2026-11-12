@@ -1,7 +1,7 @@
-import JobGrid from '@/features/jobs/components/JobGrid'
+import JobList from '@/features/jobs/components/JobList'
+import JobListSkeleton from '@/features/jobs/components/JobListSkeleton'
 import JobPortals from '@/features/jobs/components/JobPortals'
 import { useLatestJobs } from '@/features/jobs/hooks/useLatestJobs'
-import CardGridSkeleton from '@/shared/components/CardGridSkeleton'
 import EmptyState from '@/shared/components/EmptyState'
 import QueryBoundary from '@/shared/components/QueryBoundary'
 import { paths } from '@/shared/config/paths'
@@ -26,14 +26,14 @@ export default function LatestJobsSection() {
         data={request.data}
         error={request.error}
         onRetry={request.reload}
-        skeleton={<CardGridSkeleton count={3} withImage={false} />}
+        skeleton={<JobListSkeleton count={3} />}
         errorTitle={t('home.jobs.error')}
       >
         {(items) =>
           items.length === 0 ? (
             <EmptyState icon="briefcase" title={t('home.jobs.emptyTitle')} description={t('home.jobs.emptyText')} />
           ) : (
-            <JobGrid items={items} />
+            <JobList items={items} />
           )
         }
       </QueryBoundary>

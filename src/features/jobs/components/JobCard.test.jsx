@@ -39,7 +39,7 @@ describe('JobCard', () => {
     expect(screen.getByText('Junior')).toBeInTheDocument()
     expect(screen.getByText('Híbrido')).toBeInTheDocument()
     expect(screen.getByText('Jornada completa')).toBeInTheDocument()
-    expect(screen.getByRole('list', { name: 'Tecnologías' })).toHaveTextContent('#React#CSS')
+    expect(screen.getByRole('list', { name: 'Tecnologías' })).toHaveTextContent('ReactCSS')
     expect(screen.getByText('ayer')).toHaveAttribute('datetime', JOB.publishedAt)
   })
 
@@ -50,6 +50,29 @@ describe('JobCard', () => {
     renderCard({ ...JOB, publishedAt: day(5) })
     expect(screen.queryByText('Nueva')).not.toBeInTheDocument()
     expect(screen.getByText('hace 5 días')).toBeInTheDocument()
+  })
+
+  it('nombra cada dato para el lector de pantalla (nivel, modalidad y jornada)', () => {
+    renderCard(JOB)
+    const terms = screen.getAllByRole('term').map((term) => term.textContent)
+    expect(terms).toEqual(['Nivel', 'Modalidad', 'Tipo de contrato'])
+  })
+
+  it('enseña tres tecnologías y dice cuántas quedan', () => {
+    renderCard({ ...JOB, tags: ['React', 'CSS', 'TypeScript', 'Vite', 'Git'] })
+    const list = screen.getByRole('list', { name: 'Tecnologías' })
+    expect(list).toHaveTextContent('ReactCSSTypeScript')
+    expect(screen.getByText('y 2 tecnologías más')).toBeInTheDocument()
+    expect(list).not.toHaveTextContent('Vite')
+  })
+
+  it('muestra la nota que se le pase bajo la fecha', () => {
+    renderWithProviders(
+      <SavedJobsContext.Provider value={savedJobs}>
+        <JobCard job={JOB} note={<span>Guardada el 3 nov</span>} />
+      </SavedJobsContext.Provider>,
+    )
+    expect(screen.getByText('Guardada el 3 nov')).toBeInTheDocument()
   })
 
   it('en prácticas no repite «Prácticas» como jornada', () => {
