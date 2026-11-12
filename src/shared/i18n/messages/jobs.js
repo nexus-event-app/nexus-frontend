@@ -61,6 +61,8 @@ export default {
       view: 'Ver oferta',
     },
     portals: {
+      eyebrow: 'Más ofertas',
+      cta: 'Ver ofertas',
       title: 'Busca también en portales de España',
       description: 'Búsquedas ya filtradas por tecnología y perfiles junior en los principales portales de empleo.',
       compact: '¿Buscas más ofertas en España?',
@@ -158,6 +160,8 @@ export default {
       view: 'Mira l’oferta',
     },
     portals: {
+      eyebrow: 'Més ofertes',
+      cta: 'Veure ofertes',
       title: 'Cerca també a portals d’Espanya',
       description: 'Cerques ja filtrades per tecnologia i perfils júnior als principals portals de feina.',
       compact: 'Busques més ofertes a Espanya?',
@@ -255,6 +259,8 @@ export default {
       view: 'View job',
     },
     portals: {
+      eyebrow: 'More jobs',
+      cta: 'See jobs',
       title: 'Also search on Spanish job boards',
       description: 'Searches already filtered for tech and junior roles on the main job boards in Spain.',
       compact: 'Looking for more jobs in Spain?',
