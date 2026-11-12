@@ -29,7 +29,7 @@ export default function HeroSection() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="page-gutter relative isolate grid items-center gap-x-12 gap-y-14 overflow-hidden bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 pb-16 pt-14 text-white sm:pt-20 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)]"
+      className="page-gutter relative isolate grid items-center gap-x-12 gap-y-10 overflow-hidden bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 pb-10 pt-10 text-white sm:pb-12 sm:pt-14 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)]"
     >
       <span
         aria-hidden="true"
@@ -46,19 +46,19 @@ export default function HeroSection() {
         </Eyebrow>
         <h1
           id="hero-heading"
-          className="mt-5 animate-rise-in text-4xl font-bold leading-[1.08] tracking-tight [animation-delay:80ms] sm:text-5xl xl:text-[3.4rem]"
+          className="mt-4 animate-rise-in text-4xl font-bold leading-[1.08] tracking-tight [animation-delay:80ms] sm:text-5xl xl:text-[3.4rem]"
         >
           <span className="block">{t('home.hero.titleStart')}</span>{' '}
           <span className="block bg-gradient-to-r from-brand-200 via-violet-200 to-brand-200 bg-clip-text text-transparent">
             {t('home.hero.titleEnd')}
           </span>
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl animate-rise-in text-lg leading-relaxed text-brand-100 [animation-delay:160ms] lg:mx-0">
+        <p className="mx-auto mt-5 max-w-2xl animate-rise-in text-lg leading-relaxed text-brand-100 [animation-delay:160ms] lg:mx-0">
           {t('home.hero.text', { name })}
         </p>
 
         {isAuthenticated ? (
-          <section aria-label={t('home.hero.continue')} className="mt-9 animate-rise-in [animation-delay:240ms]">
+          <section aria-label={t('home.hero.continue')} className="mt-7 animate-rise-in [animation-delay:240ms]">
             <p className="text-lg font-semibold text-white">{t('home.hero.greeting', { name: user.name })}</p>
             <ButtonLink
               to={paths.learning}
@@ -69,7 +69,7 @@ export default function HeroSection() {
             </ButtonLink>
           </section>
         ) : (
-          <menu className="mt-9 flex animate-rise-in flex-col items-center gap-4 [animation-delay:240ms] sm:flex-row lg:justify-start">
+          <menu className="mt-7 flex animate-rise-in flex-col items-center gap-4 [animation-delay:240ms] sm:flex-row lg:justify-start">
             <li>
               <ButtonLink
                 to={paths.register}
@@ -91,7 +91,7 @@ export default function HeroSection() {
         )}
       </header>
 
-      <HeroIllustration className="relative hidden h-[27rem] animate-rise-in [animation-delay:200ms] lg:block" />
+      <HeroIllustration className="relative hidden h-[23rem] animate-rise-in [animation-delay:200ms] lg:block" />
 
       <section aria-labelledby="hero-features" className="lg:col-span-2">
         <h2 id="hero-features" className="sr-only">
@@ -102,13 +102,13 @@ export default function HeroSection() {
             <li
               key={feature.key}
               style={{ animationDelay: `${400 + index * 80}ms` }}
-              className="animate-rise-in rounded-2xl bg-white/[0.07] p-5 ring-1 ring-inset ring-white/15"
+              className="grid animate-rise-in grid-cols-[auto_minmax(0,1fr)] gap-x-3 rounded-2xl bg-white/[0.07] p-4 ring-1 ring-inset ring-white/15"
             >
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 text-white">
+              <span className="row-span-2 flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 text-white">
                 <Icon name={feature.icon} className="h-5 w-5" />
               </span>
-              <h3 className="mt-4 font-bold text-white">{t(`home.hero.${feature.key}Title`)}</h3>
-              <p className="mt-1 text-sm leading-relaxed text-brand-100">{t(`home.hero.${feature.key}Text`)}</p>
+              <h3 className="font-bold text-white">{t(`home.hero.${feature.key}Title`)}</h3>
+              <p className="mt-0.5 text-sm leading-relaxed text-brand-100">{t(`home.hero.${feature.key}Text`)}</p>
             </li>
           ))}
         </ul>

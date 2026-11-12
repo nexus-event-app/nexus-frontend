@@ -1,6 +1,5 @@
 import JobList from '@/features/jobs/components/JobList'
 import JobListSkeleton from '@/features/jobs/components/JobListSkeleton'
-import JobPortals from '@/features/jobs/components/JobPortals'
 import { useLatestJobs } from '@/features/jobs/hooks/useLatestJobs'
 import EmptyState from '@/shared/components/EmptyState'
 import QueryBoundary from '@/shared/components/QueryBoundary'
@@ -37,7 +36,6 @@ export default function LatestJobsSection() {
           )
         }
       </QueryBoundary>
-      <JobPortals compact />
     </HomeSection>
   )
 }

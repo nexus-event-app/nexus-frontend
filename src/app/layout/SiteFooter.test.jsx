@@ -1,13 +1,42 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { testimonialService } from '@/features/testimonials/services/testimonialService'
 import { renderWithProviders } from '@/test/render'
 import SiteFooter from './SiteFooter'
 
+const TESTIMONIALS = [
+  {
+    id: 1,
+    name: 'Marta Ejemplo',
+    role: 'Desarrolladora junior',
+    content: 'Encontré mi primer empleo.',
+    isHighlighted: false,
+  },
+  { id: 2, name: 'Javier López', role: null, content: 'El foro me ayudó con Docker.', isHighlighted: true },
+]
+
 describe('SiteFooter', () => {
-  it('invita a empezar por las rutas y enlaza a las secciones y a lo legal', () => {
+  beforeEach(() => {
+    vi.spyOn(testimonialService, 'latest').mockResolvedValue(TESTIMONIALS)
+  })
+
+  it('enseña un testimonio pequeño (el destacado) y enlaza a los testimonios', async () => {
     renderWithProviders(<SiteFooter />)
-    expect(screen.getByRole('link', { name: /Empieza tu ruta/ })).toHaveAttribute('href', '/rutas')
+    const testimonial = await screen.findByRole('region', { name: 'Una historia de quien ya empezó' })
+    expect(testimonial).toHaveTextContent('El foro me ayudó con Docker.')
+    expect(testimonial).toHaveTextContent('Javier López')
+    expect(screen.getByRole('link', { name: 'Leer más testimonios' })).toHaveAttribute('href', '/testimonios')
+  })
+
+  it('sin testimonios publicados no enseña la tarjeta', async () => {
+    testimonialService.latest.mockResolvedValue([])
+    renderWithProviders(<SiteFooter />)
+    await expect(screen.findByRole('link', { name: 'Leer más testimonios' }, { timeout: 300 })).rejects.toThrow()
+  })
+
+  it('enlaza a las secciones y a lo legal', () => {
+    renderWithProviders(<SiteFooter />)
     expect(screen.getByRole('navigation', { name: 'Pie de página: explorar' })).toHaveTextContent('Sobre el proyecto')
     expect(screen.getByRole('link', { name: 'Privacidad' })).toHaveAttribute('href', '/privacidad')
     expect(screen.getByRole('link', { name: 'Crear cuenta' })).toBeInTheDocument()

@@ -45,4 +45,14 @@ test.describe('Navegación', () => {
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
     await expect(page.getByRole('main')).toContainText(/404|no existe|no encontrada|no hemos encontrado/i)
   })
+
+  test('la barra solo lleva «Iniciar sesión» y el menú sigue el orden de la portada', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'En el móvil la barra se abre en un menú con las dos opciones')
+    await page.goto('/')
+    const banner = page.getByRole('banner')
+    await expect(banner.getByRole('link', { name: 'Iniciar sesión' })).toBeVisible()
+    await expect(banner.getByRole('link', { name: 'Crear cuenta' })).toHaveCount(0)
+    const links = banner.getByRole('navigation', { name: /Principal/ }).getByRole('link')
+    await expect(links).toHaveText(['Noticias', 'Empleo', 'Foro', 'Rutas', 'Testimonios', 'Sobre el proyecto'])
+  })
 })

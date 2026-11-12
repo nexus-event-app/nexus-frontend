@@ -21,7 +21,11 @@ import UserMenu from './UserMenu'
 import { siteConfig } from '@/shared/config/site'
 import { cx } from '@/shared/utils/classNames'
 
-/** Entrar y crear cuenta, como elementos de un menú (<menu>). En escritorio son pastillas, como el resto de la cabecera. */
+/**
+ * Entrar y crear cuenta, como elementos de un menú (<menu>). En la barra de escritorio (`pill`) solo va «Iniciar
+ * sesión», en pastilla: «Crear cuenta» ya aparece en la portada y en muchas páginas, y así la barra respira. En el
+ * menú del móvil van los dos.
+ */
 function AuthLinks({ className, pill = false }) {
   const { t } = useI18n()
   return (
@@ -39,18 +43,13 @@ function AuthLinks({ className, pill = false }) {
           {t('common.account.login')}
         </ButtonLink>
       </li>
-      <li>
-        <ButtonLink
-          to={paths.register}
-          className={cx(
-            pill &&
-              'whitespace-nowrap rounded-full bg-gradient-to-r from-brand-600 to-brand-700 px-4 font-medium sm:text-sm shadow-md shadow-brand-600/25 transition-all hover:-translate-y-px hover:shadow-lg hover:shadow-brand-600/30 dark:from-brand-500 dark:to-brand-700',
-            className,
-          )}
-        >
-          {t('common.account.register')}
-        </ButtonLink>
-      </li>
+      {!pill && (
+        <li>
+          <ButtonLink to={paths.register} className={className}>
+            {t('common.account.register')}
+          </ButtonLink>
+        </li>
+      )}
     </>
   )
 }

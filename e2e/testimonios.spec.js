@@ -20,13 +20,13 @@ test.describe('Testimonios', () => {
 
   test('enseña seis testimonios por página y el resto en la siguiente', async ({ page }) => {
     await page.goto('/testimonios')
-    await expect(page.getByRole('figure')).toHaveCount(6)
+    await expect(page.getByRole('main').getByRole('figure')).toHaveCount(6)
     await page
       .getByRole('navigation', { name: /Paginación/ })
       .getByRole('link', { name: /Siguiente/ })
       .click()
     await expect(page).toHaveURL(/page=2/)
-    await expect(page.getByRole('figure')).toHaveCount(2)
+    await expect(page.getByRole('main').getByRole('figure')).toHaveCount(2)
     await expect(page.getByText('Persona 7')).toBeVisible()
   })
 

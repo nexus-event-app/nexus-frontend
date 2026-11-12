@@ -12,19 +12,14 @@ import { contentLanguageOf } from '@/shared/utils/contentLanguage'
 import { excerpt } from '@/shared/utils/text'
 
 /**
- * Noticia de la portada. `featured`: la grande, con la imagen arriba y la etiqueta de destacada. `horizontal`: imagen
- * a la izquierda en pantallas medianas y grandes; si no, la imagen va arriba. Toda la tarjeta lleva a la noticia; «Leer noticia» es
- * solo una pista visual. Aparece subiendo un poco cuando entra en pantalla.
+ * Noticia de la portada: imagen arriba, categoría y fecha, titular y resumen (dos líneas cada uno) y «Leer noticia».
+ * Compacta para que el apartado ocupe lo mismo que los demás. Toda la tarjeta lleva a la noticia; «Leer noticia» es solo
+ * una pista visual. Aparece subiendo un poco cuando entra en pantalla.
  */
-export default function HomeNewsCard({ item, featured = false, horizontal = false, delay = 0 }) {
+export default function HomeNewsCard({ item, delay = 0 }) {
   const { t } = useI18n()
   const [ref, inView] = useInView()
   const language = contentLanguageOf(item)
-
-  // Sin contenedor para el texto: cada bloque lleva su margen y la tarjeta los coloca con flex (destacada) o con una
-  // rejilla de dos columnas (horizontal, la imagen ocupa toda la altura a la izquierda).
-  const side = horizontal && !featured
-  const pad = featured ? 'px-6 sm:px-8' : cx('px-6', side && 'sm:col-start-2')
 
   return (
     <article
@@ -32,29 +27,19 @@ export default function HomeNewsCard({ item, featured = false, horizontal = fals
       style={{ transitionDelay: `${delay}ms` }}
       className={cx(
         'group relative flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-surface shadow-card transition-all duration-700 ease-out hover:-translate-y-1 hover:shadow-pop has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-brand-600',
-        side && 'sm:grid sm:grid-cols-[42%_minmax(0,1fr)] sm:grid-rows-[auto_auto_1fr_auto]',
         inView ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0 print:translate-y-0 print:opacity-100',
       )}
     >
-      <figure className={cx('relative overflow-hidden', side && 'sm:row-span-4 sm:h-full')}>
+      <figure className="relative overflow-hidden">
         <NewsImage
           url={item.imageUrl}
           category={item.category}
           title={item.title}
           seed={item.id}
-          priority={featured}
-          className={cx(
-            'transition-transform duration-700 ease-out group-hover:scale-105',
-            featured ? 'aspect-[2/1]' : side && 'sm:aspect-auto sm:h-full',
-          )}
+          className="aspect-[5/2] transition-transform duration-700 ease-out group-hover:scale-105"
         />
-        {featured && (
-          <figcaption className="absolute left-5 top-5 rounded-full bg-gray-950/75 px-3.5 py-1.5 text-sm font-medium text-white backdrop-blur">
-            {t('home.news.featured')}
-          </figcaption>
-        )}
       </figure>
-      <p className={cx('flex flex-wrap items-center gap-x-2 gap-y-1 pt-6 text-sm', pad, featured && 'sm:pt-8')}>
+      <p className="mx-6 flex flex-wrap items-center gap-x-2 gap-y-1 pt-5 text-sm">
         <span className="font-semibold text-accent">{newsCategories.labelOf(item.category)}</span>
         <span aria-hidden="true" className="text-ink-muted">
           ·
@@ -62,14 +47,7 @@ export default function HomeNewsCard({ item, featured = false, horizontal = fals
         <Time value={item.createdAt} format="short" className="text-ink-muted" />
         <ContentLanguageBadge language={language} />
       </p>
-      <h3
-        lang={language}
-        className={cx(
-          'mt-3 font-bold leading-tight tracking-tight text-ink',
-          pad,
-          featured ? 'text-2xl sm:text-3xl' : 'line-clamp-3 text-xl',
-        )}
-      >
+      <h3 lang={language} className="mx-6 mt-2 line-clamp-2 text-lg font-bold leading-snug tracking-tight text-ink">
         <Link
           to={paths.newsDetail(item)}
           className="after:absolute after:inset-0 hover:text-accent focus-visible:ring-0 focus-visible:ring-offset-0"
@@ -77,16 +55,11 @@ export default function HomeNewsCard({ item, featured = false, horizontal = fals
           {item.title}
         </Link>
       </h3>
-      <p lang={language} className={cx('mb-6 mt-3 line-clamp-3 text-ink-muted', pad)}>
-        {excerpt(item.content, featured ? 180 : 140)}
+      <p lang={language} className="mx-6 mb-5 mt-2 line-clamp-2 text-sm leading-relaxed text-ink-muted">
+        {excerpt(item.content, 140)}
       </p>
-      <footer
-        className={cx(
-          'mt-auto flex items-center justify-between gap-4 border-t border-slate-200 pb-6 pt-5 text-sm',
-          featured ? 'mx-6 sm:mx-8 sm:pb-8' : cx('mx-6', side && 'sm:col-start-2'),
-        )}
-      >
-        <span className="min-w-0 text-ink-muted">
+      <footer className="mx-6 mt-auto flex items-center justify-between gap-4 border-t border-slate-200 pb-5 pt-4 text-sm">
+        <span className="min-w-0 truncate text-ink-muted">
           {item.imported && item.source ? t('news.card.via', { source: item.source }) : null}
         </span>
         <span aria-hidden="true" className="inline-flex shrink-0 items-center gap-2 font-semibold text-accent">

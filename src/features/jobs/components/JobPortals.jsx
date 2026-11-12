@@ -17,34 +17,9 @@ function PortalLink({ portal, className, children }) {
 
 /**
  * Búsquedas ya filtradas (tecnología, junior, España) en los principales portales de empleo.
- * `compact` muestra los portales como pastillas en un recuadro, para la portada.
  */
-export default function JobPortals({ compact = false }) {
+export default function JobPortals() {
   const { t } = useI18n()
-
-  if (compact) {
-    return (
-      <nav
-        aria-label={t('jobs.portals.title')}
-        className="mt-8 flex flex-col gap-3 rounded-3xl border border-dashed border-slate-300 p-5 sm:flex-row sm:items-center"
-      >
-        <p className="shrink-0 font-semibold text-ink">{t('jobs.portals.compact')}</p>
-        <ul className="flex flex-wrap gap-2">
-          {JOB_PORTALS.map((portal) => (
-            <li key={portal.id}>
-              <PortalLink
-                portal={portal}
-                className="inline-flex min-h-[2.75rem] items-center gap-1.5 rounded-full border border-slate-200 bg-surface px-3.5 text-sm font-medium text-ink-soft transition-all hover:-translate-y-0.5 hover:border-accent-line hover:text-accent sm:min-h-[2.25rem]"
-              >
-                {portal.name}
-                <Icon name="external" className="h-3.5 w-3.5" />
-              </PortalLink>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    )
-  }
 
   // Apartado propio, como las secciones de la portada: antetítulo que se escribe solo, título grande y una tarjeta
   // por portal con sus iniciales, para qué sirve y «Ver ofertas». Un halo suave detrás lo separa de la lista.

@@ -1,10 +1,12 @@
 import { Link } from '@/shared/i18n/router'
 import { useAuth } from '@/features/auth/hooks/useAuth'
+import { useLatestTestimonials } from '@/features/testimonials/hooks/useTestimonials'
 import Icon from '@/shared/components/Icon'
 import Logo from '@/shared/components/Logo'
 import { paths } from '@/shared/config/paths'
 import { siteConfig } from '@/shared/config/site'
 import { useI18n } from '@/shared/i18n/useI18n'
+import { initialsOf } from '@/shared/utils/text'
 import { mainNavigation } from './navigation'
 
 const LEGAL_LINKS = [
@@ -64,39 +66,80 @@ function BackToTop() {
 }
 
 /**
- * Pie de la web, en el morado de la portada: presentación con una invitación a empezar por las rutas, enlaces en tres columnas y, al final,
- * el nombre del proyecto en grande como remate visual (decorativo) y la barra con el copyright y «Volver arriba».
+ * Un testimonio pequeño (el destacado o el más reciente), como las tarjetitas de la cabecera de la portada: blanca,
+ * un poco inclinada, con las comillas de sello. Da vida al pie y lleva a los testimonios. Colores fijos (tarjeta blanca
+ * sobre el morado) en los dos temas. Si aún no hay testimonios, no se muestra.
+ */
+function FooterTestimonial() {
+  const { t } = useI18n()
+  const { data } = useLatestTestimonials()
+  const testimonial = data?.find((item) => item.isHighlighted) ?? data?.[0]
+  if (!testimonial) return null
+
+  return (
+    <section aria-labelledby="footer-testimonial" className="mt-8 max-w-sm">
+      <h2 id="footer-testimonial" className="sr-only">
+        {t('common.footer.testimonialTitle')}
+      </h2>
+      <figure className="relative -rotate-1 rounded-2xl bg-white px-5 pb-4 pt-6 text-gray-900 shadow-2xl shadow-brand-950/40 transition-transform duration-300 hover:rotate-0">
+        <span
+          aria-hidden="true"
+          className="absolute -top-4 left-5 flex h-9 w-9 items-center justify-center rounded-xl bg-brand-600 text-3xl font-bold leading-none text-white shadow-lg"
+        >
+          <span className="translate-y-2">“</span>
+        </span>
+        <blockquote>
+          <p className="line-clamp-3 text-sm leading-relaxed text-gray-800">{testimonial.content}</p>
+        </blockquote>
+        <figcaption className="mt-3 flex items-center gap-2.5 border-t border-gray-100 pt-3 text-xs">
+          <span
+            aria-hidden="true"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-100 font-bold text-brand-800"
+          >
+            {initialsOf(testimonial.name)}
+          </span>
+          <span className="min-w-0">
+            <strong className="block truncate text-sm font-semibold text-gray-900">{testimonial.name}</strong>
+            {testimonial.role && <span className="block truncate text-gray-600">{testimonial.role}</span>}
+          </span>
+        </figcaption>
+      </figure>
+      <Link
+        to={paths.testimonials}
+        className="mt-4 inline-flex min-h-[2.75rem] items-center gap-1.5 text-sm font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white"
+      >
+        {t('common.footer.testimonialLink')}
+      </Link>
+    </section>
+  )
+}
+
+/**
+ * Pie de la web, en el morado de la portada: presentación con un testimonio pequeño, enlaces en tres columnas y la
+ * barra con el copyright y «Volver arriba».
  */
 export default function SiteFooter() {
   const { isAuthenticated, user } = useAuth()
   const { t } = useI18n()
 
   return (
-    <footer className="page-gutter relative isolate grid gap-x-10 gap-y-12 overflow-hidden bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 pt-16 text-white sm:grid-cols-2 lg:grid-cols-[minmax(0,1.5fr)_repeat(3,minmax(0,1fr))]">
+    <footer className="page-gutter relative isolate grid gap-x-10 gap-y-10 overflow-hidden bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 pt-14 text-white sm:grid-cols-2 lg:grid-cols-[minmax(0,1.5fr)_repeat(3,minmax(0,1fr))]">
       {/* Mismo degradado y luz que la portada, para cerrar la página con el color de la marca. Decorativo. */}
       <span
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-40 -left-32 -z-10 h-[30rem] w-[30rem] animate-drift-slow rounded-full bg-brand-500/30 blur-3xl"
       />
 
-      <section aria-labelledby="footer-start" className="sm:col-span-2 lg:col-span-1">
+      {/* Presentación: el logo, qué es y un testimonio. El título solo lo oyen los lectores de pantalla. */}
+      <section aria-labelledby="footer-about" className="sm:col-span-2 lg:col-span-1">
+        <h2 id="footer-about" className="sr-only">
+          {siteConfig.name}
+        </h2>
         <Logo inverse />
         <p className="mt-4 max-w-sm text-brand-100">
           {t('seo.tagline')}. {t('common.footer.description')}
         </p>
-        <article className="group relative mt-6 max-w-sm rounded-3xl bg-white/10 p-5 ring-1 ring-inset ring-white/20 backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-white/15 has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-white">
-          <h2 id="footer-start" className="flex items-center gap-2 font-bold text-white">
-            <Icon name="academic" className="h-5 w-5 text-brand-200" />
-            {t('common.footer.startTitle')}
-          </h2>
-          <p className="mt-1 text-sm text-brand-100">{t('common.footer.startText')}</p>
-          <Link
-            to={paths.learning}
-            className="mt-3 inline-flex text-sm font-semibold text-white underline decoration-white/40 underline-offset-4 after:absolute after:inset-0 after:rounded-3xl group-hover:decoration-white focus-visible:ring-0 focus-visible:ring-offset-0"
-          >
-            {t('common.footer.startLink')}
-          </Link>
-        </article>
+        <FooterTestimonial />
       </section>
 
       <nav aria-label={t('common.footer.exploreLabel')}>
@@ -152,15 +195,7 @@ export default function SiteFooter() {
         </ul>
       </nav>
 
-      {/* El nombre en grande, cortado por abajo y desvaneciéndose: remate visual; el nombre ya está en el logo. */}
-      <p
-        aria-hidden="true"
-        className="col-span-full -mb-[0.28em] select-none whitespace-nowrap bg-gradient-to-b from-white/50 via-white/20 to-transparent bg-clip-text text-center text-[clamp(3rem,12.5vw,10.5rem)] font-bold leading-none tracking-tighter text-transparent"
-      >
-        {siteConfig.name}
-      </p>
-
-      <p className="relative col-span-full -mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/15 py-6 text-sm text-brand-100 sm:flex-row">
+      <p className="relative col-span-full flex flex-col items-center justify-between gap-4 border-t border-white/15 py-6 text-sm text-brand-100 sm:flex-row">
         <span className="text-center sm:text-left">
           {t('common.footer.copyright', { year: new Date().getFullYear(), name: siteConfig.name })}
         </span>
