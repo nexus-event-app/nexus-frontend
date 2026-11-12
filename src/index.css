@@ -197,6 +197,11 @@
     @apply min-h-[2.75rem] px-3 text-sm sm:min-h-[2.25rem];
   }
 
+  /* Botón grande, para la acción principal de una página (p. ej. «Nueva discusión»). */
+  .btn-lg {
+    @apply min-h-[3.25rem] rounded-full px-6 text-base;
+  }
+
   .btn-primary {
     @apply bg-brand-600 text-white shadow-card hover:bg-brand-700 dark:hover:bg-brand-500;
   }

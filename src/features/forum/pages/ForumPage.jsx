@@ -2,6 +2,7 @@ import { Link } from '@/shared/i18n/router'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import ButtonLink from '@/shared/components/ButtonLink'
 import EmptyState from '@/shared/components/EmptyState'
+import Icon from '@/shared/components/Icon'
 import ListSkeleton from '@/shared/components/ListSkeleton'
 import ActionMenu from '@/shared/components/ActionMenu'
 import Eyebrow from '@/shared/components/Eyebrow'
@@ -39,14 +40,18 @@ export default function ForumPage() {
       {/* Cuadrícula decorativa detrás de la cabecera, como en Noticias y Empleo. */}
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Breadcrumbs className="col-span-full" items={[{ label: t('forum.breadcrumb'), to: paths.forum }]} />
-      <header className="col-span-full mb-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+      <header className="col-span-full mb-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start">
         <hgroup>
           <Eyebrow>{t('forum.list.eyebrow')}</Eyebrow>
           <h1 className="mt-3 text-4xl font-bold tracking-tight text-ink sm:text-5xl">{heading}</h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-muted">{t('forum.list.description')}</p>
         </hgroup>
-        <ActionMenu className="shrink-0">
-          <ButtonLink to={paths.forumNew}>{t('forum.list.newDiscussion')}</ButtonLink>
+        {/* La acción principal del foro: grande y a la altura del título, bien separada de las normas. */}
+        <ActionMenu className="shrink-0 lg:mt-9">
+          <ButtonLink to={paths.forumNew} size="lg" className="shadow-pop">
+            <Icon name="plus" className="h-5 w-5" />
+            {t('forum.list.newDiscussion')}
+          </ButtonLink>
         </ActionMenu>
       </header>
 

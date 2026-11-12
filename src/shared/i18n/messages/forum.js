@@ -4,8 +4,8 @@ export default {
     breadcrumb: 'Foro',
     user: 'Usuario',
     list: {
-      eyebrow: 'Comunidad',
-      heading: 'Foro de la comunidad',
+      eyebrow: 'Pregunta y comparte',
+      heading: 'Foro',
       categoryHeading: 'Foro: {category}',
       seoDescription:
         'Preguntas, recursos y experiencias de la comunidad tech junior. Pregunta sin miedo y ayuda a otras personas a crecer.',
@@ -100,7 +100,7 @@ export default {
       comment: 'El comentario debe tener entre 3 y 5.000 caracteres.',
     },
     rules: {
-      title: 'Normas de la comunidad',
+      title: 'Normas del foro',
       intro:
         'Este es un espacio de aprendizaje y colaboración. Para mantener un ambiente constructivo, respeta estas normas:',
       respectTitle: 'Respeto absoluto',
@@ -123,8 +123,8 @@ export default {
     breadcrumb: 'Fòrum',
     user: 'Usuari',
     list: {
-      eyebrow: 'Comunitat',
-      heading: 'Fòrum de la comunitat',
+      eyebrow: 'Pregunta i comparteix',
+      heading: 'Fòrum',
       categoryHeading: 'Fòrum: {category}',
       seoDescription:
         'Preguntes, recursos i experiències de la comunitat tech júnior. Pregunta sense por i ajuda altres persones a créixer.',
@@ -219,7 +219,7 @@ export default {
       comment: 'El comentari ha de tenir entre 3 i 5.000 caràcters.',
     },
     rules: {
-      title: 'Normes de la comunitat',
+      title: 'Normes del fòrum',
       intro:
         'Aquest és un espai d’aprenentatge i col·laboració. Per mantenir un ambient constructiu, respecta aquestes normes:',
       respectTitle: 'Respecte absolut',
@@ -243,8 +243,8 @@ export default {
     breadcrumb: 'Forum',
     user: 'User',
     list: {
-      eyebrow: 'Community',
-      heading: 'Community forum',
+      eyebrow: 'Ask and share',
+      heading: 'Forum',
       categoryHeading: 'Forum: {category}',
       seoDescription:
         'Questions, resources and experiences from the junior tech community. Ask without fear and help others grow.',
@@ -338,7 +338,7 @@ export default {
       comment: 'The comment must be between 3 and 5,000 characters.',
     },
     rules: {
-      title: 'Community guidelines',
+      title: 'Forum rules',
       intro: 'This is a space for learning and collaboration. To keep it constructive, please follow these guidelines:',
       respectTitle: 'Absolute respect',
       respectText: 'Zero tolerance for disrespect, insults, discrimination or harassment of any kind.',

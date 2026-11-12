@@ -66,7 +66,7 @@ test.describe('Mejor respuesta', () => {
 
   test('el listado pide cuatro discusiones por página y enseña las normas al lado', async ({ page, api }) => {
     await page.goto('/foro')
-    await expect(page.getByRole('complementary', { name: 'Normas de la comunidad' })).toBeVisible()
+    await expect(page.getByRole('complementary', { name: 'Normas del foro' })).toBeVisible()
     await expect(page.getByRole('search').getByRole('button')).toHaveCount(0)
     await expect
       .poll(() => api.calls.some((call) => call.path === '/api/discussions' && call.query.get('size') === '4'))

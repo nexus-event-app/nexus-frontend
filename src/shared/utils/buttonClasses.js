@@ -10,5 +10,5 @@ const VARIANT_CLASSES = {
 }
 
 export function buttonClasses({ variant = 'primary', size = 'md', className } = {}) {
-  return cx('btn', VARIANT_CLASSES[variant], size === 'sm' && 'btn-sm', className)
+  return cx('btn', VARIANT_CLASSES[variant], size === 'sm' && 'btn-sm', size === 'lg' && 'btn-lg', className)
 }
