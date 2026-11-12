@@ -15,19 +15,24 @@ const items = (count) =>
   }))
 
 describe('NewsGrid', () => {
-  it('con «featured» destaca solo la primera noticia', () => {
-    renderWithProviders(<NewsGrid items={items(6)} headingLevel="h2" featured />)
+  it('con «featured» solo la primera lleva la etiqueta «Destacada»', () => {
+    renderWithProviders(<NewsGrid items={items(12)} headingLevel="h2" varied featured />)
     const cards = screen.getAllByRole('article')
     expect(within(cards[0]).getByText('Destacada')).toBeInTheDocument()
     expect(screen.getAllByText('Destacada')).toHaveLength(1)
   })
 
-  it('no destaca ninguna si hay pocas noticias o no se pide', () => {
-    const { unmount } = renderWithProviders(<NewsGrid items={items(3)} featured />)
+  it('sin «featured» no destaca ninguna', () => {
+    renderWithProviders(<NewsGrid items={items(12)} varied />)
     expect(screen.queryByText('Destacada')).not.toBeInTheDocument()
-    unmount()
-    renderWithProviders(<NewsGrid items={items(6)} />)
-    expect(screen.queryByText('Destacada')).not.toBeInTheDocument()
+  })
+
+  it('las destacadas en color también tienen titular, enlace e idioma', () => {
+    renderWithProviders(<NewsGrid items={items(12)} headingLevel="h2" varied />)
+    // En una página completa la cuarta es una destacada en color (sin imagen).
+    const spotlight = screen.getAllByRole('article')[3]
+    expect(within(spotlight).getByRole('heading', { level: 2, name: 'Noticia 4' })).toHaveAttribute('lang', 'es')
+    expect(within(spotlight).getByRole('link', { name: 'Noticia 4' })).toBeInTheDocument()
   })
 
   it('cada tarjeta lleva a su noticia con el titular como nombre', () => {

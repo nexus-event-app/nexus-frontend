@@ -89,8 +89,8 @@ export default function NewsListPage() {
                 <p role="status" className="mb-5 text-sm font-medium text-ink-muted">
                   {t('news.list.count', { count: result.totalElements })}
                 </p>
-                {/* La más reciente se destaca solo en la primera página. */}
-                <NewsGrid items={result.content} headingLevel="h2" featured={page === 1} />
+                {/* Rejilla variada; la más reciente lleva «Destacada» solo en la primera página. */}
+                <NewsGrid items={result.content} headingLevel="h2" varied featured={page === 1} />
                 <Pagination page={page} totalPages={result.totalPages} buildHref={buildHref} />
               </>
             )
