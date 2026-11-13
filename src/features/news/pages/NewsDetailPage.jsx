@@ -28,7 +28,8 @@ import { readingMinutes } from '../utils/readingTime'
 import { buildNewsArticleData } from '../utils/structuredData'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-const RELATED_COUNT = 3
+/** Noticias en el bloque lateral «Sigue leyendo». */
+const RELATED_COUNT = 4
 
 export default function NewsDetailPage() {
   const { t } = useI18n()
@@ -64,10 +65,11 @@ export default function NewsDetailPage() {
   const language = contentLanguageOf(article)
   const minutes = readingMinutes(article.content)
 
-  // Diseño editorial: la noticia en una columna centrada y cómoda de leer (la imagen, algo más ancha) y, debajo,
-  // «Sigue leyendo» a todo el ancho.
+  // Como en el foro: la noticia en su tarjeta a la izquierda y, al lado, el bloque «Sigue leyendo» (fijo al bajar en
+  // pantallas grandes; en móvil va debajo). Detrás, la cuadrícula suave de la web.
   return (
-    <PageMain className="page-container page-section">
+    <PageMain className="page-container page-section relative isolate grid grid-cols-1 content-start gap-x-10 lg:grid-cols-[minmax(0,1fr)_22rem]">
+      <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Seo
         title={article.title}
         description={excerpt(article.content, 160)}
@@ -82,14 +84,14 @@ export default function NewsDetailPage() {
       />
       {!imported && <JsonLd data={buildNewsArticleData(article)} />}
       <Breadcrumbs
-        className="mx-auto max-w-3xl"
+        className="col-span-full"
         items={[
           { label: t('news.breadcrumb'), to: paths.news },
           { label: excerpt(article.title, 60), to: path },
         ]}
       />
 
-      <article className="mx-auto mt-6 max-w-3xl">
+      <article className="mt-6 min-w-0 rounded-3xl border border-slate-200 bg-surface px-6 py-7 shadow-card sm:px-10 sm:py-9">
         <header>
           <p className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
             <span className="font-bold uppercase tracking-[0.15em] text-accent">
@@ -99,7 +101,7 @@ export default function NewsDetailPage() {
           </p>
           <h1
             lang={language}
-            className="mt-4 text-balance text-4xl font-bold leading-[1.1] tracking-tight text-ink sm:text-5xl"
+            className="mt-4 text-balance text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl"
           >
             {article.title}
           </h1>
@@ -125,10 +127,9 @@ export default function NewsDetailPage() {
           </p>
         </header>
 
-        {/* La imagen, algo más ancha que el texto en pantallas grandes, para dar aire a la noticia. */}
-        <figure className="mt-10 overflow-hidden rounded-3xl shadow-card lg:-mx-16">
+        <figure className="mt-8 overflow-hidden rounded-2xl">
           <NewsImage
-            className="aspect-[2/1]"
+            className="aspect-[5/2]"
             url={article.imageUrl}
             alt={t('news.detail.imageAlt', { title: article.title })}
             category={article.category}
@@ -138,14 +139,14 @@ export default function NewsDetailPage() {
           />
         </figure>
 
-        <UserText lang={language} className="mt-10 text-lg leading-8 text-ink-soft">
+        <UserText lang={language} className="mt-8 text-lg leading-8 text-ink-soft">
           {article.content}
         </UserText>
 
         {imported && hasSource && (
           <aside
             aria-label={t('news.detail.originalLabel')}
-            className="mt-10 grid gap-5 rounded-3xl border border-slate-200 bg-surface p-6 shadow-card sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center sm:p-8"
+            className="mt-8 grid gap-4 rounded-2xl bg-canvas p-5 ring-1 ring-inset ring-slate-200 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center sm:p-6"
           >
             <span
               aria-hidden="true"
@@ -170,7 +171,7 @@ export default function NewsDetailPage() {
           </aside>
         )}
 
-        <footer className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-slate-200 pt-6">
+        <footer className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-slate-200 pt-5">
           {!imported && hasSource ? (
             <p className="text-sm text-ink-muted">
               {t('news.detail.source')}{' '}
@@ -199,7 +200,7 @@ export default function NewsDetailPage() {
         </footer>
       </article>
 
-      <RelatedNews items={related} className="mt-24" />
+      <RelatedNews items={related} className="mt-10 lg:sticky lg:top-24 lg:mt-6 lg:self-start" />
     </PageMain>
   )
 }
