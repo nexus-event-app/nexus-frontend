@@ -1,7 +1,13 @@
 /** Cuentas: inicio de sesión, registro, verificación de email y recuperación de contraseña. */
 export default {
   es: {
+    eyebrow: 'Tu cuenta',
+    panel: {
+      label: 'Lo que ganas con tu cuenta',
+      title: 'Todo lo que necesitas para dar tu primer paso en tecnología, en un solo sitio.',
+    },
     login: {
+      eyebrow: 'Hola de nuevo',
       seoTitle: 'Iniciar sesión',
       seoDescription: 'Accede a tu cuenta de {name}.',
       title: 'Iniciar sesión',
@@ -15,6 +21,7 @@ export default {
       welcomeBack: 'Hola de nuevo, {name}.',
     },
     register: {
+      eyebrow: 'Tu primer paso',
       seoTitle: 'Crear cuenta',
       seoDescription: 'Crea tu cuenta en {name}.',
       title: 'Crear cuenta',
@@ -98,7 +105,13 @@ export default {
     sessionExpired: 'Tu sesión ha caducado. Inicia sesión de nuevo.',
   },
   ca: {
+    eyebrow: 'El teu compte',
+    panel: {
+      label: 'El que guanyes amb el teu compte',
+      title: 'Tot el que necessites per fer el primer pas en tecnologia, en un sol lloc.',
+    },
     login: {
+      eyebrow: 'Hola de nou',
       seoTitle: 'Inicia la sessió',
       seoDescription: 'Accedeix al teu compte de {name}.',
       title: 'Inicia la sessió',
@@ -112,6 +125,7 @@ export default {
       welcomeBack: 'Hola de nou, {name}.',
     },
     register: {
+      eyebrow: 'El teu primer pas',
       seoTitle: 'Crea un compte',
       seoDescription: 'Crea el teu compte a {name}.',
       title: 'Crea un compte',
@@ -195,7 +209,13 @@ export default {
     sessionExpired: 'La teva sessió ha caducat. Torna a iniciar la sessió.',
   },
   en: {
+    eyebrow: 'Your account',
+    panel: {
+      label: 'What you get with your account',
+      title: 'Everything you need to take your first step in tech, in one place.',
+    },
     login: {
+      eyebrow: 'Welcome back',
       seoTitle: 'Log in',
       seoDescription: 'Log in to your {name} account.',
       title: 'Log in',
@@ -209,6 +229,7 @@ export default {
       welcomeBack: 'Welcome back, {name}.',
     },
     register: {
+      eyebrow: 'Your first step',
       seoTitle: 'Create account',
       seoDescription: 'Create your {name} account.',
       title: 'Create account',

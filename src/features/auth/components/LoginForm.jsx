@@ -44,7 +44,7 @@ export default function LoginForm() {
           {t('auth.login.forgot')}
         </Link>
       </p>
-      <Button type="submit" className="w-full" loading={form.submitting}>
+      <Button type="submit" size="lg" className="w-full shadow-pop" loading={form.submitting}>
         {form.submitting ? t('auth.login.submitting') : t('auth.login.submit')}
       </Button>
     </form>

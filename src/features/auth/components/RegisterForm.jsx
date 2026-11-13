@@ -54,7 +54,7 @@ export default function RegisterForm() {
         required
       />
       <TermsCheckbox checked={form.values.acceptTerms} onChange={form.handleChange} error={form.errors.acceptTerms} />
-      <Button type="submit" className="w-full" loading={form.submitting}>
+      <Button type="submit" size="lg" className="w-full shadow-pop" loading={form.submitting}>
         {form.submitting ? t('auth.register.submitting') : t('auth.register.submit')}
       </Button>
     </form>

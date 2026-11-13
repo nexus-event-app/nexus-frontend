@@ -28,6 +28,7 @@ export default function RegisterPage() {
         robots="noindex,nofollow"
       />
       <AuthCard
+        eyebrow={t('auth.register.eyebrow')}
         title={t('auth.register.title')}
         subtitle={t('auth.register.subtitle')}
         footer={

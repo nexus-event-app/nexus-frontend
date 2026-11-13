@@ -28,6 +28,7 @@ export default function LoginPage() {
         robots="noindex,nofollow"
       />
       <AuthCard
+        eyebrow={t('auth.login.eyebrow')}
         title={t('auth.login.title')}
         subtitle={t('auth.login.subtitle')}
         footer={
