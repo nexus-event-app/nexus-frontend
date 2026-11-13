@@ -36,6 +36,9 @@ export default {
     },
     new: {
       seoTitle: 'Nueva discusión',
+      eyebrow: 'Pregunta a la comunidad',
+      formEyebrow: 'Tu discusión',
+      formTitle: 'Cuéntalo con detalle',
       seoDescription: 'Abre una discusión en el foro de {name}.',
       description: 'Cuéntanos tu duda o tema. Cuanto más claro, mejor te podremos ayudar.',
       confirmEmail: 'Confirma tu email para publicar en el foro. Te enviamos un enlace al registrarte.',
@@ -102,6 +105,7 @@ export default {
     },
     rules: {
       title: 'Normas del foro',
+      eyebrow: 'Convivencia',
       intro:
         'Este es un espacio de aprendizaje y colaboración. Para mantener un ambiente constructivo, respeta estas normas:',
       respectTitle: 'Respeto absoluto',
@@ -156,6 +160,9 @@ export default {
     },
     new: {
       seoTitle: 'Nova discussió',
+      eyebrow: 'Pregunta a la comunitat',
+      formEyebrow: 'La teva discussió',
+      formTitle: 'Explica-ho amb detall',
       seoDescription: 'Obre una discussió al fòrum de {name}.',
       description: 'Explica’ns el teu dubte o tema. Com més clar, millor et podrem ajudar.',
       confirmEmail: 'Confirma el teu correu per publicar al fòrum. T’hem enviat un enllaç en registrar-te.',
@@ -222,6 +229,7 @@ export default {
     },
     rules: {
       title: 'Normes del fòrum',
+      eyebrow: 'Convivència',
       intro:
         'Aquest és un espai d’aprenentatge i col·laboració. Per mantenir un ambient constructiu, respecta aquestes normes:',
       respectTitle: 'Respecte absolut',
@@ -277,6 +285,9 @@ export default {
     },
     new: {
       seoTitle: 'New discussion',
+      eyebrow: 'Ask the community',
+      formEyebrow: 'Your discussion',
+      formTitle: 'Tell us the details',
       seoDescription: 'Start a discussion in the {name} forum.',
       description: 'Tell us your question or topic. The clearer it is, the better we can help.',
       confirmEmail: 'Confirm your email to post in the forum. We sent you a link when you signed up.',
@@ -342,6 +353,7 @@ export default {
     },
     rules: {
       title: 'Forum rules',
+      eyebrow: 'Community',
       intro: 'This is a space for learning and collaboration. To keep it constructive, please follow these guidelines:',
       respectTitle: 'Absolute respect',
       respectText: 'Zero tolerance for disrespect, insults, discrimination or harassment of any kind.',

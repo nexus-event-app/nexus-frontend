@@ -30,6 +30,8 @@ const PRIVATE_PAGES = [
   '/perfil/7-lucia-prueba',
   // «Editar perfil»: el formulario y la vista previa.
   '/perfil/editar',
+  // Crear una discusión: el formulario y las normas del foro.
+  '/foro/nueva',
 ]
 
 for (const theme of ['light', 'dark']) {

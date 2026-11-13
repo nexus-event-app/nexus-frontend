@@ -7,7 +7,15 @@ import { useForm } from '@/shared/hooks/useForm'
 import { validateDiscussion } from '../utils/validators'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-export default function DiscussionForm({ initialValues, submitLabel, onSubmit, onCancel, className }) {
+export default function DiscussionForm({
+  initialValues,
+  submitLabel,
+  onSubmit,
+  onCancel,
+  buttonSize = 'md',
+  className,
+  ...props
+}) {
   const { t } = useI18n()
   const form = useForm({
     initialValues,
@@ -16,7 +24,7 @@ export default function DiscussionForm({ initialValues, submitLabel, onSubmit, o
   })
 
   return (
-    <form onSubmit={form.handleSubmit} noValidate className={cx('space-y-5', className)}>
+    <form onSubmit={form.handleSubmit} noValidate className={cx('space-y-5', className)} {...props}>
       {form.formError && <Alert variant="error">{form.formError}</Alert>}
       <FormField
         {...form.getFieldProps('title')}
@@ -41,13 +49,23 @@ export default function DiscussionForm({ initialValues, submitLabel, onSubmit, o
         maxLength={10000}
         required
       />
-      <footer className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+      <footer
+        className={cx(
+          'flex flex-col-reverse gap-3 sm:flex-row sm:justify-end',
+          buttonSize === 'lg' && 'border-t border-slate-200 pt-6',
+        )}
+      >
         {onCancel && (
-          <Button variant="secondary" onClick={onCancel} disabled={form.submitting}>
+          <Button variant="secondary" size={buttonSize} onClick={onCancel} disabled={form.submitting}>
             {t('forum.form.cancel')}
           </Button>
         )}
-        <Button type="submit" loading={form.submitting}>
+        <Button
+          type="submit"
+          size={buttonSize}
+          className={cx(buttonSize === 'lg' && 'shadow-pop')}
+          loading={form.submitting}
+        >
           {submitLabel}
         </Button>
       </footer>
