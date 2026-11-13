@@ -8,11 +8,13 @@ const frontend = LEARNING_PATHS.find((path) => path.id === 'frontend')
 
 describe('LearningPathCard', () => {
   it('enlaza a la ruta y nombra la duración y las etapas para el lector de pantalla', () => {
-    renderWithProviders(<LearningPathCard path={frontend} number={1} />)
+    renderWithProviders(<LearningPathCard path={frontend} />)
     expect(screen.getByRole('heading', { level: 2, name: 'Frontend' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Frontend' })).toHaveAttribute('href', '/rutas/frontend')
     expect(screen.getAllByRole('term').map((term) => term.textContent)).toEqual(['Duración orientativa', 'Etapas'])
     expect(screen.getByText(`${frontend.steps.length} etapas`)).toBeInTheDocument()
+    // Sin número: las rutas no tienen un orden, cada persona empieza por la que quiera.
+    expect(screen.queryByText(/^0\d$/)).not.toBeInTheDocument()
   })
 
   it('solo enseña el progreso si hay alguna etapa hecha', () => {

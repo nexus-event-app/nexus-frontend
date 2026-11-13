@@ -8,18 +8,11 @@ import PathProgress from './PathProgress'
 
 /**
  * Tarjeta de una ruta de aprendizaje, la misma en la portada y en la página de rutas. Sobria a propósito: blanca, con
- * el icono de la ruta sobre el morado oscuro de la marca (igual en todas) y el número de la ruta como detalle. Toda la
- * tarjeta lleva a la ruta. Con progreso guardado, la barra aparece al pie. Sube un poco al entrar en pantalla.
+ * el icono de la ruta sobre el morado oscuro de la marca (igual en todas). Sin número: las rutas no tienen un orden,
+ * cada persona empieza por la que quiera. Toda la tarjeta lleva a la ruta. Con progreso guardado, la barra aparece al pie. Sube un poco al entrar en pantalla.
  * `compact`: para la portada, donde caben cinco en fila.
  */
-export default function LearningPathCard({
-  path,
-  number,
-  done = null,
-  headingLevel = 'h2',
-  compact = false,
-  delay = 0,
-}) {
+export default function LearningPathCard({ path, done = null, headingLevel = 'h2', compact = false, delay = 0 }) {
   const { t } = useI18n()
   const Heading = headingLevel
   const [ref, inView] = useInView()
@@ -43,12 +36,6 @@ export default function LearningPathCard({
         >
           <Icon name={path.icon} className="h-6 w-6" />
         </span>
-        {/* Número de la ruta, como en un índice: decorativo (el orden ya lo da la lista). */}
-        {number && (
-          <span aria-hidden="true" className="font-mono text-sm font-semibold tabular-nums text-ink-muted">
-            {String(number).padStart(2, '0')}
-          </span>
-        )}
       </header>
       <Heading className={cx('mt-4 font-bold leading-snug text-ink', compact ? 'text-lg' : 'text-xl')}>
         <Link

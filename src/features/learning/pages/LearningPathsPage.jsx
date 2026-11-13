@@ -101,7 +101,6 @@ export default function LearningPathsPage() {
           <li key={path.id}>
             <LearningPathCard
               path={path}
-              number={index + 1}
               done={progress.ready ? progress.countDone(path) : null}
               delay={(index % 3) * 80}
             />

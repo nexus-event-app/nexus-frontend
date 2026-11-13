@@ -89,7 +89,7 @@ export default function LearningPathPage() {
       {/* Resumen: antetítulo y título fuera, como siempre; los datos, el progreso y los siguientes pasos en recuadros. */}
       <aside
         aria-labelledby="learning-summary"
-        className="mt-12 lg:sticky lg:top-24 lg:col-start-2 lg:row-span-4 lg:row-start-2 lg:mt-6 lg:self-start"
+        className="mt-12 lg:sticky lg:top-24 lg:col-start-2 lg:row-span-5 lg:row-start-2 lg:mt-6 lg:self-start"
       >
         <hgroup>
           <Eyebrow>{t('learning.detail.summaryEyebrow')}</Eyebrow>
@@ -133,22 +133,20 @@ export default function LearningPathPage() {
         </nav>
       </aside>
 
-      <nav aria-labelledby="learning-others" className="col-span-full mt-24">
+      <nav aria-labelledby="learning-others" className="mt-24 lg:col-start-1">
         <hgroup>
           <Eyebrow>{t('learning.detail.othersEyebrow')}</Eyebrow>
           <h2 id="learning-others" className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
             {t('learning.detail.others')}
           </h2>
         </hgroup>
-        <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
           {LEARNING_PATHS.filter((other) => other.id !== path.id).map((other) => (
             <li key={other.id}>
               <LearningPathCard
                 path={other}
-                number={LEARNING_PATHS.indexOf(other) + 1}
                 done={progress.ready ? progress.countDone(other) : null}
                 headingLevel="h3"
-                compact
               />
             </li>
           ))}
