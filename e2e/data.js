@@ -103,6 +103,23 @@ export const jobs = [
   },
 ]
 
+/** Ofertas guardadas: una publicada y otra que ya no lo está (se muestra apagada, solo para quitarla). */
+export const savedJobs = [
+  { job: jobs[0], available: true, savedAt: DATE },
+  {
+    job: {
+      ...jobs[0],
+      id: 12,
+      slug: 'qa-tester-junior',
+      title: 'QA tester junior',
+      company: 'Pruebas SL',
+      isActive: false,
+    },
+    available: false,
+    savedAt: DATE,
+  },
+]
+
 export const discussions = [
   {
     id: 21,

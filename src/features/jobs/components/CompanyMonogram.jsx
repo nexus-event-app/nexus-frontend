@@ -13,16 +13,19 @@ function hashOf(text) {
 
 /**
  * Iniciales de la empresa sobre un color sobrio, a modo de logo (las ofertas importadas no traen el suyo). Es
- * decorativo: el nombre de la empresa ya aparece en texto al lado.
+ * decorativo: el nombre de la empresa ya aparece en texto al lado. `muted` lo pinta en gris del tema (ofertas que ya no
+ * están publicadas): bajar la opacidad del color dejaría el texto sin contraste suficiente.
  */
-export default function CompanyMonogram({ name, className }) {
+export default function CompanyMonogram({ name, muted = false, className }) {
   const label = name?.trim() || '?'
   return (
     <span
       aria-hidden="true"
       className={cx(
-        'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-base font-bold tracking-wide text-white ring-1 ring-inset ring-white/10',
-        TONES[hashOf(label) % TONES.length],
+        'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-base font-bold tracking-wide ring-1 ring-inset',
+        muted
+          ? 'bg-canvas text-ink-muted ring-slate-200'
+          : cx('text-white ring-white/10', TONES[hashOf(label) % TONES.length]),
         className,
       )}
     >
