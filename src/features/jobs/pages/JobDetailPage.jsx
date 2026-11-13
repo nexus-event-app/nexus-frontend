@@ -4,6 +4,7 @@ import Alert from '@/shared/components/Alert'
 import ArticleSkeleton from '@/shared/components/ArticleSkeleton'
 import ActionMenu from '@/shared/components/ActionMenu'
 import CopyLinkButton from '@/shared/components/CopyLinkButton'
+import Eyebrow from '@/shared/components/Eyebrow'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import ErrorState from '@/shared/components/ErrorState'
 import Icon from '@/shared/components/Icon'
@@ -35,7 +36,6 @@ function SummaryRow({ label, children }) {
   )
 }
 
-const LEVEL_ICONS = { INTERN: 'academic', JUNIOR: 'sparkles', MID: 'chart' }
 const MODE_ICONS = { REMOTE: 'computer', HYBRID: 'refresh', ONSITE: 'building' }
 
 export default function JobDetailPage() {
@@ -97,45 +97,53 @@ export default function JobDetailPage() {
         ]}
       />
 
-      <article className="min-w-0 max-w-3xl">
-        <header className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-5 gap-y-5">
-          <CompanyMonogram name={job.company} className="h-16 w-16 rounded-2xl text-xl" />
-          <p className="min-w-0 text-ink-soft">
-            <span className="block truncate text-lg font-semibold text-ink">{job.company}</span>
+      {/*
+        Como en el detalle de noticia: el antetítulo (con su punto), el título y los datos de la oferta van encima; la
+        tarjeta lleva solo la oferta. El artículo toma el nombre del título (aria-labelledby).
+      */}
+      <header className="mt-6 min-w-0 lg:col-start-1">
+        <Eyebrow>{jobLevels.labelOf(job.level)}</Eyebrow>
+        <h1
+          id="job-title"
+          className="mt-3 text-balance text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl"
+        >
+          {job.title}
+        </h1>
+        <p className="mt-5 flex items-center gap-3 text-ink-soft">
+          <CompanyMonogram name={job.company} className="h-10 w-10 rounded-lg text-sm" />
+          <span className="min-w-0">
+            <span className="block truncate font-semibold text-ink">{job.company}</span>
             <span className="inline-flex items-center gap-1.5 text-sm text-ink-muted">
               <Icon name="pin" className="h-4 w-4" />
               {job.location}
             </span>
-          </p>
-          <h1 className="col-span-full text-balance text-4xl font-bold leading-[1.1] tracking-tight text-ink sm:text-5xl">
-            {job.title}
-          </h1>
-          {/* Nivel, modalidad y jornada: sobrios, con icono, como en la lista de ofertas. */}
-          <dl className="col-span-full flex flex-wrap items-center gap-x-5 gap-y-2 text-ink-soft">
-            <dt className="sr-only">{t('jobs.detail.level')}</dt>
-            <dd className="inline-flex items-center gap-2">
-              <Icon name={LEVEL_ICONS[job.level] ?? 'sparkles'} className="h-5 w-5 text-accent" />
-              {jobLevels.labelOf(job.level)}
-            </dd>
-            <dt className="sr-only">{t('jobs.detail.workMode')}</dt>
-            <dd className="inline-flex items-center gap-2">
-              <Icon name={MODE_ICONS[job.workMode] ?? 'building'} className="h-5 w-5 text-accent" />
-              {workModes.labelOf(job.workMode)}
-            </dd>
-            {job.contractType && (
-              <>
-                <dt className="sr-only">{t('jobs.detail.contract')}</dt>
-                <dd className="inline-flex items-center gap-2">
-                  <Icon name="clock" className="h-5 w-5 text-accent" />
-                  {contractTypes.labelOf(job.contractType)}
-                </dd>
-              </>
-            )}
-          </dl>
-        </header>
+          </span>
+        </p>
+        {/* Modalidad y jornada: sobrias, con icono, como en la lista de ofertas (el nivel ya va en el antetítulo). */}
+        <dl className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-ink-soft">
+          <dt className="sr-only">{t('jobs.detail.workMode')}</dt>
+          <dd className="inline-flex items-center gap-2">
+            <Icon name={MODE_ICONS[job.workMode] ?? 'building'} className="h-4 w-4 text-accent" />
+            {workModes.labelOf(job.workMode)}
+          </dd>
+          {job.contractType && (
+            <>
+              <dt className="sr-only">{t('jobs.detail.contract')}</dt>
+              <dd className="inline-flex items-center gap-2">
+                <Icon name="clock" className="h-4 w-4 text-accent" />
+                {contractTypes.labelOf(job.contractType)}
+              </dd>
+            </>
+          )}
+        </dl>
+      </header>
 
+      <article
+        aria-labelledby="job-title"
+        className="mt-8 min-w-0 rounded-3xl border border-slate-200 bg-surface p-6 shadow-card sm:p-8 lg:col-start-1"
+      >
         {imported && job.source && (
-          <p className="mt-6 flex items-start gap-3 rounded-2xl bg-accent-soft px-4 py-3 text-sm text-ink-soft">
+          <p className="mb-8 flex items-start gap-3 rounded-2xl bg-accent-soft px-4 py-3 text-sm text-ink-soft">
             <Icon name="info" className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
             <span>
               {t('jobs.detail.importedStart')} <strong className="font-semibold text-ink">{job.source}</strong>.{' '}
@@ -145,21 +153,21 @@ export default function JobDetailPage() {
         )}
 
         {expired && (
-          <Alert variant="warning" className="mt-6" title={t('jobs.detail.expiredTitle')}>
+          <Alert variant="warning" className="mb-8" title={t('jobs.detail.expiredTitle')}>
             {t('jobs.detail.expired')}
           </Alert>
         )}
 
-        <section aria-labelledby="job-description" className="mt-12">
-          <h2 id="job-description" className="mb-5 text-2xl font-bold tracking-tight text-ink">
+        <section aria-labelledby="job-description">
+          <h2 id="job-description" className="mb-4 text-xl font-bold tracking-tight text-ink">
             {t('jobs.detail.description')}
           </h2>
-          <UserText className="text-lg leading-8 text-ink-soft">{job.description}</UserText>
+          <UserText className="leading-7 text-ink-soft">{job.description}</UserText>
         </section>
 
         {job.tags?.length > 0 && (
-          <section aria-labelledby="job-tags" className="mt-12">
-            <h2 id="job-tags" className="mb-4 text-2xl font-bold tracking-tight text-ink">
+          <section aria-labelledby="job-tags" className="mt-10">
+            <h2 id="job-tags" className="mb-4 text-xl font-bold tracking-tight text-ink">
               {t('jobs.detail.tags')}
             </h2>
             <ul className="flex flex-wrap gap-2">
@@ -175,7 +183,7 @@ export default function JobDetailPage() {
           </section>
         )}
 
-        <footer className="mt-12 flex flex-wrap items-center justify-end gap-3 border-t border-slate-200 pt-6">
+        <footer className="mt-10 flex flex-wrap items-center justify-end gap-3 border-t border-slate-200 pt-5">
           <ActionMenu className="flex-wrap gap-3">
             <Link
               to={paths.jobs}
@@ -189,21 +197,18 @@ export default function JobDetailPage() {
         </footer>
       </article>
 
-      {/* Resumen: cabecera con el degradado de la marca (como las normas del foro), los datos y el botón grande. */}
+      {/* Resumen: antetítulo y título fuera, como siempre; el recuadro lleva los datos y los botones. */}
       <aside
         aria-labelledby="job-summary"
-        className="mt-12 overflow-hidden rounded-3xl border border-slate-200 bg-surface shadow-card lg:sticky lg:top-24 lg:mt-0 lg:self-start"
+        className="mt-12 lg:sticky lg:top-24 lg:col-start-2 lg:row-span-2 lg:row-start-2 lg:mt-6 lg:self-start"
       >
-        <header className="relative isolate overflow-hidden bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 px-6 py-5 text-white">
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute -right-10 -top-10 -z-10 h-32 w-32 rounded-full bg-brand-400/30 blur-2xl"
-          />
-          <h2 id="job-summary" className="text-lg font-bold">
+        <hgroup>
+          <Eyebrow>{t('jobs.detail.summaryEyebrow')}</Eyebrow>
+          <h2 id="job-summary" className="mt-3 text-2xl font-bold tracking-tight text-ink">
             {t('jobs.detail.summary')}
           </h2>
-        </header>
-        <dl className="mx-6 mt-2 grid grid-cols-[auto_minmax(0,1fr)] [&>*:nth-last-child(-n+2)]:border-b-0">
+        </hgroup>
+        <dl className="mt-5 grid grid-cols-[auto_minmax(0,1fr)] rounded-t-3xl border border-b-0 border-slate-200 bg-surface px-6 pt-2 shadow-card [&>*:nth-last-child(-n+2)]:border-b-0">
           <SummaryRow label={t('jobs.detail.company')}>{job.company}</SummaryRow>
           <SummaryRow label={t('jobs.detail.location')}>{job.location}</SummaryRow>
           <SummaryRow label={t('jobs.detail.workMode')}>{workModes.labelOf(job.workMode)}</SummaryRow>
@@ -219,7 +224,8 @@ export default function JobDetailPage() {
           )}
           {job.source && <SummaryRow label={t('jobs.detail.source')}>{job.source}</SummaryRow>}
         </dl>
-        <ActionMenu className="mx-6 mb-6 mt-4 flex-col gap-3">
+        {/* Los botones cierran el mismo recuadro que los datos (la lista y el menú comparten el borde). */}
+        <ActionMenu className="flex-col gap-3 rounded-b-3xl border border-t-0 border-slate-200 bg-surface px-6 pb-6 pt-4 shadow-card">
           {canApply && !expired && (
             <a
               href={job.applyUrl}
