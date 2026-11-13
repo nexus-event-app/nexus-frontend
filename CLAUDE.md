@@ -46,6 +46,8 @@ Normas de código del proyecto. Se aplican a todo lo que se escriba a partir de 
 
 - Antetítulo (`Eyebrow`, con su punto) y título de un apartado van siempre fuera, encima de su bloque: nunca dentro
   de una tarjeta o recuadro. La tarjeta lleva solo el contenido.
+  Excepción: las normas del foro (`ForumRules`) dejan fuera solo el antetítulo y llevan el título en su cabecera de
+  color, para que destaquen.
 
 - Tarjetas que son un enlace entero (el enlace del título con `after:absolute after:inset-0`): las pistas visuales
   («Leer noticia», la flecha...) llevan `aria-hidden` y `pointer-events-none`, para que el clic siempre llegue al enlace
