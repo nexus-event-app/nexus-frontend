@@ -44,6 +44,9 @@ Normas de código del proyecto. Se aplican a todo lo que se escriba a partir de 
 - Animaciones suaves y con propósito (`animate-rise-in`, `animate-drift`...): ninguna debe ser necesaria para entender
   el contenido y todas se desactivan con «reducir movimiento» (index.css). axe espera a que terminen las de entrada.
 
+- Antetítulo (`Eyebrow`, con su punto) y título de un apartado van siempre fuera, encima de su bloque: nunca dentro
+  de una tarjeta o recuadro. La tarjeta lleva solo el contenido.
+
 - Tarjetas que son un enlace entero (el enlace del título con `after:absolute after:inset-0`): las pistas visuales
   («Leer noticia», la flecha...) llevan `aria-hidden` y `pointer-events-none`, para que el clic siempre llegue al enlace
   aunque se muevan al pasar el ratón. Lo comprueba `e2e/tarjetas.spec.js`.

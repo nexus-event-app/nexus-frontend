@@ -4,6 +4,7 @@ import ArticleSkeleton from '@/shared/components/ArticleSkeleton'
 import ActionMenu from '@/shared/components/ActionMenu'
 import CopyLinkButton from '@/shared/components/CopyLinkButton'
 import ContentLanguageBadge from '@/shared/components/ContentLanguageBadge'
+import Eyebrow from '@/shared/components/Eyebrow'
 import { contentLanguageOf } from '@/shared/utils/contentLanguage'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import ErrorState from '@/shared/components/ErrorState'
@@ -65,8 +66,8 @@ export default function NewsDetailPage() {
   const language = contentLanguageOf(article)
   const minutes = readingMinutes(article.content)
 
-  // Como en el foro: la noticia en su tarjeta a la izquierda y, al lado, el bloque «Sigue leyendo» (fijo al bajar en
-  // pantallas grandes; en móvil va debajo). Detrás, la cuadrícula suave de la web.
+  // Como en el foro: la noticia a la izquierda y, al lado, «Sigue leyendo» (fijo al bajar en pantallas grandes; en
+  // móvil va debajo). Detrás, la cuadrícula suave de la web.
   return (
     <PageMain className="page-container page-section relative isolate grid grid-cols-1 content-start gap-x-10 lg:grid-cols-[minmax(0,1fr)_22rem]">
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
@@ -91,43 +92,49 @@ export default function NewsDetailPage() {
         ]}
       />
 
-      <article className="mt-6 min-w-0 rounded-3xl border border-slate-200 bg-surface px-6 py-7 shadow-card sm:px-10 sm:py-9">
-        <header>
-          <p className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
-            <span className="font-bold uppercase tracking-[0.15em] text-accent">
-              {newsCategories.labelOf(article.category)}
-            </span>
-            <ContentLanguageBadge language={language} />
-          </p>
-          <h1
-            lang={language}
-            className="mt-4 text-balance text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl"
-          >
-            {article.title}
-          </h1>
-          <p className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-ink-muted">
-            {article.author && (
-              <>
-                <span className="font-medium text-ink-soft">{t('news.detail.by', { author: article.author })}</span>
-                <span aria-hidden="true">·</span>
-              </>
-            )}
-            <Time value={article.createdAt} />
-            <span aria-hidden="true">·</span>
-            <span className="inline-flex items-center gap-1.5">
-              <Icon name="clock" className="h-4 w-4" />
-              {t('news.detail.readingTime', { count: minutes })}
-            </span>
-            {imported && article.source && (
-              <>
-                <span aria-hidden="true">·</span>
-                <span>{t('news.detail.via', { source: article.source })}</span>
-              </>
-            )}
-          </p>
-        </header>
+      {/*
+        Como en el resto de la web, el antetítulo (con su punto) y el título van fuera, encima del bloque; la tarjeta
+        lleva solo la noticia. El artículo toma el nombre del título (aria-labelledby).
+      */}
+      <header className="mt-6 min-w-0 lg:col-start-1">
+        <p className="flex flex-wrap items-center gap-x-3 gap-y-2">
+          <Eyebrow>{newsCategories.labelOf(article.category)}</Eyebrow>
+          <ContentLanguageBadge language={language} />
+        </p>
+        <h1
+          id="news-title"
+          lang={language}
+          className="mt-3 text-balance text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl"
+        >
+          {article.title}
+        </h1>
+        <p className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-ink-muted">
+          {article.author && (
+            <>
+              <span className="font-medium text-ink-soft">{t('news.detail.by', { author: article.author })}</span>
+              <span aria-hidden="true">·</span>
+            </>
+          )}
+          <Time value={article.createdAt} />
+          <span aria-hidden="true">·</span>
+          <span className="inline-flex items-center gap-1.5">
+            <Icon name="clock" className="h-4 w-4" />
+            {t('news.detail.readingTime', { count: minutes })}
+          </span>
+          {imported && article.source && (
+            <>
+              <span aria-hidden="true">·</span>
+              <span>{t('news.detail.via', { source: article.source })}</span>
+            </>
+          )}
+        </p>
+      </header>
 
-        <figure className="mt-8 overflow-hidden rounded-2xl">
+      <article
+        aria-labelledby="news-title"
+        className="mt-8 min-w-0 rounded-3xl border border-slate-200 bg-surface p-6 shadow-card sm:p-8 lg:col-start-1"
+      >
+        <figure className="overflow-hidden rounded-2xl">
           <NewsImage
             className="aspect-[5/2]"
             url={article.imageUrl}
@@ -200,7 +207,10 @@ export default function NewsDetailPage() {
         </footer>
       </article>
 
-      <RelatedNews items={related} className="mt-10 lg:sticky lg:top-24 lg:mt-6 lg:self-start" />
+      <RelatedNews
+        items={related}
+        className="mt-12 lg:sticky lg:top-24 lg:col-start-2 lg:row-span-2 lg:row-start-2 lg:mt-6 lg:self-start"
+      />
     </PageMain>
   )
 }
