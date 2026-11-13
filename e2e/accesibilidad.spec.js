@@ -28,6 +28,8 @@ const PRIVATE_PAGES = [
   '/rutas/ia',
   // El perfil propio: con «Editar perfil» y todos los datos rellenos.
   '/perfil/7-lucia-prueba',
+  // «Editar perfil»: el formulario y la vista previa.
+  '/perfil/editar',
 ]
 
 for (const theme of ['light', 'dark']) {

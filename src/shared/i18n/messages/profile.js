@@ -34,6 +34,13 @@ export default {
     },
     edit: {
       title: 'Editar perfil',
+      eyebrow: 'Tu perfil público',
+      formEyebrow: 'Tus datos',
+      formTitle: 'Lo que cuentas',
+      basics: 'Lo básico',
+      previewEyebrow: 'Vista previa',
+      previewTitle: 'Así te verán',
+      previewHint: 'Se actualiza mientras escribes. Nada se publica hasta que guardes.',
       description:
         'Lo que pongas aquí es público: lo verá cualquiera que entre en tu perfil. Tu email nunca se muestra.',
       error: 'No hemos podido cargar tu perfil',
@@ -110,6 +117,13 @@ export default {
     },
     edit: {
       title: 'Edita el perfil',
+      eyebrow: 'El teu perfil públic',
+      formEyebrow: 'Les teves dades',
+      formTitle: 'El que expliques',
+      basics: 'El més bàsic',
+      previewEyebrow: 'Vista prèvia',
+      previewTitle: 'Així et veuran',
+      previewHint: 'S’actualitza mentre escrius. No es publica res fins que desis.',
       description:
         'El que posis aquí és públic: ho veurà qualsevol persona que entri al teu perfil. El teu correu no es mostra mai.',
       error: 'No hem pogut carregar el teu perfil',
@@ -186,6 +200,13 @@ export default {
     },
     edit: {
       title: 'Edit profile',
+      eyebrow: 'Your public profile',
+      formEyebrow: 'Your details',
+      formTitle: 'What you share',
+      basics: 'The basics',
+      previewEyebrow: 'Preview',
+      previewTitle: 'How others will see you',
+      previewHint: 'It updates as you type. Nothing is published until you save.',
       description: 'Everything here is public: anyone who visits your profile will see it. Your email is never shown.',
       error: 'We couldn’t load your profile',
       confirmEmail: 'Confirm your email to edit your public profile.',

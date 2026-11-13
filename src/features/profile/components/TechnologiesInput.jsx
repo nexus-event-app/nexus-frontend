@@ -1,5 +1,6 @@
 import { useId, useRef, useState } from 'react'
 import Icon from '@/shared/components/Icon'
+import { cx } from '@/shared/utils/classNames'
 import { useI18n } from '@/shared/i18n/useI18n'
 
 export const MAX_TECHNOLOGIES = 12
@@ -44,7 +45,7 @@ const SUGGESTIONS = [
  * Campo de etiquetas: se escribe una tecnología y se añade con Intro o coma. Cada etiqueta tiene su botón para
  * quitarla, y con Retroceso en el campo vacío se quita la última.
  */
-export default function TechnologiesInput({ value, onChange, error }) {
+export default function TechnologiesInput({ value, onChange, error, className, legendClassName }) {
   const { t } = useI18n()
   const id = useId()
   const [draft, setDraft] = useState('')
@@ -75,8 +76,10 @@ export default function TechnologiesInput({ value, onChange, error }) {
 
   return (
     // Grupo de campos: la lista de tecnologías añadidas y el campo para añadir otra.
-    <fieldset>
-      <legend className="mb-1.5 block text-sm font-semibold text-ink">{t('profile.edit.technologies')}</legend>
+    <fieldset className={className}>
+      <legend className={cx('block', legendClassName ?? 'mb-1.5 text-sm font-semibold text-ink')}>
+        {t('profile.edit.technologies')}
+      </legend>
       {value.length > 0 && (
         <ul className="mb-2 flex flex-wrap gap-2" aria-label={t('profile.edit.technologiesAdded')}>
           {value.map((technology) => (

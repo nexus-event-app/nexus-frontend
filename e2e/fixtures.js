@@ -62,6 +62,8 @@ class MockApi {
     this.on('GET', /^\/api\/users\/\d+$/, () => json(profile))
     this.on('GET', /^\/api\/users\/\d+\/discussions$/, () => json(page(discussions)))
     this.on('GET', /^\/api\/users\/\d+\/testimonials$/, () => json(testimonials))
+    this.on('GET', '/api/profile', () => json(profile))
+    this.on('PUT', '/api/profile', () => json(profile))
     this.on('GET', '/api/auth/me', () => json(user))
     this.on('POST', '/api/auth/login', () => json({ token: 'token-de-prueba', user }))
   }
