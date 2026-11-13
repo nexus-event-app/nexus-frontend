@@ -2,6 +2,14 @@
 export default {
   es: {
     view: {
+      aboutEyebrow: 'Perfil',
+      aboutTitle: 'Sobre {name}',
+      aboutTitleOwn: 'Sobre ti',
+      emptyAbout: 'Todavía no ha contado nada sobre su camino tech.',
+      emptyAboutOwn: 'Cuenta qué estás aprendiendo y añade tus enlaces para que la comunidad te conozca.',
+      discussionsEyebrow: 'En el foro',
+      testimonialsEyebrow: 'En el muro',
+      stats: 'Actividad',
       seoTitle: '{name} · Perfil en la comunidad',
       seoDescription: 'Perfil de {name} en la comunidad: discusiones del foro y testimonios.',
       error: 'No hemos podido cargar el perfil',
@@ -70,6 +78,14 @@ export default {
   },
   ca: {
     view: {
+      aboutEyebrow: 'Perfil',
+      aboutTitle: 'Sobre {name}',
+      aboutTitleOwn: 'Sobre tu',
+      emptyAbout: 'Encara no ha explicat res sobre el seu camí tech.',
+      emptyAboutOwn: 'Explica què estàs aprenent i afegeix els teus enllaços perquè la comunitat et conegui.',
+      discussionsEyebrow: 'Al fòrum',
+      testimonialsEyebrow: 'Al mur',
+      stats: 'Activitat',
       seoTitle: '{name} · Perfil a la comunitat',
       seoDescription: 'Perfil de {name} a la comunitat: debats del fòrum i testimonis.',
       error: 'No hem pogut carregar el perfil',
@@ -138,6 +154,14 @@ export default {
   },
   en: {
     view: {
+      aboutEyebrow: 'Profile',
+      aboutTitle: 'About {name}',
+      aboutTitleOwn: 'About you',
+      emptyAbout: 'They have not shared anything about their tech journey yet.',
+      emptyAboutOwn: 'Tell people what you are learning and add your links so the community can get to know you.',
+      discussionsEyebrow: 'In the forum',
+      testimonialsEyebrow: 'On the wall',
+      stats: 'Activity',
       seoTitle: '{name} · Community profile',
       seoDescription: 'Profile of {name} in the community: forum discussions and testimonials.',
       error: 'We couldn’t load the profile',

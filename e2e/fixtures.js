@@ -8,6 +8,7 @@ import {
   news,
   notifications,
   page,
+  profile,
   searchResult,
   testimonials,
   user,
@@ -58,6 +59,9 @@ class MockApi {
     this.on('GET', '/api/admin/stats', () =>
       json({ users: 3, news: 2, jobs: 1, discussions: 1, comments: 2, pendingTestimonials: 0, pendingReports: 1 }),
     )
+    this.on('GET', /^\/api\/users\/\d+$/, () => json(profile))
+    this.on('GET', /^\/api\/users\/\d+\/discussions$/, () => json(page(discussions)))
+    this.on('GET', /^\/api\/users\/\d+\/testimonials$/, () => json(testimonials))
     this.on('GET', '/api/auth/me', () => json(user))
     this.on('POST', '/api/auth/login', () => json({ token: 'token-de-prueba', user }))
   }

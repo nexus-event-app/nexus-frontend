@@ -5,6 +5,7 @@ import DiscussionCard from '@/features/forum/components/DiscussionCard'
 import TestimonialGrid from '@/features/testimonials/components/TestimonialGrid'
 import ArticleSkeleton from '@/shared/components/ArticleSkeleton'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
+import Eyebrow from '@/shared/components/Eyebrow'
 import ButtonLink from '@/shared/components/ButtonLink'
 import EmptyState from '@/shared/components/EmptyState'
 import ErrorState from '@/shared/components/ErrorState'
@@ -21,6 +22,8 @@ import { useRequest } from '@/shared/hooks/useRequest'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { parseIdSlug } from '@/shared/utils/slug'
 import { excerpt } from '@/shared/utils/text'
+import { cx } from '@/shared/utils/classNames'
+import ProfileAbout from '../components/ProfileAbout'
 import ProfileHeader from '../components/ProfileHeader'
 import { profileService } from '../services/profileService'
 
@@ -28,17 +31,20 @@ function isIncomplete(profile) {
   return !profile.avatarUrl && !profile.bio && !profile.headline && profile.technologies.length === 0
 }
 
-function Discussions({ profile, isOwn }) {
+function Discussions({ profile, isOwn, className }) {
   const { t } = useI18n()
   const { page, buildHref } = useListQuery()
   const request = useRequest(`profile:${profile.id}:discussions:${page}`, ({ signal }) =>
     profileService.discussions(profile.id, { page: page - 1, size: DEFAULT_PAGE_SIZE }, { signal }),
   )
   return (
-    <section aria-labelledby="profile-discussions" aria-busy={request.loading} className="mt-12">
-      <h2 id="profile-discussions" className="mb-4 text-2xl font-bold text-ink">
-        {t('profile.view.discussionsTitle')}
-      </h2>
+    <section aria-labelledby="profile-discussions" aria-busy={request.loading} className={className}>
+      <hgroup className="mb-6">
+        <Eyebrow>{t('profile.view.discussionsEyebrow')}</Eyebrow>
+        <h2 id="profile-discussions" className="mt-3 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+          {t('profile.view.discussionsTitle')}
+        </h2>
+      </hgroup>
       <QueryBoundary data={request.data} error={request.error} onRetry={request.reload} skeleton={<ListSkeleton />}>
         {(result) =>
           result.content.length === 0 ? (
@@ -67,17 +73,20 @@ function Discussions({ profile, isOwn }) {
   )
 }
 
-function Testimonials({ profile, isOwn }) {
+function Testimonials({ profile, isOwn, className }) {
   const { t } = useI18n()
   const request = useRequest(`profile:${profile.id}:testimonials`, ({ signal }) =>
     profileService.testimonials(profile.id, { signal }),
   )
   if (!isOwn && request.data?.length === 0) return null
   return (
-    <section aria-labelledby="profile-testimonials" aria-busy={request.loading} className="mt-12">
-      <h2 id="profile-testimonials" className="mb-4 text-2xl font-bold text-ink">
-        {t('profile.view.testimonialsTitle')}
-      </h2>
+    <section aria-labelledby="profile-testimonials" aria-busy={request.loading} className={className}>
+      <hgroup className="mb-6">
+        <Eyebrow>{t('profile.view.testimonialsEyebrow')}</Eyebrow>
+        <h2 id="profile-testimonials" className="mt-3 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+          {t('profile.view.testimonialsTitle')}
+        </h2>
+      </hgroup>
       <QueryBoundary data={request.data} error={request.error} onRetry={request.reload} skeleton={<ListSkeleton />}>
         {(items) =>
           items.length === 0 ? (
@@ -91,7 +100,7 @@ function Testimonials({ profile, isOwn }) {
               }
             />
           ) : (
-            <TestimonialGrid items={items} linkAuthors={false} />
+            <TestimonialGrid items={items} linkAuthors={false} compact columns={2} />
           )
         }
       </QueryBoundary>
@@ -127,10 +136,15 @@ export default function ProfilePage() {
   if (slug !== profile.slug) return <Navigate to={paths.profile(profile)} replace />
 
   const isOwn = user?.id === profile.id
+  // Filas de la rejilla: migas, cabecera, aviso de completar el perfil (si toca) y, después, los apartados.
+  const showComplete = isOwn && isIncomplete(profile)
   const path = paths.profile(profile)
 
   return (
-    <PageMain className="page-container page-section max-w-[60rem]">
+    // Como en el resto de páginas: la cabecera arriba; a la izquierda, sus discusiones y testimonios; a la derecha,
+    // «Sobre…». Detrás, la cuadrícula suave de la web.
+    <PageMain className="page-container page-section relative isolate grid grid-cols-1 content-start gap-x-12 lg:grid-cols-[minmax(0,1fr)_22rem]">
+      <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       {/* Los perfiles son de personas: no se indexan en buscadores. */}
       <Seo
         title={t('profile.view.seoTitle', { name: profile.name })}
@@ -145,30 +159,40 @@ export default function ProfilePage() {
         translated={false}
       />
       <Breadcrumbs
+        className="col-span-full"
         items={[
           { label: t('forum.breadcrumb'), to: paths.forum },
           { label: profile.name, to: path },
         ]}
       />
-      <ProfileHeader profile={profile} isOwn={isOwn} />
-      {isOwn && isIncomplete(profile) && (
-        <section
-          aria-labelledby="profile-complete"
-          className="mt-12 flex flex-col gap-4 rounded-card border border-dashed border-accent-line bg-accent-soft/60 p-5 sm:flex-row sm:items-center sm:justify-between"
-        >
-          <hgroup>
-            <h2 id="profile-complete" className="font-semibold text-ink">
-              {t('profile.view.completeTitle')}
-            </h2>
-            <p className="mt-1 text-sm text-ink-soft">{t('profile.view.completeText')}</p>
-          </hgroup>
-          <ButtonLink to={paths.profileEdit} className="shrink-0">
+      <ProfileHeader
+        profile={profile}
+        isOwn={isOwn}
+        className="col-span-full mt-6 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-6 gap-y-4 sm:grid-cols-[auto_minmax(0,1fr)_auto]"
+      />
+      {showComplete && (
+        <p className="col-span-full mt-8 flex flex-col gap-4 rounded-3xl border border-dashed border-accent-line bg-accent-soft px-6 py-5 text-ink-soft sm:flex-row sm:items-center sm:justify-between">
+          <span>
+            <strong className="block font-semibold text-ink">{t('profile.view.completeTitle')}</strong>
+            <span className="mt-1 block text-sm">{t('profile.view.completeText')}</span>
+          </span>
+          <ButtonLink to={paths.profileEdit} className="shrink-0 rounded-full">
             {t('profile.view.completeAction')}
           </ButtonLink>
-        </section>
+        </p>
       )}
-      <Discussions profile={profile} isOwn={isOwn} />
-      <Testimonials profile={profile} isOwn={isOwn} />
+      <ProfileAbout
+        profile={profile}
+        isOwn={isOwn}
+        headingClassName={cx('mt-14 lg:col-start-2', showComplete ? 'lg:row-start-4' : 'lg:row-start-3')}
+        className="mt-5 lg:col-start-2"
+      />
+      <Discussions
+        profile={profile}
+        isOwn={isOwn}
+        className={cx('mt-14 lg:col-start-1 lg:row-span-2', showComplete ? 'lg:row-start-4' : 'lg:row-start-3')}
+      />
+      <Testimonials profile={profile} isOwn={isOwn} className="mt-14 lg:col-start-1" />
     </PageMain>
   )
 }

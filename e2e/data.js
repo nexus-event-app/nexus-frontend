@@ -13,6 +13,22 @@ export const user = {
   createdAt: DATE,
 }
 
+/** Perfil público de la persona con sesión (Lucía), con todos sus datos rellenos. */
+export const profile = {
+  id: 7,
+  name: 'Lucía Prueba',
+  slug: 'lucia-prueba',
+  avatarUrl: null,
+  headline: 'Estudiante de DAW, buscando mis primeras prácticas',
+  bio: 'Aprendo React y accesibilidad. Me encanta preguntar en el foro y ayudar a quien empieza.',
+  technologies: ['React', 'JavaScript', 'CSS', 'Git'],
+  githubUrl: 'https://github.com/ejemplo',
+  linkedinUrl: 'https://www.linkedin.com/in/ejemplo',
+  memberSince: DATE,
+  discussionCount: 1,
+  testimonialCount: 1,
+}
+
 export const news = [
   {
     id: 1,
