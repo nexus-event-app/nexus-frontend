@@ -18,7 +18,7 @@ test.describe('Rutas de aprendizaje', () => {
 
     await expect(page).toHaveURL(/\/rutas\/ia$/)
     await expect(page.getByRole('heading', { level: 1, name: 'Inteligencia artificial' })).toBeVisible()
-    await expect(page.getByRole('main').getByRole('article')).toHaveCount(6)
+    await expect(page.getByRole('heading', { level: 2, name: /^Etapa \d/ })).toHaveCount(6)
     const elements = page.getByRole('link', { name: /Elements of AI/ })
     await expect(elements).toHaveAttribute('href', 'https://www.elementsofai.com/es')
     await expect(elements).toHaveAttribute('target', '_blank')

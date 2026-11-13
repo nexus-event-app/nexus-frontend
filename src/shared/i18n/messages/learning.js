@@ -57,6 +57,8 @@ export default {
       others: 'Otras rutas',
       notFound: 'Esta ruta no existe',
       summary: 'Resumen de la ruta',
+      summaryEyebrow: 'En breve',
+      othersEyebrow: 'Sigue explorando',
     },
     paths: {
       frontend: {
@@ -324,6 +326,8 @@ export default {
       others: 'Altres rutes',
       notFound: 'Aquesta ruta no existeix',
       summary: 'Resum de la ruta',
+      summaryEyebrow: 'En resum',
+      othersEyebrow: 'Continua explorant',
     },
     paths: {
       frontend: {
@@ -591,6 +595,8 @@ export default {
       others: 'Other paths',
       notFound: 'This path does not exist',
       summary: 'Path summary',
+      summaryEyebrow: 'At a glance',
+      othersEyebrow: 'Keep exploring',
     },
     paths: {
       frontend: {
