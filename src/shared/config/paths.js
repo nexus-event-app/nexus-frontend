@@ -36,6 +36,7 @@ export const paths = {
   adminForum: '/admin/foro',
   adminTestimonials: '/admin/testimonios',
   adminUsers: '/admin/usuarios',
+  adminUserProfile: (id) => `/admin/usuarios/${id}/perfil`,
   adminImport: '/admin/importacion',
   adminReports: '/admin/reportes',
 }

@@ -8,7 +8,6 @@ import Button from '@/shared/components/Button'
 import ButtonLink from '@/shared/components/ButtonLink'
 import ErrorState from '@/shared/components/ErrorState'
 import Eyebrow from '@/shared/components/Eyebrow'
-import FormField from '@/shared/components/FormField'
 import PageMain from '@/shared/components/PageMain'
 import Seo from '@/shared/components/Seo'
 import { paths } from '@/shared/config/paths'
@@ -17,66 +16,29 @@ import { useRequest } from '@/shared/hooks/useRequest'
 import { useToast } from '@/shared/hooks/useToast'
 import { useNavigate } from '@/shared/i18n/useNavigate'
 import { useI18n } from '@/shared/i18n/useI18n'
-import { translate } from '@/shared/i18n/translate'
 import AvatarField from '../components/AvatarField'
+import ProfileFields from '../components/ProfileFields'
 import ProfilePreview from '../components/ProfilePreview'
-import TechnologiesInput from '../components/TechnologiesInput'
 import { profileService } from '../services/profileService'
-import { GITHUB_PATTERN, LINKEDIN_PATTERN, normalizeGithub, normalizeLinkedin } from '../utils/profileLinks'
-
-const BIO_MAX = 300
-
-function validate({ name, headline, bio, githubUrl, linkedinUrl }) {
-  const errors = {}
-  const nameLength = name.trim().length
-  if (nameLength < 2 || nameLength > 50) errors.name = translate('profile.validation.name')
-  if (headline.trim().length > 80) errors.headline = translate('profile.validation.headline')
-  if (bio.trim().length > BIO_MAX) errors.bio = translate('profile.validation.bio')
-  const github = normalizeGithub(githubUrl)
-  if (github && !GITHUB_PATTERN.test(github)) errors.githubUrl = translate('profile.validation.github')
-  const linkedin = normalizeLinkedin(linkedinUrl)
-  if (linkedin && !LINKEDIN_PATTERN.test(linkedin)) errors.linkedinUrl = translate('profile.validation.linkedin')
-  return errors
-}
-
-function toFormValues(profile) {
-  return {
-    name: profile.name ?? '',
-    headline: profile.headline ?? '',
-    bio: profile.bio ?? '',
-    technologies: profile.technologies ?? [],
-    githubUrl: profile.githubUrl ?? '',
-    linkedinUrl: profile.linkedinUrl ?? '',
-  }
-}
+import { toProfileFormValues, toProfilePayload, validateProfile } from '../utils/profileForm'
 
 function ProfileForm({ profile, onAvatarChange }) {
   const { t } = useI18n()
   const toast = useToast()
   const navigate = useNavigate()
   const { refreshUser } = useAuth()
-  const [initialValues] = useState(() => toFormValues(profile))
+  const [initialValues] = useState(() => toProfileFormValues(profile))
 
   const form = useForm({
     initialValues,
-    validate,
+    validate: validateProfile,
     onSubmit: async (values) => {
-      const saved = await profileService.update({
-        name: values.name.trim(),
-        headline: values.headline.trim(),
-        bio: values.bio.trim(),
-        technologies: values.technologies,
-        githubUrl: normalizeGithub(values.githubUrl),
-        linkedinUrl: normalizeLinkedin(values.linkedinUrl),
-      })
+      const saved = await profileService.update(toProfilePayload(values))
       await refreshUser().catch(() => null)
       toast.success(t('profile.edit.saved'))
       navigate(paths.profile(saved))
     },
   })
-
-  const technologiesError = Object.entries(form.errors).find(([key]) => key.startsWith('technologies'))?.[1]
-  const bioLength = form.values.bio.trim().length
 
   return (
     // Sin envoltorio: el formulario y la vista previa se colocan en la rejilla de la página (en el móvil, la vista
@@ -102,63 +64,7 @@ function ProfileForm({ profile, onAvatarChange }) {
           onChange={onAvatarChange}
           legendClassName="mb-4 text-lg font-bold text-ink"
         />
-        <fieldset className="space-y-6 border-t border-slate-200 pt-8 [&>legend+*]:clear-left">
-          <legend className="float-left mb-4 w-full text-lg font-bold text-ink">{t('profile.edit.basics')}</legend>
-          <FormField
-            {...form.getFieldProps('name')}
-            label={t('profile.edit.name')}
-            hint={t('profile.edit.nameHint')}
-            autoComplete="name"
-            maxLength={50}
-            required
-          />
-          <FormField
-            {...form.getFieldProps('headline')}
-            label={t('profile.edit.headline')}
-            placeholder={t('profile.edit.headlinePlaceholder')}
-            maxLength={80}
-          />
-          <FormField
-            {...form.getFieldProps('bio')}
-            as="textarea"
-            rows={4}
-            label={t('profile.edit.bio')}
-            placeholder={t('profile.edit.bioPlaceholder')}
-            hint={t('profile.edit.bioHint', { count: bioLength, max: BIO_MAX })}
-            maxLength={BIO_MAX}
-          />
-        </fieldset>
-        <TechnologiesInput
-          className="border-t border-slate-200 pt-8 [&>legend+*]:clear-left"
-          legendClassName="float-left mb-4 w-full text-lg font-bold text-ink"
-          value={form.values.technologies}
-          onChange={(next) => form.setValue('technologies', next)}
-          error={technologiesError}
-        />
-        <fieldset className="space-y-6 border-t border-slate-200 pt-8 [&>legend+*]:clear-left">
-          {/* Leyendas flotantes: se comportan como un título más y no cortan el borde del grupo. */}
-          <legend className="float-left mb-4 w-full text-lg font-bold text-ink">{t('profile.edit.links')}</legend>
-          <p className="!mt-0 text-sm text-ink-muted">{t('profile.edit.linksHint')}</p>
-          <FormField
-            {...form.getFieldProps('githubUrl')}
-            type="url"
-            inputMode="url"
-            autoComplete="url"
-            label="GitHub"
-            placeholder="https://github.com/tu-usuario"
-            onBlur={(event) => form.setValue('githubUrl', normalizeGithub(event.target.value))}
-            maxLength={200}
-          />
-          <FormField
-            {...form.getFieldProps('linkedinUrl')}
-            type="url"
-            inputMode="url"
-            label="LinkedIn"
-            placeholder="https://www.linkedin.com/in/tu-usuario"
-            onBlur={(event) => form.setValue('linkedinUrl', normalizeLinkedin(event.target.value))}
-            maxLength={200}
-          />
-        </fieldset>
+        <ProfileFields form={form} firstClassName="border-t border-slate-200 pt-8" />
         <footer className="flex flex-col-reverse gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:justify-end">
           <ButtonLink to={paths.profile(profile)} variant="secondary" size="lg">
             {t('profile.edit.cancel')}
