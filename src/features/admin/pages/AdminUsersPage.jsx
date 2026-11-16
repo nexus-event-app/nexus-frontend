@@ -2,8 +2,6 @@ import { useState } from 'react'
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import ActionMenu from '@/shared/components/ActionMenu'
 import Badge from '@/shared/components/Badge'
-import Button from '@/shared/components/Button'
-import ButtonLink from '@/shared/components/ButtonLink'
 import ConfirmDialog from '@/shared/components/ConfirmDialog'
 import Icon from '@/shared/components/Icon'
 import PageHeader from '@/shared/components/PageHeader'
@@ -11,10 +9,34 @@ import SearchBar from '@/shared/components/SearchBar'
 import Seo from '@/shared/components/Seo'
 import Time from '@/shared/components/Time'
 import { paths } from '@/shared/config/paths'
+import { Link } from '@/shared/i18n/router'
 import { useAction } from '@/shared/hooks/useAction'
+import { cx } from '@/shared/utils/classNames'
 import PagedTable from '../components/PagedTable'
 import { useAdminList } from '../hooks/useAdminList'
 import { adminUsersService } from '../services/adminUsersService'
+
+/**
+ * Acción de la tabla solo con su icono, para que la fila no pese: el nombre completo lo oyen los lectores de
+ * pantalla y aparece al pasar el ratón (title). Redonda y de 44 px, el tamaño mínimo para pulsar con el dedo.
+ */
+function IconAction({ as: Component = 'button', icon, label, active = false, danger = false, ...props }) {
+  return (
+    <Component
+      {...(Component === 'button' ? { type: 'button' } : {})}
+      title={label}
+      className={cx(
+        'inline-flex h-11 w-11 items-center justify-center rounded-full transition-colors hover:bg-slate-100',
+        active ? 'text-accent' : 'text-ink-muted',
+        danger ? 'hover:text-red-700 dark:hover:text-red-400' : 'hover:text-accent',
+      )}
+      {...props}
+    >
+      <Icon name={icon} className="h-5 w-5" />
+      <span className="sr-only">{label}</span>
+    </Component>
+  )
+}
 
 /** Texto de cada confirmación: activar/desactivar la cuenta o dar/quitar el permiso de administración. */
 function confirmation({ type, user }) {
@@ -95,32 +117,31 @@ export default function AdminUsersPage() {
         const isSelf = user.id === currentUser.id
         const isAdmin = user.role === 'ADMIN'
         return (
-          <ActionMenu className="justify-end md:justify-start">
-            <ButtonLink to={paths.adminUserProfile(user.id)} variant="secondary" size="sm">
-              <Icon name="pencil" className="h-4 w-4" />
-              Editar perfil
-              <span className="sr-only"> de {user.name}</span>
-            </ButtonLink>
+          <ActionMenu className="flex-nowrap justify-end gap-1 md:justify-start">
+            <IconAction
+              as={Link}
+              to={paths.adminUserProfile(user.id)}
+              icon="pencil"
+              label={`Editar perfil de ${user.name}`}
+            />
             {/* Nadie cambia su propio permiso (así siempre queda alguien con acceso), y para ser admin hace falta
                 el email verificado. */}
             {!isSelf && (isAdmin || user.emailVerified) && (
-              <Button variant="secondary" size="sm" onClick={() => setPendingAction({ type: 'role', user })}>
-                <Icon name="shield" className="h-4 w-4" />
-                {isAdmin ? 'Quitar admin' : 'Hacer admin'}
-                <span className="sr-only"> a {user.name}</span>
-              </Button>
+              <IconAction
+                icon="shield"
+                label={isAdmin ? `Quitar admin a ${user.name}` : `Hacer admin a ${user.name}`}
+                active={isAdmin}
+                onClick={() => setPendingAction({ type: 'role', user })}
+              />
             )}
             {/* A un administrador primero se le quita el permiso; después se puede desactivar su cuenta. */}
             {!isSelf && !isAdmin && (
-              <Button
-                variant={user.enabled ? 'secondary' : 'primary'}
-                size="sm"
+              <IconAction
+                icon={user.enabled ? 'ban' : 'check'}
+                label={user.enabled ? `Desactivar a ${user.name}` : `Activar a ${user.name}`}
+                danger={user.enabled}
                 onClick={() => setPendingAction({ type: 'status', user })}
-              >
-                <Icon name={user.enabled ? 'ban' : 'check'} className="h-4 w-4" />
-                {user.enabled ? 'Desactivar' : 'Activar'}
-                <span className="sr-only"> a {user.name}</span>
-              </Button>
+              />
             )}
           </ActionMenu>
         )
