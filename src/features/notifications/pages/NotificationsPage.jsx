@@ -3,9 +3,9 @@ import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import Button from '@/shared/components/Button'
 import ButtonLink from '@/shared/components/ButtonLink'
 import EmptyState from '@/shared/components/EmptyState'
+import Eyebrow from '@/shared/components/Eyebrow'
 import Icon from '@/shared/components/Icon'
 import ListSkeleton from '@/shared/components/ListSkeleton'
-import PageHeader from '@/shared/components/PageHeader'
 import PageMain from '@/shared/components/PageMain'
 import Pagination from '@/shared/components/Pagination'
 import QueryBoundary from '@/shared/components/QueryBoundary'
@@ -19,6 +19,50 @@ import { useI18n } from '@/shared/i18n/useI18n'
 import NotificationItem from '../components/NotificationItem'
 import { useNotifications } from '../hooks/useNotifications'
 import { notificationService } from '../services/notificationService'
+
+const TYPES = [
+  { key: 'Comment', icon: 'chat', tone: 'bg-accent' },
+  { key: 'Accepted', icon: 'check', tone: 'bg-emerald-600' },
+]
+
+/** Al lado de la lista: qué avisos llegan, que solo los ves tú, y un enlace al foro. */
+function HowItWorks({ className }) {
+  const { t } = useI18n()
+  return (
+    <aside aria-labelledby="notifications-how" className={className}>
+      <hgroup>
+        <Eyebrow>{t('notifications.asideEyebrow')}</Eyebrow>
+        <h2 id="notifications-how" className="mt-3 text-2xl font-bold tracking-tight text-ink">
+          {t('notifications.asideTitle')}
+        </h2>
+      </hgroup>
+      <ul className="mt-5 space-y-4 rounded-3xl border border-slate-200 bg-surface p-6 shadow-card">
+        {TYPES.map((type) => (
+          <li key={type.key} className="grid grid-cols-[auto_minmax(0,1fr)] gap-3">
+            <span
+              aria-hidden="true"
+              className={`flex h-8 w-8 items-center justify-center rounded-full text-white ${type.tone}`}
+            >
+              <Icon name={type.icon} className="h-4 w-4" />
+            </span>
+            <p className="text-sm leading-relaxed text-ink-soft">
+              <strong className="block font-semibold text-ink">{t(`notifications.type${type.key}Title`)}</strong>
+              {t(`notifications.type${type.key}Text`)}
+            </p>
+          </li>
+        ))}
+        <li className="flex items-center gap-2 border-t border-slate-200 pt-4 text-sm text-ink-muted">
+          <Icon name="lock" className="h-4 w-4 shrink-0 text-accent" />
+          {t('notifications.privacy')}
+        </li>
+      </ul>
+      <ButtonLink to={paths.forum} variant="secondary" className="mt-5 w-full rounded-full">
+        {t('notifications.forumLink')}
+        <Icon name="arrow-right" className="h-4 w-4" />
+      </ButtonLink>
+    </aside>
+  )
+}
 
 export default function NotificationsPage() {
   const { t } = useI18n()
@@ -45,23 +89,36 @@ export default function NotificationsPage() {
   }
 
   return (
-    <PageMain className="page-container page-section">
+    // Como el resto de páginas: cabecera arriba; a la izquierda, tus avisos; a la derecha, qué te avisamos.
+    <PageMain className="page-container page-section relative isolate grid grid-cols-1 content-start gap-x-12 lg:grid-cols-[minmax(0,1fr)_22rem]">
+      <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Seo title={t('notifications.seoTitle')} path={paths.notifications} robots="noindex,nofollow" />
-      <Breadcrumbs items={[{ label: t('notifications.title'), to: paths.notifications }]} />
-      <PageHeader
-        title={t('notifications.title')}
-        description={t('notifications.description')}
-        actions={
-          unread > 0 && (
-            <Button variant="secondary" loading={markingAll} onClick={markAllRead}>
+      <Breadcrumbs className="col-span-full" items={[{ label: t('notifications.title'), to: paths.notifications }]} />
+      <hgroup className="col-span-full mt-6 max-w-3xl">
+        <Eyebrow>{t('notifications.eyebrow')}</Eyebrow>
+        <h1 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">{t('notifications.title')}</h1>
+        <p className="mt-3 text-lg text-ink-muted">{t('notifications.description')}</p>
+      </hgroup>
+
+      <section
+        aria-labelledby="notifications-list"
+        aria-busy={request.loading}
+        className="mt-10 min-w-0 lg:col-start-1 lg:row-start-3"
+      >
+        <header className="mb-5 flex flex-wrap items-end justify-between gap-4">
+          <hgroup>
+            <Eyebrow>{t('notifications.listEyebrow')}</Eyebrow>
+            <h2 id="notifications-list" className="mt-3 text-2xl font-bold tracking-tight text-ink">
+              {t('notifications.listTitle')}
+            </h2>
+          </hgroup>
+          {unread > 0 && (
+            <Button variant="secondary" size="sm" className="rounded-full" loading={markingAll} onClick={markAllRead}>
               <Icon name="check" className="h-4 w-4" />
               {t('notifications.markAllRead')}
             </Button>
-          )
-        }
-      />
-
-      <section aria-label={t('notifications.title')} aria-busy={request.loading} className="mx-auto max-w-3xl">
+          )}
+        </header>
         <QueryBoundary
           data={request.data}
           error={request.error}
@@ -88,7 +145,7 @@ export default function NotificationsPage() {
                 <p role="status" className="mb-4 text-sm text-ink-muted">
                   {unread > 0 ? t('notifications.unreadCount', { count: unread }) : t('notifications.noneUnread')}
                 </p>
-                <ul className="space-y-3">
+                <ul className="divide-y divide-slate-200 overflow-hidden rounded-3xl border border-slate-200 bg-surface shadow-card">
                   {result.content.map((notification) => (
                     <li key={notification.id}>
                       <NotificationItem notification={notification} onOpen={handleOpen} />
@@ -101,6 +158,7 @@ export default function NotificationsPage() {
           }}
         </QueryBoundary>
       </section>
+      <HowItWorks className="mt-14 lg:sticky lg:top-24 lg:col-start-2 lg:row-start-3 lg:mt-10 lg:self-start" />
     </PageMain>
   )
 }
