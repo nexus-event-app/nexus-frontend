@@ -7,7 +7,7 @@ export default {
       heading: 'Noticias tech para juniors',
       categoryHeading: 'Noticias de {category}',
       seoDescription:
-        'Las noticias tech más útiles para quienes empiezan: desarrollo, entrevistas, networking y recursos, en español.',
+        'Las noticias tech más útiles para quienes empiezan: desarrollo, entrevistas, networking y recursos.',
       description:
         'Desarrollo, entrevistas, networking y recursos para estar a la última en tecnología, pensados para perfiles junior.',
       searchLabel: 'Buscar noticias',
@@ -50,7 +50,7 @@ export default {
       heading: 'Notícies tech per a júniors',
       categoryHeading: 'Notícies de {category}',
       seoDescription:
-        'Les notícies tech més útils per a qui comença: desenvolupament, entrevistes, networking i recursos, en castellà.',
+        'Les notícies tech més útils per a qui comença: desenvolupament, entrevistes, networking i recursos.',
       description:
         'Desenvolupament, entrevistes, networking i recursos per estar al dia en tecnologia, pensats per a perfils júnior.',
       searchLabel: 'Cerca notícies',
@@ -93,7 +93,7 @@ export default {
       heading: 'Tech news for juniors',
       categoryHeading: '{category} news',
       seoDescription:
-        'The most useful tech news for people just starting out: development, interviews, networking and resources, in Spanish.',
+        'The most useful tech news for people just starting out: development, interviews, networking and resources.',
       description:
         'Development, interviews, networking and resources to stay up to date with tech, designed for junior profiles.',
       searchLabel: 'Search news',

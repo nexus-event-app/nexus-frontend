@@ -1,6 +1,5 @@
 import { Link } from '@/shared/i18n/router'
 import { useAuth } from '@/features/auth/hooks/useAuth'
-import { useLatestTestimonials } from '@/features/testimonials/hooks/useTestimonials'
 import Icon from '@/shared/components/Icon'
 import Logo from '@/shared/components/Logo'
 import { paths } from '@/shared/config/paths'
@@ -65,52 +64,8 @@ function BackToTop() {
 }
 
 /**
- * Un testimonio pequeño y anónimo (el destacado o el más reciente): un guiño para dar algo de gracia al pie, como las
- * tarjetitas de la cabecera de la portada. Blanca, un poco inclinada, con las comillas de sello. No enlaza a ningún sitio
- * (los testimonios ya están en el menú). Colores fijos (tarjeta blanca sobre el morado) en los dos temas. Si aún no hay
- * testimonios, no se muestra.
- */
-function FooterTestimonial() {
-  const { t } = useI18n()
-  const { data } = useLatestTestimonials()
-  const testimonial = data?.find((item) => item.isHighlighted) ?? data?.[0]
-  if (!testimonial) return null
-
-  return (
-    <section aria-labelledby="footer-testimonial" className="mt-6 max-w-[17rem]">
-      <h2 id="footer-testimonial" className="sr-only">
-        {t('common.footer.testimonialTitle')}
-      </h2>
-      <figure className="relative -rotate-2 rounded-xl bg-white px-4 pb-3 pt-4 text-gray-900 shadow-xl shadow-brand-950/40 transition-transform duration-300 hover:rotate-0">
-        <span
-          aria-hidden="true"
-          className="absolute -top-3 left-4 flex h-7 w-7 items-center justify-center rounded-lg bg-brand-600 text-2xl font-bold leading-none text-white shadow-md"
-        >
-          <span className="translate-y-1.5">“</span>
-        </span>
-        <blockquote>
-          <p className="line-clamp-2 text-xs leading-relaxed text-gray-800">{testimonial.content}</p>
-        </blockquote>
-        <figcaption className="mt-2 flex items-center gap-2 text-xs">
-          <span
-            aria-hidden="true"
-            className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-100 text-brand-800"
-          >
-            <Icon name="user" className="h-3.5 w-3.5" />
-          </span>
-          <span className="min-w-0 truncate">
-            <strong className="font-semibold text-gray-900">{t('common.footer.anonymous')}</strong>
-            {testimonial.role && <span className="text-gray-600"> · {testimonial.role}</span>}
-          </span>
-        </figcaption>
-      </figure>
-    </section>
-  )
-}
-
-/**
- * Pie de la web, en el morado de la portada: presentación con un testimonio pequeño, enlaces en tres columnas y la
- * barra con el copyright y «Volver arriba».
+ * Pie de la web, en el morado de la portada: presentación, enlaces en tres columnas y la barra con el copyright y
+ * «Volver arriba».
  */
 export default function SiteFooter() {
   const { isAuthenticated, user } = useAuth()
@@ -124,7 +79,7 @@ export default function SiteFooter() {
         className="pointer-events-none absolute -bottom-40 -left-32 -z-10 h-[30rem] w-[30rem] animate-drift-slow rounded-full bg-brand-500/30 blur-3xl"
       />
 
-      {/* Presentación: el logo, qué es y un testimonio. El título solo lo oyen los lectores de pantalla. */}
+      {/* Presentación: el logo y qué es. El título solo lo oyen los lectores de pantalla. */}
       <section aria-labelledby="footer-about" className="sm:col-span-2 lg:col-span-1">
         <h2 id="footer-about" className="sr-only">
           {siteConfig.name}
@@ -133,7 +88,6 @@ export default function SiteFooter() {
         <p className="mt-4 max-w-sm text-brand-100">
           {t('seo.tagline')}. {t('common.footer.description')}
         </p>
-        <FooterTestimonial />
       </section>
 
       <nav aria-label={t('common.footer.exploreLabel')}>

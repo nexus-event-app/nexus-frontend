@@ -1,41 +1,16 @@
 import { screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { testimonialService } from '@/features/testimonials/services/testimonialService'
+import { describe, expect, it, vi } from 'vitest'
 import { renderWithProviders } from '@/test/render'
 import SiteFooter from './SiteFooter'
 
-const TESTIMONIALS = [
-  {
-    id: 1,
-    name: 'Marta Ejemplo',
-    role: 'Desarrolladora junior',
-    content: 'Encontré mi primer empleo.',
-    isHighlighted: false,
-  },
-  { id: 2, name: 'Javier López', role: null, content: 'El foro me ayudó con Docker.', isHighlighted: true },
-]
-
 describe('SiteFooter', () => {
-  beforeEach(() => {
-    vi.spyOn(testimonialService, 'latest').mockResolvedValue(TESTIMONIALS)
-  })
-
-  it('enseña un testimonio pequeño y anónimo (el destacado), sin enlace', async () => {
+  it('presenta la web sin tarjeta de testimonio ni la coletilla «en español»', () => {
     renderWithProviders(<SiteFooter />)
-    const testimonial = await screen.findByRole('region', { name: 'Una historia de quien ya empezó' })
-    expect(testimonial).toHaveTextContent('El foro me ayudó con Docker.')
-    expect(testimonial).toHaveTextContent('Anónimo')
-    expect(testimonial).not.toHaveTextContent('Javier López')
-    expect(within(testimonial).queryByRole('link')).not.toBeInTheDocument()
-  })
-
-  it('sin testimonios publicados no enseña la tarjeta', async () => {
-    testimonialService.latest.mockResolvedValue([])
-    renderWithProviders(<SiteFooter />)
-    await expect(
-      screen.findByRole('region', { name: 'Una historia de quien ya empezó' }, { timeout: 300 }),
-    ).rejects.toThrow()
+    const footer = screen.getByRole('contentinfo')
+    expect(within(footer).queryByRole('figure')).not.toBeInTheDocument()
+    expect(footer).not.toHaveTextContent(/español/i)
+    expect(footer).toHaveTextContent('Hecho para la comunidad tech junior.')
   })
 
   it('enlaza a las secciones y a lo legal', () => {

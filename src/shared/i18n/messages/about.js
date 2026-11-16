@@ -9,7 +9,7 @@ export default {
     terminal: { message: 'Mi primer paso en tecnología', output: 'Una persona más aprendiendo en comunidad' },
     title: 'Nadie debería dar su primer paso en tecnología en solitario',
     intro:
-      '{name} es una comunidad en español para quienes empiezan su carrera en tecnología: noticias para estar a la última en tecnología, ofertas de empleo junior y prácticas, un foro donde preguntar sin miedo y testimonios reales de quienes ya han pasado por ahí.',
+      '{name} es una comunidad para quienes empiezan su carrera en tecnología: noticias para estar a la última en tecnología, ofertas de empleo junior y prácticas, un foro donde preguntar sin miedo y testimonios reales de quienes ya han pasado por ahí.',
     purpose: {
       eyebrow: 'Por qué existe',
       title: 'Empezar no debería ser tan difícil',
@@ -97,7 +97,7 @@ export default {
     terminal: { message: 'El meu primer pas en tecnologia', output: 'Una persona més aprenent en comunitat' },
     title: 'Ningú no hauria de fer el primer pas en tecnologia tot sol',
     intro:
-      '{name} és una comunitat en espanyol per a qui comença la seva carrera en tecnologia: notícies per estar al dia en tecnologia, ofertes de feina júnior i pràctiques, un fòrum on preguntar sense por i testimonis reals de qui ja hi ha passat.',
+      '{name} és una comunitat per a qui comença la seva carrera en tecnologia: notícies per estar al dia en tecnologia, ofertes de feina júnior i pràctiques, un fòrum on preguntar sense por i testimonis reals de qui ja hi ha passat.',
     purpose: {
       eyebrow: 'Per què existeix',
       title: 'Començar no hauria de ser tan difícil',
@@ -185,7 +185,7 @@ export default {
     terminal: { message: 'My first step in tech', output: 'One more person learning together' },
     title: 'Nobody should take their first step in tech alone',
     intro:
-      '{name} is a Spanish-language community for people starting their career in tech: news to stay up to date with tech, junior jobs and internships, a forum where you can ask without fear and real stories from people who have been there.',
+      '{name} is a community for people starting their career in tech: news to stay up to date with tech, junior jobs and internships, a forum where you can ask without fear and real stories from people who have been there.',
     purpose: {
       eyebrow: 'Why it exists',
       title: 'Starting out shouldn’t be this hard',

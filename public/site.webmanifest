@@ -1,7 +1,7 @@
 {
   "name": "Primer Commit",
   "short_name": "Primer Commit",
-  "description": "Comunidad tech en español para perfiles junior: noticias, empleo, foro y testimonios.",
+  "description": "Comunidad tech para perfiles junior: noticias, empleo, foro y testimonios.",
   "lang": "es",
   "start_url": "/",
   "scope": "/",

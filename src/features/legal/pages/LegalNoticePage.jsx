@@ -24,9 +24,9 @@ const SECTIONS = [
     title: '2. Qué es Primer Commit',
     content: (
       <p>
-        {siteConfig.name} es una comunidad gratuita en español para personas que empiezan en el sector tecnológico.
-        Ofrece noticias, ofertas de empleo junior y de prácticas, un foro y testimonios de la comunidad. Usar el sitio
-        implica aceptar estas condiciones.
+        {siteConfig.name} es una comunidad gratuita para personas que empiezan en el sector tecnológico. Ofrece
+        noticias, ofertas de empleo junior y de prácticas, un foro y testimonios de la comunidad. Usar el sitio implica
+        aceptar estas condiciones.
       </p>
     ),
   },
