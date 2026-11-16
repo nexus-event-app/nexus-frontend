@@ -15,6 +15,8 @@ export function authValue(overrides = {}) {
     isAdmin: user?.role === 'ADMIN',
     login: vi.fn(),
     register: vi.fn(),
+    loginWithGoogle: vi.fn(),
+    completeGoogleSignup: vi.fn(),
     logout: vi.fn(),
     refreshUser: vi.fn(),
     loading: false,

@@ -28,6 +28,13 @@ const SECTIONS = [
           tampoco nosotros, puede verla.
         </li>
         <li>
+          <strong>Si entras con Google:</strong> Google nos facilita tu nombre, tu email (y si está verificado) y un
+          identificador de tu cuenta de Google, para reconocerte las próximas veces. No recibimos tu contraseña de
+          Google ni guardamos tu foto ni ningún otro dato de tu cuenta. La cuenta solo se crea cuando aceptas estas
+          condiciones; si ya tenías una con el mismo email, se vincula a ella. Google trata tus datos según su propia
+          política de privacidad.
+        </li>
+        <li>
           <strong>Lo que publicas:</strong> debates, comentarios, «me gusta» y testimonios (con el nombre, el cargo y la
           ubicación que indiques).
         </li>

@@ -69,6 +69,12 @@ export default function AuthProvider({ children }) {
 
   const login = useCallback((credentials) => startSession(() => authService.login(credentials)), [startSession])
   const register = useCallback((payload) => startSession(() => authService.register(payload)), [startSession])
+  // Al volver de Google: canjear el código de un solo uso o crear la cuenta tras aceptar las condiciones.
+  const loginWithGoogle = useCallback((code) => startSession(() => authService.googleExchange(code)), [startSession])
+  const completeGoogleSignup = useCallback(
+    (token) => startSession(() => authService.googleComplete(token)),
+    [startSession],
+  )
 
   /** Vuelve a pedir el usuario al backend (p. ej. tras verificar el email) y actualiza la sesión. */
   const refreshUser = useCallback(async () => {
@@ -94,11 +100,13 @@ export default function AuthProvider({ children }) {
       isAdmin: session?.user?.role === 'ADMIN',
       login,
       register,
+      loginWithGoogle,
+      completeGoogleSignup,
       logout,
       refreshUser,
       loading,
     }),
-    [session, login, register, logout, refreshUser, loading],
+    [session, login, register, loginWithGoogle, completeGoogleSignup, logout, refreshUser, loading],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

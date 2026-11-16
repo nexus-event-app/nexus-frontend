@@ -6,6 +6,7 @@ import { loginPath, paths } from '@/shared/config/paths'
 import { safeRedirect } from '@/shared/utils/url'
 import AuthCard from '../components/AuthCard'
 import RegisterForm from '../components/RegisterForm'
+import GoogleSignIn from '../components/GoogleSignIn'
 import { useAuth } from '../hooks/useAuth'
 import { siteConfig } from '@/shared/config/site'
 import { useI18n } from '@/shared/i18n/useI18n'
@@ -40,6 +41,7 @@ export default function RegisterPage() {
           </>
         }
       >
+        <GoogleSignIn redirectTo={redirectTo} />
         <RegisterForm />
       </AuthCard>
     </>

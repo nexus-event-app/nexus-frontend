@@ -65,6 +65,8 @@ class MockApi {
     this.on('GET', '/api/profile', () => json(profile))
     this.on('PUT', '/api/profile', () => json(profile))
     this.on('GET', '/api/auth/me', () => json(user))
+    // «Continuar con Google» activado, como en local con las credenciales puestas.
+    this.on('GET', '/api/auth/providers', () => json({ google: true }))
     this.on('POST', '/api/auth/login', () => json({ token: 'token-de-prueba', user }))
   }
 

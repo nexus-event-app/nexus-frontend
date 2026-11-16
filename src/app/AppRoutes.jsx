@@ -34,6 +34,7 @@ const ResetPasswordPage = lazy(() => import('@/features/auth/pages/ResetPassword
 const VerifyEmailPage = lazy(() => import('@/features/auth/pages/VerifyEmailPage'))
 const LoginPage = lazy(() => import('@/features/auth/pages/LoginPage'))
 const RegisterPage = lazy(() => import('@/features/auth/pages/RegisterPage'))
+const GoogleReturnPage = lazy(() => import('@/features/auth/pages/GoogleReturnPage'))
 const AdminDashboardPage = lazy(() => import('@/features/admin/pages/AdminDashboardPage'))
 const AdminNewsPage = lazy(() => import('@/features/admin/pages/AdminNewsPage'))
 const AdminJobsPage = lazy(() => import('@/features/admin/pages/AdminJobsPage'))
@@ -109,6 +110,7 @@ function publicRoutes({ prefix, lang }) {
       <Route path={seg('cookies')} element={<CookiesPage />} />
       <Route path={seg('login')} element={<LoginPage />} />
       <Route path={seg('registro')} element={<RegisterPage />} />
+      <Route path={`${seg('registro')}/google`} element={<GoogleReturnPage />} />
       <Route path={seg('recuperar-contrasena')} element={<ForgotPasswordPage />} />
       <Route path={seg('restablecer-contrasena')} element={<ResetPasswordPage />} />
       <Route path={seg('verificar-email')} element={<VerifyEmailPage />} />

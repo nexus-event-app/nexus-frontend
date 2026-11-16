@@ -28,6 +28,8 @@ export const paths = {
   resetPassword: '/restablecer-contrasena',
   verifyEmail: '/verificar-email',
   register: '/registro',
+  /** Adonde vuelve la persona desde Google (lo construye el backend en GoogleOAuthConfig). */
+  googleReturn: '/registro/google',
   admin: '/admin',
   adminNews: '/admin/noticias',
   adminJobs: '/admin/empleo',
