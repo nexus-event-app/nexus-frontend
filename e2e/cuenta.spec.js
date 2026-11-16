@@ -88,3 +88,25 @@ test.describe('Cuenta', () => {
     expect(api.calls.some((call) => call.method === 'PUT')).toBe(false)
   })
 })
+
+test.describe('Cerrar sesión', () => {
+  test('desde tu perfil lleva a la portada y la sesión queda cerrada', async ({ page, signedIn }) => {
+    expect(signedIn.id).toBe(7)
+    await page.goto('/perfil/7-lucia-prueba')
+    await expect(page.getByRole('region', { name: 'Tu actividad' })).toBeVisible()
+
+    // En el móvil la opción está en el menú lateral; en el escritorio, en el menú de la cuenta.
+    const accountMenu = page.getByRole('banner').getByRole('button', { name: 'Lucía Prueba' })
+    if (await accountMenu.isVisible()) {
+      await accountMenu.click()
+    } else {
+      await page.getByRole('button', { name: /menú/i }).first().click()
+    }
+    await page.getByRole('button', { name: 'Cerrar sesión' }).click()
+
+    await expect(page).toHaveURL(/\/$/)
+    await expect(page.getByText('Has cerrado sesión.')).toBeVisible()
+    await expect(page.getByRole('link', { name: 'Iniciar sesión' }).first()).toBeVisible()
+    expect(await page.evaluate(() => Object.keys(localStorage).some((key) => /session/i.test(key)))).toBe(false)
+  })
+})

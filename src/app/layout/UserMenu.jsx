@@ -1,4 +1,5 @@
 import { useId, useRef, useState } from 'react'
+import { useLogout } from '@/features/auth/hooks/useLogout'
 import { useLocation } from 'react-router-dom'
 import { Link } from '@/shared/i18n/router'
 import { useAuth } from '@/features/auth/hooks/useAuth'
@@ -7,11 +8,9 @@ import Icon from '@/shared/components/Icon'
 import { paths } from '@/shared/config/paths'
 import { useDismiss } from '@/shared/hooks/useDismiss'
 import { useI18n } from '@/shared/i18n/useI18n'
-import { useToast } from '@/shared/hooks/useToast'
 
 export default function UserMenu() {
-  const { user, isAdmin, logout } = useAuth()
-  const toast = useToast()
+  const { user, isAdmin } = useAuth()
   const { t } = useI18n()
   const location = useLocation()
   const menuId = useId()
@@ -21,10 +20,7 @@ export default function UserMenu() {
 
   useDismiss(containerRef, open, () => setOpenKey(null))
 
-  const handleLogout = () => {
-    logout()
-    toast.info(t('common.account.loggedOut'))
-  }
+  const handleLogout = useLogout()
 
   return (
     // Es un elemento del menú de la cabecera (<menu>): el desplegable se coloca respecto a él.

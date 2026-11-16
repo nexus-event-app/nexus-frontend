@@ -1,4 +1,5 @@
 import { Suspense, useId, useRef, useState } from 'react'
+import { useLogout } from '@/features/auth/hooks/useLogout'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import Button from '@/shared/components/Button'
@@ -9,18 +10,13 @@ import PageLoader from '@/shared/components/PageLoader'
 import ThemeToggle from '@/shared/components/ThemeToggle'
 import { paths } from '@/shared/config/paths'
 import { useDismiss } from '@/shared/hooks/useDismiss'
-import { useToast } from '@/shared/hooks/useToast'
 import AdminNav from './AdminNav'
 import { siteConfig } from '@/shared/config/site'
 
 function AccountBlock() {
-  const { user, logout } = useAuth()
-  const toast = useToast()
+  const { user } = useAuth()
 
-  const handleLogout = () => {
-    logout()
-    toast.info('Has cerrado sesión.')
-  }
+  const handleLogout = useLogout()
 
   return (
     <footer className="space-y-3 border-t border-slate-200 pt-4">

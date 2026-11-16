@@ -1,4 +1,5 @@
 import { useCallback, useId, useRef, useState } from 'react'
+import { useLogout } from '@/features/auth/hooks/useLogout'
 import { useLocation } from 'react-router-dom'
 import { Link } from '@/shared/i18n/router'
 import { useAuth } from '@/features/auth/hooks/useAuth'
@@ -12,7 +13,6 @@ import ThemeToggle from '@/shared/components/ThemeToggle'
 import { useDismiss } from '@/shared/hooks/useDismiss'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { stripLang } from '@/shared/i18n/languages'
-import { useToast } from '@/shared/hooks/useToast'
 import NotificationBell from '@/features/notifications/components/NotificationBell'
 import SearchButton from '@/features/search/components/SearchButton'
 import SearchDialog from '@/features/search/components/SearchDialog'
@@ -56,8 +56,7 @@ function AuthLinks({ className, pill = false }) {
 }
 
 export default function SiteHeader() {
-  const { isAuthenticated, isAdmin, user, logout } = useAuth()
-  const toast = useToast()
+  const { isAuthenticated, isAdmin, user } = useAuth()
   const { t } = useI18n()
   const location = useLocation()
   const menuId = useId()
@@ -90,10 +89,7 @@ export default function SiteHeader() {
     window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' })
   }
 
-  const handleLogout = () => {
-    logout()
-    toast.info(t('common.account.loggedOut'))
-  }
+  const handleLogout = useLogout()
 
   return (
     <header
