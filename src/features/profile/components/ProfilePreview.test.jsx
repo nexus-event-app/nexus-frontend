@@ -13,8 +13,8 @@ const values = {
 }
 
 describe('ProfilePreview', () => {
-  it('muestra lo que se escribe con el título fuera del recuadro', () => {
-    renderWithProviders(<ProfilePreview values={values} fallbackName="Lucía Prueba" onAvatarChange={() => {}} />)
+  it('es la misma tarjeta del perfil, con lo que se está escribiendo y el título fuera', () => {
+    renderWithProviders(<ProfilePreview values={values} fallbackName="Lucía Prueba" />)
     const aside = screen.getByRole('complementary', { name: 'Así te verán' })
     const card = screen.getByRole('article', { name: 'Lucía Prueba' })
     expect(aside).toContainElement(card)
@@ -27,9 +27,7 @@ describe('ProfilePreview', () => {
   })
 
   it('usa el nombre escrito en el formulario si lo hay', () => {
-    renderWithProviders(
-      <ProfilePreview values={{ ...values, name: 'Lucía P.' }} fallbackName="Lucía Prueba" onAvatarChange={() => {}} />,
-    )
+    renderWithProviders(<ProfilePreview values={{ ...values, name: 'Lucía P.' }} fallbackName="Lucía Prueba" />)
     expect(screen.getByRole('heading', { name: 'Lucía P.' })).toBeInTheDocument()
   })
 })

@@ -48,6 +48,10 @@ Normas de código del proyecto. Se aplican a todo lo que se escriba a partir de 
   de una tarjeta o recuadro. La tarjeta lleva solo el contenido.
   Excepción: las normas del foro (`ForumRules`) dejan fuera solo el antetítulo y llevan el título en su cabecera de
   color, para que destaquen.
+  La tarjeta de perfil (`ProfileCard`) lleva el nombre dentro: es su contenido. Fuera va solo el antetítulo.
+
+- Privacidad: la actividad de una persona (discusiones, testimonios, contadores) solo la ve ella en su perfil. El
+  perfil de otra persona muestra únicamente lo que ha puesto en él.
 
 - Tarjetas que son un enlace entero (el enlace del título con `after:absolute after:inset-0`): las pistas visuales
   («Leer noticia», la flecha...) llevan `aria-hidden` y `pointer-events-none`, para que el clic siempre llegue al enlace

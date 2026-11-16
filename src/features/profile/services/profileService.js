@@ -2,10 +2,11 @@ import { http } from '@/shared/api/http'
 
 export const profileService = {
   getPublic: (id, config) => http.get(`/users/${id}`, config).then((response) => response.data),
-  discussions: (id, params, config) =>
-    http.get(`/users/${id}/discussions`, { params, ...config }).then((response) => response.data),
-  testimonials: (id, config) => http.get(`/users/${id}/testimonials`, config).then((response) => response.data),
   getOwn: (config) => http.get('/profile', config).then((response) => response.data),
+  // Tu actividad: solo la puedes pedir tú (el backend no la da de nadie más).
+  ownDiscussions: (params, config) =>
+    http.get('/profile/discussions', { params, ...config }).then((response) => response.data),
+  ownTestimonials: (config) => http.get('/profile/testimonials', config).then((response) => response.data),
   update: (payload) => http.put('/profile', payload).then((response) => response.data),
   uploadAvatar: (blob) => {
     const body = new FormData()

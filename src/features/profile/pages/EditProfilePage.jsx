@@ -18,6 +18,7 @@ import { useToast } from '@/shared/hooks/useToast'
 import { useNavigate } from '@/shared/i18n/useNavigate'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { translate } from '@/shared/i18n/translate'
+import AvatarField from '../components/AvatarField'
 import ProfilePreview from '../components/ProfilePreview'
 import TechnologiesInput from '../components/TechnologiesInput'
 import { profileService } from '../services/profileService'
@@ -78,16 +79,9 @@ function ProfileForm({ profile, onAvatarChange }) {
   const bioLength = form.values.bio.trim().length
 
   return (
-    // Sin envoltorio: la vista previa y el formulario se colocan en la rejilla de la página.
+    // Sin envoltorio: el formulario y la vista previa se colocan en la rejilla de la página (en el móvil, la vista
+    // previa queda debajo del formulario).
     <>
-      <ProfilePreview
-        className="mt-10 lg:sticky lg:top-24 lg:col-start-2 lg:row-span-2 lg:row-start-3 lg:self-start"
-        values={form.values}
-        fallbackName={profile.name}
-        avatarUrl={profile.avatarUrl}
-        onAvatarChange={onAvatarChange}
-      />
-
       <hgroup className="mt-14 lg:col-start-1 lg:row-start-3 lg:mt-10">
         <Eyebrow>{t('profile.edit.formEyebrow')}</Eyebrow>
         <h2 id="profile-form-title" className="mt-3 text-2xl font-bold tracking-tight text-ink">
@@ -101,7 +95,14 @@ function ProfileForm({ profile, onAvatarChange }) {
         className="mt-5 space-y-8 rounded-3xl border border-slate-200 bg-surface p-5 shadow-card sm:p-8 lg:col-start-1 lg:row-start-4"
       >
         {form.formError && <Alert variant="error">{form.formError}</Alert>}
-        <fieldset className="space-y-6 [&>legend+*]:clear-left">
+        {/* La foto se guarda al momento, sin esperar a «Guardar perfil». */}
+        <AvatarField
+          name={form.values.name || profile.name}
+          avatarUrl={profile.avatarUrl}
+          onChange={onAvatarChange}
+          legendClassName="mb-4 text-lg font-bold text-ink"
+        />
+        <fieldset className="space-y-6 border-t border-slate-200 pt-8 [&>legend+*]:clear-left">
           <legend className="float-left mb-4 w-full text-lg font-bold text-ink">{t('profile.edit.basics')}</legend>
           <FormField
             {...form.getFieldProps('name')}
@@ -167,6 +168,14 @@ function ProfileForm({ profile, onAvatarChange }) {
           </Button>
         </footer>
       </form>
+
+      <ProfilePreview
+        className="mt-14 lg:sticky lg:top-24 lg:col-start-2 lg:row-span-2 lg:row-start-3 lg:mt-10 lg:self-start"
+        values={form.values}
+        fallbackName={profile.name}
+        avatarUrl={profile.avatarUrl}
+        memberSince={profile.memberSince}
+      />
     </>
   )
 }

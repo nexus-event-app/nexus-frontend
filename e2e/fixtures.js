@@ -59,9 +59,12 @@ class MockApi {
     this.on('GET', '/api/admin/stats', () =>
       json({ users: 3, news: 2, jobs: 1, discussions: 1, comments: 2, pendingTestimonials: 0, pendingReports: 1 }),
     )
-    this.on('GET', /^\/api\/users\/\d+$/, () => json(profile))
-    this.on('GET', /^\/api\/users\/\d+\/discussions$/, () => json(page(discussions)))
-    this.on('GET', /^\/api\/users\/\d+\/testimonials$/, () => json(testimonials))
+    // Perfil público: sin actividad ni contadores (por privacidad, solo los ve su dueño en /api/profile).
+    this.on('GET', /^\/api\/users\/\d+$/, () =>
+      json({ ...profile, discussionCount: undefined, testimonialCount: undefined }),
+    )
+    this.on('GET', '/api/profile/discussions', () => json(page(discussions)))
+    this.on('GET', '/api/profile/testimonials', () => json(testimonials))
     this.on('GET', '/api/profile', () => json(profile))
     this.on('PUT', '/api/profile', () => json(profile))
     this.on('GET', '/api/auth/me', () => json(user))

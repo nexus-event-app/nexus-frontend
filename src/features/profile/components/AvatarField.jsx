@@ -13,7 +13,7 @@ import { resizeToSquareJpeg } from '../utils/resizeImage'
 const MAX_FILE_BYTES = 20 * 1024 * 1024
 
 /** Foto de perfil: se sube o se quita al momento, sin esperar a guardar el resto del formulario. */
-export default function AvatarField({ name, avatarUrl, onChange, className }) {
+export default function AvatarField({ name, avatarUrl, onChange, className, legendClassName }) {
   const { t } = useI18n()
   const toast = useToast()
   const inputId = useId()
@@ -71,7 +71,9 @@ export default function AvatarField({ name, avatarUrl, onChange, className }) {
       className={cx('grid items-center gap-4 sm:grid-cols-[auto_minmax(0,1fr)] sm:gap-y-2', className)}
       aria-busy={busy}
     >
-      <legend className="float-left col-span-full w-full text-sm font-semibold text-ink sm:mb-1">
+      <legend
+        className={cx('float-left col-span-full w-full', legendClassName ?? 'text-sm font-semibold text-ink sm:mb-1')}
+      >
         {t('profile.edit.photo')}
       </legend>
       <Avatar name={name} src={preview ?? avatarUrl} size="xl" className={cx('sm:row-span-2', busy && 'opacity-60')} />
