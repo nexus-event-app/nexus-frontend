@@ -17,7 +17,7 @@ const FEATURES = [
 ]
 
 /**
- * Portada: qué es Primer Commit y una sola llamada a la acción, unirse (o, con sesión, seguir con tu ruta). A la
+ * Portada: qué es Primer Commit y una sola llamada a la acción, unirse (con sesión, solo un saludo). A la
  * derecha, una ilustración con mini pantallas de la web; abajo, lo que encontrarás, en bloques informativos con un
  * estilo translúcido distinto del de las tarjetas que se pueden pulsar.
  */
@@ -58,16 +58,10 @@ export default function HeroSection() {
         </p>
 
         {isAuthenticated ? (
-          <section aria-label={t('home.hero.continue')} className="mt-7 animate-rise-in [animation-delay:240ms]">
-            <p className="text-lg font-semibold text-white">{t('home.hero.greeting', { name: user.name })}</p>
-            <ButtonLink
-              to={paths.learning}
-              variant="inverse"
-              className="mt-4 rounded-full px-7 py-3 text-base shadow-lg shadow-brand-950/30 transition-all hover:-translate-y-0.5"
-            >
-              {t('home.hero.continue')}
-            </ButtonLink>
-          </section>
+          // Con sesión, solo el saludo: nada de botones que lleven a algún sitio.
+          <p className="mt-7 animate-rise-in text-lg font-semibold text-white [animation-delay:240ms]">
+            {t('home.hero.greeting', { name: user.name })}
+          </p>
         ) : (
           <menu className="mt-7 flex animate-rise-in flex-col items-center gap-4 [animation-delay:240ms] sm:flex-row lg:justify-start">
             <li>

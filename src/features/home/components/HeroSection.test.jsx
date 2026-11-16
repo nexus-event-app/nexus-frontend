@@ -19,11 +19,10 @@ describe('HeroSection', () => {
     expect(within(features).queryByRole('link')).not.toBeInTheDocument()
   })
 
-  it('con sesión saluda por el nombre y lleva a seguir con la ruta', () => {
+  it('con sesión solo saluda por el nombre, sin botones que lleven a ningún sitio', () => {
     renderWithProviders(<HeroSection />, { auth: { user: { id: 7, name: 'Lucía' } } })
     expect(screen.getByText('Hola, Lucía. ¡Qué bien verte por aquí!')).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /Sigue con tu ruta/ })).toHaveAttribute('href', '/rutas')
-    expect(screen.queryByRole('link', { name: /Únete a la comunidad/ })).not.toBeInTheDocument()
+    expect(screen.queryByRole('link')).not.toBeInTheDocument()
   })
 })
 
