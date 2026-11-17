@@ -27,7 +27,8 @@ export default {
     missingCta: 'Preguntar en el foro',
     categories: {
       basics: 'Lo básico',
-      code: 'Código y Git',
+      code: 'Git y GitHub',
+      gitCommands: 'Comandos de Git',
       web: 'Web y apps',
       team: 'Trabajo en equipo',
       data: 'Datos e IA',
@@ -111,13 +112,13 @@ export default {
         term: 'Commit',
         definition:
           'Guardar un conjunto de cambios en el historial, con un mensaje que explica qué has hecho. Tu primer commit es tu primer paso.',
-        example: '«Añade el formulario de contacto».',
+        example: '`git commit -m "Añade el formulario de contacto"`: un mensaje claro y concreto, mejor que «cambios».',
       },
       rama: {
         term: 'Rama (branch)',
         definition:
           'Una copia paralela del código donde trabajar en algo nuevo sin tocar la versión principal hasta que esté listo.',
-        example: 'Crear la rama «nuevo-buscador» para probar una idea sin romper la web.',
+        example: 'Crear la rama «feature/buscador» para probar una idea sin romper la web. El nombre dice para qué es.',
       },
       pullRequest: {
         term: 'Pull request',
@@ -139,6 +140,80 @@ export default {
         term: 'Código abierto (open source)',
         definition: 'Código que cualquiera puede ver, usar y mejorar.',
         example: 'Corregir una errata en la documentación de un proyecto abierto es una buena primera contribución.',
+      },
+      controlVersiones: {
+        term: 'Control de versiones',
+        definition:
+          'Llevar un registro de todos los cambios de un proyecto: quién cambió qué y cuándo. Así se puede volver atrás y trabajar en equipo sin pisarse.',
+        example: 'Git es el sistema de control de versiones más usado.',
+      },
+      localRemoto: {
+        term: 'Local y remoto',
+        definition:
+          'Local es la copia del proyecto que tienes en tu ordenador; remoto, la que está en internet (por ejemplo, en GitHub) y comparte todo el equipo.',
+        example: 'Haces cambios en local y, cuando están listos, los subes al remoto.',
+      },
+      gitflow: {
+        term: 'Gitflow',
+        definition:
+          'Una forma ordenada de organizar las ramas de un proyecto: main para lo publicado, develop para lo que se está desarrollando y ramas feature o hotfix para cada tarea o arreglo urgente.',
+        example: 'Creas «feature/footer» desde develop y, cuando está lista, la unes de nuevo a develop.',
+      },
+      readme: {
+        term: 'README',
+        definition:
+          'El archivo de presentación de un repositorio: explica qué es el proyecto, cómo instalarlo y cómo usarlo. Es lo primero que se ve en GitHub.',
+        example: 'Un README con una captura, las tecnologías usadas y los pasos para ejecutarlo.',
+      },
+      clone: {
+        term: 'Clonar (git clone)',
+        definition: 'Descargar en tu ordenador una copia completa de un repositorio remoto, con todo su historial.',
+        example: '`git clone` seguido de la dirección del repositorio, que copias del botón «Code» de GitHub.',
+      },
+      status: {
+        term: 'git status',
+        definition:
+          'Te dice en qué rama estás y qué archivos has cambiado, preparado o aún no guardado. Úsalo a menudo.',
+        example: 'Antes de hacer un commit, `git status` te enseña qué vas a incluir.',
+      },
+      staging: {
+        term: 'Preparar cambios (git add)',
+        definition:
+          'Elegir qué cambios irán en el próximo commit. Los cambios elegidos pasan a una zona de preparación (staging).',
+        example: '`git add .` prepara todos los cambios; `git add index.html`, solo ese archivo.',
+      },
+      push: {
+        term: 'Push (git push)',
+        definition: 'Subir tus commits de local al repositorio remoto para que el resto del equipo los tenga.',
+        example: '`git push` después de terminar tu tarea.',
+      },
+      pull: {
+        term: 'Pull (git pull)',
+        definition: 'Traer a tu copia local los últimos cambios del remoto y unirlos con tu trabajo.',
+        example: '`git pull` al empezar el día, para trabajar sobre lo más reciente.',
+      },
+      fetch: {
+        term: 'Fetch (git fetch)',
+        definition:
+          'Descargar la información del remoto (ramas y commits nuevos) sin tocar tu trabajo. A diferencia de pull, no une nada.',
+        example: '`git fetch` para ver si hay ramas nuevas antes de cambiarte a una.',
+      },
+      checkout: {
+        term: 'Cambiar de rama (git switch)',
+        definition:
+          'Moverte a otra rama para trabajar en ella. `git checkout` hace lo mismo; con `-b`, además, la crea.',
+        example: '`git switch develop`, o `git checkout -b feature/login` para crear una rama nueva y entrar en ella.',
+      },
+      log: {
+        term: 'git log',
+        definition: 'Muestra el historial de commits de la rama: quién hizo cada uno, cuándo y con qué mensaje.',
+        example: '`git log --oneline` para ver el historial en una línea por commit.',
+      },
+      stash: {
+        term: 'Stash (git stash)',
+        definition:
+          'Guardar aparte los cambios que aún no quieres confirmar para dejar limpia tu copia. No se pierden: los recuperas cuando quieras.',
+        example: '`git stash` para cambiar de rama un momento y `git stash pop` para recuperar lo que tenías.',
       },
       frontend: {
         term: 'Frontend',
@@ -314,7 +389,8 @@ export default {
     missingCta: 'Pregunta al fòrum',
     categories: {
       basics: 'El més bàsic',
-      code: 'Codi i Git',
+      code: 'Git i GitHub',
+      gitCommands: 'Ordres de Git',
       web: 'Web i apps',
       team: 'Treball en equip',
       data: 'Dades i IA',
@@ -398,13 +474,14 @@ export default {
         term: 'Commit',
         definition:
           'Desar un conjunt de canvis a l’historial, amb un missatge que explica què has fet. El teu primer commit és el teu primer pas.',
-        example: '«Afegeix el formulari de contacte».',
+        example: '`git commit -m "Afegeix el formulari de contacte"`: un missatge clar i concret, millor que «canvis».',
       },
       rama: {
         term: 'Branca (branch)',
         definition:
           'Una còpia paral·lela del codi on treballar en alguna cosa nova sense tocar la versió principal fins que estigui llesta.',
-        example: 'Crear la branca «nou-cercador» per provar una idea sense trencar la web.',
+        example:
+          'Crear la branca «feature/cercador» per provar una idea sense trencar la web. El nom diu per a què és.',
       },
       pullRequest: {
         term: 'Pull request',
@@ -426,6 +503,80 @@ export default {
         term: 'Codi obert (open source)',
         definition: 'Codi que qualsevol persona pot veure, fer servir i millorar.',
         example: 'Corregir una errata a la documentació d’un projecte obert és una bona primera contribució.',
+      },
+      controlVersiones: {
+        term: 'Control de versions',
+        definition:
+          'Portar un registre de tots els canvis d’un projecte: qui va canviar què i quan. Així es pot tornar enrere i treballar en equip sense trepitjar-se.',
+        example: 'Git és el sistema de control de versions més utilitzat.',
+      },
+      localRemoto: {
+        term: 'Local i remot',
+        definition:
+          'Local és la còpia del projecte que tens al teu ordinador; remot, la que és a internet (per exemple, a GitHub) i comparteix tot l’equip.',
+        example: 'Fas canvis en local i, quan estan llestos, els puges al remot.',
+      },
+      gitflow: {
+        term: 'Gitflow',
+        definition:
+          'Una manera ordenada d’organitzar les branques d’un projecte: main per al que està publicat, develop per al que s’està desenvolupant i branques feature o hotfix per a cada tasca o arranjament urgent.',
+        example: 'Crees «feature/footer» des de develop i, quan està llesta, la tornes a unir a develop.',
+      },
+      readme: {
+        term: 'README',
+        definition:
+          'El fitxer de presentació d’un repositori: explica què és el projecte, com instal·lar-lo i com fer-lo servir. És el primer que es veu a GitHub.',
+        example: 'Un README amb una captura, les tecnologies utilitzades i els passos per executar-lo.',
+      },
+      clone: {
+        term: 'Clonar (git clone)',
+        definition: 'Descarregar al teu ordinador una còpia completa d’un repositori remot, amb tot el seu historial.',
+        example: '`git clone` seguit de l’adreça del repositori, que copies del botó «Code» de GitHub.',
+      },
+      status: {
+        term: 'git status',
+        definition:
+          'Et diu en quina branca ets i quins fitxers has canviat, preparat o encara no has desat. Fes-lo servir sovint.',
+        example: 'Abans de fer un commit, `git status` et mostra què hi inclouràs.',
+      },
+      staging: {
+        term: 'Preparar canvis (git add)',
+        definition:
+          'Triar quins canvis aniran al proper commit. Els canvis triats passen a una zona de preparació (staging).',
+        example: '`git add .` prepara tots els canvis; `git add index.html`, només aquest fitxer.',
+      },
+      push: {
+        term: 'Push (git push)',
+        definition: 'Pujar els teus commits de local al repositori remot perquè la resta de l’equip els tingui.',
+        example: '`git push` després d’acabar la teva tasca.',
+      },
+      pull: {
+        term: 'Pull (git pull)',
+        definition: 'Portar a la teva còpia local els darrers canvis del remot i unir-los amb la teva feina.',
+        example: '`git pull` en començar el dia, per treballar sobre el més recent.',
+      },
+      fetch: {
+        term: 'Fetch (git fetch)',
+        definition:
+          'Descarregar la informació del remot (branques i commits nous) sense tocar la teva feina. A diferència de pull, no uneix res.',
+        example: '`git fetch` per veure si hi ha branques noves abans de canviar-te a una.',
+      },
+      checkout: {
+        term: 'Canviar de branca (git switch)',
+        definition:
+          'Moure’t a una altra branca per treballar-hi. `git checkout` fa el mateix; amb `-b`, a més, la crea.',
+        example: '`git switch develop`, o `git checkout -b feature/login` per crear una branca nova i entrar-hi.',
+      },
+      log: {
+        term: 'git log',
+        definition: 'Mostra l’historial de commits de la branca: qui va fer cadascun, quan i amb quin missatge.',
+        example: '`git log --oneline` per veure l’historial en una línia per commit.',
+      },
+      stash: {
+        term: 'Stash (git stash)',
+        definition:
+          'Desar a part els canvis que encara no vols confirmar per deixar neta la teva còpia. No es perden: els recuperes quan vulguis.',
+        example: '`git stash` per canviar de branca un moment i `git stash pop` per recuperar el que tenies.',
       },
       frontend: {
         term: 'Frontend',
@@ -601,7 +752,8 @@ export default {
     missingCta: 'Ask in the forum',
     categories: {
       basics: 'The basics',
-      code: 'Code and Git',
+      code: 'Git and GitHub',
+      gitCommands: 'Git commands',
       web: 'Web and apps',
       team: 'Teamwork',
       data: 'Data and AI',
@@ -684,13 +836,14 @@ export default {
         term: 'Commit',
         definition:
           'Saving a set of changes to the history, with a message explaining what you did. Your first commit is your first step.',
-        example: '«Add the contact form».',
+        example: '`git commit -m "Add the contact form"`: a clear, specific message beats «changes».',
       },
       rama: {
         term: 'Branch',
         definition:
           'A parallel copy of the code where you work on something new without touching the main version until it’s ready.',
-        example: 'Creating a «new-search» branch to try an idea without breaking the website.',
+        example:
+          'Creating a «feature/search» branch to try an idea without breaking the website. The name says what it’s for.',
       },
       pullRequest: {
         term: 'Pull request',
@@ -712,6 +865,79 @@ export default {
         term: 'Open source',
         definition: 'Code that anyone can see, use and improve.',
         example: 'Fixing a typo in an open project’s documentation is a great first contribution.',
+      },
+      controlVersiones: {
+        term: 'Version control',
+        definition:
+          'Keeping a record of every change to a project: who changed what and when. That way you can go back and work as a team without overwriting each other.',
+        example: 'Git is the most widely used version control system.',
+      },
+      localRemoto: {
+        term: 'Local and remote',
+        definition:
+          'Local is the copy of the project on your computer; remote is the one online (for example, on GitHub) that the whole team shares.',
+        example: 'You make changes locally and, when they’re ready, push them to the remote.',
+      },
+      gitflow: {
+        term: 'Gitflow',
+        definition:
+          'An organised way to structure a project’s branches: main for what’s released, develop for what’s being built, and feature or hotfix branches for each task or urgent fix.',
+        example: 'You create «feature/footer» from develop and merge it back into develop when it’s ready.',
+      },
+      readme: {
+        term: 'README',
+        definition:
+          'A repository’s introduction file: it explains what the project is, how to install it and how to use it. It’s the first thing you see on GitHub.',
+        example: 'A README with a screenshot, the technologies used and the steps to run it.',
+      },
+      clone: {
+        term: 'Clone (git clone)',
+        definition: 'Downloading a full copy of a remote repository to your computer, with all its history.',
+        example: '`git clone` followed by the repository address, which you copy from the “Code” button on GitHub.',
+      },
+      status: {
+        term: 'git status',
+        definition:
+          'Tells you which branch you’re on and which files you’ve changed, staged or not saved yet. Use it often.',
+        example: 'Before committing, `git status` shows you what you’re about to include.',
+      },
+      staging: {
+        term: 'Staging changes (git add)',
+        definition: 'Choosing which changes go into the next commit. The chosen changes move to a staging area.',
+        example: '`git add .` stages every change; `git add index.html`, just that file.',
+      },
+      push: {
+        term: 'Push (git push)',
+        definition: 'Uploading your local commits to the remote repository so the rest of the team has them.',
+        example: '`git push` once you’ve finished your task.',
+      },
+      pull: {
+        term: 'Pull (git pull)',
+        definition: 'Bringing the latest changes from the remote into your local copy and merging them with your work.',
+        example: '`git pull` at the start of the day, so you work on the latest version.',
+      },
+      fetch: {
+        term: 'Fetch (git fetch)',
+        definition:
+          'Downloading the remote’s information (new branches and commits) without touching your work. Unlike pull, it doesn’t merge anything.',
+        example: '`git fetch` to check for new branches before switching to one.',
+      },
+      checkout: {
+        term: 'Switching branches (git switch)',
+        definition:
+          'Moving to another branch to work on it. `git checkout` does the same; with `-b` it also creates it.',
+        example: '`git switch develop`, or `git checkout -b feature/login` to create a new branch and move to it.',
+      },
+      log: {
+        term: 'git log',
+        definition: 'Shows the branch’s commit history: who made each one, when and with what message.',
+        example: '`git log --oneline` to see the history with one line per commit.',
+      },
+      stash: {
+        term: 'Stash (git stash)',
+        definition:
+          'Setting aside changes you don’t want to commit yet so your copy is clean. They’re not lost: you get them back whenever you like.',
+        example: '`git stash` to switch branches for a moment and `git stash pop` to get your work back.',
       },
       frontend: {
         term: 'Frontend',

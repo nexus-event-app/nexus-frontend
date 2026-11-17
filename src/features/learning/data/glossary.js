@@ -24,11 +24,29 @@ export const GLOSSARY = [
   {
     id: 'code',
     icon: 'code',
-    terms: ['git', 'repositorio', 'commit', 'rama', 'pullRequest', 'merge', 'github', 'openSource'],
+    terms: [
+      'controlVersiones',
+      'git',
+      'github',
+      'repositorio',
+      'localRemoto',
+      'rama',
+      'merge',
+      'pullRequest',
+      'gitflow',
+      'readme',
+      'openSource',
+    ],
+  },
+  // Los comandos de Git, en el orden en que se usan en el día a día.
+  {
+    id: 'gitCommands',
+    icon: 'computer',
+    terms: ['clone', 'status', 'staging', 'commit', 'push', 'pull', 'fetch', 'checkout', 'log', 'stash'],
   },
   {
     id: 'web',
-    icon: 'computer',
+    icon: 'newspaper',
     terms: ['frontend', 'backend', 'fullStack', 'api', 'baseDeDatos', 'servidor', 'deploy', 'nube', 'responsive'],
   },
   { id: 'team', icon: 'users', terms: ['agile', 'scrum', 'sprint', 'daily', 'testing', 'codeReview', 'stack'] },
@@ -51,6 +69,22 @@ export function termPath(id) {
 /** Minúsculas y sin tildes: «Depuración» encuentra «depurar», «API» encuentra «api». */
 export function normalize(text) {
   return text.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().trim()
+}
+
+/**
+ * Los textos marcan los comandos entre comillas invertidas («`git push`»): se pintan como código. Donde no se puede
+ * (el buscador global), se quitan.
+ */
+export function plainText(text) {
+  return text.replaceAll('`', '')
+}
+
+/** Divide un texto en trozos normales y trozos de código, para pintar cada uno con su estilo. */
+export function splitCode(text) {
+  return text
+    .split('`')
+    .map((part, index) => ({ text: part, code: index % 2 === 1 }))
+    .filter((part) => part.text)
 }
 
 /** Término con sus textos en el idioma actual. */
@@ -87,6 +121,6 @@ export function searchTerms(terms, query) {
 
 /** Grupo «Glosario» para el buscador global, con la misma forma que los que devuelve el backend. */
 export function glossarySearchGroup(query, t, limit) {
-  const matches = searchTerms(allTerms(t), query)
+  const matches = searchTerms(allTerms(t), query).map((item) => ({ ...item, definition: plainText(item.definition) }))
   return { items: matches.slice(0, limit), total: matches.length }
 }

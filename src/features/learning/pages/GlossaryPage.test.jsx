@@ -9,7 +9,7 @@ describe('GlossaryPage', () => {
   it('muestra todos los términos por categorías, con su definición y su ejemplo', () => {
     renderWithProviders(<GlossaryPage />, { route: '/glosario' })
     expect(screen.getByRole('heading', { level: 1, name: 'Las palabras que vas a oír' })).toBeInTheDocument()
-    expect(screen.getByRole('status')).toHaveTextContent('45 términos')
+    expect(screen.getByRole('status')).toHaveTextContent('58 términos')
     const api = screen.getByRole('article', { name: 'API' })
     expect(api).toHaveAttribute('id', 'termino-api')
     expect(api).toHaveTextContent(/camarero/)
@@ -39,6 +39,15 @@ describe('GlossaryPage', () => {
     renderWithProviders(<GlossaryPage />, { route: '/en/glossary' })
     expect(screen.getByRole('heading', { level: 1, name: 'The words you’ll hear' })).toBeInTheDocument()
     expect(screen.getByRole('article', { name: 'Database' })).toBeInTheDocument()
+  })
+})
+
+describe('GlossaryPage · comandos', () => {
+  it('pinta los comandos de Git como código', () => {
+    renderWithProviders(<GlossaryPage />)
+    const card = screen.getByRole('article', { name: 'Preparar cambios (git add)' })
+    expect(within(card).getByText('git add index.html').tagName).toBe('CODE')
+    expect(card).not.toHaveTextContent('`')
   })
 })
 

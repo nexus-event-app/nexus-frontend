@@ -9,7 +9,27 @@ import Seo from '@/shared/components/Seo'
 import { paths } from '@/shared/config/paths'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
-import { GLOSSARY, allTerms, searchTerms, termAnchor } from '../data/glossary'
+import { GLOSSARY, allTerms, searchTerms, splitCode, termAnchor } from '../data/glossary'
+
+/** Texto con los comandos («`git push`») como código, con letra de ordenador para distinguirlos y copiarlos. */
+function RichText({ text }) {
+  return splitCode(text).map((part, index) =>
+    part.code ? (
+      <code
+        key={index}
+        className={cx(
+          'rounded-md bg-accent-soft px-1.5 py-0.5 font-mono text-[0.9em] text-accent-strong box-decoration-clone',
+          // Los cortos, enteros en una línea; los largos (una URL, un mensaje) pueden partirse para no salirse.
+          part.text.length <= 24 ? 'whitespace-nowrap' : '[overflow-wrap:anywhere]',
+        )}
+      >
+        {part.text}
+      </code>
+    ) : (
+      part.text
+    ),
+  )
+}
 
 /** Un término: nombre, qué es en una o dos frases y un ejemplo. Su ancla permite enlazarlo desde cualquier sitio. */
 function TermCard({ item }) {
@@ -23,12 +43,14 @@ function TermCard({ item }) {
       <h3 id={`${termAnchor(item.id)}-title`} className="text-lg font-bold text-ink">
         {item.term}
       </h3>
-      <p className="mb-4 mt-2 leading-relaxed text-ink-soft">{item.definition}</p>
+      <p className="mb-4 mt-2 leading-relaxed text-ink-soft">
+        <RichText text={item.definition} />
+      </p>
       {/* El ejemplo, al pie de la tarjeta: así quedan alineados en cada fila. */}
       <p className="mt-auto flex gap-2 rounded-2xl bg-canvas px-4 py-3 text-sm leading-relaxed text-ink-muted">
         <Icon name="sparkles" className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
         <span>
-          <strong className="font-semibold text-ink">{t('glossary.example')}:</strong> {item.example}
+          <strong className="font-semibold text-ink">{t('glossary.example')}:</strong> <RichText text={item.example} />
         </span>
       </p>
     </article>
