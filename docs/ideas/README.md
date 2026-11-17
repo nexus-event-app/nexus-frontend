@@ -50,3 +50,28 @@ Estado: aparcado; ninguna opción terminó de convencer.
 su web oficial (o dejarlos fuera) y añadir una explicación breve de qué es la «piscina» de 42.
 
 Estado: aparcado.
+
+## 3. Mentorías (bloque en Rutas de aprendizaje), para cuando la web crezca
+
+**Datos:** los mismos de comunidades (`datos/comunidades--*.csv`); las mentorías salen en pocas filas, completadas
+con búsquedas del 17 de noviembre de 2026 (sin poder abrir las webs oficiales: hay que comprobarlas antes).
+
+**Para mujeres (lo más sólido):**
+
+- Step4ward: mentoras con experiencia en tech en España, para mujeres que empiezan o avanzan (perfil en
+  [Open Collective](https://opencollective.com/step4ward); recomendada por Tech Ladies Barcelona).
+- SheHub (Barcelona, remoto): proyectos reales en equipos de mujeres con mentoras, para recién tituladas.
+- Yes We Tech: asociación desde 2015 que acompaña a mujeres en su carrera tech y menciona mentorías.
+- Women Techmakers Barcelona (programa de Google): sin comprobar.
+
+**Corrección del Excel:** CyberGirl Squad (Yes We Tech) es para niñas de 7 a 11 y de 12 a 15 años, no para nuestro
+público. Fuera.
+
+**Por confirmar:** IT For Girls (NTT DATA, formación y mentoría gratuita para mujeres; edición 2025) y STEMAspire
+(UPM, solo universitarias STEM). Abiertas a todo el mundo hay poco (BcnEng, de la que Step4ward es un proyecto).
+
+**Planteamiento que salió:** bloque «Mentorías» con tres consejos para aprovecharlas, un apartado destacado
+«Por y para mujeres» con tarjetas, y una tarjeta final que lleve al foro. Idea más grande para el futuro: marcar en
+el perfil «Me ofrezco como mentora/mentor» y tener una lista de personas de la comunidad dispuestas a ayudar.
+
+Estado: aparcado hasta que la web vaya a más.
