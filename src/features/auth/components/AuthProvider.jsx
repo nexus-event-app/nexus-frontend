@@ -13,6 +13,8 @@ export default function AuthProvider({ children }) {
   const toast = useToast()
   const [session, setSession] = useState(readSession)
   const [loading, setLoading] = useState(() => readSession() !== null)
+  // Cerró sesión ella misma (o eliminó su cuenta): las páginas privadas llevan a la portada, no a «Iniciar sesión».
+  const [signedOut, setSignedOut] = useState(false)
 
   useEffect(() => {
     const stored = readSession()
@@ -64,6 +66,7 @@ export default function AuthProvider({ children }) {
     const next = { token, user }
     saveSession(next)
     setSession(next)
+    setSignedOut(false)
     return user
   }, [])
 
@@ -90,6 +93,7 @@ export default function AuthProvider({ children }) {
   const logout = useCallback(() => {
     clearSession()
     setSession(null)
+    setSignedOut(true)
   }, [])
 
   const value = useMemo(
@@ -105,8 +109,9 @@ export default function AuthProvider({ children }) {
       logout,
       refreshUser,
       loading,
+      signedOut,
     }),
-    [session, login, register, loginWithGoogle, completeGoogleSignup, logout, refreshUser, loading],
+    [session, login, register, loginWithGoogle, completeGoogleSignup, logout, refreshUser, loading, signedOut],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

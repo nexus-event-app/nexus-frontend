@@ -14,4 +14,6 @@ export const profileService = {
     return http.post('/profile/avatar', body).then((response) => response.data)
   },
   removeAvatar: () => http.delete('/profile/avatar').then((response) => response.data),
+  // Eliminar la propia cuenta: pide la contraseña actual si la cuenta tiene (las de Google pueden no tenerla).
+  deleteAccount: (password) => http.delete('/profile', { data: password ? { password } : {} }),
 }

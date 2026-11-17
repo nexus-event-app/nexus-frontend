@@ -20,6 +20,7 @@ export function authValue(overrides = {}) {
     logout: vi.fn(),
     refreshUser: vi.fn(),
     loading: false,
+    signedOut: false,
     ...overrides,
   }
 }

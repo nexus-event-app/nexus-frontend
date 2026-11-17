@@ -103,8 +103,14 @@ export default function AdminUsersPage() {
       header: 'Estado',
       render: (user) => (
         <p className="flex flex-wrap justify-end gap-1.5 md:justify-start">
-          <Badge tone={user.enabled ? 'green' : 'red'}>{user.enabled ? 'Activo' : 'Desactivado'}</Badge>
-          {!user.emailVerified && <Badge tone="amber">Email sin verificar</Badge>}
+          {user.deleted ? (
+            <Badge tone="slate">Eliminada por su titular</Badge>
+          ) : (
+            <>
+              <Badge tone={user.enabled ? 'green' : 'red'}>{user.enabled ? 'Activo' : 'Desactivado'}</Badge>
+              {!user.emailVerified && <Badge tone="amber">Email sin verificar</Badge>}
+            </>
+          )}
         </p>
       ),
     },
@@ -116,6 +122,8 @@ export default function AdminUsersPage() {
       render: (user) => {
         const isSelf = user.id === currentUser.id
         const isAdmin = user.role === 'ADMIN'
+        // Su titular la eliminó: ya no tiene datos que editar ni se puede reactivar.
+        if (user.deleted) return <span className="text-sm text-ink-muted">—</span>
         return (
           <ActionMenu className="flex-nowrap justify-end gap-1 md:justify-start">
             <IconAction

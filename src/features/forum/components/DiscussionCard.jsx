@@ -10,6 +10,7 @@ import { useInView } from '@/shared/hooks/useInView'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import { excerpt } from '@/shared/utils/text'
+import { authorOf } from '../utils/author'
 
 /** Lo bastante para llenar las cuatro líneas del bocadillo y que se entienda de qué va la discusión. */
 const EXCERPT_LENGTH = 320
@@ -47,7 +48,7 @@ export default function DiscussionCard({ discussion, headingLevel = 'h3' }) {
   const [ref, inView] = useInView()
   const category = CATEGORY_STYLES[discussion.category] ?? CATEGORY_STYLES.GENERAL
   const status = statusOf(discussion)
-  const author = discussion.authorName || t('forum.user')
+  const author = authorOf(discussion, t)
 
   return (
     <article
@@ -97,8 +98,8 @@ export default function DiscussionCard({ discussion, headingLevel = 'h3' }) {
         <span className="line-clamp-4">{excerpt(discussion.content, EXCERPT_LENGTH)}</span>
       </p>
       <p className="mb-4 mt-3 flex min-w-0 items-center gap-2 text-sm text-ink-muted">
-        <Avatar name={discussion.authorName} src={discussion.authorAvatarUrl} size="sm" />
-        <AuthorLink id={discussion.authorId} name={author} className="truncate font-medium text-ink-soft" />
+        <Avatar name={author.name} src={author.avatarUrl} size="sm" />
+        <AuthorLink id={author.id} name={author.name} className="truncate font-medium text-ink-soft" />
         <span aria-hidden="true">·</span>
         <Time value={discussion.createdAt} format="relative" className="shrink-0" />
       </p>

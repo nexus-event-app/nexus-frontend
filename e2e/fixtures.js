@@ -67,6 +67,7 @@ class MockApi {
     this.on('GET', '/api/profile/testimonials', () => json(testimonials))
     this.on('GET', '/api/profile', () => json(profile))
     this.on('PUT', '/api/profile', () => json(profile))
+    this.on('DELETE', '/api/profile', () => ({ status: 204 }))
     this.on('GET', '/api/auth/me', () => json(user))
     // «Continuar con Google» activado, como en local con las credenciales puestas.
     this.on('GET', '/api/auth/providers', () => json({ google: true }))
@@ -157,4 +158,4 @@ export async function expectAccessible(browserPage) {
   expect(summary).toEqual([])
 }
 
-export { expect }
+export { expect, json }

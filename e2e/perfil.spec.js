@@ -1,4 +1,5 @@
-import { expect, test } from './fixtures.js'
+import { discussions } from './data.js'
+import { expect, expectAccessible, json, test } from './fixtures.js'
 
 test.describe('Editar perfil', () => {
   test('la vista previa cambia mientras escribes y «Guardar perfil» envía los datos', async ({
@@ -47,5 +48,45 @@ test.describe('Perfil', () => {
     await expect(activity).toContainText('Nadie más ve tu actividad')
     await expect(activity.getByRole('link', { name: '¿Por dónde empiezo con Java?' })).toBeVisible()
     await expect(activity.getByRole('region', { name: 'Tus testimonios' }).getByRole('listitem')).not.toHaveCount(0)
+  })
+})
+
+test.describe('Eliminar la cuenta', () => {
+  test('explica qué pasa, pide la contraseña, elimina la cuenta y vuelve a la portada sin sesión', async ({
+    page,
+    api,
+    signedIn,
+  }) => {
+    expect(signedIn.hasPassword).toBe(true)
+    await page.goto('/perfil/editar')
+    const section = page.getByRole('region', { name: 'Eliminar tu cuenta' })
+    await expect(section).toContainText('firmadas como «Cuenta eliminada»')
+
+    await section.getByRole('button', { name: 'Eliminar mi cuenta' }).click()
+    const dialog = page.getByRole('dialog', { name: '¿Eliminar tu cuenta?' })
+    await expect(dialog).toBeVisible()
+    await expectAccessible(page)
+
+    await dialog.getByLabel(/Tu contraseña actual/).fill('Clave12345')
+    await dialog.getByRole('button', { name: 'Eliminar definitivamente' }).click()
+
+    await expect(page).toHaveURL(/\/$/)
+    await expect(page.getByText(/Tu cuenta se ha eliminado/)).toBeVisible()
+    await expect(page.getByRole('link', { name: 'Iniciar sesión' }).first()).toBeVisible()
+    const sent = api.calls.find((call) => call.method === 'DELETE' && call.path === '/api/profile')
+    expect(JSON.parse(sent.body)).toEqual({ password: 'Clave12345' })
+  })
+
+  test('en el foro, lo que escribió una cuenta eliminada sale como «Cuenta eliminada» y sin enlace', async ({
+    page,
+    api,
+  }) => {
+    const [first] = discussions
+    const deleted = { ...first, authorName: 'Cuenta eliminada', authorDeleted: true, authorAvatarUrl: null }
+    api.on('GET', new RegExp(`^/api/discussions/${first.id}$`), () => json(deleted))
+    await page.goto(`/foro/${first.id}-${first.slug}`)
+    await expect(page.getByRole('heading', { level: 1, name: first.title })).toBeVisible()
+    await expect(page.getByText('Cuenta eliminada').first()).toBeVisible()
+    await expect(page.getByRole('link', { name: 'Cuenta eliminada' })).toHaveCount(0)
   })
 })

@@ -8,6 +8,7 @@ import { cx } from '@/shared/utils/classNames'
 import ReportButton from '@/features/reports/components/ReportButton'
 import LikeButton from './LikeButton'
 import { useI18n } from '@/shared/i18n/useI18n'
+import { authorOf } from '../utils/author'
 
 export default function CommentItem({
   id,
@@ -22,7 +23,7 @@ export default function CommentItem({
   onDelete,
 }) {
   const { t } = useI18n()
-  const author = comment.authorName || t('forum.user')
+  const author = authorOf(comment, t)
   return (
     // Enfocable (tabIndex -1) para que el enlace de un aviso pueda llevar el foco a este comentario. La foto va a la
     // izquierda y todo lo demás al lado, como en un hilo de conversación; la mejor respuesta se señala en verde (y con
@@ -43,9 +44,9 @@ export default function CommentItem({
           {t('forum.comments.accepted')}
         </p>
       )}
-      <Avatar name={comment.authorName} src={comment.authorAvatarUrl} className="row-span-3" />
+      <Avatar name={author.name} src={author.avatarUrl} className="row-span-3" />
       <header className="flex min-w-0 flex-wrap items-baseline gap-x-2">
-        <AuthorLink id={comment.authorId} name={author} className="truncate font-semibold text-ink" />
+        <AuthorLink id={author.id} name={author.name} className="truncate font-semibold text-ink" />
         <Time value={comment.createdAt} format="datetime" className="text-sm text-ink-muted" />
       </header>
       <UserText className="mt-1.5 leading-relaxed text-ink-soft">{comment.content}</UserText>
@@ -67,20 +68,20 @@ export default function CommentItem({
           >
             <Icon name="check-circle" className="h-4 w-4" />
             {accepted ? t('forum.comments.unaccept') : t('forum.comments.accept')}
-            <span className="sr-only">{t('forum.comments.acceptSr', { author })}</span>
+            <span className="sr-only">{t('forum.comments.acceptSr', { author: author.name })}</span>
           </Button>
         )}
         <ReportButton
           targetType="COMMENT"
           targetId={comment.id}
           ownerId={comment.authorId}
-          srLabel={t('reports.commentSr', { author })}
+          srLabel={t('reports.commentSr', { author: author.name })}
         />
         {canDelete && (
           <Button variant="ghost" size="sm" onClick={() => onDelete(comment)}>
             <Icon name="trash" className="h-4 w-4" />
             {t('forum.comments.delete')}
-            <span className="sr-only">{t('forum.comments.deleteSr', { author })}</span>
+            <span className="sr-only">{t('forum.comments.deleteSr', { author: author.name })}</span>
           </Button>
         )}
       </footer>

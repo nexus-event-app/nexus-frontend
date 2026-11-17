@@ -90,8 +90,12 @@ const SECTIONS = [
     title: '5. Cuánto tiempo los conservamos',
     content: (
       <p>
-        Mientras tu cuenta esté activa. Si pides eliminarla, borraremos tus datos de cuenta; tu contenido publicado se
-        eliminará o se anonimizará. Algunos datos podrán conservarse bloqueados durante los plazos que exija la ley.
+        Mientras tu cuenta esté activa. Puedes eliminarla tú cuando quieras desde «Editar perfil» → «Eliminar tu
+        cuenta»: se borran al momento tu nombre, tu email, tu contraseña, tu perfil, tu foto, tus testimonios, tus
+        ofertas guardadas y tu progreso. Tus discusiones y respuestas del foro se conservan anonimizadas, firmadas como
+        «Cuenta eliminada», para no romper las conversaciones de otras personas; si prefieres que también se borren,
+        puedes eliminarlas antes o pedírnoslo. Las copias de seguridad, que solo se usan para recuperar el sitio ante un
+        fallo, se sobrescriben en un máximo de 14 días.
       </p>
     ),
   },
@@ -115,7 +119,7 @@ const SECTIONS = [
         <p>
           Puedes ejercer en cualquier momento tus derechos de acceso, rectificación, supresión, oposición, limitación
           del tratamiento y portabilidad, y retirar tu consentimiento, escribiendo a <ContactEmail /> desde el email de
-          tu cuenta.
+          tu cuenta. Para la supresión no hace falta escribirnos: puedes eliminar tu cuenta tú desde «Editar perfil».
         </p>
         <p>
           Si crees que no hemos tratado bien tus datos, puedes presentar una reclamación ante la Agencia Española de

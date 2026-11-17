@@ -17,6 +17,7 @@ import { useToast } from '@/shared/hooks/useToast'
 import { useNavigate } from '@/shared/i18n/useNavigate'
 import { useI18n } from '@/shared/i18n/useI18n'
 import AvatarField from '../components/AvatarField'
+import DeleteAccountSection from '../components/DeleteAccountSection'
 import ProfileFields from '../components/ProfileFields'
 import ProfilePreview from '../components/ProfilePreview'
 import { profileService } from '../services/profileService'
@@ -128,6 +129,7 @@ export default function EditProfilePage() {
       ) : (
         <ProfileForm profile={profile} onAvatarChange={handleAvatarChange} />
       )}
+      <DeleteAccountSection className="mt-16 lg:col-start-1 lg:row-start-5" />
     </PageMain>
   )
 }

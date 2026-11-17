@@ -90,6 +90,24 @@ test.describe('Cuenta', () => {
 })
 
 test.describe('Cerrar sesión', () => {
+  test('desde una página privada (editar perfil) también lleva a la portada, no a «Iniciar sesión»', async ({
+    page,
+    signedIn,
+  }) => {
+    expect(signedIn.id).toBe(7)
+    await page.goto('/perfil/editar')
+    await expect(page.getByRole('heading', { level: 1, name: 'Editar perfil' })).toBeVisible()
+    const accountMenu = page.getByRole('banner').getByRole('button', { name: 'Lucía Prueba' })
+    if (await accountMenu.isVisible()) {
+      await accountMenu.click()
+    } else {
+      await page.getByRole('button', { name: /menú/i }).first().click()
+    }
+    await page.getByRole('button', { name: 'Cerrar sesión' }).click()
+    await expect(page).toHaveURL(/localhost:\d+\/$/)
+    await expect(page.getByText('Has cerrado sesión.')).toBeVisible()
+  })
+
   test('desde tu perfil lleva a la portada y la sesión queda cerrada', async ({ page, signedIn }) => {
     expect(signedIn.id).toBe(7)
     await page.goto('/perfil/7-lucia-prueba')

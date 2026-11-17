@@ -23,9 +23,11 @@ import ReportButton from '@/features/reports/components/ReportButton'
 import LikeButton from './LikeButton'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
+import { authorOf } from '../utils/author'
 
 export default function DiscussionArticle({ discussion, commentCount, onChange, className }) {
   const { t } = useI18n()
+  const author = authorOf(discussion, t)
   const { isAuthenticated } = useAuth()
   const toast = useToast()
   const navigate = useNavigate()
@@ -88,13 +90,9 @@ export default function DiscussionArticle({ discussion, commentCount, onChange, 
           {discussion.title}
         </h1>
         <p className="mt-5 flex items-center gap-3 text-sm text-ink-muted">
-          <Avatar name={discussion.authorName} src={discussion.authorAvatarUrl} />
+          <Avatar name={author.name} src={author.avatarUrl} />
           <span>
-            <AuthorLink
-              id={discussion.authorId}
-              name={discussion.authorName || t('forum.user')}
-              className="block font-semibold text-ink"
-            />
+            <AuthorLink id={author.id} name={author.name} className="block font-semibold text-ink" />
             <Time value={discussion.createdAt} format="datetime" />
             {commentCount > 0 && ` · ${t('forum.detail.comment', { count: commentCount })}`}
           </span>

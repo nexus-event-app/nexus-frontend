@@ -3,6 +3,7 @@ export default {
   es: {
     breadcrumb: 'Foro',
     user: 'Usuario',
+    deletedAccount: 'Cuenta eliminada',
     list: {
       eyebrow: 'Pregunta y comparte',
       heading: 'Foro',
@@ -127,6 +128,7 @@ export default {
   ca: {
     breadcrumb: 'Fòrum',
     user: 'Usuari',
+    deletedAccount: 'Compte eliminat',
     list: {
       eyebrow: 'Pregunta i comparteix',
       heading: 'Fòrum',
@@ -252,6 +254,7 @@ export default {
   en: {
     breadcrumb: 'Forum',
     user: 'User',
+    deletedAccount: 'Deleted account',
     list: {
       eyebrow: 'Ask and share',
       heading: 'Forum',

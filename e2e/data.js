@@ -10,6 +10,7 @@ export const user = {
   enabled: true,
   emailVerified: true,
   avatarUrl: null,
+  hasPassword: true,
   createdAt: DATE,
 }
 
