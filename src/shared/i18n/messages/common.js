@@ -2,6 +2,12 @@
 export default {
   es: {
     skipLink: 'Saltar al contenido',
+    beta: {
+      label: 'Beta',
+      text: 'Estás probando la primera versión de Primer Commit. ¿Algo falla o echas algo en falta?',
+      link: 'Cuéntanoslo en el foro',
+      close: 'Cerrar el aviso de la beta',
+    },
     newTab: '(se abre en una pestaña nueva)',
     copyLink: { label: 'Copiar enlace', copied: 'Enlace copiado', failed: 'No hemos podido copiar el enlace' },
     readMore: 'Leer más',
@@ -82,6 +88,12 @@ export default {
   },
   ca: {
     skipLink: 'Salta al contingut',
+    beta: {
+      label: 'Beta',
+      text: 'Estàs provant la primera versió de Primer Commit. Alguna cosa falla o hi trobes a faltar alguna cosa?',
+      link: 'Explica’ns-ho al fòrum',
+      close: 'Tanca l’avís de la beta',
+    },
     newTab: '(s’obre en una pestanya nova)',
     copyLink: { label: 'Copia l’enllaç', copied: 'Enllaç copiat', failed: 'No hem pogut copiar l’enllaç' },
     readMore: 'Llegeix-ne més',
@@ -162,6 +174,12 @@ export default {
   },
   en: {
     skipLink: 'Skip to content',
+    beta: {
+      label: 'Beta',
+      text: 'You’re trying out the first version of Primer Commit. Something broken or missing?',
+      link: 'Tell us in the forum',
+      close: 'Close the beta notice',
+    },
     newTab: '(opens in a new tab)',
     copyLink: { label: 'Copy link', copied: 'Link copied', failed: 'We couldn’t copy the link' },
     readMore: 'Read more',

@@ -5,6 +5,7 @@ import ErrorBoundary from '@/shared/components/ErrorBoundary'
 import PageLoader from '@/shared/components/PageLoader'
 import PageMain from '@/shared/components/PageMain'
 import { useI18n } from '@/shared/i18n/useI18n'
+import BetaBanner from './BetaBanner'
 import SiteFooter from './SiteFooter'
 import SiteHeader from './SiteHeader'
 
@@ -22,6 +23,7 @@ export default function RootLayout() {
         {t('common.skipLink')}
       </a>
       <SiteHeader />
+      <BetaBanner />
       <EmailVerificationBanner />
       <ErrorBoundary resetKey={pathname}>
         <Suspense

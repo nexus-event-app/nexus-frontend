@@ -1,7 +1,8 @@
 /**
  * Datos legales del titular del sitio (LSSI art. 10 y RGPD art. 13).
  * Se leen de variables de entorno en tiempo de build para que no queden escritos en el repositorio.
- * Mientras falten, las páginas legales muestran «pendiente de configurar».
+ * Mientras falten nombre o email, las páginas legales muestran «pendiente de configurar»; NIF y domicilio, si faltan,
+ * no se muestran.
  */
 function env(name) {
   const value = import.meta.env[name]

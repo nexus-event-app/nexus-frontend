@@ -10,6 +10,8 @@ COPY . .
 # Se incorporan al bundle en tiempo de build
 ARG VITE_API_URL=
 ARG VITE_SITE_URL=http://localhost:5173
+# true en la versión de prueba: muestra el aviso de la beta
+ARG VITE_BETA=false
 # Datos legales del titular (ver README): se pasan con --build-arg, nunca en el repositorio
 ARG VITE_LEGAL_OWNER_NAME=
 ARG VITE_LEGAL_OWNER_ID=
@@ -18,6 +20,7 @@ ARG VITE_LEGAL_EMAIL=
 ARG VITE_LEGAL_HOSTING_PROVIDER=
 ENV VITE_API_URL=$VITE_API_URL \
     VITE_SITE_URL=$VITE_SITE_URL \
+    VITE_BETA=$VITE_BETA \
     VITE_LEGAL_OWNER_NAME=$VITE_LEGAL_OWNER_NAME \
     VITE_LEGAL_OWNER_ID=$VITE_LEGAL_OWNER_ID \
     VITE_LEGAL_ADDRESS=$VITE_LEGAL_ADDRESS \

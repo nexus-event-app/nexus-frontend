@@ -1,9 +1,25 @@
 # Plantilla procesada por el entrypoint de nginx (envsubst). Solo se sustituye ${BACKEND_URL}.
+
+# Si delante hay otro proxy (Caddy con el HTTPS, ver nexus-backend/deploy), respeta el protocolo que nos indica:
+# así el backend sabe que la visita llegó por https. Sin proxy delante, el de esta conexión.
+map $http_x_forwarded_proto $forwarded_proto {
+    default $http_x_forwarded_proto;
+    '' $scheme;
+}
+
 server {
+    # Solo IPv4: dentro de la red de Docker no hace falta IPv6, y si el servidor no lo tiene nginx no arrancaría.
     listen 8080;
-    listen [::]:8080;
     server_name _;
     server_tokens off;
+
+    # IP real de cada visita cuando llega a través de un proxy de la red interna (Docker): sin esto, todas las
+    # peticiones parecerían venir del proxy y el límite de intentos de acceso sería compartido por todo el mundo.
+    set_real_ip_from 10.0.0.0/8;
+    set_real_ip_from 172.16.0.0/12;
+    set_real_ip_from 192.168.0.0/16;
+    real_ip_header X-Forwarded-For;
+    real_ip_recursive on;
 
     root /usr/share/nginx/html;
     index index.html;
