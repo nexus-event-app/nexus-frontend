@@ -20,6 +20,7 @@ export const paths = {
   notifications: '/notificaciones',
   learning: '/rutas',
   learningPath: (id) => `/rutas/${id}`,
+  glossary: '/glosario',
   legalNotice: '/aviso-legal',
   privacy: '/privacidad',
   cookies: '/cookies',

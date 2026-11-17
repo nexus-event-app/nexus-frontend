@@ -23,6 +23,7 @@ export const ROUTE_SEGMENTS = {
   'sobre-el-proyecto': { ca: 'sobre-el-projecte', en: 'about' },
   notificaciones: { ca: 'notificacions', en: 'notifications' },
   rutas: { ca: 'rutes', en: 'learning-paths' },
+  glosario: { ca: 'glossari', en: 'glossary' },
 }
 
 /** Subsecciones fijas (el resto de segundos segmentos son identificadores como «12-mi-duda» y no se traducen). */

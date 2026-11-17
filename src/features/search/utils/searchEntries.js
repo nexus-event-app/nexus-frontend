@@ -1,9 +1,11 @@
 import { paths } from '@/shared/config/paths'
 import { contractTypes, discussionCategories, newsCategories } from '@/shared/config/catalogs'
 import { contentLanguageOf } from '@/shared/utils/contentLanguage'
+import { termPath } from '@/features/learning/data/glossary'
 
 /** Convierte cada resultado en una entrada uniforme (enlace, título y detalle) para pintarla en cualquier lista. */
 const TO_ENTRY = {
+  glossary: (item) => ({ href: termPath(item.id), title: item.term, detail: item.definition }),
   news: (item) => ({
     href: paths.newsDetail(item),
     title: item.title,

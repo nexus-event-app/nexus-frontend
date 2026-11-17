@@ -17,6 +17,8 @@ const PAGES = [
   '/rutas',
   '/rutas/frontend',
   '/en/learning-paths/data',
+  '/glosario',
+  '/en/glossary',
   '/login',
   '/registro',
   '/en/about',

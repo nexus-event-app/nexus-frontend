@@ -9,6 +9,7 @@ import { paths } from '@/shared/config/paths'
 import { siteConfig } from '@/shared/config/site'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { formatDate } from '@/shared/utils/date'
+import GlossaryTeaser from '../components/GlossaryTeaser'
 import LearningPathCard from '../components/LearningPathCard'
 import { LEARNING_PATHS, RESOURCES_REVIEWED_AT } from '../data/learningPaths'
 import { useLearningProgress } from '../hooks/useLearningProgress'
@@ -132,6 +133,8 @@ export default function LearningPathsPage() {
       <p className="mt-10 text-sm text-ink-muted">
         {t('learning.reviewed', { date: formatDate(RESOURCES_REVIEWED_AT) })}
       </p>
+
+      <GlossaryTeaser className="mt-20" />
     </PageMain>
   )
 }

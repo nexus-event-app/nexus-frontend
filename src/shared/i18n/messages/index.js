@@ -4,6 +4,7 @@ import catalogs from './catalogs'
 import common from './common'
 import errors from './errors'
 import forum from './forum'
+import glossary from './glossary'
 import home from './home'
 import jobs from './jobs'
 import learning from './learning'
@@ -31,6 +32,7 @@ const modules = {
   about,
   notifications,
   learning,
+  glossary,
   reports,
 }
 

@@ -16,12 +16,13 @@ import Seo from '@/shared/components/Seo'
 import { paths, searchPath, withQuery } from '@/shared/config/paths'
 import { useRequest } from '@/shared/hooks/useRequest'
 import { useI18n } from '@/shared/i18n/useI18n'
-import { MIN_QUERY_LENGTH, totalResults } from '../hooks/useSearch'
+import { MIN_QUERY_LENGTH, totalResults, withGlossary } from '../hooks/useSearch'
 import { searchService } from '../services/searchService'
+import { termPath } from '@/features/learning/data/glossary'
 
 const PAGE_LIMIT = 6
 /** Lista completa de cada grupo con la búsqueda aplicada (las personas no tienen una propia). */
-const SECTION_PATHS = { news: paths.news, jobs: paths.jobs, discussions: paths.forum }
+const SECTION_PATHS = { glossary: paths.glossary, news: paths.news, jobs: paths.jobs, discussions: paths.forum }
 
 function ResultSection({ group, total, query, children }) {
   const { t } = useI18n()
@@ -44,6 +45,21 @@ function ResultSection({ group, total, query, children }) {
       />
       {children}
     </section>
+  )
+}
+
+function GlossaryList({ items }) {
+  return (
+    <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {items.map((item) => (
+        <li key={item.id}>
+          <Link to={termPath(item.id)} className="card flex h-full flex-col p-4 transition-shadow hover:shadow-pop">
+            <strong className="font-semibold text-ink">{item.term}</strong>
+            <span className="mt-1 line-clamp-2 text-sm text-ink-muted">{item.definition}</span>
+          </Link>
+        </li>
+      ))}
+    </ul>
   )
 }
 
@@ -108,49 +124,57 @@ export default function SearchPage() {
             skeleton={<CardGridSkeleton withImage={false} count={3} />}
             errorTitle={t('search.page.error')}
           >
-            {(result) => (
-              <>
-                <p role="status" className="text-sm text-ink-muted">
-                  {t('search.resultCount', { count: totalResults(result) })}
-                </p>
-                {totalResults(result) === 0 ? (
-                  <EmptyState
-                    icon="search"
-                    title={t('search.noResults', { query })}
-                    description={t('search.noResultsHint')}
-                  />
-                ) : (
-                  <>
-                    {result.news.total > 0 && (
-                      <ResultSection group="news" total={result.news.total} query={query}>
-                        <NewsGrid items={result.news.items} />
-                      </ResultSection>
-                    )}
-                    {result.jobs.total > 0 && (
-                      <ResultSection group="jobs" total={result.jobs.total} query={query}>
-                        <JobList items={result.jobs.items} />
-                      </ResultSection>
-                    )}
-                    {result.discussions.total > 0 && (
-                      <ResultSection group="discussions" total={result.discussions.total} query={query}>
-                        <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                          {result.discussions.items.map((discussion) => (
-                            <li key={discussion.id}>
-                              <DiscussionCard discussion={discussion} />
-                            </li>
-                          ))}
-                        </ul>
-                      </ResultSection>
-                    )}
-                    {result.people.total > 0 && (
-                      <ResultSection group="people" total={result.people.total} query={query}>
-                        <PeopleList people={result.people.items} />
-                      </ResultSection>
-                    )}
-                  </>
-                )}
-              </>
-            )}
+            {(data) => {
+              const result = withGlossary(data, query, t, PAGE_LIMIT)
+              return (
+                <>
+                  <p role="status" className="text-sm text-ink-muted">
+                    {t('search.resultCount', { count: totalResults(result) })}
+                  </p>
+                  {totalResults(result) === 0 ? (
+                    <EmptyState
+                      icon="search"
+                      title={t('search.noResults', { query })}
+                      description={t('search.noResultsHint')}
+                    />
+                  ) : (
+                    <>
+                      {result.glossary.total > 0 && (
+                        <ResultSection group="glossary" total={result.glossary.total} query={query}>
+                          <GlossaryList items={result.glossary.items} />
+                        </ResultSection>
+                      )}
+                      {result.news.total > 0 && (
+                        <ResultSection group="news" total={result.news.total} query={query}>
+                          <NewsGrid items={result.news.items} />
+                        </ResultSection>
+                      )}
+                      {result.jobs.total > 0 && (
+                        <ResultSection group="jobs" total={result.jobs.total} query={query}>
+                          <JobList items={result.jobs.items} />
+                        </ResultSection>
+                      )}
+                      {result.discussions.total > 0 && (
+                        <ResultSection group="discussions" total={result.discussions.total} query={query}>
+                          <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                            {result.discussions.items.map((discussion) => (
+                              <li key={discussion.id}>
+                                <DiscussionCard discussion={discussion} />
+                              </li>
+                            ))}
+                          </ul>
+                        </ResultSection>
+                      )}
+                      {result.people.total > 0 && (
+                        <ResultSection group="people" total={result.people.total} query={query}>
+                          <PeopleList people={result.people.items} />
+                        </ResultSection>
+                      )}
+                    </>
+                  )}
+                </>
+              )
+            }}
           </QueryBoundary>
         </section>
       )}

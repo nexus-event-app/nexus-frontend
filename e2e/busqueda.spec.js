@@ -10,10 +10,11 @@ test.describe('Búsqueda global', () => {
     const input = dialog.getByRole('combobox')
     await expect(input).toBeFocused()
 
-    await input.fill('react')
+    // Un texto que no está en el glosario: así el primer resultado es la noticia.
+    await input.fill('novedades')
     await expect(dialog.getByRole('option', { name: /Novedades de React 19/ })).toBeVisible()
     await expect
-      .poll(() => api.calls.some((call) => call.path === '/api/search' && call.query.get('q') === 'react'))
+      .poll(() => api.calls.some((call) => call.path === '/api/search' && call.query.get('q') === 'novedades'))
       .toBe(true)
 
     await page.keyboard.press('ArrowDown')

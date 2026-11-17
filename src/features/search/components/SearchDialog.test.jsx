@@ -46,9 +46,10 @@ describe('SearchDialog', () => {
   })
 
   it('agrupa los resultados y añade «ver todos»', async () => {
-    const { input } = await openAndType('react')
+    // Un texto que no está en el glosario, para ver solo los grupos que vienen del backend.
+    const { input } = await openAndType('novedad')
 
-    expect(searchService.search).toHaveBeenLastCalledWith('react', 4, expect.anything())
+    expect(searchService.search).toHaveBeenLastCalledWith('novedad', 4, expect.anything())
     expect(input).toHaveAttribute('aria-expanded', 'true')
     const listbox = screen.getByRole('listbox')
     expect(within(listbox).getByRole('group', { name: 'Noticias' })).toBeInTheDocument()
@@ -58,11 +59,19 @@ describe('SearchDialog', () => {
     expect(screen.getByRole('status')).toHaveTextContent('3')
   })
 
+  it('el glosario va primero y lleva a la explicación del término', async () => {
+    await openAndType('api')
+    const glossary = screen.getByRole('group', { name: 'Glosario' })
+    const option = within(glossary).getAllByRole('option')[0]
+    expect(option).toHaveTextContent('API')
+    expect(screen.getAllByRole('option')[0]).toBe(option)
+  })
+
   it('se maneja con las flechas y abre la opción activa con Intro', async () => {
     const onClose = vi.fn()
     const view = renderWithProviders(<SearchDialog onClose={onClose} />, { route: '/en' })
     const input = screen.getByRole('combobox')
-    await userEvent.type(input, 'react')
+    await userEvent.type(input, 'novedad')
     await screen.findByRole('option', { name: /Novedades de React 19/ })
 
     await userEvent.keyboard('{ArrowDown}{ArrowDown}')
