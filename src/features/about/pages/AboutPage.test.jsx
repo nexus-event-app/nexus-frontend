@@ -46,4 +46,19 @@ describe('AboutPage', () => {
     expect(eyebrows).not.toContain('Sobre el proyecto')
     eyebrows.forEach((eyebrow) => expect(titles).not.toContain(eyebrow))
   })
+
+  it('cuenta la historia como pasos en orden, sin códigos que no entiende nadie', () => {
+    renderWithProviders(<AboutPage />)
+    const story = screen.getByRole('region', { name: 'De una idea a una comunidad' })
+    const steps = within(story).getAllByRole('listitem')
+    expect(steps.map((step) => within(step).getByRole('heading', { level: 3 }).textContent)).toEqual([
+      'La idea',
+      'La construcción',
+      'El lanzamiento',
+      'Lo siguiente',
+    ])
+    expect(steps[0]).toHaveTextContent('Paso 1')
+    expect(steps[3]).toHaveTextContent('Próximamente')
+    expect(story).not.toHaveTextContent(/a1f3c2e|HEAD/)
+  })
 })

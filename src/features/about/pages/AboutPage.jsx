@@ -20,13 +20,8 @@ const OFFERS = [
   { key: 'forum', icon: 'chat', to: paths.forum },
   { key: 'testimonials', icon: 'star', to: paths.testimonials },
 ]
-/** Etapas de la historia, como un `git log`: cada una con un «hash» decorativo; la última aún está por llegar. */
-const STORY = [
-  { key: 'idea', hash: 'a1f3c2e' },
-  { key: 'build', hash: '7b9d04f' },
-  { key: 'launch', hash: 'e52c8a1' },
-  { key: 'next', hash: 'HEAD', upcoming: true },
-]
+/** Etapas de la historia, en orden; la última aún está por llegar. */
+const STORY = [{ key: 'idea' }, { key: 'build' }, { key: 'launch' }, { key: 'next', upcoming: true }]
 const PRINCIPLES = [
   { key: 'independent', icon: 'users' },
   { key: 'funding', icon: 'heart' },
@@ -166,45 +161,48 @@ export default function AboutPage() {
         </ul>
       </section>
 
-      {/* La historia como un `git log`: una línea que une los commits; el último, discontinuo, aún está por llegar. */}
+      {/*
+        La historia como una línea de tiempo: círculos numerados unidos por una línea (vertical en móvil, horizontal en
+        pantallas grandes). El tramo hasta lo que está por llegar va discontinuo, igual que su círculo.
+      */}
       <section aria-labelledby="about-story" className="mt-24">
         <SectionTitle id="about-story" eyebrow={t('about.story.eyebrow')} title={t('about.story.title')} />
         <ol className="mt-10 grid gap-8 lg:grid-cols-4 lg:gap-6">
-          {STORY.map((step, index) => (
-            <li
-              key={step.key}
-              className={cx(
-                'relative grid grid-cols-[1.5rem_minmax(0,1fr)] content-start gap-x-4 lg:grid-cols-1 lg:gap-y-4',
-                // Tramo de la línea hasta el siguiente commit (en vertical en móvil, en horizontal en pantallas grandes).
-                index < STORY.length - 1 &&
-                  'before:absolute before:-bottom-8 before:left-[0.6875rem] before:top-6 before:w-0.5 before:bg-slate-200 lg:before:-right-6 lg:before:bottom-auto lg:before:left-6 lg:before:top-[0.6875rem] lg:before:h-0.5 lg:before:w-auto',
-              )}
-            >
-              <span
-                aria-hidden="true"
+          {STORY.map((step, index) => {
+            const next = STORY[index + 1]
+            return (
+              <li
+                key={step.key}
                 className={cx(
-                  'relative z-10 flex h-6 w-6 items-center justify-center rounded-full border-2 bg-canvas',
-                  step.upcoming ? 'border-dashed border-slate-400' : 'border-brand-600 dark:border-brand-400',
+                  'relative grid grid-cols-[2.5rem_minmax(0,1fr)] content-start gap-x-4 lg:grid-cols-1 lg:gap-y-4',
+                  next &&
+                    'before:absolute before:-bottom-8 before:left-[1.1875rem] before:top-12 lg:before:-right-4 lg:before:bottom-auto lg:before:left-12 lg:before:top-[1.1875rem]',
+                  next &&
+                    !next.upcoming &&
+                    'before:w-0.5 before:rounded-full before:bg-accent-line lg:before:h-0.5 lg:before:w-auto',
+                  next?.upcoming &&
+                    'before:border-l-2 before:border-dashed before:border-slate-300 lg:before:border-l-0 lg:before:border-t-2',
                 )}
               >
-                {!step.upcoming && <span className="h-2 w-2 rounded-full bg-brand-600 dark:bg-brand-400" />}
-              </span>
-              <p className="flex flex-wrap items-center gap-x-2 font-mono text-xs">
-                <span aria-hidden="true" className="rounded bg-slate-100 px-1.5 py-0.5 text-ink-soft">
-                  {step.hash}
+                <span
+                  aria-hidden="true"
+                  className={cx(
+                    'row-span-3 flex h-10 w-10 items-center justify-center rounded-full font-bold lg:row-span-1',
+                    step.upcoming
+                      ? 'border-2 border-dashed border-slate-300 text-ink-muted'
+                      : 'bg-brand-600 text-white shadow-card',
+                  )}
+                >
+                  {step.upcoming ? <Icon name="sparkles" className="h-5 w-5" /> : index + 1}
                 </span>
-                <span className="font-semibold uppercase tracking-wide text-accent">
+                <p className="text-xs font-semibold uppercase tracking-wider text-accent">
                   {step.upcoming ? t('about.story.upcoming') : t('about.story.step', { number: index + 1 })}
-                </span>
-              </p>
-              <h3 className="col-start-2 mt-2 text-lg font-bold text-ink lg:col-start-1 lg:mt-0">
-                {t(`about.story.${step.key}.title`)}
-              </h3>
-              <p className="col-start-2 mt-1 leading-relaxed text-ink-soft lg:col-start-1 lg:mt-0">
-                {t(`about.story.${step.key}.text`)}
-              </p>
-            </li>
-          ))}
+                </p>
+                <h3 className="mt-1 text-lg font-bold text-ink lg:mt-0">{t(`about.story.${step.key}.title`)}</h3>
+                <p className="mt-2 leading-relaxed text-ink-soft lg:mt-0">{t(`about.story.${step.key}.text`)}</p>
+              </li>
+            )
+          })}
         </ol>
       </section>
 
