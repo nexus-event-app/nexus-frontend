@@ -11,6 +11,7 @@ import JobFilters from '../components/JobFilters'
 import JobList from '../components/JobList'
 import JobListSkeleton from '../components/JobListSkeleton'
 import JobPortals from '../components/JobPortals'
+import InterviewPrep from '../components/InterviewPrep'
 import JobTips from '../components/JobTips'
 import { useJobsList } from '../hooks/useJobsList'
 import { useSavedJobs } from '../hooks/useSavedJobs'
@@ -106,6 +107,7 @@ export default function JobsListPage() {
 
       <JobPortals />
       <JobTips />
+      <InterviewPrep />
     </PageMain>
   )
 }
