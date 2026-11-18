@@ -97,6 +97,10 @@ test.describe('Eventos', () => {
     await page.getByLabel(/^Fecha/).fill('2099-05-10')
     await page.getByLabel(/Hora/).fill('18:00')
     await page.getByLabel('Presencial').check()
+    // Si se pega la dirección en la ciudad, pide solo la ciudad.
+    await page.getByLabel(/^Ciudad/).fill('Calle de Cronos, 63 · Madrid')
+    await page.getByRole('button', { name: 'Compartir evento' }).click()
+    await expect(page.getByText(/Pon solo la ciudad/)).toBeVisible()
     await page.getByLabel(/^Ciudad/).fill('Madrid')
     await page.getByLabel(/Dirección/).fill('Calle de Cronos, 63')
     await page
@@ -139,6 +143,32 @@ test.describe('Eventos', () => {
     await expect(
       other.getByRole('button', { name: 'Reportar el evento «Hackathon online para principiantes»' }),
     ).toBeVisible()
+  })
+
+  test('«Voy» enseña cuánta gente va y, con sesión, se marca', async ({ page, api, signedIn }) => {
+    expect(signedIn.id).toBe(7)
+    await page.goto('/eventos')
+    const meetup = page.getByRole('article', { name: 'Meetup de React en Valencia' })
+    const going = meetup.getByRole('button', { name: /^Voy a «Meetup de React en Valencia»/ })
+    await expect(going).toHaveText(/Voy\s*· 12/)
+    await expect(going).toHaveAttribute('aria-pressed', 'false')
+    await going.click()
+    await expect(going).toHaveAttribute('aria-pressed', 'true')
+    await expect(going).toHaveText(/· 13/)
+    expect(api.calls.some((call) => call.method === 'POST' && call.path === '/api/events/51/interest')).toBe(true)
+    // Sin nadie apuntado todavía, solo «Voy», sin número.
+    const hackathon = page.getByRole('article', { name: 'Hackathon online para principiantes' })
+    await expect(hackathon.getByRole('button', { name: /^Voy a/ })).not.toHaveText(/·/)
+  })
+
+  test('sin sesión, «Voy» pide iniciar sesión', async ({ page, api }) => {
+    await page.goto('/eventos')
+    await page
+      .getByRole('article', { name: 'Meetup de React en Valencia' })
+      .getByRole('button', { name: /^Voy a/ })
+      .click()
+    await expect(page.getByText('Inicia sesión para marcar que vas.')).toBeVisible()
+    expect(api.calls.some((call) => call.path.endsWith('/interest'))).toBe(false)
   })
 
   test('sin sesión, «Compartir un evento» pide iniciar sesión y vuelve al formulario', async ({ page }) => {

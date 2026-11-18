@@ -12,4 +12,6 @@ export const eventsService = {
   cities: (config) => http.get('/events/cities', config).then((response) => response.data),
   create: (payload) => http.post('/events', payload).then((response) => response.data),
   remove: (id) => http.delete(`/events/${id}`),
+  /** «Me apunto»: lo marca o lo quita; devuelve `{ count, interested }`. */
+  toggleInterest: (id) => http.post(`/events/${id}/interest`).then((response) => response.data),
 }

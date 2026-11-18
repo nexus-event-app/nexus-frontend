@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import { useAuth } from '@/features/auth/hooks/useAuth'
 import ReportButton from '@/features/reports/components/ReportButton'
 import Button from '@/shared/components/Button'
 import ConfirmDialog from '@/shared/components/ConfirmDialog'
 import Icon from '@/shared/components/Icon'
 import { useAction } from '@/shared/hooks/useAction'
+import { useToast } from '@/shared/hooks/useToast'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import { eventsService } from '../services/eventsService'
@@ -18,12 +20,26 @@ function localDate(iso) {
  * Un evento, en una tarjeta compacta (caben tres por fila): fecha en un sello de color, título, cuándo y dónde, la
  * descripción recortada a tres líneas y «Apuntarme», que lleva a su web (se ve a qué dominio). Al pasar el ratón se
  * eleva un poco y el sello gira; aparecen escalonadas (`index`). Todo se desactiva con «reducir movimiento».
+ * «Voy» (la mano) cuenta cuánta gente va, para que se vea que la agenda se usa; nunca dice quién.
  * No dice quién lo compartió; esa persona puede borrarlo y el resto, reportarlo.
  */
 export default function EventCard({ event, index = 0, headingLevel = 'h3', onDeleted }) {
   const { t, locale } = useI18n()
   const Heading = headingLevel
+  const { isAuthenticated } = useAuth()
+  const toast = useToast()
   const [confirming, setConfirming] = useState(false)
+  const [going, setGoing] = useState({ count: event.interestedCount ?? 0, interested: Boolean(event.interested) })
+  const [toggleGoing, togglingGoing] = useAction(async () => {
+    setGoing(await eventsService.toggleInterest(event.id))
+  })
+  const handleGoing = () => {
+    if (!isAuthenticated) {
+      toast.info(t('events.card.loginToGo'))
+      return
+    }
+    toggleGoing()
+  }
   const [remove, removing] = useAction(
     async () => {
       await eventsService.remove(event.id)
@@ -70,17 +86,18 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', onDel
             {new Intl.DateTimeFormat(locale, { month: 'short' }).format(date).replace('.', '')}
           </span>
         </time>
-        <p className="mt-1 flex flex-wrap gap-1.5">
+        <p className="mt-1 flex min-w-0 flex-wrap gap-1.5">
           <span
+            title={online ? undefined : event.city}
             className={cx(
-              'inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold',
+              'inline-flex max-w-full items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold',
               online
                 ? 'bg-sky-50 text-sky-800 dark:bg-sky-500/15 dark:text-sky-200'
                 : 'bg-amber-50 text-amber-900 dark:bg-amber-500/15 dark:text-amber-200',
             )}
           >
-            <Icon name={online ? 'computer' : 'pin'} className="h-3.5 w-3.5" />
-            {online ? t('events.card.online') : event.city}
+            <Icon name={online ? 'computer' : 'pin'} className="h-3.5 w-3.5 shrink-0" />
+            <span className="truncate">{online ? t('events.card.online') : event.city}</span>
           </span>
           {event.forWomen && (
             <span className="inline-flex items-center gap-1 rounded-full bg-pink-50 px-2.5 py-1 text-xs font-semibold text-pink-800 dark:bg-pink-500/15 dark:text-pink-200">
@@ -106,8 +123,13 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', onDel
       <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-ink-soft" title={event.description}>
         {event.description}
       </p>
+      {/* Adónde lleva «Apuntarme»: los lectores de pantalla ya lo oyen en el propio enlace. */}
+      <p aria-hidden="true" className="mt-auto flex items-center gap-1 truncate pt-3 text-xs text-ink-muted">
+        <Icon name="link" className="h-3.5 w-3.5 shrink-0" />
+        {event.host}
+      </p>
 
-      <footer className="mt-auto flex items-center gap-2 border-t border-slate-200 pt-4">
+      <footer className="mt-3 flex items-center gap-2 border-t border-slate-200 pt-4">
         <a
           href={event.url}
           target="_blank"
@@ -121,9 +143,37 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', onDel
           <Icon name="external" className="h-4 w-4" />
           <span className="sr-only"> {t('events.card.joinSr', { host: event.host })}</span>
         </a>
-        <span aria-hidden="true" className="min-w-0 truncate text-xs text-ink-muted">
-          {event.host}
-        </span>
+        <button
+          type="button"
+          onClick={handleGoing}
+          disabled={togglingGoing}
+          aria-pressed={going.interested}
+          title={t('events.card.goingHint')}
+          className={cx(
+            'inline-flex min-h-[2.75rem] items-center gap-1.5 rounded-full border px-3 text-sm font-semibold transition-colors disabled:opacity-60 sm:min-h-[2.25rem]',
+            going.interested
+              ? 'border-amber-300 bg-amber-50 text-amber-900 dark:border-amber-400/40 dark:bg-amber-500/15 dark:text-amber-200'
+              : 'border-slate-300 bg-surface text-ink-soft hover:border-accent-line hover:text-ink',
+          )}
+        >
+          {/* La clave reinicia la animación cada vez que se marca. */}
+          <Icon
+            key={going.interested ? `on-${going.count}` : 'off'}
+            name="hand"
+            filled={going.interested}
+            className={cx('h-4 w-4', going.interested && 'animate-pop')}
+          />
+          <span aria-hidden="true">{t('events.card.going')}</span>
+          {going.count > 0 && (
+            <span aria-hidden="true" className="tabular-nums">
+              · {going.count}
+            </span>
+          )}
+          {/* Nombre accesible con lo que se ve y el número completo (WCAG 2.5.3). */}
+          <span className="sr-only">
+            {t('events.card.goingSr', { title: event.title })}. {t('events.card.goingCount', { count: going.count })}
+          </span>
+        </button>
         <span className="ml-auto shrink-0">
           {event.mine ? (
             <Button variant="ghost" size="sm" title={t('events.card.delete')} onClick={() => setConfirming(true)}>

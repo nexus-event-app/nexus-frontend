@@ -236,6 +236,8 @@ const moreEvents = Array.from({ length: 6 }, (_, index) => ({
   address: null,
   forWomen: false,
   mine: false,
+  interestedCount: index,
+  interested: false,
 }))
 
 export const events = [
@@ -252,6 +254,8 @@ export const events = [
     address: 'Las Naves, Carrer de Joan Verdeguer, 16',
     forWomen: false,
     mine: true,
+    interestedCount: 12,
+    interested: false,
   },
   {
     id: 52,
@@ -266,6 +270,8 @@ export const events = [
     address: null,
     forWomen: false,
     mine: false,
+    interestedCount: 0,
+    interested: false,
   },
   {
     id: 53,
@@ -280,6 +286,8 @@ export const events = [
     address: null,
     forWomen: true,
     mine: false,
+    interestedCount: 5,
+    interested: true,
   },
   ...moreEvents,
 ]

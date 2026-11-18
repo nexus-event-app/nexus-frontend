@@ -50,7 +50,7 @@ export default function EventFilters({ id, filters, modeSlug, hrefWith, onCityCh
           id="events-city"
           value={filters.city}
           onChange={(event) => onCityChange(event.target.value)}
-          className="field-input min-h-[2.75rem] w-auto rounded-full py-2 pl-4 pr-10 text-sm sm:min-h-[2.25rem]"
+          className="field-input min-h-[2.75rem] w-auto max-w-[12rem] truncate rounded-full py-1.5 pl-3 pr-8 text-sm sm:min-h-[2.25rem]"
         >
           <option value="">{t('events.filter.allCities')}</option>
           {/* La elegida se queda en la lista aunque ya no tenga eventos, para poder quitarla. */}

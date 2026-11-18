@@ -100,6 +100,11 @@ export default {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0' },
         },
+        // «Me apunto»: la mano da un pequeño salto al marcarlo.
+        pop: {
+          '0%, 100%': { transform: 'scale(1) rotate(0)' },
+          '40%': { transform: 'scale(1.3) rotate(-12deg)' },
+        },
         'soft-pulse': {
           '0%, 100%': { opacity: '1', transform: 'scale(1)' },
           '50%': { opacity: '0.5', transform: 'scale(0.8)' },
@@ -107,6 +112,7 @@ export default {
       },
       animation: {
         'toast-in': 'toast-in 0.2s ease-out',
+        pop: 'pop 0.4s ease-out',
         'fade-in': 'fade-in 0.15s ease-out',
         'rise-in': 'rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both',
         drift: 'drift 24s ease-in-out infinite',

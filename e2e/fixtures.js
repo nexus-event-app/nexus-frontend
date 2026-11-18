@@ -94,6 +94,12 @@ class MockApi {
       json(page(events.map((item) => ({ ...item, active: true, past: false, authorName: 'Lucía Prueba' })))),
     )
     this.on('DELETE', /^\/api\/events\/\d+$/, () => ({ status: 204 }))
+    // «Voy»: alterna sobre los datos de prueba.
+    this.on('POST', /^\/api\/events\/(\d+)\/interest$/, ([, id]) => {
+      const item = events.find((event) => event.id === Number(id))
+      const interested = !item.interested
+      return json({ count: item.interestedCount + (interested ? 1 : -1), interested })
+    })
     this.on('GET', '/api/testimonials', () => json(testimonials))
     this.on('GET', '/api/search', () => json(searchResult()))
     this.on('GET', '/api/saved-jobs/ids', () => json([]))

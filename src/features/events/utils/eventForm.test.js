@@ -30,6 +30,16 @@ describe('eventForm', () => {
     expect(validateEvent({ ...valid, url: 'javascript:alert(1)' }, '2026-11-20').url).toBeDefined()
   })
 
+  it('pide solo la ciudad cuando se escribe la dirección en ella', () => {
+    const inPerson = { ...valid, mode: 'PRESENCIAL' }
+    for (const city of ['Doofinder C. de Cronos, 63 · Madrid', 'Calle Pelai 12', 'x'.repeat(41)]) {
+      expect(validateEvent({ ...inPerson, city }, '2026-11-20').city).toMatch(/solo la ciudad/)
+    }
+    for (const city of ['Madrid', 'San Sebastián de los Reyes', 'Vitoria-Gasteiz']) {
+      expect(validateEvent({ ...inPerson, city }, '2026-11-20')).toEqual({})
+    }
+  })
+
   it('no envía la ciudad de un evento online ni una hora vacía', () => {
     expect(toEventPayload({ ...valid, city: 'Madrid', time: '' })).toMatchObject({
       city: null,

@@ -35,6 +35,11 @@ export function todayIso(now = new Date()) {
   return local.toISOString().slice(0, 10)
 }
 
+/** Parece una dirección y no solo una ciudad: lleva números, comas o «·», o es muy larga (como en el servidor). */
+export function looksLikeAddress(city) {
+  return /[\d,·]/.test(city) || city.trim().length > 40
+}
+
 /**
  * Las mismas reglas que el servidor, para avisar antes de enviar. Sin `today` (el panel, al corregir) no se exige que la
  * fecha no haya pasado.
@@ -45,7 +50,10 @@ export function validateEvent(values, today = todayIso()) {
   const title = values.title.trim().length
   if (title < 5 || title > 120) errors.title = translate('events.validation.title')
   if (!values.date || (today && values.date < today)) errors.date = translate('events.validation.date')
-  if (values.mode === 'PRESENCIAL' && !values.city.trim()) errors.city = translate('events.validation.city')
+  if (values.mode === 'PRESENCIAL') {
+    if (!values.city.trim()) errors.city = translate('events.validation.city')
+    else if (looksLikeAddress(values.city)) errors.city = translate('events.validation.cityOnly')
+  }
   if (values.address.trim().length > 200) errors.address = translate('events.validation.address')
   const description = values.description.trim().length
   if (description < 10 || description > DESCRIPTION_MAX) errors.description = translate('events.validation.description')
