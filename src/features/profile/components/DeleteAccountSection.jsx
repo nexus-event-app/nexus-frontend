@@ -4,7 +4,6 @@ import { useAuth } from '@/features/auth/hooks/useAuth'
 import { getErrorMessage } from '@/shared/api/ApiError'
 import Alert from '@/shared/components/Alert'
 import Button from '@/shared/components/Button'
-import Eyebrow from '@/shared/components/Eyebrow'
 import Icon from '@/shared/components/Icon'
 import Modal from '@/shared/components/Modal'
 import { paths } from '@/shared/config/paths'
@@ -60,6 +59,21 @@ function ConfirmDeletion({ needsPassword, onCancel }) {
     <Modal title={t('profile.deleteAccount.dialogTitle')} size="sm" onClose={onCancel} dismissible={!pending}>
       <form onSubmit={handleSubmit} noValidate className="space-y-5">
         <p className="text-ink-soft">{t('profile.deleteAccount.dialogText')}</p>
+        <ul className="space-y-4 rounded-2xl bg-canvas p-4">
+          {GROUPS.map((group) => (
+            <li key={group.key}>
+              <h3 className="flex items-center gap-2 text-sm font-semibold text-ink">
+                <Icon name={group.icon} className={cx('h-4 w-4', group.tone)} />
+                {t(`profile.deleteAccount.${group.key}Title`)}
+              </h3>
+              <ul className="mt-1.5 space-y-1 pl-6 text-sm leading-relaxed text-ink-soft">
+                {group.items.map((item) => (
+                  <li key={item}>{t(`profile.deleteAccount.${item}`)}</li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
         {error && <Alert variant="error">{error}</Alert>}
         {needsPassword && (
           <PasswordField
@@ -86,8 +100,8 @@ function ConfirmDeletion({ needsPassword, onCancel }) {
 }
 
 /**
- * «Eliminar tu cuenta», al final de Editar perfil: explica qué se borra y qué se queda (el foro, sin nombre) antes de
- * pedir confirmación. Las cuentas de administración no pueden eliminarse aquí (el panel podría quedarse sin nadie).
+ * «Eliminar tu cuenta», al final de Editar perfil, en pequeño. Al pulsarlo, la ventana de confirmación explica qué se
+ * borra y qué se queda (el foro, sin nombre). Las cuentas de administración no pueden eliminarse aquí (el panel podría quedarse sin nadie).
  */
 export default function DeleteAccountSection({ className }) {
   const { t } = useI18n()
@@ -97,47 +111,27 @@ export default function DeleteAccountSection({ className }) {
   const isAdmin = user.role === 'ADMIN'
 
   return (
-    <section aria-labelledby="delete-account-title" className={className}>
-      <hgroup>
-        <Eyebrow>{t('profile.deleteAccount.eyebrow')}</Eyebrow>
-        <h2 id="delete-account-title" className="mt-3 text-2xl font-bold tracking-tight text-ink">
-          {t('profile.deleteAccount.title')}
-        </h2>
-      </hgroup>
-      <article
-        aria-labelledby="delete-account-title"
-        className="mt-5 rounded-3xl border border-red-200 bg-surface p-5 shadow-card sm:p-8 dark:border-red-500/30"
-      >
-        <p className="text-ink-soft">{t('profile.deleteAccount.intro')}</p>
-        <ul className="mt-6 grid gap-6 sm:grid-cols-2">
-          {GROUPS.map((group) => (
-            <li key={group.key}>
-              <h3 className="flex items-center gap-2 font-semibold text-ink">
-                <Icon name={group.icon} className={cx('h-5 w-5', group.tone)} />
-                {t(`profile.deleteAccount.${group.key}Title`)}
-              </h3>
-              <ul className="mt-3 space-y-2 text-sm leading-relaxed text-ink-soft">
-                {group.items.map((item) => (
-                  <li key={item}>{t(`profile.deleteAccount.${item}`)}</li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
-        <footer className="mt-6 border-t border-slate-200 pt-6">
-          {isAdmin ? (
-            <p className="flex gap-2 text-sm text-ink-muted">
-              <Icon name="info" className="mt-0.5 h-4 w-4 shrink-0" />
-              {t('profile.deleteAccount.admin')}
-            </p>
-          ) : (
-            <Button variant="danger" onClick={() => setConfirming(true)}>
-              <Icon name="trash" className="h-4 w-4" />
-              {t('profile.deleteAccount.button')}
-            </Button>
-          )}
-        </footer>
-      </article>
+    // Discreto, al final de la página, como en casi todas las webs: que se encuentre si se busca, sin llamar la
+    // atención. Lo que se borra y lo que se queda se explica en la ventana de confirmación.
+    <section aria-labelledby="delete-account-title" className={cx('border-t border-slate-200 pt-6', className)}>
+      <h2 id="delete-account-title" className="text-base font-semibold text-ink">
+        {t('profile.deleteAccount.title')}
+      </h2>
+      {isAdmin ? (
+        <p className="mt-1 text-sm text-ink-muted">{t('profile.deleteAccount.admin')}</p>
+      ) : (
+        <p className="mt-1 text-sm text-ink-muted">
+          {t('profile.deleteAccount.intro')}{' '}
+          {/* 44 px para el dedo, sin agrandar la línea de texto (el margen negativo lo compensa). */}
+          <button
+            type="button"
+            onClick={() => setConfirming(true)}
+            className="-my-3 inline-flex min-h-[2.75rem] items-center font-semibold text-red-700 underline underline-offset-2 hover:no-underline dark:text-red-400"
+          >
+            {t('profile.deleteAccount.button')}
+          </button>
+        </p>
+      )}
       {confirming && (
         <ConfirmDeletion needsPassword={user.hasPassword !== false} onCancel={() => setConfirming(false)} />
       )}

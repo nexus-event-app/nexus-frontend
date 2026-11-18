@@ -60,11 +60,9 @@ test.describe('Eliminar la cuenta', () => {
     expect(signedIn.hasPassword).toBe(true)
     await page.goto('/perfil/editar')
     const section = page.getByRole('region', { name: 'Eliminar tu cuenta' })
-    await expect(section).toContainText('firmadas como «Cuenta eliminada»')
-
     await section.getByRole('button', { name: 'Eliminar mi cuenta' }).click()
     const dialog = page.getByRole('dialog', { name: '¿Eliminar tu cuenta?' })
-    await expect(dialog).toBeVisible()
+    await expect(dialog).toContainText('firmadas como «Cuenta eliminada»')
     await expectAccessible(page)
 
     await dialog.getByLabel(/Tu contraseña actual/).fill('Clave12345')

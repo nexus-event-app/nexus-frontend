@@ -76,9 +76,8 @@ export default {
       saved: 'Perfil guardado.',
     },
     deleteAccount: {
-      eyebrow: 'Tu cuenta',
       title: 'Eliminar tu cuenta',
-      intro: 'Si te vas, se borran tus datos personales. Esto no se puede deshacer.',
+      intro: 'Si te vas, se borran tus datos personales y no se puede deshacer.',
       deletedTitle: 'Se borra',
       deleted1: 'Tu nombre, tu email, tu contraseña y el acceso con Google.',
       deleted2: 'Tu perfil y tu foto.',
@@ -183,9 +182,8 @@ export default {
       saved: 'Perfil desat.',
     },
     deleteAccount: {
-      eyebrow: 'El teu compte',
       title: 'Eliminar el teu compte',
-      intro: 'Si te’n vas, s’esborren les teves dades personals. No es pot desfer.',
+      intro: 'Si te’n vas, s’esborren les teves dades personals i no es pot desfer.',
       deletedTitle: 'S’esborra',
       deleted1: 'El teu nom, el teu correu, la teva contrasenya i l’accés amb Google.',
       deleted2: 'El teu perfil i la teva foto.',
@@ -289,9 +287,8 @@ export default {
       saved: 'Profile saved.',
     },
     deleteAccount: {
-      eyebrow: 'Your account',
       title: 'Delete your account',
-      intro: 'If you leave, your personal data is deleted. This can’t be undone.',
+      intro: 'If you leave, your personal data is deleted and this can’t be undone.',
       deletedTitle: 'What is deleted',
       deleted1: 'Your name, email, password and Google sign-in.',
       deleted2: 'Your profile and photo.',

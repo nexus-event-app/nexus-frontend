@@ -13,12 +13,17 @@ const USER = { id: 7, name: 'Ana', role: 'USER', hasPassword: true }
 describe('DeleteAccountSection', () => {
   afterEach(() => vi.clearAllMocks())
 
-  it('explica qué se borra y qué se queda antes de pedir nada', () => {
+  it('es discreto: un título pequeño, una frase y un enlace; el detalle sale al pulsarlo', async () => {
     renderWithProviders(<DeleteAccountSection />, { auth: { user: USER } })
     const section = screen.getByRole('region', { name: 'Eliminar tu cuenta' })
-    expect(within(section).getByRole('heading', { level: 3, name: 'Se borra' })).toBeInTheDocument()
-    expect(within(section).getByRole('heading', { level: 3, name: 'Se queda, sin tu nombre' })).toBeInTheDocument()
-    expect(section).toHaveTextContent('firmadas como «Cuenta eliminada»')
+    expect(within(section).getByRole('heading', { level: 2 })).toHaveTextContent('Eliminar tu cuenta')
+    expect(within(section).queryByRole('heading', { level: 3 })).not.toBeInTheDocument()
+
+    await userEvent.click(within(section).getByRole('button', { name: 'Eliminar mi cuenta' }))
+    const dialog = screen.getByRole('dialog', { name: '¿Eliminar tu cuenta?' })
+    expect(within(dialog).getByRole('heading', { level: 3, name: 'Se borra' })).toBeInTheDocument()
+    expect(within(dialog).getByRole('heading', { level: 3, name: 'Se queda, sin tu nombre' })).toBeInTheDocument()
+    expect(dialog).toHaveTextContent('firmadas como «Cuenta eliminada»')
     expect(profileService.deleteAccount).not.toHaveBeenCalled()
   })
 
