@@ -46,7 +46,7 @@ export default {
     news: {
       eyebrow: 'Radar tech',
       title: 'Noticias',
-      description: 'Lo que está moviendo el mundo tech esta semana, explicado para que lo entiendas a la primera.',
+      description: 'Te contamos lo más interesante de la semana en tecnología, de forma sencilla y sin complicaciones.',
       read: 'Leer noticia',
       link: 'Ver todas las noticias',
       error: 'No hemos podido cargar las noticias',
@@ -129,7 +129,8 @@ export default {
     news: {
       eyebrow: 'Radar tech',
       title: 'Notícies',
-      description: 'El que està movent el món tech aquesta setmana, explicat perquè ho entenguis a la primera.',
+      description:
+        'T’expliquem el més interessant de la setmana en tecnologia, de manera senzilla i sense complicacions.',
       read: 'Llegeix la notícia',
       link: 'Mira totes les notícies',
       error: 'No hem pogut carregar les notícies',
@@ -212,7 +213,7 @@ export default {
     news: {
       eyebrow: 'Tech radar',
       title: 'News',
-      description: 'What is moving the tech world this week, explained so you get it the first time.',
+      description: 'The most interesting tech news of the week, told simply and without the jargon.',
       read: 'Read the story',
       link: 'See all news',
       error: 'We couldn’t load the news',

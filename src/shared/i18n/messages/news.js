@@ -4,7 +4,7 @@ export default {
     breadcrumb: 'Noticias',
     list: {
       eyebrow: 'Actualidad tech',
-      heading: 'Noticias tech para juniors',
+      heading: 'Noticias tech',
       categoryHeadings: {
         IA: 'Noticias de IA',
         PROGRAMACION: 'Noticias de programación',
@@ -17,7 +17,7 @@ export default {
       seoDescription:
         'Las noticias tech más útiles para quienes empiezan: IA, programación, datos, ciberseguridad y empleo.',
       description:
-        'IA, programación, datos, ciberseguridad, sistemas y empleo para estar a la última en tecnología, pensado para perfiles junior.',
+        'IA, programación, datos, ciberseguridad, sistemas y empleo: lo que pasa en tecnología, para que estés siempre al día.',
       searchLabel: 'Buscar noticias',
       searchPlaceholder: 'Buscar por título o contenido…',
       error: 'No hemos podido cargar las noticias',
@@ -55,7 +55,7 @@ export default {
     breadcrumb: 'Notícies',
     list: {
       eyebrow: 'Actualitat tech',
-      heading: 'Notícies tech per a júniors',
+      heading: 'Notícies tech',
       categoryHeadings: {
         IA: 'Notícies d’IA',
         PROGRAMACION: 'Notícies de programació',
@@ -67,7 +67,7 @@ export default {
       },
       seoDescription: 'Les notícies tech més útils per a qui comença: IA, programació, dades, ciberseguretat i feina.',
       description:
-        'IA, programació, dades, ciberseguretat, sistemes i feina per estar al dia en tecnologia, pensat per a perfils júnior.',
+        'IA, programació, dades, ciberseguretat, sistemes i feina: el que passa en tecnologia, perquè estiguis sempre al dia.',
       searchLabel: 'Cerca notícies',
       searchPlaceholder: 'Cerca per títol o contingut…',
       error: 'No hem pogut carregar les notícies',
@@ -105,7 +105,7 @@ export default {
     breadcrumb: 'News',
     list: {
       eyebrow: 'Tech news',
-      heading: 'Tech news for juniors',
+      heading: 'Tech news',
       categoryHeadings: {
         IA: 'AI news',
         PROGRAMACION: 'Programming news',
@@ -118,7 +118,7 @@ export default {
       seoDescription:
         'The most useful tech news for people just starting out: AI, programming, data, cybersecurity and jobs.',
       description:
-        'AI, programming, data, cybersecurity, systems and jobs to stay up to date with tech, designed for junior profiles.',
+        'AI, programming, data, cybersecurity, systems and jobs: what’s happening in tech, so you’re always up to date.',
       searchLabel: 'Search news',
       searchPlaceholder: 'Search by title or content…',
       error: 'We couldn’t load the news',
