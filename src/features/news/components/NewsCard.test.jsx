@@ -8,7 +8,7 @@ const ITEM = {
   slug: 'react-19',
   title: 'What is new in React 19',
   content: 'A quick tour of the new features.',
-  category: 'DESARROLLO',
+  category: 'PROGRAMACION',
   imageUrl: null,
   createdAt: '2026-11-02T10:00:00',
   imported: true,

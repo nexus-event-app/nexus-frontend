@@ -31,11 +31,14 @@ function catalog(name, entries) {
   }
 }
 
+/** Temas de las noticias, en el orden de los filtros. Las importadas se clasifican solas por su contenido. */
 export const newsCategories = catalog('newsCategories', [
-  ['DESARROLLO', 'Desarrollo', 'blue'],
-  ['ENTREVISTAS', 'Entrevistas', 'violet'],
-  ['NETWORKING', 'Networking', 'green'],
-  ['RECURSOS', 'Recursos', 'indigo'],
+  ['IA', 'IA', 'violet'],
+  ['PROGRAMACION', 'Programación', 'blue'],
+  ['DATOS', 'Datos', 'indigo'],
+  ['CIBERSEGURIDAD', 'Ciberseguridad', 'red'],
+  ['SISTEMAS', 'Sistemas y cloud', 'amber'],
+  ['CARRERA', 'Empleo y carrera', 'green'],
   ['GENERAL', 'General', 'slate'],
 ])
 

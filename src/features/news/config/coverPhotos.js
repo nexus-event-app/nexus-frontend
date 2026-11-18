@@ -94,9 +94,11 @@ export const RELATED_TOPICS = {
 
 /** Si el titular no deja claro el tema, se elige por la categoría de la noticia. */
 export const CATEGORY_TOPICS = {
-  DESARROLLO: ['code', 'terminal', 'web'],
-  ENTREVISTAS: ['career', 'community'],
-  NETWORKING: ['community', 'business'],
-  RECURSOS: ['learning', 'code'],
+  IA: ['ai', 'code'],
+  PROGRAMACION: ['code', 'terminal', 'web'],
+  DATOS: ['data', 'code'],
+  CIBERSEGURIDAD: ['security', 'bugs'],
+  SISTEMAS: ['cloud', 'terminal'],
+  CARRERA: ['career', 'community'],
   GENERAL: ['code', 'community', 'business', 'learning'],
 }

@@ -1,7 +1,7 @@
 import { expect, expectAccessible, test } from './fixtures.js'
 import { news, page as pageOf } from './data.js'
 
-const CATEGORIES = ['DESARROLLO', 'ENTREVISTAS', 'NETWORKING', 'RECURSOS', 'GENERAL']
+const CATEGORIES = ['IA', 'PROGRAMACION', 'DATOS', 'CIBERSEGURIDAD', 'SISTEMAS', 'CARRERA', 'GENERAL']
 
 /** Una página completa de noticias (9), para ver la rejilla llena. */
 const fullPage = Array.from({ length: 9 }, (_, index) => ({

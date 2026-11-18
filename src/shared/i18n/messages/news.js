@@ -5,11 +5,19 @@ export default {
     list: {
       eyebrow: 'Actualidad tech',
       heading: 'Noticias tech para juniors',
-      categoryHeading: 'Noticias de {category}',
+      categoryHeadings: {
+        IA: 'Noticias de IA',
+        PROGRAMACION: 'Noticias de programación',
+        DATOS: 'Noticias de datos',
+        CIBERSEGURIDAD: 'Noticias de ciberseguridad',
+        SISTEMAS: 'Noticias de sistemas y cloud',
+        CARRERA: 'Noticias de empleo y carrera',
+        GENERAL: 'Noticias generales',
+      },
       seoDescription:
-        'Las noticias tech más útiles para quienes empiezan: desarrollo, entrevistas, networking y recursos.',
+        'Las noticias tech más útiles para quienes empiezan: IA, programación, datos, ciberseguridad y empleo.',
       description:
-        'Desarrollo, entrevistas, networking y recursos para estar a la última en tecnología, pensados para perfiles junior.',
+        'IA, programación, datos, ciberseguridad, sistemas y empleo para estar a la última en tecnología, pensado para perfiles junior.',
       searchLabel: 'Buscar noticias',
       searchPlaceholder: 'Buscar por título o contenido…',
       error: 'No hemos podido cargar las noticias',
@@ -48,11 +56,18 @@ export default {
     list: {
       eyebrow: 'Actualitat tech',
       heading: 'Notícies tech per a júniors',
-      categoryHeading: 'Notícies de {category}',
-      seoDescription:
-        'Les notícies tech més útils per a qui comença: desenvolupament, entrevistes, networking i recursos.',
+      categoryHeadings: {
+        IA: 'Notícies d’IA',
+        PROGRAMACION: 'Notícies de programació',
+        DATOS: 'Notícies de dades',
+        CIBERSEGURIDAD: 'Notícies de ciberseguretat',
+        SISTEMAS: 'Notícies de sistemes i cloud',
+        CARRERA: 'Notícies de feina i carrera',
+        GENERAL: 'Notícies generals',
+      },
+      seoDescription: 'Les notícies tech més útils per a qui comença: IA, programació, dades, ciberseguretat i feina.',
       description:
-        'Desenvolupament, entrevistes, networking i recursos per estar al dia en tecnologia, pensats per a perfils júnior.',
+        'IA, programació, dades, ciberseguretat, sistemes i feina per estar al dia en tecnologia, pensat per a perfils júnior.',
       searchLabel: 'Cerca notícies',
       searchPlaceholder: 'Cerca per títol o contingut…',
       error: 'No hem pogut carregar les notícies',
@@ -91,11 +106,19 @@ export default {
     list: {
       eyebrow: 'Tech news',
       heading: 'Tech news for juniors',
-      categoryHeading: '{category} news',
+      categoryHeadings: {
+        IA: 'AI news',
+        PROGRAMACION: 'Programming news',
+        DATOS: 'Data news',
+        CIBERSEGURIDAD: 'Cybersecurity news',
+        SISTEMAS: 'Systems & cloud news',
+        CARRERA: 'Jobs & career news',
+        GENERAL: 'General news',
+      },
       seoDescription:
-        'The most useful tech news for people just starting out: development, interviews, networking and resources.',
+        'The most useful tech news for people just starting out: AI, programming, data, cybersecurity and jobs.',
       description:
-        'Development, interviews, networking and resources to stay up to date with tech, designed for junior profiles.',
+        'AI, programming, data, cybersecurity, systems and jobs to stay up to date with tech, designed for junior profiles.',
       searchLabel: 'Search news',
       searchPlaceholder: 'Search by title or content…',
       error: 'We couldn’t load the news',

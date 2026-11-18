@@ -2,10 +2,12 @@
 export default {
   es: {
     newsCategories: {
-      DESARROLLO: 'Desarrollo',
-      ENTREVISTAS: 'Entrevistas',
-      NETWORKING: 'Networking',
-      RECURSOS: 'Recursos',
+      IA: 'IA',
+      PROGRAMACION: 'Programación',
+      DATOS: 'Datos',
+      CIBERSEGURIDAD: 'Ciberseguridad',
+      SISTEMAS: 'Sistemas y cloud',
+      CARRERA: 'Empleo y carrera',
       GENERAL: 'General',
     },
     discussionCategories: {
@@ -27,10 +29,12 @@ export default {
   },
   ca: {
     newsCategories: {
-      DESARROLLO: 'Desenvolupament',
-      ENTREVISTAS: 'Entrevistes',
-      NETWORKING: 'Networking',
-      RECURSOS: 'Recursos',
+      IA: 'IA',
+      PROGRAMACION: 'Programació',
+      DATOS: 'Dades',
+      CIBERSEGURIDAD: 'Ciberseguretat',
+      SISTEMAS: 'Sistemes i cloud',
+      CARRERA: 'Feina i carrera',
       GENERAL: 'General',
     },
     discussionCategories: {
@@ -52,10 +56,12 @@ export default {
   },
   en: {
     newsCategories: {
-      DESARROLLO: 'Development',
-      ENTREVISTAS: 'Interviews',
-      NETWORKING: 'Networking',
-      RECURSOS: 'Resources',
+      IA: 'AI',
+      PROGRAMACION: 'Programming',
+      DATOS: 'Data',
+      CIBERSEGURIDAD: 'Cybersecurity',
+      SISTEMAS: 'Systems & cloud',
+      CARRERA: 'Jobs & career',
       GENERAL: 'General',
     },
     discussionCategories: {

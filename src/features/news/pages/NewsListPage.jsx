@@ -8,7 +8,6 @@ import Pagination from '@/shared/components/Pagination'
 import QueryBoundary from '@/shared/components/QueryBoundary'
 import SearchBar from '@/shared/components/SearchBar'
 import Seo from '@/shared/components/Seo'
-import { newsCategories } from '@/shared/config/catalogs'
 import { paths } from '@/shared/config/paths'
 import NewsCategoryFilter from '../components/NewsCategoryFilter'
 import NewsLanguageFilter from '../components/NewsLanguageFilter'
@@ -21,9 +20,8 @@ export default function NewsListPage() {
   const list = useNewsList()
   const { page, category, search, language, hasFilters, setFilters, buildHref } = list
 
-  const heading = category
-    ? t('news.list.categoryHeading', { category: newsCategories.labelOf(category).toLowerCase() })
-    : t('news.list.heading')
+  // Un título propio por tema: «Noticias de IA» no se puede formar pasando la etiqueta a minúsculas.
+  const heading = category ? t(`news.list.categoryHeadings.${category}`) : t('news.list.heading')
   const pageSuffix = page > 1 ? t('common.pageSuffix', { page }) : ''
 
   return (
@@ -51,7 +49,12 @@ export default function NewsListPage() {
         ocupan su fila y debajo van el idioma y el buscador.
       */}
       <search className="mb-8 grid grid-cols-1 items-center gap-3 border-y border-slate-200 py-3 sm:grid-cols-[auto_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_auto_16rem]">
-        <NewsCategoryFilter category={category} buildHref={buildHref} className="sm:col-span-full lg:col-span-1" />
+        <NewsCategoryFilter
+          category={category}
+          language={language}
+          buildHref={buildHref}
+          className="sm:col-span-full lg:col-span-1"
+        />
         <NewsLanguageFilter language={language} buildHref={buildHref} />
         <SearchBar
           compact

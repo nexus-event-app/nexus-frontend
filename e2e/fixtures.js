@@ -25,6 +25,8 @@ class MockApi {
     this.calls = []
     this.handlers = new Map()
     this.on('GET', '/api/news/latest', () => json(news))
+    // Temas con noticias publicadas: los de los datos de prueba (los demás filtros no se muestran).
+    this.on('GET', '/api/news/categories', () => json(['PROGRAMACION', 'CARRERA']))
     this.on('GET', '/api/news', (_, query) => {
       const all = [...news, englishNews]
       const language = query?.get('language')
