@@ -5,7 +5,9 @@ import { renderWithProviders } from '@/test/render'
 import { adminEventsService } from '../services/adminEventsService'
 import AdminEventsPage from './AdminEventsPage'
 
-vi.mock('../services/adminEventsService', () => ({ adminEventsService: { list: vi.fn(), remove: vi.fn() } }))
+vi.mock('../services/adminEventsService', () => ({
+  adminEventsService: { list: vi.fn(), remove: vi.fn(), update: vi.fn() },
+}))
 
 const base = {
   description: 'Descripción',
@@ -47,5 +49,42 @@ describe('AdminEventsPage', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Borrar Meetup de React (repetido)' }))
     await userEvent.click(within(screen.getByRole('dialog')).getByRole('button', { name: 'Borrar evento' }))
     expect(adminEventsService.remove).toHaveBeenCalledWith(2)
+  })
+
+  it('deja corregir un evento: abre el formulario con sus datos y guarda los cambios', async () => {
+    adminEventsService.list.mockResolvedValue({
+      content: [
+        {
+          ...base,
+          id: 4,
+          title: 'Meetup de Reakt',
+          mode: 'PRESENCIAL',
+          city: 'Doofinder C. de Cronos, 63 · Madrid',
+          time: '19:00:00',
+        },
+      ],
+      page: 0,
+      totalPages: 1,
+      totalElements: 1,
+    })
+    adminEventsService.update.mockResolvedValue({})
+    renderWithProviders(<AdminEventsPage />, { route: '/admin/eventos', auth: { user: { id: 1, role: 'ADMIN' } } })
+
+    await userEvent.click(await screen.findByRole('button', { name: 'Editar Meetup de Reakt' }))
+    const dialog = screen.getByRole('dialog', { name: 'Editar evento' })
+    const title = within(dialog).getByLabelText(/^Título/)
+    expect(title).toHaveValue('Meetup de Reakt')
+    await userEvent.clear(title)
+    await userEvent.type(title, 'Meetup de React')
+    const city = within(dialog).getByLabelText(/^Ciudad/)
+    await userEvent.clear(city)
+    await userEvent.type(city, 'Madrid')
+    await userEvent.type(within(dialog).getByLabelText(/Dirección/), 'C. de Cronos, 63')
+    await userEvent.click(within(dialog).getByRole('button', { name: 'Guardar cambios' }))
+
+    expect(adminEventsService.update).toHaveBeenCalledWith(
+      4,
+      expect.objectContaining({ title: 'Meetup de React', city: 'Madrid', address: 'C. de Cronos, 63', time: '19:00' }),
+    )
   })
 })

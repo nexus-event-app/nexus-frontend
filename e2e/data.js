@@ -223,6 +223,21 @@ export function searchResult({ newsItems = news, jobItems = jobs, discussionItem
 }
 
 /** Eventos de la comunidad (fechas lejanas para que no caduquen en las pruebas). */
+const moreEvents = Array.from({ length: 6 }, (_, index) => ({
+  id: 60 + index,
+  title: `Charla online número ${index + 1}`,
+  description: 'Una charla corta para aprender algo nuevo cada semana.',
+  url: `https://www.meetup.com/charlas/events/${index + 1}/`,
+  host: 'meetup.com',
+  date: `2099-04-${String(index + 10).padStart(2, '0')}`,
+  time: null,
+  mode: 'ONLINE',
+  city: null,
+  address: null,
+  forWomen: false,
+  mine: false,
+}))
+
 export const events = [
   {
     id: 51,
@@ -234,6 +249,7 @@ export const events = [
     time: '19:00:00',
     mode: 'PRESENCIAL',
     city: 'Valencia',
+    address: 'Las Naves, Carrer de Joan Verdeguer, 16',
     forWomen: false,
     mine: true,
   },
@@ -247,6 +263,7 @@ export const events = [
     time: null,
     mode: 'ONLINE',
     city: null,
+    address: null,
     forWomen: false,
     mine: false,
   },
@@ -260,7 +277,9 @@ export const events = [
     time: '18:30:00',
     mode: 'PRESENCIAL',
     city: 'Barcelona',
+    address: null,
     forWomen: true,
     mine: false,
   },
+  ...moreEvents,
 ]

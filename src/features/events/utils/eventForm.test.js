@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { INITIAL_EVENT, toEventPayload, todayIso, validateEvent } from './eventForm'
+import { INITIAL_EVENT, toEventFormValues, toEventPayload, todayIso, validateEvent } from './eventForm'
 
 const valid = {
   ...INITIAL_EVENT,
@@ -41,5 +41,20 @@ describe('eventForm', () => {
 
   it('da la fecha de hoy en formato de campo', () => {
     expect(todayIso(new Date(2026, 10, 20, 23, 30))).toBe('2026-11-20')
+  })
+
+  it('la dirección es opcional y solo va en los presenciales; el panel puede corregir fechas pasadas', () => {
+    expect(toEventPayload({ ...valid, mode: 'PRESENCIAL', city: 'Madrid', address: ' Calle Mayor, 1 ' }).address).toBe(
+      'Calle Mayor, 1',
+    )
+    expect(toEventPayload({ ...valid, mode: 'PRESENCIAL', city: 'Madrid', address: '' }).address).toBeNull()
+    expect(toEventPayload({ ...valid, address: 'Calle Mayor, 1' }).address).toBeNull()
+    expect(validateEvent({ ...valid, date: '2020-01-01' }, null)).toEqual({})
+  })
+
+  it('pasa un evento guardado a los valores del formulario', () => {
+    expect(
+      toEventFormValues({ ...valid, time: '19:00:00', city: null, address: null, mode: 'ONLINE', forWomen: true }),
+    ).toMatchObject({ time: '19:00', city: '', address: '', forWomen: true })
   })
 })

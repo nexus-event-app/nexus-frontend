@@ -51,15 +51,48 @@ class MockApi {
     this.on('GET', '/api/events', (_, query) => {
       const forWomen = query?.get('forWomen')
       const mode = query?.get('mode')
-      return json(
-        page(
-          events.filter(
-            (item) => (forWomen == null || String(item.forWomen) === forWomen) && (mode == null || item.mode === mode),
-          ),
-        ),
+      const city = query?.get('city')
+      const day = query?.get('day')
+      const size = Number(query?.get('size') ?? 20)
+      const pageIndex = Number(query?.get('page') ?? 0)
+      const all = events.filter(
+        (item) =>
+          (forWomen == null || String(item.forWomen) === forWomen) &&
+          (mode == null || item.mode === mode) &&
+          (city == null || item.city?.toLowerCase() === city.toLowerCase()) &&
+          (day == null || item.date === day),
       )
+      return json({
+        content: all.slice(pageIndex * size, pageIndex * size + size),
+        page: pageIndex,
+        size,
+        totalElements: all.length,
+        totalPages: Math.max(1, Math.ceil(all.length / size)),
+        last: (pageIndex + 1) * size >= all.length,
+      })
     })
+    // El calendario: días con eventos de los datos de prueba (marzo de 2099).
+    this.on('GET', '/api/events/calendar', () =>
+      json(
+        Object.values(
+          events.reduce((days, item) => {
+            const current = days[item.date] ?? { date: item.date, count: 0, forWomen: false }
+            days[item.date] = { ...current, count: current.count + 1, forWomen: current.forWomen || item.forWomen }
+            return days
+          }, {}),
+        ),
+      ),
+    )
+    this.on('GET', '/api/events/cities', () =>
+      json([...new Set(events.map((item) => item.city).filter(Boolean))].sort()),
+    )
     this.on('POST', '/api/events', () => json(events[0], 201))
+    this.on('PUT', /^\/api\/admin\/events\/\d+$/, () =>
+      json({ ...events[0], active: true, past: false, authorName: 'Lucía Prueba' }),
+    )
+    this.on('GET', '/api/admin/events', () =>
+      json(page(events.map((item) => ({ ...item, active: true, past: false, authorName: 'Lucía Prueba' })))),
+    )
     this.on('DELETE', /^\/api\/events\/\d+$/, () => ({ status: 204 }))
     this.on('GET', '/api/testimonials', () => json(testimonials))
     this.on('GET', '/api/search', () => json(searchResult()))

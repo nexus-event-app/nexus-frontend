@@ -8,9 +8,12 @@ test.describe('Eventos', () => {
     await expect(page.getByRole('heading', { level: 1, name: 'No te pierdas ninguna oportunidad' })).toBeVisible()
 
     const general = page.getByRole('region', { name: 'Para todo el mundo' })
-    await expect(general.getByRole('article')).toHaveCount(2)
+    // Seis por página (dos filas de tres) y paginación propia.
+    await expect(general.getByRole('article')).toHaveCount(6)
+    await expect(general.getByRole('navigation', { name: 'Páginas de «Para todo el mundo»' })).toBeVisible()
     const meetup = general.getByRole('article', { name: 'Meetup de React en Valencia' })
     await expect(meetup).toContainText('Valencia')
+    await expect(meetup).toContainText('Las Naves, Carrer de Joan Verdeguer, 16')
     await expect(meetup.getByRole('link', { name: /Apuntarme/ })).toHaveAttribute(
       'href',
       'https://www.meetup.com/react-valencia/events/1/',
@@ -20,6 +23,55 @@ test.describe('Eventos', () => {
     const women = page.getByRole('region', { name: 'Por y para mujeres' })
     await expect(women.getByRole('article')).toHaveCount(1)
     await expect(women.getByRole('article', { name: 'Café tech de mujeres en Barcelona' })).toBeVisible()
+  })
+
+  test('la paginación de cada bloque va por su cuenta', async ({ page }) => {
+    await page.goto('/eventos')
+    const general = page.getByRole('region', { name: 'Para todo el mundo' })
+    await general
+      .getByRole('navigation', { name: /Páginas/ })
+      .getByRole('link', { name: '2' })
+      .click()
+    await expect(page).toHaveURL(/pg=2/)
+    await expect(general.getByRole('article')).toHaveCount(2)
+    await expect(page.getByRole('region', { name: 'Por y para mujeres' }).getByRole('article')).toHaveCount(1)
+  })
+
+  test('el calendario marca los días con eventos y, al pulsar uno, la agenda enseña los de ese día', async ({
+    page,
+    api,
+  }) => {
+    // Con un día elegido en la dirección, el calendario abre en ese mes (marzo de 2099, el de los datos de prueba).
+    await page.goto('/eventos?dia=2099-03-12')
+    const calendar = page.getByRole('region', { name: /marzo de 2099/i })
+    await expect(calendar.getByRole('button', { name: /12 de marzo: 1 evento/ })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    )
+    await calendar.getByRole('button', { name: /15 de marzo: 1 evento/ }).click()
+    await expect(page).toHaveURL(/dia=2099-03-15/)
+    await expect
+      .poll(() => api.calls.some((call) => call.path === '/api/events' && call.query.get('day') === '2099-03-15'))
+      .toBe(true)
+    await expect(page.getByRole('region', { name: 'Por y para mujeres' }).getByRole('article')).toHaveCount(1)
+    await expect(page.getByRole('region', { name: 'Para todo el mundo' })).toContainText(
+      'No hay eventos con estos filtros',
+    )
+    // Quitar el día.
+    await page.getByRole('link', { name: /Quitar el filtro del 15 de marzo/ }).click()
+    await expect(page).not.toHaveURL(/dia=/)
+  })
+
+  test('el filtro de ciudad solo ofrece ciudades con eventos y filtra la agenda', async ({ page, api }) => {
+    await page.goto('/eventos')
+    const city = page.getByLabel('Ciudad')
+    await expect(city.locator('option')).toHaveText(['Todas las ciudades', 'Barcelona', 'Valencia'])
+    await city.selectOption('Valencia')
+    await expect(page).toHaveURL(/ciudad=Valencia/)
+    await expect
+      .poll(() => api.calls.some((call) => call.path === '/api/events' && call.query.get('city') === 'Valencia'))
+      .toBe(true)
+    await expect(page.getByRole('region', { name: 'Para todo el mundo' }).getByRole('article')).toHaveCount(1)
   })
 
   test('el filtro de modalidad pide solo los eventos online', async ({ page, api }) => {
@@ -46,6 +98,7 @@ test.describe('Eventos', () => {
     await page.getByLabel(/Hora/).fill('18:00')
     await page.getByLabel('Presencial').check()
     await page.getByLabel(/^Ciudad/).fill('Madrid')
+    await page.getByLabel(/Dirección/).fill('Calle de Cronos, 63')
     await page
       .getByLabel(/Descripción corta/)
       .fill('Taller práctico y gratuito para dar tus primeros pasos con Python.')
@@ -62,6 +115,7 @@ test.describe('Eventos', () => {
       time: '18:00',
       mode: 'PRESENCIAL',
       city: 'Madrid',
+      address: 'Calle de Cronos, 63',
       description: 'Taller práctico y gratuito para dar tus primeros pasos con Python.',
       forWomen: true,
     })

@@ -9,6 +9,7 @@ import Seo from '@/shared/components/Seo'
 import Time from '@/shared/components/Time'
 import { paths } from '@/shared/config/paths'
 import { useAction } from '@/shared/hooks/useAction'
+import EventEditDialog from '../components/EventEditDialog'
 import PagedTable from '../components/PagedTable'
 import { useAdminList } from '../hooks/useAdminList'
 import { adminEventsService } from '../services/adminEventsService'
@@ -25,6 +26,7 @@ function EventStatus({ event }) {
 export default function AdminEventsPage() {
   const list = useAdminList('events', adminEventsService.list)
   const [deleting, setDeleting] = useState(null)
+  const [editing, setEditing] = useState(null)
 
   const [removeEvent, removing] = useAction(
     async (event) => {
@@ -62,7 +64,19 @@ export default function AdminEventsPage() {
         </span>
       ),
     },
-    { key: 'where', header: 'Dónde', render: (event) => (event.mode === 'ONLINE' ? 'Online' : event.city) },
+    {
+      key: 'where',
+      header: 'Dónde',
+      render: (event) =>
+        event.mode === 'ONLINE' ? (
+          'Online'
+        ) : (
+          <span>
+            {event.city}
+            {event.address && <span className="block text-sm text-ink-muted">{event.address}</span>}
+          </span>
+        ),
+    },
     { key: 'status', header: 'Estado', render: (event) => <EventStatus event={event} /> },
     { key: 'author', header: 'Compartido por', render: (event) => event.authorName },
     {
@@ -76,6 +90,10 @@ export default function AdminEventsPage() {
             {event.host}
             <span className="sr-only"> (enlace de «{event.title}», se abre en una pestaña nueva)</span>
           </a>
+          <Button variant="secondary" size="sm" onClick={() => setEditing(event)}>
+            <Icon name="pencil" className="h-4 w-4" />
+            Editar<span className="sr-only"> {event.title}</span>
+          </Button>
           <Button variant="ghost" size="sm" onClick={() => setDeleting(event)}>
             <Icon name="trash" className="h-4 w-4" />
             Borrar<span className="sr-only"> {event.title}</span>
@@ -90,7 +108,7 @@ export default function AdminEventsPage() {
       <Seo title="Moderar eventos" path={paths.adminEvents} robots="noindex,nofollow" />
       <PageHeader
         title="Eventos"
-        description="Los comparte la comunidad y se publican al momento. Borra aquí los repetidos o los que no encajen."
+        description="Los comparte la comunidad y se publican al momento. Corrige aquí cualquier error y borra los repetidos o los que no encajen."
       />
       <PagedTable
         list={list}
@@ -100,6 +118,16 @@ export default function AdminEventsPage() {
         emptyTitle="No hay eventos"
         emptyDescription="Cuando alguien comparta un evento aparecerá aquí."
       />
+      {editing && (
+        <EventEditDialog
+          event={editing}
+          onClose={() => setEditing(null)}
+          onSaved={() => {
+            setEditing(null)
+            list.reload()
+          }}
+        />
+      )}
       {deleting && (
         <ConfirmDialog
           title="Borrar evento"

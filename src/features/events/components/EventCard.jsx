@@ -15,10 +15,12 @@ function localDate(iso) {
 }
 
 /**
- * Un evento: fecha bien visible a la izquierda, título, cuándo y dónde, la descripción y «Apuntarme», que lleva a su
- * web (se ve a qué dominio). No dice quién lo compartió; esa persona puede borrarlo y el resto, reportarlo.
+ * Un evento, en una tarjeta compacta (caben tres por fila): fecha en un sello de color, título, cuándo y dónde, la
+ * descripción recortada a tres líneas y «Apuntarme», que lleva a su web (se ve a qué dominio). Al pasar el ratón se
+ * eleva un poco y el sello gira; aparecen escalonadas (`index`). Todo se desactiva con «reducir movimiento».
+ * No dice quién lo compartió; esa persona puede borrarlo y el resto, reportarlo.
  */
-export default function EventCard({ event, headingLevel = 'h3', onDeleted }) {
+export default function EventCard({ event, index = 0, headingLevel = 'h3', onDeleted }) {
   const { t, locale } = useI18n()
   const Heading = headingLevel
   const [confirming, setConfirming] = useState(false)
@@ -32,7 +34,7 @@ export default function EventCard({ event, headingLevel = 'h3', onDeleted }) {
   )
 
   const date = localDate(event.date)
-  const where = event.mode === 'ONLINE' ? t('events.card.online') : event.city
+  const online = event.mode === 'ONLINE'
   const when = [
     new Intl.DateTimeFormat(locale, { weekday: 'long', day: 'numeric', month: 'long' }).format(date),
     event.time?.slice(0, 5),
@@ -43,58 +45,92 @@ export default function EventCard({ event, headingLevel = 'h3', onDeleted }) {
   return (
     <article
       aria-labelledby={`event-${event.id}`}
+      style={{ animationDelay: `${Math.min(index, 5) * 70}ms` }}
       className={cx(
-        'grid h-full grid-cols-[auto_minmax(0,1fr)] gap-x-4 rounded-3xl border bg-surface p-5 shadow-card transition-shadow hover:shadow-pop sm:p-6',
-        event.forWomen ? 'border-pink-200 dark:border-pink-400/30' : 'border-slate-200',
+        'group flex h-full flex-col rounded-3xl border bg-surface p-5 shadow-card transition-all duration-300 animate-rise-in hover:-translate-y-1 hover:shadow-pop',
+        event.forWomen
+          ? 'border-pink-200 hover:border-pink-300 dark:border-pink-400/30'
+          : 'border-slate-200 hover:border-accent-line',
       )}
     >
-      {/* Calendario: día grande y mes abreviado; la fecha completa la leen los lectores de pantalla en «when». */}
-      <time
-        dateTime={event.date}
-        aria-hidden="true"
-        className={cx(
-          'row-span-4 flex h-16 w-16 flex-col items-center justify-center rounded-2xl text-center',
-          event.forWomen
-            ? 'bg-pink-50 text-pink-800 dark:bg-pink-500/15 dark:text-pink-200'
-            : 'bg-accent-soft text-accent-strong',
-        )}
-      >
-        <span className="text-2xl font-bold leading-none">{date.getDate()}</span>
-        <span className="mt-1 text-xs font-semibold uppercase tracking-wide">
-          {new Intl.DateTimeFormat(locale, { month: 'short' }).format(date).replace('.', '')}
-        </span>
-      </time>
-      <Heading id={`event-${event.id}`} className="text-lg font-bold leading-snug text-ink">
+      <header className="flex items-start gap-3">
+        {/* Sello de calendario: la fecha completa la leen los lectores de pantalla en «when». */}
+        <time
+          dateTime={event.date}
+          aria-hidden="true"
+          className={cx(
+            'flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-2xl text-white shadow-card transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105',
+            event.forWomen
+              ? 'bg-gradient-to-br from-pink-500 to-pink-700'
+              : 'bg-gradient-to-br from-brand-500 to-brand-700',
+          )}
+        >
+          <span className="text-xl font-bold leading-none">{date.getDate()}</span>
+          <span className="mt-0.5 text-[0.7rem] font-semibold uppercase tracking-wide">
+            {new Intl.DateTimeFormat(locale, { month: 'short' }).format(date).replace('.', '')}
+          </span>
+        </time>
+        <p className="mt-1 flex flex-wrap gap-1.5">
+          <span
+            className={cx(
+              'inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold',
+              online
+                ? 'bg-sky-50 text-sky-800 dark:bg-sky-500/15 dark:text-sky-200'
+                : 'bg-amber-50 text-amber-900 dark:bg-amber-500/15 dark:text-amber-200',
+            )}
+          >
+            <Icon name={online ? 'computer' : 'pin'} className="h-3.5 w-3.5" />
+            {online ? t('events.card.online') : event.city}
+          </span>
+          {event.forWomen && (
+            <span className="inline-flex items-center gap-1 rounded-full bg-pink-50 px-2.5 py-1 text-xs font-semibold text-pink-800 dark:bg-pink-500/15 dark:text-pink-200">
+              <Icon name="heart" className="h-3.5 w-3.5" />
+              {t('events.card.women')}
+            </span>
+          )}
+        </p>
+      </header>
+
+      <Heading id={`event-${event.id}`} className="mt-4 line-clamp-2 text-base font-bold leading-snug text-ink">
         {event.title}
       </Heading>
-      <p className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-ink-muted">
-        <span className="first-letter:uppercase">{when}</span>
-        <span className="inline-flex items-center gap-1">
-          <Icon name={event.mode === 'ONLINE' ? 'computer' : 'pin'} className="h-4 w-4" />
-          {where}
-        </span>
+      <p className="mt-1 text-sm text-ink-muted first-letter:uppercase">{when}</p>
+      {!online && event.address && (
+        <p className="mt-1 flex items-start gap-1 text-sm text-ink-muted">
+          <Icon name="pin" className="mt-0.5 h-4 w-4 shrink-0" />
+          <span className="line-clamp-1" title={event.address}>
+            {event.address}
+          </span>
+        </p>
+      )}
+      <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-ink-soft" title={event.description}>
+        {event.description}
       </p>
-      <p className="mt-3 leading-relaxed text-ink-soft">{event.description}</p>
-      <footer className="col-span-full mt-4 flex flex-wrap items-center gap-2 border-t border-slate-200 pt-4">
+
+      <footer className="mt-auto flex items-center gap-2 border-t border-slate-200 pt-4">
         <a
           href={event.url}
           target="_blank"
           rel="noopener noreferrer nofollow ugc"
-          className="btn btn-primary btn-sm rounded-full"
+          className={cx(
+            'btn btn-sm rounded-full text-white shadow-card transition-transform hover:scale-105',
+            event.forWomen ? 'bg-pink-700 hover:bg-pink-800' : 'btn-primary',
+          )}
         >
           {t('events.card.join')}
           <Icon name="external" className="h-4 w-4" />
           <span className="sr-only"> {t('events.card.joinSr', { host: event.host })}</span>
         </a>
-        <span aria-hidden="true" className="text-sm text-ink-muted">
+        <span aria-hidden="true" className="min-w-0 truncate text-xs text-ink-muted">
           {event.host}
         </span>
-        <span className="ml-auto">
+        <span className="ml-auto shrink-0">
           {event.mine ? (
-            <Button variant="ghost" size="sm" onClick={() => setConfirming(true)}>
+            <Button variant="ghost" size="sm" title={t('events.card.delete')} onClick={() => setConfirming(true)}>
               <Icon name="trash" className="h-4 w-4" />
-              {t('events.card.delete')}
-              <span className="sr-only"> {t('events.card.deleteSr', { title: event.title })}</span>
+              <span className="sr-only">
+                {t('events.card.delete')} {t('events.card.deleteSr', { title: event.title })}
+              </span>
             </Button>
           ) : (
             <ReportButton

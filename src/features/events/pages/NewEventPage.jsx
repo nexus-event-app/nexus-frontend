@@ -4,9 +4,7 @@ import Alert from '@/shared/components/Alert'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import Button from '@/shared/components/Button'
 import ButtonLink from '@/shared/components/ButtonLink'
-import CheckboxField from '@/shared/components/CheckboxField'
 import Eyebrow from '@/shared/components/Eyebrow'
-import FormField from '@/shared/components/FormField'
 import Icon from '@/shared/components/Icon'
 import PageMain from '@/shared/components/PageMain'
 import Seo from '@/shared/components/Seo'
@@ -16,7 +14,8 @@ import { useToast } from '@/shared/hooks/useToast'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { useNavigate } from '@/shared/i18n/useNavigate'
 import { eventsService } from '../services/eventsService'
-import { DESCRIPTION_MAX, INITIAL_EVENT, toEventPayload, todayIso, validateEvent } from '../utils/eventForm'
+import EventFields from '../components/EventFields'
+import { INITIAL_EVENT, toEventPayload, todayIso, validateEvent } from '../utils/eventForm'
 
 /** Consejos para que la agenda sea útil, al lado del formulario. */
 function SharingTips({ className }) {
@@ -49,7 +48,6 @@ function EventForm({ onSubmit }) {
     validate: (values) => validateEvent(values, today),
     onSubmit: (values) => onSubmit(toEventPayload(values)),
   })
-  const inPerson = form.values.mode === 'PRESENCIAL'
 
   return (
     <form
@@ -63,86 +61,7 @@ function EventForm({ onSubmit }) {
           {form.formError}
         </Alert>
       )}
-      <FormField
-        {...form.getFieldProps('url')}
-        className="col-span-full"
-        type="url"
-        inputMode="url"
-        label={t('events.form.url')}
-        hint={t('events.form.urlHint')}
-        placeholder="https://"
-        maxLength={500}
-        required
-      />
-      <FormField
-        {...form.getFieldProps('title')}
-        className="col-span-full"
-        label={t('events.form.title')}
-        placeholder={t('events.form.titlePlaceholder')}
-        maxLength={120}
-        required
-      />
-      <FormField
-        {...form.getFieldProps('date')}
-        className="field-half"
-        type="date"
-        min={today}
-        label={t('events.form.date')}
-        required
-      />
-      <FormField {...form.getFieldProps('time')} className="field-half" type="time" label={t('events.form.time')} />
-      <fieldset className="col-span-full">
-        <legend className="mb-2 text-sm font-semibold text-ink">{t('events.form.mode')}</legend>
-        <ul className="flex flex-wrap gap-2">
-          {[
-            ['ONLINE', 'events.form.online', 'computer'],
-            ['PRESENCIAL', 'events.form.inPerson', 'pin'],
-          ].map(([value, label, icon]) => (
-            <li key={value}>
-              <label className="flex min-h-[2.75rem] cursor-pointer items-center gap-2 rounded-full border border-slate-300 px-4 text-sm font-medium text-ink has-[:checked]:border-accent has-[:checked]:bg-accent-soft has-[:checked]:text-accent-strong">
-                <input
-                  type="radio"
-                  name="mode"
-                  value={value}
-                  checked={form.values.mode === value}
-                  onChange={form.handleChange}
-                  className="h-4 w-4 text-brand-600"
-                />
-                <Icon name={icon} className="h-4 w-4" />
-                {t(label)}
-              </label>
-            </li>
-          ))}
-        </ul>
-      </fieldset>
-      {inPerson && (
-        <FormField
-          {...form.getFieldProps('city')}
-          className="col-span-full"
-          label={t('events.form.city')}
-          maxLength={80}
-          required
-        />
-      )}
-      <FormField
-        {...form.getFieldProps('description')}
-        className="col-span-full"
-        as="textarea"
-        rows={3}
-        label={t('events.form.description')}
-        hint={t('events.form.descriptionHint', { count: form.values.description.length })}
-        maxLength={DESCRIPTION_MAX}
-        required
-      />
-      <p className="col-span-full rounded-2xl bg-pink-50/70 px-4 py-2 dark:bg-pink-500/10">
-        <CheckboxField
-          name="forWomen"
-          checked={form.values.forWomen}
-          onChange={form.handleChange}
-          label={t('events.form.forWomen')}
-          hint={t('events.form.forWomenHint')}
-        />
-      </p>
+      <EventFields form={form} minDate={today} />
       <footer className="col-span-full flex flex-col-reverse gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:justify-end">
         <ButtonLink to={paths.events} variant="secondary" size="lg">
           {t('events.new.cancel')}
