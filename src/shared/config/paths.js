@@ -21,6 +21,8 @@ export const paths = {
   learning: '/rutas',
   learningPath: (id) => `/rutas/${id}`,
   glossary: '/glosario',
+  events: '/eventos',
+  eventsNew: '/eventos/nuevo',
   legalNotice: '/aviso-legal',
   privacy: '/privacidad',
   cookies: '/cookies',
@@ -40,6 +42,7 @@ export const paths = {
   adminUserProfile: (id) => `/admin/usuarios/${id}/perfil`,
   adminImport: '/admin/importacion',
   adminReports: '/admin/reportes',
+  adminEvents: '/admin/eventos',
 }
 
 export function loginPath(redirectTo) {

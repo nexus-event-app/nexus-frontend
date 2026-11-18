@@ -19,6 +19,8 @@ const PAGES = [
   '/en/learning-paths/data',
   '/glosario',
   '/en/glossary',
+  '/eventos',
+  '/en/events',
   '/login',
   '/registro',
   '/en/about',
@@ -34,6 +36,10 @@ const PRIVATE_PAGES = [
   '/perfil/editar',
   // Crear una discusión: el formulario y las normas del foro.
   '/foro/nueva',
+  // Compartir un evento: el formulario y los consejos.
+  '/eventos/nuevo',
+  // La agenda con sesión: en los eventos propios sale «Borrar» en lugar de «Reportar».
+  '/eventos',
 ]
 
 for (const theme of ['light', 'dark']) {

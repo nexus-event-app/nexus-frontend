@@ -53,7 +53,15 @@ test.describe('Navegación', () => {
     await expect(banner.getByRole('link', { name: 'Iniciar sesión' })).toBeVisible()
     await expect(banner.getByRole('link', { name: 'Crear cuenta' })).toHaveCount(0)
     const links = banner.getByRole('navigation', { name: /Principal/ }).getByRole('link')
-    await expect(links).toHaveText(['Noticias', 'Empleo', 'Foro', 'Rutas', 'Testimonios', 'Sobre el proyecto'])
+    await expect(links).toHaveText([
+      'Noticias',
+      'Empleo',
+      'Foro',
+      'Eventos',
+      'Rutas',
+      'Testimonios',
+      'Sobre el proyecto',
+    ])
   })
 
   test('en la portada, el logo sube hasta arriba; desde otra página lleva a la portada', async ({ page }) => {

@@ -24,6 +24,8 @@ const NotificationsPage = lazy(() => import('@/features/notifications/pages/Noti
 const LearningPathsPage = lazy(() => import('@/features/learning/pages/LearningPathsPage'))
 const LearningPathPage = lazy(() => import('@/features/learning/pages/LearningPathPage'))
 const GlossaryPage = lazy(() => import('@/features/learning/pages/GlossaryPage'))
+const EventsPage = lazy(() => import('@/features/events/pages/EventsPage'))
+const NewEventPage = lazy(() => import('@/features/events/pages/NewEventPage'))
 const AboutPage = lazy(() => import('@/features/about/pages/AboutPage'))
 const SearchPage = lazy(() => import('@/features/search/pages/SearchPage'))
 const TestimonialsPage = lazy(() => import('@/features/testimonials/pages/TestimonialsPage'))
@@ -45,6 +47,7 @@ const AdminUsersPage = lazy(() => import('@/features/admin/pages/AdminUsersPage'
 const AdminUserProfilePage = lazy(() => import('@/features/admin/pages/AdminUserProfilePage'))
 const AdminImportPage = lazy(() => import('@/features/admin/pages/AdminImportPage'))
 const AdminReportsPage = lazy(() => import('@/features/admin/pages/AdminReportsPage'))
+const AdminEventsPage = lazy(() => import('@/features/admin/pages/AdminEventsPage'))
 
 /** Las páginas públicas existen una vez por idioma: «/», «/ca» y «/en». El panel de admin solo en castellano. */
 const PUBLIC_LANGUAGES = [
@@ -91,6 +94,15 @@ function publicRoutes({ prefix, lang }) {
       <Route path={seg('rutas')} element={<LearningPathsPage />} />
       <Route path={`${seg('rutas')}/:pathSlug`} element={<LearningPathPage />} />
       <Route path={seg('glosario')} element={<GlossaryPage />} />
+      <Route path={seg('eventos')} element={<EventsPage />} />
+      <Route
+        path={`${seg('eventos')}/${routeSubsegment('eventos', 'nuevo', lang)}`}
+        element={
+          <RequireAuth>
+            <NewEventPage />
+          </RequireAuth>
+        }
+      />
       <Route
         path={seg('notificaciones')}
         element={
@@ -125,6 +137,7 @@ function publicRoutes({ prefix, lang }) {
           <Route path={`${forum}/nueva`} element={<LegacyPathRedirect />} />
           <Route path={`${seg('empleo')}/guardadas`} element={<LegacyPathRedirect />} />
           <Route path={`${seg('perfil')}/editar`} element={<LegacyPathRedirect />} />
+          <Route path={`${seg('eventos')}/nuevo`} element={<LegacyPathRedirect />} />
         </>
       )}
       <Route path="*" element={<NotFound />} />
@@ -154,6 +167,7 @@ export default function AppRoutes() {
         <Route path="usuarios/:userId/perfil" element={<AdminUserProfilePage />} />
         <Route path="importacion" element={<AdminImportPage />} />
         <Route path="reportes" element={<AdminReportsPage />} />
+        <Route path="eventos" element={<AdminEventsPage />} />
         <Route path="*" element={<NotFound embedded />} />
       </Route>
     </Routes>

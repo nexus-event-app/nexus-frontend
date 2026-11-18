@@ -20,7 +20,7 @@ import { useRequest } from '@/shared/hooks/useRequest'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { adminReportsService } from '../services/adminReportsService'
 
-const TYPE_LABELS = { DISCUSSION: 'Discusión', COMMENT: 'Comentario', TESTIMONIAL: 'Testimonio' }
+const TYPE_LABELS = { DISCUSSION: 'Discusión', COMMENT: 'Comentario', TESTIMONIAL: 'Testimonio', EVENT: 'Evento' }
 const RESOLUTION_LABELS = { HIDE: 'Ocultado', DELETE: 'Eliminado', DISMISS: 'Descartado' }
 
 /** Dónde ver el contenido reportado en la web. */
@@ -28,6 +28,7 @@ function targetHref(item) {
   const { target } = item
   if (!target.exists) return null
   if (item.targetType === 'TESTIMONIAL') return paths.testimonials
+  if (item.targetType === 'EVENT') return paths.events
   const discussion = paths.discussionDetail({ id: target.discussionId, slug: target.discussionSlug })
   return item.targetType === 'COMMENT' ? `${discussion}#comentario-${item.targetId}` : discussion
 }

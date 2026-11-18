@@ -3,6 +3,7 @@ import { test as base, expect } from '@playwright/test'
 import {
   comments,
   discussions,
+  events,
   englishNews,
   jobs,
   news,
@@ -47,6 +48,19 @@ class MockApi {
     )
     this.on('PUT', /^\/api\/notifications\/(\d+\/read|read-all)$/, () => ({ status: 204 }))
     this.on('GET', '/api/testimonials/latest', () => json(testimonials))
+    this.on('GET', '/api/events', (_, query) => {
+      const forWomen = query?.get('forWomen')
+      const mode = query?.get('mode')
+      return json(
+        page(
+          events.filter(
+            (item) => (forWomen == null || String(item.forWomen) === forWomen) && (mode == null || item.mode === mode),
+          ),
+        ),
+      )
+    })
+    this.on('POST', '/api/events', () => json(events[0], 201))
+    this.on('DELETE', /^\/api\/events\/\d+$/, () => ({ status: 204 }))
     this.on('GET', '/api/testimonials', () => json(testimonials))
     this.on('GET', '/api/search', () => json(searchResult()))
     this.on('GET', '/api/saved-jobs/ids', () => json([]))

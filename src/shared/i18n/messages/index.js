@@ -3,6 +3,7 @@ import auth from './auth'
 import catalogs from './catalogs'
 import common from './common'
 import errors from './errors'
+import events from './events'
 import forum from './forum'
 import glossary from './glossary'
 import home from './home'
@@ -25,6 +26,7 @@ const modules = {
   news,
   jobs,
   forum,
+  events,
   testimonials,
   auth,
   profile,

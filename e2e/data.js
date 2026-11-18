@@ -221,3 +221,46 @@ export function searchResult({ newsItems = news, jobItems = jobs, discussionItem
   const group = (items) => ({ items, total: items.length })
   return { news: group(newsItems), jobs: group(jobItems), discussions: group(discussionItems), people: group(people) }
 }
+
+/** Eventos de la comunidad (fechas lejanas para que no caduquen en las pruebas). */
+export const events = [
+  {
+    id: 51,
+    title: 'Meetup de React en Valencia',
+    description: 'Charlas cortas para empezar con React y conocer a gente de la comunidad. Gratis.',
+    url: 'https://www.meetup.com/react-valencia/events/1/',
+    host: 'meetup.com',
+    date: '2099-03-12',
+    time: '19:00:00',
+    mode: 'PRESENCIAL',
+    city: 'Valencia',
+    forWomen: false,
+    mine: true,
+  },
+  {
+    id: 52,
+    title: 'Hackathon online para principiantes',
+    description: 'Un fin de semana para crear tu primer proyecto en equipo, con mentoras y mentores.',
+    url: 'https://www.eventbrite.es/e/hackathon-2',
+    host: 'eventbrite.es',
+    date: '2099-03-20',
+    time: null,
+    mode: 'ONLINE',
+    city: null,
+    forWomen: false,
+    mine: false,
+  },
+  {
+    id: 53,
+    title: 'Café tech de mujeres en Barcelona',
+    description: 'Encuentro para conocer a otras mujeres que empiezan en tecnología y compartir experiencias.',
+    url: 'https://www.meetup.com/mujeres-tech-bcn/events/3/',
+    host: 'meetup.com',
+    date: '2099-03-15',
+    time: '18:30:00',
+    mode: 'PRESENCIAL',
+    city: 'Barcelona',
+    forWomen: true,
+    mine: false,
+  },
+]
