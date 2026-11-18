@@ -13,6 +13,8 @@ const URL_HINTS = {
   REMOTIVE_JOBS: 'https://remotive.com/api/remote-jobs?category=software-dev',
   JOBICY_JOBS: 'https://jobicy.com/api/v2/remote-jobs?count=100&geo=europe&industry=dev',
   ARBEITNOW_JOBS: 'https://www.arbeitnow.com/api/job-board-api',
+  ADZUNA_JOBS:
+    'Búsqueda sin página ni claves, p. ej. https://api.adzuna.com/v1/api/jobs/es/search?category=it-jobs&what_or=junior. Las claves van en el servidor (ADZUNA_APP_ID y ADZUNA_APP_KEY).',
 }
 
 function toValues(source) {

@@ -68,6 +68,7 @@ export const importSourceTypes = catalog('importSourceTypes', [
   ['REMOTIVE_JOBS', 'Empleo · Remotive', 'green'],
   ['JOBICY_JOBS', 'Empleo · Jobicy', 'green'],
   ['ARBEITNOW_JOBS', 'Empleo · Arbeitnow', 'green'],
+  ['ADZUNA_JOBS', 'Empleo · Adzuna (España)', 'green'],
 ])
 
 /** Idiomas del contenido (noticias y sus fuentes). El panel de administración solo está en castellano. */
