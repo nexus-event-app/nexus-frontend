@@ -29,16 +29,17 @@ function validate({ name, role, location, content }) {
 export default function TestimonialForm({ className }) {
   const { t } = useI18n()
   const { user } = useAuth()
-  const [sent, setSent] = useState(false)
+  const [sent, setSent] = useState(null)
   const initialValues = { name: user.name, role: '', location: '', content: '' }
 
   const form = useForm({
     initialValues,
     validate,
     onSubmit: async ({ name, role, location, content }) => {
-      setSent(false)
+      setSent(null)
+      let created
       try {
-        await testimonialService.create({
+        created = await testimonialService.create({
           name: name.trim(),
           role: role.trim() || null,
           location: location.trim() || null,
@@ -50,7 +51,8 @@ export default function TestimonialForm({ className }) {
         }
         throw error
       }
-      setSent(true)
+      // El de la administración se publica al momento; el resto espera la revisión.
+      setSent(created?.isActive ? 'published' : 'pending')
       form.reset(initialValues)
     },
   })
@@ -63,8 +65,11 @@ export default function TestimonialForm({ className }) {
     // página (el panel de «Escribe en el muro»).
     <form onSubmit={form.handleSubmit} noValidate className={cx('form-grid', className)}>
       {sent && (
-        <Alert variant="success" title={t('testimonials.form.thanksTitle')}>
-          {t('testimonials.form.thanks')}
+        <Alert
+          variant="success"
+          title={t(sent === 'published' ? 'testimonials.form.publishedTitle' : 'testimonials.form.thanksTitle')}
+        >
+          {t(sent === 'published' ? 'testimonials.form.published' : 'testimonials.form.thanks')}
         </Alert>
       )}
       {form.formError && <Alert variant="error">{form.formError}</Alert>}
