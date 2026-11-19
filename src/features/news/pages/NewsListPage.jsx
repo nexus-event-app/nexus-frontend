@@ -2,6 +2,8 @@ import { Link } from '@/shared/i18n/router'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import CardGridSkeleton from '@/shared/components/CardGridSkeleton'
 import EmptyState from '@/shared/components/EmptyState'
+import Illustration from '@/shared/components/Illustration'
+import { illustrations } from '@/shared/config/illustrations'
 import Eyebrow from '@/shared/components/Eyebrow'
 import PageMain from '@/shared/components/PageMain'
 import Pagination from '@/shared/components/Pagination'
@@ -36,12 +38,14 @@ export default function NewsListPage() {
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Breadcrumbs items={[{ label: t('news.breadcrumb'), to: paths.news }]} />
 
-      <header className="mb-8">
+      {/* Título a la izquierda y, en pantallas grandes, la ilustración en el hueco de la derecha. */}
+      <header className="mb-8 grid items-end gap-x-10 lg:grid-cols-[minmax(0,1fr)_20rem] xl:grid-cols-[minmax(0,1fr)_24rem]">
         <hgroup>
           <Eyebrow>{t('news.list.eyebrow')}</Eyebrow>
           <h1 className="mt-3 text-4xl font-bold tracking-tight text-ink sm:text-5xl">{heading}</h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-muted">{t('news.list.description')}</p>
         </hgroup>
+        <Illustration {...illustrations.news} className="-mt-20 hidden lg:block" />
       </header>
 
       {/*

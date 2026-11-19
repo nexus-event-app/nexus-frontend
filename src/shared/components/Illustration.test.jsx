@@ -15,4 +15,8 @@ describe('Illustration', () => {
     expect(image).toHaveAttribute('height', '595')
     expect(image).toHaveAttribute('loading', 'lazy')
   })
+
+  it('la de Noticias también está registrada con su tamaño', () => {
+    expect(illustrations.news).toEqual({ src: '/images/noticias-ilustracion.webp', width: 800, height: 524 })
+  })
 })
