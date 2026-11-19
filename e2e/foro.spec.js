@@ -64,6 +64,26 @@ test.describe('Mejor respuesta', () => {
     )
   })
 
+  test('«Nueva discusión» va a la altura de los filtros y las normas a la del número de discusiones', async ({
+    page,
+    isMobile,
+  }) => {
+    test.skip(isMobile, 'En el móvil va todo en una columna')
+    await page.goto('/foro')
+    const filters = await page.getByRole('main').getByRole('search').boundingBox()
+    const button = await page.getByRole('main').getByRole('link', { name: 'Nueva discusión' }).boundingBox()
+    const count = await page
+      .getByRole('status')
+      .filter({ hasText: /discusi/ })
+      .boundingBox()
+    const rules = await page.getByRole('complementary', { name: 'Normas del foro' }).boundingBox()
+    // El botón, dentro de la franja de los filtros y a su derecha; las normas empiezan donde el número.
+    expect(button.y).toBeGreaterThanOrEqual(filters.y - 1)
+    expect(button.y + button.height).toBeLessThanOrEqual(filters.y + filters.height + 1)
+    expect(button.x).toBeGreaterThan(filters.x + filters.width)
+    expect(Math.abs(rules.y - count.y)).toBeLessThan(24)
+  })
+
   test('el listado pide cuatro discusiones por página y enseña las normas al lado', async ({ page, api }) => {
     await page.goto('/foro')
     await expect(page.getByRole('complementary', { name: 'Normas del foro' })).toBeVisible()

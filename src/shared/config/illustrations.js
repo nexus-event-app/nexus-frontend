@@ -7,4 +7,6 @@ export const illustrations = {
   employment: { src: '/images/empleo-ilustracion.webp', width: 800, height: 595 },
   /** Dos personas leyendo noticias en el móvil y el portátil: cabecera de Noticias. */
   news: { src: '/images/noticias-ilustracion.webp', width: 800, height: 524 },
+  /** Tres personas charlando: cabecera del Foro. */
+  forum: { src: '/images/foro-ilustracion.webp', width: 800, height: 525 },
 }

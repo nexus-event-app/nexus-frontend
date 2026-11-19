@@ -5,6 +5,8 @@ import EmptyState from '@/shared/components/EmptyState'
 import Icon from '@/shared/components/Icon'
 import ListSkeleton from '@/shared/components/ListSkeleton'
 import ActionMenu from '@/shared/components/ActionMenu'
+import Illustration from '@/shared/components/Illustration'
+import { illustrations } from '@/shared/config/illustrations'
 import Eyebrow from '@/shared/components/Eyebrow'
 import PageMain from '@/shared/components/PageMain'
 import Pagination from '@/shared/components/Pagination'
@@ -29,7 +31,8 @@ export default function ForumPage() {
     : t('forum.list.heading')
 
   return (
-    // Rejilla del <main>: migas y cabecera arriba; búsqueda y discusiones a la izquierda, normas a la derecha.
+    // Rejilla del <main>: migas y cabecera arriba; búsqueda y discusiones a la izquierda; a la derecha, «Nueva discusión»
+    // a la altura de la búsqueda y las normas a la de las discusiones.
     <PageMain className="page-container page-section relative isolate grid grid-cols-1 content-start gap-x-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:grid-rows-[auto_auto_auto_1fr]">
       <Seo
         title={page > 1 ? `${heading}${t('common.pageSuffix', { page })}` : heading}
@@ -40,23 +43,29 @@ export default function ForumPage() {
       {/* Cuadrícula decorativa detrás de la cabecera, como en Noticias y Empleo. */}
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Breadcrumbs className="col-span-full" items={[{ label: t('forum.breadcrumb'), to: paths.forum }]} />
-      <header className="col-span-full mb-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start">
+      {/* Título a la izquierda y, en pantallas grandes, la ilustración en el hueco de la derecha (como en Noticias). */}
+      <header className="col-span-full mb-8 grid items-end gap-x-10 lg:grid-cols-[minmax(0,1fr)_20rem] xl:grid-cols-[minmax(0,1fr)_24rem]">
         <hgroup>
           <Eyebrow>{t('forum.list.eyebrow')}</Eyebrow>
           <h1 className="mt-3 text-4xl font-bold tracking-tight text-ink sm:text-5xl">{heading}</h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-muted">{t('forum.list.description')}</p>
         </hgroup>
-        {/* La acción principal del foro: grande y a la altura del título, bien separada de las normas. */}
-        <ActionMenu className="shrink-0 lg:mt-9">
-          <ButtonLink to={paths.forumNew} size="lg" className="shadow-pop">
-            <Icon name="plus" className="h-5 w-5" />
-            {t('forum.list.newDiscussion')}
-          </ButtonLink>
-        </ActionMenu>
+        <Illustration {...illustrations.forum} className="-mt-20 hidden lg:block" />
       </header>
 
+      {/*
+        La acción principal del foro: en la columna de las normas, a la altura de los filtros y justo encima de ellas.
+        En el móvil va antes de los filtros.
+      */}
+      <ActionMenu className="mb-6 lg:col-start-2 lg:row-start-3 lg:self-end lg:[&>li]:w-full">
+        <ButtonLink to={paths.forumNew} size="lg" className="shadow-pop lg:w-full">
+          <Icon name="plus" className="h-5 w-5" />
+          {t('forum.list.newDiscussion')}
+        </ButtonLink>
+      </ActionMenu>
+
       {/* Barra de filtros discreta, como en Noticias y Empleo: categorías en fichas y el buscador en pastilla. */}
-      <search className="mb-6 grid min-w-0 grid-cols-1 items-center gap-3 border-y border-slate-200 py-3 xl:grid-cols-[minmax(0,1fr)_12rem]">
+      <search className="mb-6 grid min-w-0 lg:col-start-1 lg:row-start-3 grid-cols-1 items-center gap-3 border-y border-slate-200 py-3 xl:grid-cols-[minmax(0,1fr)_12rem]">
         <DiscussionCategoryFilter category={category} buildHref={buildHref} />
         <SearchBar
           compact
@@ -67,7 +76,11 @@ export default function ForumPage() {
         />
       </search>
 
-      <section aria-label={t('forum.list.region')} aria-busy={list.loading} className="min-w-0">
+      <section
+        aria-label={t('forum.list.region')}
+        aria-busy={list.loading}
+        className="min-w-0 lg:col-start-1 lg:row-start-4"
+      >
         <QueryBoundary
           data={list.data}
           error={list.error}
@@ -110,7 +123,8 @@ export default function ForumPage() {
         </QueryBoundary>
       </section>
 
-      <ForumRules className="mt-12 lg:sticky lg:top-24 lg:col-start-2 lg:row-span-2 lg:row-start-3 lg:mt-0 lg:self-start" />
+      {/* Las normas empiezan a la altura del número de discusiones. */}
+      <ForumRules className="mt-12 lg:sticky lg:top-24 lg:col-start-2 lg:row-start-4 lg:mt-0 lg:self-start" />
     </PageMain>
   )
 }

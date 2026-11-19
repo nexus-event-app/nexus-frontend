@@ -16,7 +16,8 @@ describe('Illustration', () => {
     expect(image).toHaveAttribute('loading', 'lazy')
   })
 
-  it('la de Noticias también está registrada con su tamaño', () => {
+  it('las de Noticias y Foro también están registradas con su tamaño', () => {
     expect(illustrations.news).toEqual({ src: '/images/noticias-ilustracion.webp', width: 800, height: 524 })
+    expect(illustrations.forum).toEqual({ src: '/images/foro-ilustracion.webp', width: 800, height: 525 })
   })
 })
