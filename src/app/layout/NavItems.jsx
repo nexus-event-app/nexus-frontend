@@ -5,14 +5,16 @@ import { mainNavigation } from './navigation'
 
 /**
  * Enlaces de la navegación principal. En horizontal van dentro de una cápsula y la sección actual se resalta como
- * una pastilla blanca; en vertical (menú del móvil) ocupan todo el ancho.
+ * una pastilla blanca; en vertical (menú del móvil), en dos columnas para que el menú sea corto.
  */
 export default function NavItems({ orientation = 'horizontal' }) {
   const { t } = useI18n()
   const vertical = orientation === 'vertical'
 
   return (
-    <ul className={cx('flex', vertical ? 'flex-col gap-1' : 'items-center gap-0.5 rounded-full bg-slate-100 p-1')}>
+    <ul
+      className={cx('flex', vertical ? 'grid grid-cols-2 gap-1' : 'items-center gap-0.5 rounded-full bg-slate-100 p-1')}
+    >
       {mainNavigation.map((item) => (
         <li key={item.to}>
           <NavLink

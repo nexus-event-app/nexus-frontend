@@ -85,4 +85,29 @@ test.describe('Navegación', () => {
     await expect(page).toHaveURL(/localhost:\d+\/$/)
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
   })
+
+  test('móvil estrecho con sesión: todo en una fila, menú a la derecha y «Cerrar sesión» a mano', async ({
+    page,
+    signedIn,
+  }) => {
+    expect(signedIn.id).toBe(7)
+    await page.setViewportSize({ width: 360, height: 640 })
+    await page.goto('/')
+    const banner = page.getByRole('banner')
+    const logo = await banner.getByRole('link', { name: /ir al inicio/ }).boundingBox()
+    const toggle = banner.getByRole('button', { name: 'Abrir menú' })
+    const box = await toggle.boundingBox()
+    // Misma fila que el logo y pegado al borde derecho (con el margen de la página).
+    expect(Math.abs(box.y + box.height / 2 - (logo.y + logo.height / 2))).toBeLessThan(4)
+    expect(360 - (box.x + box.width)).toBeLessThanOrEqual(24)
+
+    await toggle.click()
+    const logout = banner.getByRole('button', { name: 'Cerrar sesión' })
+    await logout.scrollIntoViewIfNeeded()
+    await expect(logout).toBeInViewport()
+    await logout.click()
+    await expect(banner.getByRole('button', { name: 'Abrir menú' })).toBeVisible()
+    await banner.getByRole('button', { name: 'Abrir menú' }).click()
+    await expect(banner.getByRole('link', { name: 'Iniciar sesión' })).toBeVisible()
+  })
 })

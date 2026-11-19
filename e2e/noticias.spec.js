@@ -30,7 +30,7 @@ test.describe('Lista de noticias', () => {
 
   test('el buscador es discreto: busca al escribir, sin botón', async ({ page, api }) => {
     await page.goto('/noticias')
-    const search = page.getByRole('search')
+    const search = page.getByRole('main').getByRole('search')
     await expect(search.getByRole('button')).toHaveCount(0)
     await search.getByRole('searchbox', { name: 'Buscar noticias' }).fill('entrevista')
     await expect(page).toHaveURL(/q=entrevista/)

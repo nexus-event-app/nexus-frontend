@@ -1,9 +1,10 @@
+import { useState } from 'react'
 import { screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { renderWithProviders } from '@/test/render'
 import { searchService } from '../services/searchService'
-import SearchDialog from './SearchDialog'
+import SiteSearch from './SiteSearch'
 
 const empty = { items: [], total: 0 }
 const RESULT = {
@@ -16,12 +17,19 @@ const RESULT = {
   people: { items: [{ id: 3, name: 'Ana García', headline: 'Frontend junior' }], total: 1 },
 }
 
+/** Como en la cabecera: la lupa abre el campo y este avisa al cerrarse. */
+function Harness() {
+  const [open, setOpen] = useState(false)
+  return <SiteSearch open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)} />
+}
+
 beforeEach(() => {
   vi.spyOn(searchService, 'search').mockResolvedValue(RESULT)
 })
 
 async function openAndType(text, options) {
-  const view = renderWithProviders(<SearchDialog onClose={vi.fn()} />, options)
+  const view = renderWithProviders(<Harness />, options)
+  await userEvent.click(screen.getByRole('button', { name: /Buscar en toda la web|Search the whole site/ }))
   const input = screen.getByRole('combobox')
   await userEvent.type(input, text)
   // «Ver todos» aparece al momento; se espera a que lleguen los resultados.
@@ -29,26 +37,32 @@ async function openAndType(text, options) {
   return { ...view, input }
 }
 
-describe('SearchDialog', () => {
-  it('abre con el foco en el campo y sin lista mientras no hay búsqueda', () => {
-    renderWithProviders(<SearchDialog onClose={vi.fn()} />)
-    const input = screen.getByRole('combobox')
+describe('SiteSearch', () => {
+  it('la lupa abre el campo en la propia cabecera, con el foco en él y sin ventana aparte', async () => {
+    renderWithProviders(<Harness />)
+    const button = screen.getByRole('button', { name: 'Buscar en toda la web' })
+    expect(button).toHaveAttribute('aria-expanded', 'false')
+    expect(screen.queryByRole('combobox')).not.toBeInTheDocument()
+
+    await userEvent.click(button)
+    const input = screen.getByRole('combobox', { name: 'Buscar noticias, ofertas, discusiones y personas' })
     expect(input).toHaveFocus()
     expect(input).toHaveAttribute('aria-expanded', 'false')
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
     expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
   })
 
-  it('no busca con menos de dos letras', async () => {
-    renderWithProviders(<SearchDialog onClose={vi.fn()} />)
+  it('no busca con menos de dos letras y lo indica', async () => {
+    renderWithProviders(<Harness />)
+    await userEvent.click(screen.getByRole('button', { name: 'Buscar en toda la web' }))
     await userEvent.type(screen.getByRole('combobox'), 'r')
+    expect(screen.getAllByText(/Escribe al menos 2 letras/)[0]).toBeInTheDocument()
     await new Promise((resolve) => setTimeout(resolve, 400))
     expect(searchService.search).not.toHaveBeenCalled()
   })
 
-  it('agrupa los resultados y añade «ver todos»', async () => {
-    // Un texto que no está en el glosario, para ver solo los grupos que vienen del backend.
+  it('agrupa los resultados debajo del campo y añade «ver todos»', async () => {
     const { input } = await openAndType('novedad')
-
     expect(searchService.search).toHaveBeenLastCalledWith('novedad', 4, expect.anything())
     expect(input).toHaveAttribute('aria-expanded', 'true')
     const listbox = screen.getByRole('listbox')
@@ -59,7 +73,7 @@ describe('SearchDialog', () => {
     expect(screen.getByRole('status')).toHaveTextContent('3')
   })
 
-  it('el glosario va primero y lleva a la explicación del término', async () => {
+  it('el glosario va primero', async () => {
     await openAndType('api')
     const glossary = screen.getByRole('group', { name: 'Glosario' })
     const option = within(glossary).getAllByRole('option')[0]
@@ -67,24 +81,18 @@ describe('SearchDialog', () => {
     expect(screen.getAllByRole('option')[0]).toBe(option)
   })
 
-  it('se maneja con las flechas y abre la opción activa con Intro', async () => {
-    const onClose = vi.fn()
-    const view = renderWithProviders(<SearchDialog onClose={onClose} />, { route: '/en' })
-    const input = screen.getByRole('combobox')
-    await userEvent.type(input, 'novedad')
-    await screen.findByRole('option', { name: /Novedades de React 19/ })
-
+  it('se maneja con las flechas, abre la opción activa con Intro y se cierra', async () => {
+    const view = await openAndType('novedad', { route: '/en' })
+    const input = view.input
     await userEvent.keyboard('{ArrowDown}{ArrowDown}')
     const active = screen.getAllByRole('option')[1]
     expect(active).toHaveAttribute('aria-selected', 'true')
     expect(input).toHaveAttribute('aria-activedescendant', active.id)
-
     await userEvent.keyboard('{ArrowUp}{ArrowUp}')
     expect(screen.getAllByRole('option').at(-1)).toHaveAttribute('aria-selected', 'true')
-
     await userEvent.keyboard('{Home}{Enter}')
-    expect(onClose).toHaveBeenCalled()
     expect(view.current.location.pathname).toBe('/en/news/1-react-19')
+    expect(screen.queryByRole('combobox')).not.toBeInTheDocument()
   })
 
   it('sin opción activa, Intro abre la página de resultados', async () => {
@@ -96,10 +104,23 @@ describe('SearchDialog', () => {
 
   it('avisa cuando no hay resultados', async () => {
     searchService.search.mockResolvedValue({ news: empty, jobs: empty, discussions: empty, people: empty })
-    renderWithProviders(<SearchDialog onClose={vi.fn()} />)
+    renderWithProviders(<Harness />)
+    await userEvent.click(screen.getByRole('button', { name: 'Buscar en toda la web' }))
     await userEvent.type(screen.getByRole('combobox'), 'xyz')
-    // Se ve en la ventana y se anuncia a los lectores de pantalla.
     expect(await screen.findByText('No hay resultados para «xyz».', { selector: 'strong' })).toBeVisible()
     expect(screen.getByRole('status')).toHaveTextContent('No hay resultados para «xyz».')
+  })
+
+  it('Escape y el botón de cerrar la cierran y el foco vuelve a la lupa', async () => {
+    renderWithProviders(<Harness />)
+    const button = screen.getByRole('button', { name: 'Buscar en toda la web' })
+    await userEvent.click(button)
+    await userEvent.keyboard('{Escape}')
+    expect(screen.queryByRole('combobox')).not.toBeInTheDocument()
+    await vi.waitFor(() => expect(button).toHaveFocus())
+
+    await userEvent.click(button)
+    await userEvent.click(screen.getByRole('button', { name: 'Cerrar la búsqueda' }))
+    expect(screen.queryByRole('combobox')).not.toBeInTheDocument()
   })
 })
