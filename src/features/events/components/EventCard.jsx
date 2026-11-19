@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useId, useState } from 'react'
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import ReportButton from '@/features/reports/components/ReportButton'
 import Button from '@/shared/components/Button'
 import ConfirmDialog from '@/shared/components/ConfirmDialog'
 import Icon from '@/shared/components/Icon'
 import { useAction } from '@/shared/hooks/useAction'
+import { useIsClamped } from '@/shared/hooks/useIsClamped'
 import { useToast } from '@/shared/hooks/useToast'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
@@ -29,6 +30,10 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', onDel
   const { isAuthenticated } = useAuth()
   const toast = useToast()
   const [confirming, setConfirming] = useState(false)
+  // Descripción recortada a tres líneas; si no cabe, «Leer más» la abre entera en la propia tarjeta.
+  const descriptionId = useId()
+  const [expanded, setExpanded] = useState(false)
+  const [descriptionRef, clamped] = useIsClamped([event.description, expanded])
   const [going, setGoing] = useState({ count: event.interestedCount ?? 0, interested: Boolean(event.interested) })
   const [toggleGoing, togglingGoing] = useAction(async () => {
     setGoing(await eventsService.toggleInterest(event.id))
@@ -108,7 +113,11 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', onDel
         </p>
       </header>
 
-      <Heading id={`event-${event.id}`} className="mt-4 line-clamp-2 text-base font-bold leading-snug text-ink">
+      {/* En mayúsculas para que destaque (solo visual: los lectores de pantalla lo leen tal cual). */}
+      <Heading
+        id={`event-${event.id}`}
+        className="mt-4 line-clamp-2 text-base font-bold uppercase leading-snug tracking-wide text-ink"
+      >
         {event.title}
       </Heading>
       <p className="mt-1 text-sm text-ink-muted first-letter:uppercase">{when}</p>
@@ -120,9 +129,26 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', onDel
           </span>
         </p>
       )}
-      <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-ink-soft" title={event.description}>
+      <p
+        id={descriptionId}
+        ref={descriptionRef}
+        className={cx('mt-3 text-sm leading-relaxed text-ink-soft', !expanded && 'line-clamp-3')}
+      >
         {event.description}
       </p>
+      {(clamped || expanded) && (
+        <button
+          type="button"
+          onClick={() => setExpanded((value) => !value)}
+          aria-expanded={expanded}
+          aria-controls={descriptionId}
+          className="inline-flex min-h-[2.75rem] items-center gap-1 self-start text-sm font-semibold text-accent hover:underline sm:min-h-[2rem]"
+        >
+          {expanded ? t('common.readLess') : t('common.readMore')}
+          <Icon name="chevron-down" className={cx('h-4 w-4 transition-transform', expanded && 'rotate-180')} />
+          <span className="sr-only">{t('events.card.descriptionOf', { title: event.title })}</span>
+        </button>
+      )}
       {/* Adónde lleva «Apuntarme»: los lectores de pantalla ya lo oyen en el propio enlace. */}
       <p aria-hidden="true" className="mt-auto flex items-center gap-1 truncate pt-3 text-xs text-ink-muted">
         <Icon name="link" className="h-3.5 w-3.5 shrink-0" />

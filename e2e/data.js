@@ -244,7 +244,8 @@ export const events = [
   {
     id: 51,
     title: 'Meetup de React en Valencia',
-    description: 'Charlas cortas para empezar con React y conocer a gente de la comunidad. Gratis.',
+    description:
+      'Charlas cortas para empezar con React y conocer a gente de la comunidad. Gratis. Habrá pizza, sorteos de libros y un rato al final para presentar tus proyectos personales y encontrar compañeras y compañeros de estudio.',
     url: 'https://www.meetup.com/react-valencia/events/1/',
     host: 'meetup.com',
     date: '2099-03-12',
