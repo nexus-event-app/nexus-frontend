@@ -1,4 +1,6 @@
 import Eyebrow from '@/shared/components/Eyebrow'
+import Illustration from '@/shared/components/Illustration'
+import { illustrations } from '@/shared/config/illustrations'
 import Icon from '@/shared/components/Icon'
 import { useI18n } from '@/shared/i18n/useI18n'
 
@@ -72,7 +74,7 @@ export default function InterviewPrep() {
 
   return (
     // Rejilla: cabecera y fases a todo el ancho; prueba en directo y preguntas, una junto a otra en pantallas anchas.
-    <section aria-labelledby="interview-prep" className="mt-20 grid gap-x-8 gap-y-12 lg:grid-cols-2">
+    <section aria-labelledby="interview-prep" className="relative mt-20 grid gap-x-8 gap-y-12 lg:grid-cols-2">
       <hgroup className="col-span-full max-w-2xl">
         <Eyebrow>{t('jobs.interview.eyebrow')}</Eyebrow>
         <h2 id="interview-prep" className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
@@ -80,6 +82,12 @@ export default function InterviewPrep() {
         </h2>
         <p className="mt-4 text-lg leading-relaxed text-ink-muted">{t('jobs.interview.description')}</p>
       </hgroup>
+
+      {/* En el hueco libre a la derecha de los títulos: colocada encima, sin ocupar sitio ni mover las fases. */}
+      <Illustration
+        {...illustrations.interview}
+        className="absolute -top-4 right-6 hidden w-64 lg:block xl:right-12 xl:w-72"
+      />
 
       <section aria-labelledby="interview-phases" className="col-span-full -mt-2">
         <hgroup className="max-w-3xl">

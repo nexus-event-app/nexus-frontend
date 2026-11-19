@@ -18,5 +18,7 @@ export const illustrations = {
   footer: { src: '/images/pie-ilustracion.webp', width: 800, height: 356 },
   /** Una chica junto a una bombilla con «TIPS»: consejos de Empleo. Late como un corazón. */
   tips: { src: '/images/consejos-ilustracion.webp', width: 600, height: 597, animation: 'heartbeat' },
+  /** Una entrevista de trabajo en una mesa: «Prepara tus entrevistas técnicas». Late como la de los consejos. */
+  interview: { src: '/images/entrevistas-ilustracion.webp', width: 700, height: 509, animation: 'heartbeat' },
   testimonials: { src: '/images/testimonios-ilustracion.webp', width: 800, height: 610 },
 }
