@@ -21,6 +21,11 @@ describe('Illustration', () => {
     expect(illustrations.forum).toEqual({ src: '/images/foro-ilustracion.webp', width: 800, height: 525 })
     expect(illustrations.about).toEqual({ src: '/images/sobre-ilustracion.webp', width: 800, height: 538 })
     expect(illustrations.learningRoad).toEqual({ src: '/images/rutas-camino.webp', width: 1600, height: 318 })
+    expect(illustrations.learningRoadGirl).toEqual({
+      src: '/images/rutas-camino-chica.webp',
+      width: 1400,
+      height: 278,
+    })
     expect(illustrations.footer).toEqual({ src: '/images/pie-ilustracion.webp', width: 800, height: 356 })
     expect(illustrations.events).toEqual({ src: '/images/eventos-ilustracion.webp', width: 800, height: 580 })
     expect(illustrations.women).toEqual({ src: '/images/mujeres-ilustracion.webp', width: 800, height: 537 })

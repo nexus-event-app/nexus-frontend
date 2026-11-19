@@ -3,6 +3,8 @@ import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import ButtonLink from '@/shared/components/ButtonLink'
 import Eyebrow from '@/shared/components/Eyebrow'
 import Icon from '@/shared/components/Icon'
+import Illustration from '@/shared/components/Illustration'
+import { illustrations } from '@/shared/config/illustrations'
 import PageMain from '@/shared/components/PageMain'
 import Seo from '@/shared/components/Seo'
 import { paths } from '@/shared/config/paths'
@@ -36,12 +38,17 @@ export default function LearningPathsPage() {
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Breadcrumbs items={[{ label: t('learning.breadcrumb'), to: paths.learning }]} />
 
-      <header className="mb-10">
+      {/* Título a la izquierda y, en pantallas grandes, el camino de las rutas en el hueco de la derecha. */}
+      <header className="mb-10 grid items-end gap-x-10 lg:grid-cols-[minmax(0,1fr)_24rem] xl:grid-cols-[minmax(0,1fr)_32rem]">
         <hgroup>
           <Eyebrow>{t('learning.eyebrow')}</Eyebrow>
           <h1 className="mt-3 text-4xl font-bold tracking-tight text-ink sm:text-5xl">{t('learning.title')}</h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-muted">{t('learning.intro')}</p>
         </hgroup>
+        <Illustration
+          {...illustrations.learningRoadGirl}
+          className="hidden [mask-composite:intersect] [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent),linear-gradient(to_bottom,transparent,black_4%,black_82%,transparent)] lg:block"
+        />
       </header>
 
       {/*

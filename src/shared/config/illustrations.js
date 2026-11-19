@@ -24,5 +24,7 @@ export const illustrations = {
   about: { src: '/images/sobre-ilustracion.webp', width: 800, height: 538 },
   /** Un camino con una parada por ruta (Frontend, Backend, QA, Datos, IA) hasta el primer empleo: portada, Rutas. */
   learningRoad: { src: '/images/rutas-camino.webp', width: 1600, height: 318 },
+  /** El mismo camino con una chica de protagonista: cabecera de Rutas de aprendizaje. */
+  learningRoadGirl: { src: '/images/rutas-camino-chica.webp', width: 1400, height: 278 },
   testimonials: { src: '/images/testimonios-ilustracion.webp', width: 800, height: 610 },
 }
