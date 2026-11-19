@@ -2,6 +2,8 @@ import { useAuth } from '@/features/auth/hooks/useAuth'
 import LearningPathCard from '@/features/learning/components/LearningPathCard'
 import { LEARNING_PATHS } from '@/features/learning/data/learningPaths'
 import { useLearningProgress } from '@/features/learning/hooks/useLearningProgress'
+import Illustration from '@/shared/components/Illustration'
+import { illustrations } from '@/shared/config/illustrations'
 import { paths } from '@/shared/config/paths'
 import { useI18n } from '@/shared/i18n/useI18n'
 import HomeSection from './HomeSection'
@@ -37,6 +39,14 @@ export default function HomePathsSection() {
           </li>
         ))}
       </ul>
+      {/*
+        En el hueco libre bajo las tarjetas: el camino de las cinco rutas hasta el primer empleo. Colocado encima, sin
+        ocupar sitio, y con los extremos difuminados; su ancho está medido para que quepa en ese hueco.
+      */}
+      <Illustration
+        {...illustrations.learningRoad}
+        className="absolute inset-x-0 bottom-1 mx-auto hidden w-[29rem] [mask-composite:intersect] [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent),linear-gradient(to_bottom,transparent,black_4%,black_82%,transparent)] lg:block xl:w-[42rem]"
+      />
     </HomeSection>
   )
 }
