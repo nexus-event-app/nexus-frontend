@@ -16,7 +16,7 @@ import EventCard from './EventCard'
 export const EVENTS_PAGE_SIZE = 6
 
 /**
- * Un bloque de la agenda («Para todo el mundo» o «Por y para mujeres») con sus próximos eventos, los filtros elegidos y
+ * Un bloque de la agenda («Eventos», para todo el mundo, o «Por y para mujeres») con sus próximos eventos, los filtros elegidos y
  * su propia paginación (`page` y `pageHref`, para que cada bloque pase de página por su cuenta).
  */
 export default function EventSection({ id, forWomen, filters, page, pageHref, illustration, className }) {
@@ -70,7 +70,11 @@ export default function EventSection({ id, forWomen, filters, page, pageHref, il
       {illustration && (
         <Illustration
           {...illustration}
-          className="absolute -top-14 right-4 hidden w-64 lg:block xl:right-8 xl:w-[19rem]"
+          className={cx(
+            'absolute right-4 hidden w-64 lg:block xl:right-8 xl:w-[19rem]',
+            // El bloque general no tiene recuadro (ni su margen interior): sube más y asoma sobre los filtros.
+            forWomen ? '-top-14' : '-top-24 xl:-top-28',
+          )}
         />
       )}
 

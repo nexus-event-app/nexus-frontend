@@ -30,7 +30,7 @@ export default {
     },
     general: {
       eyebrow: 'Agenda',
-      title: 'Para todo el mundo',
+      title: 'Eventos',
       text: 'Meetups, charlas y hackathons abiertos a cualquiera que quiera aprender.',
     },
     women: {
@@ -151,7 +151,7 @@ export default {
     },
     general: {
       eyebrow: 'Agenda',
-      title: 'Per a tothom',
+      title: 'Esdeveniments',
       text: 'Meetups, xerrades i hackathons oberts a qualsevol persona que vulgui aprendre.',
     },
     women: {
@@ -272,7 +272,7 @@ export default {
     },
     general: {
       eyebrow: 'Calendar',
-      title: 'For everyone',
+      title: 'Events',
       text: 'Meetups, talks and hackathons open to anyone who wants to learn.',
     },
     women: {

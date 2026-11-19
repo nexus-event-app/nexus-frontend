@@ -16,9 +16,10 @@ describe('Illustration', () => {
     expect(image).toHaveAttribute('loading', 'lazy')
   })
 
-  it('las de Noticias, Foro, Eventos (mujeres) y Testimonios también están registradas con su tamaño', () => {
+  it('las de Noticias, Foro, Eventos y Testimonios también están registradas con su tamaño', () => {
     expect(illustrations.news).toEqual({ src: '/images/noticias-ilustracion.webp', width: 800, height: 524 })
     expect(illustrations.forum).toEqual({ src: '/images/foro-ilustracion.webp', width: 800, height: 525 })
+    expect(illustrations.events).toEqual({ src: '/images/eventos-ilustracion.webp', width: 800, height: 580 })
     expect(illustrations.women).toEqual({ src: '/images/mujeres-ilustracion.webp', width: 800, height: 537 })
     expect(illustrations.testimonials).toEqual({
       src: '/images/testimonios-ilustracion.webp',

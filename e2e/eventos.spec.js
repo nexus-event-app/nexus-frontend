@@ -7,10 +7,10 @@ test.describe('Eventos', () => {
     await page.goto('/eventos')
     await expect(page.getByRole('heading', { level: 1, name: 'No te pierdas ninguna oportunidad' })).toBeVisible()
 
-    const general = page.getByRole('region', { name: 'Para todo el mundo' })
+    const general = page.getByRole('region', { name: 'Eventos', exact: true })
     // Seis por página (dos filas de tres) y paginación propia.
     await expect(general.getByRole('article')).toHaveCount(6)
-    await expect(general.getByRole('navigation', { name: 'Páginas de «Para todo el mundo»' })).toBeVisible()
+    await expect(general.getByRole('navigation', { name: 'Páginas de «Eventos»' })).toBeVisible()
     const meetup = general.getByRole('article', { name: 'Meetup de React en Valencia' })
     await expect(meetup).toContainText('Valencia')
     await expect(meetup).toContainText('Las Naves, Carrer de Joan Verdeguer, 16')
@@ -37,7 +37,7 @@ test.describe('Eventos', () => {
 
   test('la paginación de cada bloque va por su cuenta', async ({ page }) => {
     await page.goto('/eventos')
-    const general = page.getByRole('region', { name: 'Para todo el mundo' })
+    const general = page.getByRole('region', { name: 'Eventos', exact: true })
     await general
       .getByRole('navigation', { name: /Páginas/ })
       .getByRole('link', { name: '2' })
@@ -64,7 +64,7 @@ test.describe('Eventos', () => {
       .poll(() => api.calls.some((call) => call.path === '/api/events' && call.query.get('day') === '2099-03-15'))
       .toBe(true)
     await expect(page.getByRole('region', { name: 'Por y para mujeres' }).getByRole('article')).toHaveCount(1)
-    await expect(page.getByRole('region', { name: 'Para todo el mundo' })).toContainText(
+    await expect(page.getByRole('region', { name: 'Eventos', exact: true })).toContainText(
       'No hay eventos con estos filtros',
     )
     // Quitar el día.
@@ -81,7 +81,7 @@ test.describe('Eventos', () => {
     await expect
       .poll(() => api.calls.some((call) => call.path === '/api/events' && call.query.get('city') === 'Valencia'))
       .toBe(true)
-    await expect(page.getByRole('region', { name: 'Para todo el mundo' }).getByRole('article')).toHaveCount(1)
+    await expect(page.getByRole('region', { name: 'Eventos', exact: true }).getByRole('article')).toHaveCount(1)
   })
 
   test('el filtro de modalidad pide solo los eventos online', async ({ page, api }) => {

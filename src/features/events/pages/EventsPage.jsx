@@ -140,6 +140,7 @@ export default function EventsPage() {
       <EventSection
         id="eventos-generales"
         forWomen={false}
+        illustration={illustrations.events}
         filters={filters}
         page={pageOf(searchParams.get('pg'))}
         pageHref={(page) => hrefWith({ pg: page > 1 ? String(page) : '' }, { keepPages: true })}
