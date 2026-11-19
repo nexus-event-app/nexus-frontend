@@ -77,7 +77,7 @@ export default function EventsPage() {
         Rejilla de dos columnas centradas entre sí: a la izquierda, título, entradilla y los tres pasos; a la derecha,
         el calendario y debajo «Compartir un evento». En el móvil, uno tras otro en ese mismo orden.
       */}
-      <header className="mt-6 grid items-center gap-x-12 gap-y-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
+      <header className="mt-6 grid items-center gap-x-12 gap-y-8 lg:grid-cols-[minmax(0,1fr)_19rem]">
         <hgroup className="max-w-3xl lg:col-start-1 lg:row-start-1 lg:self-end">
           <Eyebrow>{t('events.eyebrow')}</Eyebrow>
           <h1 className="mt-3 text-4xl font-bold tracking-tight text-ink sm:text-5xl">{t('events.title')}</h1>
@@ -120,7 +120,7 @@ export default function EventsPage() {
         <ButtonLink
           to={paths.eventsNew}
           size="lg"
-          className="w-full justify-center rounded-full shadow-pop lg:col-start-2 lg:row-start-3 lg:-mt-2"
+          className="min-h-[3.5rem] w-full justify-center rounded-2xl bg-gradient-to-br from-brand-600 to-brand-800 text-base shadow-pop transition-transform hover:-translate-y-0.5 hover:from-brand-700 hover:to-brand-900 lg:col-start-2 lg:row-start-3 lg:-mt-4"
         >
           <Icon name="plus" className="h-5 w-5" />
           {t('events.share')}

@@ -74,7 +74,7 @@ export default function EventsCalendar({ selectedDay, onSelectDay, className }) 
         className,
       )}
     >
-      <header className="flex items-center justify-between gap-2 bg-gradient-to-br from-brand-600 to-brand-800 px-4 py-3 text-white">
+      <header className="flex items-center justify-between gap-2 bg-gradient-to-br from-brand-600 to-brand-800 px-3 py-1.5 text-white">
         <button
           type="button"
           onClick={() => move(-1)}
@@ -86,7 +86,7 @@ export default function EventsCalendar({ selectedDay, onSelectDay, className }) 
         </button>
         <h2
           id="events-calendar-title"
-          className="text-center text-lg font-bold first-letter:uppercase"
+          className="text-center text-base font-bold first-letter:uppercase"
           aria-live="polite"
         >
           {monthName}
@@ -101,7 +101,7 @@ export default function EventsCalendar({ selectedDay, onSelectDay, className }) 
         </button>
       </header>
 
-      <table className="w-full table-fixed border-separate border-spacing-1 px-3 pt-2 text-center">
+      <table className="w-full table-fixed border-separate border-spacing-x-1 border-spacing-y-0.5 px-2.5 pt-1.5 text-center">
         <caption className="sr-only">{t('events.calendar.caption', { month: monthName })}</caption>
         <thead>
           <tr>
@@ -132,7 +132,7 @@ export default function EventsCalendar({ selectedDay, onSelectDay, className }) 
                         aria-pressed={selected}
                         aria-label={t('events.calendar.dayLabel', { date: fullDate.format(date), count: info.count })}
                         className={cx(
-                          'group relative mx-auto flex h-10 w-10 flex-col items-center justify-center rounded-full text-sm font-bold transition-all duration-200 hover:scale-110',
+                          'group relative mx-auto flex h-9 w-9 flex-col items-center justify-center rounded-full text-[0.8rem] font-bold transition-all duration-200 hover:scale-110',
                           selected
                             ? 'bg-brand-600 text-white shadow-pop'
                             : info.forWomen
@@ -156,7 +156,7 @@ export default function EventsCalendar({ selectedDay, onSelectDay, className }) 
                     ) : (
                       <span
                         className={cx(
-                          'mx-auto flex h-10 w-10 items-center justify-center rounded-full text-sm',
+                          'mx-auto flex h-9 w-9 items-center justify-center rounded-full text-[0.8rem]',
                           // Pasados y de otros meses, más apagados (sin perder contraste).
                           key < today || outside ? 'font-normal text-ink-muted' : 'text-ink-soft',
                           isToday && 'font-bold text-ink ring-2 ring-inset ring-accent-line',
@@ -173,7 +173,7 @@ export default function EventsCalendar({ selectedDay, onSelectDay, className }) 
         </tbody>
       </table>
 
-      <footer className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 border-t border-slate-200 px-4 py-3 text-xs text-ink-muted">
+      <footer className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 border-t border-slate-200 px-4 py-2.5 text-xs text-ink-muted">
         <span className="inline-flex items-center gap-1.5">
           <span aria-hidden="true" className="h-2.5 w-2.5 rounded-full bg-brand-600 dark:bg-brand-300" />
           {t('events.calendar.legendEvents')}
