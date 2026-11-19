@@ -25,6 +25,16 @@ test.describe('Eventos', () => {
     await expect(women.getByRole('article', { name: 'Café tech de mujeres en Barcelona' })).toBeVisible()
   })
 
+  test('cabecera: los tres pasos bajo la entradilla y «Compartir un evento» bajo el calendario', async ({ page }) => {
+    await page.goto('/eventos')
+    const intro = await page.getByText(/^Charlas, meetups, hackathons/).boundingBox()
+    const steps = await page.getByRole('region', { name: 'Cómo funciona' }).boundingBox()
+    const calendar = await page.getByRole('region', { name: /de 20\d\d/ }).boundingBox()
+    const share = await page.getByRole('main').getByRole('link', { name: 'Compartir un evento' }).first().boundingBox()
+    expect(steps.y).toBeGreaterThan(intro.y + intro.height - 1)
+    expect(share.y).toBeGreaterThan(calendar.y + calendar.height - 1)
+  })
+
   test('la paginación de cada bloque va por su cuenta', async ({ page }) => {
     await page.goto('/eventos')
     const general = page.getByRole('region', { name: 'Para todo el mundo' })

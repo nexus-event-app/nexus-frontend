@@ -29,7 +29,7 @@ function pageOf(value) {
 }
 
 /**
- * Agenda de eventos que construye la comunidad: título y calendario arriba; debajo, cómo funciona, los filtros
+ * Agenda de eventos que construye la comunidad: título, cómo funciona y calendario arriba; debajo, los filtros
  * (modalidad, ciudad y el día elegido en el calendario) y dos bloques, cada uno con su paginación.
  */
 export default function EventsPage() {
@@ -73,47 +73,59 @@ export default function EventsPage() {
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Breadcrumbs items={[{ label: t('events.breadcrumb'), to: paths.events }]} />
 
-      {/* Título a la izquierda y calendario a la derecha (debajo en el móvil). */}
-      <header className="mt-6 grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_22rem]">
-        <hgroup className="max-w-3xl">
+      {/*
+        Rejilla de dos columnas centradas entre sí: a la izquierda, título, entradilla y los tres pasos; a la derecha,
+        el calendario y debajo «Compartir un evento». En el móvil, uno tras otro en ese mismo orden.
+      */}
+      <header className="mt-6 grid items-center gap-x-12 gap-y-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
+        <hgroup className="max-w-3xl lg:col-start-1 lg:row-start-1 lg:self-end">
           <Eyebrow>{t('events.eyebrow')}</Eyebrow>
           <h1 className="mt-3 text-4xl font-bold tracking-tight text-ink sm:text-5xl">{t('events.title')}</h1>
           <p className="mt-4 text-lg leading-relaxed text-ink-muted">{t('events.intro')}</p>
-          <ButtonLink to={paths.eventsNew} size="lg" className="mt-8 rounded-full shadow-pop">
-            <Icon name="plus" className="h-5 w-5" />
-            {t('events.share')}
-          </ButtonLink>
         </hgroup>
-        <EventsCalendar selectedDay={day || null} onSelectDay={selectDay} />
-      </header>
 
-      {/* Tres pasos: deja claro que la agenda es de todo el mundo. */}
-      <section aria-labelledby="events-how" className="mt-14">
-        <h2 id="events-how" className="sr-only">
-          {t('events.how.title')}
-        </h2>
-        <ol className="grid gap-4 sm:grid-cols-3">
-          {STEPS.map((step, index) => (
-            <li
-              key={step.key}
-              className="flex items-start gap-4 rounded-3xl border border-slate-200 bg-surface p-5 shadow-card"
-            >
-              <span
-                aria-hidden="true"
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent-soft text-accent"
+        {/* Tres pasos: deja claro que la agenda es de todo el mundo. */}
+        <section aria-labelledby="events-how" className="lg:col-start-1 lg:row-start-2 lg:self-start">
+          <h2 id="events-how" className="sr-only">
+            {t('events.how.title')}
+          </h2>
+          <ol className="grid gap-3 sm:grid-cols-3">
+            {STEPS.map((step, index) => (
+              <li
+                key={step.key}
+                className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-surface p-4 shadow-card sm:flex-col"
               >
-                <Icon name={step.icon} className="h-5 w-5" />
-              </span>
-              <p className="text-sm leading-relaxed text-ink-soft">
-                <strong className="block text-base font-semibold text-ink">
-                  {index + 1}. {t(`events.how.${step.key}`)}
-                </strong>
-                {t(`events.how.${step.key}Text`)}
-              </p>
-            </li>
-          ))}
-        </ol>
-      </section>
+                <span
+                  aria-hidden="true"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent"
+                >
+                  <Icon name={step.icon} className="h-5 w-5" />
+                </span>
+                <p className="text-sm leading-relaxed text-ink-soft">
+                  <strong className="block font-semibold text-ink">
+                    {index + 1}. {t(`events.how.${step.key}`)}
+                  </strong>
+                  {t(`events.how.${step.key}Text`)}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <EventsCalendar
+          selectedDay={day || null}
+          onSelectDay={selectDay}
+          className="lg:col-start-2 lg:row-span-2 lg:row-start-1"
+        />
+        <ButtonLink
+          to={paths.eventsNew}
+          size="lg"
+          className="w-full justify-center rounded-full shadow-pop lg:col-start-2 lg:row-start-3 lg:-mt-2"
+        >
+          <Icon name="plus" className="h-5 w-5" />
+          {t('events.share')}
+        </ButtonLink>
+      </header>
 
       <EventFilters
         id="agenda"
