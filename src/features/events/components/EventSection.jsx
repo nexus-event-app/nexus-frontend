@@ -1,3 +1,4 @@
+import Illustration from '@/shared/components/Illustration'
 import Eyebrow from '@/shared/components/Eyebrow'
 import ErrorState from '@/shared/components/ErrorState'
 import Icon from '@/shared/components/Icon'
@@ -18,7 +19,7 @@ export const EVENTS_PAGE_SIZE = 6
  * Un bloque de la agenda («Para todo el mundo» o «Por y para mujeres») con sus próximos eventos, los filtros elegidos y
  * su propia paginación (`page` y `pageHref`, para que cada bloque pase de página por su cuenta).
  */
-export default function EventSection({ id, forWomen, filters, page, pageHref, className }) {
+export default function EventSection({ id, forWomen, filters, page, pageHref, illustration, className }) {
   const { t } = useI18n()
   const key = forWomen ? 'women' : 'general'
   const { mode, city, day } = filters
@@ -49,7 +50,7 @@ export default function EventSection({ id, forWomen, filters, page, pageHref, cl
       id={id}
       aria-labelledby={`${id}-title`}
       aria-busy={request.loading}
-      className={cx('scroll-mt-24', className)}
+      className={cx('relative scroll-mt-24', className)}
     >
       <hgroup className="max-w-2xl">
         <Eyebrow>{t(`events.${key}.eyebrow`)}</Eyebrow>
@@ -65,6 +66,13 @@ export default function EventSection({ id, forWomen, filters, page, pageHref, cl
         </h2>
         <p className="mt-3 leading-relaxed text-ink-muted">{t(`events.${key}.text`)}</p>
       </hgroup>
+      {/* Ilustración en el hueco de la derecha del título; puede asomar por encima del recuadro y no mueve nada. */}
+      {illustration && (
+        <Illustration
+          {...illustration}
+          className="absolute -top-14 right-4 hidden w-64 lg:block xl:right-8 xl:w-[19rem]"
+        />
+      )}
 
       {request.error ? (
         <ErrorState className="mt-8" error={request.error} title={t('events.error')} onRetry={request.reload} />

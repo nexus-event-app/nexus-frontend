@@ -5,6 +5,7 @@ import Eyebrow from '@/shared/components/Eyebrow'
 import Icon from '@/shared/components/Icon'
 import PageMain from '@/shared/components/PageMain'
 import Seo from '@/shared/components/Seo'
+import { illustrations } from '@/shared/config/illustrations'
 import { paths } from '@/shared/config/paths'
 import { siteConfig } from '@/shared/config/site'
 import { useI18n } from '@/shared/i18n/useI18n'
@@ -147,6 +148,7 @@ export default function EventsPage() {
       <EventSection
         id="eventos-mujeres"
         forWomen
+        illustration={illustrations.women}
         filters={filters}
         page={pageOf(searchParams.get('pm'))}
         pageHref={(page) => hrefWith({ pm: page > 1 ? String(page) : '' }, { keepPages: true })}

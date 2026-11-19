@@ -9,4 +9,6 @@ export const illustrations = {
   news: { src: '/images/noticias-ilustracion.webp', width: 800, height: 524 },
   /** Tres personas charlando: cabecera del Foro. */
   forum: { src: '/images/foro-ilustracion.webp', width: 800, height: 525 },
+  /** Cuatro mujeres abrazadas: bloque «Por y para mujeres» de Eventos. */
+  women: { src: '/images/mujeres-ilustracion.webp', width: 800, height: 537 },
 }

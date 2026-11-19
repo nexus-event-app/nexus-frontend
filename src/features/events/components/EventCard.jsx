@@ -150,7 +150,7 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', onDel
           aria-pressed={going.interested}
           title={t('events.card.goingHint')}
           className={cx(
-            'inline-flex min-h-[2.75rem] items-center gap-1.5 rounded-full border px-3 text-sm font-semibold transition-colors disabled:opacity-60 sm:min-h-[2.25rem]',
+            'inline-flex min-h-[2.75rem] shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-3 text-sm font-semibold transition-colors disabled:opacity-60 sm:min-h-[2.25rem]',
             going.interested
               ? 'border-amber-300 bg-amber-50 text-amber-900 dark:border-amber-400/40 dark:bg-amber-500/15 dark:text-amber-200'
               : 'border-slate-300 bg-surface text-ink-soft hover:border-accent-line hover:text-ink',
