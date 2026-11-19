@@ -36,19 +36,22 @@ describe('Illustration', () => {
     })
   })
 
-  it('las de los consejos y las entrevistas laten como un corazón; las demás flotan', () => {
+  it('las de los consejos y las entrevistas laten como un corazón, la de notificaciones se balancea y las demás flotan', () => {
     const { container } = renderWithProviders(
       <>
         <Illustration {...illustrations.tips} />
         <Illustration {...illustrations.news} />
         <Illustration {...illustrations.interview} />
+        <Illustration {...illustrations.notifications} />
       </>,
     )
-    const [tips, news, interview] = container.querySelectorAll('img')
+    const [tips, news, interview, notifications] = container.querySelectorAll('img')
     expect(tips).toHaveAttribute('src', '/images/consejos-ilustracion.webp')
     expect(tips.className).toContain('animate-heartbeat')
     expect(news.className).toContain('animate-float')
     expect(interview).toHaveAttribute('src', '/images/entrevistas-ilustracion.webp')
     expect(interview.className).toContain('animate-heartbeat')
+    expect(notifications).toHaveAttribute('src', '/images/notificaciones-ilustracion.webp')
+    expect(notifications.className).toContain('animate-nudge')
   })
 })

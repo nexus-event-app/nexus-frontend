@@ -26,5 +26,7 @@ export const illustrations = {
   learningRoad: { src: '/images/rutas-camino.webp', width: 1600, height: 318 },
   /** El mismo camino con una chica de protagonista: cabecera de Rutas de aprendizaje. */
   learningRoadGirl: { src: '/images/rutas-camino-chica.webp', width: 1400, height: 278 },
+  /** Una chica mirando el móvil entre avisos y mensajes: Notificaciones. Se balancea como un aviso. */
+  notifications: { src: '/images/notificaciones-ilustracion.webp', width: 600, height: 550, animation: 'nudge' },
   testimonials: { src: '/images/testimonios-ilustracion.webp', width: 800, height: 610 },
 }

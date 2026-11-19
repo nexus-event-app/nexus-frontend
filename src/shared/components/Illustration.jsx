@@ -18,8 +18,9 @@ export default function Illustration({ src, width, height, animation = 'float', 
         decoding="async"
         className={cx(
           'h-auto w-full transition-transform duration-500 ease-out group-hover/illustration:-rotate-2 group-hover/illustration:scale-105',
-          // `float`: flota despacio (la de siempre). `heartbeat`: late despacio, como un corazón.
-          animation === 'heartbeat' ? 'animate-heartbeat' : 'animate-float',
+          // `float`: flota despacio (la de siempre). `heartbeat`: late despacio, como un corazón. `nudge`: se balancea a
+          // los lados como un aviso que llega.
+          { heartbeat: 'animate-heartbeat', nudge: 'animate-nudge' }[animation] ?? 'animate-float',
         )}
       />
     </figure>

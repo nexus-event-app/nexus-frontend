@@ -3,6 +3,8 @@ import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import Button from '@/shared/components/Button'
 import ButtonLink from '@/shared/components/ButtonLink'
 import EmptyState from '@/shared/components/EmptyState'
+import Illustration from '@/shared/components/Illustration'
+import { illustrations } from '@/shared/config/illustrations'
 import Eyebrow from '@/shared/components/Eyebrow'
 import Icon from '@/shared/components/Icon'
 import ListSkeleton from '@/shared/components/ListSkeleton'
@@ -94,11 +96,16 @@ export default function NotificationsPage() {
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Seo title={t('notifications.seoTitle')} path={paths.notifications} robots="noindex,nofollow" />
       <Breadcrumbs className="col-span-full" items={[{ label: t('notifications.title'), to: paths.notifications }]} />
-      <hgroup className="col-span-full mt-6 max-w-3xl">
+      <hgroup className="col-span-full mt-6 max-w-3xl lg:row-start-2">
         <Eyebrow>{t('notifications.eyebrow')}</Eyebrow>
         <h1 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">{t('notifications.title')}</h1>
         <p className="mt-3 text-lg text-ink-muted">{t('notifications.description')}</p>
       </hgroup>
+      {/* En el hueco de la derecha del título; los márgenes negativos evitan que la cabecera crezca. */}
+      <Illustration
+        {...illustrations.notifications}
+        className="hidden lg:col-start-2 lg:row-start-2 lg:-mb-6 lg:-mt-24 lg:block lg:w-44 lg:self-end lg:justify-self-center xl:-mt-16 xl:w-52"
+      />
 
       <section
         aria-labelledby="notifications-list"

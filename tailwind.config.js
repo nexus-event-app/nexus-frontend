@@ -100,6 +100,14 @@ export default {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0' },
         },
+        // Aviso que llega: se balancea a los lados unas veces y descansa (para la ilustración de notificaciones).
+        nudge: {
+          '0%, 55%, 100%': { transform: 'translateX(0) rotate(0)' },
+          '10%': { transform: 'translateX(-6px) rotate(-2deg)' },
+          '20%': { transform: 'translateX(6px) rotate(2deg)' },
+          '30%': { transform: 'translateX(-4px) rotate(-1.5deg)' },
+          '40%': { transform: 'translateX(3px) rotate(1deg)' },
+        },
         // Latido lento, como un corazón (dos pulsos y una pausa): para la ilustración de los consejos.
         heartbeat: {
           '0%, 40%, 100%': { transform: 'scale(1)' },
@@ -121,6 +129,7 @@ export default {
         'toast-in': 'toast-in 0.2s ease-out',
         pop: 'pop 0.4s ease-out',
         heartbeat: 'heartbeat 3.2s ease-in-out infinite',
+        nudge: 'nudge 4s ease-in-out infinite',
         'fade-in': 'fade-in 0.15s ease-out',
         'rise-in': 'rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both',
         drift: 'drift 24s ease-in-out infinite',
