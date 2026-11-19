@@ -104,7 +104,7 @@ export default function NotificationsPage() {
       {/* En el hueco de la derecha del título; los márgenes negativos evitan que la cabecera crezca. */}
       <Illustration
         {...illustrations.notifications}
-        className="hidden lg:col-start-2 lg:row-start-2 lg:-mb-6 lg:-mt-24 lg:block lg:w-44 lg:self-end lg:justify-self-center xl:-mt-16 xl:w-52"
+        className="hidden lg:col-start-2 lg:row-start-2 lg:-mb-6 lg:-mt-24 lg:block lg:w-44 lg:self-end lg:justify-self-start xl:-ml-32 xl:-mt-16 xl:w-52"
       />
 
       <section
