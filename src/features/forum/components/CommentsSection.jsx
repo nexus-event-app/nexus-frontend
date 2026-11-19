@@ -89,7 +89,7 @@ export default function CommentsSection({ discussion, comments, onDiscussionChan
   }
 
   return (
-    <section aria-labelledby="comments-heading" className={cx('mt-12', className)}>
+    <section aria-labelledby="comments-heading" className={cx('mt-8', className)}>
       <h2 id="comments-heading" className="flex items-center gap-3 text-2xl font-bold tracking-tight text-ink">
         {t('forum.comments.title')}
         {data && (
@@ -109,7 +109,7 @@ export default function CommentsSection({ discussion, comments, onDiscussionChan
       {data && data.length > 0 && (
         // Una línea vertical une las respuestas a la altura de las fotos, como un hilo de conversación (decorativa:
         // pasa por detrás de las tarjetas y solo se ve entre una y otra).
-        <ul className="relative mt-6 space-y-4 before:absolute before:bottom-6 before:left-9 before:top-6 before:w-0.5 before:bg-slate-200 sm:before:left-10">
+        <ul className="relative mt-5 space-y-2.5 before:absolute before:bottom-6 before:left-[2.125rem] before:top-6 before:w-0.5 before:bg-slate-200 sm:before:left-10">
           {sortComments(data, acceptedId).map((comment) => (
             <li key={comment.id} className="relative">
               <CommentItem

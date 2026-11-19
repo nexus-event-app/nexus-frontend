@@ -14,3 +14,19 @@ export function initialsOf(name) {
   if (parts.length === 0) return '?'
   return (parts[0][0] + (parts.length > 1 ? parts[parts.length - 1][0] : '')).toUpperCase()
 }
+
+/**
+ * El principio de un texto largo para enseñarlo plegado: como mucho `maxLines` líneas y `maxLength` caracteres,
+ * cortando en un espacio y con «…». Devuelve null si el texto ya es corto (no hace falta «Leer más»).
+ */
+export function foldText(text, { maxLines = 8, maxLength = 600 } = {}) {
+  const value = text ?? ''
+  const lines = value.split('\n')
+  if (lines.length <= maxLines && value.length <= maxLength) return null
+  let folded = lines.slice(0, maxLines).join('\n')
+  if (folded.length > maxLength) {
+    const cut = folded.lastIndexOf(' ', maxLength)
+    folded = folded.slice(0, cut > maxLength * 0.6 ? cut : maxLength)
+  }
+  return `${folded.trimEnd()}…`
+}

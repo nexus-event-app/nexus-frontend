@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { excerpt, initialsOf } from './text'
+import { excerpt, foldText, initialsOf } from './text'
 
 describe('excerpt', () => {
   it('deja igual los textos cortos y une los espacios', () => {
@@ -25,5 +25,20 @@ describe('initialsOf', () => {
     expect(initialsOf('Marta')).toBe('M')
     expect(initialsOf('   ')).toBe('?')
     expect(initialsOf(undefined)).toBe('?')
+  })
+})
+
+describe('foldText', () => {
+  it('no pliega los textos cortos', () => {
+    expect(foldText('Hola\n¿qué tal?')).toBeNull()
+  })
+
+  it('pliega por líneas y por caracteres, cortando en un espacio', () => {
+    const lines = Array.from({ length: 12 }, (_, i) => `Línea ${i + 1}`).join('\n')
+    expect(foldText(lines, { maxLines: 3 })).toBe('Línea 1\nLínea 2\nLínea 3…')
+    const long = 'palabra '.repeat(100)
+    const folded = foldText(long, { maxLength: 50 })
+    expect(folded.length).toBeLessThanOrEqual(51)
+    expect(folded).toMatch(/palabra…$/)
   })
 })

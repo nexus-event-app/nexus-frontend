@@ -23,6 +23,7 @@ import ReportButton from '@/features/reports/components/ReportButton'
 import LikeButton from './LikeButton'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
+import { foldText } from '@/shared/utils/text'
 import { authorOf } from '../utils/author'
 
 export default function DiscussionArticle({ discussion, commentCount, onChange, className }) {
@@ -34,6 +35,9 @@ export default function DiscussionArticle({ discussion, commentCount, onChange, 
   const canManage = useCanManage()
   const [editing, setEditing] = useState(false)
   const [confirmingDelete, setConfirmingDelete] = useState(false)
+  // Si el texto es largo, se enseña plegado (como en Testimonios): se lee de un vistazo y «Leer más» lo abre entero.
+  const [expanded, setExpanded] = useState(false)
+  const folded = foldText(discussion.content)
 
   const [toggleLike, likePending] = useAction(async () => {
     onChange(await discussionService.toggleLike(discussion.id))
@@ -64,7 +68,7 @@ export default function DiscussionArticle({ discussion, commentCount, onChange, 
   // La pregunta, en su propia tarjeta: así se distingue a primera vista de las respuestas (debajo, más ligeras).
   return (
     <article
-      className={cx('rounded-3xl border border-slate-200 bg-surface px-6 py-7 shadow-card sm:px-10 sm:py-9', className)}
+      className={cx('rounded-3xl border border-slate-200 bg-surface px-5 py-6 shadow-card sm:px-8 sm:py-7', className)}
     >
       <header>
         <p className="flex flex-wrap items-center gap-x-3 gap-y-2">
@@ -86,10 +90,10 @@ export default function DiscussionArticle({ discussion, commentCount, onChange, 
             </>
           )}
         </p>
-        <h1 className="mt-4 text-balance text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl">
+        <h1 className="mt-3 text-balance text-2xl font-bold leading-tight tracking-tight text-ink sm:text-3xl">
           {discussion.title}
         </h1>
-        <p className="mt-5 flex items-center gap-3 text-sm text-ink-muted">
+        <p className="mt-4 flex items-center gap-3 text-sm text-ink-muted">
           <Avatar name={author.name} src={author.avatarUrl} />
           <span>
             <AuthorLink id={author.id} name={author.name} className="block font-semibold text-ink" />
@@ -99,9 +103,20 @@ export default function DiscussionArticle({ discussion, commentCount, onChange, 
         </p>
       </header>
 
-      <UserText className="mt-7 text-lg leading-8 text-ink-soft">{discussion.content}</UserText>
+      <UserText className="mt-5 leading-7 text-ink-soft">{folded && !expanded ? folded : discussion.content}</UserText>
+      {folded && (
+        <button
+          type="button"
+          onClick={() => setExpanded((value) => !value)}
+          aria-expanded={expanded}
+          className="mt-2 inline-flex min-h-[2.75rem] items-center gap-1 text-sm font-semibold text-accent hover:underline"
+        >
+          {expanded ? t('common.readLess') : t('common.readMore')}
+          <Icon name="chevron-down" className={cx('h-4 w-4 transition-transform', expanded && 'rotate-180')} />
+        </button>
+      )}
 
-      <footer className="mt-8 flex flex-wrap items-center gap-2 border-t border-slate-200 pt-5">
+      <footer className="mt-6 flex flex-wrap items-center gap-2 border-t border-slate-200 pt-4">
         <LikeButton
           count={discussion.likesCount}
           liked={discussion.isLikedByCurrentUser}
