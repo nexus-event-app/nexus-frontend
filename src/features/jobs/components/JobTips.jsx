@@ -1,4 +1,6 @@
 import Eyebrow from '@/shared/components/Eyebrow'
+import Illustration from '@/shared/components/Illustration'
+import { illustrations } from '@/shared/config/illustrations'
 import Icon from '@/shared/components/Icon'
 import { useI18n } from '@/shared/i18n/useI18n'
 
@@ -18,7 +20,7 @@ export default function JobTips() {
   const { t } = useI18n()
 
   return (
-    <section aria-labelledby="job-tips" className="mt-20">
+    <section aria-labelledby="job-tips" className="relative mt-20">
       <hgroup className="max-w-2xl">
         <Eyebrow>{t('jobs.tips.eyebrow')}</Eyebrow>
         <h2 id="job-tips" className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
@@ -26,6 +28,11 @@ export default function JobTips() {
         </h2>
         <p className="mt-4 text-lg leading-relaxed text-ink-muted">{t('jobs.tips.description')}</p>
       </hgroup>
+      {/* En el hueco libre a la derecha del título: colocada encima, sin ocupar sitio ni mover las tarjetas. */}
+      <Illustration
+        {...illustrations.tips}
+        className="absolute -top-8 right-6 hidden w-44 lg:block xl:right-12 xl:w-48"
+      />
       <ul className="mt-8 grid gap-5 md:grid-cols-2">
         {CARDS.map((card) => (
           <li key={card.id}>

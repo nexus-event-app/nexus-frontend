@@ -16,5 +16,7 @@ export const illustrations = {
   events: { src: '/images/eventos-ilustracion.webp', width: 800, height: 580 },
   /** Dos personas programando con sus portátiles: pie de la web. */
   footer: { src: '/images/pie-ilustracion.webp', width: 800, height: 356 },
+  /** Una chica junto a una bombilla con «TIPS»: consejos de Empleo. Late como un corazón. */
+  tips: { src: '/images/consejos-ilustracion.webp', width: 600, height: 597, animation: 'heartbeat' },
   testimonials: { src: '/images/testimonios-ilustracion.webp', width: 800, height: 610 },
 }

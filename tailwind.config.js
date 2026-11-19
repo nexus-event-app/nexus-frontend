@@ -100,6 +100,13 @@ export default {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0' },
         },
+        // Latido lento, como un corazón (dos pulsos y una pausa): para la ilustración de los consejos.
+        heartbeat: {
+          '0%, 40%, 100%': { transform: 'scale(1)' },
+          '10%': { transform: 'scale(1.05)' },
+          '20%': { transform: 'scale(1.01)' },
+          '30%': { transform: 'scale(1.04)' },
+        },
         // «Me apunto»: la mano da un pequeño salto al marcarlo.
         pop: {
           '0%, 100%': { transform: 'scale(1) rotate(0)' },
@@ -113,6 +120,7 @@ export default {
       animation: {
         'toast-in': 'toast-in 0.2s ease-out',
         pop: 'pop 0.4s ease-out',
+        heartbeat: 'heartbeat 3.2s ease-in-out infinite',
         'fade-in': 'fade-in 0.15s ease-out',
         'rise-in': 'rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both',
         drift: 'drift 24s ease-in-out infinite',

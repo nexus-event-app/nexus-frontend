@@ -28,4 +28,17 @@ describe('Illustration', () => {
       height: 610,
     })
   })
+
+  it('la de los consejos late como un corazón; las demás flotan', () => {
+    const { container } = renderWithProviders(
+      <>
+        <Illustration {...illustrations.tips} />
+        <Illustration {...illustrations.news} />
+      </>,
+    )
+    const [tips, news] = container.querySelectorAll('img')
+    expect(tips).toHaveAttribute('src', '/images/consejos-ilustracion.webp')
+    expect(tips.className).toContain('animate-heartbeat')
+    expect(news.className).toContain('animate-float')
+  })
 })

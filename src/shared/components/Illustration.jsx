@@ -6,7 +6,7 @@ import { cx } from '@/shared/utils/classNames'
  * sin distraer. Todo se desactiva con «reducir movimiento». Es decorativa: lo que cuenta ya está en el texto, así que
  * va oculta a los lectores de pantalla y no se descarga hasta que se ve.
  */
-export default function Illustration({ src, width, height, className }) {
+export default function Illustration({ src, width, height, animation = 'float', className }) {
   return (
     <figure aria-hidden="true" className={cx('group/illustration', className)}>
       <img
@@ -16,7 +16,11 @@ export default function Illustration({ src, width, height, className }) {
         height={height}
         loading="lazy"
         decoding="async"
-        className="h-auto w-full animate-float transition-transform duration-500 ease-out group-hover/illustration:-rotate-2 group-hover/illustration:scale-105"
+        className={cx(
+          'h-auto w-full transition-transform duration-500 ease-out group-hover/illustration:-rotate-2 group-hover/illustration:scale-105',
+          // `float`: flota despacio (la de siempre). `heartbeat`: late despacio, como un corazón.
+          animation === 'heartbeat' ? 'animate-heartbeat' : 'animate-float',
+        )}
       />
     </figure>
   )
