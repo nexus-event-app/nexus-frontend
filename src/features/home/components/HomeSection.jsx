@@ -1,5 +1,6 @@
 import Eyebrow from '@/shared/components/Eyebrow'
 import Icon from '@/shared/components/Icon'
+import Illustration from '@/shared/components/Illustration'
 import { Link } from '@/shared/i18n/router'
 import { cx } from '@/shared/utils/classNames'
 
@@ -7,15 +8,31 @@ import { cx } from '@/shared/utils/classNames'
  * Sección de la portada: antetítulo que se escribe solo, título grande, una frase que invita a entrar y el enlace
  * «Ver todo» en forma de pastilla. Detrás, una cuadrícula suave que se desvanece (decorativa). En pantallas grandes
  * todos los apartados tienen la misma altura mínima, para que la portada lleve un ritmo regular.
+ * Con `illustration` (una de shared/config/illustrations), el contenido va a la izquierda y la ilustración a la
+ * derecha (desde 1280 px: con menos ancho, las tarjetas se quedarían estrechas), sin contenedores extra: la propia sección se convierte en rejilla.
  */
-export default function HomeSection({ id, eyebrow, title, description, linkTo, linkLabel, tinted = false, children }) {
+export default function HomeSection({
+  id,
+  eyebrow,
+  title,
+  description,
+  linkTo,
+  linkLabel,
+  tinted = false,
+  illustration,
+  children,
+}) {
   return (
     <section
       aria-labelledby={id}
-      className={cx('page-gutter page-section relative isolate lg:min-h-[43rem]', tinted && 'bg-surface')}
+      className={cx(
+        'page-gutter page-section relative isolate lg:min-h-[43rem]',
+        tinted && 'bg-surface',
+        illustration && 'xl:grid xl:grid-cols-[minmax(0,1fr)_23rem] xl:content-start xl:items-center xl:gap-x-10',
+      )}
     >
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-0 -z-10" />
-      <header className="mb-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+      <header className="col-span-full mb-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
         <hgroup>
           {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
           <h2 id={id} className="mt-3 text-4xl font-bold tracking-tight text-ink sm:text-5xl">
@@ -36,6 +53,7 @@ export default function HomeSection({ id, eyebrow, title, description, linkTo, l
         )}
       </header>
       {children}
+      {illustration && <Illustration {...illustration} className="hidden xl:block" />}
     </section>
   )
 }

@@ -44,6 +44,10 @@ Normas de código del proyecto. Se aplican a todo lo que se escriba a partir de 
 - Animaciones suaves y con propósito (`animate-rise-in`, `animate-drift`...): ninguna debe ser necesaria para entender
   el contenido y todas se desactivan con «reducir movimiento» (index.css). axe espera a que terminen las de entrada.
 
+- Ilustraciones sin fondo propio, para que se vea el de la web en claro y en oscuro: se preparan con
+  `scripts/ilustracion-sin-fondo.py`, se registran en `src/shared/config/illustrations.js` y se pintan con
+  `Illustration` (decorativa, flota despacio). Si con menos ancho aprietan el contenido, solo desde 1280 px.
+
 - Antetítulo (`Eyebrow`, con su punto) y título de un apartado van siempre fuera, encima de su bloque: nunca dentro
   de una tarjeta o recuadro. La tarjeta lleva solo el contenido.
   Excepción: las normas del foro (`ForumRules`) dejan fuera solo el antetítulo y llevan el título en su cabecera de

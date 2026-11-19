@@ -3,6 +3,7 @@ import JobListSkeleton from '@/features/jobs/components/JobListSkeleton'
 import { useLatestJobs } from '@/features/jobs/hooks/useLatestJobs'
 import EmptyState from '@/shared/components/EmptyState'
 import QueryBoundary from '@/shared/components/QueryBoundary'
+import { illustrations } from '@/shared/config/illustrations'
 import { paths } from '@/shared/config/paths'
 import HomeSection from './HomeSection'
 import { useI18n } from '@/shared/i18n/useI18n'
@@ -20,6 +21,7 @@ export default function LatestJobsSection() {
       linkTo={paths.jobs}
       linkLabel={t('home.jobs.link')}
       tinted
+      illustration={illustrations.employment}
     >
       <QueryBoundary
         data={request.data}

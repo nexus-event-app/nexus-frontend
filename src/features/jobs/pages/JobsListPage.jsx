@@ -1,5 +1,7 @@
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import EmptyState from '@/shared/components/EmptyState'
+import Illustration from '@/shared/components/Illustration'
+import { illustrations } from '@/shared/config/illustrations'
 import ActionMenu from '@/shared/components/ActionMenu'
 import Eyebrow from '@/shared/components/Eyebrow'
 import PageMain from '@/shared/components/PageMain'
@@ -73,7 +75,19 @@ export default function JobsListPage() {
 
       <JobFilters filters={filters} onChange={setFilters} buildHref={buildHref} />
 
-      <section aria-label={t('common.results')} aria-busy={list.loading}>
+      {/*
+        Resultados en rejilla: el número de ofertas, la lista y las páginas a la izquierda; desde 1280 px, la
+        ilustración a la derecha, que acompaña al bajar (sticky).
+      */}
+      <section
+        aria-label={t('common.results')}
+        aria-busy={list.loading}
+        className="xl:grid xl:grid-cols-[minmax(0,1fr)_21rem] xl:gap-x-10"
+      >
+        <Illustration
+          {...illustrations.employment}
+          className="hidden xl:sticky xl:top-28 xl:col-start-2 xl:row-span-3 xl:row-start-1 xl:block xl:self-start"
+        />
         <QueryBoundary
           data={list.data}
           error={list.error}
