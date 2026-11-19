@@ -20,5 +20,7 @@ export const illustrations = {
   tips: { src: '/images/consejos-ilustracion.webp', width: 600, height: 597, animation: 'heartbeat' },
   /** Una entrevista de trabajo en una mesa: «Prepara tus entrevistas técnicas». Late como la de los consejos. */
   interview: { src: '/images/entrevistas-ilustracion.webp', width: 700, height: 509, animation: 'heartbeat' },
+  /** Una chica programando con la camiseta de Primer Commit: cabecera de «Sobre el proyecto». */
+  about: { src: '/images/sobre-ilustracion.webp', width: 800, height: 538 },
   testimonials: { src: '/images/testimonios-ilustracion.webp', width: 800, height: 610 },
 }

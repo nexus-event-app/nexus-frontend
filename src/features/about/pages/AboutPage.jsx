@@ -5,6 +5,8 @@ import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import ButtonLink from '@/shared/components/ButtonLink'
 import Icon from '@/shared/components/Icon'
 import JsonLd from '@/shared/components/JsonLd'
+import Illustration from '@/shared/components/Illustration'
+import { illustrations } from '@/shared/config/illustrations'
 import Eyebrow from '@/shared/components/Eyebrow'
 import PageMain from '@/shared/components/PageMain'
 import Seo from '@/shared/components/Seo'
@@ -60,40 +62,6 @@ function SectionTitle({ id, eyebrow, title, children, className }) {
 }
 
 /**
- * Terminal decorativa de la cabecera: el «primer commit» que da nombre al proyecto. Colores fijos (gris muy oscuro)
- * en los dos temas; el cursor parpadea y se queda quieto con «reducir movimiento». Oculta a los lectores de pantalla:
- * no añade información.
- */
-function FirstCommitTerminal() {
-  const { t } = useI18n()
-  return (
-    <figure
-      aria-hidden="true"
-      className="overflow-hidden rounded-2xl bg-gray-950 font-mono text-sm shadow-pop ring-1 ring-white/10 lg:rotate-1"
-    >
-      <figcaption className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
-        <span className="h-3 w-3 rounded-full bg-gray-700" />
-        <span className="h-3 w-3 rounded-full bg-gray-700" />
-        <span className="h-3 w-3 rounded-full bg-gray-700" />
-        <span className="ml-2 text-xs text-gray-400">~/mi-carrera-tech</span>
-      </figcaption>
-      <pre className="overflow-x-auto whitespace-pre-wrap px-5 py-5 leading-7 text-gray-300">
-        <code>
-          <span className="text-brand-300">$</span> git init{'\n'}
-          <span className="text-brand-300">$</span> git add curiosidad.txt ganas.txt{'\n'}
-          <span className="text-brand-300">$</span> git commit -m &quot;{t('about.terminal.message')}&quot;{'\n'}
-          <span className="text-gray-400">[main (root-commit) a1f3c2e]</span>{' '}
-          <span className="text-white">{t('about.terminal.output')}</span>
-          {'\n'}
-          <span className="text-brand-300">$</span>{' '}
-          <span className="inline-block h-4 w-2 translate-y-0.5 animate-caret bg-brand-300" />
-        </code>
-      </pre>
-    </figure>
-  )
-}
-
-/**
  * «Sobre el proyecto»: qué es Primer Commit, por qué existe, quién está detrás y cómo se financia. Sirve también como
  * carta de presentación para entidades y programas de ayudas. Sin datos personales: el email sale de la configuración.
  * Sobria y con un guiño a Git (la terminal de la cabecera y la historia como un `git log`), en grises y el morado de la
@@ -129,7 +97,8 @@ export default function AboutPage() {
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-muted">{t('about.intro', { name })}</p>
         </hgroup>
-        <FirstCommitTerminal />
+        {/* A la derecha, la ilustración de la chica programando (en el móvil, debajo del texto y más pequeña). */}
+        <Illustration {...illustrations.about} className="mx-auto w-full max-w-sm lg:max-w-none" />
       </header>
 
       {/* Por qué existe: el texto a la izquierda y lo que encontrarás a la derecha. */}
