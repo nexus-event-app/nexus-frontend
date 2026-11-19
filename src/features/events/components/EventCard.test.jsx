@@ -89,17 +89,11 @@ describe('EventCard', () => {
     expect(heading).toHaveClass('uppercase')
   })
 
-  it('una descripción corta no lleva «Leer más»; una larga sí, y se despliega', async () => {
-    renderWithProviders(<EventCard event={EVENT} />)
+  it('la descripción se ve entera, sin recortar ni «Leer más»', () => {
+    const long = 'Texto largo del evento. '.repeat(11).trim()
+    renderWithProviders(<EventCard event={{ ...EVENT, description: long }} />)
+    const description = screen.getByText(long)
+    expect(description).not.toHaveClass('line-clamp-3')
     expect(screen.queryByRole('button', { name: /Leer más/ })).not.toBeInTheDocument()
-
-    // jsdom no mide: se simula que el texto no cabe en las tres líneas.
-    const height = vi.spyOn(HTMLElement.prototype, 'scrollHeight', 'get').mockReturnValue(200)
-    renderWithProviders(<EventCard event={{ ...EVENT, id: 52, title: 'Otro evento' }} />)
-    const more = await screen.findByRole('button', { name: /Leer más la descripción de «Otro evento»/ })
-    expect(more).toHaveAttribute('aria-expanded', 'false')
-    await userEvent.click(more)
-    expect(screen.getByRole('button', { name: /Leer menos/ })).toHaveAttribute('aria-expanded', 'true')
-    height.mockRestore()
   })
 })
