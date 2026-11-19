@@ -14,5 +14,7 @@ export const illustrations = {
   /** Un grupo celebrando con las manos en alto: cabecera de Testimonios. */
   /** Una charla con público: bloque general de Eventos. */
   events: { src: '/images/eventos-ilustracion.webp', width: 800, height: 580 },
+  /** Dos personas programando con sus portátiles: pie de la web. */
+  footer: { src: '/images/pie-ilustracion.webp', width: 800, height: 356 },
   testimonials: { src: '/images/testimonios-ilustracion.webp', width: 800, height: 610 },
 }

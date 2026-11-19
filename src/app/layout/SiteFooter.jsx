@@ -2,6 +2,8 @@ import { Link } from '@/shared/i18n/router'
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import Icon from '@/shared/components/Icon'
 import Logo from '@/shared/components/Logo'
+import Illustration from '@/shared/components/Illustration'
+import { illustrations } from '@/shared/config/illustrations'
 import { paths } from '@/shared/config/paths'
 import { siteConfig } from '@/shared/config/site'
 import { useI18n } from '@/shared/i18n/useI18n'
@@ -80,7 +82,7 @@ export default function SiteFooter() {
       />
 
       {/* Presentación: el logo y qué es. El título solo lo oyen los lectores de pantalla. */}
-      <section aria-labelledby="footer-about" className="sm:col-span-2 lg:col-span-1">
+      <section aria-labelledby="footer-about" className="relative sm:col-span-2 lg:col-span-1">
         <h2 id="footer-about" className="sr-only">
           {siteConfig.name}
         </h2>
@@ -88,6 +90,14 @@ export default function SiteFooter() {
         <p className="mt-4 max-w-sm text-brand-100">
           {t('seo.tagline')}. {t('common.footer.description')}
         </p>
+        {/*
+          En el hueco libre bajo el texto (pantallas grandes): colocada encima, sin ocupar sitio, para que el pie no
+          cambie de tamaño. Su ancho está medido para que quepa en ese hueco.
+        */}
+        <Illustration
+          {...illustrations.footer}
+          className="absolute bottom-0 left-0 hidden w-[16.5rem] lg:block xl:w-[19rem]"
+        />
       </section>
 
       <nav aria-label={t('common.footer.exploreLabel')}>
