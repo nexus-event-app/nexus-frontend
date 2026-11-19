@@ -11,4 +11,6 @@ export const illustrations = {
   forum: { src: '/images/foro-ilustracion.webp', width: 800, height: 525 },
   /** Cuatro mujeres abrazadas: bloque «Por y para mujeres» de Eventos. */
   women: { src: '/images/mujeres-ilustracion.webp', width: 800, height: 537 },
+  /** Un grupo celebrando con las manos en alto: cabecera de Testimonios. */
+  testimonials: { src: '/images/testimonios-ilustracion.webp', width: 800, height: 610 },
 }

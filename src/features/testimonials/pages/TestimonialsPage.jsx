@@ -4,6 +4,8 @@ import VerifyEmailNotice from '@/features/auth/components/VerifyEmailNotice'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import CardGridSkeleton from '@/shared/components/CardGridSkeleton'
 import EmptyState from '@/shared/components/EmptyState'
+import Illustration from '@/shared/components/Illustration'
+import { illustrations } from '@/shared/config/illustrations'
 import Eyebrow from '@/shared/components/Eyebrow'
 import Icon from '@/shared/components/Icon'
 import PageMain from '@/shared/components/PageMain'
@@ -53,12 +55,20 @@ export default function TestimonialsPage() {
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Breadcrumbs items={[{ label: t('testimonials.breadcrumb'), to: paths.testimonials }]} />
 
-      <header className="mb-10">
+      {/*
+        Título a la izquierda y, en pantallas grandes, la ilustración a la derecha: baja un poco y se mete en el borde
+        del muro (va por encima de él), con los pies difuminados.
+      */}
+      <header className="mb-10 grid items-end gap-x-10 lg:grid-cols-[minmax(0,1fr)_15rem] xl:grid-cols-[minmax(0,1fr)_18rem]">
         <hgroup>
           <Eyebrow>{t('testimonials.eyebrow')}</Eyebrow>
           <h1 className="mt-3 text-4xl font-bold tracking-tight text-ink sm:text-5xl">{t('testimonials.heading')}</h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-muted">{t('testimonials.description')}</p>
         </hgroup>
+        <Illustration
+          {...illustrations.testimonials}
+          className="relative z-10 -mb-24 -mt-16 hidden [mask-image:linear-gradient(to_bottom,black_80%,transparent)] lg:block"
+        />
       </header>
 
       {/* El muro: un tablero con la cuadrícula suave de fondo donde las notas quedan colgadas, un poco torcidas. */}
