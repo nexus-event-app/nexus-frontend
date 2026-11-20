@@ -32,7 +32,18 @@ describe('GlossaryPage', () => {
   it('si no encuentra la palabra, invita a preguntarla en el foro', async () => {
     renderWithProviders(<GlossaryPage />, { route: '/glosario?q=zzzz' })
     expect(screen.getByRole('heading', { name: 'No hemos encontrado esa palabra' })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Preguntar en el foro' })).toHaveAttribute('href', '/foro/nueva')
+    for (const link of screen.getAllByRole('link', { name: '¡Añádela a la lista!' })) {
+      expect(link).toHaveAttribute('href', '/foro?q=glosario')
+    }
+  })
+
+  it('arriba invita siempre a proponer palabras que falten, en el foro', () => {
+    renderWithProviders(<GlossaryPage />, { route: '/glosario' })
+    const callout = screen.getByRole('complementary', { name: '¿Echas en falta alguna palabra?' })
+    expect(within(callout).getByRole('link', { name: '¡Añádela a la lista!' })).toHaveAttribute(
+      'href',
+      '/foro?q=glosario',
+    )
   })
 
   it('está traducido', () => {

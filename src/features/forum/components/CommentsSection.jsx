@@ -129,7 +129,8 @@ export default function CommentsSection({ discussion, comments, onDiscussionChan
         </ul>
       )}
 
-      <footer className="mt-8">
+      {/* #responder: los enlaces que invitan a contestar (p. ej., el hilo del glosario) llevan directo aquí. */}
+      <footer id="responder" className="mt-8 scroll-mt-24">
         {isAuthenticated && user?.emailVerified === false ? (
           <VerifyEmailNotice>{t('forum.comments.confirmEmail')}</VerifyEmailNotice>
         ) : isAuthenticated ? (

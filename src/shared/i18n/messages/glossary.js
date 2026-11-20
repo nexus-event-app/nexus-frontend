@@ -23,8 +23,8 @@ export default {
     emptyTitle: 'No hemos encontrado esa palabra',
     emptyText: 'Prueba con otra o pregúntala en el foro: seguro que alguien te la explica.',
     missingTitle: '¿Echas en falta alguna palabra?',
-    missingText: 'Pregúntala en el foro y la añadiremos al glosario.',
-    missingCta: 'Preguntar en el foro',
+    missingText: 'Déjala en nuestro hilo del foro y la sumamos al glosario. ¡Entre todas y todos lo hacemos crecer!',
+    missingCta: '¡Añádela a la lista!',
     categories: {
       basics: 'Lo básico',
       code: 'Git y GitHub',
@@ -385,8 +385,8 @@ export default {
     emptyTitle: 'No hem trobat aquesta paraula',
     emptyText: 'Prova’n una altra o pregunta-la al fòrum: segur que algú te l’explica.',
     missingTitle: 'Trobes a faltar alguna paraula?',
-    missingText: 'Pregunta-la al fòrum i l’afegirem al glossari.',
-    missingCta: 'Pregunta al fòrum',
+    missingText: 'Deixa-la al nostre fil del fòrum i la sumem al glossari. Entre tots i totes el fem créixer!',
+    missingCta: 'Afegeix-la a la llista!',
     categories: {
       basics: 'El més bàsic',
       code: 'Git i GitHub',
@@ -748,8 +748,8 @@ export default {
     emptyTitle: 'We couldn’t find that word',
     emptyText: 'Try another one or ask in the forum: someone will surely explain it.',
     missingTitle: 'Missing a word?',
-    missingText: 'Ask about it in the forum and we’ll add it to the glossary.',
-    missingCta: 'Ask in the forum',
+    missingText: 'Drop it in our forum thread and we’ll add it to the glossary. Let’s grow it together!',
+    missingCta: 'Add it to the list!',
     categories: {
       basics: 'The basics',
       code: 'Git and GitHub',

@@ -6,10 +6,12 @@ import Eyebrow from '@/shared/components/Eyebrow'
 import Icon from '@/shared/components/Icon'
 import PageMain from '@/shared/components/PageMain'
 import Seo from '@/shared/components/Seo'
+import { glossaryThreadHref } from '@/shared/config/community'
 import { paths } from '@/shared/config/paths'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import { GLOSSARY, allTerms, searchTerms, splitCode, termAnchor } from '../data/glossary'
+import MissingWordCallout from '../components/MissingWordCallout'
 
 /** Texto con los comandos («`git push`») como código, con letra de ordenador para distinguirlos y copiarlos. */
 function RichText({ text }) {
@@ -127,11 +129,15 @@ export default function GlossaryPage() {
         ]}
       />
 
-      <hgroup className="mt-6 max-w-3xl">
-        <Eyebrow>{t('glossary.eyebrow')}</Eyebrow>
-        <h1 className="mt-3 text-4xl font-bold tracking-tight text-ink sm:text-5xl">{t('glossary.title')}</h1>
-        <p className="mt-4 text-lg leading-relaxed text-ink-muted">{t('glossary.intro')}</p>
-      </hgroup>
+      {/* Título a la izquierda y, en pantallas grandes, la invitación a proponer palabras a la derecha. */}
+      <header className="mt-6 grid items-end gap-x-10 gap-y-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
+        <hgroup className="max-w-3xl">
+          <Eyebrow>{t('glossary.eyebrow')}</Eyebrow>
+          <h1 className="mt-3 text-4xl font-bold tracking-tight text-ink sm:text-5xl">{t('glossary.title')}</h1>
+          <p className="mt-4 text-lg leading-relaxed text-ink-muted">{t('glossary.intro')}</p>
+        </hgroup>
+        <MissingWordCallout id="glossary-missing" />
+      </header>
 
       <search className="mt-10 grid gap-4 border-y border-slate-200 py-5">
         <p className="relative max-w-md">
@@ -168,7 +174,7 @@ export default function GlossaryPage() {
             {t('glossary.emptyTitle')}
           </h2>
           <p className="mt-2 text-ink-muted">{t('glossary.emptyText')}</p>
-          <ButtonLink to={paths.forumNew} variant="secondary" className="mt-5 rounded-full">
+          <ButtonLink to={glossaryThreadHref()} variant="secondary" className="mt-5 rounded-full">
             {t('glossary.missingCta')}
           </ButtonLink>
         </section>
@@ -195,25 +201,6 @@ export default function GlossaryPage() {
             </ul>
           </section>
         ))
-      )}
-
-      {/* Para lo que falta: preguntar en el foro (y así sabemos qué añadir). Sin resultados ya lo ofrece el aviso. */}
-      {visible.length > 0 && (
-        <aside
-          aria-labelledby="glossary-missing"
-          className="mt-14 flex flex-col gap-4 rounded-3xl border-2 border-dashed border-slate-300 p-6 sm:flex-row sm:items-center sm:justify-between"
-        >
-          <hgroup>
-            <h2 id="glossary-missing" className="text-lg font-bold text-ink">
-              {t('glossary.missingTitle')}
-            </h2>
-            <p className="mt-1 text-ink-muted">{t('glossary.missingText')}</p>
-          </hgroup>
-          <ButtonLink to={paths.forumNew} variant="secondary" className="shrink-0 rounded-full">
-            <Icon name="chat" className="h-4 w-4" />
-            {t('glossary.missingCta')}
-          </ButtonLink>
-        </aside>
       )}
     </PageMain>
   )
