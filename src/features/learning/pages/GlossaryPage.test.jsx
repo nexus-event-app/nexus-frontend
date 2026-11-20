@@ -33,7 +33,7 @@ describe('GlossaryPage', () => {
     renderWithProviders(<GlossaryPage />, { route: '/glosario?q=zzzz' })
     expect(screen.getByRole('heading', { name: 'No hemos encontrado esa palabra' })).toBeInTheDocument()
     for (const link of screen.getAllByRole('link', { name: '¡Añádela a la lista!' })) {
-      expect(link).toHaveAttribute('href', '/foro/11-que-palabra-le-falta-al-glosario-dejala-aqui#responder')
+      expect(link).toHaveAttribute('href', '/foro/1-que-palabra-le-falta-al-glosario-dejala-aqui#responder')
     }
   })
 
@@ -42,7 +42,7 @@ describe('GlossaryPage', () => {
     const callout = screen.getByRole('complementary', { name: '¿Echas en falta alguna palabra?' })
     expect(within(callout).getByRole('link', { name: '¡Añádela a la lista!' })).toHaveAttribute(
       'href',
-      '/foro/11-que-palabra-le-falta-al-glosario-dejala-aqui#responder',
+      '/foro/1-que-palabra-le-falta-al-glosario-dejala-aqui#responder',
     )
   })
 

@@ -6,7 +6,7 @@ import { paths } from './paths'
  * /foro/57-que-palabra-le-falta-al-glosario → { id: 57, slug: 'que-palabra-le-falta-al-glosario' }).
  * Si se pone a null, el botón busca «glosario» en el foro.
  */
-export const GLOSSARY_THREAD = { id: 11, slug: 'que-palabra-le-falta-al-glosario-dejala-aqui' }
+export const GLOSSARY_THREAD = { id: 1, slug: 'que-palabra-le-falta-al-glosario-dejala-aqui' }
 
 /** Adónde lleva «Añadir una palabra»: directo a la caja de respuesta del hilo (#responder). */
 export function glossaryThreadHref(thread = GLOSSARY_THREAD) {
