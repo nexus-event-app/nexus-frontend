@@ -4,6 +4,7 @@ import Seo from '@/shared/components/Seo'
 import { paths } from '@/shared/config/paths'
 import ForumSection from '../components/ForumSection'
 import HeroSection from '../components/HeroSection'
+import HomeEventsSection from '../components/HomeEventsSection'
 import HomeJoinSection from '../components/HomeJoinSection'
 import HomePathsSection from '../components/HomePathsSection'
 import LatestJobsSection from '../components/LatestJobsSection'
@@ -20,6 +21,8 @@ export default function HomePage() {
       <LatestNewsSection />
       <LatestJobsSection />
       <ForumSection />
+      {/* En el mismo orden que el menú: Noticias, Empleo, Foro, Eventos, Rutas, Testimonios. */}
+      <HomeEventsSection />
       <HomePathsSection />
       <TestimonialsSection />
       {/* Al final, después de los testimonios: invita a crear cuenta (solo sin sesión). */}

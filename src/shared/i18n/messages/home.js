@@ -62,6 +62,14 @@ export default {
       emptyTitle: 'Ahora mismo no hay ofertas',
       emptyText: 'Vuelve pronto: añadimos oportunidades junior con frecuencia.',
     },
+    events: {
+      eyebrow: 'Agenda de la comunidad',
+      title: 'Próximos eventos',
+      description: 'Meetups, charlas y hackathons para aprender y conocer gente, también de comunidades de mujeres.',
+      link: 'Ver todos los eventos',
+      empty: 'Todavía no hay eventos próximos.',
+      emptyWomen: 'Todavía no hay eventos de comunidades de mujeres.',
+    },
     forum: {
       eyebrow: 'Pregunta y comparte',
       title: 'Nuestro foro',
@@ -145,6 +153,14 @@ export default {
       emptyTitle: 'Ara mateix no hi ha ofertes',
       emptyText: 'Torna aviat: afegim oportunitats júnior sovint.',
     },
+    events: {
+      eyebrow: 'Agenda de la comunitat',
+      title: 'Propers esdeveniments',
+      description: 'Meetups, xerrades i hackathons per aprendre i conèixer gent, també de comunitats de dones.',
+      link: 'Veure tots els esdeveniments',
+      empty: 'Encara no hi ha esdeveniments propers.',
+      emptyWomen: 'Encara no hi ha esdeveniments de comunitats de dones.',
+    },
     forum: {
       eyebrow: 'Pregunta i comparteix',
       title: 'El nostre fòrum',
@@ -227,6 +243,14 @@ export default {
       error: 'We couldn’t load the job offers',
       emptyTitle: 'There are no offers right now',
       emptyText: 'Come back soon: we add junior opportunities often.',
+    },
+    events: {
+      eyebrow: 'Community calendar',
+      title: 'Upcoming events',
+      description: 'Meetups, talks and hackathons to learn and meet people, including women’s communities.',
+      link: 'See all events',
+      empty: 'There are no upcoming events yet.',
+      emptyWomen: 'There are no events from women’s communities yet.',
     },
     forum: {
       eyebrow: 'Ask and share',

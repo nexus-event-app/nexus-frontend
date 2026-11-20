@@ -8,6 +8,14 @@ test.describe('Navegación', () => {
     await expect(page.getByRole('link', { name: /Novedades de React 19/ }).first()).toBeVisible()
     await expect(page.getByRole('link', { name: /Desarrollador\/a frontend junior/ }).first()).toBeVisible()
     await expect(page.getByRole('link', { name: /¿Por dónde empiezo con Java\?/ }).first()).toBeVisible()
+    // Eventos, después del foro (como en el menú): el próximo general y el próximo de mujeres.
+    const events = page.getByRole('region', { name: 'Próximos eventos' })
+    await expect(events.getByRole('article', { name: 'Meetup de React en Valencia' })).toBeVisible()
+    await expect(events.getByRole('article', { name: 'Café tech de mujeres en Barcelona' })).toBeVisible()
+    const order = await page
+      .locator('main > section h2')
+      .evaluateAll((titles) => titles.map((title) => title.textContent.trim()))
+    expect(order.indexOf('Nuestro foro')).toBeLessThan(order.indexOf('Próximos eventos'))
   })
 
   test('se llega a una noticia desde el listado y las migas vuelven atrás', async ({ page }) => {
