@@ -14,6 +14,13 @@ import PagedTable from '../components/PagedTable'
 import { useAdminList } from '../hooks/useAdminList'
 import { adminEventsService } from '../services/adminEventsService'
 
+/**
+ * Hasta noviembre de 2026 el formulario cortaba la descripción en 280 caracteres sin avisar: las que miden justo eso
+ * casi seguro que se quedaron a medias. Se marcan para pegar de nuevo el texto completo desde la web del evento.
+ */
+const OLD_DESCRIPTION_LIMIT = 280
+const looksCut = (event) => event.description?.length === OLD_DESCRIPTION_LIMIT
+
 function EventStatus({ event }) {
   if (!event.active) return <Badge tone="red">Oculto</Badge>
   return event.past ? <Badge tone="slate">Ya pasó</Badge> : <Badge tone="green">Publicado</Badge>
@@ -46,6 +53,11 @@ export default function AdminEventsPage() {
         <p>
           {event.title}
           <span className="mt-1 block text-sm font-normal text-ink-muted">{event.description}</span>
+          {looksCut(event) && (
+            <span className="mt-1 block">
+              <Badge tone="amber">Descripción cortada: pega la completa con «Editar»</Badge>
+            </span>
+          )}
           {event.forWomen && (
             <span className="mt-1 block">
               <Badge tone="pink">Por y para mujeres</Badge>

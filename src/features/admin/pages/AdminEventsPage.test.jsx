@@ -87,4 +87,21 @@ describe('AdminEventsPage', () => {
       expect.objectContaining({ title: 'Meetup de React', city: 'Madrid', address: 'C. de Cronos, 63', time: '19:00' }),
     )
   })
+
+  it('marca las descripciones que se quedaron cortadas en 280 caracteres para pegarlas completas', async () => {
+    adminEventsService.list.mockResolvedValue({
+      content: [
+        { ...base, id: 1, title: 'Cortado', description: 'x'.repeat(280) },
+        { ...base, id: 2, title: 'Completo', description: 'x'.repeat(500) },
+      ],
+      page: 0,
+      totalPages: 1,
+      totalElements: 2,
+    })
+    renderWithProviders(<AdminEventsPage />, { route: '/admin/eventos', auth: { user: { id: 1, role: 'ADMIN' } } })
+    const marks = await screen.findAllByText('Descripción cortada: pega la completa con «Editar»')
+    // Una por evento cortado (la tabla puede pintarla en escritorio y en móvil).
+    expect(marks.length).toBeGreaterThan(0)
+    expect(marks.every((mark) => !mark.closest('li, tr')?.textContent.includes('Completo'))).toBe(true)
+  })
 })
