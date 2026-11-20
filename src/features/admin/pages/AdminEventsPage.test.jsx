@@ -104,4 +104,18 @@ describe('AdminEventsPage', () => {
     expect(marks.length).toBeGreaterThan(0)
     expect(marks.every((mark) => !mark.closest('li, tr')?.textContent.includes('Completo'))).toBe(true)
   })
+
+  it('la descripción sale en dos líneas y «Leer más» la abre entera', async () => {
+    adminEventsService.list.mockResolvedValue({
+      content: [{ ...base, id: 1, title: 'Largo', description: 'Una frase de la descripción. '.repeat(10).trim() }],
+      page: 0,
+      totalPages: 1,
+      totalElements: 1,
+    })
+    renderWithProviders(<AdminEventsPage />, { route: '/admin/eventos', auth: { user: { id: 1, role: 'ADMIN' } } })
+    const [more] = await screen.findAllByRole('button', { name: /Leer más la descripción de «Largo»/ })
+    expect(more).toHaveAttribute('aria-expanded', 'false')
+    await userEvent.click(more)
+    expect(screen.getAllByRole('button', { name: /Leer menos/ })[0]).toHaveAttribute('aria-expanded', 'true')
+  })
 })

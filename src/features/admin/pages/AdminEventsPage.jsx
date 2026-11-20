@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useId, useState } from 'react'
 import ActionMenu from '@/shared/components/ActionMenu'
 import Badge from '@/shared/components/Badge'
 import Button from '@/shared/components/Button'
@@ -9,6 +9,8 @@ import Seo from '@/shared/components/Seo'
 import Time from '@/shared/components/Time'
 import { paths } from '@/shared/config/paths'
 import { useAction } from '@/shared/hooks/useAction'
+import { useIsClamped } from '@/shared/hooks/useIsClamped'
+import { cx } from '@/shared/utils/classNames'
 import EventEditDialog from '../components/EventEditDialog'
 import PagedTable from '../components/PagedTable'
 import { useAdminList } from '../hooks/useAdminList'
@@ -20,6 +22,41 @@ import { adminEventsService } from '../services/adminEventsService'
  */
 const OLD_DESCRIPTION_LIMIT = 280
 const looksCut = (event) => event.description?.length === OLD_DESCRIPTION_LIMIT
+
+/** Descripción en dos líneas y «Leer más» para verla entera: así la tabla se lee de un vistazo. */
+function EventDescription({ event }) {
+  const id = useId()
+  const [expanded, setExpanded] = useState(false)
+  const [ref, clamped] = useIsClamped([event.description, expanded])
+  return (
+    <>
+      <span
+        id={id}
+        ref={ref}
+        // `line-clamp` ya pone su propio display: con `block` no recortaría.
+        className={cx(
+          'mt-1 whitespace-pre-line text-sm font-normal text-ink-muted',
+          expanded ? 'block' : 'line-clamp-2',
+        )}
+      >
+        {event.description}
+      </span>
+      {(clamped || expanded || event.description.length > 120) && (
+        <button
+          type="button"
+          onClick={() => setExpanded((value) => !value)}
+          aria-expanded={expanded}
+          aria-controls={id}
+          className="mt-1 inline-flex min-h-[2.75rem] items-center gap-1 text-sm font-semibold text-accent hover:underline md:min-h-[2rem]"
+        >
+          {expanded ? 'Leer menos' : 'Leer más'}
+          <Icon name="chevron-down" className={cx('h-4 w-4 transition-transform', expanded && 'rotate-180')} />
+          <span className="sr-only"> la descripción de «{event.title}»</span>
+        </button>
+      )}
+    </>
+  )
+}
 
 function EventStatus({ event }) {
   if (!event.active) return <Badge tone="red">Oculto</Badge>
@@ -49,10 +86,18 @@ export default function AdminEventsPage() {
       key: 'title',
       header: 'Evento',
       primary: true,
+      className: 'md:min-w-[14rem] md:max-w-[28rem]',
       render: (event) => (
         <p>
           {event.title}
-          <span className="mt-1 block text-sm font-normal text-ink-muted">{event.description}</span>
+          {/* Estado y quién lo compartió van aquí, bajo el título: así la tabla cabe sin desplazarse. */}
+          <span className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-normal text-ink-muted">
+            <EventStatus event={event} />
+            <span>
+              Compartido por <strong className="font-semibold text-ink-soft">{event.authorName}</strong>
+            </span>
+          </span>
+          <EventDescription event={event} />
           {looksCut(event) && (
             <span className="mt-1 block">
               <Badge tone="amber">Descripción cortada: pega la completa con «Editar»</Badge>
@@ -69,6 +114,7 @@ export default function AdminEventsPage() {
     {
       key: 'date',
       header: 'Fecha',
+      className: 'xl:whitespace-nowrap',
       render: (event) => (
         <span>
           <Time value={event.date} format="short" />
@@ -79,6 +125,7 @@ export default function AdminEventsPage() {
     {
       key: 'where',
       header: 'Dónde',
+      className: 'md:min-w-[7rem] md:max-w-[13rem]',
       render: (event) =>
         event.mode === 'ONLINE' ? (
           'Online'
@@ -89,17 +136,17 @@ export default function AdminEventsPage() {
           </span>
         ),
     },
-    { key: 'status', header: 'Estado', render: (event) => <EventStatus event={event} /> },
-    { key: 'author', header: 'Compartido por', render: (event) => event.authorName },
     {
       key: 'actions',
       actions: true,
       header: 'Acciones',
+      className: 'md:w-40',
+      // En columna y a todo el ancho: ningún botón se sale de la tabla, aunque el dominio sea largo.
       render: (event) => (
-        <ActionMenu className="justify-end md:justify-start">
+        <ActionMenu className="justify-end md:flex-col md:flex-nowrap md:items-stretch [&_.btn]:w-full [&_.btn]:justify-start">
           <a href={event.url} target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-sm">
-            <Icon name="external" className="h-4 w-4" />
-            {event.host}
+            <Icon name="external" className="h-4 w-4 shrink-0" />
+            <span className="truncate">{event.host}</span>
             <span className="sr-only"> (enlace de «{event.title}», se abre en una pestaña nueva)</span>
           </a>
           <Button variant="secondary" size="sm" onClick={() => setEditing(event)}>
