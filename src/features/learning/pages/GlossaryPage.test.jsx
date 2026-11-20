@@ -42,7 +42,7 @@ describe('GlossaryPage', () => {
     const callout = screen.getByRole('complementary', { name: '¿Echas en falta alguna palabra?' })
     expect(within(callout).getByRole('link', { name: '¡Añádela a la lista!' })).toHaveAttribute(
       'href',
-      '/foro?q=glosario',
+      '/foro/11-que-palabra-le-falta-al-glosario-dejala-aqui#responder',
     )
   })
 
