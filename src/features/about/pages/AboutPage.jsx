@@ -24,12 +24,6 @@ const OFFERS = [
 ]
 /** Etapas de la historia, en orden; la última aún está por llegar. */
 const STORY = [{ key: 'idea' }, { key: 'build' }, { key: 'launch' }, { key: 'next', upcoming: true }]
-const PRINCIPLES = [
-  { key: 'independent', icon: 'users' },
-  { key: 'funding', icon: 'heart' },
-  { key: 'privacy', icon: 'lock', to: paths.privacy },
-  { key: 'community', icon: 'shield', to: `${paths.forum}#forum-rules-heading` },
-]
 
 /** Icono sobre el morado oscuro de la marca, el mismo en toda la página (como en las tarjetas de rutas). */
 function IconTile({ name, className }) {
@@ -187,31 +181,6 @@ export default function AboutPage() {
         <SectionTitle id="about-team" eyebrow={t('about.team.eyebrow')} title={t('about.team.title')}>
           {t('about.team.text', { name })}
         </SectionTitle>
-      </section>
-
-      <section aria-labelledby="about-operate" className="mt-24">
-        <SectionTitle id="about-operate" eyebrow={t('about.operate.eyebrow')} title={t('about.operate.title')}>
-          {t('about.operate.intro')}
-        </SectionTitle>
-        <ul className="mt-10 grid gap-5 sm:grid-cols-2">
-          {PRINCIPLES.map((principle) => (
-            <li
-              key={principle.key}
-              className="grid grid-cols-[auto_minmax(0,1fr)] content-start gap-x-4 rounded-3xl border border-slate-200 bg-surface p-6 shadow-card"
-            >
-              <IconTile name={principle.icon} className="row-span-3" />
-              <h3 className="text-lg font-bold text-ink">{t(`about.operate.${principle.key}.title`)}</h3>
-              <p className="mt-2 leading-relaxed text-ink-soft">{t(`about.operate.${principle.key}.text`)}</p>
-              {principle.to && (
-                <p className="mt-2">
-                  <Link to={principle.to} className="link inline-flex min-h-[2.75rem] items-center">
-                    {t(`about.operate.${principle.key}.link`)}
-                  </Link>
-                </p>
-              )}
-            </li>
-          ))}
-        </ul>
       </section>
 
       <section

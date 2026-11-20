@@ -23,7 +23,7 @@ export default function NavItems({ orientation = 'horizontal' }) {
               cx(
                 'flex items-center font-medium transition-all duration-200',
                 vertical
-                  ? 'min-h-[2.75rem] rounded-control px-3 text-base'
+                  ? 'min-h-[2.75rem] rounded-xl px-3 text-[0.95rem]'
                   : 'min-h-[2.5rem] whitespace-nowrap rounded-full px-3 text-sm',
                 isActive
                   ? vertical

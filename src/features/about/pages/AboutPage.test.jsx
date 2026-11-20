@@ -10,7 +10,7 @@ describe('AboutPage', () => {
 
     expect(within(main).getAllByRole('heading', { level: 1 })).toHaveLength(1)
     const regions = within(main).getAllByRole('region')
-    expect(regions.length).toBeGreaterThanOrEqual(6)
+    expect(regions.length).toBeGreaterThanOrEqual(5)
     regions.forEach((region) => expect(region).toHaveAccessibleName())
   })
 
@@ -42,7 +42,7 @@ describe('AboutPage', () => {
     const titles = within(main)
       .getAllByRole('heading')
       .map((heading) => heading.textContent)
-    expect(eyebrows).toHaveLength(6)
+    expect(eyebrows).toHaveLength(5)
     expect(eyebrows).not.toContain('Sobre el proyecto')
     eyebrows.forEach((eyebrow) => expect(titles).not.toContain(eyebrow))
   })
@@ -60,5 +60,11 @@ describe('AboutPage', () => {
     expect(steps[0]).toHaveTextContent('Paso 1')
     expect(steps[3]).toHaveTextContent('Próximamente')
     expect(story).not.toHaveTextContent(/a1f3c2e|HEAD/)
+  })
+
+  it('el bloque de colaboración usa el texto nuevo y ya no está «Cómo funcionamos»', () => {
+    renderWithProviders(<AboutPage />, { route: '/sobre-el-proyecto' })
+    expect(screen.getByRole('heading', { level: 2, name: 'Crezcamos juntas y juntos' })).toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: 'Cómo funcionamos' })).not.toBeInTheDocument()
   })
 })

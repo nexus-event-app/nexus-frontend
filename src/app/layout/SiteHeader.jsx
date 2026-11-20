@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'
 import { Link } from '@/shared/i18n/router'
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import ButtonLink from '@/shared/components/ButtonLink'
-import Button from '@/shared/components/Button'
+import Avatar from '@/shared/components/Avatar'
 import Icon from '@/shared/components/Icon'
 import Logo from '@/shared/components/Logo'
 import { paths } from '@/shared/config/paths'
@@ -157,17 +157,65 @@ export default function SiteHeader() {
       </button>
 
       {open && (
-        // Más compacto que la pantalla: secciones en dos columnas y, si aun así no cabe (móvil apaisado), se desplaza
-        // dentro, para que «Cerrar sesión» siempre se pueda alcanzar.
+        // Menú del móvil, compacto: las secciones en dos columnas, la cuenta como una lista de accesos (con su foto) y,
+        // al final, idioma y tema en una sola fila. Si aun así no cabe (móvil apaisado), se desplaza por dentro.
         <section
           id={menuId}
           aria-label={t('common.nav.menu')}
-          className="max-h-[calc(100dvh-4.5rem)] basis-full space-y-3 overflow-y-auto overscroll-contain border-t border-slate-200 py-3 xl:hidden"
+          className="max-h-[calc(100dvh-4.5rem)] basis-full space-y-3 overflow-y-auto overscroll-contain border-t border-slate-200 pb-3 pt-2 xl:hidden"
         >
           <nav aria-label={t('common.nav.mainMobile')}>
             <NavItems orientation="vertical" />
           </nav>
-          <menu className="flex items-center justify-between gap-2">
+
+          {isAuthenticated ? (
+            <section
+              aria-label={t('common.account.menu')}
+              className="overflow-hidden rounded-2xl border border-slate-200 bg-surface"
+            >
+              <header className="flex items-center gap-3 border-b border-slate-200 bg-canvas px-3 py-2.5">
+                <Avatar name={user.name} src={user.avatarUrl} size="sm" />
+                <p className="min-w-0 text-xs leading-tight text-ink-muted">
+                  {t('common.account.loggedInAs')}
+                  <strong className="block truncate text-sm font-semibold text-ink">{user.name}</strong>
+                </p>
+              </header>
+              <menu className="divide-y divide-slate-100">
+                {[
+                  { to: paths.profile(user), icon: 'user', label: t('common.account.profile') },
+                  { to: paths.savedJobs, icon: 'bookmark', label: t('common.account.savedJobs') },
+                  ...(isAdmin ? [{ to: paths.admin, icon: 'shield', label: t('common.account.admin') }] : []),
+                ].map((item) => (
+                  <li key={item.to}>
+                    <Link
+                      to={item.to}
+                      className="flex min-h-[2.75rem] items-center gap-3 px-3 text-sm font-medium text-ink-soft transition-colors hover:bg-canvas hover:text-ink"
+                    >
+                      <Icon name={item.icon} className="h-4 w-4 text-accent" />
+                      {item.label}
+                      <Icon name="chevron-right" className="ml-auto h-4 w-4 text-ink-muted" />
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="flex min-h-[2.75rem] w-full items-center gap-3 px-3 text-left text-sm font-semibold text-red-700 transition-colors hover:bg-red-50 dark:text-red-300 dark:hover:bg-red-500/10"
+                  >
+                    <Icon name="logout" className="h-4 w-4" />
+                    {t('common.account.logout')}
+                  </button>
+                </li>
+              </menu>
+            </section>
+          ) : (
+            <menu className="grid grid-cols-2 gap-2">
+              <AuthLinks className="w-full" />
+            </menu>
+          )}
+
+          <menu className="flex items-center justify-between gap-2 border-t border-slate-200 pt-3">
             <li>
               <LanguageSwitcher />
             </li>
@@ -175,57 +223,6 @@ export default function SiteHeader() {
               <ThemeToggle />
             </li>
           </menu>
-          <footer className="space-y-2 border-t border-slate-200 pt-3">
-            {isAuthenticated && (
-              <p className="truncate px-3 text-sm text-ink-muted">
-                {t('common.account.loggedInAs')} <strong className="font-semibold text-ink">{user.name}</strong>
-              </p>
-            )}
-            <menu className="grid grid-cols-2 gap-2">
-              {isAuthenticated ? (
-                <>
-                  <li>
-                    <ButtonLink
-                      to={paths.profile(user)}
-                      variant="secondary"
-                      size="sm"
-                      className="min-h-[2.75rem] w-full"
-                    >
-                      <Icon name="user" className="h-4 w-4" />
-                      {t('common.account.profile')}
-                    </ButtonLink>
-                  </li>
-                  <li>
-                    <ButtonLink to={paths.savedJobs} variant="secondary" size="sm" className="min-h-[2.75rem] w-full">
-                      <Icon name="bookmark" className="h-4 w-4" />
-                      {t('common.account.savedJobs')}
-                    </ButtonLink>
-                  </li>
-                  {isAdmin && (
-                    <li>
-                      <ButtonLink to={paths.admin} variant="secondary" size="sm" className="min-h-[2.75rem] w-full">
-                        <Icon name="shield" className="h-4 w-4" />
-                        {t('common.account.admin')}
-                      </ButtonLink>
-                    </li>
-                  )}
-                  <li className={cx(!isAdmin && 'col-span-2')}>
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      className="min-h-[2.75rem] w-full text-red-700 hover:text-red-800 dark:text-red-300"
-                      onClick={handleLogout}
-                    >
-                      <Icon name="logout" className="h-4 w-4" />
-                      {t('common.account.logout')}
-                    </Button>
-                  </li>
-                </>
-              ) : (
-                <AuthLinks className="w-full" />
-              )}
-            </menu>
-          </footer>
         </section>
       )}
     </header>

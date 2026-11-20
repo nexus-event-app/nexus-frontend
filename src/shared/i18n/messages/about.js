@@ -53,33 +53,10 @@ export default {
       title: 'Un proyecto pequeño, independiente y hecho con cuidado',
       text: '{name} es un proyecto personal e independiente, sin ánimo de lucro y sin ninguna empresa detrás. Lo impulsa un equipo pequeño convencido de que aprender en comunidad es la mejor forma de empezar, y se construye junto a las personas que participan: cada duda, cada respuesta y cada testimonio lo hacen un poco mejor.',
     },
-    operate: {
-      eyebrow: 'Transparencia',
-      title: 'Cómo funcionamos',
-      intro: 'Unirte a una comunidad es confiar en quienes están detrás. Esto es lo que deberías saber:',
-      independent: {
-        title: 'Independiente y sin ánimo de lucro',
-        text: 'No pertenecemos a ninguna empresa ni academia y no vendemos cursos. Nuestro único objetivo es ayudarte a dar tu primer paso.',
-      },
-      funding: {
-        title: 'Cómo nos financiamos',
-        text: 'Hoy el proyecto no tiene gastos ni ingresos. Para publicarlo y hacerlo crecer buscaremos ayudas y patrocinios que respeten nuestra independencia, y explicaremos aquí de dónde viene cada apoyo y en qué se usa.',
-      },
-      privacy: {
-        title: 'Tus datos, protegidos',
-        text: 'Sin publicidad ni cookies de seguimiento, y nunca venderemos tus datos. Solo guardamos lo imprescindible para que la web funcione.',
-        link: 'Lee la política de privacidad',
-      },
-      community: {
-        title: 'Una comunidad cuidada',
-        text: 'Moderamos el foro y los testimonios con normas claras para que sea un espacio seguro y respetuoso.',
-        link: 'Conoce las normas del foro',
-      },
-    },
     support: {
       eyebrow: 'Colabora',
-      title: 'Ayúdanos a llegar a más personas',
-      text: 'Si representas a una entidad, un programa de ayudas o una empresa comprometida con el talento que empieza, nos encantará hablar. Tu apoyo nos permitirá cubrir el alojamiento y el dominio, mejorar la accesibilidad, organizar encuentros y llegar a más personas.',
+      title: 'Crezcamos juntas y juntos',
+      text: '¿Formas parte de una entidad, un programa de ayudas o una empresa que cree en el talento que empieza? Hablemos. Con tu colaboración podremos mejorar la plataforma, organizar más encuentros y llegar a más personas.',
       contact: 'Escríbenos a',
     },
     cta: {
@@ -141,33 +118,10 @@ export default {
       title: 'Un projecte petit, independent i fet amb cura',
       text: '{name} és un projecte personal i independent, sense ànim de lucre i sense cap empresa al darrere. L’impulsa un equip petit convençut que aprendre en comunitat és la millor manera de començar, i es construeix amb les persones que hi participen: cada dubte, cada resposta i cada testimoni el fan una mica millor.',
     },
-    operate: {
-      eyebrow: 'Transparència',
-      title: 'Com funcionem',
-      intro: 'Unir-te a una comunitat és confiar en qui hi ha al darrere. Això és el que hauries de saber:',
-      independent: {
-        title: 'Independent i sense ànim de lucre',
-        text: 'No pertanyem a cap empresa ni acadèmia i no venem cursos. El nostre únic objectiu és ajudar-te a fer el primer pas.',
-      },
-      funding: {
-        title: 'Com ens financem',
-        text: 'Avui el projecte no té despeses ni ingressos. Per publicar-lo i fer-lo créixer buscarem ajudes i patrocinis que respectin la nostra independència, i explicarem aquí d’on ve cada suport i en què es fa servir.',
-      },
-      privacy: {
-        title: 'Les teves dades, protegides',
-        text: 'Sense publicitat ni galetes de seguiment, i mai no vendrem les teves dades. Només desem l’imprescindible perquè el web funcioni.',
-        link: 'Llegeix la política de privacitat',
-      },
-      community: {
-        title: 'Una comunitat cuidada',
-        text: 'Moderem el fòrum i els testimonis amb normes clares perquè sigui un espai segur i respectuós.',
-        link: 'Coneix les normes del fòrum',
-      },
-    },
     support: {
       eyebrow: 'Col·labora',
-      title: 'Ajuda’ns a arribar a més persones',
-      text: 'Si representes una entitat, un programa d’ajudes o una empresa compromesa amb el talent que comença, ens encantarà parlar-ne. El teu suport ens permetrà cobrir l’allotjament i el domini, millorar l’accessibilitat, organitzar trobades i arribar a més persones.',
+      title: 'Creixem juntes i junts',
+      text: 'Formes part d’una entitat, un programa d’ajudes o una empresa que creu en el talent que comença? Parlem-ne. Amb la teva col·laboració podrem millorar la plataforma, organitzar més trobades i arribar a més persones.',
       contact: 'Escriu-nos a',
     },
     cta: {
@@ -232,33 +186,10 @@ export default {
       title: 'A small, independent project built with care',
       text: '{name} is an independent personal project, non-profit and with no company behind it. It is driven by a small team convinced that learning together is the best way to start, and it is built with the people who take part: every question, answer and testimonial makes it a little better.',
     },
-    operate: {
-      eyebrow: 'Transparency',
-      title: 'How we work',
-      intro: 'Joining a community means trusting the people behind it. Here is what you should know:',
-      independent: {
-        title: 'Independent and non-profit',
-        text: 'We do not belong to any company or academy and we do not sell courses. Our only goal is to help you take your first step.',
-      },
-      funding: {
-        title: 'How we are funded',
-        text: 'Today the project has no costs and no income. To launch it and help it grow we will look for grants and sponsorships that respect our independence, and we will explain here where every contribution comes from and how it is used.',
-      },
-      privacy: {
-        title: 'Your data, protected',
-        text: 'No ads and no tracking cookies, and we will never sell your data. We only store what the site needs to work.',
-        link: 'Read the privacy policy',
-      },
-      community: {
-        title: 'A safe community',
-        text: 'We moderate the forum and testimonials with clear rules so that it stays a safe and respectful space.',
-        link: 'Read the forum rules',
-      },
-    },
     support: {
       eyebrow: 'Get involved',
-      title: 'Help us reach more people',
-      text: 'If you represent an organisation, a grant programme or a company committed to people starting out in tech, we would love to talk. Your support will help us cover hosting and the domain, improve accessibility, organise meetups and reach more people.',
+      title: 'Let’s grow together',
+      text: 'Are you part of an organisation, a grant programme or a company that believes in people starting out in tech? Let’s talk. With your support we can improve the platform, organise more meetups and reach more people.',
       contact: 'Write to us at',
     },
     cta: {
