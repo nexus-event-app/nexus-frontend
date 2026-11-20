@@ -17,6 +17,8 @@ export function useIsClamped(deps = []) {
     const element = ref.current
     if (!element) return undefined
     measure()
+    // Se vuelve a medir cuando termina de cargar la tipografía: con la de reserva el texto ocupa otra cosa.
+    document.fonts?.ready.then(measure).catch(() => {})
     const observer = new ResizeObserver(measure)
     observer.observe(element)
     return () => observer.disconnect()
