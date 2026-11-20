@@ -28,9 +28,10 @@ function localDate(iso) {
  * descripción recortada a tres líneas y «Apuntarme», que lleva a su web (se ve a qué dominio). Al pasar el ratón se
  * eleva un poco y el sello gira; aparecen escalonadas (`index`). Todo se desactiva con «reducir movimiento».
  * «Voy» (la mano) cuenta cuánta gente va, para que se vea que la agenda se usa; nunca dice quién.
- * No dice quién lo compartió; esa persona puede borrarlo y el resto, reportarlo.
+ * No dice quién lo compartió; esa persona puede borrarlo y el resto, reportarlo. `compact`: sin la descripción, para
+ * la portada.
  */
-export default function EventCard({ event, index = 0, headingLevel = 'h3', onDeleted }) {
+export default function EventCard({ event, index = 0, headingLevel = 'h3', compact = false, onDeleted }) {
   const { t, locale } = useI18n()
   const Heading = headingLevel
   const { isAuthenticated } = useAuth()
@@ -154,25 +155,33 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', onDel
           </>
         )}
       </dl>
-      <p
-        id={descriptionId}
-        ref={descriptionRef}
-        className={cx('mt-3 whitespace-pre-line text-sm leading-relaxed text-ink-soft', !expanded && 'line-clamp-3')}
-      >
-        {event.description}
-      </p>
-      {(clamped || expanded || event.description.length > LONG_DESCRIPTION) && (
-        <button
-          type="button"
-          onClick={() => setExpanded((value) => !value)}
-          aria-expanded={expanded}
-          aria-controls={descriptionId}
-          className="inline-flex min-h-[2.75rem] items-center gap-1 self-start text-sm font-semibold text-accent hover:underline sm:min-h-[2rem]"
-        >
-          {expanded ? t('common.readLess') : t('common.readMore')}
-          <Icon name="chevron-down" className={cx('h-4 w-4 transition-transform', expanded && 'rotate-180')} />
-          <span className="sr-only">{t('events.card.descriptionOf', { title: event.title })}</span>
-        </button>
+      {/* `compact` (portada): sin descripción, para que la tarjeta sea pequeña; se lee entera en Eventos. */}
+      {!compact && (
+        <>
+          <p
+            id={descriptionId}
+            ref={descriptionRef}
+            className={cx(
+              'mt-3 whitespace-pre-line text-sm leading-relaxed text-ink-soft',
+              !expanded && 'line-clamp-3',
+            )}
+          >
+            {event.description}
+          </p>
+          {(clamped || expanded || event.description.length > LONG_DESCRIPTION) && (
+            <button
+              type="button"
+              onClick={() => setExpanded((value) => !value)}
+              aria-expanded={expanded}
+              aria-controls={descriptionId}
+              className="inline-flex min-h-[2.75rem] items-center gap-1 self-start text-sm font-semibold text-accent hover:underline sm:min-h-[2rem]"
+            >
+              {expanded ? t('common.readLess') : t('common.readMore')}
+              <Icon name="chevron-down" className={cx('h-4 w-4 transition-transform', expanded && 'rotate-180')} />
+              <span className="sr-only">{t('events.card.descriptionOf', { title: event.title })}</span>
+            </button>
+          )}
+        </>
       )}
       {/* Adónde lleva «Apuntarme»: los lectores de pantalla ya lo oyen en el propio enlace. */}
       <p aria-hidden="true" className="mt-auto flex items-center gap-1 truncate pt-3 text-xs text-ink-muted">

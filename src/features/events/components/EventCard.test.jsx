@@ -115,4 +115,12 @@ describe('EventCard', () => {
     expect(when.closest('dt').nextElementSibling).toHaveTextContent(/1 de marzo · 19:00/)
     expect(screen.getByText('Dónde').closest('dt').nextElementSibling).toHaveTextContent('Las Naves')
   })
+
+  it('en versión compacta (portada) no lleva descripción ni «Leer más»', () => {
+    const long = 'Texto largo del evento para la comunidad. '.repeat(5).trim()
+    renderWithProviders(<EventCard event={{ ...EVENT, description: long }} compact />)
+    expect(screen.queryByText(long)).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /Leer más/ })).not.toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Apuntarme/ })).toBeInTheDocument()
+  })
 })

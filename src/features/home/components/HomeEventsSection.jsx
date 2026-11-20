@@ -36,13 +36,13 @@ function NextEvent({ forWomen, className }) {
       </p>
     )
   }
-  return <EventCard event={event} headingLevel="h3" />
+  return <EventCard event={event} headingLevel="h3" compact />
 }
 
 /**
  * Eventos en la portada (después del foro, como en el menú): el próximo evento para todo el mundo y el próximo de
- * comunidades de mujeres, cada uno con su ilustración al lado, intercalados (tarjeta, ilustración, tarjeta,
- * ilustración). Las ilustraciones solo se ven en pantallas grandes; en el móvil quedan las dos tarjetas.
+ * comunidades de mujeres en tarjetas compactas (sin descripción), con las ilustraciones en medio. Las ilustraciones
+ * solo se ven en pantallas grandes; en el móvil quedan las dos tarjetas.
  */
 export default function HomeEventsSection() {
   const { t } = useI18n()
@@ -56,18 +56,27 @@ export default function HomeEventsSection() {
       linkLabel={t('home.events.link')}
       tinted
     >
-      <ul className="grid items-center gap-6 md:grid-cols-2 xl:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)_minmax(0,1fr)_minmax(0,0.9fr)]">
+      {/*
+        Las dos tarjetas a los lados y, en medio, las dos ilustraciones una encima de otra (la comunidad en el centro).
+        La columna central no aporta altura (contain: size): la fila la marcan las tarjetas y cada ilustración ocupa
+        media altura y se ajusta sin deformarse. En pantallas medianas, solo las dos tarjetas; en el móvil, una debajo de otra.
+      */}
+      <ul className="grid gap-6 md:grid-cols-2 xl:grid-cols-[minmax(0,1fr)_minmax(0,0.55fr)_minmax(0,1fr)]">
         <li className="h-full">
           <NextEvent forWomen={false} className="h-full" />
         </li>
-        <li aria-hidden="true" className="hidden xl:block">
-          <Illustration {...illustrations.events} />
+        <li aria-hidden="true" className="hidden xl:grid xl:grid-rows-2 xl:gap-2 xl:py-4 xl:[contain:size]">
+          <Illustration
+            {...illustrations.events}
+            className="min-h-0 [&_img]:h-full [&_img]:w-full [&_img]:object-contain"
+          />
+          <Illustration
+            {...illustrations.women}
+            className="min-h-0 [&_img]:h-full [&_img]:w-full [&_img]:object-contain"
+          />
         </li>
         <li className="h-full">
           <NextEvent forWomen className="h-full" />
-        </li>
-        <li aria-hidden="true" className="hidden xl:block">
-          <Illustration {...illustrations.women} />
         </li>
       </ul>
     </HomeSection>
