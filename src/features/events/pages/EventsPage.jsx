@@ -13,6 +13,7 @@ import { useNavigate } from '@/shared/i18n/useNavigate'
 import EventFilters from '../components/EventFilters'
 import EventSection from '../components/EventSection'
 import EventsCalendar from '../components/EventsCalendar'
+import ShareInvite from '../components/ShareInvite'
 
 /** Filtros y páginas en la dirección, para poder compartirlos y volver atrás. */
 const MODES = { online: 'ONLINE', presencial: 'PRESENCIAL' }
@@ -83,27 +84,29 @@ export default function EventsPage() {
           <Eyebrow>{t('events.eyebrow')}</Eyebrow>
           <h1 className="mt-3 text-4xl font-bold tracking-tight text-ink sm:text-5xl">{t('events.title')}</h1>
           <p className="mt-4 text-lg leading-relaxed text-ink-muted">{t('events.intro')}</p>
+          <ShareInvite className="mt-5 max-w-xl" />
         </hgroup>
 
         {/* Tres pasos: deja claro que la agenda es de todo el mundo. */}
-        <section aria-labelledby="events-how" className="lg:col-start-1 lg:row-start-2 lg:self-start">
+        {/* Llegan hasta abajo del botón «Compartir un evento» (ocupan su fila y la del botón). */}
+        <section aria-labelledby="events-how" className="lg:col-start-1 lg:row-span-2 lg:row-start-2 lg:self-stretch">
           <h2 id="events-how" className="sr-only">
             {t('events.how.title')}
           </h2>
-          <ol className="grid gap-3 sm:grid-cols-3">
+          <ol className="grid gap-4 sm:grid-cols-3 lg:h-full">
             {STEPS.map((step, index) => (
               <li
                 key={step.key}
-                className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-surface p-4 shadow-card sm:flex-col"
+                className="group flex items-start gap-3 rounded-3xl border border-slate-200 bg-surface p-5 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-pop sm:flex-col sm:gap-4 lg:h-full"
               >
                 <span
                   aria-hidden="true"
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent"
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-accent-soft text-accent transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110"
                 >
-                  <Icon name={step.icon} className="h-5 w-5" />
+                  <Icon name={step.icon} className="h-6 w-6" />
                 </span>
-                <p className="text-sm leading-relaxed text-ink-soft">
-                  <strong className="block font-semibold text-ink">
+                <p className="text-sm leading-relaxed text-ink-soft lg:text-[0.95rem]">
+                  <strong className="mb-1 block text-base font-semibold text-ink">
                     {index + 1}. {t(`events.how.${step.key}`)}
                   </strong>
                   {t(`events.how.${step.key}Text`)}

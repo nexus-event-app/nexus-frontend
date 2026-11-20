@@ -10,6 +10,13 @@ export default {
     intro:
       'Charlas, meetups, hackathons y talleres para aprender, conocer gente y que te conozcan. Esta agenda la hacemos entre todas y todos: si sabes de un evento, compártelo.',
     share: 'Compartir un evento',
+    invite: {
+      before: '¿Conoces',
+      words: 'un meetup|un hackathon|una charla|un taller|una feria de empleo',
+      after: 'que merece la pena?',
+      cta: 'Compártelo: puede ser el primer paso de alguien.',
+      full: '¿Conoces un meetup, un hackathon, una charla o un taller que merece la pena? Compártelo: puede ser el primer paso de alguien.',
+    },
     how: {
       title: 'Cómo funciona',
       find: 'Encuentra',
@@ -132,6 +139,13 @@ export default {
     intro:
       'Xerrades, meetups, hackathons i tallers per aprendre, conèixer gent i que et coneguin. Aquesta agenda la fem entre totes i tots: si saps d’un esdeveniment, comparteix-lo.',
     share: 'Compartir un esdeveniment',
+    invite: {
+      before: 'Coneixes',
+      words: 'un meetup|un hackathon|una xerrada|un taller|una fira d’ocupació',
+      after: 'que val la pena?',
+      cta: 'Comparteix-lo: pot ser el primer pas d’algú.',
+      full: 'Coneixes un meetup, un hackathon, una xerrada o un taller que val la pena? Comparteix-lo: pot ser el primer pas d’algú.',
+    },
     how: {
       title: 'Com funciona',
       find: 'Troba',
@@ -254,6 +268,13 @@ export default {
     intro:
       'Talks, meetups, hackathons and workshops to learn, meet people and get noticed. We build this calendar together: if you know of an event, share it.',
     share: 'Share an event',
+    invite: {
+      before: 'Know',
+      words: 'a meetup|a hackathon|a talk|a workshop|a job fair',
+      after: 'worth going to?',
+      cta: 'Share it: it could be someone’s first step.',
+      full: 'Know a meetup, a hackathon, a talk or a workshop worth going to? Share it: it could be someone’s first step.',
+    },
     how: {
       title: 'How it works',
       find: 'Find',
