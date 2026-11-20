@@ -122,17 +122,38 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', onDel
       {/* En mayúsculas para que destaque (solo visual: los lectores de pantalla lo leen tal cual). */}
       <Heading
         id={`event-${event.id}`}
-        className="mt-4 line-clamp-2 text-base font-bold uppercase leading-snug tracking-wide text-ink"
+        className="mt-4 text-base font-bold uppercase leading-snug tracking-wide text-ink"
       >
         {event.title}
       </Heading>
-      <p className="mt-1 text-sm text-ink-muted first-letter:uppercase">{when}</p>
-      {!online && event.address && (
-        <p className="mt-1 flex items-start gap-1 text-sm text-ink-muted">
-          <Icon name="pin" className="mt-0.5 h-4 w-4 shrink-0" />
-          <span>{event.address}</span>
-        </p>
-      )}
+      {/* Cuándo y dónde, lo más importante para ir: en su propio recuadro, con el texto más marcado. */}
+      <dl
+        className={cx(
+          'mt-3 grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-2.5 gap-y-2 rounded-2xl px-3.5 py-3 text-sm',
+          event.forWomen ? 'bg-pink-50 dark:bg-pink-500/10' : 'bg-accent-soft/60',
+        )}
+      >
+        <dt className="pt-px">
+          <Icon
+            name="calendar"
+            className={cx('h-4 w-4', event.forWomen ? 'text-pink-700 dark:text-pink-300' : 'text-accent')}
+          />
+          <span className="sr-only">{t('events.card.whenLabel')}</span>
+        </dt>
+        <dd className="font-semibold text-ink first-letter:uppercase">{when}</dd>
+        {!online && event.address && (
+          <>
+            <dt className="pt-px">
+              <Icon
+                name="pin"
+                className={cx('h-4 w-4', event.forWomen ? 'text-pink-700 dark:text-pink-300' : 'text-accent')}
+              />
+              <span className="sr-only">{t('events.card.whereLabel')}</span>
+            </dt>
+            <dd className="font-medium text-ink-soft">{event.address}</dd>
+          </>
+        )}
+      </dl>
       <p
         id={descriptionId}
         ref={descriptionRef}

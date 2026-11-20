@@ -40,6 +40,14 @@ describe('eventForm', () => {
     }
   })
 
+  it('admite descripciones largas, como las de Meetup (hasta 2000 caracteres), sin recortarlas', () => {
+    const long = 'Párrafo de la descripción del evento. '.repeat(40).trim()
+    expect(long.length).toBeGreaterThan(280)
+    expect(validateEvent({ ...valid, description: long }, '2026-11-20')).toEqual({})
+    expect(toEventPayload({ ...valid, description: long }).description).toBe(long)
+    expect(validateEvent({ ...valid, description: 'a'.repeat(2001) }, '2026-11-20').description).toBeDefined()
+  })
+
   it('no envía la ciudad de un evento online ni una hora vacía', () => {
     expect(toEventPayload({ ...valid, city: 'Madrid', time: '' })).toMatchObject({
       city: null,

@@ -108,4 +108,11 @@ describe('EventCard', () => {
     renderWithProviders(<EventCard event={{ ...EVENT, description: long }} />)
     expect(screen.getByRole('button', { name: /Leer más/ })).toHaveAttribute('aria-expanded', 'false')
   })
+
+  it('cuándo y dónde van destacados en su propio recuadro', () => {
+    renderWithProviders(<EventCard event={{ ...EVENT, address: 'Las Naves, Carrer de Joan Verdeguer, 16' }} />)
+    const when = screen.getByText('Cuándo')
+    expect(when.closest('dt').nextElementSibling).toHaveTextContent(/1 de marzo · 19:00/)
+    expect(screen.getByText('Dónde').closest('dt').nextElementSibling).toHaveTextContent('Las Naves')
+  })
 })

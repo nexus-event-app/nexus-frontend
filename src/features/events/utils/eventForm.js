@@ -1,6 +1,7 @@
 import { translate } from '@/shared/i18n/translate'
 
-export const DESCRIPTION_MAX = 280
+/** Como en el servidor: cabe la descripción completa que se copia de Meetup o Eventbrite. */
+export const DESCRIPTION_MAX = 2000
 
 export const INITIAL_EVENT = {
   url: '',

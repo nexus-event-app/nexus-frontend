@@ -90,7 +90,7 @@ export default function EventFields({ form, minDate }) {
         {...form.getFieldProps('description')}
         className="col-span-full"
         as="textarea"
-        rows={3}
+        rows={6}
         label={t('events.form.description')}
         hint={t('events.form.descriptionHint', { count: form.values.description.length })}
         maxLength={DESCRIPTION_MAX}
