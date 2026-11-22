@@ -21,3 +21,17 @@ export function useTypewriter(text, { start = true, speed = 55 } = {}) {
 
   return { typed: text.slice(0, length), done: length >= text.length }
 }
+
+export function useRotatingTypewriter(words, { speed = 70, pause = 1800 } = {}) {
+  const [count, setCount] = useState(0)
+  const index = count % words.length
+  const { typed, done } = useTypewriter(words[index], { speed })
+
+  useEffect(() => {
+    if (!done || prefersReducedMotion()) return undefined
+    const timer = window.setTimeout(() => setCount((current) => current + 1), pause)
+    return () => window.clearTimeout(timer)
+  }, [done, pause])
+
+  return { index, typed }
+}

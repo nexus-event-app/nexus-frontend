@@ -1,10 +1,13 @@
 export default {
   es: {
     hero: {
-      eyebrow: 'Comunidad tech',
-      titleStart: 'Tu primer paso en tecnología',
-      titleEnd: 'no tiene que darse en solitario',
-      text: '{name} es la comunidad para quienes empiezan en tecnología. Aquí compartimos experiencias, resolvemos dudas, descubrimos eventos y encontramos prácticas y ofertas de empleo.',
+      slogan: 'Tu primer paso en tecnología no tiene que darse en solitario',
+      title: 'Comunidad',
+      subtitle: 'para quienes empiezan en tecnología',
+      actionsLead: 'Aquí',
+      actions: 'descubrimos eventos|encontramos prácticas y empleo|compartimos experiencias|resolvemos dudas',
+      actionsFull:
+        'Aquí descubrimos eventos, encontramos prácticas y empleo, compartimos experiencias y resolvemos dudas.',
       join: 'Únete a la comunidad',
       haveAccount: 'Ya tengo cuenta',
       greeting: 'Hola, {name}. ¡Qué bien verte por aquí!',
@@ -92,10 +95,12 @@ export default {
   },
   ca: {
     hero: {
-      eyebrow: 'Comunitat tech',
-      titleStart: 'El teu primer pas en tecnologia',
-      titleEnd: 'no ha de ser en solitari',
-      text: '{name} és la comunitat per a qui comença en tecnologia. Aquí compartim experiències, resolem dubtes, descobrim esdeveniments i trobem pràctiques i ofertes de feina.',
+      slogan: 'El teu primer pas en tecnologia no ha de ser en solitari',
+      title: 'Comunitat',
+      subtitle: 'per a qui comença en tecnologia',
+      actionsLead: 'Aquí',
+      actions: 'descobrim esdeveniments|trobem pràctiques i feina|compartim experiències|resolem dubtes',
+      actionsFull: 'Aquí descobrim esdeveniments, trobem pràctiques i feina, compartim experiències i resolem dubtes.',
       join: 'Uneix-te a la comunitat',
       haveAccount: 'Ja tinc compte',
       greeting: 'Hola, {name}. Quina alegria veure’t per aquí!',
@@ -183,10 +188,12 @@ export default {
   },
   en: {
     hero: {
-      eyebrow: 'Tech community',
-      titleStart: 'Your first step into tech',
-      titleEnd: 'doesn’t have to be a solo one',
-      text: '{name} is the community for people starting out in tech. Here we share experiences, answer questions, discover events and find internships and job offers.',
+      slogan: 'Your first step into tech doesn’t have to be a solo one',
+      title: 'Community',
+      subtitle: 'for people starting out in tech',
+      actionsLead: 'Here we',
+      actions: 'discover events|find internships and jobs|share experiences|answer questions',
+      actionsFull: 'Here we discover events, find internships and jobs, share experiences and answer questions.',
       join: 'Join the community',
       haveAccount: 'I already have an account',
       greeting: 'Hi, {name}. Great to see you here!',

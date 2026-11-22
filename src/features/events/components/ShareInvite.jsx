@@ -1,27 +1,12 @@
-import { useEffect, useState } from 'react'
 import Icon from '@/shared/components/Icon'
-import { useTypewriter } from '@/shared/hooks/useTypewriter'
+import { useRotatingTypewriter } from '@/shared/hooks/useTypewriter'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
-
-const PAUSE = 1800
-
-function prefersReducedMotion() {
-  return typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
-}
 
 export default function ShareInvite({ className }) {
   const { t } = useI18n()
   const words = t('events.invite.words').split('|')
-  const [index, setIndex] = useState(0)
-  const word = words[index % words.length]
-  const { typed, done } = useTypewriter(word, { speed: 70 })
-
-  useEffect(() => {
-    if (!done || prefersReducedMotion()) return undefined
-    const timer = window.setTimeout(() => setIndex((current) => current + 1), PAUSE)
-    return () => window.clearTimeout(timer)
-  }, [done])
+  const { typed } = useRotatingTypewriter(words)
 
   return (
     <p

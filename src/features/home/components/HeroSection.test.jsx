@@ -9,7 +9,7 @@ import HomePathsSection from './HomePathsSection'
 describe('HeroSection', () => {
   it('sin sesión invita a unirse y explica qué hay en la web sin enlaces repetidos', () => {
     renderWithProviders(<HeroSection />)
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Tu primer paso en tecnología')
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Comunidad para quienes empiezan en tecnología')
     expect(screen.getByRole('link', { name: /Únete a la comunidad/ })).toHaveAttribute('href', '/registro')
     expect(screen.getByRole('link', { name: 'Ya tengo cuenta' })).toHaveAttribute('href', '/login')
 

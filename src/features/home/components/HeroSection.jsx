@@ -6,6 +6,7 @@ import { paths } from '@/shared/config/paths'
 import { siteConfig } from '@/shared/config/site'
 import { Link } from '@/shared/i18n/router'
 import { useI18n } from '@/shared/i18n/useI18n'
+import HeroActions from './HeroActions'
 import HeroIllustration from './HeroIllustration'
 
 const FEATURES = [
@@ -36,20 +37,20 @@ export default function HeroSection() {
 
       <header className="text-center lg:text-left">
         <Eyebrow tone="dark" className="animate-rise-in">
-          {t('home.hero.eyebrow')}
+          {name}
         </Eyebrow>
         <h1
           id="hero-heading"
-          className="mt-4 animate-rise-in text-4xl font-bold leading-[1.08] tracking-tight [animation-delay:80ms] sm:text-5xl xl:text-[3.4rem]"
+          className="mt-5 animate-rise-in font-bold uppercase tracking-tight [animation-delay:80ms]"
         >
-          <span className="block">{t('home.hero.titleStart')}</span>{' '}
-          <span className="block bg-gradient-to-r from-brand-200 via-violet-200 to-brand-200 bg-clip-text text-transparent">
-            {t('home.hero.titleEnd')}
+          <span className="block bg-gradient-to-r from-white via-brand-100 to-violet-200 bg-clip-text text-5xl leading-none text-transparent sm:text-6xl xl:text-[4.6rem]">
+            {t('home.hero.title')}
+          </span>{' '}
+          <span className="mt-3 block text-xl leading-snug text-brand-100 sm:text-2xl xl:text-[1.75rem]">
+            {t('home.hero.subtitle')}
           </span>
         </h1>
-        <p className="mx-auto mt-5 max-w-2xl animate-rise-in text-lg leading-relaxed text-brand-100 [animation-delay:160ms] lg:mx-0">
-          {t('home.hero.text', { name })}
-        </p>
+        <HeroActions className="mx-auto mt-8 max-w-xl animate-rise-in [animation-delay:160ms] lg:mx-0" />
 
         {isAuthenticated ? (
           <p className="mt-7 animate-rise-in text-lg font-semibold text-white [animation-delay:240ms]">
