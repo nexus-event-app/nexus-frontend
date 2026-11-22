@@ -3,10 +3,6 @@ import { defineConfig, devices } from '@playwright/test'
 const PORT = 4173
 const CI = Boolean(process.env.CI)
 
-/**
- * Pruebas de extremo a extremo: la web compilada en un navegador real. La API se simula en cada prueba (e2e/fixtures.js)
- * para que no dependan del backend ni de datos que cambian.
- */
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,

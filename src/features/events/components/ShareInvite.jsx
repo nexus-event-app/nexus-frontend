@@ -10,11 +10,6 @@ function prefersReducedMotion() {
   return typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
 }
 
-/**
- * Invitación a compartir eventos: «¿Conoces [un meetup] que merece la pena?», donde el tipo de evento se escribe
- * solo y va cambiando (meetup, hackathon, charla...). La palabra que cambia es decorativa: los lectores de pantalla
- * oyen la frase completa una sola vez. Con «reducir movimiento» se queda fija la primera.
- */
 export default function ShareInvite({ className }) {
   const { t } = useI18n()
   const words = t('events.invite.words').split('|')
@@ -29,8 +24,6 @@ export default function ShareInvite({ className }) {
   }, [done])
 
   return (
-    // Recuadro suave: el destello a la izquierda y, al lado, la pregunta (con la palabra que se escribe sola) y la
-    // invitación debajo, para que el texto no salte al cambiar de palabra.
     <p
       className={cx(
         'grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 rounded-2xl border border-accent-line/60 bg-accent-soft/50 px-4 py-3',

@@ -16,10 +16,6 @@ import PagedTable from '../components/PagedTable'
 import { useAdminList } from '../hooks/useAdminList'
 import { adminUsersService } from '../services/adminUsersService'
 
-/**
- * Acción de la tabla solo con su icono, para que la fila no pese: el nombre completo lo oyen los lectores de
- * pantalla y aparece al pasar el ratón (title). Redonda y de 44 px, el tamaño mínimo para pulsar con el dedo.
- */
 function IconAction({ as: Component = 'button', icon, label, active = false, danger = false, ...props }) {
   return (
     <Component
@@ -38,7 +34,6 @@ function IconAction({ as: Component = 'button', icon, label, active = false, dan
   )
 }
 
-/** Texto de cada confirmación: activar/desactivar la cuenta o dar/quitar el permiso de administración. */
 function confirmation({ type, user }) {
   if (type === 'role') {
     return user.role === 'ADMIN'
@@ -73,7 +68,6 @@ function confirmation({ type, user }) {
 export default function AdminUsersPage() {
   const { user: currentUser } = useAuth()
   const list = useAdminList('users', adminUsersService.list)
-  // Acción pendiente de confirmar: { type: 'status' | 'role', user }.
   const [pendingAction, setPendingAction] = useState(null)
 
   const [runAction, running] = useAction(async ({ type, user }) => {
@@ -122,7 +116,6 @@ export default function AdminUsersPage() {
       render: (user) => {
         const isSelf = user.id === currentUser.id
         const isAdmin = user.role === 'ADMIN'
-        // Su titular la eliminó: ya no tiene datos que editar ni se puede reactivar.
         if (user.deleted) return <span className="text-sm text-ink-muted">—</span>
         return (
           <ActionMenu className="flex-nowrap justify-end gap-1 md:justify-start">
@@ -132,8 +125,6 @@ export default function AdminUsersPage() {
               icon="pencil"
               label={`Editar perfil de ${user.name}`}
             />
-            {/* Nadie cambia su propio permiso (así siempre queda alguien con acceso), y para ser admin hace falta
-                el email verificado. */}
             {!isSelf && (isAdmin || user.emailVerified) && (
               <IconAction
                 icon="shield"
@@ -142,7 +133,6 @@ export default function AdminUsersPage() {
                 onClick={() => setPendingAction({ type: 'role', user })}
               />
             )}
-            {/* A un administrador primero se le quita el permiso; después se puede desactivar su cuenta. */}
             {!isSelf && !isAdmin && (
               <IconAction
                 icon={user.enabled ? 'ban' : 'check'}

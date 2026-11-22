@@ -12,13 +12,10 @@ import { cx } from '@/shared/utils/classNames'
 import { excerpt } from '@/shared/utils/text'
 import { authorOf } from '../utils/author'
 
-/** Lo bastante para llenar las cuatro líneas del bocadillo y que se entienda de qué va la discusión. */
 const EXCERPT_LENGTH = 320
-/** A partir de cuántas respuestas o me gusta una discusión se marca como «Popular». */
 const POPULAR_REPLIES = 5
 const POPULAR_LIKES = 10
 
-/** Icono y colores de cada categoría (el nombre de la categoría siempre va también en texto). */
 const CATEGORY_STYLES = {
   AYUDA_TECNICA: { icon: 'code', tile: 'bg-blue-50 text-blue-700 dark:bg-blue-500/15 dark:text-blue-200' },
   RECURSOS: { icon: 'bookmark', tile: 'bg-green-50 text-green-700 dark:bg-green-500/15 dark:text-green-200' },
@@ -27,7 +24,6 @@ const CATEGORY_STYLES = {
   GENERAL: { icon: 'chat', tile: 'bg-slate-100 text-ink-soft' },
 }
 
-/** Estado más destacado de la discusión: resuelta, popular o sin respuesta (o ninguno). */
 function statusOf(discussion) {
   if (discussion.acceptedCommentId) return { key: 'resolved', tone: 'green', icon: 'check-circle' }
   if (discussion.commentCount >= POPULAR_REPLIES || discussion.likesCount >= POPULAR_LIKES) {
@@ -37,11 +33,6 @@ function statusOf(discussion) {
   return null
 }
 
-/**
- * Tarjeta de una discusión con aire de foro: categoría con su icono, estado (resuelta, popular o sin respuesta),
- * título, el inicio del mensaje en un bocadillo (cuatro líneas, para que se entienda de qué va), quién lo escribió y cuándo, y al pie las respuestas, los me gusta y
- * «Participar». Toda la tarjeta lleva a la discusión (salvo el nombre, que lleva al perfil). Todas miden lo mismo.
- */
 export default function DiscussionCard({ discussion, headingLevel = 'h3' }) {
   const { t } = useI18n()
   const Heading = headingLevel
@@ -92,9 +83,7 @@ export default function DiscussionCard({ discussion, headingLevel = 'h3' }) {
         </Link>
       </Heading>
 
-      {/* El inicio del mensaje, como un bocadillo de conversación que sale de quien lo escribió (debajo). */}
       <p className="mt-3 min-h-[calc(4lh+1.5rem)] rounded-2xl rounded-bl-sm bg-canvas px-4 py-3 text-sm leading-relaxed text-ink-muted ring-1 ring-inset ring-slate-200 transition-colors group-hover:bg-accent-soft group-hover:ring-accent-line">
-        {/* El recorte va en el texto, no en el bocadillo: con el relleno se vería asomar una tercera línea. */}
         <span className="line-clamp-4">{excerpt(discussion.content, EXCERPT_LENGTH)}</span>
       </p>
       <p className="mb-4 mt-3 flex min-w-0 items-center gap-2 text-sm text-ink-muted">

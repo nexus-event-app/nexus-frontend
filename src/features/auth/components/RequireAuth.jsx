@@ -10,8 +10,6 @@ export default function RequireAuth({ children }) {
 
   if (loading) return <PageLoader />
   if (!isAuthenticated) {
-    // Si acaba de cerrar sesión (o de eliminar su cuenta) estando aquí, a la portada: pedirle que inicie sesión para
-    // volver a la página que acaba de dejar no tendría sentido.
     if (signedOut) return <Navigate to={paths.home} replace />
     return <Navigate to={loginPath(`${location.pathname}${location.search}`)} replace />
   }

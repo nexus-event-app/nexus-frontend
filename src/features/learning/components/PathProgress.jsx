@@ -2,7 +2,6 @@ import { useId } from 'react'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 
-/** Barra de progreso de una ruta con su etiqueta y el número de etapas hechas, también en texto. */
 export default function PathProgress({ done, total, className }) {
   const { t } = useI18n()
   const id = useId()

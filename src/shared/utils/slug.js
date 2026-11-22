@@ -8,7 +8,6 @@ export function buildSlugPath(base, item) {
   return `${base}/${item.id}${item.slug ? `-${item.slug}` : ''}`
 }
 
-/** Igual que SlugUtil.slugify del backend: «Ana García» → «ana-garcia». */
 export function slugify(text, fallback = 'sin-titulo') {
   const slug = String(text ?? '')
     .normalize('NFD')

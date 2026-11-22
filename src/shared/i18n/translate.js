@@ -15,7 +15,6 @@ const pluralRules = Object.fromEntries(LANGUAGES.map((language) => [language, ne
 
 let currentLanguage = DEFAULT_LANGUAGE
 
-/** El proveedor de idioma lo fija antes de pintar, para que el código fuera de React también traduzca bien. */
 export function setCurrentLanguage(language) {
   currentLanguage = language
 }
@@ -33,10 +32,6 @@ function lookup(key, language, count) {
   return dictionary[key]
 }
 
-/**
- * Traduce una clave. Admite variables con {nombre} y plurales con las claves «clave_one» y «clave_other»
- * cuando se pasa {count}. Si falta la clave en el idioma pedido usa el castellano.
- */
 export function translate(key, params = {}, language = currentLanguage) {
   const template = lookup(key, language, params.count) ?? lookup(key, DEFAULT_LANGUAGE, params.count) ?? key
   return template.replace(/\{(\w+)\}/g, (match, name) => (name in params ? String(params[name]) : match))

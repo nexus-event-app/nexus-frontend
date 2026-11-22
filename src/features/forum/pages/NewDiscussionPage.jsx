@@ -28,8 +28,6 @@ export default function NewDiscussionPage() {
   }
 
   return (
-    // Como «Editar perfil»: cabecera arriba; a la izquierda, el formulario; a la derecha, las normas del foro. Las normas
-    // ocupan dos filas y son más largas: la última fila se lleva el sobrante para que el formulario no se separe del título.
     <PageMain className="page-container page-section relative isolate grid grid-cols-1 content-start gap-x-12 lg:grid-cols-[minmax(0,1fr)_22rem] lg:grid-rows-[auto_auto_auto_1fr]">
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Seo

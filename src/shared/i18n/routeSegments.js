@@ -1,10 +1,3 @@
-/**
- * Nombre de cada sección de la web en cada idioma. En el código las rutas se escriben siempre en castellano
- * (`paths.news` → «/noticias») y `localizePath` las traduce: «/en/news», «/ca/noticies».
- *
- * Si cambias o añades una sección, actualiza también `Languages.java` en el backend (sitemap, robots y emails).
- * `npm run check:routes` comprueba esta tabla.
- */
 export const ROUTE_SEGMENTS = {
   noticias: { ca: 'noticies', en: 'news' },
   empleo: { ca: 'feina', en: 'jobs' },
@@ -27,7 +20,6 @@ export const ROUTE_SEGMENTS = {
   eventos: { ca: 'esdeveniments', en: 'events' },
 }
 
-/** Subsecciones fijas (el resto de segundos segmentos son identificadores como «12-mi-duda» y no se traducen). */
 export const ROUTE_SUBSEGMENTS = {
   foro: { nueva: { ca: 'nova', en: 'new' } },
   empleo: { guardadas: { ca: 'desades', en: 'saved' } },

@@ -22,24 +22,20 @@ import TestimonialForm from '../components/TestimonialForm'
 import TestimonialGrid from '../components/TestimonialGrid'
 import { useTestimonials } from '../hooks/useTestimonials'
 
-/** Seis testimonios por página: dos filas de tres en pantallas grandes. */
 export const TESTIMONIALS_PAGE_SIZE = 6
 
-/** Pasos de «Escribe en el muro», en orden; solo informan (no son enlaces). */
 const SHARE_STEPS = [
   { key: 'write', icon: 'pencil' },
   { key: 'review', icon: 'shield' },
   { key: 'inspire', icon: 'sparkles' },
 ]
 
-/** La parte derecha del panel (formulario o aviso): redondea las esquinas que no toca el bloque de la izquierda. */
 const SHARE_SIDE = 'rounded-b-3xl rounded-t-none p-6 sm:p-8 lg:rounded-r-3xl lg:rounded-bl-none'
 
 export default function TestimonialsPage() {
   const { t } = useI18n()
   const { isAuthenticated, user } = useAuth()
   const request = useTestimonials()
-  // La API devuelve todos los testimonios publicados (son pocos): se reparten en páginas aquí.
   const { page, buildHref } = useListQuery()
 
   return (
@@ -51,14 +47,9 @@ export default function TestimonialsPage() {
         description={t('testimonials.seoDescription', { name: siteConfig.name })}
         path={page > 1 ? `${paths.testimonials}?page=${page}` : paths.testimonials}
       />
-      {/* Cuadrícula decorativa detrás de la cabecera, como en el resto de páginas. */}
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Breadcrumbs items={[{ label: t('testimonials.breadcrumb'), to: paths.testimonials }]} />
 
-      {/*
-        Título a la izquierda y, en pantallas grandes, la ilustración a la derecha: baja un poco y se mete en el borde
-        del muro (va por encima de él), con los pies difuminados.
-      */}
       <header className="mb-10 grid items-end gap-x-10 lg:grid-cols-[minmax(0,1fr)_15rem] xl:grid-cols-[minmax(0,1fr)_18rem]">
         <hgroup>
           <Eyebrow>{t('testimonials.eyebrow')}</Eyebrow>
@@ -71,7 +62,6 @@ export default function TestimonialsPage() {
         />
       </header>
 
-      {/* El muro: un tablero con la cuadrícula suave de fondo donde las notas quedan colgadas, un poco torcidas. */}
       <section
         aria-label={t('testimonials.wallLabel')}
         aria-busy={request.loading}
@@ -108,11 +98,6 @@ export default function TestimonialsPage() {
         </QueryBoundary>
       </section>
 
-      {/*
-        «Escribe en el muro»: cabecera como la de los demás apartados y, debajo, un panel compacto (cabe en
-        pantalla sin bajar): a la izquierda, sobre el degradado de la marca, cómo funciona; a la derecha, el
-        formulario (o lo que haga falta antes: entrar o confirmar el email).
-      */}
       <section aria-labelledby="share-heading" className="mt-20 grid lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
         <header className="col-span-full mb-6">
           <hgroup>
@@ -123,7 +108,6 @@ export default function TestimonialsPage() {
             <p className="mt-3 max-w-2xl text-lg leading-relaxed text-ink-muted">{t('testimonials.shareText')}</p>
           </hgroup>
         </header>
-        {/* Las dos piezas forman un solo panel: cada una redondea sus esquinas exteriores. */}
         <aside
           aria-labelledby="share-steps-heading"
           className="relative isolate overflow-hidden rounded-t-3xl bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 p-6 text-white sm:p-8 lg:rounded-l-3xl lg:rounded-tr-none"

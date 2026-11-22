@@ -10,10 +10,6 @@ function localDate(iso) {
   return new Date(year, month - 1, day)
 }
 
-/**
- * Filtros de la agenda: modalidad (online o presencial), ciudad (solo las que tienen eventos) y, si se eligió un día en
- * el calendario, una etiqueta para quitarlo. Elegir ciudad implica presencial.
- */
 export default function EventFilters({ id, filters, modeSlug, hrefWith, onCityChange, className }) {
   const { t, locale } = useI18n()
   const cities = useRequest('events:cities', ({ signal }) => eventsService.cities({ signal }))
@@ -23,7 +19,6 @@ export default function EventFilters({ id, filters, modeSlug, hrefWith, onCityCh
     {
       key: 'online',
       label: t('events.filter.online'),
-      // Online y ciudad no casan: al elegir online se quita la ciudad.
       href: hrefWith({ modalidad: 'online', ciudad: '' }),
       active: modeSlug === 'online',
     },
@@ -53,7 +48,6 @@ export default function EventFilters({ id, filters, modeSlug, hrefWith, onCityCh
           className="field-input min-h-[2.75rem] w-auto max-w-[12rem] truncate rounded-full py-1.5 pl-3 pr-8 text-sm sm:min-h-[2.25rem]"
         >
           <option value="">{t('events.filter.allCities')}</option>
-          {/* La elegida se queda en la lista aunque ya no tenga eventos, para poder quitarla. */}
           {[...new Set([...cityOptions, ...(filters.city ? [filters.city] : [])])].map((city) => (
             <option key={city} value={city}>
               {city}

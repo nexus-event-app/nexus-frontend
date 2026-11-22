@@ -22,7 +22,6 @@ export default function NewsListPage() {
   const list = useNewsList()
   const { page, category, search, language, hasFilters, setFilters, buildHref } = list
 
-  // Un título propio por tema: «Noticias de IA» no se puede formar pasando la etiqueta a minúsculas.
   const heading = category ? t(`news.list.categoryHeadings.${category}`) : t('news.list.heading')
   const pageSuffix = page > 1 ? t('common.pageSuffix', { page }) : ''
 
@@ -34,11 +33,9 @@ export default function NewsListPage() {
         path={page > 1 ? `${paths.news}?page=${page}` : paths.news}
         robots={hasFilters ? 'noindex,follow' : 'index,follow'}
       />
-      {/* Cuadrícula decorativa detrás de la cabecera, como en las secciones de la portada. */}
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Breadcrumbs items={[{ label: t('news.breadcrumb'), to: paths.news }]} />
 
-      {/* Título a la izquierda y, en pantallas grandes, la ilustración en el hueco de la derecha. */}
       <header className="mb-8 grid items-end gap-x-10 lg:grid-cols-[minmax(0,1fr)_20rem] xl:grid-cols-[minmax(0,1fr)_24rem]">
         <hgroup>
           <Eyebrow>{t('news.list.eyebrow')}</Eyebrow>
@@ -48,10 +45,6 @@ export default function NewsListPage() {
         <Illustration {...illustrations.news} className="-mt-20 hidden lg:block" />
       </header>
 
-      {/*
-        Barra de filtros discreta: categorías a la izquierda; idioma y buscador a la derecha. En móvil, las categorías
-        ocupan su fila y debajo van el idioma y el buscador.
-      */}
       <search className="mb-8 grid grid-cols-1 items-center gap-3 border-y border-slate-200 py-3 sm:grid-cols-[auto_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_auto_16rem]">
         <NewsCategoryFilter
           category={category}
@@ -96,7 +89,6 @@ export default function NewsListPage() {
                 <p role="status" className="mb-5 text-sm font-medium text-ink-muted">
                   {t('news.list.count', { count: result.totalElements })}
                 </p>
-                {/* Rejilla variada: unas con la imagen arriba y otras, anchas, con la imagen al lado. */}
                 <NewsGrid items={result.content} headingLevel="h2" varied />
                 <Pagination page={page} totalPages={result.totalPages} buildHref={buildHref} />
               </>

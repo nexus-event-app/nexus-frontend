@@ -4,7 +4,6 @@ import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import { formatMonthYear } from '@/shared/utils/date'
 
-/** Marcas de GitHub y LinkedIn (rellenas, en el color del texto del botón). */
 const BRAND_PATHS = {
   github:
     'M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z',
@@ -30,14 +29,12 @@ function BrandIcon({ brand }) {
   )
 }
 
-/** Botón de una red social, con sus colores: se reconoce de un vistazo. Sube un poco al pasar el ratón. */
 function LinkPill({ href, brand, label, className, interactive }) {
   const { t } = useI18n()
   const classes = cx(
     'inline-flex min-h-[2.75rem] items-center gap-2 rounded-full px-5 text-sm font-semibold shadow-card',
     className,
   )
-  // En la vista previa de «Editar perfil» el enlace aún puede estar a medio escribir: se muestra sin enlazar.
   if (!interactive) {
     return (
       <span className={classes}>
@@ -61,12 +58,6 @@ function LinkPill({ href, brand, label, className, interactive }) {
   )
 }
 
-/**
- * La tarjeta de perfil: foto, nombre, titular, desde cuándo está en la comunidad, presentación, tecnologías y
- * enlaces. Es exactamente lo que ve cualquiera que entre en el perfil, y la misma que «Así te verán» al editarlo.
- * Nunca muestra la actividad de la persona. El nombre va dentro porque es el contenido de la tarjeta. `stacked` pone
- * la foto encima del nombre, para columnas estrechas.
- */
 export default function ProfileCard({
   profile,
   headingLevel = 'h1',
@@ -90,7 +81,6 @@ export default function ProfileCard({
         className,
       )}
     >
-      {/* Franja de color arriba, con luces que se mueven despacio: da vida sin quitar protagonismo a la persona. */}
       <span
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-24 overflow-hidden bg-gradient-to-br from-brand-500 via-brand-600 to-violet-600"
@@ -99,8 +89,6 @@ export default function ProfileCard({
         <span className="absolute -right-6 -top-10 h-36 w-36 animate-drift-slow rounded-full bg-pink-300/30 blur-2xl" />
       </span>
       <header
-        // La foto asoma sobre la franja; el nombre queda siempre debajo de ella, sobre blanco, para que se lea bien.
-        // En el móvil (y en columnas estrechas) la foto va encima del nombre.
         className={cx(
           'grid gap-x-5 gap-y-4 pt-4',
           stacked ? 'justify-items-start' : 'sm:grid-cols-[auto_minmax(0,1fr)] sm:items-start',
@@ -126,7 +114,6 @@ export default function ProfileCard({
       {hasDetails ? (
         <>
           {profile.bio && (
-            // La presentación, destacada como una cita: con la línea de color a la izquierda y el texto más grande.
             <p className="mt-6 whitespace-pre-line rounded-2xl border-l-4 border-accent bg-accent-soft/50 px-5 py-4 text-lg leading-relaxed text-ink">
               {profile.bio}
             </p>

@@ -8,17 +8,12 @@ import { useI18n } from '@/shared/i18n/useI18n'
 import { contentLanguageOf } from '@/shared/utils/contentLanguage'
 import NewsImage from './NewsImage'
 
-/**
- * «Sigue leyendo», al lado de una noticia: antetítulo y título (fuera del recuadro) y, debajo, una lista compacta de
- * otras noticias en un recuadro, cada una con su miniatura. Toda la fila lleva a la noticia.
- */
 export default function RelatedNews({ items, className }) {
   const { t } = useI18n()
   if (items.length === 0) return null
 
   return (
     <aside aria-labelledby="related-news-heading" className={className}>
-      {/* Antetítulo y título fuera del recuadro, como en el resto de la web; el recuadro es la propia lista. */}
       <hgroup>
         <Eyebrow>{t('news.related.eyebrow')}</Eyebrow>
         <h2 id="related-news-heading" className="mt-3 text-2xl font-bold tracking-tight text-ink">

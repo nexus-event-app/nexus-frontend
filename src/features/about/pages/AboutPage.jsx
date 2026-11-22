@@ -22,10 +22,8 @@ const OFFERS = [
   { key: 'forum', icon: 'chat', to: paths.forum },
   { key: 'testimonials', icon: 'star', to: paths.testimonials },
 ]
-/** Etapas de la historia, en orden; la última aún está por llegar. */
 const STORY = [{ key: 'idea' }, { key: 'build' }, { key: 'launch' }, { key: 'next', upcoming: true }]
 
-/** Icono sobre el morado oscuro de la marca, el mismo en toda la página (como en las tarjetas de rutas). */
 function IconTile({ name, className }) {
   return (
     <span
@@ -40,7 +38,6 @@ function IconTile({ name, className }) {
   )
 }
 
-/** Cabecera de cada apartado: antetítulo que se escribe solo, título y, si la hay, una entradilla. */
 function SectionTitle({ id, eyebrow, title, children, className }) {
   return (
     <header className={className}>
@@ -55,12 +52,6 @@ function SectionTitle({ id, eyebrow, title, children, className }) {
   )
 }
 
-/**
- * «Sobre el proyecto»: qué es Primer Commit, por qué existe, quién está detrás y cómo se financia. Sirve también como
- * carta de presentación para entidades y programas de ayudas. Sin datos personales: el email sale de la configuración.
- * Sobria y con un guiño a Git (la terminal de la cabecera y la historia como un `git log`), en grises y el morado de la
- * marca.
- */
 export default function AboutPage() {
   const { t } = useI18n()
   const { isAuthenticated } = useAuth()
@@ -79,7 +70,6 @@ export default function AboutPage() {
           about: { '@type': 'Organization', name, url: siteConfig.url, nonprofitStatus: 'Nonprofit' },
         }}
       />
-      {/* Cuadrícula decorativa detrás de la cabecera, como en el resto de páginas. */}
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-[32rem]" />
       <Breadcrumbs items={[{ label: t('about.breadcrumb'), to: paths.about }]} />
 
@@ -91,11 +81,9 @@ export default function AboutPage() {
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-muted">{t('about.intro', { name })}</p>
         </hgroup>
-        {/* A la derecha, la ilustración de la chica programando (en el móvil, debajo del texto y más pequeña). */}
         <Illustration {...illustrations.about} className="mx-auto w-full max-w-sm lg:max-w-none" />
       </header>
 
-      {/* Por qué existe: el texto a la izquierda y lo que encontrarás a la derecha. */}
       <section aria-labelledby="about-purpose" className="mt-24 grid gap-x-14 gap-y-8 lg:grid-cols-2 lg:items-center">
         <SectionTitle id="about-purpose" eyebrow={t('about.purpose.eyebrow')} title={t('about.purpose.title')} />
         <p className="text-lg leading-relaxed text-ink-soft lg:col-start-1">{t('about.purpose.problem')}</p>
@@ -124,10 +112,6 @@ export default function AboutPage() {
         </ul>
       </section>
 
-      {/*
-        La historia como una línea de tiempo: círculos numerados unidos por una línea (vertical en móvil, horizontal en
-        pantallas grandes). El tramo hasta lo que está por llegar va discontinuo, igual que su círculo.
-      */}
       <section aria-labelledby="about-story" className="mt-24">
         <SectionTitle id="about-story" eyebrow={t('about.story.eyebrow')} title={t('about.story.title')} />
         <ol className="mt-10 grid gap-8 lg:grid-cols-4 lg:gap-6">
@@ -173,7 +157,6 @@ export default function AboutPage() {
         aria-labelledby="about-team"
         className="relative isolate mt-24 overflow-hidden rounded-3xl border border-slate-200 bg-surface p-6 shadow-card sm:p-10"
       >
-        {/* Llaves de código gigantes en la esquina: decorativas, pintadas con CSS para que no cuenten como texto. */}
         <span
           aria-hidden="true"
           className="pointer-events-none absolute -right-4 -top-10 -z-10 select-none font-mono text-[10rem] font-bold leading-none text-slate-100 before:content-['{_}']"
@@ -200,7 +183,6 @@ export default function AboutPage() {
         )}
       </section>
 
-      {/* «¿Te unes?» solo para quien aún no tiene cuenta: lleva a crearla. */}
       {!isAuthenticated && (
         <section
           aria-labelledby="about-cta"

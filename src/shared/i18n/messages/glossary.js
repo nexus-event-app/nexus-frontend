@@ -1,7 +1,3 @@
-/**
- * Glosario para quien empieza: cada término con una definición en una o dos frases sencillas y un ejemplo cotidiano.
- * El orden de las categorías y de los términos está en features/learning/data/glossary.js.
- */
 export default {
   es: {
     breadcrumb: 'Glosario',

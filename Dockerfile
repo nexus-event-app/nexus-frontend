@@ -1,4 +1,3 @@
-# Etapa 1: compilar la aplicación con Vite
 FROM node:20-alpine AS build
 WORKDIR /app
 
@@ -7,12 +6,9 @@ RUN npm ci
 
 COPY . .
 
-# Se incorporan al bundle en tiempo de build
 ARG VITE_API_URL=
 ARG VITE_SITE_URL=http://localhost:5173
-# true en la versión de prueba: muestra el aviso de la beta
 ARG VITE_BETA=false
-# Datos legales del titular (ver README): se pasan con --build-arg, nunca en el repositorio
 ARG VITE_LEGAL_OWNER_NAME=
 ARG VITE_LEGAL_OWNER_ID=
 ARG VITE_LEGAL_ADDRESS=
@@ -29,10 +25,8 @@ ENV VITE_API_URL=$VITE_API_URL \
 
 RUN npm run build
 
-# Etapa 2: nginx sin privilegios sirviendo la SPA y haciendo de proxy al backend
 FROM nginxinc/nginx-unprivileged:1.27-alpine
 
-# BACKEND_URL: origen del backend, sin barra final ni ruta (p. ej. http://backend:8080)
 ENV BACKEND_URL=http://backend:8080 \
     NGINX_ENVSUBST_FILTER=^BACKEND_URL\$
 

@@ -38,7 +38,6 @@ const modules = {
   reports,
 }
 
-/** Une los módulos: cada uno aporta sus textos en los tres idiomas bajo su propio nombre. */
 function merge(language) {
   return Object.fromEntries(Object.entries(modules).map(([name, texts]) => [name, texts[language]]))
 }

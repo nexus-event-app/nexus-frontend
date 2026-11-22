@@ -5,10 +5,8 @@ import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import { useNotifications } from '../hooks/useNotifications'
 
-/** Más de 9 avisos se muestran como «9+» para que el número quepa en la campanita. */
 const MAX_BADGE = 9
 
-/** Campanita de la cabecera: lleva a la página de avisos y dice cuántos hay sin leer. */
 export default function NotificationBell({ className }) {
   const { t } = useI18n()
   const { unread } = useNotifications()

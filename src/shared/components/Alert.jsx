@@ -22,7 +22,6 @@ const VARIANTS = {
   },
 }
 
-/** Aviso breve: un párrafo con su rol (alert o status) para que los lectores de pantalla lo anuncien. */
 export default function Alert({ variant = 'info', title, className, children }) {
   const config = VARIANTS[variant]
 

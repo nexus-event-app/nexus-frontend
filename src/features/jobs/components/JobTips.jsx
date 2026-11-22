@@ -4,7 +4,6 @@ import { illustrations } from '@/shared/config/illustrations'
 import Icon from '@/shared/components/Icon'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-/** Cuatro tarjetas con tres consejos cada una. Los textos están en jobs.tips (castellano, catalán e inglés). */
 const CARDS = [
   { id: 'linkedin', icon: 'briefcase' },
   { id: 'visible', icon: 'sparkles' },
@@ -12,10 +11,6 @@ const CARDS = [
   { id: 'letter', icon: 'pencil' },
 ]
 
-/**
- * Guía rápida después de los portales: lo más importante para tener LinkedIn al día, hacerse visible, preparar el
- * CV y la carta de presentación. Breve, como ayuda para quien empieza, sin entrar en detalle.
- */
 export default function JobTips() {
   const { t } = useI18n()
 
@@ -28,7 +23,6 @@ export default function JobTips() {
         </h2>
         <p className="mt-4 text-lg leading-relaxed text-ink-muted">{t('jobs.tips.description')}</p>
       </hgroup>
-      {/* En el hueco libre a la derecha del título: colocada encima, sin ocupar sitio ni mover las tarjetas. */}
       <Illustration
         {...illustrations.tips}
         className="absolute -top-8 right-6 hidden w-44 lg:block xl:right-12 xl:w-48"

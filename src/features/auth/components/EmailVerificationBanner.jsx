@@ -3,7 +3,6 @@ import { useAuth } from '../hooks/useAuth'
 import { authService } from '../services/authService'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-/** Aviso bajo la cabecera mientras el email de la cuenta no esté confirmado. */
 export default function EmailVerificationBanner() {
   const { t } = useI18n()
   const { user } = useAuth()

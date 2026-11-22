@@ -1,4 +1,3 @@
-// Comprueba la traducción de rutas entre idiomas (src/shared/i18n/languages.js y routeSegments.js).
 import { build } from 'esbuild'
 import assert from 'node:assert/strict'
 import { mkdtempSync } from 'node:fs'
@@ -6,7 +5,6 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
-// Los módulos usan importaciones sin extensión: se empaquetan antes de cargarlos.
 async function load(entry) {
   const outfile = join(mkdtempSync(join(tmpdir(), 'routes-')), 'module.mjs')
   await build({ entryPoints: [entry], bundle: true, format: 'esm', outfile, logLevel: 'silent' })
@@ -17,7 +15,6 @@ const { localizePath, stripLang, langFromPath } = await load('src/shared/i18n/la
 const { ROUTE_SEGMENTS, ROUTE_SUBSEGMENTS } = await load('src/shared/i18n/routeSegments.js')
 
 const cases = [
-  // [ruta interna, castellano, catalán, inglés]
   ['/', '/', '/ca', '/en'],
   ['/noticias', '/noticias', '/ca/noticies', '/en/news'],
   ['/noticias/12-hola-mundo', '/noticias/12-hola-mundo', '/ca/noticies/12-hola-mundo', '/en/news/12-hola-mundo'],
@@ -62,7 +59,6 @@ for (const [internal, es, ca, en] of cases) {
   const expected = { es, ca, en }
   for (const lang of ['es', 'ca', 'en']) {
     assert.equal(localizePath(internal, lang), expected[lang], `${internal} → ${lang}`)
-    // De cualquier versión a cualquier otra, y vuelta a la interna.
     for (const from of ['es', 'ca', 'en'])
       assert.equal(localizePath(expected[from], lang), expected[lang], `${expected[from]} → ${lang}`)
     assert.equal(stripLang(expected[lang]), internal, `${expected[lang]} → interna`)
@@ -71,17 +67,14 @@ for (const [internal, es, ca, en] of cases) {
   }
 }
 
-// Direcciones antiguas: la sección en castellano dentro de /ca o /en se traduce.
 assert.equal(localizePath('/en/foro/5-mi-duda', 'en'), '/en/forum/5-mi-duda')
 assert.equal(localizePath('/ca/empleo', 'ca'), '/ca/feina')
 assert.equal(localizePath('/en/foro/nueva', 'en'), '/en/forum/new')
-// El panel de admin y las rutas desconocidas no se tocan; los destinos relativos tampoco.
 assert.equal(localizePath('/admin/noticias', 'en'), '/admin/noticias')
 assert.equal(localizePath('/no-existe', 'en'), '/en/no-existe')
 assert.equal(localizePath('?page=2', 'en'), '?page=2')
 checks += 6
 
-// Cada sección tiene traducción a todos los idiomas, sin duplicados dentro de un mismo idioma.
 for (const lang of ['ca', 'en']) {
   const values = Object.values(ROUTE_SEGMENTS).map((t) => t[lang])
   assert.equal(new Set(values).size, values.length, `secciones duplicadas en ${lang}`)

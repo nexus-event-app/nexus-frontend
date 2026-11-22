@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest'
 import messages from '@/shared/i18n/messages'
 import { findLearningPath, LEARNING_PATHS, RESOURCES_REVIEWED_AT } from './learningPaths'
 
-// Mismo formato que valida el backend (LearningProgressServiceImpl): si no, el progreso no se podría guardar.
 const ID = /^[a-z0-9](?:[a-z0-9-]{0,38}[a-z0-9])?$/
 
 describe('rutas de aprendizaje', () => {

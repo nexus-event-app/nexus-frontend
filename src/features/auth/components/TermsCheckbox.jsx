@@ -12,7 +12,6 @@ function NewTabLink({ to, children }) {
   )
 }
 
-/** Aceptación obligatoria de las condiciones de uso y la política de privacidad al registrarse. */
 export default function TermsCheckbox({ checked, onChange, error }) {
   const { t } = useI18n()
   const id = useId()

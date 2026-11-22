@@ -4,8 +4,7 @@ import { useRequest } from '@/shared/hooks/useRequest'
 import { jobsService } from '../services/jobsService'
 
 const FILTER_KEYS = ['nivel', 'modalidad', 'contrato', 'q']
-/** Cinco ofertas por página: se ven sin bajar mucho y debajo va la paginación. */
-export const JOBS_PAGE_SIZE = 5
+const JOBS_PAGE_SIZE = 5
 
 export function useJobsList() {
   const query = useListQuery(FILTER_KEYS)

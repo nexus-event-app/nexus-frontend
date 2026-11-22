@@ -18,7 +18,6 @@ test.describe('Mejor respuesta', () => {
     await expect
       .poll(() => api.calls.find((call) => call.path === '/api/discussions/21/accepted-answer')?.body)
       .toBe(JSON.stringify({ commentId: 5 }))
-    // La mejor respuesta pasa a ser el primer comentario.
     await expect(page.locator('#comentario-5')).toContainText('Mejor respuesta')
     await expect(
       page
@@ -41,8 +40,6 @@ test.describe('Mejor respuesta', () => {
     await expect(page.getByRole('button', { name: /mejor respuesta/ })).toHaveCount(0)
     await page.getByRole('link', { name: 'Ver la mejor respuesta' }).click()
     await expect(page.locator('#comentario-6')).toBeFocused()
-    // Se audita con la página arriba: desplazada, la cabecera fija tapa a medias los botones de más arriba y axe los
-    // daría por pequeños (miden 44 px de alto).
     await page.evaluate(() => window.scrollTo(0, 0))
     await expectAccessible(page)
   })
@@ -77,7 +74,6 @@ test.describe('Mejor respuesta', () => {
       .filter({ hasText: /discusi/ })
       .boundingBox()
     const rules = await page.getByRole('complementary', { name: 'Normas del foro' }).boundingBox()
-    // El botón, dentro de la franja de los filtros y a su derecha; las normas empiezan donde el número.
     expect(button.y).toBeGreaterThanOrEqual(filters.y - 1)
     expect(button.y + button.height).toBeLessThanOrEqual(filters.y + filters.height + 1)
     expect(button.x).toBeGreaterThan(filters.x + filters.width)

@@ -6,7 +6,6 @@ describe('safeRedirect', () => {
     expect(safeRedirect('/foro/3?page=2')).toBe('/foro/3?page=2')
   })
 
-  // Evita redirecciones abiertas: tras iniciar sesión nunca se sale de la web.
   it.each(['https://malicioso.example', '//malicioso.example', '/\\malicioso.example', 'javascript:alert(1)', null])(
     'rechaza %s',
     (value) => {

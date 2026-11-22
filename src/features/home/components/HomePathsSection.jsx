@@ -8,9 +8,6 @@ import { paths } from '@/shared/config/paths'
 import { useI18n } from '@/shared/i18n/useI18n'
 import HomeSection from './HomeSection'
 
-/**
- * Rutas de aprendizaje en la portada: lo que más motiva a empezar. Con sesión, cada ruta muestra el progreso guardado.
- */
 export default function HomePathsSection() {
   const { t } = useI18n()
   const { isAuthenticated } = useAuth()
@@ -38,10 +35,6 @@ export default function HomePathsSection() {
           </li>
         ))}
       </ul>
-      {/*
-        En el hueco libre bajo las tarjetas: el camino de las cinco rutas hasta el primer empleo. Colocado encima, sin
-        ocupar sitio, y con los extremos difuminados; su ancho está medido para que quepa en ese hueco.
-      */}
       <Illustration
         {...illustrations.learningRoad}
         className="absolute inset-x-0 bottom-1 mx-auto hidden w-[29rem] [mask-composite:intersect] [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent),linear-gradient(to_bottom,transparent,black_4%,black_82%,transparent)] lg:block xl:w-[42rem]"

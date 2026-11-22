@@ -21,11 +21,9 @@ export default function HomePage() {
       <LatestNewsSection />
       <LatestJobsSection />
       <ForumSection />
-      {/* En el mismo orden que el menú: Noticias, Empleo, Foro, Eventos, Rutas, Testimonios. */}
       <HomeEventsSection />
       <HomePathsSection />
       <TestimonialsSection />
-      {/* Al final, después de los testimonios: invita a crear cuenta (solo sin sesión). */}
       <HomeJoinSection />
     </PageMain>
   )

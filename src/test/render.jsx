@@ -5,7 +5,6 @@ import { AuthContext } from '@/features/auth/hooks/authContext'
 import { ToastContext } from '@/shared/components/toast/toastContext'
 import I18nProvider from '@/shared/i18n/I18nProvider'
 
-/** Sesión de prueba: sin iniciar sesión salvo que la prueba pase otro usuario. */
 export function authValue(overrides = {}) {
   const user = overrides.user ?? null
   return {
@@ -29,17 +28,12 @@ export function toastValue() {
   return { success: vi.fn(), error: vi.fn(), info: vi.fn(), show: vi.fn(), dismiss: vi.fn() }
 }
 
-/** Guarda la dirección actual para que las pruebas puedan comprobar a dónde se ha navegado. */
 function LocationProbe({ onChange }) {
   const location = useLocation()
   onChange(location)
   return null
 }
 
-/**
- * Pinta un componente con todo lo que necesita la web (router, idioma, sesión y avisos). Devuelve además la sesión,
- * los avisos y la dirección actual para hacer comprobaciones.
- */
 export function renderWithProviders(ui, { route = '/', auth, toast } = {}) {
   const session = authValue(auth)
   const toasts = toast ?? toastValue()

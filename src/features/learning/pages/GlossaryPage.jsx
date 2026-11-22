@@ -13,7 +13,6 @@ import { cx } from '@/shared/utils/classNames'
 import { GLOSSARY, allTerms, searchTerms, splitCode, termAnchor } from '../data/glossary'
 import MissingWordCallout from '../components/MissingWordCallout'
 
-/** Texto con los comandos («`git push`») como código, con letra de ordenador para distinguirlos y copiarlos. */
 function RichText({ text }) {
   return splitCode(text).map((part, index) =>
     part.code ? (
@@ -21,7 +20,6 @@ function RichText({ text }) {
         key={index}
         className={cx(
           'rounded-md bg-accent-soft px-1.5 py-0.5 font-mono text-[0.9em] text-accent-strong box-decoration-clone',
-          // Los cortos, enteros en una línea; los largos (una URL, un mensaje) pueden partirse para no salirse.
           part.text.length <= 24 ? 'whitespace-nowrap' : '[overflow-wrap:anywhere]',
         )}
       >
@@ -33,7 +31,6 @@ function RichText({ text }) {
   )
 }
 
-/** Un término: nombre, qué es en una o dos frases y un ejemplo. Su ancla permite enlazarlo desde cualquier sitio. */
 function TermCard({ item }) {
   const { t } = useI18n()
   return (
@@ -48,7 +45,6 @@ function TermCard({ item }) {
       <p className="mb-4 mt-2 leading-relaxed text-ink-soft">
         <RichText text={item.definition} />
       </p>
-      {/* El ejemplo, al pie de la tarjeta: así quedan alineados en cada fila. */}
       <p className="mt-auto flex gap-2 rounded-2xl bg-canvas px-4 py-3 text-sm leading-relaxed text-ink-muted">
         <Icon name="sparkles" className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
         <span>
@@ -59,7 +55,6 @@ function TermCard({ item }) {
   )
 }
 
-/** Botones de categoría: filtran la lista sin cambiar de página. */
 function CategoryFilter({ value, onChange, counts }) {
   const { t } = useI18n()
   const options = [
@@ -96,10 +91,6 @@ function CategoryFilter({ value, onChange, counts }) {
   )
 }
 
-/**
- * Glosario para quien empieza: las palabras que más se oyen al entrar en tecnología, por categorías, con un buscador
- * que filtra mientras escribes (también sin tildes) y un ancla por término para enlazarlos desde el buscador global.
- */
 export default function GlossaryPage() {
   const { t } = useI18n()
   const inputId = useId()
@@ -129,7 +120,6 @@ export default function GlossaryPage() {
         ]}
       />
 
-      {/* Título a la izquierda y, en pantallas grandes, la invitación a proponer palabras a la derecha. */}
       <header className="mt-6 grid items-end gap-x-10 gap-y-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <hgroup className="max-w-3xl">
           <Eyebrow>{t('glossary.eyebrow')}</Eyebrow>

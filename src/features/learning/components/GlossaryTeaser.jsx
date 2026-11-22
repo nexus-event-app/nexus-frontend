@@ -8,14 +8,9 @@ import { useI18n } from '@/shared/i18n/useI18n'
 import { FEATURED_TERMS, termPath } from '../data/glossary'
 import MissingWordCallout from './MissingWordCallout'
 
-/**
- * Bloque de Rutas de aprendizaje que lleva al glosario: antetítulo y título fuera, y en el recuadro unos términos
- * de muestra (cada uno enlaza a su explicación) y el botón para ver el glosario entero.
- */
 export default function GlossaryTeaser({ className }) {
   const { t } = useI18n()
   return (
-    // Rejilla: título a la izquierda y, en pantallas grandes, la invitación a proponer palabras a la derecha.
     <section
       aria-labelledby="glossary-teaser"
       className={cx('grid gap-x-10 gap-y-8 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-end', className)}
@@ -27,7 +22,6 @@ export default function GlossaryTeaser({ className }) {
         </h2>
         <p className="mt-4 text-lg leading-relaxed text-ink-muted">{t('glossary.teaser.text')}</p>
       </hgroup>
-      {/* Enlaces al glosario: unos términos de muestra (cada uno a su explicación) y el glosario entero. */}
       <nav
         aria-label={t('glossary.teaser.termsLabel')}
         className="col-span-full -mt-2 grid gap-6 rounded-3xl border border-slate-200 bg-surface p-6 shadow-card sm:p-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center"

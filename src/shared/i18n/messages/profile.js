@@ -1,4 +1,3 @@
-/** Perfil público y edición del perfil. */
 export default {
   es: {
     view: {

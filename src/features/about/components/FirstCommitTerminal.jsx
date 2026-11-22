@@ -1,12 +1,6 @@
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 
-/**
- * Terminal decorativa: el «primer commit» que da nombre al proyecto. Estaba en la cabecera de «Sobre el proyecto»;
- * se guarda para usarla en otra parte. Colores fijos (gris muy oscuro)
- * en los dos temas; el cursor parpadea y se queda quieto con «reducir movimiento». Oculta a los lectores de pantalla:
- * no añade información.
- */
 export default function FirstCommitTerminal({ className }) {
   const { t } = useI18n()
   return (

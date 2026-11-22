@@ -1,7 +1,6 @@
 import Icon from '@/shared/components/Icon'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-/** Enlace a un recurso externo gratuito: dice quién lo publica, en qué idioma está y que se abre en otra pestaña. */
 export default function ResourceLink({ resource }) {
   const { t } = useI18n()
   return (

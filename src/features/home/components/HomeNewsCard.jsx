@@ -11,17 +11,10 @@ import { cx } from '@/shared/utils/classNames'
 import { contentLanguageOf } from '@/shared/utils/contentLanguage'
 import { excerpt } from '@/shared/utils/text'
 
-/**
- * Noticia de la portada. `featured`: la más reciente, más grande (imagen ancha arriba, titular mayor y resumen).
- * Las demás, pequeñas: imagen a la izquierda en pantallas medianas y grandes, y solo categoría, fecha y titular, para
- * que el apartado ocupe lo mismo que los demás. Toda la tarjeta lleva a la noticia; «Leer noticia» es solo una pista
- * visual. Aparece subiendo un poco cuando entra en pantalla.
- */
 export default function HomeNewsCard({ item, featured = false, delay = 0 }) {
   const { t } = useI18n()
   const [ref, inView] = useInView()
   const language = contentLanguageOf(item)
-  // En las pequeñas, el texto va en la segunda columna de la rejilla (la imagen ocupa la primera, de arriba abajo).
   const pad = featured ? 'mx-6' : 'mx-5 sm:col-start-2'
 
   return (
@@ -78,7 +71,6 @@ export default function HomeNewsCard({ item, featured = false, delay = 0 }) {
       <footer
         className={cx(
           'mt-auto flex items-center justify-between gap-4 border-t border-slate-200 text-sm',
-          // En las pequeñas, el pie va en la última fila de la rejilla, siempre abajo.
           featured ? 'mx-6 pb-4 pt-3' : 'mx-5 pb-4 pt-3 sm:col-start-2 sm:row-start-4',
         )}
       >

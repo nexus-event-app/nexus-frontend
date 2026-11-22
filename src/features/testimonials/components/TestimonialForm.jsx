@@ -51,7 +51,6 @@ export default function TestimonialForm({ className }) {
         }
         throw error
       }
-      // El de la administración se publica al momento; el resto espera la revisión.
       setSent(created?.isActive ? 'published' : 'pending')
       form.reset(initialValues)
     },
@@ -60,9 +59,6 @@ export default function TestimonialForm({ className }) {
   const length = form.values.content.trim().length
 
   return (
-    // Rejilla (form-grid): nombre, puesto y ubicación comparten fila (así el formulario cabe en pantalla); el resto
-    // ocupa todo el ancho. Sin caja propia: la pone la
-    // página (el panel de «Escribe en el muro»).
     <form onSubmit={form.handleSubmit} noValidate className={cx('form-grid', className)}>
       {sent && (
         <Alert
@@ -106,7 +102,6 @@ export default function TestimonialForm({ className }) {
         maxLength={CONTENT_MAX}
         required
       />
-      {/* Qué se publica y cómo retirarlo, junto al botón: es lo que conviene saber justo antes de enviar. */}
       <p className="flex flex-col gap-4 border-t border-slate-200 pt-5 sm:flex-row sm:items-center sm:justify-between">
         <small className="max-w-md text-sm leading-relaxed text-ink-muted">{t('testimonials.form.intro')}</small>
         <Button type="submit" size="lg" loading={form.submitting} className="shrink-0 shadow-pop">

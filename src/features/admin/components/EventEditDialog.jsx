@@ -7,10 +7,6 @@ import { useForm } from '@/shared/hooks/useForm'
 import { useToast } from '@/shared/hooks/useToast'
 import { adminEventsService } from '../services/adminEventsService'
 
-/**
- * Corregir un evento desde el panel (una errata, la fecha, la ciudad escrita con la dirección...). Usa los mismos campos
- * que el formulario público; aquí no se exige que la fecha no haya pasado.
- */
 export default function EventEditDialog({ event, onSaved, onClose }) {
   const toast = useToast()
   const form = useForm({

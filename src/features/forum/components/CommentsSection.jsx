@@ -20,7 +20,6 @@ import { Link } from '@/shared/i18n/router'
 import Icon from '@/shared/components/Icon'
 import { paths } from '@/shared/config/paths'
 
-/** La mejor respuesta va la primera; el resto, en el orden en que se escribieron. */
 function sortComments(comments, acceptedId) {
   const accepted = comments.find((comment) => comment.id === acceptedId)
   return accepted ? [accepted, ...comments.filter((comment) => comment !== accepted)] : comments
@@ -35,11 +34,9 @@ export default function CommentsSection({ discussion, comments, onDiscussionChan
   const [pendingDelete, setPendingDelete] = useState(null)
   const { data, error, reload, mutate } = comments
   const { hash } = useLocation()
-  // Solo quien preguntó elige la mejor respuesta (el servidor también lo comprueba).
   const canAccept = isAuthenticated && user?.id === discussion.authorId
   const acceptedId = discussion.acceptedCommentId ?? null
 
-  // Al llegar desde un aviso («#comentario-12»), se lleva la vista y el foco a ese comentario cuando ya está cargado.
   const loaded = Boolean(data)
   useEffect(() => {
     if (!loaded || !hash.startsWith('#comentario-')) return
@@ -67,7 +64,6 @@ export default function CommentsSection({ discussion, comments, onDiscussionChan
     async (comment) => {
       await commentService.remove(comment.id)
       mutate((items) => items.filter((item) => item.id !== comment.id))
-      // Si era la mejor respuesta, la discusión vuelve a quedar sin resolver.
       if (comment.id === acceptedId) onDiscussionChange({ ...discussion, acceptedCommentId: null })
       setPendingDelete(null)
     },
@@ -107,8 +103,6 @@ export default function CommentsSection({ discussion, comments, onDiscussionChan
         </p>
       )}
       {data && data.length > 0 && (
-        // Una línea vertical une las respuestas a la altura de las fotos, como un hilo de conversación (decorativa:
-        // pasa por detrás de las tarjetas y solo se ve entre una y otra).
         <ul className="relative mt-5 space-y-2.5 before:absolute before:bottom-6 before:left-[2.125rem] before:top-6 before:w-0.5 before:bg-slate-200 sm:before:left-10">
           {sortComments(data, acceptedId).map((comment) => (
             <li key={comment.id} className="relative">
@@ -129,7 +123,6 @@ export default function CommentsSection({ discussion, comments, onDiscussionChan
         </ul>
       )}
 
-      {/* #responder: los enlaces que invitan a contestar (p. ej., el hilo del glosario) llevan directo aquí. */}
       <footer id="responder" className="mt-8 scroll-mt-24">
         {isAuthenticated && user?.emailVerified === false ? (
           <VerifyEmailNotice>{t('forum.comments.confirmEmail')}</VerifyEmailNotice>

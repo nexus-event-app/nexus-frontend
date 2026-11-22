@@ -4,7 +4,6 @@ import { describe, expect, it } from 'vitest'
 import { renderWithProviders } from '@/test/render'
 import RequireAuth from './RequireAuth'
 
-// Solo la página privada va protegida, como en la web: la portada y «Iniciar sesión» son públicas.
 const privatePage = (
   <Routes>
     <Route

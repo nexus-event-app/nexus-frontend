@@ -11,10 +11,8 @@ const LEGAL_LINKS = [
   { label: 'Política de cookies', to: paths.cookies },
 ]
 
-/** Plantilla común de las páginas legales: migas, título, índice y enlaces a las demás. */
 export default function LegalPage({ title, description, path, sections }) {
   return (
-    // Rejilla del <main>: migas arriba; índice del texto a la izquierda (pantallas grandes) y el texto legal.
     <PageMain className="page-container page-section grid grid-cols-1 content-start gap-x-10 lg:grid-cols-[16rem_minmax(0,1fr)]">
       <Seo title={title} description={description} path={path} translated={false} />
       <Breadcrumbs className="col-span-full" items={[{ label: title, to: path }]} />

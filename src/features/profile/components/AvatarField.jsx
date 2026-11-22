@@ -9,10 +9,8 @@ import { useI18n } from '@/shared/i18n/useI18n'
 import { profileService } from '../services/profileService'
 import { resizeToSquareJpeg } from '../utils/resizeImage'
 
-/** Fotos de hasta 20 MB (las del móvil pesan mucho); se reducen en el navegador antes de subirlas. */
 const MAX_FILE_BYTES = 20 * 1024 * 1024
 
-/** Foto de perfil: se sube o se quita al momento, sin esperar a guardar el resto del formulario. */
 export default function AvatarField({ name, avatarUrl, onChange, className, legendClassName }) {
   const { t } = useI18n()
   const toast = useToast()
@@ -66,7 +64,6 @@ export default function AvatarField({ name, avatarUrl, onChange, className, lege
   }
 
   return (
-    // Rejilla: la foto a la izquierda; los botones y la explicación a su derecha.
     <fieldset
       className={cx('grid items-center gap-4 sm:grid-cols-[auto_minmax(0,1fr)] sm:gap-y-2', className)}
       aria-busy={busy}

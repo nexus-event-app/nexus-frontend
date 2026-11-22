@@ -6,9 +6,7 @@ test('el tema oscuro se aplica y se recuerda al volver', async ({ page, isMobile
   const html = page.locator('html')
   await expect(html).not.toHaveClass(/dark/)
 
-  // En el móvil el botón está dentro del menú.
   if (isMobile) await page.getByRole('button', { name: 'Abrir menú' }).click()
-  // El botón recorre automático → claro → oscuro.
   const toggle = page.getByRole('button', { name: /^Tema:/ })
   for (let i = 0; i < 3 && !(await html.getAttribute('class'))?.includes('dark'); i++) await toggle.click()
   await expect(html).toHaveClass(/dark/)

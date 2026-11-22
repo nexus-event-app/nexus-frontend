@@ -2,10 +2,6 @@ import Eyebrow from '@/shared/components/Eyebrow'
 import { useI18n } from '@/shared/i18n/useI18n'
 import ProfileCard from './ProfileCard'
 
-/**
- * Lateral de «Editar perfil»: la misma tarjeta que ve cualquiera que entre en tu perfil, con lo que estás escribiendo,
- * para ver cómo quedará antes de guardar. Antetítulo y título fuera del recuadro, como en el resto de la web.
- */
 export default function ProfilePreview({ values, fallbackName, avatarUrl, memberSince, className }) {
   const { t } = useI18n()
   const profile = {

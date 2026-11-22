@@ -18,7 +18,6 @@ export default function LikeButton({ count, liked, pending, onToggle, label }) {
       )}
     >
       <Icon name="heart" className="h-5 w-5" filled={liked} />
-      {/* El nombre accesible incluye el número que se ve («Me gusta este comentario: 3 me gusta»), como pide WCAG 2.5.3. */}
       <span className="sr-only">{label}: </span>
       {count}
       <span className="sr-only"> {t('forum.card.likes')}</span>

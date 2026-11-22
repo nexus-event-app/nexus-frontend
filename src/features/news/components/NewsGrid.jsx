@@ -2,10 +2,6 @@ import { cx } from '@/shared/utils/classNames'
 import NewsCard from './NewsCard'
 import { newsLayout } from './newsLayout'
 
-/**
- * Rejilla de noticias. Con `varied`, en pantallas grandes mezcla tarjetas con la imagen arriba y anchas con la imagen
- * al lado (ver newsLayout) para que no quede tan lineal; en móvil y tableta todas son iguales.
- */
 export default function NewsGrid({ items, headingLevel, varied = false }) {
   const layout = varied ? newsLayout(items.length) : items.map(() => 'default')
   return (

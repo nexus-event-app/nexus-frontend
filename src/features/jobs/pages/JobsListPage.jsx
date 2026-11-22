@@ -24,7 +24,6 @@ import { useI18n } from '@/shared/i18n/useI18n'
 
 const CLEARED_FILTERS = { nivel: '', modalidad: '', contrato: '', q: '' }
 
-/** «Quitar filtros»: discreto, como un enlace, junto al número de ofertas. */
 function ClearFilters({ onClear }) {
   const { t } = useI18n()
   return (
@@ -54,7 +53,6 @@ export default function JobsListPage() {
         path={page > 1 ? `${paths.jobs}?page=${page}` : paths.jobs}
         robots={hasFilters ? 'noindex,follow' : 'index,follow'}
       />
-      {/* Cuadrícula decorativa detrás de la cabecera, como en Noticias y en la portada. */}
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Breadcrumbs items={[{ label: t('jobs.breadcrumb'), to: paths.jobs }]} />
       <header className="mb-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
@@ -75,10 +73,6 @@ export default function JobsListPage() {
 
       <JobFilters filters={filters} onChange={setFilters} buildHref={buildHref} />
 
-      {/*
-        Resultados en rejilla: el número de ofertas, la lista y las páginas a la izquierda; desde 1280 px, la
-        ilustración a la derecha, que acompaña al bajar (sticky).
-      */}
       <section
         aria-label={t('common.results')}
         aria-busy={list.loading}

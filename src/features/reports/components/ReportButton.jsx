@@ -10,11 +10,6 @@ import { useNavigate } from '@/shared/i18n/useNavigate'
 import { cx } from '@/shared/utils/classNames'
 import ReportDialog from './ReportDialog'
 
-/**
- * Botón «Reportar». No aparece en el contenido propio. Sin sesión, lleva a iniciarla y vuelve aquí.
- * `srLabel` completa el nombre para lectores de pantalla («Reportar el comentario de Ana»); con `compact` solo se
- * ve la bandera y `srLabel` es el nombre completo.
- */
 export default function ReportButton({ targetType, targetId, ownerId, srLabel, compact = false, className }) {
   const { t } = useI18n()
   const { isAuthenticated, user } = useAuth()

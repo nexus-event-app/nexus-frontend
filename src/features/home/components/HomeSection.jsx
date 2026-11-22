@@ -4,13 +4,6 @@ import Illustration from '@/shared/components/Illustration'
 import { Link } from '@/shared/i18n/router'
 import { cx } from '@/shared/utils/classNames'
 
-/**
- * Sección de la portada: antetítulo que se escribe solo, título grande, una frase que invita a entrar y el enlace
- * «Ver todo» en forma de pastilla. Detrás, una cuadrícula suave que se desvanece (decorativa). En pantallas grandes
- * todos los apartados tienen la misma altura mínima, para que la portada lleve un ritmo regular.
- * Con `illustration` (una de shared/config/illustrations), el contenido va a la izquierda y la ilustración a la
- * derecha (desde 1280 px: con menos ancho, las tarjetas se quedarían estrechas), sin contenedores extra: la propia sección se convierte en rejilla.
- */
 export default function HomeSection({
   id,
   eyebrow,

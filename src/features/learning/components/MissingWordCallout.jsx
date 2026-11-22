@@ -4,18 +4,12 @@ import { glossaryThreadHref } from '@/shared/config/community'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 
-/** Burbujas con palabras que suenan a chino: flotan despacio alrededor del recuadro (decorativas). */
 const BUBBLES = [
   { text: '¿API?', className: '-top-4 right-24 [animation-delay:-1s]' },
   { text: '¿Merge?', className: '-top-3 right-3 rotate-6 [animation-delay:-3s]' },
   { text: '¿Docker?', className: '-bottom-3 left-6 -rotate-6 [animation-delay:-5s]' },
 ]
 
-/**
- * «¿Echas en falta alguna palabra?»: invitación llamativa a dejarla en el hilo del glosario del foro (así sabemos
- * qué añadir). Degradado de la marca, el bocadillo se balancea como un aviso y unas palabras flotan alrededor; todo
- * se queda quieto con «reducir movimiento». `headingLevel` según dónde vaya (h2 en el glosario, h3 en Rutas).
- */
 export default function MissingWordCallout({ id, headingLevel = 'h2', className }) {
   const { t } = useI18n()
   const Heading = headingLevel

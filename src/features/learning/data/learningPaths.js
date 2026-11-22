@@ -1,16 +1,5 @@
 import { routeSubsegment } from '@/shared/i18n/languages'
 
-/**
- * Rutas de aprendizaje: etapas y recursos gratuitos de cada una. Los textos (títulos, explicaciones y proyectos)
- * están traducidos en src/shared/i18n/messages/learning.js; aquí solo hay datos que no se traducen.
- *
- * Los identificadores (`id`) se guardan en el backend como progreso de cada persona: si cambias uno, quien ya
- * tuviera esa etapa marcada la perderá. Formato: minúsculas, números y guiones (máx. 40 caracteres).
- *
- * Cada recurso es gratuito y se comprobó que existe en la fecha de RESOURCES_REVIEWED_AT. `lang` es el idioma del
- * recurso (no el de la web): muchos de los mejores están solo en inglés y se avisa de ello.
- */
-// Al mediodía para que la fecha no cambie de día en ninguna zona horaria.
 export const RESOURCES_REVIEWED_AT = '2026-11-11T12:00:00'
 
 const MDN_WEB = {
@@ -454,10 +443,6 @@ export const LEARNING_PATHS = [
   },
 ]
 
-/**
- * Ruta a partir del segmento de la dirección, que puede estar traducido («/en/learning-paths/data» → «datos»).
- * También acepta el identificador en castellano, para que las direcciones antiguas o mal traducidas funcionen.
- */
 export function findLearningPath(segment, lang) {
   return (
     LEARNING_PATHS.find((path) => routeSubsegment('rutas', path.id, lang) === segment) ??

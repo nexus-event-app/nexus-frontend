@@ -8,22 +8,15 @@ import { useIsClamped } from '@/shared/hooks/useIsClamped'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 
-/** Un solo color para todas las notas: el violeta suave de la marca, más sobrio que alternar varios. */
 const PASTEL =
   'border-violet-200 from-violet-100 to-indigo-50 dark:border-violet-400/25 dark:from-violet-500/20 dark:to-indigo-500/5'
-/** Inclinación de cada nota; al pasar por encima (o enfocar algo dentro) se endereza. */
 const TILTS = ['-rotate-1', 'rotate-1', '-rotate-[0.5deg]']
 
-/**
- * Testimonio con aspecto de nota: ligeramente inclinada, con unas grandes comillas de sello y la cita como
- * protagonista, sobre el violeta suave de la marca. Todas miden lo mismo: el texto reserva cinco líneas y, si no cabe, «Leer más» lo
- * despliega en la propia tarjeta. `compact`: más pequeña (cuatro líneas y menos relleno), para la portada.
- */
 export default function TestimonialCard({ testimonial, linkAuthor = true, index = 0, compact = false }) {
   const { t } = useI18n()
   const quoteId = useId()
   const [expanded, setExpanded] = useState(false)
-  const [quoteRef, clamped] = useIsClamped([testimonial.content, expanded])
+  const [quoteRef, clamped] = useIsClamped(testimonial.content, expanded)
   const subtitle = [testimonial.role, testimonial.location].filter(Boolean).join(' · ')
 
   return (
@@ -36,7 +29,6 @@ export default function TestimonialCard({ testimonial, linkAuthor = true, index 
         testimonial.isHighlighted && 'ring-2 ring-amber-400/70',
       )}
     >
-      {/* Comillas de sello: decorativas, la cita ya va dentro de <blockquote>. */}
       <span
         aria-hidden="true"
         className={cx(
@@ -60,7 +52,6 @@ export default function TestimonialCard({ testimonial, linkAuthor = true, index 
           {testimonial.content}
         </p>
       </blockquote>
-      {/* El botón ocupa siempre su sitio (invisible si el texto cabe) para que todas las tarjetas midan igual. */}
       <button
         type="button"
         onClick={() => setExpanded((value) => !value)}

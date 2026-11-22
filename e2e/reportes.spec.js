@@ -44,7 +44,6 @@ test.describe('Reportar contenido', () => {
   test('se reporta un comentario ajeno, pero no el contenido propio', async ({ page, api, signedIn }) => {
     expect(signedIn.id).toBe(7)
     await page.goto('/foro/21-por-donde-empiezo-con-java')
-    // La discusión y el comentario de Lucía son suyos: no se pueden reportar.
     await expect(page.getByRole('button', { name: /Reportar la discusión/ })).toHaveCount(0)
     await expect(page.locator('#comentario-6').getByRole('button', { name: /Reportar/ })).toHaveCount(0)
 
@@ -100,7 +99,6 @@ test.describe('Cola de moderación', () => {
       'href',
       '/foro/21-por-donde-empiezo-con-java#comentario-5',
     )
-    // Un comentario no se puede ocultar, solo eliminar o descartar.
     await expect(item.getByRole('button', { name: /^Ocultar/ })).toHaveCount(0)
     await expectAccessible(page)
 

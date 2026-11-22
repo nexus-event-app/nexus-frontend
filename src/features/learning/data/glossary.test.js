@@ -31,12 +31,9 @@ describe('glosario', () => {
     expect(normalize('  Depuración ')).toBe('depuracion')
     const results = searchTerms(allTerms(t), 'api')
     expect(results[0].id).toBe('api')
-    // «API» también aparece en el ejemplo de otros términos, pero detrás del propio término.
     expect(results.length).toBeGreaterThan(1)
     expect(searchTerms(allTerms(t), 'DEPURAR').map((item) => item.id)).toContain('depurar')
     expect(searchTerms(allTerms(t), '')).toHaveLength(allTerms(t).length)
-    // En las definiciones cuentan las palabras que empiezan por el texto: «rama» no encuentra «programas».
-    // «Rama» va la primera; detrás, los que hablan de ramas (merge, cambiar de rama…), pero no «Programar».
     const branches = searchTerms(allTerms(t), 'rama').map((item) => item.id)
     expect(branches[0]).toBe('rama')
     expect(branches).toContain('merge')

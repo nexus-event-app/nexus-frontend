@@ -4,7 +4,6 @@ import { illustrations } from '@/shared/config/illustrations'
 import Icon from '@/shared/components/Icon'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-/** Las tres fases más habituales, en orden, con tres pasos para prepararlas. Textos en jobs.interview. */
 const PHASES = [
   { id: 'call', icon: 'chat' },
   { id: 'test', icon: 'code' },
@@ -26,7 +25,6 @@ const QUESTION_GROUPS = [
   { id: 'growth', questions: ['growth1', 'growth2'] },
 ]
 
-/** Una fase del proceso: qué pasa en ella y cómo prepararla. */
 function Phase({ phase, n }) {
   const { t } = useI18n()
   const key = (name) => t(`jobs.interview.${phase.id}${name}`)
@@ -65,15 +63,10 @@ function Phase({ phase, n }) {
   )
 }
 
-/**
- * Preparar entrevistas técnicas, después de la guía rápida: qué esperar en cada fase, cómo afrontar una prueba en
- * directo y qué preguntar a la empresa. Es lo que más nervios da a quien empieza, así que va al grano y en positivo.
- */
 export default function InterviewPrep() {
   const { t } = useI18n()
 
   return (
-    // Rejilla: cabecera y fases a todo el ancho; prueba en directo y preguntas, una junto a otra en pantallas anchas.
     <section aria-labelledby="interview-prep" className="relative mt-20 grid gap-x-8 gap-y-12 lg:grid-cols-2">
       <hgroup className="col-span-full max-w-2xl">
         <Eyebrow>{t('jobs.interview.eyebrow')}</Eyebrow>
@@ -83,7 +76,6 @@ export default function InterviewPrep() {
         <p className="mt-4 text-lg leading-relaxed text-ink-muted">{t('jobs.interview.description')}</p>
       </hgroup>
 
-      {/* En el hueco libre a la derecha de los títulos: colocada encima, sin ocupar sitio ni mover las fases. */}
       <Illustration
         {...illustrations.interview}
         className="absolute -top-4 right-6 hidden w-64 lg:block xl:right-12 xl:w-72"

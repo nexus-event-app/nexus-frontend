@@ -4,8 +4,7 @@ import { useRequest } from '@/shared/hooks/useRequest'
 import { discussionService } from '../services/discussionService'
 
 const FILTER_KEYS = ['categoria', 'q']
-/** Cuatro discusiones por página: caben de un vistazo junto a las normas, sin tener que bajar mucho. */
-export const FORUM_PAGE_SIZE = 4
+const FORUM_PAGE_SIZE = 4
 
 export function useDiscussionsList() {
   const query = useListQuery(FILTER_KEYS)

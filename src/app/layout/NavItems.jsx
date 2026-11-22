@@ -3,10 +3,6 @@ import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import { mainNavigation } from './navigation'
 
-/**
- * Enlaces de la navegación principal. En horizontal van dentro de una cápsula y la sección actual se resalta como
- * una pastilla blanca; en vertical (menú del móvil), en dos columnas para que el menú sea corto.
- */
 export default function NavItems({ orientation = 'horizontal' }) {
   const { t } = useI18n()
   const vertical = orientation === 'vertical'

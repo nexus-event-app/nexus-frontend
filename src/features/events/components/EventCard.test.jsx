@@ -29,7 +29,6 @@ describe('EventCard', () => {
   it('enseña fecha, hora, lugar y el enlace para apuntarse, que se abre aparte y dice adónde lleva', () => {
     renderWithProviders(<EventCard event={EVENT} />)
     const card = screen.getByRole('article', { name: 'Meetup de React en Valencia' })
-    // El día 1 sale como 1 (sin desfase horario), con el día de la semana y la hora.
     expect(card).toHaveTextContent('1')
     expect(card).toHaveTextContent(/1 de marzo · 19:00/)
     expect(card).toHaveTextContent('Valencia')
@@ -93,7 +92,6 @@ describe('EventCard', () => {
     renderWithProviders(<EventCard event={EVENT} />)
     expect(screen.queryByRole('button', { name: /Leer más/ })).not.toBeInTheDocument()
 
-    // jsdom no mide: se simula que el texto no cabe en las tres líneas.
     const height = vi.spyOn(HTMLElement.prototype, 'scrollHeight', 'get').mockReturnValue(200)
     renderWithProviders(<EventCard event={{ ...EVENT, id: 52, title: 'Otro evento' }} />)
     const more = await screen.findByRole('button', { name: /Leer más la descripción de «Otro evento»/ })

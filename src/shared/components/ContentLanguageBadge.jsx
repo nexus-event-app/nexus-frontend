@@ -1,10 +1,6 @@
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 
-/**
- * Etiqueta «EN» o «ES» para un contenido escrito en un idioma distinto al de la página. Los lectores de pantalla oyen
- * el nombre completo («En inglés»); si el contenido está en el idioma de la página no se muestra nada.
- */
 export default function ContentLanguageBadge({ language, className }) {
   const { t, lang } = useI18n()
   if (!language || language === lang) return null

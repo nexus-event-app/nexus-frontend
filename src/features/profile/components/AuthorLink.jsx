@@ -2,7 +2,6 @@ import { Link } from '@/shared/i18n/router'
 import { paths } from '@/shared/config/paths'
 import { cx } from '@/shared/utils/classNames'
 
-/** Nombre de una persona enlazado a su perfil público (o texto plano si no tiene cuenta). */
 export default function AuthorLink({ id, name, className }) {
   if (!id) return <span className={className}>{name}</span>
   return (

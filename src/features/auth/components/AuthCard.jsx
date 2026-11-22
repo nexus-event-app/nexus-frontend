@@ -3,7 +3,6 @@ import Icon from '@/shared/components/Icon'
 import PageMain from '@/shared/components/PageMain'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-/** Lo que se gana con la cuenta (los mismos textos que la franja de la portada). */
 const BENEFITS = [
   { key: 'benefitProgress', icon: 'academic' },
   { key: 'benefitJobs', icon: 'bookmark' },
@@ -11,12 +10,6 @@ const BENEFITS = [
   { key: 'benefitAlerts', icon: 'bell' },
 ]
 
-/**
- * Página de acceso (entrar, registrarse, recuperar contraseña...). A la izquierda, el antetítulo, el título y la frase
- * (fuera de la tarjeta, como en el resto de la web), la tarjeta con el formulario y, debajo, el enlace para cambiar de
- * página. A la derecha, en pantallas grandes, un panel con el degradado de la marca que recuerda lo que se gana con la
- * cuenta (en el móvil no se muestra, para que el formulario quede a mano).
- */
 export default function AuthCard({ eyebrow, title, subtitle, children, footer }) {
   const { t } = useI18n()
 
@@ -34,7 +27,6 @@ export default function AuthCard({ eyebrow, title, subtitle, children, footer })
         </hgroup>
       </header>
 
-      {/* El formulario (o el aviso de cada página), en su tarjeta; toma el nombre del título de la página. */}
       <section
         aria-labelledby="auth-title"
         className="mx-auto mt-6 w-full max-w-md rounded-3xl border border-slate-200 bg-surface p-6 shadow-card sm:p-8 lg:col-start-1"

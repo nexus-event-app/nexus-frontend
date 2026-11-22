@@ -2,7 +2,6 @@ import { expect, expectAccessible, test } from './fixtures.js'
 
 const PAGES = [
   '/',
-  // Un perfil visto por otra persona (sin sesión).
   '/perfil/7-lucia-prueba',
   '/noticias',
   '/noticias/1-novedades-de-react-19',
@@ -30,15 +29,10 @@ const PRIVATE_PAGES = [
   '/notificaciones',
   '/foro/21-por-donde-empiezo-con-java',
   '/rutas/ia',
-  // El perfil propio: con «Editar perfil» y todos los datos rellenos.
   '/perfil/7-lucia-prueba',
-  // «Editar perfil»: el formulario y la vista previa.
   '/perfil/editar',
-  // Crear una discusión: el formulario y las normas del foro.
   '/foro/nueva',
-  // Compartir un evento: el formulario y los consejos.
   '/eventos/nuevo',
-  // La agenda con sesión: en los eventos propios sale «Borrar» en lugar de «Reportar».
   '/eventos',
 ]
 
@@ -51,7 +45,6 @@ for (const theme of ['light', 'dark']) {
         await page.goto(path)
         await expect(page.getByRole('main')).toBeVisible()
         await expect(page.getByRole('main')).not.toHaveAttribute('aria-busy', 'true')
-        // Apartados que cargan aparte (p. ej. las discusiones del perfil): axe no debe pasar a mitad de su animación.
         await expect(page.locator('main [aria-busy="true"]')).toHaveCount(0)
         await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1)
         await expect(page.locator('div:not(#root)')).toHaveCount(0)
@@ -59,14 +52,12 @@ for (const theme of ['light', 'dark']) {
       })
     }
 
-    // Páginas que solo ve quien tiene sesión iniciada.
     for (const path of PRIVATE_PAGES) {
       test(`${path} (con sesión) cumple WCAG 2.2 AA`, async ({ page, signedIn }) => {
         expect(signedIn.id).toBeDefined()
         await page.goto(path)
         await expect(page.getByRole('main')).not.toHaveAttribute('aria-busy', 'true')
         await expect(page.getByRole('main').getByRole('list').first()).toBeVisible()
-        // Apartados que cargan aparte (p. ej. las discusiones del perfil): axe no debe pasar a mitad de su animación.
         await expect(page.locator('main [aria-busy="true"]')).toHaveCount(0)
         await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1)
         await expect(page.locator('div:not(#root)')).toHaveCount(0)

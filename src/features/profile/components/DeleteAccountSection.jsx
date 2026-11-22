@@ -13,7 +13,6 @@ import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import { profileService } from '../services/profileService'
 
-/** Qué se borra y qué se queda, para decidir sabiendo lo que pasa. */
 const GROUPS = [
   {
     key: 'deleted',
@@ -24,7 +23,6 @@ const GROUPS = [
   { key: 'kept', icon: 'chat', tone: 'text-accent', items: ['kept1'] },
 ]
 
-/** Confirmación: repite qué pasa y pide la contraseña si la cuenta tiene (las creadas con Google pueden no tenerla). */
 function ConfirmDeletion({ needsPassword, onCancel }) {
   const { t } = useI18n()
   const { logout } = useAuth()
@@ -44,8 +42,6 @@ function ConfirmDeletion({ needsPassword, onCancel }) {
     setError(null)
     try {
       await profileService.deleteAccount(needsPassword ? password : null)
-      // La sesión ya no vale en el servidor: se vuelve a la portada y se cierra aquí también. En este orden: si se
-      // cerrara antes, la protección de las páginas privadas mandaría a «Iniciar sesión».
       navigate(paths.home, { replace: true })
       logout()
       toast.success(t('profile.deleteAccount.done'))
@@ -99,10 +95,6 @@ function ConfirmDeletion({ needsPassword, onCancel }) {
   )
 }
 
-/**
- * «Eliminar tu cuenta», al final de Editar perfil, en pequeño. Al pulsarlo, la ventana de confirmación explica qué se
- * borra y qué se queda (el foro, sin nombre). Las cuentas de administración no pueden eliminarse aquí (el panel podría quedarse sin nadie).
- */
 export default function DeleteAccountSection({ className }) {
   const { t } = useI18n()
   const { user } = useAuth()
@@ -111,8 +103,6 @@ export default function DeleteAccountSection({ className }) {
   const isAdmin = user.role === 'ADMIN'
 
   return (
-    // Discreto, al final de la página, como en casi todas las webs: que se encuentre si se busca, sin llamar la
-    // atención. Lo que se borra y lo que se queda se explica en la ventana de confirmación.
     <section aria-labelledby="delete-account-title" className={cx('border-t border-slate-200 pt-6', className)}>
       <h2 id="delete-account-title" className="text-base font-semibold text-ink">
         {t('profile.deleteAccount.title')}
@@ -122,7 +112,6 @@ export default function DeleteAccountSection({ className }) {
       ) : (
         <p className="mt-1 text-sm text-ink-muted">
           {t('profile.deleteAccount.intro')}{' '}
-          {/* 44 px para el dedo, sin agrandar la línea de texto (el margen negativo lo compensa). */}
           <button
             type="button"
             onClick={() => setConfirming(true)}

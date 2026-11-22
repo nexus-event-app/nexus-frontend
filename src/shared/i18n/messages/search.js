@@ -1,4 +1,3 @@
-/** Búsqueda global. */
 export default {
   es: {
     open: 'Buscar',

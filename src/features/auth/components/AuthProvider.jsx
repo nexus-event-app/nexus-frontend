@@ -13,7 +13,6 @@ export default function AuthProvider({ children }) {
   const toast = useToast()
   const [session, setSession] = useState(readSession)
   const [loading, setLoading] = useState(() => readSession() !== null)
-  // Cerró sesión ella misma (o eliminó su cuenta): las páginas privadas llevan a la portada, no a «Iniciar sesión».
   const [signedOut, setSignedOut] = useState(false)
 
   useEffect(() => {
@@ -72,14 +71,12 @@ export default function AuthProvider({ children }) {
 
   const login = useCallback((credentials) => startSession(() => authService.login(credentials)), [startSession])
   const register = useCallback((payload) => startSession(() => authService.register(payload)), [startSession])
-  // Al volver de Google: canjear el código de un solo uso o crear la cuenta tras aceptar las condiciones.
   const loginWithGoogle = useCallback((code) => startSession(() => authService.googleExchange(code)), [startSession])
   const completeGoogleSignup = useCallback(
     (token) => startSession(() => authService.googleComplete(token)),
     [startSession],
   )
 
-  /** Vuelve a pedir el usuario al backend (p. ej. tras verificar el email) y actualiza la sesión. */
   const refreshUser = useCallback(async () => {
     const current = readSession()
     if (!current) return null

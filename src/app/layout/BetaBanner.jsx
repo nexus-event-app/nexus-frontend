@@ -7,7 +7,6 @@ import { useI18n } from '@/shared/i18n/useI18n'
 
 const STORAGE_KEY = 'pc-aviso-beta-cerrado'
 
-/** El aviso cerrado se recuerda en este navegador; si el almacenamiento no está disponible, vuelve a salir. */
 function wasDismissed() {
   try {
     return window.localStorage.getItem(STORAGE_KEY) === '1'
@@ -19,15 +18,9 @@ function wasDismissed() {
 function rememberDismissed() {
   try {
     window.localStorage.setItem(STORAGE_KEY, '1')
-  } catch {
-    // Sin almacenamiento (modo privado...): se cierra igual, solo que no se recuerda.
-  }
+  } catch {}
 }
 
-/**
- * Aviso de la versión de prueba bajo la cabecera: explica que es una beta e invita a contar fallos e ideas en el
- * foro. Solo sale si la web se compila con VITE_BETA=true, y cada persona puede cerrarlo.
- */
 export default function BetaBanner({ enabled = siteConfig.beta }) {
   const { t } = useI18n()
   const [dismissed, setDismissed] = useState(wasDismissed)

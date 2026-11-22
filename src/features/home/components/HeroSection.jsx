@@ -8,7 +8,6 @@ import { Link } from '@/shared/i18n/router'
 import { useI18n } from '@/shared/i18n/useI18n'
 import HeroIllustration from './HeroIllustration'
 
-/** Lo que ofrece la web, en cuatro bloques informativos (no son enlaces: las secciones están en el menú). */
 const FEATURES = [
   { key: 'news', icon: 'newspaper' },
   { key: 'jobs', icon: 'briefcase' },
@@ -16,11 +15,6 @@ const FEATURES = [
   { key: 'learn', icon: 'academic' },
 ]
 
-/**
- * Portada: qué es Primer Commit y una sola llamada a la acción, unirse (con sesión, solo un saludo). A la
- * derecha, una ilustración con mini pantallas de la web; abajo, lo que encontrarás, en bloques informativos con un
- * estilo translúcido distinto del de las tarjetas que se pueden pulsar.
- */
 export default function HeroSection() {
   const { t } = useI18n()
   const { isAuthenticated, user } = useAuth()
@@ -58,7 +52,6 @@ export default function HeroSection() {
         </p>
 
         {isAuthenticated ? (
-          // Con sesión, solo el saludo: nada de botones que lleven a algún sitio.
           <p className="mt-7 animate-rise-in text-lg font-semibold text-white [animation-delay:240ms]">
             {t('home.hero.greeting', { name: user.name })}
           </p>

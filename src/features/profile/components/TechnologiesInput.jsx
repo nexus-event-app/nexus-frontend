@@ -3,8 +3,8 @@ import Icon from '@/shared/components/Icon'
 import { cx } from '@/shared/utils/classNames'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-export const MAX_TECHNOLOGIES = 12
-export const MAX_TECHNOLOGY_LENGTH = 30
+const MAX_TECHNOLOGIES = 12
+const MAX_TECHNOLOGY_LENGTH = 30
 
 const SUGGESTIONS = [
   'HTML',
@@ -41,10 +41,6 @@ const SUGGESTIONS = [
   'Ciberseguridad',
 ]
 
-/**
- * Campo de etiquetas: se escribe una tecnología y se añade con Intro o coma. Cada etiqueta tiene su botón para
- * quitarla, y con Retroceso en el campo vacío se quita la última.
- */
 export default function TechnologiesInput({ value, onChange, error, className, legendClassName }) {
   const { t } = useI18n()
   const id = useId()
@@ -75,7 +71,6 @@ export default function TechnologiesInput({ value, onChange, error, className, l
   const errorId = `${id}-error`
 
   return (
-    // Grupo de campos: la lista de tecnologías añadidas y el campo para añadir otra.
     <fieldset className={className}>
       <legend className={cx('block', legendClassName ?? 'mb-1.5 text-sm font-semibold text-ink')}>
         {t('profile.edit.technologies')}

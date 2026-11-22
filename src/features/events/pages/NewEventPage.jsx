@@ -17,7 +17,6 @@ import { eventsService } from '../services/eventsService'
 import EventFields from '../components/EventFields'
 import { INITIAL_EVENT, toEventPayload, todayIso, validateEvent } from '../utils/eventForm'
 
-/** Consejos para que la agenda sea útil, al lado del formulario. */
 function SharingTips({ className }) {
   const { t } = useI18n()
   return (
@@ -74,7 +73,6 @@ function EventForm({ onSubmit }) {
   )
 }
 
-/** Compartir un evento: formulario corto a la izquierda y consejos a la derecha, como «Nueva discusión». */
 export default function NewEventPage() {
   const { t } = useI18n()
   const { user } = useAuth()

@@ -3,18 +3,12 @@ import { useAuth } from '@/features/auth/hooks/useAuth'
 import { SavedJobsContext } from '../hooks/savedJobsContext'
 import { savedJobsService } from '../services/savedJobsService'
 
-/**
- * Qué ofertas tiene guardadas el usuario, para marcar el botón de guardar en listados y fichas. Se carga una vez
- * al iniciar sesión y se actualiza al momento al guardar o quitar (si el servidor falla, se deshace el cambio).
- */
 export default function SavedJobsProvider({ children }) {
   const { user } = useAuth()
   const userId = user?.id ?? null
   const [state, setState] = useState({ userId: null, ids: new Set() })
   const [pending, setPending] = useState(() => new Set())
   const pendingRef = useRef(pending)
-  // Cambios hechos mientras se carga la lista: la respuesta se pidió antes y no los incluye, así que se aplican
-  // encima al llegar. Sin esto, guardar una oferta nada más entrar se perdía al terminar la carga.
   const changesWhileLoadingRef = useRef(null)
 
   useEffect(() => {
@@ -34,9 +28,7 @@ export default function SavedJobsProvider({ children }) {
           changes.forEach((saved, jobId) => (saved ? ids.add(jobId) : ids.delete(jobId)))
           setState({ userId, ids })
         },
-        () => {
-          // Sin la lista, los botones aparecen sin marcar; guardar sigue funcionando.
-        },
+        () => {},
       )
       .finally(() => {
         if (changesWhileLoadingRef.current === changes) changesWhileLoadingRef.current = null
@@ -67,7 +59,6 @@ export default function SavedJobsProvider({ children }) {
       return next
     })
 
-  /** Guarda o quita la oferta. Devuelve el nuevo estado (true = guardada). Lanza el error si el servidor falla. */
   const toggle = useCallback(
     async (jobId) => {
       if (pendingRef.current.has(jobId)) return ids.has(jobId)

@@ -1,4 +1,3 @@
-/** Página de eventos de la comunidad: los comparte cualquiera con cuenta y se publican al momento. */
 export default {
   es: {
     breadcrumb: 'Eventos',

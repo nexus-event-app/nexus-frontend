@@ -1,4 +1,3 @@
-/** Portada. */
 export default {
   es: {
     hero: {

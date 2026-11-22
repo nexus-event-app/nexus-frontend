@@ -17,7 +17,6 @@ const RESULT = {
   people: { items: [{ id: 3, name: 'Ana García', headline: 'Frontend junior' }], total: 1 },
 }
 
-/** Como en la cabecera: la lupa abre el campo y este avisa al cerrarse. */
 function Harness() {
   const [open, setOpen] = useState(false)
   return <SiteSearch open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)} />
@@ -32,7 +31,6 @@ async function openAndType(text, options) {
   await userEvent.click(screen.getByRole('button', { name: /Buscar en toda la web|Search the whole site/ }))
   const input = screen.getByRole('combobox')
   await userEvent.type(input, text)
-  // «Ver todos» aparece al momento; se espera a que lleguen los resultados.
   await screen.findByRole('option', { name: /Novedades de React 19/ })
   return { ...view, input }
 }

@@ -16,11 +16,6 @@ function buildTitle(title, tagline) {
   return `${fitted}${suffix}`
 }
 
-/**
- * Metadatos SEO de la página. `translated={false}` marca las páginas cuyo contenido principal solo existe en
- * castellano (noticias, ofertas, debates, textos legales): todas sus versiones de idioma apuntan con canonical a
- * la castellana y no se declaran alternativas hreflang, para que Google no las trate como contenido duplicado.
- */
 export default function Seo({
   title,
   description,
@@ -42,7 +37,6 @@ export default function Seo({
 
   const fullTitle = buildTitle(title, t('seo.tagline'))
   const summary = excerpt(description ?? t('seo.description'), MAX_DESCRIPTION)
-  // La ruta base no lleva prefijo de idioma; cada versión añade el suyo.
   const basePath = stripLang(path ?? pathname)
   const url = absoluteUrl(localizePath(basePath, translated ? lang : DEFAULT_LANGUAGE))
   const contentLang = translated ? lang : DEFAULT_LANGUAGE

@@ -4,10 +4,6 @@ import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import Icon from './Icon'
 
-/**
- * Buscador de una página: busca mientras se escribe (con una pequeña espera) y también al pulsar Intro.
- * `compact`: versión pequeña y discreta, una pastilla con la lupa y sin botón; Intro sigue enviando la búsqueda.
- */
 export default function SearchBar({ value, onSearch, label, placeholder, compact = false, className }) {
   const { t } = useI18n()
   const fieldLabel = label ?? t('common.search.label')
@@ -71,7 +67,6 @@ export default function SearchBar({ value, onSearch, label, placeholder, compact
     </label>
   )
 
-  // Va dentro de la zona de búsqueda de cada página (<search>), que agrupa también sus filtros.
   if (compact) {
     return (
       <form onSubmit={handleSubmit} className={cx('relative', className)}>

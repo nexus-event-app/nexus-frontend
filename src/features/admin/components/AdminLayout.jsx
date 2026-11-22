@@ -53,7 +53,6 @@ export default function AdminLayout() {
 
   useDismiss(barRef, open, closeMenu)
 
-  // #root (index.css) apila la página en columna; en pantallas grandes la barra lateral queda fija a la izquierda.
   return (
     <>
       <a href="#contenido" className="skip-link">

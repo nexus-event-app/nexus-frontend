@@ -4,7 +4,6 @@ import { useI18n } from '@/shared/i18n/useI18n'
 import { JOB_PORTALS } from '../config/jobPortals'
 import CompanyMonogram from './CompanyMonogram'
 
-/** Enlace externo a un portal: pestaña nueva y sin transmitir autoridad SEO ni datos de origen. */
 function PortalLink({ portal, className, children }) {
   const { t } = useI18n()
   return (
@@ -15,14 +14,9 @@ function PortalLink({ portal, className, children }) {
   )
 }
 
-/**
- * Búsquedas ya filtradas (tecnología, junior, España) en los principales portales de empleo.
- */
 export default function JobPortals() {
   const { t } = useI18n()
 
-  // Apartado propio, como las secciones de la portada: antetítulo que se escribe solo, título grande y una tarjeta
-  // por portal con sus iniciales, para qué sirve y «Ver ofertas». Un halo suave detrás lo separa de la lista.
   return (
     <section
       aria-labelledby="job-portals"

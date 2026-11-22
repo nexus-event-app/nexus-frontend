@@ -4,7 +4,6 @@ import { jobs, page as pageOf } from './data.js'
 const LEVELS = ['JUNIOR', 'INTERN', 'MID']
 const MODES = ['HYBRID', 'REMOTE', 'ONSITE']
 
-/** Varias ofertas distintas, para ver la lista completa. */
 const manyJobs = Array.from({ length: 6 }, (_, index) => ({
   ...jobs[0],
   id: 200 + index,

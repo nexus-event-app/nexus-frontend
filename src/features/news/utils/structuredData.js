@@ -4,7 +4,6 @@ import { paths } from '@/shared/config/paths'
 import { excerpt } from '@/shared/utils/text'
 
 export function buildNewsArticleData(article) {
-  // URL canónica (castellano): el contenido de la noticia no se traduce.
   const url = absoluteUrl(paths.newsDetail(article))
 
   return {

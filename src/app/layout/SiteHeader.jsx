@@ -22,11 +22,6 @@ import UserMenu from './UserMenu'
 import { siteConfig } from '@/shared/config/site'
 import { cx } from '@/shared/utils/classNames'
 
-/**
- * Entrar y crear cuenta, como elementos de un menú (<menu>). En la barra de escritorio (`pill`) solo va «Iniciar
- * sesión», en pastilla: «Crear cuenta» ya aparece en la portada y en muchas páginas, y así la barra respira. En el
- * menú del móvil van los dos.
- */
 function AuthLinks({ className, pill = false }) {
   const { t } = useI18n()
   return (
@@ -72,8 +67,6 @@ export default function SiteHeader() {
 
   useDismiss(headerRef, open, closeMenu)
 
-  // Búsqueda global en la propia cabecera. Solo existe la versión que se ve (escritorio o móvil), para que no haya dos
-  // campos ni dos búsquedas a la vez; el atajo de teclado abre esa.
   const isDesktop = useMediaQuery('(min-width: 1280px)')
   const [searchOpen, setSearchOpen] = useState(false)
   const closeSearch = useCallback(() => setSearchOpen(false), [])
@@ -83,8 +76,6 @@ export default function SiteHeader() {
   }, [])
   useSearchShortcut(openSearch)
 
-  // En la portada, el logo apunta a la misma página y no haría nada: en ese caso sube hasta arriba (sin animación con
-  // «reducir movimiento»). Desde cualquier otra página lleva a la portada como un enlace normal.
   const handleLogoClick = (event) => {
     if (stripLang(location.pathname) !== paths.home) return
     event.preventDefault()
@@ -105,7 +96,6 @@ export default function SiteHeader() {
         aria-label={t('common.nav.goHome', { name: siteConfig.name })}
         className="flex h-16 min-w-0 items-center rounded-control xl:h-20"
       >
-        {/* En móviles estrechos el nombre se achica un poco para que la lupa, la campana y el menú quepan al lado. */}
         <Logo className="[&>span]:text-lg min-[380px]:[&>span]:text-xl" />
       </Link>
 
@@ -133,7 +123,6 @@ export default function SiteHeader() {
         </li>
       </menu>
 
-      {/* Móvil: lupa, campana y menú, siempre a la derecha del todo. */}
       {!isDesktop && (
         <SiteSearch
           variant="mobile"
@@ -157,8 +146,6 @@ export default function SiteHeader() {
       </button>
 
       {open && (
-        // Menú del móvil, compacto: las secciones en dos columnas, la cuenta como una lista de accesos (con su foto) y,
-        // al final, idioma y tema en una sola fila. Si aun así no cabe (móvil apaisado), se desplaza por dentro.
         <section
           id={menuId}
           aria-label={t('common.nav.menu')}

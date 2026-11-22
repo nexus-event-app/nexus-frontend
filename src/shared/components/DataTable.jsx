@@ -1,13 +1,7 @@
 import { cx } from '@/shared/utils/classNames'
 
-/**
- * Tabla de datos. En móvil cada fila se muestra como una tarjeta con el nombre de cada columna delante de su
- * valor; en pantallas medianas, como tabla. La <figure> le da el desplazamiento horizontal si no cabe.
- * Cada `render` de columna devuelve un único elemento.
- */
 export default function DataTable({ caption, columns, rows, getRowKey }) {
   return (
-    // Si la tabla no cabe, la <figure> se desplaza en horizontal: es enfocable para poder hacerlo con el teclado.
     <figure
       tabIndex={0}
       aria-label={caption}

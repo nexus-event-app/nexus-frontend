@@ -5,7 +5,6 @@ import { rememberGoogleRedirect } from '../utils/googleRedirect'
 
 const AUTHORIZE_URL = `${import.meta.env.VITE_API_URL || '/api'}/oauth2/authorize/google`
 
-/** Logotipo de Google, con sus colores, como piden sus normas para los botones de acceso. Decorativo. */
 function GoogleLogo() {
   return (
     <svg aria-hidden="true" viewBox="0 0 48 48" className="h-5 w-5 shrink-0">
@@ -29,11 +28,6 @@ function GoogleLogo() {
   )
 }
 
-/**
- * «Continuar con Google» encima del formulario de email, con su separador. Es un enlace normal: la página entera va
- * a Google y vuelve (sin cargar ningún script de Google en la web). Solo aparece si el backend tiene Google
- * configurado.
- */
 export default function GoogleSignIn({ redirectTo }) {
   const { t, lang } = useI18n()
   const providers = useRequest('auth:providers', ({ signal }) => authService.providers({ signal }))
@@ -49,7 +43,6 @@ export default function GoogleSignIn({ redirectTo }) {
         <GoogleLogo />
         {t('auth.google.button')}
       </a>
-      {/* Separador con texto: las rayas son decorativas. */}
       <p className="my-6 grid grid-cols-[1fr_auto_1fr] items-center gap-4 text-sm text-ink-muted before:h-px before:bg-slate-200 before:content-[''] after:h-px after:bg-slate-200 after:content-['']">
         {t('auth.google.or')}
       </p>

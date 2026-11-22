@@ -15,7 +15,6 @@ const LEGAL_LINKS = [
   { labelKey: 'common.footer.cookies', to: paths.cookies },
 ]
 
-/** Enlace del pie: al pasar por encima se colorea y asoma una flecha. */
 function FooterLink({ to, children }) {
   return (
     <Link
@@ -31,7 +30,6 @@ function FooterLink({ to, children }) {
   )
 }
 
-/** Título de una columna del pie, con el mismo punto que los antetítulos de la portada (sin animación). */
 function ColumnTitle({ children }) {
   return (
     <h2 className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-white">
@@ -43,7 +41,6 @@ function ColumnTitle({ children }) {
   )
 }
 
-/** Vuelve al principio de la página y deja el foco en el enlace de inicio de la cabecera. */
 function BackToTop() {
   const { t } = useI18n()
   const handleClick = () => {
@@ -65,23 +62,17 @@ function BackToTop() {
   )
 }
 
-/**
- * Pie de la web, en el morado de la portada: presentación, enlaces en tres columnas y la barra con el copyright y
- * «Volver arriba».
- */
 export default function SiteFooter() {
   const { isAuthenticated, user } = useAuth()
   const { t } = useI18n()
 
   return (
     <footer className="page-gutter relative isolate grid gap-x-10 gap-y-8 overflow-hidden bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 pt-10 text-white sm:grid-cols-2 lg:grid-cols-[minmax(0,1.5fr)_repeat(3,minmax(0,1fr))]">
-      {/* Mismo degradado y luz que la portada, para cerrar la página con el color de la marca. Decorativo. */}
       <span
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-40 -left-32 -z-10 h-[30rem] w-[30rem] animate-drift-slow rounded-full bg-brand-500/30 blur-3xl"
       />
 
-      {/* Presentación: el logo y qué es. El título solo lo oyen los lectores de pantalla. */}
       <section aria-labelledby="footer-about" className="relative sm:col-span-2 lg:col-span-1">
         <h2 id="footer-about" className="sr-only">
           {siteConfig.name}
@@ -90,10 +81,6 @@ export default function SiteFooter() {
         <p className="mt-4 max-w-sm text-brand-100">
           {t('seo.tagline')}. {t('common.footer.description')}
         </p>
-        {/*
-          En el hueco libre bajo el texto (pantallas grandes): colocada encima, sin ocupar sitio, para que el pie no
-          cambie de tamaño. Su ancho está medido para que quepa en ese hueco.
-        */}
         <Illustration
           {...illustrations.footer}
           className="absolute bottom-0 left-0 hidden w-[16.5rem] lg:block xl:w-[19rem]"

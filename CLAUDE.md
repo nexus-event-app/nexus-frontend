@@ -45,8 +45,9 @@ Normas de código del proyecto. Se aplican a todo lo que se escriba a partir de 
   el contenido y todas se desactivan con «reducir movimiento» (index.css). axe espera a que terminen las de entrada.
 
 - Ilustraciones sin fondo propio, para que se vea el de la web en claro y en oscuro: se preparan con
-  `scripts/ilustracion-sin-fondo.py`, se registran en `src/shared/config/illustrations.js` y se pintan con
-  `Illustration` (decorativa, flota despacio). Si con menos ancho aprietan el contenido, solo desde 1280 px.
+  `python3 scripts/ilustracion-sin-fondo.py entrada.png public/images/salida.webp [ancho]`, se registran en
+  `src/shared/config/illustrations.js` y se pintan con `Illustration` (decorativa, flota despacio). Si con menos ancho
+  aprietan el contenido, solo desde 1280 px.
 
 - Antetítulo (`Eyebrow`, con su punto) y título de un apartado van siempre fuera, encima de su bloque: nunca dentro
   de una tarjeta o recuadro. La tarjeta lleva solo el contenido.
@@ -66,5 +67,6 @@ Normas de código del proyecto. Se aplican a todo lo que se escriba a partir de 
 - Rutas por idioma en `src/shared/i18n/routeSegments.js`; `npm run check:routes`.
 - Antes de subir: `npm run lint`, `npm run check:i18n`, `npm run check:routes`, `npm test`, `npm run test:e2e`
   y `npm run build`.
-- Comentarios y nombres en castellano, explicando el porqué cuando no es evidente.
+- Sin comentarios en el código (tampoco en CSS, HTML ni configuración): el código se explica con nombres claros, en
+  castellano. Un `catch` vacío está permitido para errores que se ignoran a propósito (p. ej., `localStorage`).
 - Nunca datos personales en el código: los datos legales vienen de variables `VITE_LEGAL_*`.

@@ -43,7 +43,6 @@ test.describe('Notificaciones', () => {
 
   test('«Marcar todas como leídas» deja la campanita a cero', async ({ page, api, signedIn }) => {
     expect(signedIn.id).toBe(7)
-    // El servidor simulado deja de contar avisos sin leer en cuanto se marcan todos.
     let allRead = false
     api.on('PUT', '/api/notifications/read-all', () => {
       allRead = true
@@ -59,7 +58,6 @@ test.describe('Notificaciones', () => {
 
     await expect(page.getByRole('status').filter({ hasText: 'Estás al día' })).toBeVisible()
     await expect(page.getByRole('button', { name: 'Marcar todas como leídas' })).toHaveCount(0)
-    // Solo se ve una campanita (la de escritorio o la de móvil), ya sin avisos pendientes.
     await expect(page.getByRole('banner').getByRole('link', { name: 'Notificaciones', exact: true })).toBeVisible()
     expect(api.calls.some((call) => call.path === '/api/notifications/read-all')).toBe(true)
   })

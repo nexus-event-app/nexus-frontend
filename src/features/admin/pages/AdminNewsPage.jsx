@@ -36,8 +36,6 @@ export default function AdminNewsPage() {
 
   const [publishNews, publishing] = useAction(
     async (item) => {
-      // Se envía también el idioma: sin él, una noticia en inglés quedaba guardada como castellano y salía con el
-      // filtro «Español» y en la portada.
       const { title, content, sourceUrl, imageUrl, author, category, language } = item
       await adminNewsService.update(item.id, {
         title,

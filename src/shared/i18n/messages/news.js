@@ -1,4 +1,3 @@
-/** Noticias. */
 export default {
   es: {
     breadcrumb: 'Noticias',

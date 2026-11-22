@@ -8,7 +8,6 @@ test.describe('Navegación', () => {
     await expect(page.getByRole('link', { name: /Novedades de React 19/ }).first()).toBeVisible()
     await expect(page.getByRole('link', { name: /Desarrollador\/a frontend junior/ }).first()).toBeVisible()
     await expect(page.getByRole('link', { name: /¿Por dónde empiezo con Java\?/ }).first()).toBeVisible()
-    // Eventos, después del foro (como en el menú): el próximo general y el próximo de mujeres.
     const events = page.getByRole('region', { name: 'Próximos eventos' })
     await expect(events.getByRole('article', { name: 'Meetup de React en Valencia' })).toBeVisible()
     await expect(events.getByRole('article', { name: 'Café tech de mujeres en Barcelona' })).toBeVisible()
@@ -105,7 +104,6 @@ test.describe('Navegación', () => {
     const logo = await banner.getByRole('link', { name: /ir al inicio/ }).boundingBox()
     const toggle = banner.getByRole('button', { name: 'Abrir menú' })
     const box = await toggle.boundingBox()
-    // Misma fila que el logo y pegado al borde derecho (con el margen de la página).
     expect(Math.abs(box.y + box.height / 2 - (logo.y + logo.height / 2))).toBeLessThan(4)
     expect(360 - (box.x + box.width)).toBeLessThanOrEqual(24)
 

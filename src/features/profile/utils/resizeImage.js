@@ -1,10 +1,5 @@
 const OUTPUT_SIZE = 512
 
-/**
- * Recorta al centro en cuadrado y reduce la foto en el navegador antes de subirla: sube rápido aunque venga del
- * móvil, y vale cualquier formato que el navegador sepa abrir (HEIC en Safari, WebP...). El servidor la vuelve a
- * procesar de todos modos.
- */
 export async function resizeToSquareJpeg(file) {
   const bitmap = await loadBitmap(file)
   const side = Math.min(bitmap.width, bitmap.height)
@@ -27,11 +22,8 @@ async function loadBitmap(file) {
   if (typeof createImageBitmap === 'function') {
     try {
       return await createImageBitmap(file, { imageOrientation: 'from-image' })
-    } catch {
-      // Algunos navegadores no admiten la opción o el formato: se prueba con <img>.
-    }
+    } catch {}
   }
-  // data: y no blob:, porque la política de seguridad de la web solo permite imágenes «self», data: y https:.
   const dataUrl = await new Promise((resolve, reject) => {
     const reader = new FileReader()
     reader.onload = () => resolve(reader.result)

@@ -13,7 +13,6 @@ describe('HeroSection', () => {
     expect(screen.getByRole('link', { name: /Únete a la comunidad/ })).toHaveAttribute('href', '/registro')
     expect(screen.getByRole('link', { name: 'Ya tengo cuenta' })).toHaveAttribute('href', '/login')
 
-    // Los bloques de «Qué encontrarás» informan: no son enlaces.
     const features = screen.getByRole('region', { name: /Qué encontrarás/ })
     expect(within(features).getAllByRole('listitem')).toHaveLength(4)
     expect(within(features).queryByRole('link')).not.toBeInTheDocument()

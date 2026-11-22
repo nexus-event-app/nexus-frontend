@@ -3,7 +3,6 @@ import { news, page as pageOf } from './data.js'
 
 const CATEGORIES = ['IA', 'PROGRAMACION', 'DATOS', 'CIBERSEGURIDAD', 'SISTEMAS', 'CARRERA', 'GENERAL']
 
-/** Una página completa de noticias (9), para ver la rejilla llena. */
 const fullPage = Array.from({ length: 9 }, (_, index) => ({
   ...news[0],
   id: 100 + index,
@@ -46,7 +45,6 @@ test.describe('Idioma de las noticias', () => {
     const card = page.getByRole('article').filter({ hasText: 'What is new in React 19' })
     await expect(card.getByText('EN', { exact: true })).toBeVisible()
     await expect(card.getByRole('heading', { name: 'What is new in React 19' })).toHaveAttribute('lang', 'en')
-    // Las de castellano no llevan etiqueta.
     const spanish = page.getByRole('article').filter({ hasText: 'Novedades de React 19' })
     await expect(spanish.getByText('EN', { exact: true })).toHaveCount(0)
   })

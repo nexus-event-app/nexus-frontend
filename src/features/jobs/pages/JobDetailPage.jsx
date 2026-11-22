@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom'
-import { Link, Navigate } from '@/shared/i18n/router'
+import { Link } from '@/shared/i18n/router'
 import Alert from '@/shared/components/Alert'
-import ArticleSkeleton from '@/shared/components/ArticleSkeleton'
 import ActionMenu from '@/shared/components/ActionMenu'
 import CopyLinkButton from '@/shared/components/CopyLinkButton'
 import Eyebrow from '@/shared/components/Eyebrow'
@@ -9,7 +8,7 @@ import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import ErrorState from '@/shared/components/ErrorState'
 import Icon from '@/shared/components/Icon'
 import JsonLd from '@/shared/components/JsonLd'
-import NotFound from '@/shared/components/NotFound'
+import { detailFallback } from '@/shared/components/DetailFallback'
 import PageMain from '@/shared/components/PageMain'
 import Seo from '@/shared/components/Seo'
 import Time from '@/shared/components/Time'
@@ -26,7 +25,6 @@ import { isExpired, postedAt } from '../utils/jobHelpers'
 import { buildJobPostingData } from '../utils/structuredData'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-/** Un dato del resumen: término y valor de la lista de definiciones (la rejilla de <dl> los pone en fila). */
 function SummaryRow({ label, children }) {
   return (
     <>
@@ -45,33 +43,22 @@ export default function JobDetailPage() {
   const request = useJob(id)
   const job = request.data
 
-  if (id === null || request.error?.status === 404) return <NotFound />
-  if (request.error) {
-    return (
-      <PageMain className="page-container page-section">
-        <ErrorState error={request.error} title={t('jobs.detail.error')} onRetry={request.reload} />
-      </PageMain>
-    )
-  }
-  if (!job) {
-    return (
-      <PageMain className="page-container page-section" loading>
-        <ArticleSkeleton />
-      </PageMain>
-    )
-  }
-  if (slug !== job.slug) return <Navigate to={paths.jobDetail(job)} replace />
+  const fallback = detailFallback({
+    id,
+    slug,
+    request: request,
+    errorTitle: t('jobs.detail.error'),
+    canonicalPath: paths.jobDetail,
+  })
+  if (fallback) return fallback
 
   const path = paths.jobDetail(job)
   const expired = isExpired(job)
   const canApply = isHttpUrl(job.applyUrl)
-  // Las ofertas importadas pertenecen a otra bolsa de empleo: no se indexan ni se marcan como JobPosting.
   const imported = Boolean(job.imported)
 
-  // Rejilla del <main>: migas de pan arriba; la oferta y, al lado, su resumen (fijo al bajar en pantallas grandes).
   return (
     <PageMain className="page-container page-section relative isolate grid grid-cols-1 content-start gap-x-12 lg:grid-cols-[minmax(0,1fr)_22rem]">
-      {/* Cuadrícula decorativa detrás de la cabecera, como en el resto de páginas. */}
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Seo
         title={t('jobs.detail.seoTitle', { title: job.title, company: job.company })}
@@ -97,10 +84,6 @@ export default function JobDetailPage() {
         ]}
       />
 
-      {/*
-        Como en el detalle de noticia: el antetítulo (con su punto), el título y los datos de la oferta van encima; la
-        tarjeta lleva solo la oferta. El artículo toma el nombre del título (aria-labelledby).
-      */}
       <header className="mt-6 min-w-0 lg:col-start-1">
         <Eyebrow>{jobLevels.labelOf(job.level)}</Eyebrow>
         <h1
@@ -119,7 +102,6 @@ export default function JobDetailPage() {
             </span>
           </span>
         </p>
-        {/* Modalidad y jornada: sobrias, con icono, como en la lista de ofertas (el nivel ya va en el antetítulo). */}
         <dl className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-ink-soft">
           <dt className="sr-only">{t('jobs.detail.workMode')}</dt>
           <dd className="inline-flex items-center gap-2">
@@ -197,7 +179,6 @@ export default function JobDetailPage() {
         </footer>
       </article>
 
-      {/* Resumen: antetítulo y título fuera, como siempre; el recuadro lleva los datos y los botones. */}
       <aside
         aria-labelledby="job-summary"
         className="mt-12 lg:sticky lg:top-24 lg:col-start-2 lg:row-span-2 lg:row-start-2 lg:mt-6 lg:self-start"
@@ -224,7 +205,6 @@ export default function JobDetailPage() {
           )}
           {job.source && <SummaryRow label={t('jobs.detail.source')}>{job.source}</SummaryRow>}
         </dl>
-        {/* Los botones cierran el mismo recuadro que los datos (la lista y el menú comparten el borde). */}
         <ActionMenu className="flex-col gap-3 rounded-b-3xl border border-t-0 border-slate-200 bg-surface px-6 pb-6 pt-4 shadow-card">
           {canApply && !expired && (
             <a

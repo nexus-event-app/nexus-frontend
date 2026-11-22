@@ -6,7 +6,6 @@ import { useSavedJobs } from '../hooks/useSavedJobs'
 import { savedJobsService } from '../services/savedJobsService'
 import SavedJobsProvider from './SavedJobsProvider'
 
-/** Promesa que la prueba resuelve cuando quiere, para simular un servidor lento. */
 function deferred() {
   let resolve
   const promise = new Promise((done) => (resolve = done))
@@ -49,7 +48,6 @@ describe('SavedJobsProvider', () => {
     await act(() => result.current.toggle(12))
     expect(result.current.isSaved(11)).toBe(true)
 
-    // Llega la lista del servidor, pedida antes de los cambios: tenía la 12 pero no la 11.
     await act(async () => list.resolve([12, 13]))
 
     expect(result.current.isSaved(11)).toBe(true)

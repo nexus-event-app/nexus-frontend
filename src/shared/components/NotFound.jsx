@@ -12,7 +12,6 @@ const SUGGESTIONS = [
   { labelKey: 'common.notFound.testimonials', to: paths.testimonials },
 ]
 
-/** Página no encontrada. `embedded`: dentro de una página que ya tiene su <main> (panel de administración). */
 export default function NotFound({ embedded = false }) {
   const { t } = useI18n()
 

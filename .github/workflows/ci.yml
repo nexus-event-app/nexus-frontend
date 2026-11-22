@@ -47,8 +47,6 @@ jobs:
     name: Pruebas de extremo a extremo
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    # Imagen oficial de Playwright (misma versión que package.json): trae Chromium y sus dependencias, así que no
-    # hay que descargar paquetes de Ubuntu en cada ejecución (fallaban a veces por problemas de red ajenos).
     container:
       image: mcr.microsoft.com/playwright:v1.63.0-noble
 

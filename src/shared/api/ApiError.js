@@ -2,7 +2,6 @@ import { translate } from '@/shared/i18n/translate'
 
 const KNOWN_STATUSES = [400, 401, 403, 404, 409, 429, 500]
 
-/** Mensaje por defecto en el idioma actual cuando el servidor no manda uno propio. */
 function defaultMessage(status) {
   if (status === 0) return translate('errors.network')
   return translate(KNOWN_STATUSES.includes(status) ? `errors.${status}` : 'errors.generic')

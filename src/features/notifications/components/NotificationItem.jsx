@@ -6,10 +6,6 @@ import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import { notificationEntry } from '../utils/notificationEntry'
 
-/**
- * Un aviso, como fila de la lista: la foto de quien responde con el icono del tipo de aviso, el texto y la fecha.
- * Toda la fila lleva al comentario y, al abrirla, se marca como leído. Las no leídas llevan fondo suave y su punto.
- */
 export default function NotificationItem({ notification, onOpen }) {
   const { t } = useI18n()
   const { text, href } = notificationEntry(notification)
@@ -24,7 +20,6 @@ export default function NotificationItem({ notification, onOpen }) {
     >
       <span className="relative">
         <Avatar name={notification.actorName} src={notification.actorAvatarUrl} />
-        {/* Tipo de aviso sobre la foto (decorativo: el texto ya lo dice). */}
         <span
           aria-hidden="true"
           className={cx(

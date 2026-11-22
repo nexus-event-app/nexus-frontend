@@ -6,7 +6,6 @@ import Icon from './Icon'
 
 const ICONS = { system: 'computer', light: 'sun', dark: 'moon' }
 
-/** Botón que alterna el tema: automático (según el dispositivo) → claro → oscuro. */
 export default function ThemeToggle({ className }) {
   const { t } = useI18n()
   const { theme, setTheme } = useTheme()

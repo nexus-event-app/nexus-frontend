@@ -7,11 +7,6 @@ const TONES = {
   dark: { text: 'text-brand-200', halo: 'bg-white/15', dot: 'bg-brand-200', caret: 'bg-brand-200' },
 }
 
-/**
- * Antetítulo de una sección: un punto con halo que late y el texto, que se escribe como en una máquina de escribir
- * cuando la sección entra en pantalla. Los lectores de pantalla oyen el texto completo desde el principio; el texto
- * entero ocupa ya su sitio (invisible) para que nada se mueva mientras se escribe.
- */
 export default function Eyebrow({ children, tone = 'light', className }) {
   const text = String(children)
   const [ref, inView] = useInView()

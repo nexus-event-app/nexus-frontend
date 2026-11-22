@@ -11,10 +11,6 @@ import { excerpt } from '@/shared/utils/text'
 import NewsImage from './NewsImage'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-/*
- * Clases de cada forma de la tarjeta. `wide` solo cambia en pantallas grandes (en las demás es como `default`): pasa a
- * una rejilla de dos columnas con la imagen a la izquierda ocupando todo el alto.
- */
 const STYLES = {
   default: {
     article: 'border border-slate-200 bg-surface',
@@ -39,15 +35,9 @@ const STYLES = {
   },
 }
 
-/**
- * Tarjeta de una noticia, compacta: imagen apaisada, titular y resumen a dos líneas. Toda la tarjeta lleva a la noticia; «Leer noticia» es solo una pista visual. Las de una
- * misma fila miden lo mismo: el pie se queda abajo. `variant`: default (imagen arriba) o wide (imagen al lado; ver
- * newsLayout).
- */
 export default function NewsCard({ item, headingLevel = 'h3', variant = 'default' }) {
   const { t } = useI18n()
   const Heading = headingLevel
-  // El idioma del texto, para que el lector de pantalla lo pronuncie bien (WCAG 3.1.2).
   const language = contentLanguageOf(item)
   const styles = STYLES[variant]
   const wide = variant === 'wide'
@@ -66,7 +56,6 @@ export default function NewsCard({ item, headingLevel = 'h3', variant = 'default
           title={item.title}
           seed={item.id}
           className={cx(
-            // Imagen más apaisada que la de 16:9 por defecto: la tarjeta queda más compacta.
             'aspect-[2/1] transition-transform duration-700 ease-out group-hover:scale-105',
             wide && 'lg:aspect-auto lg:h-full',
           )}

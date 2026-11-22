@@ -1,4 +1,3 @@
-/** Ofertas de empleo. */
 export default {
   es: {
     breadcrumb: 'Empleo',

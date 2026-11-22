@@ -1,12 +1,6 @@
 import Icon from '@/shared/components/Icon'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-/**
- * Ilustración de la portada: la comunidad, grande y sin fondo propio (se ve el morado de la portada), y encima tres
- * etiquetas pequeñas de la web (una pregunta resuelta, un aviso y una oferta nueva) que flotan despacio sin tapar a
- * nadie. Es decorativa: todo lo que muestra se explica en texto al lado. Las etiquetas son blancas en los dos temas,
- * por eso usan la paleta fija `gray` y no los grises del tema (`slate`).
- */
 export default function HeroIllustration({ className }) {
   const { t } = useI18n()
 
@@ -14,7 +8,6 @@ export default function HeroIllustration({ className }) {
     <figure aria-hidden="true" className={className}>
       <span className="absolute inset-8 rounded-full bg-brand-400/25 blur-3xl" />
 
-      {/* La comunidad, protagonista; el pie se difumina en el fondo. */}
       <img
         src="/images/comunidad-portada.webp"
         alt=""
@@ -25,7 +18,6 @@ export default function HeroIllustration({ className }) {
         className="absolute inset-x-0 bottom-0 mx-auto w-full max-w-[27rem] [mask-image:linear-gradient(to_bottom,black_82%,transparent)]"
       />
 
-      {/* Pregunta del foro ya resuelta */}
       <span className="absolute left-0 top-0 block w-40 xl:w-48 animate-float rounded-xl bg-white p-2.5 text-left text-gray-900 shadow-xl shadow-brand-950/40 [animation-delay:-1s]">
         <span className="flex items-center gap-1.5">
           <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-violet-100 text-[0.55rem] font-bold text-violet-700">
@@ -50,7 +42,6 @@ export default function HeroIllustration({ className }) {
         </span>
       </span>
 
-      {/* Aviso de respuesta */}
       <span className="absolute right-0 top-1 flex w-36 xl:w-44 animate-float items-center gap-2 rounded-xl bg-white/95 p-2 text-left text-[0.7rem] text-gray-900 shadow-xl shadow-brand-950/30 [animation-delay:-3s]">
         <span className="relative flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-600 text-white">
           <Icon name="bell" className="h-3.5 w-3.5" />
@@ -59,7 +50,6 @@ export default function HeroIllustration({ className }) {
         <span className="font-medium leading-snug">{t('home.hero.mockNotification')}</span>
       </span>
 
-      {/* Oferta junior nueva */}
       <span className="absolute right-0 top-[4.75rem] block w-36 xl:top-[4.25rem] xl:w-44 animate-float rounded-xl bg-white p-2 text-left text-gray-900 shadow-xl shadow-brand-950/40 [animation-delay:-5s]">
         <span className="absolute inset-x-0 top-0 h-1 rounded-t-xl bg-gradient-to-r from-emerald-400 to-cyan-500" />
         <span className="flex items-center gap-2">

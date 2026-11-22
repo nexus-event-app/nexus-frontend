@@ -1,7 +1,6 @@
 import FilterLinks from '@/shared/components/FilterLinks'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-/** Filtro por idioma de las noticias: todas, solo en castellano o solo en inglés. */
 export default function NewsLanguageFilter({ language, buildHref, className }) {
   const { t } = useI18n()
   const options = ['', 'es', 'en'].map((value) => ({

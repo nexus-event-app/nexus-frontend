@@ -10,7 +10,6 @@ import { REPORT_REASONS, reportService } from '../services/reportService'
 
 const MAX_DETAILS = 500
 
-/** Ventana para reportar un contenido: motivo (obligatorio) y detalles (opcional). */
 export default function ReportDialog({ targetType, targetId, onClose }) {
   const { t } = useI18n()
   const toast = useToast()
@@ -28,7 +27,6 @@ export default function ReportDialog({ targetType, targetId, onClose }) {
         await reportService.create({ targetType, targetId, reason, details: details.trim() || null })
         toast.success(t('reports.sent'))
       } catch (error) {
-        // Ya lo había reportado: no es un error para quien lo envía.
         if (error?.status !== 409) throw error
         toast.info(t('reports.duplicate'))
       }

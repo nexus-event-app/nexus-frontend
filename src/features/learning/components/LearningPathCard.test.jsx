@@ -13,7 +13,6 @@ describe('LearningPathCard', () => {
     expect(screen.getByRole('link', { name: 'Frontend' })).toHaveAttribute('href', '/rutas/frontend')
     expect(screen.getAllByRole('term').map((term) => term.textContent)).toEqual(['Duración orientativa', 'Etapas'])
     expect(screen.getByText(`${frontend.steps.length} etapas`)).toBeInTheDocument()
-    // Sin número: las rutas no tienen un orden, cada persona empieza por la que quiera.
     expect(screen.queryByText(/^0\d$/)).not.toBeInTheDocument()
   })
 

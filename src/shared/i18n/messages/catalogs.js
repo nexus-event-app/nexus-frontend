@@ -1,4 +1,3 @@
-/** Etiquetas de los valores de catálogo (categorías, niveles, modalidades…). */
 export default {
   es: {
     newsCategories: {

@@ -2,7 +2,6 @@ import { cx } from '@/shared/utils/classNames'
 
 const FENCE = /```[^\n]*\n([\s\S]*?)```/g
 
-/** Una viñeta sola en su línea y su texto más abajo (así llegaban algunas listas importadas): se juntan. */
 const LONELY_BULLET = /•[ \t]*\n+[ \t]*(?=\S)/g
 const BULLET = /^•\s+/
 
@@ -18,7 +17,6 @@ function splitBlocks(text) {
   return blocks.filter((block) => block.type !== 'text' || block.value.trim())
 }
 
-/** Separa el texto en párrafos y listas: las líneas seguidas que empiezan por «•» forman una lista. */
 function splitText(text) {
   const blocks = []
   let paragraph = []
@@ -37,7 +35,6 @@ function splitText(text) {
       flushParagraph()
       items.push(line.trim().replace(BULLET, ''))
     } else if (items.length && !line.trim()) {
-      // Una línea en blanco entre dos puntos no corta la lista; si después viene otra cosa, sí.
       const next = lines.slice(index + 1).find((candidate) => candidate.trim())
       if (!next || !BULLET.test(next.trim())) flushList()
     } else {
@@ -50,12 +47,6 @@ function splitText(text) {
   return blocks
 }
 
-/**
- * Texto escrito por la comunidad o importado: párrafos, listas (líneas que empiezan por «•») y bloques de código
- * (entre ```), sin contenedor alrededor.
- * `className` se aplica a cada bloque; la separación entre bloques la pone .user-text (index.css). `lang`, si se
- * indica, marca el idioma de cada párrafo (por ejemplo, una noticia en inglés).
- */
 export default function UserText({ children, className, lang }) {
   return splitBlocks(children ?? '').map((block, index) => {
     if (block.type === 'code') {

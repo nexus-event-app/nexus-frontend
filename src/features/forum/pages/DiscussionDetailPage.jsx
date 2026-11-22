@@ -1,10 +1,8 @@
 import { useParams } from 'react-router-dom'
-import { Navigate } from '@/shared/i18n/router'
-import ArticleSkeleton from '@/shared/components/ArticleSkeleton'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import ErrorState from '@/shared/components/ErrorState'
 import JsonLd from '@/shared/components/JsonLd'
-import NotFound from '@/shared/components/NotFound'
+import { detailFallback } from '@/shared/components/DetailFallback'
 import PageMain from '@/shared/components/PageMain'
 import Seo from '@/shared/components/Seo'
 import { paths } from '@/shared/config/paths'
@@ -28,28 +26,18 @@ export default function DiscussionDetailPage() {
   const comments = useComments(id)
   const discussion = request.data
 
-  if (id === null || request.error?.status === 404) return <NotFound />
-  if (request.error) {
-    return (
-      <PageMain className="page-container page-section">
-        <ErrorState error={request.error} title={t('forum.detail.error')} onRetry={request.reload} />
-      </PageMain>
-    )
-  }
-  if (!discussion) {
-    return (
-      <PageMain className="page-container page-section" loading>
-        <ArticleSkeleton />
-      </PageMain>
-    )
-  }
-  if (slug !== discussion.slug) return <Navigate to={paths.discussionDetail(discussion)} replace />
+  const fallback = detailFallback({
+    id,
+    slug,
+    request: request,
+    errorTitle: t('forum.detail.error'),
+    canonicalPath: paths.discussionDetail,
+  })
+  if (fallback) return fallback
 
   const path = paths.discussionDetail(discussion)
 
   return (
-    // Rejilla del <main>: migas, la pregunta y las respuestas a la izquierda; a la derecha, la ilustración del foro y
-    // debajo las normas, que acompañan al bajar. En el móvil, todo en una columna (sin ilustración).
     <PageMain className="page-container page-section relative isolate grid grid-cols-1 content-start gap-x-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:grid-rows-[auto_auto_1fr] xl:grid-cols-[minmax(0,1fr)_22rem]">
       <Seo
         title={discussion.title}
@@ -61,7 +49,6 @@ export default function DiscussionDetailPage() {
         translated={false}
       />
       <JsonLd data={buildDiscussionData(discussion, comments.data)} />
-      {/* Cuadrícula decorativa detrás de la cabecera, como en el listado del foro. */}
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Breadcrumbs
         className="lg:col-start-1"
@@ -82,11 +69,6 @@ export default function DiscussionDetailPage() {
         comments={comments}
         onDiscussionChange={(updated) => request.mutate(() => updated)}
       />
-      {/*
-        Columna derecha: la ilustración y las normas ocupan toda la altura (las tres filas), las normas bajadas lo que
-        mide la ilustración; así pueden quedarse pegadas (sticky) mientras se leen las respuestas. La última fila (1fr)
-        es la que crece, para que la tarjeta de la pregunta no se estire.
-      */}
       <Illustration
         {...illustrations.forum}
         className="hidden lg:col-start-2 lg:row-start-1 lg:row-span-3 lg:block lg:self-start"

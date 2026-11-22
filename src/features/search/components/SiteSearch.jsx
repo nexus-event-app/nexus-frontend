@@ -17,11 +17,6 @@ const IS_MAC =
   typeof navigator !== 'undefined' && /mac|iphone|ipad/i.test(navigator.userAgentData?.platform ?? navigator.platform)
 const SEARCH_SHORTCUT = IS_MAC ? '⌘ K' : 'Ctrl K'
 
-/**
- * Dónde se coloca el campo abierto. En escritorio crece un poco desde la lupa hacia la izquierda, sobre el menú; en
- * el móvil ocupa la fila de la cabecera (se coloca respecto a ella, que es `sticky`). Los resultados salen justo
- * debajo, sin salir de la cabecera a una ventana aparte.
- */
 const LAYOUT = {
   desktop: {
     form: 'absolute right-0 top-1/2 z-50 w-80 -translate-y-1/2',
@@ -33,12 +28,6 @@ const LAYOUT = {
   },
 }
 
-/**
- * Búsqueda global en la propia cabecera: una lupa que, al pulsarla (o con Ctrl/⌘ + K o «/»), se convierte en un
- * campo algo más ancho con los resultados debajo. Patrón ARIA «combobox» con lista agrupada: el foco se queda en el
- * campo, las flechas mueven la opción activa (aria-activedescendant), Intro la abre y, sin opción activa, abre la
- * página de resultados. Escape o pulsar fuera la cierran y el foco vuelve a la lupa.
- */
 export default function SiteSearch({ open, onOpen, onClose, variant = 'desktop', className }) {
   const { t } = useI18n()
   const navigate = useNavigate()
@@ -79,7 +68,6 @@ export default function SiteSearch({ open, onOpen, onClose, variant = 'desktop',
   const listboxId = `${baseId}-listbox`
   const total = totalResults(result)
 
-  // Al cambiar los resultados, ninguna opción activa: Intro abre la página de resultados.
   const [resultSeen, setResultSeen] = useState(result)
   if (result !== resultSeen) {
     setResultSeen(result)
@@ -87,9 +75,8 @@ export default function SiteSearch({ open, onOpen, onClose, variant = 'desktop',
   }
 
   useEffect(() => {
-    if (active >= 0) document.getElementById(optionId(active))?.scrollIntoView({ block: 'nearest' })
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- optionId depende solo de baseId, que no cambia
-  }, [active])
+    if (active >= 0) document.getElementById(`${baseId}-option-${active}`)?.scrollIntoView({ block: 'nearest' })
+  }, [active, baseId])
 
   const go = (href) => {
     close({ restoreFocus: false })
@@ -119,7 +106,6 @@ export default function SiteSearch({ open, onOpen, onClose, variant = 'desktop',
     else if (search.enabled || query.trim().length >= 2) go(searchPath(query))
   }
 
-  // Posición de cada opción en la lista completa, para la opción activa y los id de aria-activedescendant.
   const optionIndex = new Map(options.map((option, position) => [option.key, position]))
   const renderOption = (entry) => {
     const current = optionIndex.get(entry.key)
@@ -159,7 +145,6 @@ export default function SiteSearch({ open, onOpen, onClose, variant = 'desktop',
 
   return (
     <search ref={containerRef} aria-label={t('search.openLabel')} className={className}>
-      {/* La lupa se queda en su sitio (el campo abierto se pone encima), para que la cabecera no salte. */}
       <button
         ref={buttonRef}
         type="button"
@@ -240,7 +225,6 @@ export default function SiteSearch({ open, onOpen, onClose, variant = 'desktop',
                 : ''}
           </p>
 
-          {/* Debajo del campo: una pista mientras se escribe, «sin resultados» o la lista de opciones. */}
           {typed && (
             <section
               aria-label={t('search.inputLabel')}
@@ -258,12 +242,10 @@ export default function SiteSearch({ open, onOpen, onClose, variant = 'desktop',
                   {t('search.noResultsHint')}
                 </p>
               )}
-              {/* La lista solo existe mientras hay opciones (una lista de opciones vacía no es válida). */}
               {options.length > 0 && (
                 <ul id={listboxId} role="listbox" aria-label={t('search.inputLabel')} className="space-y-3">
                   {groups.map(({ group, entries }) => (
                     <li key={group} role="none">
-                      {/* Título visible del grupo; para los lectores de pantalla lo nombra aria-label del grupo. */}
                       <span
                         aria-hidden="true"
                         className="mb-1 block px-3 pt-1 text-xs font-bold uppercase tracking-wide text-ink-muted"

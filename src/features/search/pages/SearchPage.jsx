@@ -21,7 +21,6 @@ import { searchService } from '../services/searchService'
 import { termPath } from '@/features/learning/data/glossary'
 
 const PAGE_LIMIT = 6
-/** Lista completa de cada grupo con la búsqueda aplicada (las personas no tienen una propia). */
 const SECTION_PATHS = { glossary: paths.glossary, news: paths.news, jobs: paths.jobs, discussions: paths.forum }
 
 function ResultSection({ group, total, query, children }) {
@@ -84,7 +83,6 @@ function PeopleList({ people }) {
   )
 }
 
-/** Página de resultados de la búsqueda global: noticias, ofertas, discusiones y personas. */
 export default function SearchPage() {
   const { t } = useI18n()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -99,7 +97,6 @@ export default function SearchPage() {
 
   return (
     <PageMain className="page-container page-section">
-      {/* Los resultados de búsqueda no se indexan: son páginas infinitas y repetidas. */}
       <Seo title={title} description={t('search.page.description')} path={searchPath(query)} robots="noindex,follow" />
       <Breadcrumbs items={[{ label: t('search.page.title'), to: paths.search }]} />
       <PageHeader title={title} description={t('search.page.description')} />

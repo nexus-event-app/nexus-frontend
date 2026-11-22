@@ -3,11 +3,6 @@ import { cx } from '@/shared/utils/classNames'
 import Icon from '@/shared/components/Icon'
 import ResourceLink from './ResourceLink'
 
-/**
- * Una etapa de la ruta, como un paso de un recorrido: a la izquierda su número en un círculo (verde con ✓ si está
- * hecha), unido a los demás por una línea; a la derecha la tarjeta con qué se aprende, los recursos, el proyecto para
- * practicar y, con sesión, la casilla de «Hecha».
- */
 export default function StepItem({ path, step, number, progress }) {
   const { t } = useI18n()
   const base = `learning.steps.${path.id}.${step.id}`
@@ -16,9 +11,7 @@ export default function StepItem({ path, step, number, progress }) {
   const title = t(`${base}.title`)
 
   return (
-    // Sin envoltorio: el círculo y la tarjeta se colocan en la rejilla del <li> que los contiene (ver la página).
     <>
-      {/* Número de la etapa: decorativo (el título ya dice «Etapa N» a los lectores de pantalla). */}
       <span
         aria-hidden="true"
         className={cx(
@@ -76,7 +69,6 @@ export default function StepItem({ path, step, number, progress }) {
           ))}
         </ul>
 
-        {/* El proyecto de la etapa, destacado: es lo que convierte lo aprendido en algo que enseñar. */}
         <p className="mt-6 grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 rounded-2xl bg-accent-soft px-4 py-4 text-ink-soft">
           <span
             aria-hidden="true"

@@ -5,11 +5,6 @@ import SearchBar from '@/shared/components/SearchBar'
 import { contractTypes, jobLevels, workModes } from '@/shared/config/catalogs'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-/**
- * Barra de filtros discreta, como la de Noticias: nivel en fichas, modalidad en un control segmentado, el tipo de
- * contrato en un desplegable pequeño y el buscador en forma de pastilla. Todo en una fila en pantallas muy anchas; en las
- * demás, el nivel arriba, después modalidad y contrato, y el buscador debajo.
- */
 export default function JobFilters({ filters, onChange, buildHref }) {
   const { t } = useI18n()
   const contractId = useId()

@@ -3,18 +3,12 @@
 @tailwind utilities;
 
 @layer base {
-  /* Al llegar a un apartado por un ancla (#...), que la cabecera fija no tape su título. */
   h1[id],
   h2[id],
   h3[id] {
     scroll-margin-top: 6rem;
   }
 
-  /*
-   * Colores que cambian con el tema, como canales RGB (Tailwind les añade la opacidad). El tema oscuro se activa
-   * con la clase .dark en <html>, que pone public/theme-init.js antes de pintar según la preferencia guardada o
-   * la del dispositivo.
-   */
   :root {
     color-scheme: light;
     --color-ink: 15 23 42;
@@ -52,7 +46,6 @@
     --color-accent-soft: 30 35 75;
     --color-accent-tint: 40 46 99;
     --color-accent-line: 67 76 140;
-    /* Grises invertidos: los tonos claros (fondos suaves, bordes) pasan a ser oscuros y al revés. */
     --color-slate-50: 28 38 56;
     --color-slate-100: 33 44 64;
     --color-slate-200: 45 58 80;
@@ -76,7 +69,6 @@
     overflow-wrap: break-word;
   }
 
-  /* La aplicación ocupa al menos toda la pantalla y el pie queda abajo, sin contenedores envolventes. */
   #root {
     @apply flex min-h-dvh flex-col;
   }
@@ -121,10 +113,6 @@
     @apply mx-auto w-full max-w-page px-4 sm:px-6 lg:px-8 3xl:max-w-[100rem];
   }
 
-  /*
-   * Igual que .page-container pero sin envoltorio: el elemento ocupa todo el ancho (con su fondo y sus bordes)
-   * y el margen interior centra el contenido en la misma columna que .page-container.
-   */
   .page-gutter {
     --gutter: theme(spacing.4);
     --page-max: theme(maxWidth.page);
@@ -153,10 +141,6 @@
     @apply py-10 sm:py-14;
   }
 
-  /*
-   * Formulario en rejilla: cada campo ocupa todo el ancho y, desde pantallas pequeñas, los marcados con
-   * .field-half o .field-third comparten fila. Evita envolver los campos en contenedores solo para maquetar.
-   */
   .form-grid {
     @apply grid grid-cols-6 gap-5;
   }
@@ -175,7 +159,6 @@
     }
   }
 
-  /* Bloques de texto de la comunidad (UserText): separación entre párrafos y tamaño fijo del código. */
   .user-text + .user-text {
     @apply mt-4;
   }
@@ -204,7 +187,6 @@
     @apply min-h-[2.75rem] px-3 text-sm sm:min-h-[2.25rem];
   }
 
-  /* Botón grande, para la acción principal de una página (p. ej. «Nueva discusión»). */
   .btn-lg {
     @apply min-h-[3.25rem] rounded-full px-6 text-base;
   }
@@ -241,10 +223,6 @@
     @apply border-red-600 dark:border-red-400;
   }
 
-  /*
-   * Fondo de cuadrícula suave, como papel milimetrado, que se desvanece hacia los bordes. Es solo decoración: usa el
-   * color de los bordes del tema para verse igual de discreto en claro y en oscuro.
-   */
   .bg-grid {
     background-image:
       linear-gradient(to right, rgb(var(--color-slate-200) / 0.6) 1px, transparent 1px),
@@ -257,11 +235,6 @@
     @apply rounded-card border border-slate-200 bg-surface shadow-card;
   }
 
-  /*
-   * Fila de una oferta de empleo, sin envoltorios: cada dato va a su zona de la rejilla. En móvil, el logo a la
-   * izquierda y todo lo demás apilado a su lado; en pantallas grandes, las tecnologías y la fecha pasan a columnas
-   * propias a la derecha para comparar ofertas de un vistazo.
-   */
   .job-row {
     display: grid;
     grid-template-columns: 3rem minmax(0, 1fr) auto;

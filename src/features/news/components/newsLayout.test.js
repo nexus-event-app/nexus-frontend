@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { NEWS_PAGE_SIZE, newsLayout } from './newsLayout'
 
-/** Comprueba que, en tres columnas, ninguna fila queda a medias ni una ancha se parte entre dos filas. */
 function rowsAreFull(layout) {
   let column = 0
   for (const variant of layout) {

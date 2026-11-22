@@ -9,10 +9,6 @@ import BetaBanner from './BetaBanner'
 import SiteFooter from './SiteFooter'
 import SiteHeader from './SiteHeader'
 
-/**
- * Estructura de las páginas públicas. Cada página renderiza su propio <main> (PageMain); #root (index.css)
- * las apila en columna con el pie siempre abajo.
- */
 export default function RootLayout() {
   const { pathname } = useLocation()
   const { t } = useI18n()

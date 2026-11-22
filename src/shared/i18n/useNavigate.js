@@ -3,7 +3,6 @@ import { useNavigate as useRouterNavigate } from 'react-router-dom'
 import { localizeTo } from './languages'
 import { useI18n } from './useI18n'
 
-/** Igual que useNavigate de react-router, pero conserva el idioma de la página en la que estás. */
 export function useNavigate() {
   const navigate = useRouterNavigate()
   const { lang } = useI18n()

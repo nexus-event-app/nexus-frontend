@@ -1,4 +1,3 @@
-/** Testimonios. */
 export default {
   es: {
     breadcrumb: 'Testimonios',

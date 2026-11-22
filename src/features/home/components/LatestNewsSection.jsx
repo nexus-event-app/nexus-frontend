@@ -9,10 +9,6 @@ import { contentLanguageOf } from '@/shared/utils/contentLanguage'
 import HomeNewsCard from './HomeNewsCard'
 import HomeSection from './HomeSection'
 
-/**
- * Noticias de la portada: la más reciente más grande y, a su lado, las dos siguientes más pequeñas, una encima de otra.
- * Compactas para que el apartado ocupe lo mismo que los demás.
- */
 export default function LatestNewsSection() {
   const { t } = useI18n()
   const request = useLatestNews(3)
@@ -34,8 +30,6 @@ export default function LatestNewsSection() {
         errorTitle={t('home.news.error')}
       >
         {(latest) => {
-          // Solo noticias en castellano en la portada. El servidor ya las filtra; esto es una segunda red por si alguna
-          // llegara en otro idioma (las demás están en la página de noticias, con su filtro).
           const items = latest.filter((item) => contentLanguageOf(item) === 'es')
           if (items.length === 0) {
             return (

@@ -11,11 +11,6 @@ const BENEFITS = [
   { key: 'benefitAlerts', icon: 'bell' },
 ]
 
-/**
- * Cierre de la portada para quien aún no tiene cuenta: lo que se gana al unirse y el botón para crearla. Va al final,
- * después de los testimonios, porque habla de toda la web (no solo de las rutas). Es la propia franja morada: sus
- * márgenes la dejan en la misma columna que el resto de apartados (como .page-container, pero sin envoltorio).
- */
 export default function HomeJoinSection() {
   const { t } = useI18n()
   const { isAuthenticated } = useAuth()

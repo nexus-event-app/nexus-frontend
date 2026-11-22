@@ -1,5 +1,3 @@
-/** Datos de prueba con la misma forma que las respuestas del backend (dto/response). */
-
 const DATE = '2026-11-02T10:00:00'
 
 export const user = {
@@ -14,7 +12,6 @@ export const user = {
   createdAt: DATE,
 }
 
-/** Perfil público de la persona con sesión (Lucía), con todos sus datos rellenos. */
 export const profile = {
   id: 7,
   name: 'Lucía Prueba',
@@ -63,7 +60,6 @@ export const news = [
   },
 ]
 
-// Noticia importada de una fuente en inglés.
 export const englishNews = {
   id: 3,
   slug: 'what-is-new-in-react-19',
@@ -104,7 +100,6 @@ export const jobs = [
   },
 ]
 
-/** Ofertas guardadas: una publicada y otra que ya no lo está (se muestra apagada, solo para quitarla). */
 export const savedJobs = [
   { job: jobs[0], available: true, savedAt: DATE },
   {
@@ -222,7 +217,6 @@ export function searchResult({ newsItems = news, jobItems = jobs, discussionItem
   return { news: group(newsItems), jobs: group(jobItems), discussions: group(discussionItems), people: group(people) }
 }
 
-/** Eventos de la comunidad (fechas lejanas para que no caduquen en las pruebas). */
 const moreEvents = Array.from({ length: 6 }, (_, index) => ({
   id: 60 + index,
   title: `Charla online número ${index + 1}`,

@@ -25,9 +25,6 @@ export default function CommentItem({
   const { t } = useI18n()
   const author = authorOf(comment, t)
   return (
-    // Enfocable (tabIndex -1) para que el enlace de un aviso pueda llevar el foco a este comentario. La foto va a la
-    // izquierda y todo lo demás al lado, como en un hilo de conversación; la mejor respuesta se señala en verde (y con
-    // texto, no solo con el color).
     <article
       id={id}
       tabIndex={-1}

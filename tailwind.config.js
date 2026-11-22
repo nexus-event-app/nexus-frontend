@@ -1,9 +1,7 @@
 import defaultTheme from 'tailwindcss/defaultTheme'
 
-/** Color definido como variable CSS (canal RGB) para que admita opacidad: `bg-surface/95`. */
 const token = (name) => `rgb(var(--color-${name}) / <alpha-value>)`
 
-/** @type {import('tailwindcss').Config} */
 export default {
   darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,jsx}'],
@@ -23,7 +21,6 @@ export default {
           900: '#312e81',
           950: '#1e1b4b',
         },
-        // Colores que cambian con el tema: sus valores claro y oscuro están en src/index.css (:root y .dark).
         ink: {
           DEFAULT: token('ink'),
           soft: token('ink-soft'),
@@ -38,8 +35,6 @@ export default {
           tint: token('accent-tint'),
           line: token('accent-line'),
         },
-        // Los grises neutros se adaptan al tema; para algo que deba verse igual en los dos (p. ej. bloques de
-        // código), usa la paleta `gray`.
         slate: Object.fromEntries(
           [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map((shade) => [shade, token(`slate-${shade}`)]),
         ),
@@ -80,27 +75,22 @@ export default {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
-        // Entrada de la portada: aparece subiendo un poco. Solo una vez, al cargar.
         'rise-in': {
           '0%': { transform: 'translateY(1rem)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
         },
-        // Luces del fondo de la portada: se desplazan muy despacio para dar vida sin distraer.
         drift: {
           '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
           '50%': { transform: 'translate(4%, -6%) scale(1.08)' },
         },
-        // Mini pantallas de la ilustración de la portada: suben y bajan muy suavemente.
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },
         },
-        // Cursor de la máquina de escribir de los antetítulos.
         caret: {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0' },
         },
-        // Aviso que llega: se balancea a los lados unas veces y descansa (para la ilustración de notificaciones).
         nudge: {
           '0%, 55%, 100%': { transform: 'translateX(0) rotate(0)' },
           '10%': { transform: 'translateX(-6px) rotate(-2deg)' },
@@ -108,14 +98,12 @@ export default {
           '30%': { transform: 'translateX(-4px) rotate(-1.5deg)' },
           '40%': { transform: 'translateX(3px) rotate(1deg)' },
         },
-        // Latido lento, como un corazón (dos pulsos y una pausa): para la ilustración de los consejos.
         heartbeat: {
           '0%, 40%, 100%': { transform: 'scale(1)' },
           '10%': { transform: 'scale(1.05)' },
           '20%': { transform: 'scale(1.01)' },
           '30%': { transform: 'scale(1.04)' },
         },
-        // «Me apunto»: la mano da un pequeño salto al marcarlo.
         pop: {
           '0%, 100%': { transform: 'scale(1) rotate(0)' },
           '40%': { transform: 'scale(1.3) rotate(-12deg)' },

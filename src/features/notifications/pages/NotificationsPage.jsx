@@ -27,7 +27,6 @@ const TYPES = [
   { key: 'Accepted', icon: 'check', tone: 'bg-emerald-600' },
 ]
 
-/** Al lado de la lista: qué avisos llegan, que solo los ves tú, y un enlace al foro. */
 function HowItWorks({ className }) {
   const { t } = useI18n()
   return (
@@ -86,12 +85,10 @@ export default function NotificationsPage() {
   const handleOpen = (notification) => {
     if (notification.read) return
     adjust((count) => count - 1)
-    // Se marca en segundo plano: si falla, el aviso seguirá sin leer la próxima vez.
     notificationService.markRead(notification.id).catch(() => {})
   }
 
   return (
-    // Como el resto de páginas: cabecera arriba; a la izquierda, tus avisos; a la derecha, qué te avisamos.
     <PageMain className="page-container page-section relative isolate grid grid-cols-1 content-start gap-x-12 lg:grid-cols-[minmax(0,1fr)_22rem]">
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Seo title={t('notifications.seoTitle')} path={paths.notifications} robots="noindex,nofollow" />
@@ -101,7 +98,6 @@ export default function NotificationsPage() {
         <h1 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">{t('notifications.title')}</h1>
         <p className="mt-3 text-lg text-ink-muted">{t('notifications.description')}</p>
       </hgroup>
-      {/* En el hueco de la derecha del título; los márgenes negativos evitan que la cabecera crezca. */}
       <Illustration
         {...illustrations.notifications}
         className="hidden lg:col-start-2 lg:row-start-2 lg:-mb-6 lg:-mt-24 lg:block lg:w-44 lg:self-end lg:justify-self-start xl:-ml-32 xl:-mt-16 xl:w-52"

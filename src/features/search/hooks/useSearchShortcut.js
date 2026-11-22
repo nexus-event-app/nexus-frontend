@@ -1,13 +1,11 @@
 import { useEffect } from 'react'
 
-/** ¿El foco está en un sitio donde se escribe? Entonces «/» es texto, no el atajo de búsqueda. */
 function isTyping(target) {
   return (
     target instanceof HTMLElement && (target.isContentEditable || /^(input|textarea|select)$/i.test(target.tagName))
   )
 }
 
-/** Abre la búsqueda global con Ctrl/⌘ + K o con «/» (si no hay otra ventana abierta). */
 export function useSearchShortcut(onOpen) {
   useEffect(() => {
     const handleKey = (event) => {

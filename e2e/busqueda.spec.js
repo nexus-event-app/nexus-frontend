@@ -9,10 +9,8 @@ test.describe('Búsqueda global', () => {
     const banner = page.getByRole('banner')
     const input = banner.getByRole('combobox')
     await expect(input).toBeFocused()
-    // Sin ventana aparte: todo pasa en la cabecera.
     await expect(page.getByRole('dialog')).toHaveCount(0)
 
-    // Un texto que no está en el glosario: así el primer resultado es la noticia.
     await input.fill('novedades')
     await expect(banner.getByRole('option', { name: /Novedades de React 19/ })).toBeVisible()
     await expect
@@ -28,7 +26,6 @@ test.describe('Búsqueda global', () => {
   test('Intro sin elegir abre la página de resultados', async ({ page, isMobile }) => {
     test.skip(isMobile, 'Los atajos de teclado son para escritorio')
     await page.goto('/foro')
-    // El atajo se activa cuando la página ya está pintada: sin esperar, la tecla podía llegar antes.
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
     await page.keyboard.press('/')
     await page.getByRole('banner').getByRole('combobox').fill('java')
@@ -49,7 +46,6 @@ test.describe('Búsqueda global', () => {
     await input.fill('novedades')
     const option = banner.getByRole('option', { name: /Novedades de React 19/ })
     await expect(option).toBeVisible()
-    // Los resultados quedan dentro de la pantalla y empiezan justo debajo de la cabecera.
     const viewport = page.viewportSize()
     const box = await option.boundingBox()
     expect(box.x).toBeGreaterThanOrEqual(0)

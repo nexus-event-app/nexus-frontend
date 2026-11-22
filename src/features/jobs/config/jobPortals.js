@@ -1,8 +1,3 @@
-/**
- * Portales de empleo de España con búsquedas ya filtradas por tecnología y perfiles junior.
- * Las direcciones se han comprobado a mano; si un portal cambia su formato, basta con actualizar su `url`.
- * La descripción de cada uno está en las traducciones: jobs.portals.<id>.
- */
 export const JOB_PORTALS = [
   {
     id: 'infojobs',

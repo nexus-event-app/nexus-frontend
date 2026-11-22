@@ -2,11 +2,6 @@ import { legalConfig } from '@/shared/config/legal'
 import { siteConfig } from '@/shared/config/site'
 import LegalValue from './LegalValue'
 
-/**
- * Datos identificativos del titular, comunes al aviso legal y a la política de privacidad. Nombre y email son
- * imprescindibles (si faltan, se avisa). NIF y domicilio solo se muestran si se configuran: en un proyecto personal
- * sin actividad económica pueden quedar fuera, para no publicar la dirección de nadie.
- */
 export default function OwnerDetails({ config = legalConfig }) {
   return (
     <ul>

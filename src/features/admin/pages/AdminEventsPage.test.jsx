@@ -100,7 +100,6 @@ describe('AdminEventsPage', () => {
     })
     renderWithProviders(<AdminEventsPage />, { route: '/admin/eventos', auth: { user: { id: 1, role: 'ADMIN' } } })
     const marks = await screen.findAllByText('Descripción cortada: pega la completa con «Editar»')
-    // Una por evento cortado (la tabla puede pintarla en escritorio y en móvil).
     expect(marks.length).toBeGreaterThan(0)
     expect(marks.every((mark) => !mark.closest('li, tr')?.textContent.includes('Completo'))).toBe(true)
   })

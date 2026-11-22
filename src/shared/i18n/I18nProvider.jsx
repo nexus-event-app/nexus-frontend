@@ -8,7 +8,6 @@ export default function I18nProvider({ children }) {
   const { pathname } = useLocation()
   const lang = langFromPath(pathname)
 
-  // Se fija durante el render para que los hijos y el código fuera de React ya vean el idioma correcto.
   setCurrentLanguage(lang)
 
   useEffect(() => {

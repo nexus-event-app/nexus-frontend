@@ -7,10 +7,6 @@ import { learningService } from '../services/learningService'
 
 const keyOf = (pathId, stepId) => `${pathId}/${stepId}`
 
-/**
- * Etapas hechas de la persona con sesión iniciada. Marcar o desmarcar se refleja al momento y, si el servidor falla,
- * se deshace y se avisa. Sin sesión no se pide nada y todas las etapas aparecen sin hacer.
- */
 export function useLearningProgress() {
   const { t } = useI18n()
   const toast = useToast()

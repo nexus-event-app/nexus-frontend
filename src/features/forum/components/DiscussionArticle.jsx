@@ -35,7 +35,6 @@ export default function DiscussionArticle({ discussion, commentCount, onChange, 
   const canManage = useCanManage()
   const [editing, setEditing] = useState(false)
   const [confirmingDelete, setConfirmingDelete] = useState(false)
-  // Si el texto es largo, se enseña plegado (como en Testimonios): se lee de un vistazo y «Leer más» lo abre entero.
   const [expanded, setExpanded] = useState(false)
   const folded = foldText(discussion.content)
 
@@ -65,7 +64,6 @@ export default function DiscussionArticle({ discussion, commentCount, onChange, 
 
   const manageable = canManage(discussion.authorId)
 
-  // La pregunta, en su propia tarjeta: así se distingue a primera vista de las respuestas (debajo, más ligeras).
   return (
     <article
       className={cx('rounded-3xl border border-slate-200 bg-surface px-5 py-6 shadow-card sm:px-8 sm:py-7', className)}

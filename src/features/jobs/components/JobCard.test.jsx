@@ -6,7 +6,6 @@ import JobCard from './JobCard'
 
 const savedJobs = { ready: true, count: 0, isSaved: () => false, isPending: () => false, toggle: vi.fn() }
 
-/** La tarjeta incluye el botón de guardar, que necesita las ofertas guardadas. */
 function renderCard(job) {
   return renderWithProviders(
     <SavedJobsContext.Provider value={savedJobs}>

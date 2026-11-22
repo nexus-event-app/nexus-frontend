@@ -10,7 +10,6 @@ function person(name) {
 }
 
 export function buildDiscussionData(discussion, comments) {
-  // URL canónica (castellano): el contenido del debate no se traduce.
   const url = absoluteUrl(paths.discussionDetail(discussion))
   const commentCount = comments ? comments.length : discussion.commentCount
 

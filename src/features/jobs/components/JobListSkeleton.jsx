@@ -2,7 +2,6 @@ import LoadingStatus from '@/shared/components/LoadingStatus'
 import Skeleton from '@/shared/components/Skeleton'
 import { JOB_LIST_CLASSES } from './JobList'
 
-/** Esqueleto de carga con la forma de la lista de ofertas. */
 export default function JobListSkeleton({ count = 5 }) {
   return (
     <>

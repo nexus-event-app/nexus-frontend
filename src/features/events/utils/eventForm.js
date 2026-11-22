@@ -1,6 +1,5 @@
 import { translate } from '@/shared/i18n/translate'
 
-/** Como en el servidor: cabe la descripción completa que se copia de Meetup o Eventbrite. */
 export const DESCRIPTION_MAX = 2000
 
 export const INITIAL_EVENT = {
@@ -15,7 +14,6 @@ export const INITIAL_EVENT = {
   forWomen: false,
 }
 
-/** Un evento guardado, en los valores del formulario (para corregirlo desde el panel). */
 export function toEventFormValues(event) {
   return {
     url: event.url ?? '',
@@ -30,21 +28,15 @@ export function toEventFormValues(event) {
   }
 }
 
-/** Hoy en el formato de los campos de fecha («2026-11-20»), en la hora de quien usa la web. */
 export function todayIso(now = new Date()) {
   const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
   return local.toISOString().slice(0, 10)
 }
 
-/** Parece una dirección y no solo una ciudad: lleva números, comas o «·», o es muy larga (como en el servidor). */
-export function looksLikeAddress(city) {
+function looksLikeAddress(city) {
   return /[\d,·]/.test(city) || city.trim().length > 40
 }
 
-/**
- * Las mismas reglas que el servidor, para avisar antes de enviar. Sin `today` (el panel, al corregir) no se exige que la
- * fecha no haya pasado.
- */
 export function validateEvent(values, today = todayIso()) {
   const errors = {}
   if (!/^https:\/\/[^\s/]+\.[^\s/]+(\/\S*)?$/.test(values.url.trim())) errors.url = translate('events.validation.url')

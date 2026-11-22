@@ -5,7 +5,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import ScrollManager from './ScrollManager'
 
 const handle = { navigate: null }
-/** Guarda la función de navegar para usarla desde la prueba (en un efecto, no al pintar). */
 function NavigateSpy() {
   const navigateTo = useNavigate()
   useEffect(() => {

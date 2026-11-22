@@ -1,15 +1,14 @@
 import { Fragment } from 'react'
 import { useParams } from 'react-router-dom'
-import { Link, Navigate } from '@/shared/i18n/router'
+import { Link } from '@/shared/i18n/router'
 import { useAuth } from '@/features/auth/hooks/useAuth'
-import ArticleSkeleton from '@/shared/components/ArticleSkeleton'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import ButtonLink from '@/shared/components/ButtonLink'
 import ErrorState from '@/shared/components/ErrorState'
 import Eyebrow from '@/shared/components/Eyebrow'
 import Icon from '@/shared/components/Icon'
 import ListSkeleton from '@/shared/components/ListSkeleton'
-import NotFound from '@/shared/components/NotFound'
+import { detailFallback } from '@/shared/components/DetailFallback'
 import PageMain from '@/shared/components/PageMain'
 import Pagination from '@/shared/components/Pagination'
 import QueryBoundary from '@/shared/components/QueryBoundary'
@@ -28,7 +27,6 @@ import { profileService } from '../services/profileService'
 
 const LIST_BOX = 'divide-y divide-slate-200 overflow-hidden rounded-3xl border border-slate-200 bg-surface shadow-card'
 
-/** Cuando no hay nada: una frase y la acción para empezar, dentro del mismo recuadro que tendría la lista. */
 function EmptyRow({ text, action }) {
   return (
     <p className="flex flex-col items-start gap-4 rounded-3xl border border-dashed border-slate-300 bg-surface p-6 text-ink-muted sm:flex-row sm:items-center sm:justify-between">
@@ -133,7 +131,6 @@ function OwnTestimonials() {
   )
 }
 
-/** «Tu actividad»: solo existe en tu propio perfil. Nadie más puede ver lo que has hecho en la web. */
 function OwnActivity({ profile, className }) {
   const { t } = useI18n()
   const stats = [
@@ -152,7 +149,6 @@ function OwnActivity({ profile, className }) {
           {t('profile.view.activityNote')}
         </p>
       </hgroup>
-      {/* Pares dato/valor: el nombre (oculto a la vista) y, en el recuadro, el número grande con su icono. */}
       <dl className="mt-6 grid grid-cols-2 gap-4">
         {stats.map((stat) => {
           const count = profile[stat.key] ?? 0
@@ -187,7 +183,6 @@ export default function ProfilePage() {
   const { id, slug } = parseIdSlug(idSlug)
   const { user } = useAuth()
   const isOwn = id !== null && user?.id === id
-  // En tu perfil se pide el tuyo (con tus contadores de actividad); en el de otra persona, solo su perfil público.
   const request = useRequest(
     `profile:${id}:${isOwn ? 'own' : 'public'}`,
     ({ signal }) => (isOwn ? profileService.getOwn({ signal }) : profileService.getPublic(id, { signal })),
@@ -195,22 +190,14 @@ export default function ProfilePage() {
   )
   const profile = request.data
 
-  if (id === null || request.error?.status === 404) return <NotFound />
-  if (request.error) {
-    return (
-      <PageMain className="page-container page-section">
-        <ErrorState error={request.error} title={t('profile.view.error')} onRetry={request.reload} />
-      </PageMain>
-    )
-  }
-  if (!profile) {
-    return (
-      <PageMain className="page-container page-section" loading>
-        <ArticleSkeleton />
-      </PageMain>
-    )
-  }
-  if (slug !== profile.slug) return <Navigate to={paths.profile(profile)} replace />
+  const fallback = detailFallback({
+    id,
+    slug,
+    request: request,
+    errorTitle: t('profile.view.error'),
+    canonicalPath: paths.profile,
+  })
+  if (fallback) return fallback
 
   const path = paths.profile(profile)
   const card = (
@@ -227,13 +214,11 @@ export default function ProfilePage() {
           </ButtonLink>
         )
       }
-      // En tu perfil, la tarjeta te acompaña al bajar por tu actividad.
       className={isOwn ? 'mt-4 lg:sticky lg:top-24 lg:col-start-1 lg:row-start-3 lg:self-start' : 'mt-4'}
     />
   )
 
   return (
-    // Tu perfil: la tarjeta a la izquierda y tu actividad al lado. El de otra persona: solo su tarjeta, centrada.
     <PageMain
       className={
         isOwn
@@ -242,7 +227,6 @@ export default function ProfilePage() {
       }
     >
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
-      {/* Los perfiles son de personas: no se indexan en buscadores. */}
       <Seo
         title={t('profile.view.seoTitle', { name: profile.name })}
         description={

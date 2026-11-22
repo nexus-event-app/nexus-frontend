@@ -9,7 +9,6 @@ const SIZES = {
   xl: 'h-24 w-24 text-3xl sm:h-28 sm:w-28',
 }
 
-/** Foto de perfil o, si no hay (o no carga), las iniciales. Es decorativa: el nombre siempre aparece al lado. */
 export default function Avatar({ name, src, size = 'md', className }) {
   const [failedSrc, setFailedSrc] = useState(null)
   const showImage = Boolean(src) && failedSrc !== src

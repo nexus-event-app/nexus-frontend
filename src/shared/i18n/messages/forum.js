@@ -1,4 +1,3 @@
-/** Foro. */
 export default {
   es: {
     breadcrumb: 'Foro',

@@ -20,7 +20,6 @@ import { useToast } from '@/shared/hooks/useToast'
 import { useNavigate } from '@/shared/i18n/useNavigate'
 import { adminUsersService } from '../services/adminUsersService'
 
-/** La foto no se cambia desde el panel (es de cada persona); solo se puede quitar si no es adecuada. */
 function PhotoField({ profile, onRemoved }) {
   const [confirming, setConfirming] = useState(false)
   const [remove, removing] = useAction(
@@ -96,7 +95,6 @@ function AdminProfileForm({ profile, onAvatarRemoved }) {
   )
 }
 
-/** Panel: revisar o corregir el perfil público de cualquier cuenta, también de otros administradores. */
 export default function AdminUserProfilePage() {
   const { userId } = useParams()
   const request = useRequest(`admin:user-profile:${userId}`, ({ signal }) =>

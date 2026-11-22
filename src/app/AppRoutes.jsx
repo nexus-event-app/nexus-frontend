@@ -49,7 +49,6 @@ const AdminImportPage = lazy(() => import('@/features/admin/pages/AdminImportPag
 const AdminReportsPage = lazy(() => import('@/features/admin/pages/AdminReportsPage'))
 const AdminEventsPage = lazy(() => import('@/features/admin/pages/AdminEventsPage'))
 
-/** Las páginas públicas existen una vez por idioma: «/», «/ca» y «/en». El panel de admin solo en castellano. */
 const PUBLIC_LANGUAGES = [
   { prefix: '/', lang: DEFAULT_LANGUAGE },
   { prefix: '/ca', lang: 'ca' },
@@ -58,8 +57,8 @@ const PUBLIC_LANGUAGES = [
 
 function publicRoutes({ prefix, lang }) {
   const seg = (esSegment) => routeSegment(esSegment, lang)
+  const withAuth = (page) => <RequireAuth>{page}</RequireAuth>
   const forum = seg('foro')
-  // Direcciones antiguas con el nombre de la sección en castellano (p. ej. «/en/foro/12-x»): redirigen a la traducida.
   const legacy =
     lang === DEFAULT_LANGUAGE ? [] : Object.keys(ROUTE_SEGMENTS).filter((esSegment) => seg(esSegment) !== esSegment)
 
@@ -71,22 +70,11 @@ function publicRoutes({ prefix, lang }) {
       <Route path={seg('empleo')} element={<JobsListPage />} />
       <Route
         path={`${seg('empleo')}/${routeSubsegment('empleo', 'guardadas', lang)}`}
-        element={
-          <RequireAuth>
-            <SavedJobsPage />
-          </RequireAuth>
-        }
+        element={withAuth(<SavedJobsPage />)}
       />
       <Route path={`${seg('empleo')}/:idSlug`} element={<JobDetailPage />} />
       <Route path={forum} element={<ForumPage />} />
-      <Route
-        path={`${forum}/${routeSubsegment('foro', 'nueva', lang)}`}
-        element={
-          <RequireAuth>
-            <NewDiscussionPage />
-          </RequireAuth>
-        }
-      />
+      <Route path={`${forum}/${routeSubsegment('foro', 'nueva', lang)}`} element={withAuth(<NewDiscussionPage />)} />
       <Route path={`${forum}/:idSlug`} element={<DiscussionDetailPage />} />
       <Route path={seg('testimonios')} element={<TestimonialsPage />} />
       <Route path={seg('buscar')} element={<SearchPage />} />
@@ -97,27 +85,12 @@ function publicRoutes({ prefix, lang }) {
       <Route path={seg('eventos')} element={<EventsPage />} />
       <Route
         path={`${seg('eventos')}/${routeSubsegment('eventos', 'nuevo', lang)}`}
-        element={
-          <RequireAuth>
-            <NewEventPage />
-          </RequireAuth>
-        }
+        element={withAuth(<NewEventPage />)}
       />
-      <Route
-        path={seg('notificaciones')}
-        element={
-          <RequireAuth>
-            <NotificationsPage />
-          </RequireAuth>
-        }
-      />
+      <Route path={seg('notificaciones')} element={withAuth(<NotificationsPage />)} />
       <Route
         path={`${seg('perfil')}/${routeSubsegment('perfil', 'editar', lang)}`}
-        element={
-          <RequireAuth>
-            <EditProfilePage />
-          </RequireAuth>
-        }
+        element={withAuth(<EditProfilePage />)}
       />
       <Route path={`${seg('perfil')}/:idSlug`} element={<ProfilePage />} />
       <Route path={seg('aviso-legal')} element={<LegalNoticePage />} />

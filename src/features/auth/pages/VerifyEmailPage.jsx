@@ -18,7 +18,6 @@ export default function VerifyEmailPage() {
   const token = searchParams.get('token')?.trim() ?? ''
   const { isAuthenticated, refreshUser } = useAuth()
   const [state, setState] = useState(token ? { status: 'loading' } : { status: 'error', message: null })
-  // El token es de un solo uso: se envía una única vez aunque el efecto se ejecute dos veces en desarrollo.
   const requested = useRef(false)
 
   useEffect(() => {

@@ -3,10 +3,6 @@ import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import Icon from './Icon'
 
-/**
- * Copia la dirección de la página actual y lo confirma con un aviso. Sirve en cualquier página (noticia, oferta,
- * discusión...); los textos son los comunes, aunque se pueden cambiar.
- */
 export default function CopyLinkButton({ label, copiedMessage, failedMessage, className }) {
   const { t } = useI18n()
   const toast = useToast()

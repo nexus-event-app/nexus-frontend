@@ -1,7 +1,6 @@
 import { expect, expectAccessible, test } from './fixtures.js'
 import { testimonials } from './data.js'
 
-/** Ocho testimonios: seis en la primera página y dos en la segunda. */
 const eight = Array.from({ length: 8 }, (_, index) => ({
   ...testimonials[0],
   id: 300 + index,

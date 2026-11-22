@@ -4,10 +4,6 @@ import NewsCover from './NewsCover'
 
 const IMAGE_CLASSES = 'aspect-[16/9] w-full bg-slate-100 object-cover'
 
-/**
- * Imagen de una noticia. Si no tiene, o si la imagen externa no carga (enlace roto, la web de origen la bloquea...),
- * muestra una foto de portada acorde a su tema: nunca queda un hueco vacío ni el icono de imagen rota.
- */
 export default function NewsImage({ url, alt = '', category, title, seed, priority = false, className }) {
   const [failedUrl, setFailedUrl] = useState(null)
 

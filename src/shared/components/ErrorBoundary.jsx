@@ -20,7 +20,6 @@ export default class ErrorBoundary extends Component {
   render() {
     if (!this.state.failed) return this.props.children
 
-    // `embedded`: dentro de una página que ya tiene su <main> (panel de administración).
     const message = (
       <section role="alert" className="card mx-auto my-10 w-[calc(100%-2rem)] max-w-xl px-6 py-12 text-center sm:my-14">
         <Seo title={translate('common.errorBoundary.seoTitle')} robots="noindex,nofollow" />

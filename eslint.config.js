@@ -20,8 +20,7 @@ export default defineConfig([
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^_' }],
       'no-console': 'error',
-      // HTML semántico: nada de <div>. Usa la etiqueta con significado (main, section, article, aside, nav,
-      // header, footer, ul/li, dl, figure, hgroup, fieldset, search, p...) o quita el contenedor y maqueta con CSS.
+      'no-empty': ['error', { allowEmptyCatch: true }],
       'no-restricted-syntax': [
         'error',
         {
@@ -32,12 +31,10 @@ export default defineConfig([
     },
   },
   {
-    // Pruebas unitarias: no se recargan en caliente y pueden filtrar avisos de la consola.
     files: ['src/test/**', 'src/**/*.test.{js,jsx}'],
     rules: { 'react-refresh/only-export-components': 'off', 'no-console': 'off' },
   },
   {
-    // Pruebas de extremo a extremo (Playwright): se ejecutan en Node, no en el navegador.
     files: ['e2e/**/*.js'],
     extends: [js.configs.recommended],
     languageOptions: {

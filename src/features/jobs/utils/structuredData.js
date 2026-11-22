@@ -35,7 +35,6 @@ export function buildJobPostingData(job) {
     ...(job.expiresAt && { validThrough: job.expiresAt }),
     employmentType: EMPLOYMENT_TYPES[job.contractType],
     directApply: false,
-    // URL canónica (castellano): el contenido de la oferta no se traduce.
     url: absoluteUrl(paths.jobDetail(job)),
     hiringOrganization: { '@type': 'Organization', name: job.company },
     ...(remote

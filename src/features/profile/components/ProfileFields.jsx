@@ -6,11 +6,6 @@ import TechnologiesInput from './TechnologiesInput'
 
 const LEGEND = 'float-left mb-4 w-full text-lg font-bold text-ink'
 
-/**
- * Los campos del perfil (lo básico, tecnologías y enlaces), en grupos con su título. Los usan «Editar perfil» y el
- * panel de administración, con el mismo `form` de useForm. Las leyendas flotan para comportarse como un título más
- * y no cortar el borde del grupo.
- */
 export default function ProfileFields({ form, firstClassName = '' }) {
   const { t } = useI18n()
   const technologiesError = Object.entries(form.errors).find(([key]) => key.startsWith('technologies'))?.[1]

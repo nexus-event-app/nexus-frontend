@@ -42,8 +42,6 @@ function ProfileForm({ profile, onAvatarChange }) {
   })
 
   return (
-    // Sin envoltorio: el formulario y la vista previa se colocan en la rejilla de la página (en el móvil, la vista
-    // previa queda debajo del formulario).
     <>
       <hgroup className="mt-14 lg:col-start-1 lg:row-start-3 lg:mt-10">
         <Eyebrow>{t('profile.edit.formEyebrow')}</Eyebrow>
@@ -58,7 +56,6 @@ function ProfileForm({ profile, onAvatarChange }) {
         className="mt-5 space-y-8 rounded-3xl border border-slate-200 bg-surface p-5 shadow-card sm:p-8 lg:col-start-1 lg:row-start-4"
       >
         {form.formError && <Alert variant="error">{form.formError}</Alert>}
-        {/* La foto se guarda al momento, sin esperar a «Guardar perfil». */}
         <AvatarField
           name={form.values.name || profile.name}
           avatarUrl={profile.avatarUrl}
@@ -99,7 +96,6 @@ export default function EditProfilePage() {
   }
 
   return (
-    // Como el perfil: cabecera arriba; a la izquierda, el formulario; a la derecha, la foto y la vista previa.
     <PageMain className="page-container page-section relative isolate grid grid-cols-1 content-start gap-x-12 lg:grid-cols-[minmax(0,1fr)_22rem]">
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Seo title={t('profile.edit.title')} path={paths.profileEdit} robots="noindex,nofollow" />

@@ -19,7 +19,6 @@ export default function FormField({
   const errorId = `${id}-error`
   const describedBy = [hint && hintId, error && errorId].filter(Boolean).join(' ') || undefined
 
-  // Cada etiqueta con su campo va en un párrafo, como recomienda la especificación HTML para formularios.
   return (
     <p className={className}>
       <label htmlFor={id} className="mb-1.5 block text-sm font-semibold text-ink">

@@ -18,7 +18,6 @@ describe('Eyebrow', () => {
     const typed = () =>
       container.querySelector('[aria-hidden="true"].grid > span:last-child').firstChild?.textContent ?? ''
     expect(typed()).toBe('')
-    // Cada letra programa la siguiente al pintarse: se avanza de una en una, como en el navegador.
     const type = (letters) => {
       for (let i = 0; i < letters; i++) act(() => vi.advanceTimersByTime(55))
     }

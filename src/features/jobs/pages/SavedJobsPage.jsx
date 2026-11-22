@@ -22,7 +22,6 @@ import SaveJobButton from '../components/SaveJobButton'
 import { useSavedJobs } from '../hooks/useSavedJobs'
 import { savedJobsService } from '../services/savedJobsService'
 
-/** Oferta guardada que ya no está publicada: misma fila, apagada y sin enlace; solo se puede quitar de guardadas. */
 function UnavailableJob({ job, note }) {
   const { t } = useI18n()
   return (
@@ -44,7 +43,6 @@ function UnavailableJob({ job, note }) {
 
 const TIPS = ['Read', 'Cv', 'Show', 'Ask']
 
-/** Al lado de la lista: consejos breves para preparar la candidatura y un enlace para seguir buscando. */
 function ApplyTips({ className }) {
   const { t } = useI18n()
   return (
@@ -83,7 +81,6 @@ export default function SavedJobsPage() {
   )
 
   return (
-    // Como el resto de páginas: cabecera arriba; a la izquierda, las ofertas; a la derecha, consejos para aplicar.
     <PageMain className="page-container page-section relative isolate grid grid-cols-1 content-start gap-x-12 lg:grid-cols-[minmax(0,1fr)_22rem]">
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Seo title={t('jobs.saved.title')} path={paths.savedJobs} robots="noindex,nofollow" />
@@ -122,7 +119,6 @@ export default function SavedJobsPage() {
             if (result.totalPages > 0 && page > result.totalPages) {
               return <Navigate to={buildHref(result.totalPages)} replace />
             }
-            // Las que el usuario quita en esta página desaparecen al momento; al volver se recarga la lista.
             const items = ready ? result.content.filter((item) => isSaved(item.job.id)) : result.content
             if (items.length === 0) {
               return (

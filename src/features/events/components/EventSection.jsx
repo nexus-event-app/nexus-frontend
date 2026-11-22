@@ -12,13 +12,8 @@ import { cx } from '@/shared/utils/classNames'
 import { eventsService } from '../services/eventsService'
 import EventCard from './EventCard'
 
-/** Dos filas de tres tarjetas por página. */
-export const EVENTS_PAGE_SIZE = 6
+const EVENTS_PAGE_SIZE = 6
 
-/**
- * Un bloque de la agenda («Eventos», para todo el mundo, o «Por y para mujeres») con sus próximos eventos, los filtros elegidos y
- * su propia paginación (`page` y `pageHref`, para que cada bloque pase de página por su cuenta).
- */
 export default function EventSection({ id, forWomen, filters, page, pageHref, illustration, className }) {
   const { t } = useI18n()
   const key = forWomen ? 'women' : 'general'
@@ -66,13 +61,11 @@ export default function EventSection({ id, forWomen, filters, page, pageHref, il
         </h2>
         <p className="mt-3 leading-relaxed text-ink-muted">{t(`events.${key}.text`)}</p>
       </hgroup>
-      {/* Ilustración en el hueco de la derecha del título; puede asomar por encima del recuadro y no mueve nada. */}
       {illustration && (
         <Illustration
           {...illustration}
           className={cx(
             'absolute right-4 hidden w-64 lg:block xl:right-8 xl:w-[19rem]',
-            // El bloque general no tiene recuadro (ni su margen interior): sube más y asoma sobre los filtros.
             forWomen ? '-top-14' : '-top-24 xl:-top-28',
           )}
         />

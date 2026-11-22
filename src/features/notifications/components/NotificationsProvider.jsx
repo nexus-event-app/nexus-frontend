@@ -4,13 +4,8 @@ import { useAuth } from '@/features/auth/hooks/useAuth'
 import { NotificationsContext } from '../hooks/notificationsContext'
 import { notificationService } from '../services/notificationService'
 
-/** Cada cuánto se pregunta al servidor por avisos nuevos mientras la pestaña está a la vista. */
 export const POLL_INTERVAL = 60_000
 
-/**
- * Número de avisos sin leer para la campanita de la cabecera. Se actualiza al iniciar sesión, al cambiar de página,
- * al volver a la pestaña y cada minuto mientras está a la vista (con la pestaña oculta no se pregunta).
- */
 export default function NotificationsProvider({ children }) {
   const { user } = useAuth()
   const userId = user?.id ?? null
@@ -21,9 +16,7 @@ export default function NotificationsProvider({ children }) {
     if (userId === null) return
     notificationService.unreadCount().then(
       (count) => setState({ userId, count }),
-      () => {
-        // Sin conexión o con la sesión caducada la campanita conserva el último número.
-      },
+      () => {},
     )
   }, [userId])
 
@@ -42,7 +35,6 @@ export default function NotificationsProvider({ children }) {
     }
   }, [userId, refresh])
 
-  /** Ajuste inmediato al leer avisos, sin esperar a la siguiente consulta. */
   const adjust = useCallback(
     (update) =>
       setState((current) => ({ userId, count: Math.max(0, update(current.userId === userId ? current.count : 0)) })),

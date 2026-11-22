@@ -25,7 +25,6 @@ const ERROR_MESSAGES = {
   expired: 'auth.google.errorExpired',
 }
 
-/** Lee lo que el backend deja en el fragmento al volver de Google: «#code=…», «#signup=…» o «#error=…». */
 function readReturn() {
   const params = new URLSearchParams(window.location.hash.slice(1))
   if (params.get('code')) return { kind: 'code', value: params.get('code') }
@@ -62,7 +61,6 @@ function GoogleError({ reason }) {
   )
 }
 
-/** «Ya casi está»: los datos que da Google y la casilla de las condiciones antes de crear la cuenta. */
 function FinishSignup({ token, onExpired }) {
   const { t } = useI18n()
   const toast = useToast()
@@ -131,17 +129,14 @@ function FinishSignup({ token, onExpired }) {
   )
 }
 
-/** Página a la que vuelve la persona desde Google: entra, termina el alta o ve qué ha pasado. */
 export default function GoogleReturnPage() {
   const { t } = useI18n()
   const toast = useToast()
   const navigate = useNavigate()
   const { loginWithGoogle } = useAuth()
   const [result, setResult] = useState(readReturn)
-  // El código es de un solo uso: que el modo estricto de React (doble efecto) no lo gaste dos veces.
   const exchanged = useRef(false)
 
-  // Se borra el fragmento de la barra de direcciones para que el código no quede en el historial ni se comparta.
   useEffect(() => {
     if (window.location.hash) {
       window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search)

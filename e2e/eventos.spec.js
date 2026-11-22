@@ -8,7 +8,6 @@ test.describe('Eventos', () => {
     await expect(page.getByRole('heading', { level: 1, name: 'No te pierdas ninguna oportunidad' })).toBeVisible()
 
     const general = page.getByRole('region', { name: 'Eventos', exact: true })
-    // Seis por página (dos filas de tres) y paginación propia.
     await expect(general.getByRole('article')).toHaveCount(6)
     await expect(general.getByRole('navigation', { name: 'Páginas de «Eventos»' })).toBeVisible()
     const meetup = general.getByRole('article', { name: 'Meetup de React en Valencia' })
@@ -51,7 +50,6 @@ test.describe('Eventos', () => {
     page,
     api,
   }) => {
-    // Con un día elegido en la dirección, el calendario abre en ese mes (marzo de 2099, el de los datos de prueba).
     await page.goto('/eventos?dia=2099-03-12')
     const calendar = page.getByRole('region', { name: /marzo de 2099/i })
     await expect(calendar.getByRole('button', { name: /12 de marzo: 1 evento/ })).toHaveAttribute(
@@ -67,7 +65,6 @@ test.describe('Eventos', () => {
     await expect(page.getByRole('region', { name: 'Eventos', exact: true })).toContainText(
       'No hay eventos con estos filtros',
     )
-    // Quitar el día.
     await page.getByRole('link', { name: /Quitar el filtro del 15 de marzo/ }).click()
     await expect(page).not.toHaveURL(/dia=/)
   })
@@ -107,7 +104,6 @@ test.describe('Eventos', () => {
     await page.getByLabel(/^Fecha/).fill('2099-05-10')
     await page.getByLabel(/Hora/).fill('18:00')
     await page.getByLabel('Presencial').check()
-    // Si se pega la dirección en la ciudad, pide solo la ciudad.
     await page.getByLabel(/^Ciudad/).fill('Calle de Cronos, 63 · Madrid')
     await page.getByRole('button', { name: 'Compartir evento' }).click()
     await expect(page.getByText(/Pon solo la ciudad/)).toBeVisible()
@@ -166,7 +162,6 @@ test.describe('Eventos', () => {
     await expect(going).toHaveAttribute('aria-pressed', 'true')
     await expect(going).toHaveText(/· 13/)
     expect(api.calls.some((call) => call.method === 'POST' && call.path === '/api/events/51/interest')).toBe(true)
-    // Sin nadie apuntado todavía, solo «Voy», sin número.
     const hackathon = page.getByRole('article', { name: 'Hackathon online para principiantes' })
     await expect(hackathon.getByRole('button', { name: /^Voy a/ })).not.toHaveText(/·/)
   })

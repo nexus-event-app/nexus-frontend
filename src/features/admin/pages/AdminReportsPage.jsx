@@ -23,7 +23,6 @@ import { adminReportsService } from '../services/adminReportsService'
 const TYPE_LABELS = { DISCUSSION: 'Discusión', COMMENT: 'Comentario', TESTIMONIAL: 'Testimonio', EVENT: 'Evento' }
 const RESOLUTION_LABELS = { HIDE: 'Ocultado', DELETE: 'Eliminado', DISMISS: 'Descartado' }
 
-/** Dónde ver el contenido reportado en la web. */
 function targetHref(item) {
   const { target } = item
   if (!target.exists) return null
@@ -163,7 +162,6 @@ export default function AdminReportsPage() {
   const toast = useToast()
   const [confirming, setConfirming] = useState(null)
 
-  // Al resolver, el contenido sale de la cola sin recargarla.
   const [resolve, resolving] = useAction(async ({ item, action }) => {
     await adminReportsService.resolve({ targetType: item.targetType, targetId: item.targetId, action })
     request.mutate((items) => items.filter((other) => caseKey(other) !== caseKey(item)))

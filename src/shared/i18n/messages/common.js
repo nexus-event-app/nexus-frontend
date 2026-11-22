@@ -1,4 +1,3 @@
-/** Textos compartidos: cabecera, pie, navegación, paginación, búsqueda y componentes genéricos. */
 export default {
   es: {
     skipLink: 'Saltar al contenido',

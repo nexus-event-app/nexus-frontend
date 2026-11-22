@@ -1,4 +1,3 @@
-/** Preferencia de tema: «system» sigue al dispositivo. La clave debe coincidir con public/theme-init.js. */
 export const THEME_STORAGE_KEY = 'primercommit.theme'
 export const THEMES = ['system', 'light', 'dark']
 
@@ -17,9 +16,7 @@ export function storeTheme(theme) {
   try {
     if (theme === 'system') window.localStorage.removeItem(THEME_STORAGE_KEY)
     else window.localStorage.setItem(THEME_STORAGE_KEY, theme)
-  } catch {
-    // Sin almacenamiento (modo privado estricto): el tema se aplica solo en esta visita.
-  }
+  } catch {}
 }
 
 export function systemQuery() {
@@ -31,7 +28,6 @@ export function resolveTheme(theme) {
   return systemQuery()?.matches ? 'dark' : 'light'
 }
 
-/** Aplica el tema resuelto a la página: clase .dark en <html> y color de la barra del navegador. */
 export function applyTheme(resolved) {
   const root = document.documentElement
   root.classList.toggle('dark', resolved === 'dark')

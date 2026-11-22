@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { Link, Navigate } from '@/shared/i18n/router'
-import ArticleSkeleton from '@/shared/components/ArticleSkeleton'
+import { Link } from '@/shared/i18n/router'
 import ActionMenu from '@/shared/components/ActionMenu'
 import CopyLinkButton from '@/shared/components/CopyLinkButton'
 import ContentLanguageBadge from '@/shared/components/ContentLanguageBadge'
@@ -9,7 +8,7 @@ import { contentLanguageOf } from '@/shared/utils/contentLanguage'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import ErrorState from '@/shared/components/ErrorState'
 import JsonLd from '@/shared/components/JsonLd'
-import NotFound from '@/shared/components/NotFound'
+import { detailFallback } from '@/shared/components/DetailFallback'
 import PageMain from '@/shared/components/PageMain'
 import Seo from '@/shared/components/Seo'
 import Time from '@/shared/components/Time'
@@ -29,7 +28,6 @@ import { readingMinutes } from '../utils/readingTime'
 import { buildNewsArticleData } from '../utils/structuredData'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-/** Noticias en el bloque lateral «Sigue leyendo». */
 const RELATED_COUNT = 4
 
 export default function NewsDetailPage() {
@@ -40,34 +38,23 @@ export default function NewsDetailPage() {
   const latestRequest = useLatestNews(RELATED_COUNT + 1)
   const article = articleRequest.data
 
-  if (id === null || articleRequest.error?.status === 404) return <NotFound />
-  if (articleRequest.error) {
-    return (
-      <PageMain className="page-container page-section">
-        <ErrorState error={articleRequest.error} title={t('news.detail.error')} onRetry={articleRequest.reload} />
-      </PageMain>
-    )
-  }
-  if (!article) {
-    return (
-      <PageMain className="page-container page-section" loading>
-        <ArticleSkeleton />
-      </PageMain>
-    )
-  }
-  if (slug !== article.slug) return <Navigate to={paths.newsDetail(article)} replace />
+  const fallback = detailFallback({
+    id,
+    slug,
+    request: articleRequest,
+    errorTitle: t('news.detail.error'),
+    canonicalPath: paths.newsDetail,
+  })
+  if (fallback) return fallback
 
   const related = (latestRequest.data ?? []).filter((item) => item.id !== article.id).slice(0, RELATED_COUNT)
   const path = paths.newsDetail(article)
   const hasSource = isHttpUrl(article.sourceUrl)
-  // Las noticias importadas son un resumen de un artículo ajeno: no se indexan ni se marcan como NewsArticle.
   const imported = Boolean(article.imported)
 
   const language = contentLanguageOf(article)
   const minutes = readingMinutes(article.content)
 
-  // Como en el foro: la noticia a la izquierda y, al lado, «Sigue leyendo» (fijo al bajar en pantallas grandes; en
-  // móvil va debajo). Detrás, la cuadrícula suave de la web.
   return (
     <PageMain className="page-container page-section relative isolate grid grid-cols-1 content-start gap-x-10 lg:grid-cols-[minmax(0,1fr)_22rem]">
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
@@ -92,10 +79,6 @@ export default function NewsDetailPage() {
         ]}
       />
 
-      {/*
-        Como en el resto de la web, el antetítulo (con su punto) y el título van fuera, encima del bloque; la tarjeta
-        lleva solo la noticia. El artículo toma el nombre del título (aria-labelledby).
-      */}
       <header className="mt-6 min-w-0 lg:col-start-1">
         <p className="flex flex-wrap items-center gap-x-3 gap-y-2">
           <Eyebrow>{newsCategories.labelOf(article.category)}</Eyebrow>

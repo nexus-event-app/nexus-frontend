@@ -19,7 +19,6 @@ import { useLearningProgress } from '../hooks/useLearningProgress'
 const NEXT_LINK =
   'group flex min-h-[2.75rem] items-center gap-3 px-5 py-3 font-medium text-ink-soft transition-colors hover:bg-canvas hover:text-accent'
 
-/** Un dato del resumen: término y valor (la rejilla de <dl> los pone en fila, con una línea entre filas). */
 function SummaryRow({ label, children }) {
   return (
     <>
@@ -36,15 +35,12 @@ export default function LearningPathPage() {
   const progress = useLearningProgress()
 
   if (!path) return <NotFound />
-  // Dirección con el identificador sin traducir: se lleva a la buena para que cada página tenga una sola URL.
   if (pathSlug !== routeSubsegment('rutas', path.id, lang)) return <Navigate to={paths.learningPath(path.id)} replace />
 
   const base = `learning.paths.${path.id}`
   const name = t(`${base}.name`)
   const total = path.steps.length
 
-  // Como en los demás detalles: el antetítulo y el título encima; las etapas como un recorrido a la izquierda y, al
-  // lado, el resumen (fijo al bajar en pantallas grandes). Detrás, la cuadrícula suave de la web.
   return (
     <PageMain className="page-container page-section relative isolate grid grid-cols-1 content-start gap-x-12 lg:grid-cols-[minmax(0,1fr)_22rem]">
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
@@ -77,7 +73,6 @@ export default function LearningPathPage() {
         </section>
       )}
 
-      {/* Las etapas, como un recorrido: una línea vertical une los círculos con su número (pasa por detrás). */}
       <ol className="relative mt-10 space-y-8 before:absolute before:bottom-6 before:left-[1.3rem] before:top-6 before:w-0.5 before:bg-slate-200 lg:col-start-1">
         {path.steps.map((step, index) => (
           <li key={step.id} className="relative grid grid-cols-[2.75rem_minmax(0,1fr)] gap-x-4 sm:gap-x-6">
@@ -86,7 +81,6 @@ export default function LearningPathPage() {
         ))}
       </ol>
 
-      {/* Resumen: antetítulo y título fuera, como siempre; los datos, el progreso y los siguientes pasos en recuadros. */}
       <aside
         aria-labelledby="learning-summary"
         className="mt-12 lg:sticky lg:top-24 lg:col-start-2 lg:row-span-5 lg:row-start-2 lg:mt-6 lg:self-start"

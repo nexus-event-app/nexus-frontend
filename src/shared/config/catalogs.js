@@ -1,9 +1,5 @@
 import { translate } from '@/shared/i18n/translate'
 
-/**
- * Catálogo de valores del servidor. Las etiquetas se traducen al idioma activo con la clave
- * «catalogs.<nombre>.<VALOR>»; si no existe, se usa la etiqueta en castellano de aquí (p. ej. en el panel).
- */
 function catalog(name, entries) {
   const base = entries.map(([value, label, tone]) => ({
     value,
@@ -31,7 +27,6 @@ function catalog(name, entries) {
   }
 }
 
-/** Temas de las noticias, en el orden de los filtros. Las importadas se clasifican solas por su contenido. */
 export const newsCategories = catalog('newsCategories', [
   ['IA', 'IA', 'violet'],
   ['PROGRAMACION', 'Programación', 'blue'],
@@ -71,7 +66,6 @@ export const importSourceTypes = catalog('importSourceTypes', [
   ['ADZUNA_JOBS', 'Empleo · Adzuna (España)', 'green'],
 ])
 
-/** Idiomas del contenido (noticias y sus fuentes). El panel de administración solo está en castellano. */
 export const contentLanguages = [
   { value: 'es', label: 'Español' },
   { value: 'en', label: 'Inglés' },

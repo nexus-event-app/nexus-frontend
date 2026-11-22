@@ -3,7 +3,6 @@ import { LANGUAGES, LANGUAGE_META, localizePath } from '@/shared/i18n/languages'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 
-/** Cambia de idioma manteniendo la página, los filtros y la paginación. */
 export default function LanguageSwitcher({ className }) {
   const { t, lang } = useI18n()
   const { pathname, search, hash } = useLocation()

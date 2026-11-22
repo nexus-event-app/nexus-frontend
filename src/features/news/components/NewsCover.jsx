@@ -1,6 +1,5 @@
 import { coverPhotoFor } from '../utils/coverPhoto'
 
-/** Foto de portada por defecto de una noticia (ver coverPhotoFor). Es decorativa: el titular ya aparece al lado. */
 export default function NewsCover({ category, title, seed, priority = false, className }) {
   return (
     <img

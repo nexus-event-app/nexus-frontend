@@ -1,4 +1,3 @@
-/** Cuentas: inicio de sesión, registro, verificación de email y recuperación de contraseña. */
 export default {
   es: {
     eyebrow: 'Tu cuenta',
@@ -58,7 +57,6 @@ export default {
       errorDisabled: 'Esta cuenta está desactivada. Si crees que es un error, escríbenos.',
       errorExpired: 'El acceso con Google ha caducado. Vuelve a intentarlo.',
       errorFailed: 'Algo ha fallado al volver de Google. Vuelve a intentarlo en unos minutos.',
-      retry: 'Volver a intentarlo',
       backToLogin: 'Volver a iniciar sesión',
     },
     terms: {
@@ -188,7 +186,6 @@ export default {
       errorDisabled: 'Aquest compte està desactivat. Si creus que és un error, escriu-nos.',
       errorExpired: 'L’accés amb Google ha caducat. Torna-ho a provar.',
       errorFailed: 'Alguna cosa ha fallat en tornar de Google. Torna-ho a provar d’aquí a uns minuts.',
-      retry: 'Torna-ho a provar',
       backToLogin: 'Torna a iniciar la sessió',
     },
     terms: {
@@ -317,7 +314,6 @@ export default {
       errorDisabled: 'This account is disabled. If you think this is a mistake, get in touch.',
       errorExpired: 'Your Google sign-in has expired. Please try again.',
       errorFailed: 'Something went wrong coming back from Google. Please try again in a few minutes.',
-      retry: 'Try again',
       backToLogin: 'Back to sign in',
     },
     terms: {

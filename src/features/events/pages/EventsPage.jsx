@@ -15,7 +15,6 @@ import EventSection from '../components/EventSection'
 import EventsCalendar from '../components/EventsCalendar'
 import ShareInvite from '../components/ShareInvite'
 
-/** Filtros y páginas en la dirección, para poder compartirlos y volver atrás. */
 const MODES = { online: 'ONLINE', presencial: 'PRESENCIAL' }
 const DAY = /^\d{4}-\d{2}-\d{2}$/
 
@@ -30,10 +29,6 @@ function pageOf(value) {
   return Number.isFinite(page) && page > 0 ? page : 1
 }
 
-/**
- * Agenda de eventos que construye la comunidad: título, cómo funciona y calendario arriba; debajo, los filtros
- * (modalidad, ciudad y el día elegido en el calendario) y dos bloques, cada uno con su paginación.
- */
 export default function EventsPage() {
   const { t } = useI18n()
   const navigate = useNavigate()
@@ -44,7 +39,6 @@ export default function EventsPage() {
   const day = DAY.test(searchParams.get('dia') ?? '') ? searchParams.get('dia') : ''
   const filters = { mode, city, day, active: Boolean(mode || city || day) }
 
-  /** Dirección con unos parámetros cambiados; al cambiar un filtro, los dos bloques vuelven a la página 1. */
   const hrefWith = (changes, { keepPages = false } = {}) => {
     const next = new URLSearchParams(searchParams)
     if (!keepPages) {
@@ -58,7 +52,6 @@ export default function EventsPage() {
 
   const selectDay = (value) => {
     navigate(hrefWith({ dia: value }), { replace: false, preventScrollReset: true })
-    // Después de elegir un día, a la agenda.
     requestAnimationFrame(() =>
       document.getElementById('agenda')?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
     )
@@ -75,10 +68,6 @@ export default function EventsPage() {
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Breadcrumbs items={[{ label: t('events.breadcrumb'), to: paths.events }]} />
 
-      {/*
-        Rejilla de dos columnas centradas entre sí: a la izquierda, título, entradilla y los tres pasos; a la derecha,
-        el calendario y debajo «Compartir un evento». En el móvil, uno tras otro en ese mismo orden.
-      */}
       <header className="mt-6 grid items-center gap-x-12 gap-y-8 lg:grid-cols-[minmax(0,1fr)_19rem]">
         <hgroup className="max-w-3xl lg:col-start-1 lg:row-start-1 lg:self-end">
           <Eyebrow>{t('events.eyebrow')}</Eyebrow>
@@ -87,8 +76,6 @@ export default function EventsPage() {
           <ShareInvite className="mt-5 max-w-xl" />
         </hgroup>
 
-        {/* Tres pasos: deja claro que la agenda es de todo el mundo. */}
-        {/* Llegan hasta abajo del botón «Compartir un evento» (ocupan su fila y la del botón). */}
         <section aria-labelledby="events-how" className="lg:col-start-1 lg:row-span-2 lg:row-start-2 lg:self-stretch">
           <h2 id="events-how" className="sr-only">
             {t('events.how.title')}

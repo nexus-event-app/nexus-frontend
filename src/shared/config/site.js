@@ -5,7 +5,6 @@ export const siteConfig = {
   url: rawUrl.replace(/\/+$/, ''),
   defaultImage: '/og-default.png',
   logo: '/icon-512.png',
-  // Versión de prueba (VITE_BETA=true al compilar): muestra el aviso de la beta con el enlace al foro.
   beta: import.meta.env.VITE_BETA === 'true',
 }
 

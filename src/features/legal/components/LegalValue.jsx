@@ -1,4 +1,3 @@
-/** Muestra un dato legal configurado o un aviso visible si aún falta. */
 export default function LegalValue({ value, href }) {
   if (!value) {
     return (

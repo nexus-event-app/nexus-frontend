@@ -8,7 +8,6 @@ import GoogleReturnPage from './GoogleReturnPage'
 
 vi.mock('../services/authService', () => ({ authService: { googlePending: vi.fn() } }))
 
-/** Simula la vuelta desde Google con lo que deja el backend en el fragmento de la dirección. */
 function returnFromGoogle(fragment) {
   window.history.replaceState(null, '', `/registro/google#${fragment}`)
   return '/registro/google'

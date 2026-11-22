@@ -9,10 +9,6 @@ import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import { useSavedJobs } from '../hooks/useSavedJobs'
 
-/**
- * Botón para guardar una oferta y verla luego en «Ofertas guardadas».
- * `compact`: solo icono (tarjetas); si no, botón con texto (ficha de la oferta).
- */
 export default function SaveJobButton({ job, compact = false, className }) {
   const { t } = useI18n()
   const toast = useToast()

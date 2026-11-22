@@ -31,7 +31,6 @@ export default defineConfig(({ mode }) => {
       alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
     },
     server: {
-      // Prepara al arrancar los módulos de la primera pantalla para que la primera carga no espere a compilarlos.
       warmup: {
         clientFiles: [
           './src/main.jsx',
@@ -45,7 +44,6 @@ export default defineConfig(({ mode }) => {
     build: {
       rollupOptions: { output: { manualChunks: vendorChunk } },
     },
-    // Pruebas unitarias y de componentes (Vitest + Testing Library). Las de extremo a extremo están en e2e/.
     test: {
       environment: 'jsdom',
       setupFiles: ['./src/test/setup.js'],

@@ -1,10 +1,8 @@
 import { translate } from '@/shared/i18n/translate'
 import { GITHUB_PATTERN, LINKEDIN_PATTERN, normalizeGithub, normalizeLinkedin } from './profileLinks'
 
-/** Límite de la presentación, el mismo que valida el backend. */
 export const BIO_MAX = 300
 
-/** Valores del formulario a partir del perfil (los campos vacíos llegan como null). */
 export function toProfileFormValues(profile) {
   return {
     name: profile.name ?? '',
@@ -29,7 +27,6 @@ export function validateProfile({ name, headline, bio, githubUrl, linkedinUrl })
   return errors
 }
 
-/** Lo que se envía al backend: textos sin espacios sobrantes y enlaces completos. */
 export function toProfilePayload(values) {
   return {
     name: values.name.trim(),

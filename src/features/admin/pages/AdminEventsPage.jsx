@@ -16,24 +16,18 @@ import PagedTable from '../components/PagedTable'
 import { useAdminList } from '../hooks/useAdminList'
 import { adminEventsService } from '../services/adminEventsService'
 
-/**
- * Hasta noviembre de 2026 el formulario cortaba la descripción en 280 caracteres sin avisar: las que miden justo eso
- * casi seguro que se quedaron a medias. Se marcan para pegar de nuevo el texto completo desde la web del evento.
- */
 const OLD_DESCRIPTION_LIMIT = 280
 const looksCut = (event) => event.description?.length === OLD_DESCRIPTION_LIMIT
 
-/** Descripción en dos líneas y «Leer más» para verla entera: así la tabla se lee de un vistazo. */
 function EventDescription({ event }) {
   const id = useId()
   const [expanded, setExpanded] = useState(false)
-  const [ref, clamped] = useIsClamped([event.description, expanded])
+  const [ref, clamped] = useIsClamped(event.description, expanded)
   return (
     <>
       <span
         id={id}
         ref={ref}
-        // `line-clamp` ya pone su propio display: con `block` no recortaría.
         className={cx(
           'mt-1 whitespace-pre-line text-sm font-normal text-ink-muted',
           expanded ? 'block' : 'line-clamp-2',
@@ -63,10 +57,6 @@ function EventStatus({ event }) {
   return event.past ? <Badge tone="slate">Ya pasó</Badge> : <Badge tone="green">Publicado</Badge>
 }
 
-/**
- * Eventos que comparte la comunidad: se publican al momento, así que aquí se revisan (llega un email por cada uno) y
- * se borran los repetidos o los que no encajan. Se ve quién lo compartió, que en la web pública no sale.
- */
 export default function AdminEventsPage() {
   const list = useAdminList('events', adminEventsService.list)
   const [deleting, setDeleting] = useState(null)
@@ -90,7 +80,6 @@ export default function AdminEventsPage() {
       render: (event) => (
         <p>
           {event.title}
-          {/* Estado y quién lo compartió van aquí, bajo el título: así la tabla cabe sin desplazarse. */}
           <span className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-normal text-ink-muted">
             <EventStatus event={event} />
             <span>
@@ -141,7 +130,6 @@ export default function AdminEventsPage() {
       actions: true,
       header: 'Acciones',
       className: 'md:w-40',
-      // En columna y a todo el ancho: ningún botón se sale de la tabla, aunque el dominio sea largo.
       render: (event) => (
         <ActionMenu className="justify-end md:flex-col md:flex-nowrap md:items-stretch [&_.btn]:w-full [&_.btn]:justify-start">
           <a href={event.url} target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-sm">

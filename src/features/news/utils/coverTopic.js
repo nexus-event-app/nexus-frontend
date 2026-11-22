@@ -1,7 +1,3 @@
-/**
- * Tema de una noticia a partir de su titular (en castellano, catalán o inglés), para elegir la foto de su
- * portada por defecto. Gana el primer tema que encaje: los más concretos van primero.
- */
 const TOPICS = [
   [
     'ai',
@@ -44,14 +40,12 @@ const TOPICS = [
   ],
 ]
 
-/** Hash pequeño y estable: la misma noticia tiene siempre la misma portada. */
 export function hashOf(value) {
   let hash = 0
   for (const char of String(value ?? '')) hash = (hash * 31 + char.codePointAt(0)) >>> 0
   return hash
 }
 
-/** Tema del titular («ai», «security»...) o null si no encaja con ninguno. */
 export function coverTopic(title) {
   const text = String(title ?? '').toLowerCase()
   return TOPICS.find(([, pattern]) => pattern.test(text))?.[0] ?? null

@@ -10,7 +10,6 @@ import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import HomeSection from './HomeSection'
 
-/** El próximo evento de un bloque (general o de mujeres), o una invitación a compartir uno si no hay. */
 function NextEvent({ forWomen, className }) {
   const { t } = useI18n()
   const request = useRequest(`home:events:${forWomen}`, ({ signal }) =>
@@ -39,11 +38,6 @@ function NextEvent({ forWomen, className }) {
   return <EventCard event={event} headingLevel="h3" compact />
 }
 
-/**
- * Eventos en la portada (después del foro, como en el menú): el próximo evento para todo el mundo y el próximo de
- * comunidades de mujeres en tarjetas compactas (sin descripción), con las ilustraciones en medio. Las ilustraciones
- * solo se ven en pantallas grandes; en el móvil quedan las dos tarjetas.
- */
 export default function HomeEventsSection() {
   const { t } = useI18n()
   return (
@@ -56,11 +50,6 @@ export default function HomeEventsSection() {
       linkLabel={t('home.events.link')}
       tinted
     >
-      {/*
-        Las dos tarjetas a los lados y, en medio, las dos ilustraciones una encima de otra (la comunidad en el centro).
-        La columna central no aporta altura (contain: size): la fila la marcan las tarjetas y cada ilustración ocupa
-        media altura y se ajusta sin deformarse. En pantallas medianas, solo las dos tarjetas; en el móvil, una debajo de otra.
-      */}
       <ul className="grid gap-6 md:grid-cols-2 xl:grid-cols-[minmax(0,1fr)_minmax(0,0.55fr)_minmax(0,1fr)]">
         <li className="h-full">
           <NextEvent forWomen={false} className="h-full" />

@@ -12,7 +12,6 @@ test.describe('Rutas de aprendizaje', () => {
       .click()
 
     await expect(page).toHaveURL(/\/rutas$/)
-    // Las cinco rutas y la ayuda para elegir.
     await expect(page.getByRole('list', { name: 'Rutas disponibles' }).getByRole('listitem')).toHaveCount(6)
     await page.getByRole('link', { name: 'Inteligencia artificial' }).click()
 
@@ -43,7 +42,6 @@ test.describe('Rutas de aprendizaje', () => {
       )
       .toBe(true)
 
-    // Al volver al listado, la tarjeta de la ruta muestra el avance guardado.
     api.on('GET', '/api/learning/progress', () =>
       json([{ pathId: 'frontend', stepId: 'javascript', completedAt: '2026-11-11T10:00:00' }]),
     )

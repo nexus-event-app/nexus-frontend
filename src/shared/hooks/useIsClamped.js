@@ -1,10 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-/**
- * Indica si el texto de un elemento recortado con line-clamp no cabe entero (para mostrar «Leer más» solo
- * cuando hace falta). Se vuelve a medir cuando cambia el tamaño del elemento o su contenido (`deps`).
- */
-export function useIsClamped(deps = []) {
+export function useIsClamped(content, expanded = false) {
   const ref = useRef(null)
   const [clamped, setClamped] = useState(false)
 
@@ -17,13 +13,11 @@ export function useIsClamped(deps = []) {
     const element = ref.current
     if (!element) return undefined
     measure()
-    // Se vuelve a medir cuando termina de cargar la tipografía: con la de reserva el texto ocupa otra cosa.
     document.fonts?.ready.then(measure).catch(() => {})
     const observer = new ResizeObserver(measure)
     observer.observe(element)
     return () => observer.disconnect()
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- `deps` es el contenido medido
-  }, [measure, ...deps])
+  }, [measure, content, expanded])
 
   return [ref, clamped]
 }

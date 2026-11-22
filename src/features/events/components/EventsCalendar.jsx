@@ -6,7 +6,6 @@ import { cx } from '@/shared/utils/classNames'
 import { eventsService } from '../services/eventsService'
 import { todayIso } from '../utils/eventForm'
 
-/** «AAAA-MM-DD» de una fecha local, sin desfases de zona horaria. */
 function iso(date) {
   return todayIso(date)
 }
@@ -16,7 +15,6 @@ function parse(value) {
   return new Date(year, month - 1, day)
 }
 
-/** Semanas (de lunes a domingo) que se ven en el calendario de un mes, con los días que asoman de los meses de al lado. */
 function monthGrid(year, month) {
   const first = new Date(year, month, 1)
   const start = new Date(year, month, 1 - ((first.getDay() + 6) % 7))
@@ -32,10 +30,6 @@ function monthGrid(year, month) {
   return weeks
 }
 
-/**
- * Calendario de la agenda: marca los días con eventos (en rosa si alguno es por y para mujeres) y, al pulsar uno,
- * filtra la agenda por ese día. Se puede avanzar de mes; no retroceder antes del actual, porque lo pasado no se ve.
- */
 export default function EventsCalendar({ selectedDay, onSelectDay, className }) {
   const { t, locale } = useI18n()
   const today = todayIso()
@@ -157,7 +151,6 @@ export default function EventsCalendar({ selectedDay, onSelectDay, className }) 
                       <span
                         className={cx(
                           'mx-auto flex h-9 w-9 items-center justify-center rounded-full text-[0.8rem]',
-                          // Pasados y de otros meses, más apagados (sin perder contraste).
                           key < today || outside ? 'font-normal text-ink-muted' : 'text-ink-soft',
                           isToday && 'font-bold text-ink ring-2 ring-inset ring-accent-line',
                         )}

@@ -51,7 +51,6 @@ test.describe('Cuenta', () => {
       'aria-pressed',
       'true',
     )
-    // El botón cambia al instante y la petición sale después: se espera a que llegue al servidor simulado.
     await expect
       .poll(() => api.calls.some((call) => call.method === 'PUT' && call.path === '/api/saved-jobs/11'))
       .toBe(true)
@@ -73,7 +72,6 @@ test.describe('Cuenta', () => {
 
     const saved = page.getByRole('button', { name: /Quitar «Desarrollador\/a frontend junior»/ })
     await expect(saved).toHaveAttribute('aria-pressed', 'true')
-    // Ya ha llegado la lista (sin esa oferta) y la oferta sigue guardada.
     await expect.poll(() => listServed).toBe(true)
     await expect(saved).toHaveAttribute('aria-pressed', 'true')
   })
@@ -113,7 +111,6 @@ test.describe('Cerrar sesión', () => {
     await page.goto('/perfil/7-lucia-prueba')
     await expect(page.getByRole('region', { name: 'Tu actividad' })).toBeVisible()
 
-    // En el móvil la opción está en el menú lateral; en el escritorio, en el menú de la cuenta.
     const accountMenu = page.getByRole('banner').getByRole('button', { name: 'Lucía Prueba' })
     if (await accountMenu.isVisible()) {
       await accountMenu.click()

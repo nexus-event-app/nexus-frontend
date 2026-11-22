@@ -4,10 +4,6 @@ import Icon from '@/shared/components/Icon'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { DESCRIPTION_MAX } from '../utils/eventForm'
 
-/**
- * Campos de un evento, para compartirlo y para corregirlo desde el panel. Van dentro de un `.form-grid`; la ciudad y la
- * dirección solo salen si es presencial. `minDate`: fecha mínima del calendario del navegador (no se pone al corregir).
- */
 export default function EventFields({ form, minDate }) {
   const { t } = useI18n()
   const inPerson = form.values.mode === 'PRESENCIAL'

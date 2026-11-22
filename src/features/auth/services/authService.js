@@ -8,7 +8,6 @@ export const authService = {
   resetPassword: (token, password) => http.post('/auth/reset-password', { token, password }),
   verifyEmail: (token) => http.post('/auth/verify-email', { token }),
   resendVerification: () => http.post('/auth/resend-verification'),
-  /** Formas de entrar disponibles además del email (p. ej. `{ google: true }`). */
   providers: (config) => http.get('/auth/providers', config).then((response) => response.data),
   googleExchange: (token) => http.post('/auth/google/exchange', { token }).then((response) => response.data),
   googlePending: (token, config) =>

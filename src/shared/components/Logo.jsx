@@ -1,7 +1,6 @@
 import { siteConfig } from '@/shared/config/site'
 import { cx } from '@/shared/utils/classNames'
 
-/** Logo de Primer Commit. `inverse`: versión clara para fondos de color (el pie morado). */
 export default function Logo({ showName = true, inverse = false, className = '' }) {
   const background = inverse ? '#ffffff' : '#4f46e5'
   const stroke = inverse ? '#4338ca' : '#ffffff'

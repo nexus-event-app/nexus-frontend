@@ -1,4 +1,3 @@
-/** Página «Sobre el proyecto»: quién está detrás, por qué existe y cómo se financia. */
 export default {
   es: {
     breadcrumb: 'Sobre el proyecto',

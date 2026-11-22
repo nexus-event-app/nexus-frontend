@@ -11,36 +11,22 @@ import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import { eventsService } from '../services/eventsService'
 
-/**
- * A partir de aquí la descripción seguro que no cabe en tres líneas: «Leer más» sale aunque todavía no se haya
- * podido medir (por ejemplo, mientras carga la tipografía).
- */
 const LONG_DESCRIPTION = 140
 
-/** «2026-12-01» como fecha local (sin desfase horario): un evento del día 1 no puede salir el 30. */
 function localDate(iso) {
   const [year, month, day] = iso.split('-').map(Number)
   return new Date(year, month - 1, day)
 }
 
-/**
- * Un evento, en una tarjeta compacta (caben tres por fila): fecha en un sello de color, título, cuándo y dónde, la
- * descripción recortada a tres líneas y «Apuntarme», que lleva a su web (se ve a qué dominio). Al pasar el ratón se
- * eleva un poco y el sello gira; aparecen escalonadas (`index`). Todo se desactiva con «reducir movimiento».
- * «Voy» (la mano) cuenta cuánta gente va, para que se vea que la agenda se usa; nunca dice quién.
- * No dice quién lo compartió; esa persona puede borrarlo y el resto, reportarlo. `compact`: sin la descripción, para
- * la portada.
- */
 export default function EventCard({ event, index = 0, headingLevel = 'h3', compact = false, onDeleted }) {
   const { t, locale } = useI18n()
   const Heading = headingLevel
   const { isAuthenticated } = useAuth()
   const toast = useToast()
   const [confirming, setConfirming] = useState(false)
-  // Descripción recortada a tres líneas; si no cabe, «Leer más» la abre entera en la propia tarjeta.
   const descriptionId = useId()
   const [expanded, setExpanded] = useState(false)
-  const [descriptionRef, clamped] = useIsClamped([event.description, expanded])
+  const [descriptionRef, clamped] = useIsClamped(event.description, expanded)
   const [going, setGoing] = useState({ count: event.interestedCount ?? 0, interested: Boolean(event.interested) })
   const [toggleGoing, togglingGoing] = useAction(async () => {
     setGoing(await eventsService.toggleInterest(event.id))
@@ -82,7 +68,6 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
       )}
     >
       <header className="flex items-start gap-3">
-        {/* Sello de calendario: la fecha completa la leen los lectores de pantalla en «when». */}
         <time
           dateTime={event.date}
           aria-hidden="true"
@@ -120,14 +105,12 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
         </p>
       </header>
 
-      {/* En mayúsculas para que destaque (solo visual: los lectores de pantalla lo leen tal cual). */}
       <Heading
         id={`event-${event.id}`}
         className="mt-4 text-base font-bold uppercase leading-snug tracking-wide text-ink"
       >
         {event.title}
       </Heading>
-      {/* Cuándo y dónde, lo más importante para ir: en su propio recuadro, con el texto más marcado. */}
       <dl
         className={cx(
           'mt-3 grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-2.5 gap-y-2 rounded-2xl px-3.5 py-3 text-sm',
@@ -155,7 +138,6 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
           </>
         )}
       </dl>
-      {/* `compact` (portada): sin descripción, para que la tarjeta sea pequeña; se lee entera en Eventos. */}
       {!compact && (
         <>
           <p
@@ -183,7 +165,6 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
           )}
         </>
       )}
-      {/* Adónde lleva «Apuntarme»: los lectores de pantalla ya lo oyen en el propio enlace. */}
       <p aria-hidden="true" className="mt-auto flex items-center gap-1 truncate pt-3 text-xs text-ink-muted">
         <Icon name="link" className="h-3.5 w-3.5 shrink-0" />
         {event.host}
@@ -216,7 +197,6 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
               : 'border-slate-300 bg-surface text-ink-soft hover:border-accent-line hover:text-ink',
           )}
         >
-          {/* La clave reinicia la animación cada vez que se marca. */}
           <Icon
             key={going.interested ? `on-${going.count}` : 'off'}
             name="hand"
@@ -229,7 +209,6 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
               · {going.count}
             </span>
           )}
-          {/* Nombre accesible con lo que se ve y el número completo (WCAG 2.5.3). */}
           <span className="sr-only">
             {t('events.card.goingSr', { title: event.title })}. {t('events.card.goingCount', { count: going.count })}
           </span>

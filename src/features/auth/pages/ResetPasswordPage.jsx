@@ -27,7 +27,6 @@ export default function ResetPasswordPage() {
     validate: validateResetPassword,
     onSubmit: async ({ password }) => {
       await authService.resetPassword(token, password)
-      // Las sesiones abiertas dejan de valer al cambiar la contraseña.
       logout()
       toast.success(t('auth.reset.done'))
       navigate(paths.login, { replace: true })

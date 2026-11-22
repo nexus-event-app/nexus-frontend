@@ -34,11 +34,9 @@ export default function LearningPathsPage() {
         description={t('learning.seoDescription', { name: siteConfig.name })}
         path={paths.learning}
       />
-      {/* Cuadrícula decorativa detrás de la cabecera, como en el resto de páginas. */}
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Breadcrumbs items={[{ label: t('learning.breadcrumb'), to: paths.learning }]} />
 
-      {/* Título a la izquierda y, en pantallas grandes, el camino de las rutas en el hueco de la derecha. */}
       <header className="mb-10 grid items-end gap-x-10 lg:grid-cols-[minmax(0,1fr)_24rem] xl:grid-cols-[minmax(0,1fr)_32rem]">
         <hgroup>
           <Eyebrow>{t('learning.eyebrow')}</Eyebrow>
@@ -51,11 +49,6 @@ export default function LearningPathsPage() {
         />
       </header>
 
-      {/*
-        «Cómo funcionan», destacado antes de las rutas: una franja con el degradado de la marca. A la izquierda el
-        título (y, sin sesión, la invitación a crear cuenta para guardar el progreso); a la derecha, los tres pasos
-        numerados. Colores fijos: texto blanco sobre morado oscuro en los dos temas.
-      */}
       <section
         aria-labelledby="learning-how"
         className="relative isolate mb-12 grid gap-8 overflow-hidden rounded-3xl bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 p-6 text-white shadow-pop sm:p-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2.4fr)] lg:items-center lg:p-10"
@@ -91,7 +84,6 @@ export default function LearningPathsPage() {
               <span aria-hidden="true" className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15">
                 <Icon name={item.icon} className="h-5 w-5" />
               </span>
-              {/* Número del paso, grande y discreto: decorativo (la lista ya está ordenada). */}
               <span aria-hidden="true" className="justify-self-end font-mono text-2xl font-bold text-white/40">
                 {String(index + 1).padStart(2, '0')}
               </span>
@@ -114,7 +106,6 @@ export default function LearningPathsPage() {
             />
           </li>
         ))}
-        {/* Con cinco rutas queda un hueco en la rejilla: lo ocupa una ayuda para elegir, que lleva al foro. */}
         <li>
           <aside
             aria-labelledby="learning-choose"

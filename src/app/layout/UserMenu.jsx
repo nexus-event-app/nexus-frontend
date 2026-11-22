@@ -23,7 +23,6 @@ export default function UserMenu() {
   const handleLogout = useLogout()
 
   return (
-    // Es un elemento del menú de la cabecera (<menu>): el desplegable se coloca respecto a él.
     <li ref={containerRef} className="relative">
       <button
         type="button"
@@ -33,7 +32,6 @@ export default function UserMenu() {
         className="flex min-h-[2.75rem] items-center gap-2 rounded-full bg-slate-100 py-1 pl-1 pr-3 text-sm font-semibold text-ink transition-colors hover:bg-slate-200"
       >
         <Avatar name={user.name} src={user.avatarUrl} size="sm" />
-        {/* Por debajo de 1536 px solo se ve la foto, para que la cabecera quepa en una línea. */}
         <span className="sr-only 2xl:not-sr-only 2xl:max-w-[10rem] 2xl:truncate">{user.name}</span>
         <Icon name="chevron-down" className="h-4 w-4" />
       </button>

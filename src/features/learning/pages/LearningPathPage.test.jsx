@@ -26,7 +26,6 @@ describe('LearningPathsPage', () => {
   it('muestra las cinco rutas con su enlace traducido y sin <div>', () => {
     const { container } = renderWithProviders(<LearningPathsPage />, { route: '/en/learning-paths' })
     const list = screen.getByRole('list', { name: 'Available paths' })
-    // Las cinco rutas y la ayuda para elegir.
     expect(within(list).getAllByRole('listitem')).toHaveLength(6)
     expect(within(list).getByRole('link', { name: 'Ask in the forum' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Data analysis' })).toHaveAttribute('href', '/en/learning-paths/data')

@@ -17,16 +17,11 @@ import {
 
 const json = (body, status = 200) => ({ status, contentType: 'application/json', body: JSON.stringify(body) })
 
-/**
- * API simulada. Cada prueba puede sustituir una respuesta con api.on(método, ruta, respuesta) y consultar las
- * peticiones recibidas en api.calls. Lo que no está previsto responde 404, para que ninguna prueba dependa de nada externo.
- */
 class MockApi {
   constructor() {
     this.calls = []
     this.handlers = new Map()
     this.on('GET', '/api/news/latest', () => json(news))
-    // Temas con noticias publicadas: los de los datos de prueba (los demás filtros no se muestran).
     this.on('GET', '/api/news/categories', () => json(['PROGRAMACION', 'CARRERA']))
     this.on('GET', '/api/news', (_, query) => {
       const all = [...news, englishNews]
@@ -71,7 +66,6 @@ class MockApi {
         last: (pageIndex + 1) * size >= all.length,
       })
     })
-    // El calendario: días con eventos de los datos de prueba (marzo de 2099).
     this.on('GET', '/api/events/calendar', () =>
       json(
         Object.values(
@@ -94,7 +88,6 @@ class MockApi {
       json(page(events.map((item) => ({ ...item, active: true, past: false, authorName: 'Lucía Prueba' })))),
     )
     this.on('DELETE', /^\/api\/events\/\d+$/, () => ({ status: 204 }))
-    // «Voy»: alterna sobre los datos de prueba.
     this.on('POST', /^\/api\/events\/(\d+)\/interest$/, ([, id]) => {
       const item = events.find((event) => event.id === Number(id))
       const interested = !item.interested
@@ -114,7 +107,6 @@ class MockApi {
     this.on('GET', '/api/admin/stats', () =>
       json({ users: 3, news: 2, jobs: 1, discussions: 1, comments: 2, pendingTestimonials: 0, pendingReports: 1 }),
     )
-    // Perfil público: sin actividad ni contadores (por privacidad, solo los ve su dueño en /api/profile).
     this.on('GET', /^\/api\/users\/\d+$/, () =>
       json({ ...profile, discussionCount: undefined, testimonialCount: undefined }),
     )
@@ -124,7 +116,6 @@ class MockApi {
     this.on('PUT', '/api/profile', () => json(profile))
     this.on('DELETE', '/api/profile', () => ({ status: 204 }))
     this.on('GET', '/api/auth/me', () => json(user))
-    // «Continuar con Google» activado, como en local con las credenciales puestas.
     this.on('GET', '/api/auth/providers', () => json({ google: true }))
     this.on('POST', '/api/auth/login', () => json({ token: 'token-de-prueba', user }))
   }
@@ -147,7 +138,6 @@ class MockApi {
 }
 
 export const test = base.extend({
-  // Automática: todas las pruebas usan la API simulada aunque no la pidan.
   api: [
     async ({ page: browserPage }, use) => {
       const api = new MockApi()
@@ -162,14 +152,12 @@ export const test = base.extend({
         })
         await route.fulfill(await api.handle(request.method(), url.pathname, url.searchParams))
       })
-      // Las imágenes externas no deben hacer lentas ni frágiles las pruebas.
       await browserPage.route(/^https?:\/\/(?!localhost)/, (route) => route.abort())
       await use(api)
     },
     { auto: true },
   ],
 
-  /** Sesión de administración, para las pruebas del panel. */
   signedInAdmin: async ({ page: browserPage, api }, use) => {
     const admin = { ...user, id: 1, name: 'Admin Prueba', role: 'ADMIN' }
     api.on('GET', '/api/auth/me', () => json(admin))
@@ -182,7 +170,6 @@ export const test = base.extend({
     await use(admin)
   },
 
-  /** Inicia sesión guardando la sesión como lo hace la web, sin pasar por el formulario. */
   signedIn: async ({ page: browserPage }, use) => {
     await browserPage.addInitScript(
       (session) => {
@@ -194,10 +181,7 @@ export const test = base.extend({
   },
 })
 
-/** Comprueba la accesibilidad (WCAG 2.2 AA y buenas prácticas) de la página actual. */
 export async function expectAccessible(browserPage) {
-  // Las animaciones de entrada (opacidad) falsearían el contraste: se espera a que terminen. Las infinitas, como las
-  // luces del fondo de la portada, no cambian el color del texto y no se esperan.
   await browserPage.evaluate(() =>
     Promise.all(
       document

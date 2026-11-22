@@ -8,7 +8,6 @@ describe('langFromPath', () => {
     ['/ca', 'ca'],
     ['/ca/noticies', 'ca'],
     ['/en/news?page=2', 'en'],
-    // «/english» no es el prefijo «/en»: el idioma solo cuenta si es un segmento completo.
     ['/english', 'es'],
   ])('%s está en «%s»', (path, lang) => {
     expect(langFromPath(path)).toBe(lang)
