@@ -63,10 +63,10 @@ despliegue viven en [nexus-backend](https://github.com/nexus-event-app/nexus-bac
 | <img src="docs/screenshots/noticias.webp" alt="Listado de noticias con filtros por tema e idioma" width="440" /> | <img src="docs/screenshots/glosario.webp" alt="Glosario tech con buscador y categorías" width="440" /> |
 | **Testimonios** | **Perfil de la comunidad** |
 | <img src="docs/screenshots/testimonios.webp" alt="Muro de testimonios" width="440" /> | <img src="docs/screenshots/perfil.webp" alt="Tarjeta de perfil con presentación, tecnologías y enlaces" width="440" /> |
-| **Tema oscuro** | **Panel de administración** |
-| <img src="docs/screenshots/portada-oscuro.webp" alt="Portada en tema oscuro" width="440" /> | <img src="docs/screenshots/panel.webp" alt="Panel de administración: moderación de eventos" width="440" /> |
 
 <p align="center">
+  <img src="docs/screenshots/portada-oscuro.webp" alt="Portada en tema oscuro" width="440" />
+  &nbsp;&nbsp;
   <img src="docs/screenshots/movil-portada.webp" alt="Portada en el móvil" width="230" />
   &nbsp;&nbsp;
   <img src="docs/screenshots/movil-eventos.webp" alt="Eventos en el móvil" width="230" />
