@@ -31,7 +31,7 @@ export default {
       jobs: 'Empleo',
     },
     teaser: {
-      eyebrow: '¿Te suena a chino?',
+      eyebrow: '¡Que no te pille por sorpresa!',
       title: 'Glosario para quien empieza',
       text: 'Las palabras que más vas a oír, explicadas en una frase y con un ejemplo. Ideal si vienes de otro sector.',
       termsLabel: 'Algunos términos del glosario',
@@ -393,7 +393,7 @@ export default {
       jobs: 'Feina',
     },
     teaser: {
-      eyebrow: 'Et sona a xinès?',
+      eyebrow: 'Que no t’agafi per sorpresa!',
       title: 'Glossari per a qui comença',
       text: 'Les paraules que més sentiràs, explicades en una frase i amb un exemple. Ideal si vens d’un altre sector.',
       termsLabel: 'Alguns termes del glossari',
@@ -756,7 +756,7 @@ export default {
       jobs: 'Jobs',
     },
     teaser: {
-      eyebrow: 'Sounds like gibberish?',
+      eyebrow: 'Don’t get caught off guard!',
       title: 'Glossary for beginners',
       text: 'The words you’ll hear the most, explained in one sentence with an example. Ideal if you come from another field.',
       termsLabel: 'Some glossary terms',

@@ -47,7 +47,8 @@ export default {
       menu: 'Menú de tu cuenta',
     },
     footer: {
-      description: 'Noticias, ofertas de empleo, foro y testimonios para quienes dan sus primeros pasos en tecnología.',
+      description:
+        'Eventos, ofertas de empleo, foro y rutas de aprendizaje para quienes dan el primer paso en el mundo tech.',
       explore: 'Explorar',
       exploreLabel: 'Pie de página: explorar',
       account: 'Tu cuenta',
@@ -134,7 +135,8 @@ export default {
       menu: 'Menú del teu compte',
     },
     footer: {
-      description: 'Notícies, ofertes de feina, fòrum i testimonis per a qui fa els primers passos en tecnologia.',
+      description:
+        'Esdeveniments, ofertes de feina, fòrum i rutes d’aprenentatge per a qui fa el primer pas en el món tech.',
       explore: 'Explora',
       exploreLabel: 'Peu de pàgina: explora',
       account: 'El teu compte',
@@ -221,7 +223,7 @@ export default {
       menu: 'Your account menu',
     },
     footer: {
-      description: 'News, job offers, forum and testimonials for those taking their first steps in tech.',
+      description: 'Events, job offers, forum and learning paths for people taking their first step into tech.',
       explore: 'Explore',
       exploreLabel: 'Footer: explore',
       account: 'Your account',
