@@ -21,7 +21,7 @@ glosario y testimonios reales. En castellano, catalán e inglés.
 </div>
 
 <p align="center">
-  <img src="docs/screenshots/portada.webp" alt="Portada de Primer Commit: titular «Tu primer paso en tecnología no tiene que darse en solitario», ilustración de la comunidad y accesos a noticias, empleo, foro y rutas" width="900" />
+  <img src="docs/screenshots/portada.webp" alt="Portada de Primer Commit: «Una comunidad para quienes dan el primer paso en el mundo tech», ilustración de la comunidad y accesos a eventos, empleo, foro y comunidad" width="900" />
 </p>
 
 ---
