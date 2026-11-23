@@ -20,6 +20,7 @@ export default {
           800: '#3730a3',
           900: '#312e81',
           950: '#1e1b4b',
+          ink: '#2b1b68',
         },
         ink: {
           DEFAULT: token('ink'),

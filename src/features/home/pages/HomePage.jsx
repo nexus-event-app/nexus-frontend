@@ -5,7 +5,7 @@ import { paths } from '@/shared/config/paths'
 import ForumSection from '../components/ForumSection'
 import HeroSection from '../components/HeroSection'
 import HomeEventsSection from '../components/HomeEventsSection'
-import HomeJoinSection from '../components/HomeJoinSection'
+import HomeFeatures from '../components/HomeFeatures'
 import HomePathsSection from '../components/HomePathsSection'
 import LatestJobsSection from '../components/LatestJobsSection'
 import LatestNewsSection from '../components/LatestNewsSection'
@@ -18,13 +18,13 @@ export default function HomePage() {
       <Seo path={paths.home} />
       <JsonLd data={buildHomeData()} />
       <HeroSection />
+      <HomeFeatures />
       <HomeEventsSection />
       <LatestJobsSection />
       <ForumSection />
       <HomePathsSection />
       <LatestNewsSection />
       <TestimonialsSection />
-      <HomeJoinSection />
     </PageMain>
   )
 }
