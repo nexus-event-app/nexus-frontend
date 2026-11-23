@@ -4,8 +4,8 @@
 
 # Primer Commit · Frontend
 
-**La comunidad para quienes dan sus primeros pasos en tecnología.**
-Noticias explicadas, prácticas y empleo junior, un foro donde preguntar sin miedo, eventos, rutas de aprendizaje,
+**Una comunidad para dar el primer paso en el mundo tech.**
+Eventos, prácticas y empleo junior, un foro donde preguntar sin miedo, rutas de aprendizaje, noticias explicadas,
 glosario y testimonios reales. En castellano, catalán e inglés.
 
 [**primercommit.es**](https://primercommit.es) · [Backend](https://github.com/nexus-event-app/nexus-backend) ·
@@ -54,13 +54,13 @@ despliegue viven en [nexus-backend](https://github.com/nexus-event-app/nexus-bac
 
 ## Capturas
 
-| Noticias | Empleo |
+| Eventos | Empleo |
 | :---: | :---: |
-| <img src="docs/screenshots/noticias.webp" alt="Listado de noticias con filtros por tema e idioma" width="440" /> | <img src="docs/screenshots/empleo.webp" alt="Ofertas de empleo junior con filtros" width="440" /> |
-| **Foro** | **Eventos** |
-| <img src="docs/screenshots/foro.webp" alt="Foro con discusiones, filtros y normas de convivencia" width="440" /> | <img src="docs/screenshots/eventos.webp" alt="Agenda de eventos con calendario y botón para compartir" width="440" /> |
-| **Rutas de aprendizaje** | **Glosario** |
-| <img src="docs/screenshots/rutas.webp" alt="Rutas de aprendizaje con un camino ilustrado hasta el primer empleo" width="440" /> | <img src="docs/screenshots/glosario.webp" alt="Glosario tech con buscador y categorías" width="440" /> |
+| <img src="docs/screenshots/eventos.webp" alt="Agenda de eventos con calendario y botón para compartir" width="440" /> | <img src="docs/screenshots/empleo.webp" alt="Ofertas de empleo junior con filtros" width="440" /> |
+| **Foro** | **Rutas de aprendizaje** |
+| <img src="docs/screenshots/foro.webp" alt="Foro con discusiones, filtros y normas de convivencia" width="440" /> | <img src="docs/screenshots/rutas.webp" alt="Rutas de aprendizaje con un camino ilustrado hasta el primer empleo" width="440" /> |
+| **Noticias** | **Glosario** |
+| <img src="docs/screenshots/noticias.webp" alt="Listado de noticias con filtros por tema e idioma" width="440" /> | <img src="docs/screenshots/glosario.webp" alt="Glosario tech con buscador y categorías" width="440" /> |
 | **Testimonios** | **Perfil de la comunidad** |
 | <img src="docs/screenshots/testimonios.webp" alt="Muro de testimonios" width="440" /> | <img src="docs/screenshots/perfil.webp" alt="Tarjeta de perfil con presentación, tecnologías y enlaces" width="440" /> |
 | **Tema oscuro** | **Panel de administración** |
@@ -78,16 +78,16 @@ despliegue viven en [nexus-backend](https://github.com/nexus-event-app/nexus-bac
 
 **Para la comunidad**
 
-- **Noticias** importadas de fuentes de confianza y clasificadas por tema (IA, programación, ciberseguridad,
-  carrera...), con filtro de idioma, búsqueda y noticias relacionadas.
+- **Eventos** que comparte la comunidad: calendario, filtros por modalidad y ciudad, un bloque propio para
+  comunidades de mujeres y «Me apunto» para ver cuánta gente va (nunca quién).
 - **Empleo junior y prácticas** en España, con filtros por nivel, modalidad y contrato, ofertas guardadas, consejos
   para que te encuentren y guía para preparar entrevistas técnicas.
 - **Foro**: discusiones por categoría, respuestas, «me gusta», mejor respuesta marcada por quien pregunta, edición,
   reportes y normas de convivencia siempre a la vista.
-- **Eventos** que comparte la comunidad: calendario, filtros por modalidad y ciudad, un bloque propio para
-  comunidades de mujeres y «Voy» para ver cuánta gente va (nunca quién).
 - **Rutas de aprendizaje** (frontend, backend, QA, datos e IA) por etapas, con recursos escogidos, un proyecto por
   etapa y progreso guardado.
+- **Noticias** importadas de fuentes de confianza y clasificadas por tema (IA, programación, ciberseguridad,
+  carrera...), con filtro de idioma, búsqueda y noticias relacionadas.
 - **Glosario** de 58 términos explicados en una frase y con un ejemplo, con buscador e invitación a proponer palabras.
 - **Testimonios** moderados antes de publicarse, y **perfiles** con presentación, tecnologías y enlaces.
 - **Búsqueda global** desde la cabecera (Ctrl/⌘ + K), **notificaciones** de respuestas y mejores respuestas, inicio
@@ -97,7 +97,16 @@ despliegue viven en [nexus-backend](https://github.com/nexus-event-app/nexus-bac
 **Para la administración**
 
 Panel en `/admin` con métricas y moderación de noticias, empleo, foro, testimonios, eventos, reportes, usuarios y
-fuentes de importación.
+fuentes de importación. En **Reportes** aparece también lo que retiene el filtro de lenguaje, listo para publicarlo,
+ocultarlo o borrarlo.
+
+**Comunidad segura**
+
+- **Filtro de lenguaje** en castellano, catalán e inglés: los insultos graves no se pueden publicar y las palabrotas
+  leves dejan la discusión, el comentario o el evento pendiente de revisión (su autora lo ve marcado como «Pendiente
+  de revisión»). El perfil y el nombre no admiten ninguna de las dos.
+- **Tres reportes de personas distintas** ocultan un contenido hasta que la administración lo revisa.
+- **Dependabot** avisa cada semana de dependencias con actualizaciones o fallos de seguridad conocidos.
 
 **Privacidad por diseño**
 
@@ -271,6 +280,8 @@ prerenderizar las rutas públicas o migrar a un framework con renderizado en ser
   obsoletas y evita condiciones de carrera.
 - **Sesión en `localStorage`** (token y usuario), validada al arrancar con `GET /api/auth/me` y sincronizada entre
   pestañas. Es la opción más simple; la alternativa más robusta frente a XSS sería una cookie `HttpOnly`.
+- **Identidad visual**: logo de nodos conectados (la comunidad), cabecera clara en índigo y la tipografía Ubuntu. El
+  logo está en `src/shared/components/Logo.jsx` y en `public/` (favicon, iconos del móvil e imagen para redes).
 - **Ilustraciones sin fondo propio**, preparadas con `scripts/ilustracion-sin-fondo.py` para que se vea el fondo de la
   web en claro y en oscuro, y registradas en `src/shared/config/illustrations.js`.
 - **El texto de la interfaz, siempre traducido**: ninguna cadena visible fuera de `src/shared/i18n/messages`; la CI
