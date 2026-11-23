@@ -3,7 +3,7 @@ export default {
     hero: {
       titleLead: 'Una',
       title: 'comunidad',
-      subtitle: 'para quienes dan el primer paso en el',
+      subtitle: 'para dar el primer paso en el',
       titleEnd: 'mundo tech',
       actions: 'Descubrimos eventos|Publicamos ofertas laborales|Compartimos experiencias|Resolvemos dudas',
       actionsFull: 'Descubrimos eventos, publicamos ofertas laborales, compartimos experiencias y resolvemos dudas.',
@@ -99,7 +99,7 @@ export default {
     hero: {
       titleLead: 'Una',
       title: 'comunitat',
-      subtitle: 'per a qui fa el primer pas en el',
+      subtitle: 'per fer el primer pas en el',
       titleEnd: 'món tech',
       actions: 'Descobrim esdeveniments|Publiquem ofertes de feina|Compartim experiències|Resolem dubtes',
       actionsFull: 'Descobrim esdeveniments, publiquem ofertes de feina, compartim experiències i resolem dubtes.',
@@ -195,7 +195,7 @@ export default {
     hero: {
       titleLead: 'A',
       title: 'community',
-      subtitle: 'for people taking their first step into the',
+      subtitle: 'to take your first step into the',
       titleEnd: 'tech world',
       actions: 'Discover events|Browse job offers|Share experiences|Get your questions answered',
       actionsFull: 'Discover events, browse job offers, share experiences and get your questions answered.',

@@ -39,15 +39,13 @@ export default function HeroSection() {
 
       <header className="text-center lg:text-left">
         <Eyebrow className="animate-rise-in text-base">{name}</Eyebrow>
-        <h1 id="hero-heading" className="mt-4 animate-rise-in font-bold uppercase [animation-delay:80ms] lg:w-fit">
-          <span className={SMALL}>{t('home.hero.titleLead')}</span>{' '}
-          <span className={cx(BIG, 'mt-1')}>
+        <h1 id="hero-heading" className="mt-5 animate-rise-in font-bold uppercase [animation-delay:80ms]">
+          <span className={BIG}>
+            <span className="align-baseline text-[0.45em] font-semibold">{t('home.hero.titleLead')}</span>{' '}
             <span className={MARK}>{t('home.hero.title')}</span>
           </span>{' '}
-          <span className={cx(SMALL, 'mt-4')}>{t('home.hero.subtitle')}</span>{' '}
-          <span className={cx(MEDIUM, 'mt-1 lg:pl-[24%]')}>
-            <span className={MARK}>{t('home.hero.titleEnd')}</span>
-          </span>
+          <span className={cx(SMALL, 'mt-5')}>{t('home.hero.subtitle')}</span>{' '}
+          <span className={cx(MEDIUM, 'mt-3')}>{t('home.hero.titleEnd')}</span>
         </h1>
         <HeroActions className="mx-auto mt-8 max-w-xl animate-rise-in [animation-delay:160ms] lg:mx-0" />
 
