@@ -3,6 +3,7 @@ import { Link } from '@/shared/i18n/router'
 import { useNavigate } from '@/shared/i18n/useNavigate'
 import { commentAnchor } from '@/features/notifications/utils/notificationEntry'
 import { useAuth } from '@/features/auth/hooks/useAuth'
+import Alert from '@/shared/components/Alert'
 import Avatar from '@/shared/components/Avatar'
 import AuthorLink from '@/features/profile/components/AuthorLink'
 import Badge from '@/shared/components/Badge'
@@ -57,9 +58,11 @@ export default function DiscussionArticle({ discussion, commentCount, onChange, 
   }
 
   const handleUpdate = async (payload) => {
-    onChange(await discussionService.update(discussion.id, payload))
+    const updated = await discussionService.update(discussion.id, payload)
+    onChange(updated)
     setEditing(false)
-    toast.success(t('forum.detail.updated'))
+    if (updated.held) toast.info(t('forum.new.held'))
+    else toast.success(t('forum.detail.updated'))
   }
 
   const manageable = canManage(discussion.authorId)
@@ -100,6 +103,12 @@ export default function DiscussionArticle({ discussion, commentCount, onChange, 
           </span>
         </p>
       </header>
+
+      {discussion.held && (
+        <Alert variant="warning" title={t('forum.detail.heldTitle')} className="mt-5">
+          {t('forum.detail.heldText')}
+        </Alert>
+      )}
 
       <UserText className="mt-5 leading-7 text-ink-soft">{folded && !expanded ? folded : discussion.content}</UserText>
       {folded && (

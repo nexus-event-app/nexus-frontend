@@ -1,4 +1,5 @@
 import Avatar from '@/shared/components/Avatar'
+import Badge from '@/shared/components/Badge'
 import AuthorLink from '@/features/profile/components/AuthorLink'
 import Button from '@/shared/components/Button'
 import Icon from '@/shared/components/Icon'
@@ -47,6 +48,12 @@ export default function CommentItem({
         <Time value={comment.createdAt} format="datetime" className="text-sm text-ink-muted" />
       </header>
       <UserText className="mt-1 leading-relaxed text-ink-soft">{comment.content}</UserText>
+      {comment.held && (
+        <p className="mt-2 flex flex-wrap items-center gap-2 text-sm text-ink-muted">
+          <Badge tone="amber">{t('forum.comments.held')}</Badge>
+          {t('forum.comments.heldText')}
+        </p>
+      )}
       <footer className="mt-2 flex flex-wrap items-center gap-2">
         <LikeButton
           count={comment.likesCount}

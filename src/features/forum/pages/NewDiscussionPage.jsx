@@ -23,7 +23,8 @@ export default function NewDiscussionPage() {
 
   const handleSubmit = async (payload) => {
     const created = await discussionService.create(payload)
-    toast.success(t('forum.new.published'))
+    if (created.held) toast.info(t('forum.new.held'))
+    else toast.success(t('forum.new.published'))
     navigate(paths.discussionDetail(created))
   }
 

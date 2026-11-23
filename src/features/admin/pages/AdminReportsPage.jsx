@@ -32,6 +32,10 @@ function targetHref(item) {
   return item.targetType === 'COMMENT' ? `${discussion}#comentario-${item.targetId}` : discussion
 }
 
+function publishes(item, action) {
+  return action === 'DISMISS' && item.target.held
+}
+
 function caseKey(item) {
   return `${item.targetType}-${item.targetId}`
 }
@@ -41,7 +45,7 @@ function ReportCase({ item, closed, pending, onResolve }) {
   const { target } = item
   const href = targetHref(item)
   const titleId = `reporte-${caseKey(item)}`
-  const canHide = item.targetType !== 'COMMENT' && target.exists && target.visible
+  const canHide = item.targetType !== 'COMMENT' && target.exists && (target.visible || target.held)
 
   return (
     <article aria-labelledby={titleId} className="card p-5 sm:p-6">
@@ -50,7 +54,8 @@ function ReportCase({ item, closed, pending, onResolve }) {
           <p className="flex flex-wrap items-center gap-2">
             <Badge tone="indigo">{TYPE_LABELS[item.targetType]}</Badge>
             {!target.exists && <Badge tone="slate">Ya eliminado</Badge>}
-            {target.exists && !target.visible && <Badge tone="slate">Oculto</Badge>}
+            {target.held && <Badge tone="amber">Retenido hasta que lo revises</Badge>}
+            {target.exists && !target.visible && !target.held && <Badge tone="slate">Oculto</Badge>}
           </p>
           <h2 id={titleId} className="mt-2 text-lg font-bold text-ink">
             {target.title ?? `${TYPE_LABELS[item.targetType]} #${item.targetId}`}
@@ -90,7 +95,7 @@ function ReportCase({ item, closed, pending, onResolve }) {
           <li key={report.id} className="py-2">
             <p className="text-ink-soft">
               <strong className="font-semibold text-ink">{t(`reports.reasons.${report.reason}.label`)}</strong> ·{' '}
-              {report.reporterName} · <Time value={report.createdAt} format="datetime" />
+              {report.reporterName ?? 'Automático'} · <Time value={report.createdAt} format="datetime" />
               {closed && report.resolution && <> · {RESOLUTION_LABELS[report.resolution]}</>}
             </p>
             {report.details && <p className="mt-1 whitespace-pre-wrap text-ink-muted">«{report.details}»</p>}
@@ -119,10 +124,17 @@ function ReportCase({ item, closed, pending, onResolve }) {
               <Icon name="trash" className="h-4 w-4" />
               Eliminar<span className="sr-only"> «{target.title}»</span>
             </Button>
-            <Button variant="ghost" size="sm" disabled={pending} onClick={() => onResolve(item, 'DISMISS')}>
-              <Icon name="check" className="h-4 w-4" />
-              Descartar<span className="sr-only"> los reportes de «{target.title}»</span>
-            </Button>
+            {target.held ? (
+              <Button variant="primary" size="sm" disabled={pending} onClick={() => onResolve(item, 'DISMISS')}>
+                <Icon name="check" className="h-4 w-4" />
+                Publicar<span className="sr-only"> «{target.title}»</span>
+              </Button>
+            ) : (
+              <Button variant="ghost" size="sm" disabled={pending} onClick={() => onResolve(item, 'DISMISS')}>
+                <Icon name="check" className="h-4 w-4" />
+                Descartar<span className="sr-only"> los reportes de «{target.title}»</span>
+              </Button>
+            )}
           </ActionMenu>
         )}
       </footer>
@@ -149,9 +161,20 @@ const CONFIRM = {
     label: 'Descartar',
     tone: 'primary',
   },
+  PUBLISH: {
+    title: 'Publicar contenido',
+    message: 'Se publicará en la web y sus reportes pasan a «Revisados».',
+    label: 'Publicar',
+    tone: 'primary',
+  },
 }
 
-const SUCCESS = { HIDE: 'Contenido ocultado.', DELETE: 'Contenido eliminado.', DISMISS: 'Reportes descartados.' }
+const SUCCESS = {
+  HIDE: 'Contenido ocultado.',
+  DELETE: 'Contenido eliminado.',
+  DISMISS: 'Reportes descartados.',
+  PUBLISH: 'Contenido publicado.',
+}
 
 export default function AdminReportsPage() {
   const [searchParams] = useSearchParams()
@@ -166,17 +189,17 @@ export default function AdminReportsPage() {
     await adminReportsService.resolve({ targetType: item.targetType, targetId: item.targetId, action })
     request.mutate((items) => items.filter((other) => caseKey(other) !== caseKey(item)))
     setConfirming(null)
-    toast.success(SUCCESS[action])
+    toast.success(SUCCESS[publishes(item, action) ? 'PUBLISH' : action])
   })
 
-  const confirm = confirming && CONFIRM[confirming.action]
+  const confirm = confirming && CONFIRM[publishes(confirming.item, confirming.action) ? 'PUBLISH' : confirming.action]
 
   return (
     <>
       <Seo title="Reportes" path={paths.adminReports} robots="noindex,nofollow" />
       <PageHeader
         title="Reportes"
-        description="Contenido que la comunidad ha reportado, agrupado: decide si ocultarlo, eliminarlo o descartar los reportes."
+        description="Contenido que la comunidad ha reportado o que se ha retenido para revisar: decide si publicarlo, ocultarlo, eliminarlo o descartar los reportes."
       />
       <FilterLinks
         label="Estado de los reportes"

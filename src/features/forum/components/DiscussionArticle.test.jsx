@@ -38,4 +38,16 @@ describe('DiscussionArticle', () => {
     expect(screen.getByText(/Línea 14/)).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /Leer menos/ })).toHaveAttribute('aria-expanded', 'true')
   })
+
+  it('una discusión retenida explica a su autora que está pendiente de revisión', () => {
+    renderWithProviders(
+      <DiscussionArticle discussion={{ ...DISCUSSION, held: true }} commentCount={0} onChange={vi.fn()} />,
+    )
+    expect(screen.getByRole('status')).toHaveTextContent('Pendiente de revisión')
+  })
+
+  it('sin retener no muestra el aviso', () => {
+    renderWithProviders(<DiscussionArticle discussion={DISCUSSION} commentCount={0} onChange={vi.fn()} />)
+    expect(screen.queryByText('Pendiente de revisión')).not.toBeInTheDocument()
+  })
 })

@@ -80,8 +80,9 @@ export default function NewEventPage() {
   const toast = useToast()
 
   const handleSubmit = async (payload) => {
-    await eventsService.create(payload)
-    toast.success(t('events.new.published'))
+    const created = await eventsService.create(payload)
+    if (created.held) toast.info(t('events.new.held'))
+    else toast.success(t('events.new.published'))
     navigate(paths.events)
   }
 

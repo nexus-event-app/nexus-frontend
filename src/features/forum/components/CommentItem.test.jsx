@@ -57,4 +57,10 @@ describe('CommentItem', () => {
     expect(article).toHaveAttribute('id', 'comentario-5')
     expect(article).toHaveAttribute('tabindex', '-1')
   })
+
+  it('un comentario retenido avisa a su autora de que está pendiente de revisión', () => {
+    renderItem({ comment: { ...COMMENT, held: true } })
+    expect(screen.getByText('Pendiente de revisión')).toBeInTheDocument()
+    expect(screen.getByText('Solo lo ves tú hasta que el equipo lo revise.')).toBeInTheDocument()
+  })
 })

@@ -81,7 +81,8 @@ export default function CommentsSection({ discussion, comments, onDiscussionChan
   const handleCreate = async (content) => {
     const created = await commentService.create({ discussionId, content })
     mutate((items) => [...items, created])
-    toast.success(t('forum.comments.posted'))
+    if (created.held) toast.info(t('forum.comments.heldToast'))
+    else toast.success(t('forum.comments.posted'))
   }
 
   return (
