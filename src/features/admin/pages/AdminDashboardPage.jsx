@@ -11,6 +11,8 @@ import StatCard from '../components/StatCard'
 import { useAdminStats } from '../hooks/useAdminStats'
 
 const QUICK_ACTIONS = [
+  { label: 'Revisar reportes', to: paths.adminReports, icon: 'flag' },
+  { label: 'Moderar eventos', to: paths.adminEvents, icon: 'calendar' },
   { label: 'Publicar una noticia', to: paths.adminNews, icon: 'newspaper' },
   { label: 'Publicar una oferta de empleo', to: paths.adminJobs, icon: 'briefcase' },
   { label: 'Moderar el foro', to: paths.adminForum, icon: 'chat' },
@@ -23,6 +25,7 @@ export default function AdminDashboardPage() {
   const stats = request.data
 
   const cards = stats && [
+    { label: 'Próximos eventos', value: stats.upcomingEvents ?? 0, icon: 'calendar', to: paths.adminEvents },
     { label: 'Usuarios', value: stats.users, icon: 'users', to: paths.adminUsers },
     { label: 'Noticias', value: stats.news, icon: 'newspaper', to: paths.adminNews },
     { label: 'Ofertas de empleo', value: stats.jobs, icon: 'briefcase', to: paths.adminJobs },

@@ -47,11 +47,9 @@ export default function DiscussionModeration({ discussion, onClose, onDeleteDisc
           </p>
           <UserText className="mt-4 text-ink-soft">{discussion.content}</UserText>
           <ActionMenu className="mt-4">
-            {discussion.isActive && (
-              <Link to={paths.discussionDetail(discussion)} className="btn btn-secondary btn-sm">
-                Ver en el sitio
-              </Link>
-            )}
+            <Link to={paths.discussionDetail(discussion)} className="btn btn-secondary btn-sm">
+              Ver en el sitio
+            </Link>
             <Button variant="danger" size="sm" onClick={() => onDeleteDiscussion(discussion)}>
               <Icon name="trash" className="h-4 w-4" />
               Borrar discusión

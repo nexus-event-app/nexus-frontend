@@ -114,6 +114,17 @@ function ReportCase({ item, closed, pending, onResolve }) {
         )}
         {!closed && (
           <ActionMenu className="justify-end">
+            {target.held ? (
+              <Button variant="secondary" size="sm" disabled={pending} onClick={() => onResolve(item, 'DISMISS')}>
+                <Icon name="check" className="h-4 w-4" />
+                Publicar<span className="sr-only"> «{target.title}»</span>
+              </Button>
+            ) : (
+              <Button variant="ghost" size="sm" disabled={pending} onClick={() => onResolve(item, 'DISMISS')}>
+                <Icon name="check" className="h-4 w-4" />
+                Descartar<span className="sr-only"> los reportes de «{target.title}»</span>
+              </Button>
+            )}
             {canHide && (
               <Button variant="secondary" size="sm" disabled={pending} onClick={() => onResolve(item, 'HIDE')}>
                 <Icon name="eye-off" className="h-4 w-4" />
@@ -124,17 +135,6 @@ function ReportCase({ item, closed, pending, onResolve }) {
               <Icon name="trash" className="h-4 w-4" />
               Eliminar<span className="sr-only"> «{target.title}»</span>
             </Button>
-            {target.held ? (
-              <Button variant="primary" size="sm" disabled={pending} onClick={() => onResolve(item, 'DISMISS')}>
-                <Icon name="check" className="h-4 w-4" />
-                Publicar<span className="sr-only"> «{target.title}»</span>
-              </Button>
-            ) : (
-              <Button variant="ghost" size="sm" disabled={pending} onClick={() => onResolve(item, 'DISMISS')}>
-                <Icon name="check" className="h-4 w-4" />
-                Descartar<span className="sr-only"> los reportes de «{target.title}»</span>
-              </Button>
-            )}
           </ActionMenu>
         )}
       </footer>

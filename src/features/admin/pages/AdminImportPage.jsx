@@ -98,6 +98,7 @@ export default function AdminImportPage() {
       active: !active,
     }
     replaceSource(await adminImportService.update(source.id, payload))
+    toast.success(active ? `${name}: fuente pausada.` : `${name}: fuente activada.`)
   })
 
   const [addDefaults, addingDefaults] = useAction(async () => {

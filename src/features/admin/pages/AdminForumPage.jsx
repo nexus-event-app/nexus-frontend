@@ -12,6 +12,7 @@ import Time from '@/shared/components/Time'
 import { discussionCategories } from '@/shared/config/catalogs'
 import { paths } from '@/shared/config/paths'
 import { useAction } from '@/shared/hooks/useAction'
+import { useToast } from '@/shared/hooks/useToast'
 import DiscussionModeration from '../components/DiscussionModeration'
 import PagedTable from '../components/PagedTable'
 import StatusBadge from '../components/StatusBadge'
@@ -22,6 +23,7 @@ export default function AdminForumPage() {
   const list = useAdminList('discussions', adminDiscussionsService.list)
   const [moderating, setModerating] = useState(null)
   const [deleting, setDeleting] = useState(null)
+  const toast = useToast()
 
   const [removeDiscussion, removing] = useAction(
     async (discussion) => {
@@ -32,6 +34,18 @@ export default function AdminForumPage() {
     },
     { successMessage: 'Discusión borrada.' },
   )
+
+  const [toggleVisibility, toggling] = useAction(async (discussion) => {
+    const { title, content, category, isActive } = discussion
+    const updated = await discussionService.update(discussion.id, { title, content, category, isActive: !isActive })
+    list.mutate((page) => ({
+      ...page,
+      content: page.content.map((item) => (item.id === updated.id ? updated : item)),
+    }))
+    toast.success(
+      updated.isActive ? 'Discusión visible de nuevo en el foro.' : 'Discusión oculta: ya no se ve en el foro.',
+    )
+  })
 
   const columns = [
     {
@@ -62,6 +76,11 @@ export default function AdminForumPage() {
           <Button variant="secondary" size="sm" onClick={() => setModerating(discussion)}>
             <Icon name="eye" className="h-4 w-4" />
             Ver<span className="sr-only"> {discussion.title}</span>
+          </Button>
+          <Button variant="ghost" size="sm" disabled={toggling} onClick={() => toggleVisibility(discussion)}>
+            <Icon name={discussion.isActive ? 'eye-off' : 'eye'} className="h-4 w-4" />
+            {discussion.isActive ? 'Ocultar' : 'Mostrar'}
+            <span className="sr-only"> {discussion.title}</span>
           </Button>
           <Button variant="ghost" size="sm" onClick={() => setDeleting(discussion)}>
             <Icon name="trash" className="h-4 w-4" />

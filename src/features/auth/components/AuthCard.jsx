@@ -4,10 +4,10 @@ import PageMain from '@/shared/components/PageMain'
 import { useI18n } from '@/shared/i18n/useI18n'
 
 const BENEFITS = [
-  { key: 'benefitProgress', icon: 'academic' },
+  { key: 'benefitEvents', icon: 'calendar' },
   { key: 'benefitJobs', icon: 'bookmark' },
   { key: 'benefitForum', icon: 'chat' },
-  { key: 'benefitAlerts', icon: 'bell' },
+  { key: 'benefitProgress', icon: 'academic' },
 ]
 
 export default function AuthCard({ eyebrow, title, subtitle, children, footer }) {

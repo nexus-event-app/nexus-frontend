@@ -44,7 +44,6 @@ export default {
       benefitProgress: 'Guarda tu progreso en las rutas',
       benefitJobs: 'Guarda ofertas para revisarlas luego',
       benefitForum: 'Pregunta y responde en el foro',
-      benefitAlerts: 'Recibe avisos cuando te respondan',
       join: 'Crear mi cuenta',
     },
     news: {
@@ -140,7 +139,6 @@ export default {
       benefitProgress: 'Desa el teu progrés a les rutes',
       benefitJobs: 'Desa ofertes per revisar-les després',
       benefitForum: 'Pregunta i respon al fòrum',
-      benefitAlerts: 'Rep avisos quan et responguin',
       join: 'Crear el meu compte',
     },
     news: {
@@ -236,7 +234,6 @@ export default {
       benefitProgress: 'Save your progress on the paths',
       benefitJobs: 'Save jobs to review later',
       benefitForum: 'Ask and answer in the forum',
-      benefitAlerts: 'Get notified when someone replies',
       join: 'Create my account',
     },
     news: {

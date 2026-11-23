@@ -13,6 +13,7 @@ import Seo from '@/shared/components/Seo'
 import Time from '@/shared/components/Time'
 import { paths } from '@/shared/config/paths'
 import { useAction } from '@/shared/hooks/useAction'
+import { useToast } from '@/shared/hooks/useToast'
 import { useRequest } from '@/shared/hooks/useRequest'
 import { excerpt } from '@/shared/utils/text'
 import { adminTestimonialsService } from '../services/adminTestimonialsService'
@@ -43,9 +44,17 @@ export default function AdminTestimonialsPage() {
   const request = useRequest('admin:testimonials', ({ signal }) => adminTestimonialsService.list({ signal }))
   const [deleting, setDeleting] = useState(null)
 
+  const toast = useToast()
   const [update, updating] = useAction(async (testimonial, changes) => {
     const updated = await adminTestimonialsService.update(testimonial.id, changes)
     request.mutate((items) => items.map((item) => (item.id === updated.id ? updated : item)))
+    if ('isHighlighted' in changes) {
+      toast.success(updated.isHighlighted ? 'Testimonio destacado en la portada.' : 'Testimonio ya no destacado.')
+    } else if (changes.isPending === false) {
+      toast.success('Testimonio aprobado: ya se ve en el muro.')
+    } else {
+      toast.success(updated.isActive ? 'Testimonio visible de nuevo.' : 'Testimonio oculto: ya no se ve en el muro.')
+    }
   })
 
   const [remove, removing] = useAction(
