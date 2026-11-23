@@ -7,7 +7,7 @@ export const illustrations = {
   footer: { src: '/images/pie-ilustracion.webp', width: 800, height: 356 },
   tips: { src: '/images/consejos-ilustracion.webp', width: 600, height: 597, animation: 'heartbeat' },
   interview: { src: '/images/entrevistas-ilustracion.webp', width: 700, height: 509, animation: 'heartbeat' },
-  about: { src: '/images/sobre-ilustracion.webp', width: 800, height: 538 },
+  about: { src: '/images/sobre-comunidad.webp', width: 800, height: 538 },
   learningRoad: { src: '/images/rutas-camino.webp', width: 1600, height: 318 },
   learningRoadGirl: { src: '/images/rutas-camino-chica.webp', width: 1400, height: 278 },
   notifications: { src: '/images/notificaciones-ilustracion.webp', width: 600, height: 550, animation: 'nudge' },

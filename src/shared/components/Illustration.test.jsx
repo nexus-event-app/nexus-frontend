@@ -19,7 +19,7 @@ describe('Illustration', () => {
   it('las de Noticias, Foro, Eventos, Testimonios y el pie también están registradas con su tamaño', () => {
     expect(illustrations.news).toEqual({ src: '/images/noticias-ilustracion.webp', width: 800, height: 524 })
     expect(illustrations.forum).toEqual({ src: '/images/foro-ilustracion.webp', width: 800, height: 525 })
-    expect(illustrations.about).toEqual({ src: '/images/sobre-ilustracion.webp', width: 800, height: 538 })
+    expect(illustrations.about).toEqual({ src: '/images/sobre-comunidad.webp', width: 800, height: 538 })
     expect(illustrations.learningRoad).toEqual({ src: '/images/rutas-camino.webp', width: 1600, height: 318 })
     expect(illustrations.learningRoadGirl).toEqual({
       src: '/images/rutas-camino-chica.webp',
