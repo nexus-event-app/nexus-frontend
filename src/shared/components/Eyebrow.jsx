@@ -26,9 +26,9 @@ export default function Eyebrow({ children, tone = 'light', className }) {
         <span className={cx('h-2 w-2 animate-soft-pulse rounded-full', colors.dot)} />
       </span>
       <span className="sr-only">{text}</span>
-      <span aria-hidden="true" className="grid">
+      <span aria-hidden="true" className="grid min-w-0">
         <span className="invisible col-start-1 row-start-1">{text}</span>
-        <span className="col-start-1 row-start-1 whitespace-nowrap">
+        <span className="col-start-1 row-start-1">
           {typed}
           <span
             className={cx(

@@ -93,7 +93,7 @@ export default function DiscussionCard({ discussion, headingLevel = 'h3' }) {
         <Time value={discussion.createdAt} format="relative" className="shrink-0" />
       </p>
 
-      <footer className="mt-auto flex items-center justify-between gap-3 border-t border-slate-200 pt-3 text-sm text-ink-muted">
+      <footer className="mt-auto flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 pt-3 text-sm text-ink-muted">
         <p className="flex items-center gap-4">
           <span className="inline-flex items-center gap-1.5">
             <Icon name="chat" className="h-4 w-4" />

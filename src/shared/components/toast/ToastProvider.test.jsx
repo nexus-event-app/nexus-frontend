@@ -1,8 +1,8 @@
-import { act, render, screen, within } from '@testing-library/react'
+import { act, fireEvent, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { useEffect } from 'react'
 import { MemoryRouter } from 'react-router-dom'
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import I18nProvider from '@/shared/i18n/I18nProvider'
 import { useToast } from '@/shared/hooks/useToast'
 import ToastProvider from './ToastProvider'
@@ -59,5 +59,36 @@ describe('ToastProvider', () => {
     await userEvent.click(button)
     await act(async () => {})
     expect(screen.getAllByRole('status')).toHaveLength(1)
+  })
+
+  describe('tiempo para leer', () => {
+    afterEach(() => vi.useRealTimers())
+
+    it('el mensaje se cierra solo pasado un rato', () => {
+      vi.useFakeTimers()
+      renderWith(<OnLoad />)
+      act(() => vi.advanceTimersByTime(10_500))
+      expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+    })
+
+    it('con el ratón encima, el mensaje espera a que termines de leerlo', () => {
+      vi.useFakeTimers()
+      renderWith(<OnLoad />)
+      const alert = screen.getByRole('alert')
+      fireEvent.mouseEnter(alert)
+      act(() => vi.advanceTimersByTime(30_000))
+      expect(screen.getByRole('alert')).toBeInTheDocument()
+      fireEvent.mouseLeave(alert)
+      act(() => vi.advanceTimersByTime(10_500))
+      expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+    })
+
+    it('con el foco del teclado dentro, el mensaje no desaparece', () => {
+      vi.useFakeTimers()
+      renderWith(<OnLoad />)
+      act(() => screen.getByRole('button', { name: 'Cerrar mensaje' }).focus())
+      act(() => vi.advanceTimersByTime(30_000))
+      expect(screen.getByRole('alert')).toBeInTheDocument()
+    })
   })
 })

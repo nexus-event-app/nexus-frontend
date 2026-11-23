@@ -169,7 +169,7 @@ export default function NewsDetailPage() {
                 href={article.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
-                className="link inline-flex items-center gap-1"
+                className="link inline-flex min-h-6 items-center gap-1"
               >
                 {hostnameOf(article.sourceUrl)}
                 <Icon name="external" className="h-4 w-4" />

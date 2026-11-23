@@ -7,7 +7,7 @@ export default function AuthorLink({ id, name, className }) {
   return (
     <Link
       to={paths.profile({ id, name })}
-      className={cx('relative z-10 rounded-sm hover:text-accent hover:underline', className)}
+      className={cx('relative z-10 -my-0.5 rounded-sm py-0.5 hover:text-accent hover:underline', className)}
     >
       {name}
     </Link>

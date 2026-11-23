@@ -66,3 +66,29 @@ for (const theme of ['light', 'dark']) {
     }
   })
 }
+
+test.describe('Ampliación al 400 % (320 px de ancho)', () => {
+  test.use({ viewport: { width: 320, height: 640 }, reducedMotion: 'reduce' })
+
+  const withoutSideScroll = async (page, path) => {
+    await page.goto(path)
+    await expect(page.getByRole('main')).not.toHaveAttribute('aria-busy', 'true')
+    await expect(page.locator('main [aria-busy="true"]')).toHaveCount(0)
+    await expect
+      .poll(() => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth))
+      .toBeLessThanOrEqual(0)
+  }
+
+  for (const path of PAGES) {
+    test(`${path} se lee sin desplazarse de lado`, async ({ page }) => {
+      await withoutSideScroll(page, path)
+    })
+  }
+
+  for (const path of ['/perfil/7-lucia-prueba', '/notificaciones', '/perfil/editar', '/eventos/nuevo']) {
+    test(`${path} (con sesión) se lee sin desplazarse de lado`, async ({ page, signedIn }) => {
+      expect(signedIn.id).toBeDefined()
+      await withoutSideScroll(page, path)
+    })
+  }
+})

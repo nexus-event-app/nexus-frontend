@@ -180,7 +180,7 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
         {event.host}
       </p>
 
-      <footer className="mt-3 flex items-center gap-2 border-t border-slate-200 pt-4">
+      <footer className="mt-3 flex flex-wrap items-center gap-2 border-t border-slate-200 pt-4">
         {isAuthenticated ? (
           <a href={event.url} target="_blank" rel="noopener noreferrer nofollow ugc" className={joinClasses}>
             {t('events.card.join')}

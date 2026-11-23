@@ -38,7 +38,7 @@ export default function ForumSection() {
               action={<ButtonLink to={paths.forumNew}>{t('home.forum.create')}</ButtonLink>}
             />
           ) : (
-            <ul className="grid gap-4 lg:grid-cols-3">
+            <ul className="grid grid-cols-[minmax(0,1fr)] gap-4 lg:grid-cols-3">
               {items.map((discussion) => (
                 <li key={discussion.id}>
                   <DiscussionCard discussion={discussion} />

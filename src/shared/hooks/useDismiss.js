@@ -11,7 +11,11 @@ export function useDismiss(ref, active, onDismiss) {
     if (!active) return undefined
 
     const handleKeyDown = (event) => {
-      if (event.key === 'Escape') onDismissRef.current()
+      if (event.key !== 'Escape') return
+      const container = ref.current
+      const trigger = container?.contains(document.activeElement) && container.querySelector('[aria-expanded="true"]')
+      onDismissRef.current()
+      if (trigger) trigger.focus()
     }
     const handlePointerDown = (event) => {
       if (ref.current && !ref.current.contains(event.target)) onDismissRef.current()

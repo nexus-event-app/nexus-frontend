@@ -49,16 +49,27 @@ function Bubble({ id, type, message, onDismiss, className, style, bubbleRef, chi
   const { t } = useI18n()
   const config = TYPES[type]
 
+  const [hovered, setHovered] = useState(false)
+  const [focused, setFocused] = useState(false)
+  const paused = hovered || focused
+
   useEffect(() => {
+    if (paused) return undefined
     const timer = setTimeout(() => onDismiss(id), config.duration)
     return () => clearTimeout(timer)
-  }, [id, config.duration, onDismiss])
+  }, [id, config.duration, onDismiss, paused])
 
   return (
     <p
       ref={bubbleRef}
       role={config.role}
       style={style}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocus={() => setFocused(true)}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false)
+      }}
       className={cx(
         'pointer-events-auto flex animate-toast-in items-start gap-3 rounded-control border-2 p-4 text-base shadow-pop',
         config.classes,

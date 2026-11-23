@@ -17,7 +17,7 @@ export default function MissingWordCallout({ id, headingLevel = 'h2', className 
     <aside
       aria-labelledby={id}
       className={cx(
-        'relative isolate grid grid-cols-[auto_minmax(0,1fr)] gap-x-3.5 rounded-3xl bg-gradient-to-br from-brand-600 via-brand-700 to-brand-900 p-5 text-white shadow-pop',
+        'relative isolate grid overflow-hidden grid-cols-[auto_minmax(0,1fr)] gap-x-3.5 rounded-3xl bg-gradient-to-br from-brand-600 via-brand-700 to-brand-900 p-5 text-white shadow-pop',
         className,
       )}
     >

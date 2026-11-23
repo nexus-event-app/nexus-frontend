@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-function prefersReducedMotion() {
+export function prefersReducedMotion() {
   return typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
 }
 
@@ -22,16 +22,16 @@ export function useTypewriter(text, { start = true, speed = 55 } = {}) {
   return { typed: text.slice(0, length), done: length >= text.length }
 }
 
-export function useRotatingTypewriter(words, { speed = 70, pause = 1800 } = {}) {
+export function useRotatingTypewriter(words, { speed = 70, pause = 1800, paused = false } = {}) {
   const [count, setCount] = useState(0)
   const index = count % words.length
-  const { typed, done } = useTypewriter(words[index], { speed })
+  const { typed, done } = useTypewriter(words[index], { speed, start: !paused })
 
   useEffect(() => {
-    if (!done || prefersReducedMotion()) return undefined
+    if (!done || paused || prefersReducedMotion()) return undefined
     const timer = window.setTimeout(() => setCount((current) => current + 1), pause)
     return () => window.clearTimeout(timer)
-  }, [done, pause])
+  }, [done, pause, paused])
 
   return { index, typed }
 }

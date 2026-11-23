@@ -149,7 +149,7 @@ function OwnActivity({ profile, className }) {
           {t('profile.view.activityNote')}
         </p>
       </hgroup>
-      <dl className="mt-6 grid grid-cols-2 gap-4">
+      <dl className="mt-6 grid grid-cols-[repeat(auto-fit,minmax(11rem,1fr))] gap-4">
         {stats.map((stat) => {
           const count = profile[stat.key] ?? 0
           const label = t(`profile.view.${stat.key}`, { count })

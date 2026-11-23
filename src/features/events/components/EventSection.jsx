@@ -84,7 +84,7 @@ export default function EventSection({ id, forWomen, filters, page, pageHref, il
         </p>
       ) : (
         <>
-          <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-8 grid grid-cols-[minmax(0,1fr)] gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {data.content.map((event, index) => (
               <li key={event.id}>
                 <EventCard event={event} index={index} onDeleted={removeFromList} />
