@@ -1,12 +1,16 @@
 import { useId, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useAuth } from '@/features/auth/hooks/useAuth'
+import { useRequireLogin } from '@/features/auth/hooks/useRequireLogin'
 import ReportButton from '@/features/reports/components/ReportButton'
 import Button from '@/shared/components/Button'
 import ConfirmDialog from '@/shared/components/ConfirmDialog'
 import Icon from '@/shared/components/Icon'
+import { loginPath } from '@/shared/config/paths'
 import { useAction } from '@/shared/hooks/useAction'
 import { useIsClamped } from '@/shared/hooks/useIsClamped'
 import { useToast } from '@/shared/hooks/useToast'
+import { Link } from '@/shared/i18n/router'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import { eventsService } from '../services/eventsService'
@@ -22,7 +26,9 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
   const { t, locale } = useI18n()
   const Heading = headingLevel
   const { isAuthenticated } = useAuth()
+  const requireLogin = useRequireLogin()
   const toast = useToast()
+  const { pathname, search } = useLocation()
   const [confirming, setConfirming] = useState(false)
   const descriptionId = useId()
   const [expanded, setExpanded] = useState(false)
@@ -32,10 +38,7 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
     setGoing(await eventsService.toggleInterest(event.id))
   })
   const handleGoing = () => {
-    if (!isAuthenticated) {
-      toast.info(t('events.card.loginToGo'))
-      return
-    }
+    if (requireLogin(t('events.card.loginToGo'))) return
     toggleGoing()
   }
   const [remove, removing] = useAction(
@@ -45,6 +48,11 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
       onDeleted?.(event)
     },
     { successMessage: t('events.card.deleted') },
+  )
+
+  const joinClasses = cx(
+    'btn btn-sm rounded-full text-white shadow-card transition-transform hover:scale-105',
+    event.forWomen ? 'bg-pink-700 hover:bg-pink-800' : 'btn-primary',
   )
 
   const date = localDate(event.date)
@@ -171,19 +179,23 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
       </p>
 
       <footer className="mt-3 flex items-center gap-2 border-t border-slate-200 pt-4">
-        <a
-          href={event.url}
-          target="_blank"
-          rel="noopener noreferrer nofollow ugc"
-          className={cx(
-            'btn btn-sm rounded-full text-white shadow-card transition-transform hover:scale-105',
-            event.forWomen ? 'bg-pink-700 hover:bg-pink-800' : 'btn-primary',
-          )}
-        >
-          {t('events.card.join')}
-          <Icon name="external" className="h-4 w-4" />
-          <span className="sr-only"> {t('events.card.joinSr', { host: event.host })}</span>
-        </a>
+        {isAuthenticated ? (
+          <a href={event.url} target="_blank" rel="noopener noreferrer nofollow ugc" className={joinClasses}>
+            {t('events.card.join')}
+            <Icon name="external" className="h-4 w-4" />
+            <span className="sr-only"> {t('events.card.joinSr', { host: event.host })}</span>
+          </a>
+        ) : (
+          <Link
+            to={loginPath(`${pathname}${search}`)}
+            onClick={() => toast.info(t('events.card.loginToJoin'))}
+            className={joinClasses}
+          >
+            {t('events.card.join')}
+            <Icon name="lock" className="h-4 w-4" />
+            <span className="sr-only"> {t('events.card.joinSignIn')}</span>
+          </Link>
+        )}
         <button
           type="button"
           onClick={handleGoing}

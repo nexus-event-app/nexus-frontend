@@ -1,10 +1,8 @@
-import { useLocation } from 'react-router-dom'
 import { useAuth } from '@/features/auth/hooks/useAuth'
+import { useRequireLogin } from '@/features/auth/hooks/useRequireLogin'
 import { getErrorMessage } from '@/shared/api/ApiError'
 import Icon from '@/shared/components/Icon'
-import { loginPath } from '@/shared/config/paths'
 import { useToast } from '@/shared/hooks/useToast'
-import { useNavigate } from '@/shared/i18n/useNavigate'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import { useSavedJobs } from '../hooks/useSavedJobs'
@@ -12,18 +10,13 @@ import { useSavedJobs } from '../hooks/useSavedJobs'
 export default function SaveJobButton({ job, compact = false, className }) {
   const { t } = useI18n()
   const toast = useToast()
-  const navigate = useNavigate()
-  const location = useLocation()
   const { isAuthenticated } = useAuth()
+  const requireLogin = useRequireLogin()
   const { isSaved, isPending, toggle } = useSavedJobs()
   const saved = isAuthenticated && isSaved(job.id)
 
   const handleClick = async () => {
-    if (!isAuthenticated) {
-      toast.info(t('jobs.saved.loginToSave'))
-      navigate(loginPath(`${location.pathname}${location.search}`))
-      return
-    }
+    if (requireLogin(t('jobs.saved.loginToSave'))) return
     try {
       const nowSaved = await toggle(job.id)
       if (nowSaved) toast.success(t('jobs.saved.added'))

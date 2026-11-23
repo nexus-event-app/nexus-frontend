@@ -26,8 +26,8 @@ const EVENT = {
 describe('EventCard', () => {
   afterEach(() => vi.clearAllMocks())
 
-  it('enseña fecha, hora, lugar y el enlace para apuntarse, que se abre aparte y dice adónde lleva', () => {
-    renderWithProviders(<EventCard event={EVENT} />)
+  it('enseña fecha, hora, lugar y, con sesión, el enlace para apuntarse, que se abre aparte y dice adónde lleva', () => {
+    renderWithProviders(<EventCard event={EVENT} />, { auth: { user: { id: 7, name: 'Bea' } } })
     const card = screen.getByRole('article', { name: 'Meetup de React en Valencia' })
     expect(card).toHaveTextContent('1')
     expect(card).toHaveTextContent(/1 de marzo · 19:00/)
@@ -55,9 +55,23 @@ describe('EventCard', () => {
   })
 
   it('los online lo dicen y está traducido', () => {
-    renderWithProviders(<EventCard event={{ ...EVENT, mode: 'ONLINE', city: null }} />, { route: '/en/events' })
+    renderWithProviders(<EventCard event={{ ...EVENT, mode: 'ONLINE', city: null }} />, {
+      route: '/en/events',
+      auth: { user: { id: 7, name: 'Bea' } },
+    })
     expect(screen.getByRole('article')).toHaveTextContent('Online')
     expect(screen.getByRole('link', { name: /Sign me up on meetup\.com/ })).toBeInTheDocument()
+  })
+
+  it('sin sesión, «Apuntarme» no enseña el enlace del evento y lleva a iniciar sesión', async () => {
+    const { toast, current } = renderWithProviders(<EventCard event={EVENT} />, { route: '/eventos' })
+    const join = screen.getByRole('link', { name: /Apuntarme \(inicia sesión para ver el enlace del evento\)/ })
+    expect(join).not.toHaveAttribute('href', EVENT.url)
+    expect(join).not.toHaveAttribute('target')
+    await userEvent.click(join)
+    expect(toast.info).toHaveBeenCalledWith('Inicia sesión para ver el enlace y apuntarte al evento.')
+    expect(current.location.pathname).toBe('/login')
+    expect(current.location.search).toBe('?redirect=%2Feventos')
   })
 
   it('«Voy» enseña cuánta gente va a todo el mundo y, con sesión, se marca y se quita', async () => {
@@ -76,10 +90,11 @@ describe('EventCard', () => {
   })
 
   it('sin sesión, «Voy» pide iniciar sesión y no marca nada', async () => {
-    const { toast } = renderWithProviders(<EventCard event={{ ...EVENT, interestedCount: 1 }} />)
+    const { toast, current } = renderWithProviders(<EventCard event={{ ...EVENT, interestedCount: 1 }} />)
     await userEvent.click(screen.getByRole('button', { name: /1 persona va/ }))
     expect(eventsService.toggleInterest).not.toHaveBeenCalled()
     expect(toast.info).toHaveBeenCalledWith('Inicia sesión para marcar que vas.')
+    expect(current.location.pathname).toBe('/login')
   })
 
   it('el título sale en mayúsculas sin cambiar su nombre accesible', () => {

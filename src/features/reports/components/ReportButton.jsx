@@ -1,31 +1,22 @@
 import { useState } from 'react'
-import { useLocation } from 'react-router-dom'
 import { useAuth } from '@/features/auth/hooks/useAuth'
+import { useRequireLogin } from '@/features/auth/hooks/useRequireLogin'
 import Button from '@/shared/components/Button'
 import Icon from '@/shared/components/Icon'
-import { loginPath } from '@/shared/config/paths'
-import { useToast } from '@/shared/hooks/useToast'
 import { useI18n } from '@/shared/i18n/useI18n'
-import { useNavigate } from '@/shared/i18n/useNavigate'
 import { cx } from '@/shared/utils/classNames'
 import ReportDialog from './ReportDialog'
 
 export default function ReportButton({ targetType, targetId, ownerId, srLabel, compact = false, className }) {
   const { t } = useI18n()
   const { isAuthenticated, user } = useAuth()
-  const toast = useToast()
-  const navigate = useNavigate()
-  const location = useLocation()
+  const requireLogin = useRequireLogin()
   const [open, setOpen] = useState(false)
 
   if (isAuthenticated && ownerId != null && user?.id === ownerId) return null
 
   const handleClick = () => {
-    if (!isAuthenticated) {
-      toast.info(t('reports.loginToReport'))
-      navigate(loginPath(`${location.pathname}${location.search}`))
-      return
-    }
+    if (requireLogin(t('reports.loginToReport'))) return
     setOpen(true)
   }
 

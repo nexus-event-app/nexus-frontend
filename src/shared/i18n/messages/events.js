@@ -78,6 +78,8 @@ export default {
       goingCount_other: '{count} personas van',
       goingHint: 'Marca que vas: se ve cuánta gente va, nunca quién.',
       loginToGo: 'Inicia sesión para marcar que vas.',
+      loginToJoin: 'Inicia sesión para ver el enlace y apuntarte al evento.',
+      joinSignIn: '(inicia sesión para ver el enlace del evento)',
     },
     cta: {
       title: '¿Organizas o conoces un evento?',
@@ -210,6 +212,8 @@ export default {
       goingCount_other: '{count} persones hi van',
       goingHint: 'Marca que hi vas: es veu quanta gent hi va, mai qui.',
       loginToGo: 'Inicia la sessió per marcar que hi vas.',
+      loginToJoin: 'Inicia la sessió per veure l’enllaç i apuntar-te a l’esdeveniment.',
+      joinSignIn: '(inicia la sessió per veure l’enllaç de l’esdeveniment)',
     },
     cta: {
       title: 'Organitzes o coneixes un esdeveniment?',
@@ -342,6 +346,8 @@ export default {
       goingCount_other: '{count} people are going',
       goingHint: 'Say you’re going: everyone sees how many people go, never who.',
       loginToGo: 'Log in to say you’re going.',
+      loginToJoin: 'Log in to see the link and sign up for the event.',
+      joinSignIn: '(log in to see the event link)',
     },
     cta: {
       title: 'Organising or know of an event?',

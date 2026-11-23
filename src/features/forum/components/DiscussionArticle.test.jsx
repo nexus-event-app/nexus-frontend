@@ -50,4 +50,15 @@ describe('DiscussionArticle', () => {
     renderWithProviders(<DiscussionArticle discussion={DISCUSSION} commentCount={0} onChange={vi.fn()} />)
     expect(screen.queryByText('Pendiente de revisión')).not.toBeInTheDocument()
   })
+
+  it('sin sesión, «Me gusta» lleva a iniciar sesión y vuelve a la discusión', async () => {
+    const { toast, current } = renderWithProviders(
+      <DiscussionArticle discussion={DISCUSSION} commentCount={0} onChange={vi.fn()} />,
+      { route: '/foro/21-por-donde-empiezo' },
+    )
+    await userEvent.click(screen.getByRole('button', { name: /Me gusta/ }))
+    expect(toast.info).toHaveBeenCalled()
+    expect(current.location.pathname).toBe('/login')
+    expect(current.location.search).toBe('?redirect=%2Fforo%2F21-por-donde-empiezo')
+  })
 })

@@ -2,6 +2,7 @@ import { cx } from '@/shared/utils/classNames'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useAuth } from '@/features/auth/hooks/useAuth'
+import { useRequireLogin } from '@/features/auth/hooks/useRequireLogin'
 import SignInPrompt from '@/features/auth/components/SignInPrompt'
 import VerifyEmailNotice from '@/features/auth/components/VerifyEmailNotice'
 import ConfirmDialog from '@/shared/components/ConfirmDialog'
@@ -29,6 +30,7 @@ export default function CommentsSection({ discussion, comments, onDiscussionChan
   const discussionId = discussion.id
   const { t } = useI18n()
   const { isAuthenticated, user } = useAuth()
+  const requireLogin = useRequireLogin()
   const toast = useToast()
   const canManage = useCanManage()
   const [pendingDelete, setPendingDelete] = useState(null)
@@ -71,10 +73,7 @@ export default function CommentsSection({ discussion, comments, onDiscussionChan
   )
 
   const handleToggleLike = (comment) => {
-    if (!isAuthenticated) {
-      toast.info(t('forum.detail.loginToLike'))
-      return
-    }
+    if (requireLogin(t('forum.detail.loginToLike'))) return
     toggleLike(comment)
   }
 

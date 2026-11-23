@@ -13,15 +13,29 @@ test.describe('Eventos', () => {
     const meetup = general.getByRole('article', { name: 'Meetup de React en Valencia' })
     await expect(meetup).toContainText('Valencia')
     await expect(meetup).toContainText('Las Naves, Carrer de Joan Verdeguer, 16')
-    await expect(meetup.getByRole('link', { name: /Apuntarme/ })).toHaveAttribute(
-      'href',
-      'https://www.meetup.com/react-valencia/events/1/',
-    )
-    await expect(meetup.getByRole('link', { name: /Apuntarme/ })).toHaveAttribute('target', '_blank')
+    await expect(meetup.getByRole('link', { name: /Apuntarme/ })).not.toHaveAttribute('target', '_blank')
 
     const women = page.getByRole('region', { name: 'Por y para mujeres' })
     await expect(women.getByRole('article')).toHaveCount(1)
     await expect(women.getByRole('article', { name: 'Café tech de mujeres en Barcelona' })).toBeVisible()
+  })
+
+  test('sin sesión, «Apuntarme» lleva a iniciar sesión', async ({ page }) => {
+    await page.goto('/eventos')
+    const meetup = page.getByRole('article', { name: 'Meetup de React en Valencia' })
+    await meetup.getByRole('link', { name: /Apuntarme/ }).click()
+    await expect(page).toHaveURL(/\/login\?redirect=%2Feventos$/)
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+  })
+
+  test('con sesión, «Apuntarme» abre el enlace del evento en otra pestaña', async ({ page, signedIn }) => {
+    void signedIn
+    await page.goto('/eventos')
+    const join = page
+      .getByRole('article', { name: 'Meetup de React en Valencia' })
+      .getByRole('link', { name: /Apuntarme/ })
+    await expect(join).toHaveAttribute('href', 'https://www.meetup.com/react-valencia/events/1/')
+    await expect(join).toHaveAttribute('target', '_blank')
   })
 
   test('cabecera: los tres pasos bajo la entradilla y «Compartir un evento» bajo el calendario', async ({ page }) => {

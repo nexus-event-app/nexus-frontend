@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from '@/shared/i18n/router'
 import { useNavigate } from '@/shared/i18n/useNavigate'
 import { commentAnchor } from '@/features/notifications/utils/notificationEntry'
-import { useAuth } from '@/features/auth/hooks/useAuth'
+import { useRequireLogin } from '@/features/auth/hooks/useRequireLogin'
 import Alert from '@/shared/components/Alert'
 import Avatar from '@/shared/components/Avatar'
 import AuthorLink from '@/features/profile/components/AuthorLink'
@@ -30,7 +30,7 @@ import { authorOf } from '../utils/author'
 export default function DiscussionArticle({ discussion, commentCount, onChange, className }) {
   const { t } = useI18n()
   const author = authorOf(discussion, t)
-  const { isAuthenticated } = useAuth()
+  const requireLogin = useRequireLogin()
   const toast = useToast()
   const navigate = useNavigate()
   const canManage = useCanManage()
@@ -50,10 +50,7 @@ export default function DiscussionArticle({ discussion, commentCount, onChange, 
   })
 
   const handleLike = () => {
-    if (!isAuthenticated) {
-      toast.info(t('forum.detail.loginToLike'))
-      return
-    }
+    if (requireLogin(t('forum.detail.loginToLike'))) return
     toggleLike()
   }
 
