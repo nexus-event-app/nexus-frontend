@@ -51,7 +51,6 @@ export default function ResetPasswordPage() {
           </Alert>
         ) : (
           <form onSubmit={form.handleSubmit} noValidate className="space-y-5">
-            {form.formError && <Alert variant="error">{form.formError}</Alert>}
             <PasswordField
               {...form.getFieldProps('password')}
               label={t('auth.reset.newPassword')}
@@ -70,6 +69,7 @@ export default function ResetPasswordPage() {
             <Button type="submit" className="w-full" loading={form.submitting}>
               {form.submitting ? t('auth.reset.submitting') : t('auth.reset.submit')}
             </Button>
+            {form.formError && <Alert variant="error">{form.formError}</Alert>}
           </form>
         )}
       </AuthCard>

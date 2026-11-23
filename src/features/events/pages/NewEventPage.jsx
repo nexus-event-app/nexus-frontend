@@ -55,11 +55,6 @@ function EventForm({ onSubmit }) {
       aria-labelledby="new-event-form"
       className="form-grid mt-5 rounded-3xl border border-slate-200 bg-surface p-5 shadow-card sm:p-8 lg:col-start-1 lg:row-start-4"
     >
-      {form.formError && (
-        <Alert variant="error" className="col-span-full">
-          {form.formError}
-        </Alert>
-      )}
       <EventFields form={form} minDate={today} />
       <footer className="col-span-full flex flex-col-reverse gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:justify-end">
         <ButtonLink to={paths.events} variant="secondary" size="lg">
@@ -69,6 +64,11 @@ function EventForm({ onSubmit }) {
           {t('events.new.submit')}
         </Button>
       </footer>
+      {form.formError && (
+        <Alert variant="error" className="col-span-full">
+          {form.formError}
+        </Alert>
+      )}
     </form>
   )
 }

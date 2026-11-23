@@ -80,7 +80,6 @@ function AdminProfileForm({ profile, onAvatarRemoved }) {
       aria-label={`Perfil de ${profile.name}`}
       className="card max-w-3xl space-y-8 p-5 sm:p-8"
     >
-      {form.formError && <Alert variant="error">{form.formError}</Alert>}
       <PhotoField profile={profile} onRemoved={onAvatarRemoved} />
       <ProfileFields form={form} firstClassName="border-t border-slate-200 pt-8" />
       <footer className="flex flex-col-reverse gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:justify-end">
@@ -91,6 +90,7 @@ function AdminProfileForm({ profile, onAvatarRemoved }) {
           Guardar perfil
         </Button>
       </footer>
+      {form.formError && <Alert variant="error">{form.formError}</Alert>}
     </form>
   )
 }

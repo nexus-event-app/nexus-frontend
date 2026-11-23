@@ -40,6 +40,8 @@ export default {
       done: 'Hecha',
       doneSr: ' (etapa {step})',
       saveError: 'No hemos podido guardar tu progreso. Inténtalo de nuevo.',
+      marked: '¡Etapa completada! Tu progreso se ha guardado.',
+      unmarked: 'Etapa marcada como pendiente.',
     },
     detail: {
       audience: 'Para quién es',
@@ -309,6 +311,8 @@ export default {
       done: 'Feta',
       doneSr: ' (etapa {step})',
       saveError: 'No hem pogut desar el teu progrés. Torna-ho a provar.',
+      marked: 'Etapa completada! El teu progrés s’ha desat.',
+      unmarked: 'Etapa marcada com a pendent.',
     },
     detail: {
       audience: 'Per a qui és',
@@ -578,6 +582,8 @@ export default {
       done: 'Done',
       doneSr: ' (step {step})',
       saveError: 'We could not save your progress. Please try again.',
+      marked: 'Stage completed! Your progress has been saved.',
+      unmarked: 'Stage marked as pending.',
     },
     detail: {
       audience: 'Who it is for',

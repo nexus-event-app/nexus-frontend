@@ -60,15 +60,6 @@ export default function TestimonialForm({ className }) {
 
   return (
     <form onSubmit={form.handleSubmit} noValidate className={cx('form-grid', className)}>
-      {sent && (
-        <Alert
-          variant="success"
-          title={t(sent === 'published' ? 'testimonials.form.publishedTitle' : 'testimonials.form.thanksTitle')}
-        >
-          {t(sent === 'published' ? 'testimonials.form.published' : 'testimonials.form.thanks')}
-        </Alert>
-      )}
-      {form.formError && <Alert variant="error">{form.formError}</Alert>}
       <FormField
         className="field-third"
         {...form.getFieldProps('name')}
@@ -108,6 +99,15 @@ export default function TestimonialForm({ className }) {
           {form.submitting ? t('testimonials.form.submitting') : t('testimonials.form.submit')}
         </Button>
       </p>
+      {sent && (
+        <Alert
+          variant="success"
+          title={t(sent === 'published' ? 'testimonials.form.publishedTitle' : 'testimonials.form.thanksTitle')}
+        >
+          {t(sent === 'published' ? 'testimonials.form.published' : 'testimonials.form.thanks')}
+        </Alert>
+      )}
+      {form.formError && <Alert variant="error">{form.formError}</Alert>}
     </form>
   )
 }

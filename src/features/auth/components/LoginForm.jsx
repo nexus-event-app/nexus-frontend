@@ -28,7 +28,6 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={form.handleSubmit} noValidate className="flex flex-col gap-5">
-      {form.formError && <Alert variant="error">{form.formError}</Alert>}
       <FormField
         {...form.getFieldProps('email')}
         label={t('auth.login.email')}
@@ -47,6 +46,7 @@ export default function LoginForm() {
       <Button type="submit" size="lg" className="w-full shadow-pop" loading={form.submitting}>
         {form.submitting ? t('auth.login.submitting') : t('auth.login.submit')}
       </Button>
+      {form.formError && <Alert variant="error">{form.formError}</Alert>}
     </form>
   )
 }

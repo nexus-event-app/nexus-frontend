@@ -46,6 +46,7 @@ export function useLearningProgress() {
     setPendingFor(key, true)
     try {
       await (value ? learningService.complete(pathId, stepId) : learningService.undo(pathId, stepId))
+      toast.success(t(value ? 'learning.progress.marked' : 'learning.progress.unmarked'))
     } catch {
       setDone(pathId, stepId, !value)
       toast.error(t('learning.progress.saveError'))

@@ -40,7 +40,9 @@ export default function DiscussionArticle({ discussion, commentCount, onChange, 
   const folded = foldText(discussion.content)
 
   const [toggleLike, likePending] = useAction(async () => {
-    onChange(await discussionService.toggleLike(discussion.id))
+    const updated = await discussionService.toggleLike(discussion.id)
+    onChange(updated)
+    toast.success(t(updated.isLikedByCurrentUser ? 'forum.detail.liked' : 'forum.detail.unliked'))
   })
 
   const [deleteDiscussion, deletePending] = useAction(async () => {

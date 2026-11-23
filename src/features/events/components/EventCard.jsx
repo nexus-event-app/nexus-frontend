@@ -35,7 +35,9 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
   const [descriptionRef, clamped] = useIsClamped(event.description, expanded)
   const [going, setGoing] = useState({ count: event.interestedCount ?? 0, interested: Boolean(event.interested) })
   const [toggleGoing, togglingGoing] = useAction(async () => {
-    setGoing(await eventsService.toggleInterest(event.id))
+    const updated = await eventsService.toggleInterest(event.id)
+    setGoing(updated)
+    toast.success(t(updated.interested ? 'events.card.goingAdded' : 'events.card.goingRemoved'))
   })
   const handleGoing = () => {
     if (requireLogin(t('events.card.loginToGo'))) return

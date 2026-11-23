@@ -28,7 +28,6 @@ export default function RegisterForm() {
 
   return (
     <form onSubmit={form.handleSubmit} noValidate className="space-y-5">
-      {form.formError && <Alert variant="error">{form.formError}</Alert>}
       <FormField
         {...form.getFieldProps('name')}
         label={t('auth.register.name')}
@@ -57,6 +56,7 @@ export default function RegisterForm() {
       <Button type="submit" size="lg" className="w-full shadow-pop" loading={form.submitting}>
         {form.submitting ? t('auth.register.submitting') : t('auth.register.submit')}
       </Button>
+      {form.formError && <Alert variant="error">{form.formError}</Alert>}
     </form>
   )
 }

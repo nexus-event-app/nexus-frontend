@@ -41,7 +41,6 @@ export default function NewsForm({ news, onSubmit, onCancel }) {
 
   return (
     <form onSubmit={form.handleSubmit} noValidate className="form-grid">
-      {form.formError && <Alert variant="error">{form.formError}</Alert>}
       <FormField {...form.getFieldProps('title')} label="Título" maxLength={200} required />
 
       <FormField className="field-third" {...form.getFieldProps('category')} as="select" label="Categoría">
@@ -100,6 +99,7 @@ export default function NewsForm({ news, onSubmit, onCancel }) {
           {editing ? 'Guardar cambios' : 'Crear noticia'}
         </Button>
       </footer>
+      {form.formError && <Alert variant="error">{form.formError}</Alert>}
     </form>
   )
 }

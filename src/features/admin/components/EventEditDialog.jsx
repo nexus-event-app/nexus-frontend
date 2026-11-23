@@ -22,11 +22,6 @@ export default function EventEditDialog({ event, onSaved, onClose }) {
   return (
     <Modal title="Editar evento" onClose={onClose} dismissible={!form.submitting}>
       <form onSubmit={form.handleSubmit} noValidate className="form-grid">
-        {form.formError && (
-          <Alert variant="error" className="col-span-full">
-            {form.formError}
-          </Alert>
-        )}
         <EventFields form={form} />
         <footer className="col-span-full flex flex-col-reverse gap-3 border-t border-slate-200 pt-5 sm:flex-row sm:justify-end">
           <Button variant="secondary" onClick={onClose} disabled={form.submitting}>
@@ -36,6 +31,11 @@ export default function EventEditDialog({ event, onSaved, onClose }) {
             Guardar cambios
           </Button>
         </footer>
+        {form.formError && (
+          <Alert variant="error" className="col-span-full">
+            {form.formError}
+          </Alert>
+        )}
       </form>
     </Modal>
   )

@@ -11,6 +11,7 @@ import Time from '@/shared/components/Time'
 import { paths } from '@/shared/config/paths'
 import { Link } from '@/shared/i18n/router'
 import { useAction } from '@/shared/hooks/useAction'
+import { useToast } from '@/shared/hooks/useToast'
 import { cx } from '@/shared/utils/classNames'
 import PagedTable from '../components/PagedTable'
 import { useAdminList } from '../hooks/useAdminList'
@@ -69,6 +70,7 @@ export default function AdminUsersPage() {
   const { user: currentUser } = useAuth()
   const list = useAdminList('users', adminUsersService.list)
   const [pendingAction, setPendingAction] = useState(null)
+  const toast = useToast()
 
   const [runAction, running] = useAction(async ({ type, user }) => {
     const updated =
@@ -80,6 +82,11 @@ export default function AdminUsersPage() {
       content: page.content.map((item) => (item.id === updated.id ? updated : item)),
     }))
     setPendingAction(null)
+    toast.success(
+      type === 'role'
+        ? `${updated.name} ahora es ${updated.role === 'ADMIN' ? 'administradora o administrador' : 'usuario normal'}.`
+        : `La cuenta de ${updated.name} está ${updated.enabled ? 'activada' : 'desactivada'}.`,
+    )
   })
 
   const columns = [

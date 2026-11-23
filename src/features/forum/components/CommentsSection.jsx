@@ -60,6 +60,7 @@ export default function CommentsSection({ discussion, comments, onDiscussionChan
   const [toggleLike, likePending] = useAction(async (comment) => {
     const updated = await commentService.toggleLike(comment.id)
     mutate((items) => items.map((item) => (item.id === updated.id ? updated : item)))
+    toast.success(t(updated.isLikedByCurrentUser ? 'forum.comments.liked' : 'forum.comments.unliked'))
   })
 
   const [deleteComment, deletePending] = useAction(

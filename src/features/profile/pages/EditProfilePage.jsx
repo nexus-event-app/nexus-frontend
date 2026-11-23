@@ -55,7 +55,6 @@ function ProfileForm({ profile, onAvatarChange }) {
         aria-labelledby="profile-form-title"
         className="mt-5 space-y-8 rounded-3xl border border-slate-200 bg-surface p-5 shadow-card sm:p-8 lg:col-start-1 lg:row-start-4"
       >
-        {form.formError && <Alert variant="error">{form.formError}</Alert>}
         <AvatarField
           name={form.values.name || profile.name}
           avatarUrl={profile.avatarUrl}
@@ -71,6 +70,7 @@ function ProfileForm({ profile, onAvatarChange }) {
             {t('profile.edit.submit')}
           </Button>
         </footer>
+        {form.formError && <Alert variant="error">{form.formError}</Alert>}
       </form>
 
       <ProfilePreview

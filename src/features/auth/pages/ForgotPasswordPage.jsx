@@ -53,7 +53,6 @@ export default function ForgotPasswordPage() {
           </Alert>
         ) : (
           <form onSubmit={form.handleSubmit} noValidate className="space-y-5">
-            {form.formError && <Alert variant="error">{form.formError}</Alert>}
             <FormField
               {...form.getFieldProps('email')}
               label={t('auth.login.email')}
@@ -66,6 +65,7 @@ export default function ForgotPasswordPage() {
             <Button type="submit" className="w-full" loading={form.submitting}>
               {form.submitting ? t('auth.forgot.submitting') : t('auth.forgot.submit')}
             </Button>
+            {form.formError && <Alert variant="error">{form.formError}</Alert>}
           </form>
         )}
       </AuthCard>

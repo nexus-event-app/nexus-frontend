@@ -61,7 +61,6 @@ export default function JobForm({ job, onSubmit, onCancel }) {
 
   return (
     <form onSubmit={form.handleSubmit} noValidate className="form-grid">
-      {form.formError && <Alert variant="error">{form.formError}</Alert>}
       <FormField {...form.getFieldProps('title')} label="Puesto" maxLength={200} required />
 
       <FormField className="field-half" {...form.getFieldProps('company')} label="Empresa" maxLength={120} required />
@@ -126,6 +125,7 @@ export default function JobForm({ job, onSubmit, onCancel }) {
           {editing ? 'Guardar cambios' : 'Crear oferta'}
         </Button>
       </footer>
+      {form.formError && <Alert variant="error">{form.formError}</Alert>}
     </form>
   )
 }

@@ -25,7 +25,6 @@ export default function DiscussionForm({
 
   return (
     <form onSubmit={form.handleSubmit} noValidate className={cx('space-y-5', className)} {...props}>
-      {form.formError && <Alert variant="error">{form.formError}</Alert>}
       <FormField
         {...form.getFieldProps('title')}
         label={t('forum.form.title')}
@@ -69,6 +68,7 @@ export default function DiscussionForm({
           {submitLabel}
         </Button>
       </footer>
+      {form.formError && <Alert variant="error">{form.formError}</Alert>}
     </form>
   )
 }

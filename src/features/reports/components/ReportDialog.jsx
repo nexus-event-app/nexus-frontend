@@ -37,7 +37,6 @@ export default function ReportDialog({ targetType, targetId, onClose }) {
   return (
     <Modal title={t('reports.dialogTitle')} description={t('reports.dialogDescription')} onClose={onClose}>
       <form onSubmit={form.handleSubmit} noValidate className="space-y-5">
-        {form.formError && <Alert variant="error">{form.formError}</Alert>}
         <fieldset aria-describedby={form.errors.reason ? reasonErrorId : undefined}>
           <legend className="mb-2 text-sm font-semibold text-ink">
             {t('reports.reasonLegend')}
@@ -94,6 +93,7 @@ export default function ReportDialog({ targetType, targetId, onClose }) {
             {form.submitting ? t('reports.submitting') : t('reports.submit')}
           </Button>
         </footer>
+        {form.formError && <Alert variant="error">{form.formError}</Alert>}
       </form>
     </Modal>
   )

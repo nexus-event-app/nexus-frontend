@@ -21,7 +21,6 @@ export default function CommentForm({ onSubmit, className }) {
 
   return (
     <form onSubmit={form.handleSubmit} noValidate className={cx('space-y-4', className)}>
-      {form.formError && <Alert variant="error">{form.formError}</Alert>}
       <FormField
         {...form.getFieldProps('content')}
         as="textarea"
@@ -34,6 +33,7 @@ export default function CommentForm({ onSubmit, className }) {
       <Button type="submit" size="lg" loading={form.submitting} className="shadow-pop">
         {form.submitting ? t('forum.comments.submitting') : t('forum.comments.submit')}
       </Button>
+      {form.formError && <Alert variant="error">{form.formError}</Alert>}
     </form>
   )
 }

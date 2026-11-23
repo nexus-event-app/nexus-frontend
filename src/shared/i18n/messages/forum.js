@@ -67,6 +67,8 @@ export default {
       deleted: 'Discusión borrada.',
       updated: 'Discusión actualizada.',
       loginToLike: 'Inicia sesión para dar me gusta.',
+      liked: 'Te gusta esta discusión.',
+      unliked: 'Has quitado tu me gusta.',
     },
     form: {
       title: 'Título',
@@ -77,6 +79,8 @@ export default {
       cancel: 'Cancelar',
     },
     comments: {
+      liked: 'Te gusta este comentario.',
+      unliked: 'Has quitado tu me gusta.',
       title: 'Respuestas',
       error: 'No hemos podido cargar los comentarios',
       empty: 'Todavía no hay respuestas. ¡Sé la primera persona en responder!',
@@ -198,6 +202,8 @@ export default {
       deleted: 'Discussió esborrada.',
       updated: 'Discussió actualitzada.',
       loginToLike: 'Inicia la sessió per donar m’agrada.',
+      liked: 'T’agrada aquesta discussió.',
+      unliked: 'Has tret el teu m’agrada.',
     },
     form: {
       title: 'Títol',
@@ -208,6 +214,8 @@ export default {
       cancel: 'Cancel·la',
     },
     comments: {
+      liked: 'T’agrada aquest comentari.',
+      unliked: 'Has tret el teu m’agrada.',
       title: 'Respostes',
       error: 'No hem pogut carregar els comentaris',
       empty: 'Encara no hi ha respostes. Sigues la primera persona a respondre!',
@@ -330,6 +338,8 @@ export default {
       deleted: 'Discussion deleted.',
       updated: 'Discussion updated.',
       loginToLike: 'Log in to like.',
+      liked: 'You like this discussion.',
+      unliked: 'You removed your like.',
     },
     form: {
       title: 'Title',
@@ -340,6 +350,8 @@ export default {
       cancel: 'Cancel',
     },
     comments: {
+      liked: 'You like this comment.',
+      unliked: 'You removed your like.',
       title: 'Replies',
       error: 'We couldn’t load the comments',
       empty: 'There are no replies yet. Be the first to reply!',

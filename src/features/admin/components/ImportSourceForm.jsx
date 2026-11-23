@@ -61,8 +61,6 @@ export default function ImportSourceForm({ source, onSubmit, onCancel }) {
 
   return (
     <form onSubmit={form.handleSubmit} noValidate className="form-grid">
-      {form.formError && <Alert variant="error">{form.formError}</Alert>}
-
       <FormField
         className="field-half"
         {...form.getFieldProps('name')}
@@ -195,6 +193,7 @@ export default function ImportSourceForm({ source, onSubmit, onCancel }) {
           {editing ? 'Guardar cambios' : 'Crear fuente'}
         </Button>
       </footer>
+      {form.formError && <Alert variant="error">{form.formError}</Alert>}
     </form>
   )
 }
