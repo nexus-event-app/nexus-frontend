@@ -10,7 +10,7 @@ describe('HeroActions', () => {
     renderWithProviders(<HeroActions />)
     expect(
       screen.getByText(
-        'Descubrimos eventos, encontramos prácticas y empleo, compartimos experiencias y resolvemos dudas.',
+        'Descubrimos eventos, publicamos ofertas laborales, compartimos experiencias y resolvemos dudas.',
       ),
     ).toHaveClass('sr-only')
   })
@@ -25,6 +25,6 @@ describe('HeroActions', () => {
 
     act(() => vi.advanceTimersByTime(2800))
     for (let step = 0; step < 40; step++) act(() => vi.advanceTimersByTime(95))
-    expect(typed()).toBe('Encontramos prácticas y empleo')
+    expect(typed()).toBe('Publicamos ofertas laborales')
   })
 })

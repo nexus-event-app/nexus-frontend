@@ -5,8 +5,18 @@ import { paths } from '@/shared/config/paths'
 import { siteConfig } from '@/shared/config/site'
 import { Link } from '@/shared/i18n/router'
 import { useI18n } from '@/shared/i18n/useI18n'
+import { cx } from '@/shared/utils/classNames'
 import HeroActions from './HeroActions'
 import HeroIllustration from './HeroIllustration'
+
+const SMALL =
+  'block text-xl font-semibold leading-snug tracking-[0.01em] text-brand-ink dark:text-brand-200 sm:text-2xl xl:text-[1.9rem]'
+const BIG =
+  'block text-5xl leading-[1.08] tracking-[-0.01em] text-brand-ink dark:text-white sm:text-[3.6rem] xl:text-[4.4rem]'
+const MEDIUM =
+  'block text-4xl leading-[1.08] tracking-[-0.01em] text-brand-ink dark:text-white sm:text-[2.9rem] xl:text-[3.4rem]'
+const MARK =
+  "relative isolate inline-block after:pointer-events-none after:absolute after:-inset-x-[0.06em] after:bottom-[0.04em] after:-z-10 after:h-[0.42em] after:-rotate-1 after:rounded-full after:bg-brand-300 after:content-[''] dark:after:bg-brand-500/60"
 
 export default function HeroSection() {
   const { t } = useI18n()
@@ -16,7 +26,7 @@ export default function HeroSection() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="page-gutter relative isolate grid items-center gap-x-12 gap-y-10 overflow-hidden bg-gradient-to-br from-brand-50 via-brand-100 to-brand-200 pb-10 pt-10 text-ink dark:from-canvas dark:via-surface dark:to-canvas sm:pb-12 sm:pt-14 lg:min-h-[36rem] lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)]"
+      className="page-gutter relative isolate grid items-center gap-x-12 gap-y-10 overflow-hidden bg-gradient-to-br from-brand-50 via-brand-100 to-brand-200 pb-10 pt-6 text-ink dark:from-canvas dark:via-surface dark:to-canvas sm:pb-12 sm:pt-8 lg:min-h-[34rem] lg:grid-cols-[minmax(0,1fr)_23rem] lg:gap-x-6 xl:grid-cols-[minmax(0,1fr)_28rem]"
     >
       <span
         aria-hidden="true"
@@ -28,18 +38,15 @@ export default function HeroSection() {
       />
 
       <header className="text-center lg:text-left">
-        <Eyebrow className="animate-rise-in">{name}</Eyebrow>
-        <h1
-          id="hero-heading"
-          className="mt-5 animate-rise-in font-bold uppercase tracking-tight [animation-delay:80ms]"
-        >
-          <span className="block text-5xl leading-none tracking-[-0.045em] text-brand-ink dark:text-white sm:text-[3.4rem] xl:text-[3.9rem]">
-            <span className="relative isolate inline-block after:pointer-events-none after:absolute after:-inset-x-[0.04em] after:bottom-[0.02em] after:-z-10 after:h-[0.28em] after:-rotate-1 after:rounded-full after:bg-brand-300/80 after:content-[''] dark:after:bg-brand-500/45">
-              {t('home.hero.title')}
-            </span>
+        <Eyebrow className="animate-rise-in text-base">{name}</Eyebrow>
+        <h1 id="hero-heading" className="mt-4 animate-rise-in font-bold uppercase [animation-delay:80ms] lg:w-fit">
+          <span className={SMALL}>{t('home.hero.titleLead')}</span>{' '}
+          <span className={cx(BIG, 'mt-1')}>
+            <span className={MARK}>{t('home.hero.title')}</span>
           </span>{' '}
-          <span className="mt-2 block text-2xl leading-tight text-brand-ink dark:text-brand-200 sm:text-3xl xl:text-[2.3rem]">
-            {t('home.hero.subtitle')}
+          <span className={cx(SMALL, 'mt-4')}>{t('home.hero.subtitle')}</span>{' '}
+          <span className={cx(MEDIUM, 'mt-1 lg:pl-[24%]')}>
+            <span className={MARK}>{t('home.hero.titleEnd')}</span>
           </span>
         </h1>
         <HeroActions className="mx-auto mt-8 max-w-xl animate-rise-in [animation-delay:160ms] lg:mx-0" />
@@ -72,7 +79,7 @@ export default function HeroSection() {
         )}
       </header>
 
-      <HeroIllustration className="relative hidden h-[23rem] animate-rise-in [animation-delay:200ms] lg:block" />
+      <HeroIllustration className="relative hidden h-[23rem] animate-rise-in xl:h-[26rem] [animation-delay:200ms] lg:block" />
     </section>
   )
 }

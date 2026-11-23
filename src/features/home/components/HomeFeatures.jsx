@@ -14,10 +14,10 @@ const FEATURES = [
 ]
 
 const BENEFITS = [
-  { key: 'benefitProgress', icon: 'academic' },
+  { key: 'benefitEvents', icon: 'calendar' },
   { key: 'benefitJobs', icon: 'bookmark' },
   { key: 'benefitForum', icon: 'chat' },
-  { key: 'benefitAlerts', icon: 'bell' },
+  { key: 'benefitProgress', icon: 'academic' },
 ]
 
 const TONES = {

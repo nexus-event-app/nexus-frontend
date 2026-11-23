@@ -9,7 +9,9 @@ import HomePathsSection from './HomePathsSection'
 describe('HeroSection', () => {
   it('sin sesión invita a unirse y explica qué hay en la web sin enlaces repetidos', () => {
     renderWithProviders(<HeroSection />)
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Comunidad para quienes empiezan en tecnología')
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
+      'Una comunidad para quienes dan el primer paso en el mundo tech',
+    )
     expect(screen.getByRole('link', { name: 'Únete a la comunidad' })).toHaveAttribute('href', '/registro')
     expect(screen.getByText('Regístrate gratis. ¡Te esperamos!')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Ya tengo cuenta' })).toHaveAttribute('href', '/login')
@@ -37,7 +39,16 @@ describe('HomeFeatures', () => {
     ).toBeInTheDocument()
 
     const join = screen.getByRole('complementary', { name: 'Con tu cuenta, todo suma' })
-    expect(within(join).getAllByRole('listitem')).toHaveLength(4)
+    expect(
+      within(join)
+        .getAllByRole('listitem')
+        .map((item) => item.textContent),
+    ).toEqual([
+      'Comparte eventos',
+      'Guarda ofertas para revisarlas luego',
+      'Pregunta y responde en el foro',
+      'Guarda tu progreso en las rutas',
+    ])
     expect(within(join).getByRole('link', { name: 'Crear mi cuenta' })).toHaveAttribute('href', '/registro')
   })
 
