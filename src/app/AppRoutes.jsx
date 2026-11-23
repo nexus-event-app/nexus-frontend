@@ -20,6 +20,7 @@ const NewDiscussionPage = lazy(() => import('@/features/forum/pages/NewDiscussio
 const DiscussionDetailPage = lazy(() => import('@/features/forum/pages/DiscussionDetailPage'))
 const ProfilePage = lazy(() => import('@/features/profile/pages/ProfilePage'))
 const EditProfilePage = lazy(() => import('@/features/profile/pages/EditProfilePage'))
+const OwnProfileRedirect = lazy(() => import('@/features/profile/pages/OwnProfileRedirect'))
 const NotificationsPage = lazy(() => import('@/features/notifications/pages/NotificationsPage'))
 const LearningPathsPage = lazy(() => import('@/features/learning/pages/LearningPathsPage'))
 const LearningPathPage = lazy(() => import('@/features/learning/pages/LearningPathPage'))
@@ -92,6 +93,7 @@ function publicRoutes({ prefix, lang }) {
         path={`${seg('perfil')}/${routeSubsegment('perfil', 'editar', lang)}`}
         element={withAuth(<EditProfilePage />)}
       />
+      <Route path={seg('perfil')} element={withAuth(<OwnProfileRedirect />)} />
       <Route path={`${seg('perfil')}/:idSlug`} element={<ProfilePage />} />
       <Route path={seg('aviso-legal')} element={<LegalNoticePage />} />
       <Route path={seg('privacidad')} element={<PrivacyPage />} />

@@ -112,7 +112,8 @@ export default {
       missingToken: 'Falta el código del enlace.',
       loading: 'Confirmando tu email…',
       successTitle: '¡Email confirmado!',
-      success: 'Ya puedes participar en el foro y compartir tu testimonio.',
+      success:
+        'Ya puedes compartir eventos, apuntarte, guardar ofertas, participar en el foro y contar tu experiencia.',
       goForum: 'Ir al foro',
       errorTitle: 'No hemos podido confirmar tu email',
       errorHint: 'Si ya has iniciado sesión, puedes pedir un nuevo enlace desde el aviso de la parte superior.',
@@ -124,7 +125,7 @@ export default {
     },
     banner: {
       start: 'Confirma tu email (',
-      end: ') para participar en el foro y compartir tu testimonio.',
+      end: ') para compartir eventos, guardar ofertas, participar en el foro y contar tu experiencia.',
     },
     sessionExpired: 'Tu sesión ha caducado. Inicia sesión de nuevo.',
   },
@@ -241,7 +242,8 @@ export default {
       missingToken: 'Falta el codi de l’enllaç.',
       loading: 'Confirmant el teu correu…',
       successTitle: 'Correu confirmat!',
-      success: 'Ja pots participar al fòrum i compartir el teu testimoni.',
+      success:
+        "Ja pots compartir esdeveniments, apuntar-t'hi, desar ofertes, participar al fòrum i explicar la teva experiència.",
       goForum: 'Vés al fòrum',
       errorTitle: 'No hem pogut confirmar el teu correu',
       errorHint: 'Si ja has iniciat la sessió, pots demanar un enllaç nou des de l’avís de la part superior.',
@@ -253,7 +255,7 @@ export default {
     },
     banner: {
       start: 'Confirma el teu correu (',
-      end: ') per participar al fòrum i compartir el teu testimoni.',
+      end: ') per compartir esdeveniments, desar ofertes, participar al fòrum i explicar la teva experiència.',
     },
     sessionExpired: 'La teva sessió ha caducat. Torna a iniciar la sessió.',
   },
@@ -369,7 +371,7 @@ export default {
       missingToken: 'The link code is missing.',
       loading: 'Confirming your email…',
       successTitle: 'Email confirmed!',
-      success: 'You can now take part in the forum and share your testimonial.',
+      success: 'You can now share events, sign up for them, save jobs, take part in the forum and tell your story.',
       goForum: 'Go to the forum',
       errorTitle: 'We could not confirm your email',
       errorHint: 'If you are already logged in, you can request a new link from the notice at the top.',
@@ -381,7 +383,7 @@ export default {
     },
     banner: {
       start: 'Confirm your email (',
-      end: ') to take part in the forum and share your testimonial.',
+      end: ') to share events, save jobs, take part in the forum and tell your story.',
     },
     sessionExpired: 'Your session has expired. Please log in again.',
   },
