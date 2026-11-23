@@ -25,7 +25,7 @@ ENV VITE_API_URL=$VITE_API_URL \
 
 RUN npm run build
 
-FROM nginxinc/nginx-unprivileged:1.27-alpine
+FROM nginxinc/nginx-unprivileged:1.31-alpine
 
 ENV BACKEND_URL=http://backend:8080 \
     NGINX_ENVSUBST_FILTER=^BACKEND_URL\$
