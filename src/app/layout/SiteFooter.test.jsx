@@ -15,7 +15,12 @@ describe('SiteFooter', () => {
 
   it('enlaza a las secciones y a lo legal', () => {
     renderWithProviders(<SiteFooter />)
-    expect(screen.getByRole('navigation', { name: 'Pie de página: explorar' })).toHaveTextContent('Sobre el proyecto')
+    const explore = screen.getByRole('navigation', { name: 'Pie de página: explorar' })
+    expect(
+      within(explore)
+        .getAllByRole('link')
+        .map((link) => link.textContent),
+    ).toEqual(['Eventos', 'Empleo', 'Foro', 'Rutas', 'Noticias', 'Testimonios', 'Sobre el proyecto'])
     expect(screen.getByRole('link', { name: 'Privacidad' })).toHaveAttribute('href', '/privacidad')
     expect(screen.getByRole('link', { name: 'Crear cuenta' })).toBeInTheDocument()
   })

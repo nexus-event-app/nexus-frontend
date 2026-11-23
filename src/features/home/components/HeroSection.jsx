@@ -10,7 +10,7 @@ import HeroActions from './HeroActions'
 import HeroIllustration from './HeroIllustration'
 
 const FEATURES = [
-  { key: 'news', icon: 'newspaper' },
+  { key: 'events', icon: 'calendar' },
   { key: 'jobs', icon: 'briefcase' },
   { key: 'forum', icon: 'chat' },
   { key: 'learn', icon: 'academic' },

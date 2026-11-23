@@ -20,7 +20,6 @@ export default function LatestJobsSection() {
       description={t('home.jobs.description')}
       linkTo={paths.jobs}
       linkLabel={t('home.jobs.link')}
-      tinted
       illustration={illustrations.employment}
     >
       <QueryBoundary

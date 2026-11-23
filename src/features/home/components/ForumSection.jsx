@@ -20,6 +20,7 @@ export default function ForumSection() {
       description={t('home.forum.description')}
       linkTo={paths.forum}
       linkLabel={t('home.forum.link')}
+      tinted
     >
       <QueryBoundary
         data={request.data}

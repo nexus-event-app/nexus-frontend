@@ -12,8 +12,8 @@ export default {
       haveAccount: 'Ya tengo cuenta',
       greeting: 'Hola, {name}. ¡Qué bien verte por aquí!',
       featuresTitle: 'Qué encontrarás en {name}',
-      newsTitle: 'Noticias al día',
-      newsText: 'Mantente a la última en tecnología con las novedades que importan, explicadas para quien empieza.',
+      eventsTitle: 'Eventos para ir',
+      eventsText: 'Charlas, meetups, hackathons y talleres para aprender, conocer gente y que te conozcan.',
       learnTitle: 'Aprende con rumbo',
       learnText:
         'Rutas paso a paso de frontend, backend, QA, datos e IA, con recursos escogidos y un proyecto en cada etapa.',
@@ -105,8 +105,8 @@ export default {
       haveAccount: 'Ja tinc compte',
       greeting: 'Hola, {name}. Quina alegria veure’t per aquí!',
       featuresTitle: 'Què trobaràs a {name}',
-      newsTitle: 'Notícies al dia',
-      newsText: 'Estigues al dia en tecnologia amb les novetats que importen, explicades per a qui comença.',
+      eventsTitle: 'Esdeveniments per anar-hi',
+      eventsText: 'Xerrades, meetups, hackathons i tallers per aprendre, conèixer gent i que et coneguin.',
       learnTitle: 'Aprèn amb rumb',
       learnText:
         'Rutes pas a pas de frontend, backend, QA, dades i IA, amb recursos escollits i un projecte a cada etapa.',
@@ -198,8 +198,8 @@ export default {
       haveAccount: 'I already have an account',
       greeting: 'Hi, {name}. Great to see you here!',
       featuresTitle: 'What you will find on {name}',
-      newsTitle: 'Up-to-date news',
-      newsText: 'Stay on top of tech with the news that matters, explained for beginners.',
+      eventsTitle: 'Events to go to',
+      eventsText: 'Talks, meetups, hackathons and workshops to learn, meet people and get known.',
       learnTitle: 'Learn with direction',
       learnText:
         'Step-by-step paths in frontend, backend, QA, data and AI, with hand-picked resources and a project at every step.',

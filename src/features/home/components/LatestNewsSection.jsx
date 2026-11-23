@@ -21,6 +21,7 @@ export default function LatestNewsSection() {
       description={t('home.news.description')}
       linkTo={paths.news}
       linkLabel={t('home.news.link')}
+      tinted
     >
       <QueryBoundary
         data={request.data}

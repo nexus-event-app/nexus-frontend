@@ -15,6 +15,11 @@ describe('HeroSection', () => {
 
     const features = screen.getByRole('region', { name: /Qué encontrarás/ })
     expect(within(features).getAllByRole('listitem')).toHaveLength(4)
+    expect(
+      within(features)
+        .getAllByRole('heading', { level: 3 })
+        .map((heading) => heading.textContent),
+    ).toEqual(['Eventos para ir', 'Tu primer empleo', 'Pregunta sin miedo', 'Aprende con rumbo'])
     expect(within(features).queryByRole('link')).not.toBeInTheDocument()
   })
 

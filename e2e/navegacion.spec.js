@@ -14,7 +14,8 @@ test.describe('Navegación', () => {
     const order = await page
       .locator('main > section h2')
       .evaluateAll((titles) => titles.map((title) => title.textContent.trim()))
-    expect(order.indexOf('Nuestro foro')).toBeLessThan(order.indexOf('Próximos eventos'))
+    const sections = ['Próximos eventos', 'Últimas ofertas de empleo', 'Nuestro foro', 'Elige tu camino', 'Noticias']
+    expect(order.filter((title) => sections.includes(title))).toEqual(sections)
   })
 
   test('se llega a una noticia desde el listado y las migas vuelven atrás', async ({ page }) => {
@@ -61,11 +62,11 @@ test.describe('Navegación', () => {
     await expect(banner.getByRole('link', { name: 'Crear cuenta' })).toHaveCount(0)
     const links = banner.getByRole('navigation', { name: /Principal/ }).getByRole('link')
     await expect(links).toHaveText([
-      'Noticias',
+      'Eventos',
       'Empleo',
       'Foro',
-      'Eventos',
       'Rutas',
+      'Noticias',
       'Testimonios',
       'Sobre el proyecto',
     ])
