@@ -47,7 +47,7 @@ export default function GuideForm({ guide, onSubmit, onCancel }) {
       <FormField {...form.getFieldProps('category')} as="select" label="Tema" required>
         {GUIDE_CATEGORIES.map((category) => (
           <option key={category.value} value={category.value}>
-            {category.emoji} {category.adminLabel}
+            {category.adminLabel}
           </option>
         ))}
       </FormField>

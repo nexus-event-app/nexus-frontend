@@ -1,8 +1,8 @@
 export const GUIDE_CATEGORIES = [
-  { value: 'PRIMEROS_PASOS', slug: 'primeros-pasos', emoji: '🚀', adminLabel: 'Primeros pasos' },
-  { value: 'EMPLEO', slug: 'empleo', emoji: '💼', adminLabel: 'Empleo' },
-  { value: 'HERRAMIENTAS', slug: 'herramientas', emoji: '🛠️', adminLabel: 'Herramientas' },
-  { value: 'COMUNIDAD', slug: 'comunidad', emoji: '🤝', adminLabel: 'Comunidad' },
+  { value: 'PRIMEROS_PASOS', slug: 'primeros-pasos', icon: 'rocket', adminLabel: 'Primeros pasos' },
+  { value: 'EMPLEO', slug: 'empleo', icon: 'briefcase', adminLabel: 'Empleo' },
+  { value: 'HERRAMIENTAS', slug: 'herramientas', icon: 'wrench', adminLabel: 'Herramientas' },
+  { value: 'COMUNIDAD', slug: 'comunidad', icon: 'users', adminLabel: 'Comunidad' },
 ]
 
 export function categoryOf(value) {

@@ -3,7 +3,6 @@ import { Link } from '@/shared/i18n/router'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import ButtonLink from '@/shared/components/ButtonLink'
 import EmptyState from '@/shared/components/EmptyState'
-import FilterLinks from '@/shared/components/FilterLinks'
 import ErrorState from '@/shared/components/ErrorState'
 import Eyebrow from '@/shared/components/Eyebrow'
 import Icon from '@/shared/components/Icon'
@@ -15,6 +14,7 @@ import { illustrations } from '@/shared/config/illustrations'
 import { paths } from '@/shared/config/paths'
 import { useRequest } from '@/shared/hooks/useRequest'
 import { useI18n } from '@/shared/i18n/useI18n'
+import { cx } from '@/shared/utils/classNames'
 import { GUIDE_CATEGORIES, categoryFromSlug, categoryOf } from '../config/categories'
 import { guidesService } from '../services/guidesService'
 
@@ -30,12 +30,8 @@ function GuideCard({ guide }) {
           <span className="h-2.5 w-2.5 rounded-full bg-white/90" />
         </span>
         <span className="inline-flex items-center gap-1.5 text-sm font-semibold tracking-wide text-white">
-          <span aria-hidden="true">{category.emoji}</span>
+          <Icon name={category.icon} className="h-4 w-4" />
           {t(`guides.categories.${category.value}`)}
-        </span>
-        <span className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-xs font-semibold">
-          <Icon name="clock" className="h-3.5 w-3.5" />
-          {t('guides.readingTime', { count: guide.readingMinutes ?? 1 })}
         </span>
       </header>
 
@@ -67,37 +63,55 @@ function GuideCard({ guide }) {
   )
 }
 
-function CategoryFilter({ guides, active }) {
+function CategoryFilter({ active }) {
   const { t } = useI18n()
-  const count = (value) => guides.filter((guide) => categoryOf(guide.category).value === value).length
   const options = [
-    {
-      key: 'all',
-      label: (
-        <>
-          {t('guides.all')}
-          <span className="ml-1.5 tabular-nums opacity-70">{guides.length}</span>
-        </>
-      ),
-      href: paths.guides,
-      active: !active,
-    },
+    { key: 'all', icon: 'sparkles', label: t('guides.all'), href: paths.guides, current: !active },
     ...GUIDE_CATEGORIES.map((category) => ({
       key: category.slug,
-      label: (
-        <>
-          <span aria-hidden="true" className="mr-1.5">
-            {category.emoji}
-          </span>
-          {t(`guides.categories.${category.value}`)}
-          <span className="ml-1.5 tabular-nums opacity-70">{count(category.value)}</span>
-        </>
-      ),
+      icon: category.icon,
+      label: t(`guides.categories.${category.value}`),
       href: `${paths.guides}?categoria=${category.slug}`,
-      active: active?.value === category.value,
+      current: active?.value === category.value,
     })),
   ]
-  return <FilterLinks label={t('guides.filterLabel')} options={options} className="mt-10" />
+  return (
+    <nav aria-labelledby="guide-filter-title" className="mt-10">
+      <p id="guide-filter-title" className="flex items-center gap-2 text-sm font-semibold text-ink">
+        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-accent-soft text-accent">
+          <Icon name="funnel" className="h-4 w-4" />
+        </span>
+        {t('guides.filterTitle')}
+      </p>
+      <ul className="mt-3 flex flex-wrap gap-2.5">
+        {options.map((option) => (
+          <li key={option.key}>
+            <Link
+              to={option.href}
+              aria-current={option.current ? 'true' : undefined}
+              className={cx(
+                'group inline-flex min-h-[2.75rem] items-center gap-2.5 rounded-full border py-1.5 pl-1.5 pr-4 text-sm font-semibold transition-all duration-200',
+                option.current
+                  ? 'border-transparent bg-gradient-to-r from-brand-600 to-violet-600 text-white shadow-pop'
+                  : 'border-slate-200 bg-surface text-ink-soft shadow-card hover:-translate-y-0.5 hover:border-accent-line hover:text-accent',
+              )}
+            >
+              <span
+                aria-hidden="true"
+                className={cx(
+                  'flex h-8 w-8 items-center justify-center rounded-full transition-colors',
+                  option.current ? 'bg-white/20 text-white' : 'bg-accent-soft text-accent group-hover:bg-accent-tint',
+                )}
+              >
+                <Icon name={option.icon} className="h-4 w-4" />
+              </span>
+              {option.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
 }
 
 export default function GuidesListPage() {
@@ -141,7 +155,7 @@ export default function GuidesListPage() {
         </section>
       ) : (
         <>
-          <CategoryFilter guides={guides} active={active} />
+          <CategoryFilter active={active} />
           {visible.length === 0 ? (
             <section aria-label={t('guides.listLabel')} className="mt-8">
               <EmptyState

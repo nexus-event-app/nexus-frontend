@@ -26,7 +26,7 @@ test.describe('Guías', () => {
     await page.goto('/guias')
     const list = page.getByRole('list', { name: 'Todas las guías' })
     await expect(list.getByRole('listitem')).toHaveCount(2)
-    const filters = page.getByRole('navigation', { name: 'Filtrar guías por tema' })
+    const filters = page.getByRole('navigation', { name: 'Filtrar por tema' })
     await filters.getByRole('link', { name: /Empleo/ }).click()
     await expect(page).toHaveURL(/categoria=empleo/)
     await expect(list.getByRole('listitem')).toHaveCount(1)

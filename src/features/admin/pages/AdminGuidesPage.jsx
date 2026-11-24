@@ -56,7 +56,7 @@ export default function AdminGuidesPage() {
         <p>
           {item.title}
           <span className="mt-1 block text-sm font-normal text-ink-muted">
-            {categoryOf(item.category).emoji} {categoryOf(item.category).adminLabel} · /guias/{item.slug}
+            {categoryOf(item.category).adminLabel} · /guias/{item.slug}
           </span>
         </p>
       ),

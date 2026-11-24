@@ -237,10 +237,6 @@ export default function GuideDetailPage() {
               <Icon name="calendar" className="h-4 w-4 text-accent" />
               <Time value={guide.publishedAt} />
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-surface px-3 py-1.5 font-medium text-ink-soft shadow-card ring-1 ring-slate-200">
-              <Icon name="clock" className="h-4 w-4 text-accent" />
-              {t('guides.readingTime', { count: guide.readingMinutes ?? 1 })}
-            </span>
             {updated && (
               <span className="inline-flex items-center gap-1.5 rounded-full bg-surface px-3 py-1.5 font-medium text-ink-soft shadow-card ring-1 ring-slate-200">
                 <Icon name="refresh" className="h-4 w-4 text-accent" />
