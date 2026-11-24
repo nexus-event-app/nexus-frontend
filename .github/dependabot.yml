@@ -7,6 +7,10 @@ updates:
       day: monday
     open-pull-requests-limit: 5
     target-branch: dev
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
     groups:
       desarrollo:
         dependency-type: development
@@ -23,8 +27,16 @@ updates:
     schedule:
       interval: monthly
     target-branch: dev
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
   - package-ecosystem: docker
     directory: /
     schedule:
       interval: monthly
     target-branch: dev
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
