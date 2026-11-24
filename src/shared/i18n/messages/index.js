@@ -6,6 +6,7 @@ import errors from './errors'
 import events from './events'
 import forum from './forum'
 import glossary from './glossary'
+import guides from './guides'
 import home from './home'
 import jobs from './jobs'
 import learning from './learning'
@@ -35,6 +36,7 @@ const modules = {
   notifications,
   learning,
   glossary,
+  guides,
   reports,
 }
 

@@ -67,3 +67,19 @@ export function validateImportSource({ name, url, keywords, excludeKeywords }) {
   }
   return errors
 }
+
+export function validateGuide({ title, slug, description, content }) {
+  const errors = {}
+  const trimmedTitle = title.trim()
+  if (!trimmedTitle) errors.title = 'El título es obligatorio.'
+  else if (trimmedTitle.length > 200) errors.title = 'El título no puede superar los 200 caracteres.'
+  if (slug.trim() && !/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug.trim()))
+    errors.slug = 'Usa solo letras minúsculas sin tildes, números y guiones, p. ej. mi-primera-guia.'
+  const trimmedDescription = description.trim()
+  if (!trimmedDescription) errors.description = 'La descripción es obligatoria.'
+  else if (trimmedDescription.length > 300) errors.description = 'La descripción no puede superar los 300 caracteres.'
+  const trimmedContent = content.trim()
+  if (!trimmedContent) errors.content = 'El contenido es obligatorio.'
+  else if (trimmedContent.length > 50000) errors.content = 'El contenido no puede superar los 50.000 caracteres.'
+  return errors
+}

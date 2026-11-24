@@ -25,6 +25,8 @@ const NotificationsPage = lazy(() => import('@/features/notifications/pages/Noti
 const LearningPathsPage = lazy(() => import('@/features/learning/pages/LearningPathsPage'))
 const LearningPathPage = lazy(() => import('@/features/learning/pages/LearningPathPage'))
 const GlossaryPage = lazy(() => import('@/features/learning/pages/GlossaryPage'))
+const GuidesListPage = lazy(() => import('@/features/guides/pages/GuidesListPage'))
+const GuideDetailPage = lazy(() => import('@/features/guides/pages/GuideDetailPage'))
 const EventsPage = lazy(() => import('@/features/events/pages/EventsPage'))
 const NewEventPage = lazy(() => import('@/features/events/pages/NewEventPage'))
 const AboutPage = lazy(() => import('@/features/about/pages/AboutPage'))
@@ -49,6 +51,7 @@ const AdminUserProfilePage = lazy(() => import('@/features/admin/pages/AdminUser
 const AdminImportPage = lazy(() => import('@/features/admin/pages/AdminImportPage'))
 const AdminReportsPage = lazy(() => import('@/features/admin/pages/AdminReportsPage'))
 const AdminEventsPage = lazy(() => import('@/features/admin/pages/AdminEventsPage'))
+const AdminGuidesPage = lazy(() => import('@/features/admin/pages/AdminGuidesPage'))
 
 const PUBLIC_LANGUAGES = [
   { prefix: '/', lang: DEFAULT_LANGUAGE },
@@ -97,6 +100,8 @@ function publicRoutes({ prefix, lang }) {
       <Route path={seg('rutas')} element={<LearningPathsPage />} />
       <Route path={`${seg('rutas')}/:pathSlug`} element={<LearningPathPage />} />
       <Route path={seg('glosario')} element={<GlossaryPage />} />
+      <Route path={seg('guias')} element={<GuidesListPage />} />
+      <Route path={`${seg('guias')}/:slug`} element={<GuideDetailPage />} />
       <Route path={seg('eventos')} element={<EventsPage />} />
       <Route
         path={`${seg('eventos')}/${routeSubsegment('eventos', 'nuevo', lang)}`}
@@ -164,6 +169,7 @@ export default function AppRoutes() {
         <Route path="importacion" element={<AdminImportPage />} />
         <Route path="reportes" element={<AdminReportsPage />} />
         <Route path="eventos" element={<AdminEventsPage />} />
+        <Route path="guias" element={<AdminGuidesPage />} />
         <Route path="*" element={<NotFound embedded />} />
       </Route>
     </Routes>

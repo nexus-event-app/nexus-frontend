@@ -18,6 +18,7 @@ export const ROUTE_SEGMENTS = {
   rutas: { ca: 'rutes', en: 'learning-paths' },
   glosario: { ca: 'glossari', en: 'glossary' },
   eventos: { ca: 'esdeveniments', en: 'events' },
+  guias: { ca: 'guies', en: 'guides' },
 }
 
 export const ROUTE_SUBSEGMENTS = {

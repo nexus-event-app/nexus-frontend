@@ -95,6 +95,9 @@ export default function SiteFooter() {
               <FooterLink to={item.to}>{t(item.labelKey)}</FooterLink>
             </li>
           ))}
+          <li>
+            <FooterLink to={paths.guides}>{t('common.nav.guides')}</FooterLink>
+          </li>
         </ul>
       </nav>
 

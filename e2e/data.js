@@ -286,3 +286,18 @@ export const events = [
   },
   ...moreEvents,
 ]
+
+export const guides = [
+  {
+    id: 1,
+    slug: 'que-hacer-despues-de-un-bootcamp',
+    title: 'Qué hacer después de un bootcamp de programación: guía paso a paso',
+    description:
+      'Has terminado el bootcamp, ¿y ahora qué? Pasos claros para seguir aprendiendo y conseguir tu primer empleo.',
+    content:
+      'Durante semanas has tenido clases.\n\n## 1. Haz balance\n\n- ¿Qué parte disfruté más?\n- ¿Qué me cuesta?\n\n## 2. Sigue programando\n\nSigue una de nuestras [rutas de aprendizaje](/rutas).\n\n## 3. Ve a eventos\n\nMira la [agenda de eventos](/eventos).\n\n## En resumen\n\n1. Haz balance.\n2. Programa cada día.',
+    published: true,
+    publishedAt: '2026-11-24T10:00:00',
+    updatedAt: '2026-11-24T10:00:00',
+  },
+]

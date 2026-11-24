@@ -20,6 +20,8 @@ export const paths = {
   learning: '/rutas',
   learningPath: (id) => `/rutas/${id}`,
   glossary: '/glosario',
+  guides: '/guias',
+  guideDetail: (guide) => `/guias/${guide.slug}`,
   events: '/eventos',
   eventsNew: '/eventos/nuevo',
   legalNotice: '/aviso-legal',
@@ -41,6 +43,7 @@ export const paths = {
   adminImport: '/admin/importacion',
   adminReports: '/admin/reportes',
   adminEvents: '/admin/eventos',
+  adminGuides: '/admin/guias',
 }
 
 export function loginPath(redirectTo) {
