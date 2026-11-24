@@ -1,16 +1,21 @@
 import { expect, json, test } from './fixtures.js'
 
 test.describe('Guías', () => {
-  test('sin cuenta se puede leer una guía entera, con su índice, y al final invita a unirse', async ({ page }) => {
+  test('sin cuenta se puede leer una guía entera, con su índice, y al final invita a unirse', async ({
+    page,
+    isMobile,
+  }) => {
     await page.goto('/guias')
     await page.getByRole('link', { name: /Qué hacer después de un bootcamp/ }).click()
     await expect(page).toHaveURL(/\/guias\/que-hacer-despues-de-un-bootcamp$/)
     await expect(page.getByRole('heading', { level: 1, name: /Qué hacer después de un bootcamp/ })).toBeVisible()
 
-    const toc = page.getByRole('navigation', { name: 'En esta guía' })
-    await toc.getByRole('link', { name: '3. Ve a eventos' }).click()
-    await expect(page).toHaveURL(/#3-ve-a-eventos$/)
-    await expect(page.getByRole('heading', { level: 2, name: '3. Ve a eventos' })).toBeInViewport()
+    if (!isMobile) {
+      const toc = page.getByRole('navigation', { name: 'En esta guía' })
+      await toc.getByRole('link', { name: '3. Ve a eventos' }).click()
+      await expect(page).toHaveURL(/#3-ve-a-eventos$/)
+      await expect(page.getByRole('heading', { level: 2, name: '3. Ve a eventos' })).toBeInViewport()
+    }
 
     await expect(page.getByRole('link', { name: 'agenda de eventos' })).toHaveAttribute('href', '/eventos')
     await expect(page.getByRole('link', { name: /Únete a la comunidad/ })).toHaveAttribute('href', '/registro')

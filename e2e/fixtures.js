@@ -32,7 +32,7 @@ class MockApi {
     this.on('GET', /^\/api\/news\/(\d+)$/, ([, id]) =>
       json([...news, englishNews].find((item) => item.id === Number(id))),
     )
-    this.on('GET', '/api/guides', () => json(guides.map(({ content, ...summary }) => summary)))
+    this.on('GET', '/api/guides', () => json(guides.map((guide) => ({ ...guide, content: undefined }))))
     this.on('GET', /^\/api\/guides\/([a-z0-9-]+)$/, ([, slug]) => {
       const guide = guides.find((item) => item.slug === slug)
       return guide ? json(guide) : json({ error: 'NOT_FOUND' }, 404)

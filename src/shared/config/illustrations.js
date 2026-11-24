@@ -12,4 +12,10 @@ export const illustrations = {
   learningRoadGirl: { src: '/images/rutas-camino-chica.webp', width: 1400, height: 278 },
   notifications: { src: '/images/notificaciones-ilustracion.webp', width: 600, height: 550, animation: 'nudge' },
   testimonials: { src: '/images/testimonios-ilustracion.webp', width: 800, height: 610 },
+  guides: {
+    src: '/images/guias-programando.webp',
+    still: '/images/guias-programando-quieta.webp',
+    width: 690,
+    height: 429,
+  },
 }

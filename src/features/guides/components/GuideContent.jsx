@@ -1,3 +1,4 @@
+import Icon from '@/shared/components/Icon'
 import { Link } from '@/shared/i18n/router'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
@@ -37,13 +38,27 @@ export default function GuideContent({ blocks }) {
       {blocks.map((block, index) => {
         const key = `${block.type}-${index}`
         if (block.type === 'h2') {
+          const numbered = block.text.match(/^(\d+)[.)]\s+(.+)$/)
           return (
             <h2
               key={key}
               id={block.id}
-              className="mt-12 scroll-mt-28 text-2xl font-bold tracking-tight text-ink first:mt-0"
+              className="relative mt-14 scroll-mt-28 text-2xl font-bold tracking-tight text-ink first:mt-0"
             >
-              {block.text}
+              <span
+                aria-hidden="true"
+                className="absolute -left-[3.35rem] -top-0.5 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-violet-600 font-mono text-base font-bold text-white shadow-card ring-4 ring-surface sm:-left-[4.35rem]"
+              >
+                {numbered ? numbered[1] : <Icon name="check" className="h-5 w-5" />}
+              </span>
+              {numbered ? (
+                <>
+                  <span className="sr-only">{numbered[1]}. </span>
+                  {numbered[2]}
+                </>
+              ) : (
+                block.text
+              )}
             </h2>
           )
         }
