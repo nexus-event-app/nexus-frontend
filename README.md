@@ -5,7 +5,7 @@
 # Primer Commit · Frontend
 
 **Una comunidad para dar el primer paso en el mundo tech.**
-Eventos, prácticas y empleo junior, un foro donde preguntar sin miedo, rutas de aprendizaje, noticias explicadas,
+Eventos, prácticas y empleo junior, un foro para resolver dudas entre todas y todos, rutas de aprendizaje, noticias explicadas,
 glosario y testimonios reales. En castellano, catalán e inglés.
 
 [**primercommit.es**](https://primercommit.es) · [Backend](https://github.com/nexus-event-app/nexus-backend) ·

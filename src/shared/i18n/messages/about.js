@@ -8,7 +8,7 @@ export default {
     terminal: { message: 'Mi primer paso en tecnología', output: 'Una persona más aprendiendo en comunidad' },
     title: 'Nadie debería dar su primer paso en tecnología en solitario',
     intro:
-      '{name} es una comunidad para quienes empiezan su carrera en tecnología: noticias para estar a la última en tecnología, ofertas de empleo junior y prácticas, un foro donde preguntar sin miedo y testimonios reales de quienes ya han pasado por ahí.',
+      '{name} es una comunidad para quienes empiezan su carrera en tecnología: noticias para estar a la última en tecnología, ofertas de empleo junior y prácticas, un foro para resolver dudas entre todas y todos y testimonios reales de quienes ya han pasado por ahí.',
     purpose: {
       eyebrow: 'Por qué existe',
       title: 'Empezar no debería ser tan difícil',
@@ -20,7 +20,7 @@ export default {
       news: { title: 'Noticias al día', text: 'Lo que pasa en el sector, explicado para quien empieza.' },
       jobs: { title: 'Empleo junior', text: 'Prácticas y primeros empleos, con las ofertas de España primero.' },
       forum: {
-        title: 'Un foro sin miedo',
+        title: 'Un foro para ayudarnos',
         text: 'Dudas técnicas, recursos y experiencias. Todas las preguntas son bienvenidas.',
       },
       testimonials: { title: 'Historias reales', text: 'Cómo les va a quienes ya han dado su primer paso.' },
@@ -73,7 +73,7 @@ export default {
     terminal: { message: 'El meu primer pas en tecnologia', output: 'Una persona més aprenent en comunitat' },
     title: 'Ningú no hauria de fer el primer pas en tecnologia tot sol',
     intro:
-      '{name} és una comunitat per a qui comença la seva carrera en tecnologia: notícies per estar al dia en tecnologia, ofertes de feina júnior i pràctiques, un fòrum on preguntar sense por i testimonis reals de qui ja hi ha passat.',
+      '{name} és una comunitat per a qui comença la seva carrera en tecnologia: notícies per estar al dia en tecnologia, ofertes de feina júnior i pràctiques, un fòrum per resoldre dubtes entre totes i tots i testimonis reals de qui ja hi ha passat.',
     purpose: {
       eyebrow: 'Per què existeix',
       title: 'Començar no hauria de ser tan difícil',
@@ -85,7 +85,7 @@ export default {
       news: { title: 'Notícies al dia', text: 'El que passa al sector, explicat per a qui comença.' },
       jobs: { title: 'Feina júnior', text: 'Pràctiques i primeres feines, amb les ofertes d’Espanya primer.' },
       forum: {
-        title: 'Un fòrum sense por',
+        title: 'Un fòrum per ajudar-nos',
         text: 'Dubtes tècnics, recursos i experiències. Totes les preguntes són benvingudes.',
       },
       testimonials: { title: 'Històries reals', text: 'Com els va a qui ja ha fet el primer pas.' },
@@ -138,7 +138,7 @@ export default {
     terminal: { message: 'My first step in tech', output: 'One more person learning together' },
     title: 'Nobody should take their first step in tech alone',
     intro:
-      '{name} is a community for people starting their career in tech: news to stay up to date with tech, junior jobs and internships, a forum where you can ask without fear and real stories from people who have been there.',
+      '{name} is a community for people starting their career in tech: news to stay up to date with tech, junior jobs and internships, a forum to work through questions together and real stories from people who have been there.',
     purpose: {
       eyebrow: 'Why it exists',
       title: 'Starting out shouldn’t be this hard',

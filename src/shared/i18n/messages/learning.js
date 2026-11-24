@@ -160,7 +160,7 @@ export default {
         },
         pruebas: {
           title: 'Pruebas automáticas',
-          text: 'Pruebas unitarias y de integración para cambiar el código sin miedo.',
+          text: 'Pruebas unitarias y de integración para cambiar el código con seguridad.',
           project: 'Añade pruebas a tu API hasta cubrir los casos principales.',
         },
         despliegue: {
@@ -431,7 +431,7 @@ export default {
         },
         pruebas: {
           title: 'Proves automàtiques',
-          text: 'Proves unitàries i d’integració per canviar el codi sense por.',
+          text: 'Proves unitàries i d’integració per canviar el codi amb seguretat.',
           project: 'Afegeix proves a la teva API fins a cobrir els casos principals.',
         },
         despliegue: {
@@ -702,7 +702,7 @@ export default {
         },
         pruebas: {
           title: 'Automated testing',
-          text: 'Unit and integration tests so you can change code without fear.',
+          text: 'Unit and integration tests so you can change code with confidence.',
           project: 'Add tests to your API until the main cases are covered.',
         },
         despliegue: {

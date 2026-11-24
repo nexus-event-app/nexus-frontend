@@ -8,8 +8,8 @@ export default {
       heading: 'Foro',
       categoryHeading: 'Foro: {category}',
       seoDescription:
-        'Preguntas, recursos y experiencias de la comunidad tech junior. Pregunta sin miedo y ayuda a otras personas a crecer.',
-      description: 'Pregunta sin miedo, comparte lo que aprendes y ayuda a otras personas que empiezan como tú.',
+        'Preguntas, recursos y experiencias de la comunidad tech junior. Resuelve tus dudas y ayuda a otras personas a crecer.',
+      description: 'Resuelve tus dudas, comparte lo que aprendes y ayuda a otras personas que empiezan como tú.',
       newDiscussion: 'Nueva discusión',
       searchLabel: 'Buscar discusiones',
       searchPlaceholder: 'Buscar en el foro…',
@@ -144,8 +144,8 @@ export default {
       heading: 'Fòrum',
       categoryHeading: 'Fòrum: {category}',
       seoDescription:
-        'Preguntes, recursos i experiències de la comunitat tech júnior. Pregunta sense por i ajuda altres persones a créixer.',
-      description: 'Pregunta sense por, comparteix el que aprens i ajuda altres persones que comencen com tu.',
+        'Preguntes, recursos i experiències de la comunitat tech júnior. Resol els teus dubtes i ajuda altres persones a créixer.',
+      description: 'Resol els teus dubtes, comparteix el que aprens i ajuda altres persones que comencen com tu.',
       newDiscussion: 'Nova discussió',
       searchLabel: 'Cerca discussions',
       searchPlaceholder: 'Cerca al fòrum…',
@@ -280,8 +280,9 @@ export default {
       heading: 'Forum',
       categoryHeading: 'Forum: {category}',
       seoDescription:
-        'Questions, resources and experiences from the junior tech community. Ask without fear and help others grow.',
-      description: 'Ask without fear, share what you learn and help other people who are starting out like you.',
+        'Questions, resources and experiences from the junior tech community. Get your questions answered and help others grow.',
+      description:
+        'Get your questions answered, share what you learn and help other people who are starting out like you.',
       newDiscussion: 'New discussion',
       searchLabel: 'Search discussions',
       searchPlaceholder: 'Search the forum…',

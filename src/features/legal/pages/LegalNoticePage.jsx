@@ -52,7 +52,9 @@ const SECTIONS = [
     title: '4. Normas de la comunidad',
     content: (
       <>
-        <p>Queremos un espacio donde preguntar sin miedo. Por eso no está permitido publicar:</p>
+        <p>
+          Queremos un espacio de respeto en el que todo el mundo se sienta a gusto. Por eso no está permitido publicar:
+        </p>
         <ul>
           <li>Insultos, acoso, discriminación o cualquier contenido que vulnere la ley.</li>
           <li>Spam, publicidad no solicitada o enlaces engañosos.</li>
