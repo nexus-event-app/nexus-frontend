@@ -1,6 +1,7 @@
 export default {
   es: {
     view: {
+      signUpToView: 'Crea tu cuenta gratis para ver los perfiles de la comunidad.',
       profileEyebrow: 'Perfil de la comunidad',
       ownEyebrow: 'Tu perfil',
       links: 'Enlaces',
@@ -107,6 +108,7 @@ export default {
   },
   ca: {
     view: {
+      signUpToView: 'Crea el teu compte gratis per veure els perfils de la comunitat.',
       profileEyebrow: 'Perfil de la comunitat',
       ownEyebrow: 'El teu perfil',
       links: 'Enllaços',
@@ -213,6 +215,7 @@ export default {
   },
   en: {
     view: {
+      signUpToView: 'Create your free account to see community profiles.',
       profileEyebrow: 'Community profile',
       ownEyebrow: 'Your profile',
       links: 'Links',

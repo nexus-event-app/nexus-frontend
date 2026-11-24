@@ -94,7 +94,14 @@ function publicRoutes({ prefix, lang }) {
         element={withAuth(<EditProfilePage />)}
       />
       <Route path={seg('perfil')} element={withAuth(<OwnProfileRedirect />)} />
-      <Route path={`${seg('perfil')}/:idSlug`} element={<ProfilePage />} />
+      <Route
+        path={`${seg('perfil')}/:idSlug`}
+        element={
+          <RequireAuth signUpReason="profile.view.signUpToView">
+            <ProfilePage />
+          </RequireAuth>
+        }
+      />
       <Route path={seg('aviso-legal')} element={<LegalNoticePage />} />
       <Route path={seg('privacidad')} element={<PrivacyPage />} />
       <Route path={seg('cookies')} element={<CookiesPage />} />

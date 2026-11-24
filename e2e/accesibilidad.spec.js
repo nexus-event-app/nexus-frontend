@@ -2,7 +2,6 @@ import { expect, expectAccessible, test } from './fixtures.js'
 
 const PAGES = [
   '/',
-  '/perfil/7-lucia-prueba',
   '/noticias',
   '/noticias/1-novedades-de-react-19',
   '/noticias/3-what-is-new-in-react-19',

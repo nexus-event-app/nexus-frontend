@@ -34,4 +34,24 @@ describe('RequireAuth', () => {
     const { current } = renderWithProviders(privatePage, { route: '/perfil/editar', auth: { signedOut: true } })
     expect(current.location.pathname).toBe('/')
   })
+
+  it('si la página pide crear cuenta, lleva al registro, explica por qué y después vuelve', () => {
+    const page = (
+      <Routes>
+        <Route
+          path="/perfil/:idSlug"
+          element={
+            <RequireAuth signUpReason="profile.view.signUpToView">
+              <p>Perfil</p>
+            </RequireAuth>
+          }
+        />
+        <Route path="*" element={<p>Registro</p>} />
+      </Routes>
+    )
+    const { current, toast } = renderWithProviders(page, { route: '/perfil/9-marcos' })
+    expect(current.location.pathname).toBe('/registro')
+    expect(current.location.search).toBe('?redirect=%2Fperfil%2F9-marcos')
+    expect(toast.info).toHaveBeenCalledWith('Crea tu cuenta gratis para ver los perfiles de la comunidad.')
+  })
 })

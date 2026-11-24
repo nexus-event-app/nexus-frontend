@@ -1,4 +1,4 @@
-import { discussions } from './data.js'
+import { discussions, profile } from './data.js'
 import { expect, expectAccessible, json, test } from './fixtures.js'
 
 test.describe('Editar perfil', () => {
@@ -27,11 +27,34 @@ test.describe('Editar perfil', () => {
 })
 
 test.describe('Perfil', () => {
-  test('en el perfil de otra persona solo se ve lo que ha puesto en él, nunca su actividad', async ({ page, api }) => {
+  test('sin cuenta no se puede ver ningún perfil: lleva a crear la cuenta y después vuelve', async ({ page, api }) => {
     await page.goto('/perfil/7-lucia-prueba')
 
-    const card = page.getByRole('article', { name: 'Lucía Prueba' })
-    await expect(card.getByRole('heading', { level: 1, name: 'Lucía Prueba' })).toBeVisible()
+    await expect(page).toHaveURL(/\/registro\?redirect=%2Fperfil%2F7-lucia-prueba$/)
+    await expect(page.getByText('Crea tu cuenta gratis para ver los perfiles de la comunidad.')).toBeVisible()
+    expect(api.calls.some((call) => call.path.startsWith('/api/users/'))).toBe(false)
+  })
+
+  test('en el perfil de otra persona solo se ve lo que ha puesto en él, nunca su actividad', async ({
+    page,
+    api,
+    signedIn,
+  }) => {
+    expect(signedIn.id).toBe(7)
+    api.on('GET', /^\/api\/users\/\d+$/, () =>
+      json({
+        ...profile,
+        id: 9,
+        name: 'Marcos Prueba',
+        slug: 'marcos-prueba',
+        discussionCount: undefined,
+        testimonialCount: undefined,
+      }),
+    )
+    await page.goto('/perfil/9-marcos-prueba')
+
+    const card = page.getByRole('article', { name: 'Marcos Prueba' })
+    await expect(card.getByRole('heading', { level: 1, name: 'Marcos Prueba' })).toBeVisible()
     await expect(card).toContainText('Estudiante de DAW')
     await expect(card.getByRole('list', { name: 'Tecnologías' })).toContainText('React')
     await expect(page.getByRole('heading', { name: 'Tu actividad' })).toHaveCount(0)
