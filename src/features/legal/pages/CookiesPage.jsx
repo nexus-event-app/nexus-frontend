@@ -18,8 +18,20 @@ const SECTIONS = [
     ),
   },
   {
+    id: 'estadisticas',
+    title: '2. Estadísticas de visitas sin cookies',
+    content: (
+      <p>
+        Para saber cuántas personas nos visitan usamos GoatCounter, un servicio de estadísticas respetuoso con la
+        privacidad. <strong>No guarda nada en tu navegador ni usa cookies</strong>, no te sigue entre webs y no crea un
+        perfil tuyo: solo cuenta qué páginas se visitan, desde qué web llegas, tu país aproximado y el tipo de
+        dispositivo. Las direcciones de los perfiles se cuentan sin el nombre de la persona.
+      </p>
+    ),
+  },
+  {
     id: 'que-guardamos',
-    title: '2. Qué guardamos en tu navegador',
+    title: '3. Qué guardamos en tu navegador',
     content: (
       <figure tabIndex={0} aria-label="Datos que guarda el sitio en tu navegador" className="overflow-x-auto">
         <table className="w-full min-w-[32rem] text-left text-sm">
@@ -65,7 +77,7 @@ const SECTIONS = [
   },
   {
     id: 'terceros',
-    title: '3. Contenido de terceros',
+    title: '4. Contenido de terceros',
     content: (
       <p>
         Las imágenes de algunas noticias se cargan desde los servidores de su fuente original. Las pedimos sin indicar
@@ -76,7 +88,7 @@ const SECTIONS = [
   },
   {
     id: 'gestion',
-    title: '4. Cómo borrarlo',
+    title: '5. Cómo borrarlo',
     content: (
       <p>
         Al cerrar sesión se borra la sesión guardada, y al volver al tema automático se borra la preferencia de tema.
@@ -87,11 +99,11 @@ const SECTIONS = [
   },
   {
     id: 'cambios',
-    title: '5. Cambios',
+    title: '6. Cambios',
     content: (
       <p>
-        Si en el futuro añadimos herramientas de análisis o cualquier cookie que requiera tu consentimiento, te lo
-        pediremos antes de activarla y actualizaremos esta página.
+        Si en el futuro añadimos cualquier cookie o herramienta que requiera tu consentimiento, te lo pediremos antes de
+        activarla y actualizaremos esta página.
       </p>
     ),
   },

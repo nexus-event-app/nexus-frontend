@@ -233,6 +233,7 @@ al compilar.
 | `VITE_API_URL` | `/api` | URL base de la API. Déjala así salvo que el backend esté en otro origen. |
 | `VITE_SITE_URL` | `http://localhost:5173` | URL pública: canonical, Open Graph y JSON-LD. **El dominio real en producción.** |
 | `VITE_BETA` | `false` | `true` muestra el aviso de versión beta bajo la cabecera. |
+| `VITE_GOATCOUNTER_CODE` | (vacío) | Cuenta de GoatCounter para contar visitas sin cookies. Vacío, no se cuenta nada. |
 | `VITE_LEGAL_OWNER_NAME`, `VITE_LEGAL_EMAIL` | vacías | Titular y email del aviso legal y la privacidad (LSSI y RGPD). |
 | `VITE_LEGAL_OWNER_ID`, `VITE_LEGAL_ADDRESS` | vacías | NIF y domicilio. Opcionales: si están vacíos, no se muestran. |
 | `VITE_LEGAL_HOSTING_PROVIDER` | vacía | Proveedor de alojamiento, como encargado del tratamiento. |

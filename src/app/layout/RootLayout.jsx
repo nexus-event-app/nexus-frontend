@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import EmailVerificationBanner from '@/features/auth/components/EmailVerificationBanner'
+import PageViewTracker from '@/shared/analytics/PageViewTracker'
 import ErrorBoundary from '@/shared/components/ErrorBoundary'
 import PageLoader from '@/shared/components/PageLoader'
 import PageMain from '@/shared/components/PageMain'
@@ -33,6 +34,7 @@ export default function RootLayout() {
         </Suspense>
       </ErrorBoundary>
       <SiteFooter />
+      <PageViewTracker />
     </>
   )
 }

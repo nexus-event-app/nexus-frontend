@@ -47,6 +47,12 @@ const SECTIONS = [
           <strong>Datos técnicos:</strong> la dirección IP se usa de forma temporal, solo en memoria, para limitar
           abusos como intentos masivos de inicio de sesión. No la guardamos.
         </li>
+        <li>
+          <strong>Estadísticas de visitas:</strong> contamos las páginas que se visitan con GoatCounter, sin cookies y
+          sin datos que te identifiquen (solo la página, la web de la que llegas, el país aproximado y el tipo de
+          dispositivo). Nos sirve para saber qué partes del sitio son útiles. Base legal: nuestro interés legítimo en
+          mejorar el sitio (art. 6.1.f RGPD).
+        </li>
       </ul>
     ),
   },
@@ -106,8 +112,9 @@ const SECTIONS = [
       <p>
         No vendemos ni cedemos tus datos a terceros. Para alojar el sitio usamos un proveedor que actúa como encargado
         del tratamiento y solo trata los datos siguiendo nuestras instrucciones:{' '}
-        <LegalValue value={legalConfig.hostingProvider} />. Si alguno de nuestros proveedores tratara datos fuera del
-        Espacio Económico Europeo, lo haría con las garantías que exige el RGPD.
+        <LegalValue value={legalConfig.hostingProvider} />. Para las estadísticas de visitas usamos GoatCounter, que
+        solo recibe datos de visita sin identificarte. Si alguno de nuestros proveedores tratara datos fuera del Espacio
+        Económico Europeo, lo haría con las garantías que exige el RGPD.
       </p>
     ),
   },
