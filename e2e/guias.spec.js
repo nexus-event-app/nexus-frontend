@@ -15,6 +15,7 @@ test.describe('Guías', () => {
       await toc.getByRole('link', { name: '3. Ve a eventos' }).click()
       await expect(page).toHaveURL(/#3-ve-a-eventos$/)
       await expect(page.getByRole('heading', { level: 2, name: '3. Ve a eventos' })).toBeInViewport()
+      await expect(toc.getByRole('link', { name: '3. Ve a eventos' })).toHaveAttribute('aria-current', 'location')
     }
 
     await expect(page.getByRole('link', { name: 'agenda de eventos' })).toHaveAttribute('href', '/eventos')

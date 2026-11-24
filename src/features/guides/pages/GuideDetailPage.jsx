@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useParams } from 'react-router-dom'
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import ArticleSkeleton from '@/shared/components/ArticleSkeleton'
@@ -45,13 +46,14 @@ function ReadingProgress({ target }) {
       window.removeEventListener('resize', update)
     }
   }, [target])
-  return (
+  return createPortal(
     <span aria-hidden="true" className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-1">
       <span
         ref={bar}
         className="block h-full origin-left scale-x-0 bg-gradient-to-r from-brand-500 via-violet-500 to-pink-400"
       />
-    </span>
+    </span>,
+    document.body,
   )
 }
 
@@ -60,19 +62,29 @@ function useActiveHeading(headingIds) {
   const key = headingIds.join('|')
   useEffect(() => {
     const ids = key ? key.split('|') : []
-    if (!ids.length || typeof IntersectionObserver === 'undefined') return undefined
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((entry) => entry.isIntersecting)
-        if (visible.length) setActive(visible[0].target.id)
-      },
-      { rootMargin: '-15% 0px -70% 0px' },
-    )
-    ids.forEach((id) => {
-      const element = document.getElementById(id)
-      if (element) observer.observe(element)
-    })
-    return () => observer.disconnect()
+    if (!ids.length) return undefined
+    let frame = 0
+    const update = () => {
+      frame = 0
+      const line = window.innerHeight * 0.3
+      let current = ids[0]
+      for (const id of ids) {
+        const element = document.getElementById(id)
+        if (element && element.getBoundingClientRect().top <= line) current = id
+      }
+      setActive(current)
+    }
+    const schedule = () => {
+      if (!frame) frame = window.requestAnimationFrame(update)
+    }
+    update()
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule)
+    return () => {
+      window.cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
+    }
   }, [key])
   return active
 }
