@@ -15,9 +15,8 @@ import { useRequest } from '@/shared/hooks/useRequest'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { guidesService } from '../services/guidesService'
 
-function GuideCard({ guide, number }) {
+function GuideCard({ guide }) {
   const { t } = useI18n()
-  const label = String(number).padStart(2, '0')
   return (
     <article className="group relative isolate flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-surface shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-accent-line hover:shadow-pop">
       <header className="flex items-center gap-3 bg-gradient-to-r from-brand-600 via-brand-700 to-violet-700 px-5 py-3 text-white">
@@ -26,21 +25,15 @@ function GuideCard({ guide, number }) {
           <span className="h-2.5 w-2.5 rounded-full bg-white/60" />
           <span className="h-2.5 w-2.5 rounded-full bg-white/90" />
         </span>
-        <span aria-hidden="true" className="font-mono text-xs text-white/90">
-          guia-{label}.md
-        </span>
+        <span className="text-sm font-semibold tracking-wide text-white">{t('guides.label')}</span>
         <span className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-xs font-semibold">
           <Icon name="clock" className="h-3.5 w-3.5" />
           {t('guides.readingTime', { count: guide.readingMinutes ?? 1 })}
         </span>
       </header>
-      <span
-        aria-hidden="true"
-        data-number={label}
-        className="pointer-events-none absolute -bottom-6 right-3 -z-10 select-none font-mono text-[7rem] font-bold leading-none text-accent/10 transition-colors before:content-[attr(data-number)] group-hover:text-accent/15"
-      />
+
       <section className="flex flex-1 flex-col p-6">
-        <p className="flex items-center gap-2 font-mono text-xs text-ink-muted">
+        <p className="flex items-center gap-2 text-sm text-ink-muted">
           <span aria-hidden="true" className="h-2 w-2 rounded-full bg-gradient-to-br from-brand-500 to-violet-500" />
           <Time value={guide.publishedAt} />
         </p>
@@ -100,9 +93,9 @@ export default function GuidesListPage() {
         </section>
       ) : (
         <ul aria-label={t('guides.listLabel')} className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {guides.map((guide, index) => (
+          {guides.map((guide) => (
             <li key={guide.id}>
-              <GuideCard guide={guide} number={guides.length - index} />
+              <GuideCard guide={guide} />
             </li>
           ))}
         </ul>
