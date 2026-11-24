@@ -17,14 +17,13 @@ export default function MissingWordCallout({ id, headingLevel = 'h2', className 
     <aside
       aria-labelledby={id}
       className={cx(
-        'relative isolate grid overflow-hidden grid-cols-[auto_minmax(0,1fr)] gap-x-3.5 rounded-3xl bg-gradient-to-br from-brand-600 via-brand-700 to-brand-900 p-5 text-white shadow-pop',
+        'relative isolate grid grid-cols-[auto_minmax(0,1fr)] gap-x-3.5 rounded-3xl bg-gradient-to-br from-brand-600 via-brand-700 to-brand-900 p-5 text-white shadow-pop',
         className,
       )}
     >
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-10 -top-10 -z-10 h-40 w-40 animate-drift rounded-full bg-brand-400/40 blur-2xl"
-      />
+      <span aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-3xl">
+        <span className="absolute -right-10 -top-10 h-40 w-40 animate-drift rounded-full bg-brand-400/40 blur-2xl" />
+      </span>
       {BUBBLES.map((bubble) => (
         <span
           key={bubble.text}
