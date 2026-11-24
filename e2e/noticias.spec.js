@@ -67,7 +67,14 @@ test.describe('Idioma de las noticias', () => {
     expect(api.calls.some((call) => call.path === '/api/news' && call.query.get('language') === 'es')).toBe(true)
   })
 
-  test('la noticia en inglés marca el idioma de su título y su texto', async ({ page }) => {
+  test('sin cuenta no se abre ninguna noticia: lleva a crear la cuenta', async ({ page }) => {
+    await page.goto('/noticias/1-novedades-de-react-19')
+    await expect(page).toHaveURL(/\/registro\?redirect=%2Fnoticias%2F1-novedades-de-react-19$/)
+    await expect(page.getByText('Crea tu cuenta gratis para leer las noticias completas.')).toBeVisible()
+  })
+
+  test('la noticia en inglés marca el idioma de su título y su texto', async ({ page, signedIn }) => {
+    expect(signedIn.id).toBeDefined()
     await page.goto('/noticias/3-what-is-new-in-react-19')
     await expect(page.getByRole('heading', { level: 1 })).toHaveAttribute('lang', 'en')
     await expect(page.getByText('A quick tour of the features')).toHaveAttribute('lang', 'en')
@@ -76,7 +83,9 @@ test.describe('Idioma de las noticias', () => {
 
   test('el detalle enseña el tiempo de lectura, «Sigue leyendo» sin repetir la noticia y vuelve a noticias', async ({
     page,
+    signedIn,
   }) => {
+    expect(signedIn.id).toBeDefined()
     await page.goto('/noticias/1-novedades-de-react-19')
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
     await expect(page.getByText('1 min de lectura')).toBeVisible()

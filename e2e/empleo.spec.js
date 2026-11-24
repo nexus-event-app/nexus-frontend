@@ -84,7 +84,15 @@ test.describe('Página de empleo', () => {
     await expect(page).toHaveURL(/page=2/)
   })
 
-  test('el detalle de una oferta enseña su resumen y vuelve a las ofertas', async ({ page }) => {
+  test('sin cuenta no se abre ninguna oferta: lleva a crear la cuenta y después vuelve', async ({ page }) => {
+    await page.goto('/empleo')
+    await page.getByRole('link', { name: 'Desarrollador/a frontend junior' }).first().click()
+    await expect(page).toHaveURL(/\/registro\?redirect=%2Fempleo%2F11-desarrollador-frontend-junior$/)
+    await expect(page.getByText('Crea tu cuenta gratis para ver las ofertas y apuntarte.')).toBeVisible()
+  })
+
+  test('el detalle de una oferta enseña su resumen y vuelve a las ofertas', async ({ page, signedIn }) => {
+    expect(signedIn.id).toBeDefined()
     await page.goto('/empleo/11-desarrollador-frontend-junior')
     await expect(page.getByRole('heading', { level: 1, name: 'Desarrollador/a frontend junior' })).toBeVisible()
     const summary = page.getByRole('complementary', { name: 'Resumen de la oferta' })

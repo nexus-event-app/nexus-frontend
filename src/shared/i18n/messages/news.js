@@ -37,6 +37,7 @@ export default {
     card: { via: 'Vía {source}', read: 'Leer noticia' },
     related: { eyebrow: 'Más noticias', title: 'Sigue leyendo', seeAll: 'Ver todas las noticias' },
     detail: {
+      signUpToRead: 'Crea tu cuenta gratis para leer las noticias completas.',
       error: 'No hemos podido cargar la noticia',
       by: 'Por {author}',
       via: 'Vía {source}',
@@ -87,6 +88,7 @@ export default {
     card: { via: 'Via {source}', read: 'Llegeix la notícia' },
     related: { eyebrow: 'Més notícies', title: 'Continua llegint', seeAll: 'Mira totes les notícies' },
     detail: {
+      signUpToRead: 'Crea el teu compte gratis per llegir les notícies completes.',
       error: 'No hem pogut carregar la notícia',
       by: 'Per {author}',
       via: 'Via {source}',
@@ -133,6 +135,7 @@ export default {
     card: { via: 'Via {source}', read: 'Read the story' },
     related: { eyebrow: 'More news', title: 'Keep reading', seeAll: 'See all news' },
     detail: {
+      signUpToRead: 'Create your free account to read the full news.',
       error: 'We couldn’t load the article',
       by: 'By {author}',
       via: 'Via {source}',

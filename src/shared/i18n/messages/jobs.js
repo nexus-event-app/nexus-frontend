@@ -181,6 +181,7 @@ export default {
       manfred: 'Empresas tech con salarios transparentes.',
     },
     detail: {
+      signUpToView: 'Crea tu cuenta gratis para ver las ofertas y apuntarte.',
       error: 'No hemos podido cargar la oferta',
       seoTitle: '{title} en {company}',
       seoDescription: '{title} en {company} ({location}). {summary}',
@@ -387,6 +388,7 @@ export default {
       manfred: 'Empreses tech amb salaris transparents.',
     },
     detail: {
+      signUpToView: "Crea el teu compte gratis per veure les ofertes i apuntar-t'hi.",
       error: 'No hem pogut carregar l’oferta',
       seoTitle: '{title} a {company}',
       seoDescription: '{title} a {company} ({location}). {summary}',
@@ -594,6 +596,7 @@ export default {
       manfred: 'Tech companies with transparent salaries.',
     },
     detail: {
+      signUpToView: 'Create your free account to see the job offers and apply.',
       error: 'We couldn’t load the job offer',
       seoTitle: '{title} at {company}',
       seoDescription: '{title} at {company} ({location}). {summary}',

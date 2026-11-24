@@ -3,10 +3,7 @@ import { expect, expectAccessible, test } from './fixtures.js'
 const PAGES = [
   '/',
   '/noticias',
-  '/noticias/1-novedades-de-react-19',
-  '/noticias/3-what-is-new-in-react-19',
   '/empleo',
-  '/empleo/11-desarrollador-frontend-junior',
   '/foro',
   '/foro/21-por-donde-empiezo-con-java',
   '/testimonios',
@@ -25,6 +22,9 @@ const PAGES = [
 ]
 
 const PRIVATE_PAGES = [
+  '/noticias/1-novedades-de-react-19',
+  '/noticias/3-what-is-new-in-react-19',
+  '/empleo/11-desarrollador-frontend-junior',
   '/notificaciones',
   '/foro/21-por-donde-empiezo-con-java',
   '/rutas/ia',

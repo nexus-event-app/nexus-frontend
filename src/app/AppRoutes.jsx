@@ -67,13 +67,27 @@ function publicRoutes({ prefix, lang }) {
     <Route key={prefix} path={prefix} element={<RootLayout />}>
       <Route index element={<HomePage />} />
       <Route path={seg('noticias')} element={<NewsListPage />} />
-      <Route path={`${seg('noticias')}/:idSlug`} element={<NewsDetailPage />} />
+      <Route
+        path={`${seg('noticias')}/:idSlug`}
+        element={
+          <RequireAuth signUpReason="news.detail.signUpToRead">
+            <NewsDetailPage />
+          </RequireAuth>
+        }
+      />
       <Route path={seg('empleo')} element={<JobsListPage />} />
       <Route
         path={`${seg('empleo')}/${routeSubsegment('empleo', 'guardadas', lang)}`}
         element={withAuth(<SavedJobsPage />)}
       />
-      <Route path={`${seg('empleo')}/:idSlug`} element={<JobDetailPage />} />
+      <Route
+        path={`${seg('empleo')}/:idSlug`}
+        element={
+          <RequireAuth signUpReason="jobs.detail.signUpToView">
+            <JobDetailPage />
+          </RequireAuth>
+        }
+      />
       <Route path={forum} element={<ForumPage />} />
       <Route path={`${forum}/${routeSubsegment('foro', 'nueva', lang)}`} element={withAuth(<NewDiscussionPage />)} />
       <Route path={`${forum}/:idSlug`} element={<DiscussionDetailPage />} />

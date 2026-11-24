@@ -18,7 +18,8 @@ test.describe('Navegación', () => {
     expect(order.filter((title) => sections.includes(title))).toEqual(sections)
   })
 
-  test('se llega a una noticia desde el listado y las migas vuelven atrás', async ({ page }) => {
+  test('se llega a una noticia desde el listado y las migas vuelven atrás', async ({ page, signedIn }) => {
+    expect(signedIn.id).toBeDefined()
     await page.goto('/noticias')
     await page
       .getByRole('link', { name: /Cómo preparar tu primera entrevista/ })
