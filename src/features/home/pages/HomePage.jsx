@@ -2,6 +2,7 @@ import JsonLd from '@/shared/components/JsonLd'
 import PageMain from '@/shared/components/PageMain'
 import Seo from '@/shared/components/Seo'
 import { paths } from '@/shared/config/paths'
+import GuidesCallout from '@/features/guides/components/GuidesCallout'
 import ForumSection from '../components/ForumSection'
 import HeroSection from '../components/HeroSection'
 import HomeEventsSection from '../components/HomeEventsSection'
@@ -25,6 +26,10 @@ export default function HomePage() {
       <HomePathsSection />
       <LatestNewsSection />
       <TestimonialsSection />
+      <GuidesCallout
+        id="home-guides"
+        className="mx-4 mb-20 mt-4 sm:mx-6 lg:mx-8 xl:mx-auto xl:w-full xl:max-w-[calc(theme(maxWidth.page)-4rem)]"
+      />
     </PageMain>
   )
 }

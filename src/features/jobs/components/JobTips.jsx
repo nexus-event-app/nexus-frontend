@@ -1,3 +1,4 @@
+import GuidesCallout from '@/features/guides/components/GuidesCallout'
 import Eyebrow from '@/shared/components/Eyebrow'
 import Illustration from '@/shared/components/Illustration'
 import { illustrations } from '@/shared/config/illustrations'
@@ -60,6 +61,7 @@ export default function JobTips() {
           </li>
         ))}
       </ul>
+      <GuidesCallout id="job-tips-guides" headingLevel="h3" className="mt-8" />
     </section>
   )
 }

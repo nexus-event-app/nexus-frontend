@@ -26,7 +26,7 @@ export default function HeroSection() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="page-gutter relative isolate grid items-center gap-x-12 gap-y-10 overflow-hidden bg-gradient-to-br from-brand-50 via-brand-100 to-brand-200 pb-10 pt-6 text-ink dark:from-canvas dark:via-surface dark:to-canvas sm:pb-12 sm:pt-8 lg:min-h-[34rem] lg:grid-cols-[minmax(0,1fr)_23rem] lg:gap-x-6 xl:grid-cols-[minmax(0,1fr)_28rem]"
+      className="page-gutter relative isolate grid items-center gap-x-12 gap-y-10 overflow-hidden bg-gradient-to-br from-white via-brand-50 to-brand-100 pb-10 pt-6 text-ink dark:from-canvas dark:via-surface dark:to-canvas sm:pb-12 sm:pt-8 lg:min-h-[34rem] lg:grid-cols-[minmax(0,1fr)_23rem] lg:gap-x-6 xl:grid-cols-[minmax(0,1fr)_28rem]"
     >
       <span
         aria-hidden="true"
