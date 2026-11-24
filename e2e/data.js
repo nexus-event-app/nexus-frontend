@@ -291,13 +291,27 @@ export const guides = [
   {
     id: 1,
     slug: 'que-hacer-despues-de-un-bootcamp',
+    category: 'PRIMEROS_PASOS',
     title: 'Qué hacer después de un bootcamp de programación: guía paso a paso',
     description:
       'Has terminado el bootcamp, ¿y ahora qué? Pasos claros para seguir aprendiendo y conseguir tu primer empleo.',
     content:
       'Durante semanas has tenido clases.\n\n## 1. Haz balance\n\n- ¿Qué parte disfruté más?\n- ¿Qué me cuesta?\n\n## 2. Sigue programando\n\nSigue una de nuestras [rutas de aprendizaje](/rutas).\n\n## 3. Ve a eventos\n\nMira la [agenda de eventos](/eventos).\n\n## En resumen\n\n1. Haz balance.\n2. Programa cada día.',
     published: true,
+    readingMinutes: 5,
     publishedAt: '2026-11-24T10:00:00',
     updatedAt: '2026-11-24T10:00:00',
+  },
+  {
+    id: 2,
+    slug: 'como-preparar-tu-primera-entrevista-tecnica',
+    category: 'EMPLEO',
+    title: 'Cómo preparar tu primera entrevista técnica: guía paso a paso',
+    description: 'Qué fases tiene, qué suelen preguntar a perfiles junior y cómo prepararla.',
+    content: 'Te han llamado.\n\n## 1. Entiende el proceso\n\nTexto.',
+    published: true,
+    readingMinutes: 6,
+    publishedAt: '2026-11-24T11:00:00',
+    updatedAt: '2026-11-24T11:00:00',
   },
 ]

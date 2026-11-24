@@ -1,7 +1,9 @@
+import { useSearchParams } from 'react-router-dom'
 import { Link } from '@/shared/i18n/router'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import ButtonLink from '@/shared/components/ButtonLink'
 import EmptyState from '@/shared/components/EmptyState'
+import FilterLinks from '@/shared/components/FilterLinks'
 import ErrorState from '@/shared/components/ErrorState'
 import Eyebrow from '@/shared/components/Eyebrow'
 import Icon from '@/shared/components/Icon'
@@ -13,10 +15,12 @@ import { illustrations } from '@/shared/config/illustrations'
 import { paths } from '@/shared/config/paths'
 import { useRequest } from '@/shared/hooks/useRequest'
 import { useI18n } from '@/shared/i18n/useI18n'
+import { GUIDE_CATEGORIES, categoryFromSlug, categoryOf } from '../config/categories'
 import { guidesService } from '../services/guidesService'
 
 function GuideCard({ guide }) {
   const { t } = useI18n()
+  const category = categoryOf(guide.category)
   return (
     <article className="group relative isolate flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-surface shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-accent-line hover:shadow-pop">
       <header className="flex items-center gap-3 bg-gradient-to-r from-brand-600 via-brand-700 to-violet-700 px-5 py-3 text-white">
@@ -25,7 +29,10 @@ function GuideCard({ guide }) {
           <span className="h-2.5 w-2.5 rounded-full bg-white/60" />
           <span className="h-2.5 w-2.5 rounded-full bg-white/90" />
         </span>
-        <span className="text-sm font-semibold tracking-wide text-white">{t('guides.label')}</span>
+        <span className="inline-flex items-center gap-1.5 text-sm font-semibold tracking-wide text-white">
+          <span aria-hidden="true">{category.emoji}</span>
+          {t(`guides.categories.${category.value}`)}
+        </span>
         <span className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-xs font-semibold">
           <Icon name="clock" className="h-3.5 w-3.5" />
           {t('guides.readingTime', { count: guide.readingMinutes ?? 1 })}
@@ -60,14 +67,55 @@ function GuideCard({ guide }) {
   )
 }
 
+function CategoryFilter({ guides, active }) {
+  const { t } = useI18n()
+  const count = (value) => guides.filter((guide) => categoryOf(guide.category).value === value).length
+  const options = [
+    {
+      key: 'all',
+      label: (
+        <>
+          {t('guides.all')}
+          <span className="ml-1.5 tabular-nums opacity-70">{guides.length}</span>
+        </>
+      ),
+      href: paths.guides,
+      active: !active,
+    },
+    ...GUIDE_CATEGORIES.map((category) => ({
+      key: category.slug,
+      label: (
+        <>
+          <span aria-hidden="true" className="mr-1.5">
+            {category.emoji}
+          </span>
+          {t(`guides.categories.${category.value}`)}
+          <span className="ml-1.5 tabular-nums opacity-70">{count(category.value)}</span>
+        </>
+      ),
+      href: `${paths.guides}?categoria=${category.slug}`,
+      active: active?.value === category.value,
+    })),
+  ]
+  return <FilterLinks label={t('guides.filterLabel')} options={options} className="mt-10" />
+}
+
 export default function GuidesListPage() {
   const { t } = useI18n()
+  const [searchParams] = useSearchParams()
+  const active = categoryFromSlug(searchParams.get('categoria'))
   const request = useRequest('guides:list', ({ signal }) => guidesService.list({ signal }))
   const guides = request.data ?? []
+  const visible = active ? guides.filter((guide) => categoryOf(guide.category).value === active.value) : guides
 
   return (
     <PageMain loading={request.loading} className="page-container page-section relative isolate">
-      <Seo title={t('guides.seoTitle')} description={t('guides.seoDescription')} path={paths.guides} />
+      <Seo
+        title={t('guides.seoTitle')}
+        description={t('guides.seoDescription')}
+        path={paths.guides}
+        robots={active ? 'noindex,follow' : 'index,follow'}
+      />
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-96" />
       <Breadcrumbs items={[{ label: t('guides.breadcrumb'), to: paths.guides }]} />
 
@@ -92,13 +140,27 @@ export default function GuidesListPage() {
           />
         </section>
       ) : (
-        <ul aria-label={t('guides.listLabel')} className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {guides.map((guide) => (
-            <li key={guide.id}>
-              <GuideCard guide={guide} />
-            </li>
-          ))}
-        </ul>
+        <>
+          <CategoryFilter guides={guides} active={active} />
+          {visible.length === 0 ? (
+            <section aria-label={t('guides.listLabel')} className="mt-8">
+              <EmptyState
+                icon="document"
+                title={t('guides.emptyCategory')}
+                description={t('guides.emptyCategoryText')}
+                action={<ButtonLink to={paths.guides}>{t('guides.seeAll')}</ButtonLink>}
+              />
+            </section>
+          ) : (
+            <ul aria-label={t('guides.listLabel')} className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {visible.map((guide) => (
+                <li key={guide.id}>
+                  <GuideCard guide={guide} />
+                </li>
+              ))}
+            </ul>
+          )}
+        </>
       )}
     </PageMain>
   )

@@ -22,6 +22,20 @@ test.describe('Guías', () => {
     await expect(page.getByRole('link', { name: /Únete a la comunidad/ })).toHaveAttribute('href', '/registro')
   })
 
+  test('los filtros por tema dejan ver solo las guías de ese tema y cada tarjeta dice el suyo', async ({ page }) => {
+    await page.goto('/guias')
+    const list = page.getByRole('list', { name: 'Todas las guías' })
+    await expect(list.getByRole('listitem')).toHaveCount(2)
+    const filters = page.getByRole('navigation', { name: 'Filtrar guías por tema' })
+    await filters.getByRole('link', { name: /Empleo/ }).click()
+    await expect(page).toHaveURL(/categoria=empleo/)
+    await expect(list.getByRole('listitem')).toHaveCount(1)
+    await expect(list).toContainText('Empleo')
+    await expect(list).toContainText('Cómo preparar tu primera entrevista técnica')
+    await filters.getByRole('link', { name: /Comunidad/ }).click()
+    await expect(page.getByText('Todavía no hay guías de este tema')).toBeVisible()
+  })
+
   test('una guía que no existe enseña la página de no encontrada', async ({ page }) => {
     await page.goto('/guias/no-existe')
     await expect(page.getByRole('heading', { level: 1, name: 'No encontramos esta página' })).toBeVisible()
@@ -40,6 +54,6 @@ test.describe('Guías', () => {
     await dialog.getByRole('button', { name: 'Crear guía' }).click()
     await expect(page.getByText('Guía guardada como borrador.')).toBeVisible()
     const sent = JSON.parse(api.calls.find((call) => call.method === 'POST' && call.path === '/api/admin/guides').body)
-    expect(sent).toMatchObject({ title: 'Mi guía', slug: null, published: false })
+    expect(sent).toMatchObject({ title: 'Mi guía', slug: null, category: 'PRIMEROS_PASOS', published: false })
   })
 })

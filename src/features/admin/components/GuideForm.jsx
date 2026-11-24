@@ -3,6 +3,7 @@ import Button from '@/shared/components/Button'
 import CheckboxField from '@/shared/components/CheckboxField'
 import FormField from '@/shared/components/FormField'
 import { useForm } from '@/shared/hooks/useForm'
+import { GUIDE_CATEGORIES } from '@/features/guides/config/categories'
 import { validateGuide } from '../utils/validators'
 
 function toValues(guide) {
@@ -11,6 +12,7 @@ function toValues(guide) {
     slug: guide?.slug ?? '',
     description: guide?.description ?? '',
     content: guide?.content ?? '',
+    category: guide?.category ?? 'PRIMEROS_PASOS',
     published: guide?.published ?? false,
   }
 }
@@ -27,6 +29,7 @@ export default function GuideForm({ guide, onSubmit, onCancel }) {
         slug: values.slug.trim() || null,
         description: values.description.trim(),
         content: values.content.trim(),
+        category: values.category,
         published: values.published,
       }),
   })
@@ -41,6 +44,13 @@ export default function GuideForm({ guide, onSubmit, onCancel }) {
         maxLength={120}
         placeholder="que-hacer-despues-de-un-bootcamp"
       />
+      <FormField {...form.getFieldProps('category')} as="select" label="Tema" required>
+        {GUIDE_CATEGORIES.map((category) => (
+          <option key={category.value} value={category.value}>
+            {category.emoji} {category.adminLabel}
+          </option>
+        ))}
+      </FormField>
       <FormField
         {...form.getFieldProps('description')}
         as="textarea"

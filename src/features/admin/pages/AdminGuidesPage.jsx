@@ -11,6 +11,7 @@ import Time from '@/shared/components/Time'
 import { paths } from '@/shared/config/paths'
 import { useAction } from '@/shared/hooks/useAction'
 import { useToast } from '@/shared/hooks/useToast'
+import { categoryOf } from '@/features/guides/config/categories'
 import GuideForm from '../components/GuideForm'
 import PagedTable from '../components/PagedTable'
 import StatusBadge from '../components/StatusBadge'
@@ -54,7 +55,9 @@ export default function AdminGuidesPage() {
       render: (item) => (
         <p>
           {item.title}
-          <span className="mt-1 block font-mono text-xs font-normal text-ink-muted">/guias/{item.slug}</span>
+          <span className="mt-1 block text-sm font-normal text-ink-muted">
+            {categoryOf(item.category).emoji} {categoryOf(item.category).adminLabel} · /guias/{item.slug}
+          </span>
         </p>
       ),
     },

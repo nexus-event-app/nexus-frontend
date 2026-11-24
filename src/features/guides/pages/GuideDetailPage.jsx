@@ -23,6 +23,7 @@ import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import { excerpt } from '@/shared/utils/text'
 import GuideContent from '../components/GuideContent'
+import { categoryOf } from '../config/categories'
 import { guidesService } from '../services/guidesService'
 import { parseGuide } from '../utils/guideMarkdown'
 import { buildGuideData } from '../utils/structuredData'
@@ -216,7 +217,7 @@ export default function GuideDetailPage() {
 
       <header className="col-span-full mt-6 grid items-center gap-x-10 gap-y-6 xl:grid-cols-[minmax(0,1fr)_22rem]">
         <hgroup className="min-w-0 max-w-3xl">
-          <Eyebrow>{t('guides.eyebrow')}</Eyebrow>
+          <Eyebrow>{t(`guides.categories.${categoryOf(guide.category).value}`)}</Eyebrow>
           <p className="mt-4 flex w-fit max-w-full items-center gap-2 rounded-full border border-accent-line bg-accent-soft px-3 py-1 font-mono text-xs text-accent-strong">
             <Icon name="code" className="h-3.5 w-3.5 shrink-0" />
             <span className="truncate">~/guias/{guide.slug}.md</span>
