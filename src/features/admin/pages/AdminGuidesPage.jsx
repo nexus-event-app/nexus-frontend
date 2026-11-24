@@ -56,7 +56,8 @@ export default function AdminGuidesPage() {
         <p>
           {item.title}
           <span className="mt-1 block text-sm font-normal text-ink-muted">
-            {categoryOf(item.category).adminLabel} · /guias/{item.slug}
+            {categoryOf(item.category).adminLabel} · {(item.languages ?? ['es']).join(' · ').toUpperCase()} · /guias/
+            {item.slug}
           </span>
         </p>
       ),

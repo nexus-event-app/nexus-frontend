@@ -28,6 +28,7 @@ export default {
     listError: 'No hemos podido cargar las guías.',
     updated: 'Actualizada',
     toc: 'En esta guía',
+    onlySpanish: 'Esta guía todavía solo está en castellano.',
     sidebar: 'Índice y comunidad',
     ctaTitle: 'No lo hagas sola ni solo',
     ctaText: 'Únete gratis a Primer Commit: eventos, ofertas junior y un foro para resolver dudas entre todas y todos.',
@@ -67,6 +68,7 @@ export default {
     listError: 'No hem pogut carregar les guies.',
     updated: 'Actualitzada',
     toc: 'En aquesta guia',
+    onlySpanish: 'Aquesta guia encara només està en castellà.',
     sidebar: 'Índex i comunitat',
     ctaTitle: 'No ho facis sola ni sol',
     ctaText:
@@ -107,6 +109,7 @@ export default {
     listError: 'We could not load the guides.',
     updated: 'Updated',
     toc: 'In this guide',
+    onlySpanish: 'This guide is only available in Spanish for now.',
     sidebar: 'Contents and community',
     ctaTitle: 'Don’t do it alone',
     ctaText: 'Join Primer Commit for free: events, junior jobs and a forum to work through questions together.',

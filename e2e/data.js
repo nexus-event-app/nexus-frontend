@@ -292,6 +292,8 @@ export const guides = [
     id: 1,
     slug: 'que-hacer-despues-de-un-bootcamp',
     category: 'PRIMEROS_PASOS',
+    language: 'es',
+    languages: ['es', 'ca', 'en'],
     title: 'Qué hacer después de un bootcamp de programación: guía paso a paso',
     description:
       'Has terminado el bootcamp, ¿y ahora qué? Pasos claros para seguir aprendiendo y conseguir tu primer empleo.',
@@ -305,6 +307,8 @@ export const guides = [
     id: 2,
     slug: 'como-preparar-tu-primera-entrevista-tecnica',
     category: 'EMPLEO',
+    language: 'es',
+    languages: ['es'],
     title: 'Cómo preparar tu primera entrevista técnica: guía paso a paso',
     description: 'Qué fases tiene, qué suelen preguntar a perfiles junior y cómo prepararla.',
     content: 'Te han llamado.\n\n## 1. Entiende el proceso\n\nTexto.',

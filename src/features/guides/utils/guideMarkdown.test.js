@@ -30,6 +30,14 @@ describe('formato de las guías', () => {
     expect(parseInline('[raro](//evil.example)')[0]).toEqual({ type: 'text', text: 'raro' })
   })
 
+  it('reconoce el código dentro del texto', () => {
+    expect(parseInline('Escribe `git status` antes.')).toEqual([
+      { type: 'text', text: 'Escribe ' },
+      { type: 'code', text: 'git status' },
+      { type: 'text', text: ' antes.' },
+    ])
+  })
+
   it('el texto plano sirve para calcular el tiempo de lectura', () => {
     expect(plainText('## Título\n\n**Hola** [foro](/foro)')).toBe(' Título\n\nHola foro')
   })

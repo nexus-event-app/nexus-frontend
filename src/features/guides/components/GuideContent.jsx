@@ -13,6 +13,16 @@ function Inline({ tokens }) {
         </strong>
       )
     }
+    if (token.type === 'code') {
+      return (
+        <code
+          key={index}
+          className="rounded-md bg-accent-soft px-1.5 py-0.5 font-mono text-[0.85em] text-accent-strong ring-1 ring-inset ring-accent-line"
+        >
+          {token.text}
+        </code>
+      )
+    }
     if (token.type === 'link' && token.internal) {
       return (
         <Link key={index} to={token.href} className="link">

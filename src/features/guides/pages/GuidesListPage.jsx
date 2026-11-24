@@ -40,7 +40,7 @@ function GuideCard({ guide }) {
           <span aria-hidden="true" className="h-2 w-2 rounded-full bg-gradient-to-br from-brand-500 to-violet-500" />
           <Time value={guide.publishedAt} />
         </p>
-        <h2 className="mt-3 text-xl font-bold leading-snug text-ink">
+        <h2 lang={guide.language} className="mt-3 text-xl font-bold leading-snug text-ink">
           <Link
             to={paths.guideDetail(guide)}
             className="after:absolute after:inset-0 after:rounded-3xl after:content-[''] group-hover:text-accent"
@@ -48,7 +48,9 @@ function GuideCard({ guide }) {
             {guide.title}
           </Link>
         </h2>
-        <p className="mt-3 leading-relaxed text-ink-muted">{guide.description}</p>
+        <p lang={guide.language} className="mt-3 leading-relaxed text-ink-muted">
+          {guide.description}
+        </p>
         <p
           aria-hidden="true"
           className="pointer-events-none mt-auto inline-flex items-center gap-2 pt-6 text-sm font-semibold text-accent"
@@ -115,10 +117,10 @@ function CategoryFilter({ active }) {
 }
 
 export default function GuidesListPage() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const [searchParams] = useSearchParams()
   const active = categoryFromSlug(searchParams.get('categoria'))
-  const request = useRequest('guides:list', ({ signal }) => guidesService.list({ signal }))
+  const request = useRequest(`guides:list:${lang}`, ({ signal }) => guidesService.list({ signal }))
   const guides = request.data ?? []
   const visible = active ? guides.filter((guide) => categoryOf(guide.category).value === active.value) : guides
 

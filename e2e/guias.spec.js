@@ -48,12 +48,18 @@ test.describe('Guías', () => {
     await page.goto('/admin/guias')
     await page.getByRole('button', { name: 'Nueva guía' }).click()
     const dialog = page.getByRole('dialog', { name: 'Nueva guía' })
-    await dialog.getByLabel('Título').fill('Mi guía')
-    await dialog.getByLabel('Descripción').fill('Una guía de prueba.')
-    await dialog.getByLabel('Contenido').fill('## Primer apartado\n\nTexto.')
+    await dialog.getByRole('textbox', { name: 'Título', exact: true }).fill('Mi guía')
+    await dialog.getByRole('textbox', { name: 'Descripción', exact: true }).fill('Una guía de prueba.')
+    await dialog.getByRole('textbox', { name: 'Contenido', exact: true }).fill('## Primer apartado\n\nTexto.')
     await dialog.getByRole('button', { name: 'Crear guía' }).click()
     await expect(page.getByText('Guía guardada como borrador.')).toBeVisible()
     const sent = JSON.parse(api.calls.find((call) => call.method === 'POST' && call.path === '/api/admin/guides').body)
-    expect(sent).toMatchObject({ title: 'Mi guía', slug: null, category: 'PRIMEROS_PASOS', published: false })
+    expect(sent).toMatchObject({
+      title: 'Mi guía',
+      slug: null,
+      category: 'PRIMEROS_PASOS',
+      titleCa: null,
+      published: false,
+    })
   })
 })

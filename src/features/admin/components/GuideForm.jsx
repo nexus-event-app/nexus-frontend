@@ -6,6 +6,11 @@ import { useForm } from '@/shared/hooks/useForm'
 import { GUIDE_CATEGORIES } from '@/features/guides/config/categories'
 import { validateGuide } from '../utils/validators'
 
+const TRANSLATIONS = [
+  { suffix: 'Ca', legend: 'Català', language: 'catalán' },
+  { suffix: 'En', legend: 'English', language: 'inglés' },
+]
+
 function toValues(guide) {
   return {
     title: guide?.title ?? '',
@@ -13,6 +18,12 @@ function toValues(guide) {
     description: guide?.description ?? '',
     content: guide?.content ?? '',
     category: guide?.category ?? 'PRIMEROS_PASOS',
+    titleCa: guide?.titleCa ?? '',
+    descriptionCa: guide?.descriptionCa ?? '',
+    contentCa: guide?.contentCa ?? '',
+    titleEn: guide?.titleEn ?? '',
+    descriptionEn: guide?.descriptionEn ?? '',
+    contentEn: guide?.contentEn ?? '',
     published: guide?.published ?? false,
   }
 }
@@ -30,6 +41,12 @@ export default function GuideForm({ guide, onSubmit, onCancel }) {
         description: values.description.trim(),
         content: values.content.trim(),
         category: values.category,
+        titleCa: values.titleCa.trim() || null,
+        descriptionCa: values.descriptionCa.trim() || null,
+        contentCa: values.contentCa.trim() || null,
+        titleEn: values.titleEn.trim() || null,
+        descriptionEn: values.descriptionEn.trim() || null,
+        contentEn: values.contentEn.trim() || null,
         published: values.published,
       }),
   })
@@ -69,6 +86,33 @@ export default function GuideForm({ guide, onSubmit, onCancel }) {
         maxLength={50000}
         required
       />
+      {TRANSLATIONS.map((translation) => (
+        <fieldset key={translation.suffix} className="form-grid col-span-full rounded-2xl border border-slate-200 p-4">
+          <legend className="px-2 text-sm font-semibold text-ink">{translation.legend}</legend>
+          <p className="col-span-full -mt-1 text-sm text-ink-muted">
+            Opcional. Si dejas algún campo vacío, en {translation.language} se mostrará la versión en castellano.
+          </p>
+          <FormField
+            {...form.getFieldProps(`title${translation.suffix}`)}
+            label={`Título (${translation.legend})`}
+            maxLength={200}
+          />
+          <FormField
+            {...form.getFieldProps(`description${translation.suffix}`)}
+            as="textarea"
+            rows={2}
+            label={`Descripción (${translation.legend})`}
+            maxLength={300}
+          />
+          <FormField
+            {...form.getFieldProps(`content${translation.suffix}`)}
+            as="textarea"
+            rows={10}
+            label={`Contenido (${translation.legend})`}
+            maxLength={50000}
+          />
+        </fieldset>
+      ))}
       <CheckboxField
         name="published"
         label="Publicada"

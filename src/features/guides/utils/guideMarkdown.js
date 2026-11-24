@@ -3,13 +3,15 @@ import { slugify } from '@/shared/utils/slug'
 const HEADING = /^(#{2,3})\s+(.+)$/
 const BULLET = /^[-*]\s+(.+)$/
 const NUMBERED = /^\d+[.)]\s+(.+)$/
-const INLINE = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)\s]+\))/g
+const INLINE = /(`[^`]+`|\*\*[^*]+\*\*|\[[^\]]+\]\([^)\s]+\))/g
 
 export function parseInline(text) {
   return text
     .split(INLINE)
     .filter(Boolean)
     .map((part) => {
+      if (part.length > 2 && part.startsWith('`') && part.endsWith('`'))
+        return { type: 'code', text: part.slice(1, -1) }
       if (part.startsWith('**') && part.endsWith('**')) return { type: 'strong', text: part.slice(2, -2) }
       const link = part.match(/^\[([^\]]+)\]\(([^)\s]+)\)$/)
       if (link) return linkToken(link[1], link[2])
@@ -57,5 +59,5 @@ export function parseGuide(markdown) {
 }
 
 export function plainText(markdown) {
-  return (markdown ?? '').replace(/[#*]/g, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+  return (markdown ?? '').replace(/[#*`]/g, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
 }

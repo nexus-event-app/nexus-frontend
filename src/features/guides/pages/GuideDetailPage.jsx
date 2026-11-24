@@ -166,10 +166,10 @@ function JoinCallout() {
 }
 
 export default function GuideDetailPage() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const { slug } = useParams()
   const articleRef = useRef(null)
-  const request = useRequest(`guides:${slug}`, ({ signal }) => guidesService.get(slug, { signal }))
+  const request = useRequest(`guides:${slug}:${lang}`, ({ signal }) => guidesService.get(slug, { signal }))
   const guide = request.data
 
   if (request.error?.status === 404) return <NotFound />
@@ -204,7 +204,7 @@ export default function GuideDetailPage() {
         type="article"
         publishedTime={guide.publishedAt}
         modifiedTime={guide.updatedAt}
-        translated={false}
+        translated={(guide.languages ?? []).length === 3}
       />
       <JsonLd data={buildGuideData(guide)} />
       <Breadcrumbs
@@ -224,14 +224,20 @@ export default function GuideDetailPage() {
           </p>
           <h1
             id="guide-title"
-            lang="es"
+            lang={guide.language}
             className="mt-4 text-balance text-3xl font-bold leading-tight tracking-tight text-ink sm:text-[2.6rem]"
           >
             {guide.title}
           </h1>
-          <p className="mt-4 text-lg leading-relaxed text-ink-muted" lang="es">
+          <p className="mt-4 text-lg leading-relaxed text-ink-muted" lang={guide.language}>
             {guide.description}
           </p>
+          {guide.language && guide.language !== lang && (
+            <p className="mt-4 flex w-fit items-center gap-2 rounded-2xl bg-accent-soft px-4 py-2 text-sm font-medium text-accent-strong">
+              <Icon name="info" className="h-4 w-4 shrink-0" />
+              {t('guides.onlySpanish')}
+            </p>
+          )}
           <p className="mt-6 flex flex-wrap items-center gap-2 text-sm">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-surface px-3 py-1.5 font-medium text-ink-soft shadow-card ring-1 ring-slate-200">
               <Icon name="calendar" className="h-4 w-4 text-accent" />
@@ -251,7 +257,7 @@ export default function GuideDetailPage() {
       <article
         ref={articleRef}
         aria-labelledby="guide-title"
-        lang="es"
+        lang={guide.language}
         className="relative mt-10 min-w-0 rounded-3xl border border-slate-200 bg-surface py-8 pl-16 pr-6 text-lg leading-8 text-ink-soft shadow-card before:absolute before:bottom-12 before:left-[1.9rem] before:top-12 before:w-0.5 before:rounded-full before:bg-gradient-to-b before:from-brand-400 before:via-violet-400 before:to-accent-tint sm:py-10 sm:pl-24 sm:pr-10 sm:before:left-[2.9rem] lg:col-start-1"
       >
         <GuideContent blocks={blocks} />
