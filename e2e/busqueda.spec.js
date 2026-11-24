@@ -1,7 +1,13 @@
 import { expect, test } from './fixtures.js'
 
 test.describe('Búsqueda global', () => {
-  test('Ctrl+K abre el campo en la cabecera y las flechas eligen un resultado', async ({ page, api, isMobile }) => {
+  test('Ctrl+K abre el campo en la cabecera y las flechas eligen un resultado', async ({
+    page,
+    api,
+    isMobile,
+    signedIn,
+  }) => {
+    expect(signedIn.id).toBeDefined()
     test.skip(isMobile, 'Los atajos de teclado son para escritorio')
     await page.goto('/')
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
