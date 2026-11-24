@@ -4,7 +4,6 @@ import { useAuth } from '@/features/auth/hooks/useAuth'
 import ArticleSkeleton from '@/shared/components/ArticleSkeleton'
 import Breadcrumbs from '@/shared/components/Breadcrumbs'
 import ButtonLink from '@/shared/components/ButtonLink'
-import CopyLinkButton from '@/shared/components/CopyLinkButton'
 import ErrorState from '@/shared/components/ErrorState'
 import Eyebrow from '@/shared/components/Eyebrow'
 import Icon from '@/shared/components/Icon'
@@ -13,6 +12,7 @@ import JsonLd from '@/shared/components/JsonLd'
 import NotFound from '@/shared/components/NotFound'
 import PageMain from '@/shared/components/PageMain'
 import Seo from '@/shared/components/Seo'
+import ShareButton from '@/shared/components/ShareButton'
 import Time from '@/shared/components/Time'
 import { illustrations } from '@/shared/config/illustrations'
 import { paths, registerPath } from '@/shared/config/paths'
@@ -264,7 +264,7 @@ export default function GuideDetailPage() {
           <Icon name="arrow-left" className="h-4 w-4" />
           {t('guides.backToList')}
         </Link>
-        <CopyLinkButton />
+        <ShareButton title={guide.title} text={guide.description} />
       </footer>
     </PageMain>
   )
