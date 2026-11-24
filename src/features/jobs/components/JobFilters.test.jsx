@@ -3,8 +3,12 @@ import { describe, expect, it, vi } from 'vitest'
 import { renderWithProviders } from '@/test/render'
 import JobFilters from './JobFilters'
 
+vi.mock('../services/jobsService', () => ({
+  jobsService: { cities: vi.fn(() => Promise.resolve(['Barcelona', 'Madrid', 'Valencia'])) },
+}))
+
 const buildHref = (_, changes) => `/empleo?${new URLSearchParams(changes)}`
-const EMPTY = { nivel: '', modalidad: '', contrato: '', q: '' }
+const EMPTY = { nivel: '', modalidad: '', contrato: '', ciudad: '', q: '' }
 
 describe('JobFilters', () => {
   it('nivel y modalidad son enlaces y marcan el elegido', () => {
@@ -27,5 +31,15 @@ describe('JobFilters', () => {
     fireEvent.change(search, { target: { value: 'react' } })
     fireEvent.submit(search.closest('form'))
     expect(onChange).toHaveBeenCalledWith({ q: 'react' }, { replace: true })
+  })
+
+  it('la ciudad se elige entre las que tienen ofertas y avisa del cambio', async () => {
+    const onChange = vi.fn()
+    renderWithProviders(<JobFilters filters={EMPTY} onChange={onChange} buildHref={buildHref} />)
+    const select = screen.getByRole('combobox', { name: 'Ciudad' })
+    expect(select).toHaveDisplayValue('Todas las ciudades')
+    expect(await screen.findByRole('option', { name: 'Madrid' })).toBeInTheDocument()
+    fireEvent.change(select, { target: { value: 'Madrid' } })
+    expect(onChange).toHaveBeenCalledWith({ ciudad: 'Madrid' })
   })
 })

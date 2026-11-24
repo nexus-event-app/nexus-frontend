@@ -22,7 +22,7 @@ import ButtonLink from '@/shared/components/ButtonLink'
 import Icon from '@/shared/components/Icon'
 import { useI18n } from '@/shared/i18n/useI18n'
 
-const CLEARED_FILTERS = { nivel: '', modalidad: '', contrato: '', q: '' }
+const CLEARED_FILTERS = { nivel: '', modalidad: '', contrato: '', ciudad: '', q: '' }
 
 function ClearFilters({ onClear }) {
   const { t } = useI18n()

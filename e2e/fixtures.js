@@ -33,6 +33,7 @@ class MockApi {
     )
     this.on('GET', '/api/jobs/latest', () => json(jobs))
     this.on('GET', '/api/jobs', () => json(page(jobs)))
+    this.on('GET', '/api/jobs/cities', () => json(['Madrid', 'Valencia']))
     this.on('GET', /^\/api\/jobs\/(\d+)$/, ([, id]) => json(jobs.find((item) => item.id === Number(id))))
     this.on('GET', '/api/discussions', () => json(page(discussions)))
     this.on('GET', /^\/api\/discussions\/(\d+)$/, ([, id]) => json(discussions.find((item) => item.id === Number(id))))

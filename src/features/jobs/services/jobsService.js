@@ -6,5 +6,6 @@ export const jobsService = {
     http.get('/jobs', { params: compactParams(params), ...config }).then((response) => response.data),
   latest: (limit, config) =>
     http.get('/jobs/latest', { params: { limit }, ...config }).then((response) => response.data),
+  cities: (config) => http.get('/jobs/cities', config).then((response) => response.data),
   get: (id, config) => http.get(`/jobs/${id}`, config).then((response) => response.data),
 }

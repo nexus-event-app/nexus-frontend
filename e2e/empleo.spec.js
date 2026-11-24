@@ -16,6 +16,17 @@ const manyJobs = Array.from({ length: 6 }, (_, index) => ({
 }))
 
 test.describe('Página de empleo', () => {
+  test('se puede filtrar por ciudad y la elección queda en la dirección', async ({ page, api }) => {
+    await page.goto('/empleo')
+    const city = page.getByRole('combobox', { name: 'Ciudad' })
+    await expect(city.getByRole('option', { name: 'Madrid' })).toBeAttached()
+    await city.selectOption('Madrid')
+    await expect(page).toHaveURL(/ciudad=Madrid/)
+    await expect
+      .poll(() => api.calls.some((call) => call.path === '/api/jobs' && call.query?.get('city') === 'Madrid'))
+      .toBe(true)
+  })
+
   test('la lista de ofertas es accesible y cada fila lleva a su oferta', async ({ page, api }) => {
     api.on('GET', '/api/jobs', () => ({
       status: 200,

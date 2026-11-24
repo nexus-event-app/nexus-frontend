@@ -3,7 +3,7 @@ import { useListQuery } from '@/shared/hooks/useListQuery'
 import { useRequest } from '@/shared/hooks/useRequest'
 import { jobsService } from '../services/jobsService'
 
-const FILTER_KEYS = ['nivel', 'modalidad', 'contrato', 'q']
+const FILTER_KEYS = ['nivel', 'modalidad', 'contrato', 'ciudad', 'q']
 const JOBS_PAGE_SIZE = 5
 
 export function useJobsList() {
@@ -12,12 +12,15 @@ export function useJobsList() {
   const workMode = workModes.fromSlug(query.filters.modalidad)
   const contractType = contractTypes.fromSlug(query.filters.contrato)
   const search = query.filters.q
+  const city = query.filters.ciudad
 
-  const request = useRequest(`jobs:${query.page}:${level}:${workMode}:${contractType}:${search}`, ({ signal }) =>
-    jobsService.list(
-      { page: query.page - 1, size: JOBS_PAGE_SIZE, level, workMode, contractType, q: search },
-      { signal },
-    ),
+  const request = useRequest(
+    `jobs:${query.page}:${level}:${workMode}:${contractType}:${city}:${search}`,
+    ({ signal }) =>
+      jobsService.list(
+        { page: query.page - 1, size: JOBS_PAGE_SIZE, level, workMode, contractType, city, q: search },
+        { signal },
+      ),
   )
 
   return { ...query, search, ...request }
