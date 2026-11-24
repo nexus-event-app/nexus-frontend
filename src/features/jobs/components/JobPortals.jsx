@@ -1,14 +1,35 @@
+import { useLocation } from 'react-router-dom'
+import { useAuth } from '@/features/auth/hooks/useAuth'
 import Icon from '@/shared/components/Icon'
 import Eyebrow from '@/shared/components/Eyebrow'
+import { registerPath } from '@/shared/config/paths'
+import { useToast } from '@/shared/hooks/useToast'
+import { Link } from '@/shared/i18n/router'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { JOB_PORTALS } from '../config/jobPortals'
 import CompanyMonogram from './CompanyMonogram'
 
 function PortalLink({ portal, className, children }) {
   const { t } = useI18n()
+  const { isAuthenticated } = useAuth()
+  const { pathname, search } = useLocation()
+  const toast = useToast()
+
+  if (!isAuthenticated) {
+    return (
+      <Link
+        to={registerPath(`${pathname}${search}`)}
+        onClick={() => toast.info(t('jobs.portals.signUpToOpen'))}
+        className={className}
+      >
+        {children(false)}
+        <span className="sr-only"> {t('jobs.portals.signUpSr', { name: portal.name })}</span>
+      </Link>
+    )
+  }
   return (
     <a href={portal.url} target="_blank" rel="noopener noreferrer nofollow" className={className}>
-      {children}
+      {children(true)}
       <span className="sr-only"> {t('jobs.portals.external', { name: portal.name })}</span>
     </a>
   )
@@ -43,20 +64,24 @@ export default function JobPortals() {
               portal={portal}
               className="group grid h-full grid-cols-[auto_minmax(0,1fr)] grid-rows-[auto_1fr_auto] gap-x-3 gap-y-3 rounded-2xl border border-slate-200 bg-canvas p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent-line hover:bg-surface hover:shadow-pop"
             >
-              <CompanyMonogram name={portal.name} className="h-10 w-10 rounded-lg text-sm" />
-              <span className="self-center font-bold text-ink group-hover:text-accent">{portal.name}</span>
-              <span className="col-span-full text-sm leading-relaxed text-ink-muted">
-                {t(`jobs.portals.${portal.id}`)}
-              </span>
-              <span
-                aria-hidden="true"
-                className="col-span-full inline-flex items-center gap-2 text-sm font-semibold text-accent"
-              >
-                {t('jobs.portals.cta')}
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-accent-soft transition-colors duration-300 group-hover:bg-brand-600 group-hover:text-white">
-                  <Icon name="external" className="h-3.5 w-3.5" />
-                </span>
-              </span>
+              {(open) => (
+                <>
+                  <CompanyMonogram name={portal.name} className="h-10 w-10 rounded-lg text-sm" />
+                  <span className="self-center font-bold text-ink group-hover:text-accent">{portal.name}</span>
+                  <span className="col-span-full text-sm leading-relaxed text-ink-muted">
+                    {t(`jobs.portals.${portal.id}`)}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="col-span-full inline-flex items-center gap-2 text-sm font-semibold text-accent"
+                  >
+                    {t('jobs.portals.cta')}
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-accent-soft transition-colors duration-300 group-hover:bg-brand-600 group-hover:text-white">
+                      <Icon name={open ? 'external' : 'lock'} className="h-3.5 w-3.5" />
+                    </span>
+                  </span>
+                </>
+              )}
             </PortalLink>
           </li>
         ))}
