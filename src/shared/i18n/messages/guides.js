@@ -5,7 +5,7 @@ export default {
     seoDescription:
       'Guías claras y prácticas para dar tu primer paso en el mundo tech: qué hacer después de un bootcamp, cómo preparar entrevistas, tu portfolio y más.',
     eyebrow: 'Píldoras tech',
-    title: 'Píldoras para dar tu primer paso',
+    title: 'Píldoras para tu día a día',
     intro:
       'Guías cortas y prácticas para dar tus primeros pasos en tech: lo que nos habría gustado saber al empezar, explicado paso a paso.',
     listLabel: 'Todas las píldoras',
@@ -50,7 +50,7 @@ export default {
     seoDescription:
       'Guies clares i pràctiques per fer el primer pas al món tech: què fer després d’un bootcamp, com preparar entrevistes, el teu portfolio i més.',
     eyebrow: 'Píndoles tech',
-    title: 'Píndoles per fer el primer pas',
+    title: 'Píndoles per al teu dia a dia',
     intro:
       'Guies curtes i pràctiques per fer els primers passos en tech: el que ens hauria agradat saber en començar, explicat pas a pas.',
     listLabel: 'Totes les píndoles',
@@ -96,7 +96,7 @@ export default {
     seoDescription:
       'Clear, practical guides to take your first step into tech: what to do after a bootcamp, how to prepare interviews, your portfolio and more.',
     eyebrow: 'Tech bites',
-    title: 'Tech bites for your first step',
+    title: 'Tech bites for every day',
     intro:
       'Short, practical guides to take your first steps in tech: what we wish we had known when we started, explained step by step.',
     listLabel: 'All tech bites',
