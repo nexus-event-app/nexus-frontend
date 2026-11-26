@@ -26,8 +26,8 @@ import GuideContent from '../components/GuideContent'
 import GuideKeywordBoard from '../components/GuideKeywordBoard'
 import { categoryOf } from '../config/categories'
 import { guidesService } from '../services/guidesService'
-import { parseGuide } from '../utils/guideMarkdown'
-import { buildGuideData } from '../utils/structuredData'
+import { extractFaq, parseGuide } from '../utils/guideMarkdown'
+import { buildFaqData, buildGuideData } from '../utils/structuredData'
 
 function ReadingProgress({ target }) {
   const bar = useRef(null)
@@ -191,6 +191,7 @@ export default function GuideDetailPage() {
 
   const blocks = parseGuide(guide.content)
   const headings = blocks.filter((block) => block.type === 'h2')
+  const faq = extractFaq(blocks)
   const path = paths.guideDetail(guide)
   const updated = guide.updatedAt && guide.updatedAt.slice(0, 10) !== guide.publishedAt?.slice(0, 10)
 
@@ -208,6 +209,7 @@ export default function GuideDetailPage() {
         translated={(guide.languages ?? []).length === 3}
       />
       <JsonLd data={buildGuideData(guide)} />
+      {faq.length > 0 && <JsonLd data={buildFaqData(faq, guide.language)} />}
       <Breadcrumbs
         className="col-span-full"
         items={[

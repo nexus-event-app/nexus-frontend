@@ -22,3 +22,16 @@ export function buildGuideData(guide) {
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
   }
 }
+
+export function buildFaqData(faq, language = 'es') {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    inLanguage: language,
+    mainEntity: faq.map(({ question, answer }) => ({
+      '@type': 'Question',
+      name: question,
+      acceptedAnswer: { '@type': 'Answer', text: answer },
+    })),
+  }
+}

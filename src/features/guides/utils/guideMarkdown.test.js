@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { parseGuide, parseInline, plainText } from './guideMarkdown'
+import { extractFaq, parseGuide, parseInline, plainText } from './guideMarkdown'
 
 describe('formato de las guías', () => {
   it('reconoce apartados, párrafos y listas', () => {
@@ -40,5 +40,20 @@ describe('formato de las guías', () => {
 
   it('el texto plano sirve para calcular el tiempo de lectura', () => {
     expect(plainText('## Título\n\n**Hola** [foro](/foro)')).toBe(' Título\n\nHola foro')
+  })
+})
+
+describe('preguntas frecuentes de las píldoras', () => {
+  it('saca cada pregunta con su respuesta en texto plano para Google y las IA', () => {
+    const blocks = parseGuide(
+      'Intro.\n\n## Preguntas frecuentes\n\n### ¿Es normal?\n\nSí, **muy** normal.\n\n- Le pasa a [mucha gente](/foro).\n\n### ¿Sin respuesta?\n\n## Otro apartado\n\n### No es FAQ\n\nTexto.',
+    )
+    expect(extractFaq(blocks)).toEqual([{ question: '¿Es normal?', answer: 'Sí, muy normal. Le pasa a mucha gente.' }])
+  })
+
+  it('reconoce el apartado en catalán e inglés y devuelve nada si no lo hay', () => {
+    expect(extractFaq(parseGuide('## Preguntes freqüents\n\n### Què?\n\nAixò.'))).toHaveLength(1)
+    expect(extractFaq(parseGuide('## Frequently asked questions\n\n### What?\n\nThis.'))).toHaveLength(1)
+    expect(extractFaq(parseGuide('## Resumen\n\nNada.'))).toEqual([])
   })
 })

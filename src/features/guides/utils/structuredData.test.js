@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { buildGuideData } from './structuredData'
+import { buildFaqData, buildGuideData } from './structuredData'
 
 const guide = {
   slug: 'sindrome-del-impostor',
@@ -20,5 +20,16 @@ describe('buildGuideData', () => {
     const data = buildGuideData(guide)
     expect(data.inLanguage).toBe('es')
     expect(data).not.toHaveProperty('keywords')
+  })
+})
+
+describe('buildFaqData', () => {
+  it('marca las preguntas frecuentes como FAQPage', () => {
+    const data = buildFaqData([{ question: '¿Qué es?', answer: 'Esto.' }], 'en')
+    expect(data['@type']).toBe('FAQPage')
+    expect(data.inLanguage).toBe('en')
+    expect(data.mainEntity).toEqual([
+      { '@type': 'Question', name: '¿Qué es?', acceptedAnswer: { '@type': 'Answer', text: 'Esto.' } },
+    ])
   })
 })

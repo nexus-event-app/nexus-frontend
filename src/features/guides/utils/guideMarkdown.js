@@ -61,3 +61,22 @@ export function parseGuide(markdown) {
 export function plainText(markdown) {
   return (markdown ?? '').replace(/[#*`]/g, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
 }
+
+const FAQ_TITLE = /^(preguntas frecuentes|preguntes freqüents|frequently asked questions)$/i
+
+function blockText(block) {
+  const tokens = block.type === 'p' ? [block.content] : (block.items ?? [])
+  return tokens.map((content) => content.map((token) => token.text).join('')).join(' ')
+}
+
+export function extractFaq(blocks) {
+  const start = blocks.findIndex((block) => block.type === 'h2' && FAQ_TITLE.test(block.text.trim()))
+  if (start === -1) return []
+  const faq = []
+  for (const block of blocks.slice(start + 1)) {
+    if (block.type === 'h2') break
+    if (block.type === 'h3') faq.push({ question: block.text, answer: '' })
+    else if (faq.length > 0) faq.at(-1).answer = `${faq.at(-1).answer} ${blockText(block)}`.trim()
+  }
+  return faq.filter((item) => item.answer)
+}
