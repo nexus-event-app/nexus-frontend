@@ -15,7 +15,7 @@ describe('LatestGuideBanner', () => {
       { slug: 'tu-primer-meetup-tech', title: 'Tu primer meetup tech' },
     ])
     renderWithProviders(<LatestGuideBanner />)
-    const link = await screen.findByRole('link', { name: /Nueva guía.*El síndrome del impostor\/a/ })
+    const link = await screen.findByRole('link', { name: /Nueva píldora.*El síndrome del impostor\/a/ })
     expect(link).toHaveAttribute('href', '/guias/sindrome-del-impostor')
     expect(link).not.toHaveTextContent('por qué sientes')
   })

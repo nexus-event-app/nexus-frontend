@@ -80,7 +80,7 @@ export default function HeroSection() {
 
       <HeroIllustration className="relative hidden h-[23rem] animate-rise-in xl:h-[26rem] [animation-delay:200ms] lg:col-start-3 lg:row-start-1 lg:block" />
 
-      <LatestGuideBanner className="relative hidden animate-rise-in self-center justify-self-center [animation-delay:320ms] lg:col-start-2 lg:row-start-1 lg:-left-[1.5rem] lg:block xl:-left-[2.25rem] 3xl:-left-[22.25rem]" />
+      <LatestGuideBanner className="relative hidden animate-rise-in self-center justify-self-center [animation-delay:320ms] lg:col-start-2 lg:row-start-1 lg:top-[4.5rem] lg:-left-[1.5rem] lg:block xl:-left-[2.25rem] 3xl:-left-[22.25rem]" />
     </section>
   )
 }
