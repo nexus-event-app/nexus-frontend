@@ -22,19 +22,25 @@ export default function TestimonialCard({ testimonial, linkAuthor = true, index 
   return (
     <figure
       className={cx(
-        'relative flex h-full flex-col rounded-3xl transition-all duration-500 ease-out hover:-translate-y-1 hover:rotate-0 focus-within:rotate-0',
+        'group relative flex h-full flex-col rounded-3xl transition-all duration-500 ease-out hover:[transform:perspective(900px)_rotateX(4deg)_rotateY(-4deg)_translateY(-6px)] focus-within:rotate-0',
         compact ? 'p-5 pt-8' : 'p-7 pt-10',
         TILTS[index % TILTS.length],
-        cx('border bg-gradient-to-br text-ink shadow-card hover:shadow-pop', PASTEL),
+        cx(
+          'border bg-gradient-to-br text-ink',
+          'shadow-[0_2px_0_rgba(91,69,224,0.12),0_5px_0_rgba(91,69,224,0.08),0_22px_34px_-18px_rgba(46,36,119,0.5)] hover:shadow-[0_2px_0_rgba(91,69,224,0.14),0_7px_0_rgba(91,69,224,0.1),0_34px_48px_-20px_rgba(46,36,119,0.6)]',
+          'dark:shadow-[0_2px_0_rgba(0,0,0,0.35),0_5px_0_rgba(0,0,0,0.3),0_22px_34px_-18px_rgba(0,0,0,0.8)]',
+          PASTEL,
+        ),
         testimonial.isHighlighted && 'ring-2 ring-amber-400/70',
       )}
     >
       <span
         aria-hidden="true"
         className={cx(
-          'absolute flex items-center justify-center font-bold leading-none shadow-lg',
+          'absolute flex items-center justify-center font-bold leading-none transition-transform duration-500 [transform:perspective(500px)_rotateX(10deg)_rotateY(-16deg)] group-hover:[transform:perspective(500px)_rotateX(16deg)_rotateY(-26deg)_translateY(-4px)_scale(1.06)]',
+          'shadow-[0_3px_0_#3730a3,0_6px_0_#312e81,0_16px_22px_-8px_rgba(49,46,129,0.65),inset_0_2px_0_rgba(255,255,255,0.3)]',
           compact ? '-top-5 left-5 h-11 w-11 rounded-xl text-4xl' : '-top-6 left-6 h-14 w-14 rounded-2xl text-5xl',
-          'bg-brand-600 text-white dark:bg-brand-500',
+          'bg-gradient-to-br from-brand-500 to-brand-700 text-white',
         )}
       >
         <span className={compact ? 'translate-y-2.5' : 'translate-y-3'}>“</span>
@@ -72,7 +78,10 @@ export default function TestimonialCard({ testimonial, linkAuthor = true, index 
         <Avatar
           name={testimonial.name}
           src={testimonial.authorAvatarUrl}
-          className={cx('ring-2', 'ring-white dark:ring-white/20')}
+          className={cx(
+            'ring-2 shadow-[0_3px_0_rgba(91,69,224,0.25),0_10px_14px_-6px_rgba(46,36,119,0.45)]',
+            'ring-white dark:ring-white/20',
+          )}
         />
         <span className="min-w-0 flex-1">
           <AuthorLink
