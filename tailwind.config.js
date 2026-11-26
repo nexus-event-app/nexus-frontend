@@ -113,6 +113,15 @@ export default {
           '0%, 70%': { transform: 'translateX(0) skewX(-12deg)' },
           '100%': { transform: 'translateX(500%) skewX(-12deg)' },
         },
+        'toggle-down': {
+          '0%, 15%': { transform: 'translateY(0)' },
+          '45%, 70%': { transform: 'translateY(4.4rem)' },
+          '100%': { transform: 'translateY(0)' },
+        },
+        chevron: {
+          '0%, 100%': { opacity: '0.25', transform: 'translateY(-2px)' },
+          '50%': { opacity: '1', transform: 'translateY(2px)' },
+        },
         stick: {
           '0%': { opacity: '0', transform: 'translateY(-1.5rem) scale(1.8) rotate(calc(var(--tilt) + 14deg))' },
           '55%': { opacity: '1', transform: 'translateY(0.15rem) scale(0.92) rotate(calc(var(--tilt) - 3deg))' },
@@ -137,6 +146,8 @@ export default {
         caret: 'caret 1s steps(1) infinite',
         float: 'float 7s ease-in-out infinite',
         shine: 'shine 4s ease-in-out infinite',
+        'toggle-down': 'toggle-down 2.6s cubic-bezier(0.65, 0, 0.35, 1) infinite',
+        chevron: 'chevron 1.2s ease-in-out infinite',
         stick: 'stick 0.6s cubic-bezier(0.22, 1, 0.36, 1) both',
       },
     },
