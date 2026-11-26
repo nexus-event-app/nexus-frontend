@@ -11,7 +11,7 @@ test.describe('Guías', () => {
     await expect(page.getByRole('heading', { level: 1, name: /Qué hacer después de un bootcamp/ })).toBeVisible()
 
     if (!isMobile) {
-      const toc = page.getByRole('navigation', { name: 'En esta guía' })
+      const toc = page.getByRole('navigation', { name: 'En esta píldora' })
       await toc.getByRole('link', { name: '3. Ve a eventos' }).click()
       await expect(page).toHaveURL(/#3-ve-a-eventos$/)
       await expect(page.getByRole('heading', { level: 2, name: '3. Ve a eventos' })).toBeInViewport()
@@ -24,7 +24,7 @@ test.describe('Guías', () => {
 
   test('los filtros por tema dejan ver solo las guías de ese tema y cada tarjeta dice el suyo', async ({ page }) => {
     await page.goto('/guias')
-    const list = page.getByRole('list', { name: 'Todas las guías' })
+    const list = page.getByRole('list', { name: 'Todas las píldoras' })
     await expect(list.getByRole('listitem')).toHaveCount(2)
     const filters = page.getByRole('navigation', { name: 'Filtrar por tema' })
     await filters.getByRole('link', { name: /Empleo/ }).click()
@@ -33,7 +33,7 @@ test.describe('Guías', () => {
     await expect(list).toContainText('Empleo')
     await expect(list).toContainText('Cómo preparar tu primera entrevista técnica')
     await filters.getByRole('link', { name: /Comunidad/ }).click()
-    await expect(page.getByText('Todavía no hay guías de este tema')).toBeVisible()
+    await expect(page.getByText('Todavía no hay píldoras de este tema')).toBeVisible()
   })
 
   test('una guía que no existe enseña la página de no encontrada', async ({ page }) => {
@@ -46,13 +46,13 @@ test.describe('Guías', () => {
     api.on('GET', '/api/admin/guides', () => json([]))
     api.on('POST', '/api/admin/guides', () => json({ id: 2, slug: 'mi-guia', title: 'Mi guía' }, 201))
     await page.goto('/admin/guias')
-    await page.getByRole('button', { name: 'Nueva guía' }).click()
-    const dialog = page.getByRole('dialog', { name: 'Nueva guía' })
+    await page.getByRole('button', { name: 'Nueva píldora' }).click()
+    const dialog = page.getByRole('dialog', { name: 'Nueva píldora' })
     await dialog.getByRole('textbox', { name: 'Título', exact: true }).fill('Mi guía')
     await dialog.getByRole('textbox', { name: 'Descripción', exact: true }).fill('Una guía de prueba.')
     await dialog.getByRole('textbox', { name: 'Contenido', exact: true }).fill('## Primer apartado\n\nTexto.')
-    await dialog.getByRole('button', { name: 'Crear guía' }).click()
-    await expect(page.getByText('Guía guardada como borrador.')).toBeVisible()
+    await dialog.getByRole('button', { name: 'Crear píldora' }).click()
+    await expect(page.getByText('Píldora guardada como borrador.')).toBeVisible()
     const sent = JSON.parse(api.calls.find((call) => call.method === 'POST' && call.path === '/api/admin/guides').body)
     expect(sent).toMatchObject({
       title: 'Mi guía',

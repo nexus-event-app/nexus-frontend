@@ -34,7 +34,7 @@ describe('GuideDetailPage', () => {
       await screen.findByRole('heading', { level: 1, name: 'Qué hacer después de un bootcamp' }),
     ).toBeInTheDocument()
     expect(screen.getByRole('heading', { level: 2, name: '1. Haz balance' })).toHaveAttribute('id', '1-haz-balance')
-    const toc = screen.getByRole('navigation', { name: 'En esta guía' })
+    const toc = screen.getByRole('navigation', { name: 'En esta píldora' })
     expect(toc.querySelector('a[href="#1-haz-balance"]')).not.toBeNull()
     expect(screen.getByRole('link', { name: 'eventos' })).toHaveAttribute('href', '/eventos')
     expect(screen.getByRole('link', { name: /Únete a la comunidad/ })).toHaveAttribute('href', '/registro')

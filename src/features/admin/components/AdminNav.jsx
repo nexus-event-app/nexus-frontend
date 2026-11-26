@@ -10,7 +10,7 @@ const ITEMS = [
   { label: 'Foro', to: paths.adminForum, icon: 'chat' },
   { label: 'Testimonios', to: paths.adminTestimonials, icon: 'star' },
   { label: 'Eventos', to: paths.adminEvents, icon: 'calendar' },
-  { label: 'Guías', to: paths.adminGuides, icon: 'document' },
+  { label: 'Píldoras', to: paths.adminGuides, icon: 'document' },
   { label: 'Reportes', to: paths.adminReports, icon: 'flag' },
   { label: 'Usuarios', to: paths.adminUsers, icon: 'users' },
   { label: 'Importación', to: paths.adminImport, icon: 'refresh' },

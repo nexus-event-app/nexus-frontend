@@ -127,7 +127,7 @@ export default function GuideForm({ guide, onSubmit, onCancel }) {
       <FormField
         {...form.getFieldProps('keywords')}
         label="Palabras clave"
-        hint="Separadas por comas, hasta 10. Salen como etiquetas al lado del título de la guía; la primera, más grande. Si lo dejas vacío, sale la ilustración."
+        hint="Separadas por comas, hasta 10. Salen como etiquetas al lado del título de la píldora; la primera, más grande. Si lo dejas vacío, sale la ilustración."
         maxLength={300}
         placeholder="Síndrome del impostor, Autoestima, Logros"
       />
@@ -143,7 +143,7 @@ export default function GuideForm({ guide, onSubmit, onCancel }) {
           Cancelar
         </Button>
         <Button type="submit" loading={form.submitting}>
-          {editing ? 'Guardar cambios' : 'Crear guía'}
+          {editing ? 'Guardar cambios' : 'Crear píldora'}
         </Button>
       </footer>
       {form.formError && <Alert variant="error">{form.formError}</Alert>}

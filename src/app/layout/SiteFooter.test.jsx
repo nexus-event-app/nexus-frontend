@@ -20,7 +20,7 @@ describe('SiteFooter', () => {
       within(explore)
         .getAllByRole('link')
         .map((link) => link.textContent),
-    ).toEqual(['Eventos', 'Empleo', 'Foro', 'Rutas', 'Noticias', 'Testimonios', 'Sobre el proyecto', 'Guías'])
+    ).toEqual(['Eventos', 'Empleo', 'Foro', 'Rutas', 'Noticias', 'Testimonios', 'Sobre el proyecto', 'Píldoras'])
     expect(screen.getByRole('link', { name: 'Privacidad' })).toHaveAttribute('href', '/privacidad')
     expect(screen.getByRole('link', { name: 'Crear cuenta' })).toBeInTheDocument()
   })

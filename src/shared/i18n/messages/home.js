@@ -217,7 +217,7 @@ export default {
       mockRoute: 'Frontend path',
       mockRouteProgress: '3 of 6 steps',
       mockNotification: 'Marta replied to your question',
-      latestGuide: 'New pill',
+      latestGuide: 'New tech bite',
     },
     features: {
       eventsTitle: 'Events',

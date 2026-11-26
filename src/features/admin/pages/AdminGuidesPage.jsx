@@ -32,16 +32,16 @@ export default function AdminGuidesPage() {
       setDeleting(null)
       list.reload()
     },
-    { successMessage: 'Guía borrada.' },
+    { successMessage: 'Píldora borrada.' },
   )
 
   const handleSubmit = async (payload) => {
     if (editing === 'new') {
       await adminGuidesService.create(payload)
-      toast.success(payload.published ? 'Guía creada y publicada.' : 'Guía guardada como borrador.')
+      toast.success(payload.published ? 'Píldora creada y publicada.' : 'Píldora guardada como borrador.')
     } else {
       await adminGuidesService.update(editing.id, payload)
-      toast.success('Guía actualizada.')
+      toast.success('Píldora actualizada.')
     }
     setEditing(null)
     list.reload()
@@ -50,7 +50,7 @@ export default function AdminGuidesPage() {
   const columns = [
     {
       key: 'title',
-      header: 'Guía',
+      header: 'Píldora',
       primary: true,
       render: (item) => (
         <p>
@@ -94,28 +94,28 @@ export default function AdminGuidesPage() {
 
   return (
     <>
-      <Seo title="Administrar guías" path={paths.adminGuides} robots="noindex,nofollow" />
+      <Seo title="Administrar píldoras" path={paths.adminGuides} robots="noindex,nofollow" />
       <PageHeader
-        title="Guías"
-        description="Escribe y publica las guías de la comunidad. Son públicas y ayudan a que Google encuentre la web."
+        title="Píldoras"
+        description="Escribe y publica las píldoras de la comunidad. Son públicas y ayudan a que Google encuentre la web."
         actions={
           <Button onClick={() => setEditing('new')}>
             <Icon name="plus" />
-            Nueva guía
+            Nueva píldora
           </Button>
         }
       />
       <PagedTable
         list={list}
         columns={columns}
-        caption="Listado de guías"
+        caption="Listado de píldoras"
         emptyIcon="document"
-        emptyTitle="Todavía no hay guías"
-        emptyDescription="Crea la primera guía con el botón «Nueva guía»."
+        emptyTitle="Todavía no hay píldoras"
+        emptyDescription="Crea la primera píldora con el botón «Nueva píldora»."
       />
 
       {editing && (
-        <Modal title={editing === 'new' ? 'Nueva guía' : 'Editar guía'} size="lg" onClose={() => setEditing(null)}>
+        <Modal title={editing === 'new' ? 'Nueva píldora' : 'Editar píldora'} size="lg" onClose={() => setEditing(null)}>
           <GuideForm
             guide={editing === 'new' ? null : editing}
             onSubmit={handleSubmit}
@@ -126,9 +126,9 @@ export default function AdminGuidesPage() {
 
       {deleting && (
         <ConfirmDialog
-          title="Borrar guía"
+          title="Borrar píldora"
           message={`¿Seguro que quieres borrar «${deleting.title}»? Esta acción no se puede deshacer.`}
-          confirmLabel="Borrar guía"
+          confirmLabel="Borrar píldora"
           pending={removing}
           onConfirm={() => removeGuide(deleting)}
           onCancel={() => setDeleting(null)}

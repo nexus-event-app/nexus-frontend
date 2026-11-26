@@ -118,6 +118,26 @@ export default {
           '0%, 100%': { opacity: '0.25', transform: 'translateY(-2px)' },
           '50%': { opacity: '1', transform: 'translateY(2px)' },
         },
+        'stick-3d': {
+          '0%': {
+            opacity: '0',
+            transform:
+              'translate3d(0, -3rem, 22rem) rotateX(-55deg) rotateY(-14deg) rotateZ(calc(var(--tilt) + 22deg))',
+          },
+          '60%': {
+            opacity: '1',
+            transform:
+              'translate3d(0, 0.3rem, var(--depth)) rotateX(16deg) rotateY(-14deg) rotateZ(calc(var(--tilt) - 3deg))',
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translate3d(0, 0, var(--depth)) rotateX(10deg) rotateY(-14deg) rotateZ(var(--tilt))',
+          },
+        },
+        'sway-3d': {
+          '0%, 100%': { transform: 'rotateY(-7deg) rotateX(3deg) translateY(0)' },
+          '50%': { transform: 'rotateY(7deg) rotateX(-3deg) translateY(-4px)' },
+        },
         stick: {
           '0%': { opacity: '0', transform: 'translateY(-1.5rem) scale(1.8) rotate(calc(var(--tilt) + 14deg))' },
           '55%': { opacity: '1', transform: 'translateY(0.15rem) scale(0.92) rotate(calc(var(--tilt) - 3deg))' },
@@ -143,6 +163,8 @@ export default {
         float: 'float 7s ease-in-out infinite',
         'toggle-down': 'toggle-down 5s cubic-bezier(0.65, 0, 0.35, 1) infinite',
         chevron: 'chevron 2.2s ease-in-out infinite',
+        'stick-3d': 'stick-3d 0.8s cubic-bezier(0.22, 1, 0.36, 1) both',
+        'sway-3d': 'sway-3d 6s ease-in-out infinite',
         stick: 'stick 0.6s cubic-bezier(0.22, 1, 0.36, 1) both',
       },
     },
