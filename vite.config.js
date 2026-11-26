@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 
 const BACKEND_URL = 'http://localhost:8080'
 
-const proxiedPaths = ['/api', '/uploads', '/sitemap.xml', '/robots.txt']
+const proxiedPaths = ['/api', '/uploads', '/sitemap.xml', '/robots.txt', '/llms.txt']
 
 function vendorChunk(id) {
   if (!id.includes('node_modules')) return undefined

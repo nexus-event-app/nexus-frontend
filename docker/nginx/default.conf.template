@@ -54,6 +54,11 @@ server {
         proxy_pass ${BACKEND_URL};
     }
 
+    location = /llms.txt {
+        include /etc/nginx/snippets/proxy-headers.conf;
+        proxy_pass ${BACKEND_URL};
+    }
+
     location ^~ /assets/ {
         include /etc/nginx/snippets/security-headers.conf;
         add_header Cache-Control "public, max-age=31536000, immutable" always;
