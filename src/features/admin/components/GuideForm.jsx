@@ -18,6 +18,9 @@ function toValues(guide) {
     description: guide?.description ?? '',
     content: guide?.content ?? '',
     category: guide?.category ?? 'PRIMEROS_PASOS',
+    keywords: guide?.keywords ?? '',
+    keywordsCa: guide?.keywordsCa ?? '',
+    keywordsEn: guide?.keywordsEn ?? '',
     titleCa: guide?.titleCa ?? '',
     descriptionCa: guide?.descriptionCa ?? '',
     contentCa: guide?.contentCa ?? '',
@@ -41,6 +44,9 @@ export default function GuideForm({ guide, onSubmit, onCancel }) {
         description: values.description.trim(),
         content: values.content.trim(),
         category: values.category,
+        keywords: values.keywords.trim() || null,
+        keywordsCa: values.keywordsCa.trim() || null,
+        keywordsEn: values.keywordsEn.trim() || null,
         titleCa: values.titleCa.trim() || null,
         descriptionCa: values.descriptionCa.trim() || null,
         contentCa: values.contentCa.trim() || null,
@@ -111,8 +117,20 @@ export default function GuideForm({ guide, onSubmit, onCancel }) {
             label={`Contenido (${translation.legend})`}
             maxLength={50000}
           />
+          <FormField
+            {...form.getFieldProps(`keywords${translation.suffix}`)}
+            label={`Palabras clave (${translation.legend})`}
+            maxLength={300}
+          />
         </fieldset>
       ))}
+      <FormField
+        {...form.getFieldProps('keywords')}
+        label="Palabras clave"
+        hint="Separadas por comas, hasta 10. Salen como etiquetas al lado del título de la guía; la primera, más grande. Si lo dejas vacío, sale la ilustración."
+        maxLength={300}
+        placeholder="Síndrome del impostor, Autoestima, Logros"
+      />
       <CheckboxField
         name="published"
         label="Publicada"

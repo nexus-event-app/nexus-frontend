@@ -23,6 +23,7 @@ import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import { excerpt } from '@/shared/utils/text'
 import GuideContent from '../components/GuideContent'
+import GuideKeywordBoard from '../components/GuideKeywordBoard'
 import { categoryOf } from '../config/categories'
 import { guidesService } from '../services/guidesService'
 import { parseGuide } from '../utils/guideMarkdown'
@@ -251,7 +252,14 @@ export default function GuideDetailPage() {
             )}
           </p>
         </hgroup>
-        <Illustration {...illustrations.guides} className="hidden xl:block" />
+        {guide.keywords?.length > 0 ? (
+          <GuideKeywordBoard
+            keywords={guide.keywords}
+            className="hidden w-full max-w-[28rem] self-center justify-self-end xl:flex"
+          />
+        ) : (
+          <Illustration {...illustrations.guides} className="hidden xl:block" />
+        )}
       </header>
 
       <article

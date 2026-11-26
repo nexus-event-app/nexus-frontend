@@ -293,6 +293,7 @@ export const guides = [
     slug: 'que-hacer-despues-de-un-bootcamp',
     category: 'PRIMEROS_PASOS',
     language: 'es',
+    keywords: ['Después del bootcamp', 'Portfolio', 'GitHub', 'LinkedIn', 'Primer empleo', 'Networking'],
     languages: ['es', 'ca', 'en'],
     title: 'Qué hacer después de un bootcamp de programación: guía paso a paso',
     description:

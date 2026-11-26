@@ -109,6 +109,12 @@ export default {
           '0%, 100%': { transform: 'scale(1) rotate(0)' },
           '40%': { transform: 'scale(1.3) rotate(-12deg)' },
         },
+        stick: {
+          '0%': { opacity: '0', transform: 'translateY(-1.5rem) scale(1.8) rotate(calc(var(--tilt) + 14deg))' },
+          '55%': { opacity: '1', transform: 'translateY(0.15rem) scale(0.92) rotate(calc(var(--tilt) - 3deg))' },
+          '80%': { transform: 'translateY(0) scale(1.04) rotate(calc(var(--tilt) + 1deg))' },
+          '100%': { opacity: '1', transform: 'translateY(0) scale(1) rotate(var(--tilt))' },
+        },
         'soft-pulse': {
           '0%, 100%': { opacity: '1', transform: 'scale(1)' },
           '50%': { opacity: '0.5', transform: 'scale(0.8)' },
@@ -126,6 +132,7 @@ export default {
         'soft-pulse': 'soft-pulse 2.4s ease-in-out infinite',
         caret: 'caret 1s steps(1) infinite',
         float: 'float 7s ease-in-out infinite',
+        stick: 'stick 0.6s cubic-bezier(0.22, 1, 0.36, 1) both',
       },
     },
   },
