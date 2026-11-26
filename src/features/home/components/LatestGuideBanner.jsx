@@ -6,7 +6,7 @@ import { Link } from '@/shared/i18n/router'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 
-export default function LatestGuideBanner({ className, sticker = 'etiqueta' }) {
+export default function LatestGuideBanner({ className }) {
   const { t, lang } = useI18n()
   const request = useRequest(`guides:list:${lang}`, ({ signal }) => guidesService.list({ signal }))
   const guide = request.data?.[0]
@@ -16,26 +16,16 @@ export default function LatestGuideBanner({ className, sticker = 'etiqueta' }) {
   return (
     <Link to={paths.guideDetail(guide)} className={cx('group z-10 block [perspective:900px]', className)}>
       <span className="relative block animate-float [animation-delay:-2s]">
-        {sticker === 'sello' ? (
-          <span
-            style={{ '--tilt': '-14deg', animationDelay: '900ms' }}
-            className="absolute -right-9 -top-9 z-20 flex h-[4.75rem] w-[4.75rem] animate-stick flex-col items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 text-center text-[0.7rem] font-extrabold uppercase leading-tight tracking-wide text-[#04302b] shadow-[0_10px_20px_-6px_rgba(6,95,70,0.6)] ring-4 ring-white"
-          >
-            <Icon name="sparkles" className="mb-0.5 h-4 w-4" />
-            {t('home.hero.latestGuide')}
+        <span
+          style={{ '--tilt': '-8deg', animationDelay: '900ms' }}
+          className="absolute -left-10 -top-4 z-20 inline-flex animate-stick items-center gap-1.5 whitespace-nowrap rounded-lg bg-gradient-to-r from-emerald-400 to-cyan-500 py-1.5 pl-3 pr-4 text-sm font-extrabold uppercase tracking-wide text-[#04302b] shadow-[0_10px_20px_-6px_rgba(6,95,70,0.6)] after:absolute after:-bottom-1.5 after:left-4 after:h-3 after:w-3 after:rotate-45 after:bg-emerald-400 after:content-['']"
+        >
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-80" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
           </span>
-        ) : (
-          <span
-            style={{ '--tilt': '-8deg', animationDelay: '900ms' }}
-            className="absolute -left-10 -top-4 z-20 inline-flex animate-stick items-center gap-1.5 whitespace-nowrap rounded-lg bg-gradient-to-r from-emerald-400 to-cyan-500 py-1.5 pl-3 pr-4 text-sm font-extrabold uppercase tracking-wide text-[#04302b] shadow-[0_10px_20px_-6px_rgba(6,95,70,0.6)] after:absolute after:-bottom-1.5 after:left-4 after:h-3 after:w-3 after:rotate-45 after:bg-emerald-400 after:content-['']"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-80" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
-            </span>
-            {t('home.hero.latestGuide')}
-          </span>
-        )}
+          {t('home.hero.latestGuide')}
+        </span>
         <span className="relative flex w-[8.5rem] flex-col items-center gap-3 rounded-full bg-gradient-to-b from-white to-[#f1efff] px-3 pb-3 pt-8 text-center text-[#2e2477] shadow-[0_30px_60px_-15px_rgba(46,36,119,0.55),0_10px_20px_-10px_rgba(46,36,119,0.35),inset_0_2px_0_rgba(255,255,255,1),inset_0_-6px_12px_rgba(91,69,224,0.12)] ring-1 ring-[#e3defc] transition-transform duration-500 [transform-style:preserve-3d] [transform:rotateY(18deg)_rotateX(8deg)] group-hover:[transform:rotateY(0deg)_rotateX(0deg)_translateY(-4px)]">
           <span className="text-balance px-1 text-sm font-bold leading-snug [transform:translateZ(30px)]">{title}</span>
           <span className="relative mt-1 flex h-32 w-14 justify-center rounded-full bg-[#ece8ff] shadow-[inset_0_4px_10px_rgba(46,36,119,0.25),inset_0_-2px_4px_rgba(255,255,255,0.9)] [transform:translateZ(10px)]">

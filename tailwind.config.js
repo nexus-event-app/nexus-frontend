@@ -109,10 +109,6 @@ export default {
           '0%, 100%': { transform: 'scale(1) rotate(0)' },
           '40%': { transform: 'scale(1.3) rotate(-12deg)' },
         },
-        shine: {
-          '0%, 70%': { transform: 'translateX(0) skewX(-12deg)' },
-          '100%': { transform: 'translateX(500%) skewX(-12deg)' },
-        },
         'toggle-down': {
           '0%, 15%': { transform: 'translateY(0)' },
           '45%, 70%': { transform: 'translateY(4.4rem)' },
@@ -145,7 +141,6 @@ export default {
         'soft-pulse': 'soft-pulse 2.4s ease-in-out infinite',
         caret: 'caret 1s steps(1) infinite',
         float: 'float 7s ease-in-out infinite',
-        shine: 'shine 4s ease-in-out infinite',
         'toggle-down': 'toggle-down 2.6s cubic-bezier(0.65, 0, 0.35, 1) infinite',
         chevron: 'chevron 1.2s ease-in-out infinite',
         stick: 'stick 0.6s cubic-bezier(0.22, 1, 0.36, 1) both',

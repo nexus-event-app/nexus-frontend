@@ -80,10 +80,7 @@ export default function HeroSection() {
 
       <HeroIllustration className="relative hidden h-[23rem] animate-rise-in xl:h-[26rem] [animation-delay:200ms] lg:col-start-2 lg:row-start-1 lg:block" />
 
-      <LatestGuideBanner
-        sticker={new URLSearchParams(window.location.search).get('pegatina') === 'sello' ? 'sello' : 'etiqueta'}
-        className="hidden animate-rise-in self-end justify-self-start [animation-delay:320ms] lg:col-start-2 lg:row-start-1 lg:-ml-36 lg:mb-2 xl:-ml-44 lg:block"
-      />
+      <LatestGuideBanner className="hidden animate-rise-in self-end justify-self-start [animation-delay:320ms] lg:col-start-2 lg:row-start-1 lg:-ml-24 lg:mb-2 xl:-ml-32 lg:block" />
     </section>
   )
 }
