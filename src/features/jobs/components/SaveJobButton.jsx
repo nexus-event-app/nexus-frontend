@@ -39,11 +39,11 @@ export default function SaveJobButton({ job, compact = false, className }) {
       title={compact ? label : undefined}
       disabled={isPending(job.id)}
       className={cx(
-        'relative z-10 inline-flex min-h-[2.75rem] items-center justify-center gap-2 rounded-control border font-semibold transition-colors disabled:opacity-60',
+        'relative z-10 inline-flex min-h-[2.75rem] items-center justify-center gap-2 rounded-control border font-semibold transition-all hover:-translate-y-0.5 active:translate-y-[3px] active:shadow-none disabled:opacity-60',
         compact ? 'min-w-[2.75rem]' : 'w-full px-4',
         saved
-          ? 'border-accent-line bg-accent-soft text-accent-strong hover:bg-accent-tint'
-          : 'border-slate-300 bg-surface text-ink-soft hover:bg-slate-50 hover:text-ink',
+          ? 'border-accent-line bg-accent-soft text-accent-strong shadow-[0_3px_0_theme(colors.brand.300)] hover:bg-accent-tint dark:shadow-[0_3px_0_rgba(129,140,248,0.4)]'
+          : 'border-slate-300 bg-surface text-ink-soft shadow-[0_3px_0_theme(colors.slate.300)] hover:bg-slate-50 hover:text-ink',
         className,
       )}
     >

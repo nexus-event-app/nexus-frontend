@@ -53,8 +53,10 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
   )
 
   const joinClasses = cx(
-    'btn btn-sm rounded-full text-white shadow-card transition-transform hover:scale-105',
-    event.forWomen ? 'bg-pink-700 hover:bg-pink-800' : 'btn-primary',
+    'btn btn-sm rounded-full text-white transition-all hover:-translate-y-0.5 active:translate-y-[3px] active:shadow-none',
+    event.forWomen
+      ? 'bg-pink-700 shadow-[0_4px_0_#831843,0_10px_18px_-8px_rgba(131,24,67,0.6)] hover:bg-pink-800'
+      : 'btn-primary shadow-[0_4px_0_#312e81,0_10px_18px_-8px_rgba(49,46,129,0.6)]',
   )
 
   const date = localDate(event.date)
@@ -71,7 +73,9 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
       aria-labelledby={`event-${event.id}`}
       style={{ animationDelay: `${Math.min(index, 5) * 70}ms` }}
       className={cx(
-        'group flex h-full flex-col rounded-3xl border bg-surface p-5 shadow-card transition-all duration-300 animate-rise-in hover:-translate-y-1 hover:shadow-pop',
+        'group flex h-full flex-col rounded-3xl border bg-surface p-5 transition-shadow duration-300 animate-rise-in [perspective:700px]',
+        'shadow-[0_2px_0_rgba(15,23,42,0.05),0_4px_0_rgba(15,23,42,0.04),0_18px_30px_-18px_rgba(46,36,119,0.45)] hover:shadow-[0_2px_0_rgba(15,23,42,0.06),0_6px_0_rgba(15,23,42,0.05),0_30px_45px_-20px_rgba(46,36,119,0.6)]',
+        'dark:shadow-[0_2px_0_rgba(0,0,0,0.35),0_4px_0_rgba(0,0,0,0.3),0_18px_30px_-18px_rgba(0,0,0,0.8)]',
         event.forWomen
           ? 'border-pink-200 hover:border-pink-300 dark:border-pink-400/30'
           : 'border-slate-200 hover:border-accent-line',
@@ -82,10 +86,11 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
           dateTime={event.date}
           aria-hidden="true"
           className={cx(
-            'flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-2xl text-white shadow-card transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105',
+            'relative flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-2xl text-white transition-transform duration-500 [transform:rotateX(10deg)_rotateY(-14deg)] group-hover:[transform:rotateX(18deg)_rotateY(-24deg)_translateY(-4px)_scale(1.06)]',
+            "before:absolute before:-top-1 before:left-3 before:h-2.5 before:w-1.5 before:rounded-full before:bg-white before:shadow before:content-[''] after:absolute after:-top-1 after:right-3 after:h-2.5 after:w-1.5 after:rounded-full after:bg-white after:shadow after:content-['']",
             event.forWomen
-              ? 'bg-gradient-to-br from-pink-500 to-pink-700'
-              : 'bg-gradient-to-br from-brand-500 to-brand-700',
+              ? 'bg-gradient-to-br from-pink-400 to-pink-700 shadow-[0_3px_0_#9d174d,0_6px_0_#831843,0_16px_22px_-8px_rgba(131,24,67,0.65),inset_0_2px_0_rgba(255,255,255,0.35)]'
+              : 'bg-gradient-to-br from-brand-400 to-brand-700 shadow-[0_3px_0_#3730a3,0_6px_0_#312e81,0_16px_22px_-8px_rgba(49,46,129,0.65),inset_0_2px_0_rgba(255,255,255,0.35)]',
           )}
         >
           <span className="text-xl font-bold leading-none">{date.getDate()}</span>
@@ -123,7 +128,7 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
       </Heading>
       <dl
         className={cx(
-          'mt-3 grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-2.5 gap-y-2 rounded-2xl px-3.5 py-3 text-sm',
+          'mt-3 grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-2.5 gap-y-2 rounded-2xl px-3.5 py-3 text-sm shadow-[inset_0_2px_6px_rgba(46,36,119,0.12)] dark:shadow-[inset_0_2px_6px_rgba(0,0,0,0.45)]',
           event.forWomen ? 'bg-pink-50 dark:bg-pink-500/10' : 'bg-accent-soft/60',
         )}
       >
@@ -205,10 +210,10 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
           aria-pressed={going.interested}
           title={t('events.card.goingHint')}
           className={cx(
-            'inline-flex min-h-[2.75rem] shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-3 text-sm font-semibold transition-colors disabled:opacity-60 sm:min-h-[2.25rem]',
+            'inline-flex min-h-[2.75rem] shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-3 text-sm font-semibold transition-all hover:-translate-y-0.5 active:translate-y-[3px] active:shadow-none disabled:opacity-60 sm:min-h-[2.25rem]',
             going.interested
-              ? 'border-amber-300 bg-amber-50 text-amber-900 dark:border-amber-400/40 dark:bg-amber-500/15 dark:text-amber-200'
-              : 'border-slate-300 bg-surface text-ink-soft hover:border-accent-line hover:text-ink',
+              ? 'border-amber-300 bg-amber-50 text-amber-900 shadow-[0_3px_0_#fcd34d] dark:border-amber-400/40 dark:bg-amber-500/15 dark:text-amber-200 dark:shadow-[0_3px_0_rgba(251,191,36,0.35)]'
+              : 'border-slate-300 bg-surface text-ink-soft shadow-[0_3px_0_theme(colors.slate.300)] hover:border-accent-line hover:text-ink',
           )}
         >
           <Icon
