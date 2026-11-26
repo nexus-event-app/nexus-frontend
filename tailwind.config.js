@@ -111,7 +111,7 @@ export default {
         },
         'toggle-down': {
           '0%, 15%': { transform: 'translateY(0)' },
-          '45%, 70%': { transform: 'translateY(4.4rem)' },
+          '45%, 70%': { transform: 'translateY(var(--toggle, 4.4rem))' },
           '100%': { transform: 'translateY(0)' },
         },
         chevron: {

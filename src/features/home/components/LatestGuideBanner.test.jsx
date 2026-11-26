@@ -27,3 +27,14 @@ describe('LatestGuideBanner', () => {
     expect(screen.queryByRole('link')).not.toBeInTheDocument()
   })
 })
+
+describe('LatestGuideBanner en tamaño mini', () => {
+  it('enseña la pegatina y lleva a la última píldora, con el título para lectores de pantalla', async () => {
+    guidesService.list.mockResolvedValue([
+      { slug: 'sindrome-del-impostor', title: 'El síndrome del impostor/a: por qué' },
+    ])
+    renderWithProviders(<LatestGuideBanner size="mini" />)
+    const link = await screen.findByRole('link', { name: /Nueva píldora.*El síndrome del impostor\/a/ })
+    expect(link).toHaveAttribute('href', '/guias/sindrome-del-impostor')
+  })
+})

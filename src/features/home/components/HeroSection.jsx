@@ -38,8 +38,8 @@ export default function HeroSection() {
         className="pointer-events-none absolute -right-24 top-1/3 -z-10 h-[28rem] w-[28rem] animate-drift-slow rounded-full bg-brand-400/25 blur-3xl dark:bg-brand-800/30"
       />
 
-      <header className="text-center lg:text-left">
-        <Eyebrow className="animate-rise-in text-base">{name}</Eyebrow>
+      <header className="grid text-center lg:block lg:text-left">
+        <Eyebrow className="animate-rise-in justify-self-center text-base">{name}</Eyebrow>
         <h1 id="hero-heading" className="mt-5 animate-rise-in font-bold uppercase [animation-delay:80ms]">
           <span className={BIG}>
             <span className="align-baseline text-[0.45em] font-semibold">{t('home.hero.titleLead')}</span>{' '}
@@ -48,7 +48,11 @@ export default function HeroSection() {
           <span className={cx(SMALL, 'mt-5')}>{t('home.hero.subtitle')}</span>{' '}
           <span className={cx(MEDIUM, 'mt-3')}>{t('home.hero.titleEnd')}</span>
         </h1>
-        <HeroActions className="mx-auto mt-8 max-w-xl animate-rise-in [animation-delay:160ms] lg:mx-0" />
+        <HeroActions className="col-start-1 row-start-3 mx-auto mt-8 w-full max-w-xl animate-rise-in [animation-delay:160ms] lg:mx-0" />
+        <LatestGuideBanner
+          size="mini"
+          className="relative top-7 col-start-1 row-start-3 mr-2 animate-rise-in self-end justify-self-end [animation-delay:320ms] sm:mr-10 lg:hidden"
+        />
 
         {isAuthenticated ? (
           <p className="mt-7 animate-rise-in text-lg font-semibold text-ink [animation-delay:240ms]">
