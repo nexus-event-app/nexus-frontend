@@ -8,6 +8,7 @@ import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
 import HeroActions from './HeroActions'
 import HeroIllustration from './HeroIllustration'
+import LatestGuideBanner from './LatestGuideBanner'
 
 const SMALL =
   'block text-xl font-semibold leading-snug tracking-[0.01em] text-brand-ink dark:text-brand-200 sm:text-2xl xl:text-[1.9rem]'
@@ -78,6 +79,11 @@ export default function HeroSection() {
       </header>
 
       <HeroIllustration className="relative hidden h-[23rem] animate-rise-in xl:h-[26rem] [animation-delay:200ms] lg:block" />
+
+      <LatestGuideBanner
+        variant={new URLSearchParams(window.location.search).get('v') === 'terminal' ? 'terminal' : 'pill'}
+        className="col-span-full animate-rise-in justify-self-center [animation-delay:320ms]"
+      />
     </section>
   )
 }

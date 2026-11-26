@@ -21,6 +21,8 @@ export default {
       mockRoute: 'Ruta Frontend',
       mockRouteProgress: '3 de 6 etapas',
       mockNotification: 'Marta ha respondido a tu pregunta',
+      latestGuide: 'Nueva guía',
+      latestGuideRead: 'Leer la guía',
     },
     features: {
       eventsTitle: 'Eventos',
@@ -118,6 +120,8 @@ export default {
       mockRoute: 'Ruta Frontend',
       mockRouteProgress: '3 de 6 etapes',
       mockNotification: 'La Marta ha respost la teva pregunta',
+      latestGuide: 'Nova guia',
+      latestGuideRead: 'Llegir la guia',
     },
     features: {
       eventsTitle: 'Esdeveniments',
@@ -215,6 +219,8 @@ export default {
       mockRoute: 'Frontend path',
       mockRouteProgress: '3 of 6 steps',
       mockNotification: 'Marta replied to your question',
+      latestGuide: 'New guide',
+      latestGuideRead: 'Read the guide',
     },
     features: {
       eventsTitle: 'Events',
