@@ -55,6 +55,11 @@ Normas de código del proyecto. Se aplican a todo lo que se escriba a partir de 
   color, para que destaquen.
   La tarjeta de perfil (`ProfileCard`) lleva el nombre dentro: es su contenido. Fuera va solo el antetítulo.
 
+- SEO y buscadores de IA en todo lo que se escriba: títulos, descripciones, encabezados y textos con las palabras clave
+  que busca la gente («guías», «primer empleo tech», «bootcamp», «junior»...), en los tres idiomas. Cada página nueva
+  lleva su `Seo` (título y descripción propios) y, si es contenido, sus datos estructurados (`JsonLd`). Las direcciones
+  publicadas no se cambian.
+
 - Privacidad: la actividad de una persona (discusiones, testimonios, contadores) solo la ve ella en su perfil. El
   perfil de otra persona muestra únicamente lo que ha puesto en él.
 
