@@ -2,10 +2,10 @@ export default {
   es: {
     breadcrumb: 'Empleo',
     list: {
-      seoTitle: 'Ofertas de empleo junior y prácticas',
+      seoTitle: 'Empleo junior y prácticas en tecnología',
       seoTitlePage: 'Ofertas de empleo junior',
       seoDescription:
-        'Ofertas de trabajo y prácticas en tecnología para perfiles junior: filtra por nivel, modalidad y tipo de contrato.',
+        'Ofertas de empleo junior y prácticas en tecnología en España: programación, datos, QA y más. Filtra por ciudad, remoto o presencial y contrato.',
       eyebrow: 'Empleo junior',
       title: 'Ofertas de empleo',
       description: 'Prácticas y primeros empleos en tecnología, seleccionados para quienes están empezando.',
@@ -211,10 +211,10 @@ export default {
   ca: {
     breadcrumb: 'Feina',
     list: {
-      seoTitle: 'Ofertes de feina júnior i pràctiques',
+      seoTitle: 'Feina júnior i pràctiques en tecnologia',
       seoTitlePage: 'Ofertes de feina júnior',
       seoDescription:
-        'Ofertes de feina i pràctiques en tecnologia per a perfils júnior: filtra per nivell, modalitat i tipus de contracte.',
+        'Ofertes de feina júnior i pràctiques en tecnologia a Espanya: programació, dades, QA i més. Filtra per ciutat, remot o presencial i contracte.',
       eyebrow: 'Feina júnior',
       title: 'Ofertes de feina',
       description: 'Pràctiques i primeres feines en tecnologia, seleccionades per a qui està començant.',
@@ -420,10 +420,10 @@ export default {
   en: {
     breadcrumb: 'Jobs',
     list: {
-      seoTitle: 'Junior job offers and internships',
+      seoTitle: 'Junior tech jobs and internships',
       seoTitlePage: 'Junior job offers',
       seoDescription:
-        'Tech job offers and internships for junior profiles: filter by level, work mode and contract type.',
+        'Junior tech jobs and internships in Spain: programming, data, QA and more. Filter by city, remote or on-site and contract type.',
       eyebrow: 'Junior jobs',
       title: 'Job offers',
       description: 'Internships and first tech jobs, selected for people just starting out.',

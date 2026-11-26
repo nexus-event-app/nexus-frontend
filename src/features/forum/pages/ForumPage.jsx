@@ -33,7 +33,7 @@ export default function ForumPage() {
   return (
     <PageMain className="page-container page-section relative isolate grid grid-cols-1 content-start gap-x-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:grid-rows-[auto_auto_auto_1fr]">
       <Seo
-        title={page > 1 ? `${heading}${t('common.pageSuffix', { page })}` : heading}
+        title={`${category ? heading : t('forum.list.seoTitle')}${page > 1 ? t('common.pageSuffix', { page }) : ''}`}
         description={t('forum.list.seoDescription')}
         path={page > 1 ? `${paths.forum}?page=${page}` : paths.forum}
         robots={hasFilters ? 'noindex,follow' : 'index,follow'}

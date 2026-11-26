@@ -1,7 +1,7 @@
 export default {
   es: {
     breadcrumb: 'Eventos',
-    seoTitle: 'Eventos tech para quienes empiezan',
+    seoTitle: 'Eventos tech: meetups, charlas y hackathons',
     seoDescription:
       'Charlas, meetups, hackathons y talleres que comparte la comunidad de {name}: también un espacio propio para comunidades de mujeres.',
     eyebrow: 'Eventos de la comunidad',
@@ -137,7 +137,7 @@ export default {
   },
   ca: {
     breadcrumb: 'Esdeveniments',
-    seoTitle: 'Esdeveniments tech per a qui comença',
+    seoTitle: 'Meetups, xerrades i hackathons tech',
     seoDescription:
       'Xerrades, meetups, hackathons i tallers que comparteix la comunitat de {name}: també un espai propi per a comunitats de dones.',
     eyebrow: 'Esdeveniments de la comunitat',
@@ -273,7 +273,7 @@ export default {
   },
   en: {
     breadcrumb: 'Events',
-    seoTitle: 'Tech events for people starting out',
+    seoTitle: 'Tech events: meetups, talks and hackathons',
     seoDescription:
       'Talks, meetups, hackathons and workshops shared by the {name} community, with a space of its own for women’s communities.',
     eyebrow: 'Community events',

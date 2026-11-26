@@ -4,6 +4,7 @@ export default {
     user: 'Usuario',
     deletedAccount: 'Cuenta eliminada',
     list: {
+      seoTitle: 'Foro de programación para principiantes',
       eyebrow: 'Pregunta y comparte',
       heading: 'Foro',
       categoryHeading: 'Foro: {category}',
@@ -140,6 +141,7 @@ export default {
     user: 'Usuari',
     deletedAccount: 'Compte eliminat',
     list: {
+      seoTitle: 'Fòrum de programació per a principiants',
       eyebrow: 'Pregunta i comparteix',
       heading: 'Fòrum',
       categoryHeading: 'Fòrum: {category}',
@@ -276,6 +278,7 @@ export default {
     user: 'User',
     deletedAccount: 'Deleted account',
     list: {
+      seoTitle: 'Programming forum for beginners',
       eyebrow: 'Ask and share',
       heading: 'Forum',
       categoryHeading: 'Forum: {category}',

@@ -1,7 +1,7 @@
 export default {
   es: {
     breadcrumb: 'Píldoras',
-    seoTitle: 'Píldoras tech: guías para empezar en tecnología',
+    seoTitle: 'Píldoras tech: guías para empezar en tech',
     seoDescription:
       'Guías claras y prácticas para dar tu primer paso en el mundo tech: qué hacer después de un bootcamp, cómo preparar entrevistas, tu portfolio y más.',
     eyebrow: 'Píldoras tech',
@@ -46,7 +46,7 @@ export default {
   },
   ca: {
     breadcrumb: 'Píndoles',
-    seoTitle: 'Píndoles tech: guies per començar en tecnologia',
+    seoTitle: 'Píndoles tech: guies per començar en tech',
     seoDescription:
       'Guies clares i pràctiques per fer el primer pas al món tech: què fer després d’un bootcamp, com preparar entrevistes, el teu portfolio i més.',
     eyebrow: 'Píndoles tech',

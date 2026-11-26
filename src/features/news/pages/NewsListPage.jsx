@@ -28,7 +28,7 @@ export default function NewsListPage() {
   return (
     <PageMain className="page-container page-section relative isolate">
       <Seo
-        title={`${heading}${pageSuffix}`}
+        title={`${category ? heading : t('news.list.seoTitle')}${pageSuffix}`}
         description={t('news.list.seoDescription')}
         path={page > 1 ? `${paths.news}?page=${page}` : paths.news}
         robots={hasFilters ? 'noindex,follow' : 'index,follow'}

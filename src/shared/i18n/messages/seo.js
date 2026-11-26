@@ -1,20 +1,20 @@
 export default {
   es: {
-    tagline: 'Tu carrera tech empieza aquí',
+    tagline: 'Comunidad para empezar en tech',
     description:
-      'Primer Commit es la comunidad tech para quienes empiezan: noticias, ofertas de empleo junior y prácticas, foro y testimonios.',
+      'Comunidad gratuita para empezar en tecnología: empleo junior y prácticas, eventos tech, guías para después del bootcamp, foro de dudas y rutas de aprendizaje.',
     imageAlt: 'Primer Commit, tu carrera tech empieza aquí',
   },
   ca: {
-    tagline: 'La teva carrera tech comença aquí',
+    tagline: 'Comunitat per començar en tech',
     description:
-      'Primer Commit és la comunitat tech per a qui comença: notícies, ofertes de feina júnior i pràctiques, fòrum i testimonis.',
+      'Comunitat gratuïta per començar en tecnologia: feina júnior i pràctiques, esdeveniments tech, guies per a després del bootcamp, fòrum de dubtes i rutes d’aprenentatge.',
     imageAlt: 'Primer Commit, la teva carrera tech comença aquí',
   },
   en: {
-    tagline: 'Your tech career starts here',
+    tagline: 'Community to get started in tech',
     description:
-      'Primer Commit is the tech community for people just starting out: news, junior and internship job offers, forum and testimonials.',
+      'Free community to get started in tech: junior jobs and internships, tech events, guides for after a bootcamp, a Q&A forum and learning paths.',
     imageAlt: 'Primer Commit, your tech career starts here',
   },
 }

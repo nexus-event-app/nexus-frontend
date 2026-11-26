@@ -2,6 +2,7 @@ export default {
   es: {
     breadcrumb: 'Noticias',
     list: {
+      seoTitle: 'Noticias tech para perfiles junior',
       eyebrow: 'Actualidad tech',
       heading: 'Noticias tech',
       categoryHeadings: {
@@ -54,6 +55,7 @@ export default {
   ca: {
     breadcrumb: 'Notícies',
     list: {
+      seoTitle: 'Notícies tech per a perfils júnior',
       eyebrow: 'Actualitat tech',
       heading: 'Notícies tech',
       categoryHeadings: {
@@ -105,6 +107,7 @@ export default {
   en: {
     breadcrumb: 'News',
     list: {
+      seoTitle: 'Tech news for junior profiles',
       eyebrow: 'Tech news',
       heading: 'Tech news',
       categoryHeadings: {
