@@ -14,27 +14,27 @@ export default function LatestGuideBanner({ className }) {
   const title = guide.title.split(':')[0]
 
   return (
-    <Link
-      to={paths.guideDetail(guide)}
-      aria-label={`${t('home.hero.latestGuide')}: ${title}`}
-      className={cx(
-        'group relative isolate flex w-[8.5rem] flex-col items-center gap-3 rounded-full bg-gradient-to-b from-[#6d5ef5] via-[#5b45e0] to-[#7c3aed] px-3 pb-3 pt-6 text-center text-[#ffffff] shadow-2xl shadow-brand-950/30 ring-4 ring-white/70 transition-transform hover:-translate-y-1 dark:ring-white/10',
-        "before:absolute before:-inset-2 before:-z-10 before:animate-soft-pulse before:rounded-full before:bg-brand-400/30 before:blur-xl before:content-['']",
-        className,
-      )}
-    >
-      <span className="inline-flex items-center gap-1 rounded-full bg-[#ffffff]/20 px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wider">
-        <Icon name="sparkles" className="h-3 w-3" />
-        {t('home.hero.latestGuide')}
-      </span>
-      <span className="text-balance px-1 text-sm font-bold leading-snug">{title}</span>
-      <span className="relative mt-1 flex h-32 w-14 justify-center rounded-full bg-[#ffffff]/15 ring-1 ring-inset ring-white/25">
-        <span className="absolute top-1.5 flex h-11 w-11 animate-toggle-down items-center justify-center rounded-full bg-[#ffffff] text-[#5b45e0] shadow-lg group-hover:[animation-play-state:paused] group-hover:translate-y-[4.4rem]">
-          <Icon name="chevron-down" className="h-5 w-5" />
+    <Link to={paths.guideDetail(guide)} className={cx('group z-10 block [perspective:900px]', className)}>
+      <span className="relative block animate-float [animation-delay:-2s]">
+        <span
+          style={{ '--tilt': '-12deg', animationDelay: '900ms' }}
+          className="absolute -left-8 -top-5 z-20 inline-flex animate-stick items-center gap-1.5 whitespace-nowrap rounded-full bg-[#fef3c7] px-4 py-2 text-sm font-extrabold uppercase tracking-wide text-[#92400e] shadow-lg ring-1 ring-inset ring-[#fcd34d]"
+        >
+          <Icon name="sparkles" className="h-4 w-4" />
+          {t('home.hero.latestGuide')}
         </span>
-        <span className="absolute bottom-2 flex flex-col items-center -space-y-2 text-[#ffffff]/80">
-          <Icon name="chevron-down" className="h-4 w-4 animate-chevron [animation-delay:0ms]" />
-          <Icon name="chevron-down" className="h-4 w-4 animate-chevron [animation-delay:200ms]" />
+        <span className="relative flex w-[8.5rem] flex-col items-center gap-3 rounded-full bg-gradient-to-b from-white to-[#f1efff] px-3 pb-3 pt-8 text-center text-[#2e2477] shadow-[0_30px_60px_-15px_rgba(46,36,119,0.55),0_10px_20px_-10px_rgba(46,36,119,0.35),inset_0_2px_0_rgba(255,255,255,1),inset_0_-6px_12px_rgba(91,69,224,0.12)] ring-1 ring-[#e3defc] transition-transform duration-500 [transform-style:preserve-3d] [transform:rotateY(18deg)_rotateX(8deg)] group-hover:[transform:rotateY(0deg)_rotateX(0deg)_translateY(-4px)]">
+          <span className="text-balance px-1 text-sm font-bold leading-snug [transform:translateZ(30px)]">{title}</span>
+          <span className="relative mt-1 flex h-32 w-14 justify-center rounded-full bg-[#ece8ff] shadow-[inset_0_4px_10px_rgba(46,36,119,0.25),inset_0_-2px_4px_rgba(255,255,255,0.9)] [transform:translateZ(10px)]">
+            <span className="absolute bottom-2 flex flex-col items-center -space-y-2 text-[#7c6cf0]">
+              <Icon name="chevron-down" className="h-4 w-4 animate-chevron" />
+              <Icon name="chevron-down" className="h-4 w-4 animate-chevron [animation-delay:200ms]" />
+            </span>
+            <span className="absolute top-1.5 flex h-11 w-11 animate-toggle-down items-center justify-center rounded-full bg-[radial-gradient(circle_at_32%_28%,#c4b5fd_0%,#7c5cf6_38%,#4c1dd6_78%,#2e1a8a_100%)] text-[#ffffff] shadow-[0_10px_18px_-4px_rgba(76,29,214,0.7),inset_0_-3px_6px_rgba(0,0,0,0.25)] [transform:translateZ(40px)]">
+              <span className="absolute left-2 top-1.5 h-3 w-4 rounded-full bg-white/60 blur-[2px]" />
+              <Icon name="chevron-down" className="relative h-5 w-5" />
+            </span>
+          </span>
         </span>
       </span>
     </Link>

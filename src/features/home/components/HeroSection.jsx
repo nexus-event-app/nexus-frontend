@@ -27,7 +27,7 @@ export default function HeroSection() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="page-gutter relative isolate grid items-center gap-x-12 gap-y-10 overflow-hidden bg-gradient-to-br from-white via-brand-50 to-brand-100 pb-10 pt-6 text-ink dark:from-canvas dark:via-surface dark:to-canvas sm:pb-12 sm:pt-8 lg:min-h-[34rem] lg:grid-cols-[minmax(0,1fr)_auto_23rem] lg:gap-x-6 xl:grid-cols-[minmax(0,1fr)_auto_28rem]"
+      className="page-gutter relative isolate grid items-center gap-x-12 gap-y-10 overflow-hidden bg-gradient-to-br from-white via-brand-50 to-brand-100 pb-10 pt-6 text-ink dark:from-canvas dark:via-surface dark:to-canvas sm:pb-12 sm:pt-8 lg:min-h-[34rem] lg:grid-cols-[minmax(0,1fr)_23rem] lg:gap-x-6 xl:grid-cols-[minmax(0,1fr)_28rem]"
     >
       <span
         aria-hidden="true"
@@ -78,10 +78,9 @@ export default function HeroSection() {
         )}
       </header>
 
-      <LatestGuideBanner className="hidden animate-rise-in self-center justify-self-center [animation-delay:320ms] lg:flex" />
+      <HeroIllustration className="relative hidden h-[23rem] animate-rise-in xl:h-[26rem] [animation-delay:200ms] lg:col-start-2 lg:row-start-1 lg:block" />
 
-      <HeroIllustration className="relative hidden h-[23rem] animate-rise-in xl:h-[26rem] [animation-delay:200ms] lg:block" />
-
+      <LatestGuideBanner className="hidden animate-rise-in self-end justify-self-start [animation-delay:320ms] lg:col-start-2 lg:row-start-1 lg:-ml-16 lg:mb-2 xl:-ml-20 lg:block" />
     </section>
   )
 }
