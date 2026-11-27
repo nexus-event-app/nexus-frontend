@@ -22,7 +22,6 @@ export default {
       mockRouteProgress: '3 de 6 etapas',
       mockEvent: 'Meetup de IA en Madrid',
       mockEventMeta: 'Jueves · 18:30',
-      latestGuide: 'Nueva píldora',
     },
     features: {
       eventsTitle: 'Eventos',
@@ -33,6 +32,12 @@ export default {
       forumText: 'Todas las dudas son bienvenidas y la mejor respuesta queda marcada.',
       communityTitle: 'Comunidad',
       communityText: 'Tu primer paso en tecnología no tiene que darse en solitario.',
+    },
+    joinBanner: {
+      title: '¿Te ha gustado lo que has visto? Únete gratis',
+      text: 'Apúntate a eventos para conocer gente, guarda las ofertas que te interesan y pregunta en el foro. En un minuto y sin coste.',
+      join: 'Crear mi cuenta gratis',
+      haveAccount: 'Ya tengo cuenta',
     },
     paths: {
       eyebrow: 'Rutas de aprendizaje',
@@ -121,7 +126,6 @@ export default {
       mockRouteProgress: '3 de 6 etapes',
       mockEvent: 'Meetup d’IA a Madrid',
       mockEventMeta: 'Dijous · 18:30',
-      latestGuide: 'Nova píndola',
     },
     features: {
       eventsTitle: 'Esdeveniments',
@@ -132,6 +136,12 @@ export default {
       forumText: 'Tots els dubtes són benvinguts i la millor resposta queda marcada.',
       communityTitle: 'Comunitat',
       communityText: 'El teu primer pas en tecnologia no ha de ser en solitari.',
+    },
+    joinBanner: {
+      title: 'T’ha agradat el que has vist? Uneix-t’hi gratis',
+      text: 'Apunta’t a esdeveniments per conèixer gent, desa les ofertes que t’interessen i pregunta al fòrum. En un minut i sense cost.',
+      join: 'Crear el meu compte gratis',
+      haveAccount: 'Ja tinc compte',
     },
     paths: {
       eyebrow: 'Rutes d’aprenentatge',
@@ -220,7 +230,6 @@ export default {
       mockRouteProgress: '3 of 6 steps',
       mockEvent: 'AI meetup in Madrid',
       mockEventMeta: 'Thursday · 6:30 pm',
-      latestGuide: 'New tech bite',
     },
     features: {
       eventsTitle: 'Events',
@@ -231,6 +240,12 @@ export default {
       forumText: 'Every question is welcome and the best answer is marked.',
       communityTitle: 'Community',
       communityText: 'Your first step into tech doesn’t have to be a solo one.',
+    },
+    joinBanner: {
+      title: 'Like what you see? Join for free',
+      text: 'Sign up for events to meet people, save the jobs you like and ask anything in the forum. It takes a minute and it is free.',
+      join: 'Create my free account',
+      haveAccount: 'I already have an account',
     },
     paths: {
       eyebrow: 'Learning paths',

@@ -5,19 +5,13 @@ import { paths } from '@/shared/config/paths'
 import { siteConfig } from '@/shared/config/site'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { cx } from '@/shared/utils/classNames'
+import { JOIN_BENEFITS } from '../config/joinBenefits'
 
 const FEATURES = [
   { key: 'events', icon: 'calendar', tone: 'cool' },
   { key: 'jobs', icon: 'briefcase', tone: 'warm' },
   { key: 'forum', icon: 'chat', tone: 'cool' },
   { key: 'community', icon: 'users', tone: 'warm' },
-]
-
-const BENEFITS = [
-  { key: 'benefitEvents', icon: 'calendar' },
-  { key: 'benefitJobs', icon: 'bookmark' },
-  { key: 'benefitForum', icon: 'chat' },
-  { key: 'benefitProgress', icon: 'academic' },
 ]
 
 const TONES = {
@@ -67,7 +61,7 @@ export default function HomeFeatures() {
           </h2>
           <p className="mt-1 text-sm text-ink-muted">{t('home.paths.joinText')}</p>
           <ul className="mt-5 space-y-3">
-            {BENEFITS.map((benefit) => (
+            {JOIN_BENEFITS.map((benefit) => (
               <li key={benefit.key} className="flex items-center gap-3 font-medium text-ink-soft">
                 <Icon name={benefit.icon} className="h-5 w-5 shrink-0 text-brand-600 dark:text-brand-300" />
                 {t(`home.paths.${benefit.key}`)}

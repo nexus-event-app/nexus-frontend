@@ -9,32 +9,21 @@ vi.mock('@/features/guides/services/guidesService', () => ({
 }))
 
 describe('LatestGuideBanner', () => {
-  it('lleva a la última guía publicada con la pegatina de novedad', async () => {
+  it('lleva a la última píldora publicada con su título corto', async () => {
     guidesService.list.mockResolvedValue([
       { slug: 'sindrome-del-impostor', title: 'El síndrome del impostor/a: por qué sientes que no sabes suficiente' },
       { slug: 'tu-primer-meetup-tech', title: 'Tu primer meetup tech' },
     ])
     renderWithProviders(<LatestGuideBanner />)
-    const link = await screen.findByRole('link', { name: /Nueva píldora.*El síndrome del impostor\/a/ })
+    const link = await screen.findByRole('link', { name: 'El síndrome del impostor/a' })
     expect(link).toHaveAttribute('href', '/guias/sindrome-del-impostor')
-    expect(link).not.toHaveTextContent('por qué sientes')
+    expect(link).not.toHaveTextContent('Nueva')
   })
 
-  it('no enseña nada si todavía no hay guías', async () => {
+  it('no enseña nada si todavía no hay píldoras', async () => {
     guidesService.list.mockResolvedValue([])
     renderWithProviders(<LatestGuideBanner />)
     await Promise.resolve()
     expect(screen.queryByRole('link')).not.toBeInTheDocument()
-  })
-})
-
-describe('LatestGuideBanner en tamaño mini', () => {
-  it('enseña la pegatina y lleva a la última píldora, con el título para lectores de pantalla', async () => {
-    guidesService.list.mockResolvedValue([
-      { slug: 'sindrome-del-impostor', title: 'El síndrome del impostor/a: por qué' },
-    ])
-    renderWithProviders(<LatestGuideBanner size="mini" />)
-    const link = await screen.findByRole('link', { name: /Nueva píldora.*El síndrome del impostor\/a/ })
-    expect(link).toHaveAttribute('href', '/guias/sindrome-del-impostor')
   })
 })

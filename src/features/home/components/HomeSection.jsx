@@ -13,6 +13,7 @@ export default function HomeSection({
   linkLabel,
   tinted = false,
   illustration,
+  aside,
   children,
 }) {
   return (
@@ -25,7 +26,12 @@ export default function HomeSection({
       )}
     >
       <span aria-hidden="true" className="bg-grid pointer-events-none absolute inset-0 -z-10" />
-      <header className="col-span-full mb-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+      <header
+        className={cx(
+          'col-span-full mb-10 grid gap-6 lg:items-end',
+          aside ? 'lg:grid-cols-[minmax(0,1fr)_auto_auto] lg:gap-x-10' : 'lg:grid-cols-[minmax(0,1fr)_auto]',
+        )}
+      >
         <hgroup>
           {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
           <h2 id={id} className="mt-3 text-4xl font-bold tracking-tight text-ink sm:text-5xl">
@@ -33,6 +39,7 @@ export default function HomeSection({
           </h2>
           {description && <p className="mt-4 max-w-3xl text-lg leading-relaxed text-ink-muted">{description}</p>}
         </hgroup>
+        {aside}
         {linkTo && (
           <Link
             to={linkTo}

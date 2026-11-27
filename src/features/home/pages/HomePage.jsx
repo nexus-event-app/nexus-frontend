@@ -7,6 +7,7 @@ import ForumSection from '../components/ForumSection'
 import HeroSection from '../components/HeroSection'
 import HomeEventsSection from '../components/HomeEventsSection'
 import HomeFeatures from '../components/HomeFeatures'
+import HomeJoinBanner from '../components/HomeJoinBanner'
 import HomePathsSection from '../components/HomePathsSection'
 import LatestJobsSection from '../components/LatestJobsSection'
 import LatestNewsSection from '../components/LatestNewsSection'
@@ -22,6 +23,7 @@ export default function HomePage() {
       <HomeFeatures />
       <HomeEventsSection />
       <LatestJobsSection />
+      <HomeJoinBanner />
       <ForumSection />
       <HomePathsSection />
       <LatestNewsSection />

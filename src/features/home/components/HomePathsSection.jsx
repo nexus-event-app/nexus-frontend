@@ -7,6 +7,7 @@ import { illustrations } from '@/shared/config/illustrations'
 import { paths } from '@/shared/config/paths'
 import { useI18n } from '@/shared/i18n/useI18n'
 import HomeSection from './HomeSection'
+import LatestGuideBanner from './LatestGuideBanner'
 
 export default function HomePathsSection() {
   const { t } = useI18n()
@@ -21,6 +22,7 @@ export default function HomePathsSection() {
       description={t('home.paths.description')}
       linkTo={paths.learning}
       linkLabel={t('home.paths.link')}
+      aside={<LatestGuideBanner className="self-center" />}
     >
       <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5">
         {LEARNING_PATHS.map((path, index) => (
