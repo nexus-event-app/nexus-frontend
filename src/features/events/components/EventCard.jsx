@@ -53,7 +53,7 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
   )
 
   const joinClasses = cx(
-    'btn btn-sm rounded-full px-8 text-white transition-all hover:-translate-y-0.5 active:translate-y-[3px] active:shadow-none',
+    'btn btn-sm rounded-full text-white transition-all hover:-translate-y-0.5 active:translate-y-[3px] active:shadow-none',
     event.forWomen
       ? 'bg-pink-700 shadow-[0_4px_0_#831843,0_10px_18px_-8px_rgba(131,24,67,0.6)] hover:bg-pink-800'
       : 'btn-primary shadow-[0_4px_0_#312e81,0_10px_18px_-8px_rgba(49,46,129,0.6)]',
@@ -190,10 +190,7 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
             </span>
           )}
         </p>
-        <span className="-mr-2 ml-auto flex shrink-0 items-center gap-1">
-          {goingAction}
-          {ownerAction}
-        </span>
+        <span className="-mr-2 -mt-1 ml-auto shrink-0">{ownerAction}</span>
       </header>
 
       <Heading
@@ -261,7 +258,10 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
         {event.host}
       </p>
 
-      <footer className="mt-3 flex justify-center border-t border-slate-200 pt-4">{joinAction}</footer>
+      <footer className="mt-3 flex items-center gap-2 border-t border-slate-200 pt-4">
+        <span className="flex flex-1 [&>*]:w-full [&>*]:justify-center">{joinAction}</span>
+        {goingAction}
+      </footer>
       {confirming && (
         <ConfirmDialog
           title={t('events.card.deleteTitle')}
