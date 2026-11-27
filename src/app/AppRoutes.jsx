@@ -30,6 +30,7 @@ const GuideDetailPage = lazy(() => import('@/features/guides/pages/GuideDetailPa
 const EventsPage = lazy(() => import('@/features/events/pages/EventsPage'))
 const NewEventPage = lazy(() => import('@/features/events/pages/NewEventPage'))
 const AboutPage = lazy(() => import('@/features/about/pages/AboutPage'))
+const ContactPage = lazy(() => import('@/features/contact/pages/ContactPage'))
 const SearchPage = lazy(() => import('@/features/search/pages/SearchPage'))
 const TestimonialsPage = lazy(() => import('@/features/testimonials/pages/TestimonialsPage'))
 const LegalNoticePage = lazy(() => import('@/features/legal/pages/LegalNoticePage'))
@@ -97,6 +98,7 @@ function publicRoutes({ prefix, lang }) {
       <Route path={seg('testimonios')} element={<TestimonialsPage />} />
       <Route path={seg('buscar')} element={<SearchPage />} />
       <Route path={seg('sobre-el-proyecto')} element={<AboutPage />} />
+      <Route path={seg('contacto')} element={<ContactPage />} />
       <Route path={seg('rutas')} element={<LearningPathsPage />} />
       <Route path={`${seg('rutas')}/:pathSlug`} element={<LearningPathPage />} />
       <Route path={seg('glosario')} element={<GlossaryPage />} />

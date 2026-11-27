@@ -19,6 +19,7 @@ export const ROUTE_SEGMENTS = {
   glosario: { ca: 'glossari', en: 'glossary' },
   eventos: { ca: 'esdeveniments', en: 'events' },
   guias: { ca: 'guies', en: 'guides' },
+  contacto: { ca: 'contacte', en: 'contact' },
 }
 
 export const ROUTE_SUBSEGMENTS = {

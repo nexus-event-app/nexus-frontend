@@ -2,6 +2,7 @@ import about from './about'
 import auth from './auth'
 import catalogs from './catalogs'
 import common from './common'
+import contact from './contact'
 import errors from './errors'
 import events from './events'
 import forum from './forum'
@@ -33,6 +34,7 @@ const modules = {
   profile,
   search,
   about,
+  contact,
   notifications,
   learning,
   glossary,

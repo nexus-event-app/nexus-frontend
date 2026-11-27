@@ -8,7 +8,6 @@ import { paths } from '@/shared/config/paths'
 import { siteConfig } from '@/shared/config/site'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { mainNavigation } from './navigation'
-import { legalConfig } from '@/shared/config/legal'
 
 const LEGAL_LINKS = [
   { labelKey: 'common.footer.legalNotice', to: paths.legalNotice },
@@ -82,17 +81,15 @@ export default function SiteFooter() {
         <p className="mt-4 max-w-sm text-brand-100">
           {t('seo.tagline')}. {t('common.footer.description')}
         </p>
-        {legalConfig.email && (
-          <p className="mt-4 max-w-sm text-brand-100">
-            {t('common.footer.contact')}{' '}
-            <a
-              href={`mailto:${legalConfig.email}`}
-              className="font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white"
-            >
-              {legalConfig.email}
-            </a>
-          </p>
-        )}
+        <p className="mt-4 max-w-sm text-brand-100">
+          {t('common.footer.contact')}{' '}
+          <Link
+            to={paths.contact}
+            className="font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white"
+          >
+            {t('common.footer.contactLink')}
+          </Link>
+        </p>
         <Illustration
           {...illustrations.footer}
           className="absolute bottom-0 left-0 hidden w-[16.5rem] lg:block xl:w-[19rem]"

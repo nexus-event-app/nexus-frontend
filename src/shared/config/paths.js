@@ -16,6 +16,7 @@ export const paths = {
   profileEdit: '/perfil/editar',
   search: '/buscar',
   about: '/sobre-el-proyecto',
+  contact: '/contacto',
   notifications: '/notificaciones',
   learning: '/rutas',
   learningPath: (id) => `/rutas/${id}`,
