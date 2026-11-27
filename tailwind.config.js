@@ -127,11 +127,11 @@ export default {
           '60%': {
             opacity: '1',
             transform:
-              'translate3d(0, 0.3rem, var(--depth)) rotateX(16deg) rotateY(-14deg) rotateZ(calc(var(--tilt) - 3deg))',
+              'translate3d(0, 0.3rem, var(--depth)) rotateX(10deg) rotateY(-8deg) rotateZ(calc(var(--tilt) - 2deg))',
           },
           '100%': {
             opacity: '1',
-            transform: 'translate3d(0, 0, var(--depth)) rotateX(10deg) rotateY(-14deg) rotateZ(var(--tilt))',
+            transform: 'translate3d(0, 0, var(--depth)) rotateX(6deg) rotateY(-8deg) rotateZ(var(--tilt))',
           },
         },
         'sway-3d': {

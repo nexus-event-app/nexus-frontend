@@ -257,7 +257,7 @@ export default function GuideDetailPage() {
         {guide.keywords?.length > 0 ? (
           <GuideKeywordBoard
             keywords={guide.keywords}
-            className="hidden w-full max-w-[28rem] self-center justify-self-end xl:flex"
+            className="hidden w-full max-w-[22rem] self-center justify-self-end xl:flex"
           />
         ) : (
           <Illustration {...illustrations.guides} className="hidden xl:block" />
