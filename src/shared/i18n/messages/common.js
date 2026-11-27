@@ -53,6 +53,8 @@ export default {
       menu: 'Menú de tu cuenta',
     },
     footer: {
+      contact: '¿Dudas, sugerencias o algún problema? Escríbenos a',
+      emailHelp: '¿No te llega el correo? Mira en la carpeta de spam o escríbenos a',
       description:
         'Eventos, ofertas de empleo, foro y rutas de aprendizaje para quienes dan el primer paso en el mundo tech.',
       explore: 'Explorar',
@@ -147,6 +149,8 @@ export default {
       menu: 'Menú del teu compte',
     },
     footer: {
+      contact: 'Dubtes, suggeriments o algun problema? Escriu-nos a',
+      emailHelp: 'No et arriba el correu? Mira a la carpeta de correu brossa o escriu-nos a',
       description:
         'Esdeveniments, ofertes de feina, fòrum i rutes d’aprenentatge per a qui fa el primer pas en el món tech.',
       explore: 'Explora',
@@ -241,6 +245,8 @@ export default {
       menu: 'Your account menu',
     },
     footer: {
+      contact: 'Questions, suggestions or a problem? Write to us at',
+      emailHelp: 'Didn’t get the email? Check your spam folder or write to us at',
       description: 'Events, job offers, forum and learning paths for people taking their first step into tech.',
       explore: 'Explore',
       exploreLabel: 'Footer: explore',

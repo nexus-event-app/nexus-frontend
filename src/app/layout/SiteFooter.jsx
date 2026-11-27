@@ -8,6 +8,7 @@ import { paths } from '@/shared/config/paths'
 import { siteConfig } from '@/shared/config/site'
 import { useI18n } from '@/shared/i18n/useI18n'
 import { mainNavigation } from './navigation'
+import { legalConfig } from '@/shared/config/legal'
 
 const LEGAL_LINKS = [
   { labelKey: 'common.footer.legalNotice', to: paths.legalNotice },
@@ -73,7 +74,7 @@ export default function SiteFooter() {
         className="pointer-events-none absolute -bottom-40 -left-32 -z-10 h-[30rem] w-[30rem] animate-drift-slow rounded-full bg-brand-500/30 blur-3xl"
       />
 
-      <section aria-labelledby="footer-about" className="relative sm:col-span-2 lg:col-span-1">
+      <section aria-labelledby="footer-about" className="relative sm:col-span-2 lg:col-span-1 lg:pb-48 xl:pb-56">
         <h2 id="footer-about" className="sr-only">
           {siteConfig.name}
         </h2>
@@ -81,6 +82,17 @@ export default function SiteFooter() {
         <p className="mt-4 max-w-sm text-brand-100">
           {t('seo.tagline')}. {t('common.footer.description')}
         </p>
+        {legalConfig.email && (
+          <p className="mt-4 max-w-sm text-brand-100">
+            {t('common.footer.contact')}{' '}
+            <a
+              href={`mailto:${legalConfig.email}`}
+              className="font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white"
+            >
+              {legalConfig.email}
+            </a>
+          </p>
+        )}
         <Illustration
           {...illustrations.footer}
           className="absolute bottom-0 left-0 hidden w-[16.5rem] lg:block xl:w-[19rem]"
