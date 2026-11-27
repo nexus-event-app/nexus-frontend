@@ -211,16 +211,11 @@ export default function GuideDetailPage() {
       <JsonLd data={buildGuideData(guide)} />
       {faq.length > 0 && <JsonLd data={buildFaqData(faq, guide.language)} />}
       <Breadcrumbs
-        className="col-span-full lg:col-span-1"
+        className="col-span-full"
         items={[
           { label: t('guides.breadcrumb'), to: paths.guides },
           { label: excerpt(guide.title, 60), to: path },
         ]}
-      />
-      <ShareButton
-        title={guide.title}
-        text={guide.description}
-        className="mt-4 justify-self-start lg:col-start-2 lg:row-start-1 lg:mt-0 lg:self-center lg:justify-self-end"
       />
 
       <header className="col-span-full mt-6 grid items-center gap-x-10 gap-y-6 xl:grid-cols-[minmax(0,1fr)_22rem]">
@@ -269,18 +264,23 @@ export default function GuideDetailPage() {
         )}
       </header>
 
+      <ShareButton
+        title={guide.title}
+        text={guide.description}
+        className="mt-8 justify-self-end lg:col-start-1 lg:row-start-3"
+      />
       <article
         ref={articleRef}
         aria-labelledby="guide-title"
         lang={guide.language}
-        className="relative mt-10 min-w-0 rounded-3xl border border-slate-200 bg-surface py-8 pl-16 pr-6 text-lg leading-8 text-ink-soft shadow-card before:absolute before:bottom-12 before:left-[1.9rem] before:top-12 before:w-0.5 before:rounded-full before:bg-gradient-to-b before:from-brand-400 before:via-violet-400 before:to-accent-tint sm:py-10 sm:pl-24 sm:pr-10 sm:before:left-[2.9rem] lg:col-start-1"
+        className="relative mt-3 min-w-0 rounded-3xl border border-slate-200 bg-surface py-8 pl-16 pr-6 text-lg leading-8 text-ink-soft shadow-card before:absolute before:bottom-12 before:left-[1.9rem] before:top-12 before:w-0.5 before:rounded-full before:bg-gradient-to-b before:from-brand-400 before:via-violet-400 before:to-accent-tint sm:py-10 sm:pl-24 sm:pr-10 sm:before:left-[2.9rem] lg:col-start-1 lg:row-start-4"
       >
         <GuideContent blocks={blocks} />
       </article>
 
       <aside
         aria-label={t('guides.sidebar')}
-        className="mt-10 grid content-start gap-6 lg:sticky lg:top-24 lg:col-start-2 lg:row-start-3 lg:self-start"
+        className="mt-10 grid content-start gap-6 lg:sticky lg:top-24 lg:col-start-2 lg:row-span-2 lg:row-start-3 lg:mt-8 lg:self-start"
       >
         <TableOfContents headings={headings} />
         <JoinCallout />
