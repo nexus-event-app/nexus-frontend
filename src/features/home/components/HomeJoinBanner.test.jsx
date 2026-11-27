@@ -6,7 +6,7 @@ import HomeJoinBanner from './HomeJoinBanner'
 describe('HomeJoinBanner', () => {
   it('sin sesión invita a crear una cuenta con lo que se gana y un acceso para quien ya la tiene', () => {
     renderWithProviders(<HomeJoinBanner />)
-    const banner = screen.getByRole('complementary', { name: '¿Te ha gustado lo que has visto? Únete gratis' })
+    const banner = screen.getByRole('complementary', { name: '¿Te animas a participar? Únete gratis' })
     expect(
       within(banner)
         .getAllByRole('listitem')

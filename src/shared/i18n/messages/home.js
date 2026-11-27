@@ -34,7 +34,7 @@ export default {
       communityText: 'Tu primer paso en tecnología no tiene que darse en solitario.',
     },
     joinBanner: {
-      title: '¿Te ha gustado lo que has visto? Únete gratis',
+      title: '¿Te animas a participar? Únete gratis',
       text: 'Apúntate a eventos para conocer gente, guarda las ofertas que te interesan y pregunta en el foro. En un minuto y sin coste.',
       join: 'Crear mi cuenta gratis',
       haveAccount: 'Ya tengo cuenta',
@@ -138,7 +138,7 @@ export default {
       communityText: 'El teu primer pas en tecnologia no ha de ser en solitari.',
     },
     joinBanner: {
-      title: 'T’ha agradat el que has vist? Uneix-t’hi gratis',
+      title: 'T’animes a participar? Uneix-t’hi gratis',
       text: 'Apunta’t a esdeveniments per conèixer gent, desa les ofertes que t’interessen i pregunta al fòrum. En un minut i sense cost.',
       join: 'Crear el meu compte gratis',
       haveAccount: 'Ja tinc compte',
@@ -242,7 +242,7 @@ export default {
       communityText: 'Your first step into tech doesn’t have to be a solo one.',
     },
     joinBanner: {
-      title: 'Like what you see? Join for free',
+      title: 'Up for joining in? Sign up for free',
       text: 'Sign up for events to meet people, save the jobs you like and ask anything in the forum. It takes a minute and it is free.',
       join: 'Create my free account',
       haveAccount: 'I already have an account',
