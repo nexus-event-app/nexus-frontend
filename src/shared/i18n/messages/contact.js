@@ -36,11 +36,6 @@ export default {
         text: 'No te llega el correo de confirmación, no puedes entrar o algo no funciona como esperabas.',
         subject: 'Duda o problema',
       },
-      ideas: {
-        title: 'Sugerencias',
-        text: 'Una píldora que te gustaría leer, una sección nueva o cualquier idea para mejorar la web.',
-        subject: 'Sugerencia',
-      },
       community: {
         title: 'Ayudar a la comunidad',
         text: '¿Tienes experiencia en el sector? Puedes ser mentor o mentora, dar una charla o escribir una píldora.',
@@ -95,11 +90,6 @@ export default {
         text: 'No et arriba el correu de confirmació, no pots entrar o alguna cosa no funciona com esperaves.',
         subject: 'Dubte o problema',
       },
-      ideas: {
-        title: 'Suggeriments',
-        text: 'Una píndola que t’agradaria llegir, una secció nova o qualsevol idea per millorar el web.',
-        subject: 'Suggeriment',
-      },
       community: {
         title: 'Ajudar la comunitat',
         text: 'Tens experiència al sector? Pots ser mentor o mentora, fer una xerrada o escriure una píndola.',
@@ -153,11 +143,6 @@ export default {
         title: 'Questions or problems',
         text: 'The confirmation email doesn’t arrive, you can’t sign in or something doesn’t work as expected.',
         subject: 'Question or problem',
-      },
-      ideas: {
-        title: 'Suggestions',
-        text: 'A tech bite you would like to read, a new section or any idea to improve the website.',
-        subject: 'Suggestion',
       },
       community: {
         title: 'Help the community',

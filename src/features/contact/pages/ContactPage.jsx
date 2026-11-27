@@ -41,7 +41,7 @@ export default function ContactPage() {
         <h2 id="contact-reasons" className="text-2xl font-bold tracking-tight text-ink">
           {t('contact.reasonsTitle')}
         </h2>
-        <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {CONTACT_REASONS.map((item) => {
             const selected = reason === item.value
             return (

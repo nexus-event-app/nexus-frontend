@@ -22,6 +22,8 @@ const PAGES = [
   '/login',
   '/registro',
   '/en/about',
+  '/contacto',
+  '/en/contact',
 ]
 
 const PRIVATE_PAGES = [

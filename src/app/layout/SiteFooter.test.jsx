@@ -9,11 +9,8 @@ vi.mock('@/shared/config/legal', () => ({ legalConfig: { email: 'contacto@primer
 describe('SiteFooter', () => {
   it('dice a dónde escribir con dudas, sugerencias o problemas', () => {
     renderWithProviders(<SiteFooter />)
-    expect(screen.getByText(/¿Dudas, sugerencias o algún problema\? Escríbenos a/)).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'contacto@primercommit.test' })).toHaveAttribute(
-      'href',
-      'mailto:contacto@primercommit.test',
-    )
+    expect(screen.getByText(/¿Dudas, sugerencias o quieres colaborar\?/)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Contacta con nosotros' })).toHaveAttribute('href', '/contacto')
   })
 
   it('presenta la web sin tarjeta de testimonio ni la coletilla «en español»', () => {

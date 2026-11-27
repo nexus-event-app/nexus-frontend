@@ -101,6 +101,7 @@ class MockApi {
       return json({ count: item.interestedCount + (interested ? 1 : -1), interested })
     })
     this.on('GET', '/api/testimonials', () => json(testimonials))
+    this.on('POST', '/api/contact', () => json({}, 202))
     this.on('GET', '/api/search', () => json(searchResult()))
     this.on('GET', '/api/saved-jobs/ids', () => json([]))
     this.on('GET', '/api/saved-jobs', () => json(page([])))
