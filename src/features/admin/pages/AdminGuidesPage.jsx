@@ -115,7 +115,11 @@ export default function AdminGuidesPage() {
       />
 
       {editing && (
-        <Modal title={editing === 'new' ? 'Nueva píldora' : 'Editar píldora'} size="lg" onClose={() => setEditing(null)}>
+        <Modal
+          title={editing === 'new' ? 'Nueva píldora' : 'Editar píldora'}
+          size="lg"
+          onClose={() => setEditing(null)}
+        >
           <GuideForm
             guide={editing === 'new' ? null : editing}
             onSubmit={handleSubmit}

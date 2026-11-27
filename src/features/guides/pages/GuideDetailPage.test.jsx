@@ -38,6 +38,7 @@ describe('GuideDetailPage', () => {
     expect(toc.querySelector('a[href="#1-haz-balance"]')).not.toBeNull()
     expect(screen.getByRole('link', { name: 'eventos' })).toHaveAttribute('href', '/eventos')
     expect(screen.getByRole('link', { name: /Únete a la comunidad/ })).toHaveAttribute('href', '/registro')
+    expect(screen.getAllByRole('button', { name: 'Compartir' })).toHaveLength(2)
   })
 
   it('con cuenta, invita a seguir en el foro', async () => {

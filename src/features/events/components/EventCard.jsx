@@ -53,7 +53,7 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
   )
 
   const joinClasses = cx(
-    'btn btn-sm rounded-full text-white transition-all hover:-translate-y-0.5 active:translate-y-[3px] active:shadow-none',
+    'btn btn-sm rounded-full px-8 text-white transition-all hover:-translate-y-0.5 active:translate-y-[3px] active:shadow-none',
     event.forWomen
       ? 'bg-pink-700 shadow-[0_4px_0_#831843,0_10px_18px_-8px_rgba(131,24,67,0.6)] hover:bg-pink-800'
       : 'btn-primary shadow-[0_4px_0_#312e81,0_10px_18px_-8px_rgba(49,46,129,0.6)]',
@@ -67,6 +67,78 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
   ]
     .filter(Boolean)
     .join(' · ')
+
+  const joinAction = (
+    <>
+      {isAuthenticated ? (
+        <a href={event.url} target="_blank" rel="noopener noreferrer nofollow ugc" className={joinClasses}>
+          {t('events.card.join')}
+          <Icon name="external" className="h-4 w-4" />
+          <span className="sr-only"> {t('events.card.joinSr', { host: event.host })}</span>
+        </a>
+      ) : (
+        <Link
+          to={loginPath(`${pathname}${search}`)}
+          onClick={() => toast.info(t('events.card.loginToJoin'))}
+          className={joinClasses}
+        >
+          {t('events.card.join')}
+          <Icon name="lock" className="h-4 w-4" />
+          <span className="sr-only"> {t('events.card.joinSignIn')}</span>
+        </Link>
+      )}
+    </>
+  )
+  const goingAction = (
+    <button
+      type="button"
+      onClick={handleGoing}
+      disabled={togglingGoing}
+      aria-pressed={going.interested}
+      title={t('events.card.goingHint')}
+      className={cx(
+        'inline-flex min-h-[2.75rem] shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-3 text-sm font-semibold transition-all hover:-translate-y-0.5 active:translate-y-[3px] active:shadow-none disabled:opacity-60 sm:min-h-[2.25rem]',
+        going.interested
+          ? 'border-amber-300 bg-amber-50 text-amber-900 shadow-[0_3px_0_#fcd34d] dark:border-amber-400/40 dark:bg-amber-500/15 dark:text-amber-200 dark:shadow-[0_3px_0_rgba(251,191,36,0.35)]'
+          : 'border-slate-300 bg-surface text-ink-soft shadow-[0_3px_0_theme(colors.slate.300)] hover:border-accent-line hover:text-ink',
+      )}
+    >
+      <Icon
+        key={going.interested ? `on-${going.count}` : 'off'}
+        name="hand"
+        filled={going.interested}
+        className={cx('h-4 w-4', going.interested && 'animate-pop')}
+      />
+      <span aria-hidden="true">{t('events.card.going')}</span>
+      {going.count > 0 && (
+        <span aria-hidden="true" className="tabular-nums">
+          · {going.count}
+        </span>
+      )}
+      <span className="sr-only">
+        {t('events.card.goingSr', { title: event.title })}. {t('events.card.goingCount', { count: going.count })}
+      </span>
+    </button>
+  )
+  const ownerAction = (
+    <>
+      {event.mine ? (
+        <Button variant="ghost" size="sm" title={t('events.card.delete')} onClick={() => setConfirming(true)}>
+          <Icon name="trash" className="h-4 w-4" />
+          <span className="sr-only">
+            {t('events.card.delete')} {t('events.card.deleteSr', { title: event.title })}
+          </span>
+        </Button>
+      ) : (
+        <ReportButton
+          targetType="EVENT"
+          targetId={event.id}
+          compact
+          srLabel={t('events.card.reportSr', { title: event.title })}
+        />
+      )}
+    </>
+  )
 
   return (
     <article
@@ -118,6 +190,10 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
             </span>
           )}
         </p>
+        <span className="-mr-2 ml-auto flex shrink-0 items-center gap-1">
+          {goingAction}
+          {ownerAction}
+        </span>
       </header>
 
       <Heading
@@ -185,71 +261,7 @@ export default function EventCard({ event, index = 0, headingLevel = 'h3', compa
         {event.host}
       </p>
 
-      <footer className="mt-3 flex flex-wrap items-center gap-2 border-t border-slate-200 pt-4">
-        {isAuthenticated ? (
-          <a href={event.url} target="_blank" rel="noopener noreferrer nofollow ugc" className={joinClasses}>
-            {t('events.card.join')}
-            <Icon name="external" className="h-4 w-4" />
-            <span className="sr-only"> {t('events.card.joinSr', { host: event.host })}</span>
-          </a>
-        ) : (
-          <Link
-            to={loginPath(`${pathname}${search}`)}
-            onClick={() => toast.info(t('events.card.loginToJoin'))}
-            className={joinClasses}
-          >
-            {t('events.card.join')}
-            <Icon name="lock" className="h-4 w-4" />
-            <span className="sr-only"> {t('events.card.joinSignIn')}</span>
-          </Link>
-        )}
-        <button
-          type="button"
-          onClick={handleGoing}
-          disabled={togglingGoing}
-          aria-pressed={going.interested}
-          title={t('events.card.goingHint')}
-          className={cx(
-            'inline-flex min-h-[2.75rem] shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-3 text-sm font-semibold transition-all hover:-translate-y-0.5 active:translate-y-[3px] active:shadow-none disabled:opacity-60 sm:min-h-[2.25rem]',
-            going.interested
-              ? 'border-amber-300 bg-amber-50 text-amber-900 shadow-[0_3px_0_#fcd34d] dark:border-amber-400/40 dark:bg-amber-500/15 dark:text-amber-200 dark:shadow-[0_3px_0_rgba(251,191,36,0.35)]'
-              : 'border-slate-300 bg-surface text-ink-soft shadow-[0_3px_0_theme(colors.slate.300)] hover:border-accent-line hover:text-ink',
-          )}
-        >
-          <Icon
-            key={going.interested ? `on-${going.count}` : 'off'}
-            name="hand"
-            filled={going.interested}
-            className={cx('h-4 w-4', going.interested && 'animate-pop')}
-          />
-          <span aria-hidden="true">{t('events.card.going')}</span>
-          {going.count > 0 && (
-            <span aria-hidden="true" className="tabular-nums">
-              · {going.count}
-            </span>
-          )}
-          <span className="sr-only">
-            {t('events.card.goingSr', { title: event.title })}. {t('events.card.goingCount', { count: going.count })}
-          </span>
-        </button>
-        <span className="ml-auto shrink-0">
-          {event.mine ? (
-            <Button variant="ghost" size="sm" title={t('events.card.delete')} onClick={() => setConfirming(true)}>
-              <Icon name="trash" className="h-4 w-4" />
-              <span className="sr-only">
-                {t('events.card.delete')} {t('events.card.deleteSr', { title: event.title })}
-              </span>
-            </Button>
-          ) : (
-            <ReportButton
-              targetType="EVENT"
-              targetId={event.id}
-              compact
-              srLabel={t('events.card.reportSr', { title: event.title })}
-            />
-          )}
-        </span>
-      </footer>
+      <footer className="mt-3 flex justify-center border-t border-slate-200 pt-4">{joinAction}</footer>
       {confirming && (
         <ConfirmDialog
           title={t('events.card.deleteTitle')}

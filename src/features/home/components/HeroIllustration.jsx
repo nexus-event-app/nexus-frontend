@@ -2,7 +2,7 @@ import Icon from '@/shared/components/Icon'
 import { useI18n } from '@/shared/i18n/useI18n'
 
 const CARD =
-  'block animate-sway-3d rounded-xl bg-white text-left text-gray-900 shadow-[0_2px_0_rgba(15,23,42,0.08),0_4px_0_rgba(15,23,42,0.07),0_6px_0_rgba(15,23,42,0.06),0_24px_36px_-14px_rgba(46,36,119,0.55),inset_0_2px_0_rgba(255,255,255,1)] ring-1 ring-[#e3defc]'
+  'block rounded-xl bg-white text-left text-gray-900 shadow-[0_2px_0_rgba(15,23,42,0.08),0_4px_0_rgba(15,23,42,0.07),0_6px_0_rgba(15,23,42,0.06),0_24px_36px_-14px_rgba(46,36,119,0.55),inset_0_2px_0_rgba(255,255,255,1)] ring-1 ring-[#e3defc]'
 
 function Stuck({ className, tilt, depth, delay, children }) {
   return (
@@ -33,7 +33,7 @@ export default function HeroIllustration({ className }) {
       />
 
       <Stuck className="left-0 top-2 z-10 w-40 xl:left-4 xl:w-48" tilt={-5} depth={30} delay={500}>
-        <span className={`${CARD} p-2.5`} style={{ animationDelay: '-1s' }}>
+        <span className={`${CARD} p-2.5`}>
           <span className="flex items-center gap-1.5">
             <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-violet-100 text-[0.55rem] font-bold text-violet-700">
               MI
@@ -52,7 +52,7 @@ export default function HeroIllustration({ className }) {
       </Stuck>
 
       <Stuck className="right-0 top-0 z-30 w-36 xl:right-4 xl:w-44" tilt={6} depth={60} delay={800}>
-        <span className={`${CARD} p-2`} style={{ animationDelay: '-3s' }}>
+        <span className={`${CARD} p-2`}>
           <span className="flex items-center gap-2">
             <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-violet-600 text-white">
               <Icon name="calendar" className="h-3.5 w-3.5" />
@@ -75,7 +75,7 @@ export default function HeroIllustration({ className }) {
         depth={45}
         delay={1100}
       >
-        <span className={`${CARD} relative overflow-hidden p-2`} style={{ animationDelay: '-5s' }}>
+        <span className={`${CARD} relative overflow-hidden p-2`}>
           <span className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-emerald-400 to-cyan-500" />
           <span className="flex items-center gap-2">
             <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-sky-500 to-indigo-600 text-[0.6rem] font-bold text-white">

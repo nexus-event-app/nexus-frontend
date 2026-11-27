@@ -211,11 +211,16 @@ export default function GuideDetailPage() {
       <JsonLd data={buildGuideData(guide)} />
       {faq.length > 0 && <JsonLd data={buildFaqData(faq, guide.language)} />}
       <Breadcrumbs
-        className="col-span-full"
+        className="col-span-full lg:col-span-1"
         items={[
           { label: t('guides.breadcrumb'), to: paths.guides },
           { label: excerpt(guide.title, 60), to: path },
         ]}
+      />
+      <ShareButton
+        title={guide.title}
+        text={guide.description}
+        className="mt-4 justify-self-start lg:col-start-2 lg:row-start-1 lg:mt-0 lg:self-center lg:justify-self-end"
       />
 
       <header className="col-span-full mt-6 grid items-center gap-x-10 gap-y-6 xl:grid-cols-[minmax(0,1fr)_22rem]">
